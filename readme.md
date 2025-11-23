@@ -22,4 +22,7 @@ I use `fnm` to manage Node versions and I generally use an LTS version (22.21.1 
 
 ## Index
 
-- [GitHub](./packages/hello-github/readme.md): GitHub CLI, GitHub Rest API, etc.
+- [Bash](./packages/bash/readme.md): A cross-platform shell
+- [GitHub](./packages/hello-github/readme.md): Tools for editing GitHub settings via CLI
+- [jq (jqlang)](./packages/jq/readme.md): CLI tool for editing JSON files
+- [pnpm](./packages/pnpm/readme.md): Node package manager, alternative to npm
