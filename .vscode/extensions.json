@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "aaron-bond.better-comments",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "meganrogge.template-string-converter",
+    "pflannery.vscode-versionlens",
+    "tyriar.sort-lines",
+    "wmaurer.change-case"
+  ]
+}
