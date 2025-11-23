@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "validate:fix": "prettier --write . && sort-package-json"
+  },
   "prettier": {
     "printWidth": 100
   },
