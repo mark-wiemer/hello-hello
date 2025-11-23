@@ -8,13 +8,7 @@ This [How-To Geek article on the difference between terminal, shell, and console
 - [Bash reference manual](https://www.gnu.org/software/bash/manual/bash.html)
   - "[Bash] is intended to be a conformant implementation of the IEEE POSIX Shell and Tools portion of the IEEE POSIX specification (IEEE Standard 1003.1)."
   - `--posix` aligns more closely with POSIX. However, I don't use this flag.
-
-## Aliases
-
-```sh
-# Open the .bashrc file in VS Code
-alias bashedit='code ~/.bashrc'
-```
+  - "For almost every purpose, shell functions are preferable to aliases."
 
 ## Variables
 
@@ -26,4 +20,36 @@ x=2
 # Quotes are not part of var value.
 y="Hello world"
 echo $y, x is $x
+```
+
+## Aliases
+
+```sh
+# Open the .bashrc file in VS Code
+alias bashedit='code ~/.bashrc'
+```
+
+However, functions are preferable to aliases according to the reference manual.
+
+## Functions
+
+This function uses [`jq`](../jq/readme.md) to edit JSON files, editing the local `package.json` by default:
+
+```sh
+json_edit() {
+    if [ $# -eq 0 ]; then
+        echo "Usage: json_edit 'jq_filter' [file]"
+        echo "Examples:"
+        echo "  json_edit '.author = \"Mark Wiemer\"'"
+        echo "  json_edit '.scripts.build = \"tsc\"'"
+        echo "  json_edit 'del(.devDependencies.eslint)'"
+        return 1
+    fi
+
+    local filter="$1"
+    local file="${2:-package.json}"
+
+    jq "$filter" "$file" > temp.json && mv temp.json "$file"
+    echo "Applied filter: $filter"
+}
 ```
