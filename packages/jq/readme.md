@@ -10,6 +10,5 @@ jq . package.json
 ```
 
 ```sh
-jq '.author = "Mark Wiemer"'  package.json > tmp.json && mv tmp.json p
-ackage.json
+jq '.author = "Mark Wiemer"'  package.json > tmp.json && mv tmp.json package.json
 ```
