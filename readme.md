@@ -1,4 +1,4 @@
-# Hello Hello
+# Hello Hello!
 
 The starter project to start all starter projects.
 
@@ -22,4 +22,4 @@ I use `fnm` to manage Node versions and I generally use an LTS version (22.21.1 
 
 ## Index
 
-(nothing here yet!)
+- [GitHub](./packages/hello-github/readme.md): GitHub CLI, GitHub Rest API, etc.
