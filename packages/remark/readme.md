@@ -10,4 +10,5 @@ All of these are published by the unified collective:
 - remark-stringify
 - to-vfile
 - unified
+- unist-util-visit
 - ...and more
