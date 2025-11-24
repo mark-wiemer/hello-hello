@@ -1,5 +1,3 @@
-# See `packages/github/readme.md` for details
-
 # Edit in GitHub GUI for better experience:
 # https://github.com/mark-wiemer/hello-hello/edit/main/.github/workflows/stale.yml
 name: Handle stale issues and PRs
