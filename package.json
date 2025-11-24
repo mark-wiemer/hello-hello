@@ -1,4 +1,5 @@
 {
+  "author": "Mark Wiemer",
   "scripts": {
     "postinstall": "pnpm run validate:fix",
     "validate:fix": "prettier --write . && sort-package-json"
