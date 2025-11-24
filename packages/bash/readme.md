@@ -54,7 +54,7 @@ json_edit() {
 }
 ```
 
-These functions create or reset the `package.json` file:
+These functions create or reset the `package.json` file, with some customizations just for me:
 
 ```sh
 new_project() {
@@ -62,6 +62,8 @@ new_project() {
     pnpm add -D sort-package-json
     json_edit '.author="Mark Wiemer"'
     json_edit '.scripts."validate:fix"="sort-package-json"'
+    local dir_name=$(basename "$PWD")
+    json_edit ".name=\"@mark-wiemer/$dir_name\""
     pnpm run validate:fix
 }
 

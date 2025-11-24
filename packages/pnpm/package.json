@@ -1,0 +1,19 @@
+{
+  "name": "@mark-wiemer/pnpm",
+  "version": "0.1.0",
+  "description": "",
+  "keywords": [],
+  "license": "MIT",
+  "author": "Mark Wiemer",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "validate:fix": "sort-package-json"
+  },
+  "devDependencies": {
+    "sort-package-json": "^3.4.0"
+  },
+  "packageManager": "pnpm@10.23.0",
+  "scope": "@mark-wiemer"
+}
