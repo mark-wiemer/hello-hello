@@ -38,4 +38,4 @@ const response = await octokit.request(
 Workflows are defined in workflow files.
 Workflow files must be in `/.github/workflows`, no subfolders allowed.
 
-- [stale.yml](/.github/workflows/stale.yml) handles stale issues and PRs. Ref PR #1, #2, and issue #3 for examples.
+- [stale.yml](/.github/workflows/stale.yml) handles stale issues and PRs. Ref [workflow run](https://github.com/mark-wiemer/hello-hello/actions/runs/19620829424)
