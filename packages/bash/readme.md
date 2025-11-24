@@ -53,3 +53,20 @@ json_edit() {
     echo "Applied filter: $filter"
 }
 ```
+
+These functions create or reset the `package.json` file:
+
+```sh
+new_project() {
+    pnpm init
+    pnpm add -D sort-package-json
+    json_edit '.author="Mark Wiemer"'
+    json_edit '.scripts."validate:fix"="sort-package-json"'
+    pnpm run validate:fix
+}
+
+reset_project() {
+    rm package.json
+    new_project
+}
+```

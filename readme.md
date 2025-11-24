@@ -28,3 +28,5 @@ I use `fnm` to manage Node versions and I generally use an LTS version (22.21.1 
 - [jq (jqlang)](./packages/jq/readme.md): CLI tool for editing JSON files
 - [pnpm](./packages/pnpm/readme.md): Node package manager, alternative to npm
 - [POSIX](./packages/posix/readme.md): Set of cross-OS standards by IEEE
+- [Remark](./packages/remark/readme.md): Markdown toolchain for JS
+  - Created by [unified](https://unifiedjs.com/), the same collective behind [MDX](https://mdxjs.com/community/about/#who-governs-mdx) and other content processing toolchains
