@@ -1,0 +1,26 @@
+# https://github.com/actions/stale
+name: Handle stale issues and PRs
+
+on:
+  schedule:
+  # https://crontab.guru/
+  # Midnight UTC daily (4 or 5 PM Pacific)
+  - cron: '0 0 * * *'
+
+jobs:
+  stale:
+
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+
+    steps:
+    - uses: actions/stale@v5
+      with:
+        days-before-stale: 1 # short for testing
+        days-before-close: 1 # short for testing
+        stale-issue-message: 'This issue has not had activity for a while, and will be closed soon if there is no further activity'
+        stale-pr-message: 'This PR has not had activity for a while, and will be closed soon if there is no further activity'
+        stale-issue-label: 'stale'
+        stale-pr-label: 'stale'
