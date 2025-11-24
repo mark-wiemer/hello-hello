@@ -31,3 +31,11 @@ const response = await octokit.request(
   },
 );
 ```
+
+## Actions
+
+[GitHub Actions](https://docs.github.com/en/actions) is the service that runs workflows.
+Workflows are defined in workflow files.
+Workflow files must be in `/.github/workflows`, no subfolders allowed.
+
+- [stale.yml](/.github/workflows/stale.yml) handles stale issues and PRs. Ref PR #1, #2, and issue #3 for examples.

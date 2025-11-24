@@ -1,4 +1,7 @@
-# https://github.com/actions/stale
+# See `packages/github/readme.md` for details
+
+# Edit in GitHub GUI for better experience:
+# https://github.com/mark-wiemer/hello-hello/edit/main/.github/workflows/stale.yml
 name: Handle stale issues and PRs
 
 on:
@@ -15,10 +18,11 @@ jobs:
       pull-requests: write
 
     steps:
-      - uses: actions/stale@v5
+      # https://github.com/actions/stale
+      - uses: actions/stale@v10
         with:
-          days-before-stale: 1 # short for testing
-          days-before-close: 1 # short for testing
+          days-before-stale: 1 # one day for testing
+          days-before-close: 1 # one day for testing
           stale-issue-message: "This issue has not had activity for a while, and will be closed soon if there is no further activity"
           stale-pr-message: "This PR has not had activity for a while, and will be closed soon if there is no further activity"
           stale-issue-label: "stale"
