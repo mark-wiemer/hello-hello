@@ -12,14 +12,25 @@ const owner = "mark-wiemer";
 const repo = "hello-hello";
 const branch = "main";
 
-// As of writing, this branch is not protected, and returns 404
-// https://docs.github.com/en/rest/branches/branch-protection?apiVersion=2022-11-28
+//* Update branch protection
+// https://docs.github.com/en/rest/branches/branch-protection?apiVersion=2022-11-28#update-branch-protection
 const response = await octokit.request(
-  `GET /repos/${owner}/${repo}/branches/${branch}/protection`,
+  `PUT /repos/${owner}/${repo}/branches/${branch}/protection`,
   {
     owner: owner,
     repo: repo,
     branch: branch,
+    required_status_checks: null,
+    enforce_admins: true,
+    required_pull_request_reviews: null,
+    restrictions: null,
+    required_linear_history: false,
+    allow_force_pushes: false,
+    allow_deletions: false,
+    block_creations: false,
+    required_conversation_resolution: true,
+    lock_branch: false,
+    allow_fork_syncing: true,
     headers: {
       "X-GitHub-Api-Version": "2022-11-28",
     },

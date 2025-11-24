@@ -16,11 +16,18 @@ Interesting subpages:
 
 - [REST API endpoints for protected branches](https://docs.github.com/en/rest/branches/branch-protection?apiVersion=2022-11-28)
 
-Only available via API:
+Only available via REST. See `index.js` for a detailed example.
 
-```sh
-gh api \
-  -H "Accept: application/vnd.github+json" \
-  -H "X-GitHub-Api-Version: 2022-11-28" \
-  /repos/OWNER/REPO/branches/BRANCH/protection
+```js
+const response = await octokit.request(
+  `GET /repos/${owner}/${repo}/branches/${branch}/protection`,
+  {
+    owner: owner,
+    repo: repo,
+    branch: branch,
+    headers: {
+      "X-GitHub-Api-Version": "2022-11-28",
+    },
+  },
+);
 ```
