@@ -8,6 +8,9 @@ Interesting subpages:
 - [GitHub CLI docs](https://docs.github.com/en/github-cli) has a great quickstart
 - [GitHub REST API docs](https://docs.github.com/en/rest?apiVersion=2022-11-28) works via `curl` or `gh api`
   - [Octokit core.js](https://github.com/octokit/core.js) is the official JS client for the REST API
+    ```sh
+    pnpm add @octokit/core
+    ```
 
 ## Branch protection
 
