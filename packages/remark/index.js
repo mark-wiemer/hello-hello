@@ -31,49 +31,125 @@ console.log(JSON.stringify(tree, null, 2));
 */
 // #endregion Show full AST
 
-// #region Parse Lua API and print core namespace reference
+// #region Transform Lua API to TypeScript signatures
 
-function filterCoreNamespace() {
+function transformLuaApiToTypeScript() {
   return (tree) => {
-    let inCoreNamespace = false;
-    let coreNamespaceIndex = -1;
+    const transformedChildren = [];
 
-    // First pass: find the core namespace section
-    tree.children.forEach((node, index) => {
-      if (node.type === "heading" && node.children) {
-        const headingText = node.children
-          .filter((child) => child.type === "text")
-          .map((child) => child.value)
-          .join("");
+    for (let i = 0; i < tree.children.length; i++) {
+      const node = tree.children[i];
 
-        if (
-          headingText.toLowerCase().includes("core") &&
-          headingText.toLowerCase().includes("namespace")
-        ) {
-          inCoreNamespace = true;
-          coreNamespaceIndex = index;
-        } else if (node.type === "heading" && node.depth <= 1 && inCoreNamespace) {
-          inCoreNamespace = false;
+      // Look for list items that contain API functions
+      if (node.type === "list" && node.children) {
+        for (const listItem of node.children) {
+          if (listItem.type === "listItem" && listItem.children) {
+            const paragraph = listItem.children.find((child) => child.type === "paragraph");
+            if (paragraph && paragraph.children) {
+              const firstChild = paragraph.children[0];
+
+              // Check if this starts with a code block containing a function signature
+              if (
+                firstChild &&
+                firstChild.type === "inlineCode" &&
+                firstChild.value.includes("core.") &&
+                firstChild.value.includes("(")
+              ) {
+                // Extract function name and parameters
+                const funcMatch = firstChild.value.match(/core\.(\w+)\(([^)]*)\)/);
+                if (funcMatch) {
+                  const [, funcName, params] = funcMatch;
+
+                  // Collect all text content for the description
+                  let description = "";
+                  const remainingText = paragraph.children.slice(1);
+
+                  // Process the description and sub-bullets
+                  const descriptionParts = [];
+
+                  // Get main description (text after the colon)
+                  const mainText = remainingText
+                    .filter((child) => child.type === "text")
+                    .map((child) => child.value)
+                    .join("")
+                    .replace(/^:\s*/, ""); // Remove leading colon
+
+                  if (mainText.trim()) {
+                    descriptionParts.push(mainText.trim());
+                  }
+
+                  // Look for nested list items (sub-bullets)
+                  const nestedList = listItem.children.find((child) => child.type === "list");
+                  if (nestedList && nestedList.children) {
+                    nestedList.children.forEach((nestedItem) => {
+                      if (nestedItem.type === "listItem" && nestedItem.children) {
+                        const nestedParagraph = nestedItem.children.find(
+                          (child) => child.type === "paragraph",
+                        );
+                        if (nestedParagraph && nestedParagraph.children) {
+                          const nestedText = nestedParagraph.children
+                            .map((child) =>
+                              child.type === "text"
+                                ? child.value
+                                : child.type === "inlineCode"
+                                  ? `\`${child.value}\``
+                                  : "",
+                            )
+                            .join("")
+                            .trim();
+                          if (nestedText) {
+                            descriptionParts.push(`- ${nestedText}`);
+                          }
+                        }
+                      }
+                    });
+                  }
+
+                  // Create JSDoc comment lines
+                  const jsdocLines = ["/**"];
+                  descriptionParts.forEach((part, index) => {
+                    if (index === 0) {
+                      jsdocLines.push(` * ${part}`);
+                    } else {
+                      jsdocLines.push(` * ${part}`);
+                    }
+                  });
+                  jsdocLines.push(" */");
+
+                  // Create function signature
+                  const signature = `${funcName}(this: void${params.length > 0 ? ", " : ""}${params})`;
+
+                  // Create code block with JSDoc + function signature
+                  const codeContent = jsdocLines.join("\n") + "\n" + signature;
+
+                  transformedChildren.push({
+                    type: "code",
+                    lang: "ts",
+                    value: codeContent,
+                  });
+
+                  transformedChildren.push({
+                    type: "paragraph",
+                    children: [],
+                  });
+                }
+              }
+            }
+          }
         }
+      } else {
+        // Keep non-list nodes as-is (headings, etc.)
+        transformedChildren.push(node);
       }
+    }
 
-      // Mark nodes to keep
-      if (inCoreNamespace) {
-        node._keep = true;
-      }
-    });
-
-    // Second pass: filter out unmarked nodes
-    tree.children = tree.children.filter((node) => node._keep);
-
-    // Clean up temporary property
-    tree.children.forEach((node) => delete node._keep);
+    tree.children = transformedChildren;
   };
 }
 
 const file = await unified()
   .use(remarkParse) // Parse Markdown to AST
-  .use(filterCoreNamespace)
+  .use(transformLuaApiToTypeScript)
   .use(remarkStringify) // Stringify AST back to Markdown
-  .process(await read({ path: "lua_api.md" }));
-await write({ path: "lua_api_out.md", value: String(file) });
+  .process(await read({ path: "lua_api_out.md" }));
+await write({ path: "lua_api_transformed.md", value: String(file) });
