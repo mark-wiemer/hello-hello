@@ -36,7 +36,7 @@ console.log(JSON.stringify(tree, null, 2));
 // #region Transform core namespace reference to TypeScript signatures
 type BasicPlugin = Plugin<[(Readonly<Options> | null | undefined)?], Root, Root>;
 
-const transformCoreNamespaceRefToTS: BasicPlugin = () => {
+const coreNamespaceRefToTS: BasicPlugin = () => {
   return (tree) => {
     const transformedChildren: RootContent[] = [];
 
@@ -182,7 +182,7 @@ const addNote: BasicPlugin = () => {
 
 const file = await unified()
   .use(remarkParse) // Parse Markdown to AST
-  .use(transformCoreNamespaceRefToTS)
+  .use(coreNamespaceRefToTS)
   .use(addNote)
   .use(remarkStringify) // Stringify AST back to Markdown
   .process(await read({ path: "lua_api_out.md" }));
