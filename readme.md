@@ -20,6 +20,10 @@ curl -fsSL https://get.pnpm.io/install.sh | sh -
 This gave me `pnpm 10.23.0` bundled with Node 20.11.1, but I don't plan to use the bundled version.
 I use `fnm` to manage Node versions and I generally use an LTS version (22.21.1 as of writing)
 
+## Commit messages
+
+Historically, I haven't followed a particular commit message style. But [Mocha](https://mochajs.org/next/) follows [Angular commit conventions](https://github.com/angular/angular/blob/26fed34e0e340166b70702d6177ad639bbfa94aa/contributing-docs/commit-message-guidelines.md) to auto-generate release logs and I think this is worth trying out :)
+
 ## Index
 
 - [Bash](./packages/bash/readme.md): A cross-platform shell
