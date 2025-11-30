@@ -81,6 +81,137 @@ is_singleplayer(this: void)
 
 
 
+* `core.features`: Table containing *server-side* API feature flags
+
+  ```lua
+  {
+      glasslike_framed = true,  -- 0.4.7
+      nodebox_as_selectionbox = true,  -- 0.4.7
+      get_all_craft_recipes_works = true,  -- 0.4.7
+      -- The transparency channel of textures can optionally be used on
+      -- nodes (0.4.7)
+      use_texture_alpha = true,
+      -- Tree and grass ABMs are no longer done from C++ (0.4.8)
+      no_legacy_abms = true,
+      -- Texture grouping is possible using parentheses (0.4.11)
+      texture_names_parens = true,
+      -- Unique Area ID for AreaStore:insert_area (0.4.14)
+      area_store_custom_ids = true,
+      -- add_entity supports passing initial staticdata to on_activate
+      -- (0.4.16)
+      add_entity_with_staticdata = true,
+      -- Chat messages are no longer predicted (0.4.16)
+      no_chat_message_prediction = true,
+      -- The transparency channel of textures can optionally be used on
+      -- objects (ie: players and lua entities) (5.0.0)
+      object_use_texture_alpha = true,
+      -- Object selectionbox is settable independently from collisionbox
+      -- (5.0.0)
+      object_independent_selectionbox = true,
+      -- Specifies whether binary data can be uploaded or downloaded using
+      -- the HTTP API (5.1.0)
+      httpfetch_binary_data = true,
+      -- Whether formspec_version[<version>] may be used (5.1.0)
+      formspec_version_element = true,
+      -- Whether AreaStore's IDs are kept on save/load (5.1.0)
+      area_store_persistent_ids = true,
+      -- Whether core.find_path is functional (5.2.0)
+      pathfinder_works = true,
+      -- Whether Collision info is available to an objects' on_step (5.3.0)
+      object_step_has_moveresult = true,
+      -- Whether get_velocity() and add_velocity() can be used on players (5.4.0)
+      direct_velocity_on_players = true,
+      -- nodedef's use_texture_alpha accepts new string modes (5.4.0)
+      use_texture_alpha_string_modes = true,
+      -- degrotate param2 rotates in units of 1.5° instead of 2°
+      -- thus changing the range of values from 0-179 to 0-240 (5.5.0)
+      degrotate_240_steps = true,
+      -- ABM supports min_y and max_y fields in definition (5.5.0)
+      abm_min_max_y = true,
+      -- dynamic_add_media supports passing a table with options (5.5.0)
+      dynamic_add_media_table = true,
+      -- particlespawners support texpools and animation of properties,
+      -- particle textures support smooth fade and scale animations, and
+      -- sprite-sheet particle animations can by synced to the lifetime
+      -- of individual particles (5.6.0)
+      particlespawner_tweenable = true,
+      -- allows get_sky to return a table instead of separate values (5.6.0)
+      get_sky_as_table = true,
+      -- VoxelManip:get_light_data accepts an optional buffer argument (5.7.0)
+      get_light_data_buffer = true,
+      -- When using a mod storage backend that is not "files" or "dummy",
+      -- the amount of data in mod storage is not constrained by
+      -- the amount of RAM available. (5.7.0)
+      mod_storage_on_disk = true,
+      -- "zstd" method for compress/decompress (5.7.0)
+      compress_zstd = true,
+      -- Sound parameter tables support start_time (5.8.0)
+      sound_params_start_time = true,
+      -- New fields for set_physics_override: speed_climb, speed_crouch,
+      -- liquid_fluidity, liquid_fluidity_smooth, liquid_sink,
+      -- acceleration_default, acceleration_air (5.8.0)
+      physics_overrides_v2 = true,
+      -- In HUD definitions the field `type` is used and `hud_elem_type` is deprecated (5.9.0)
+      hud_def_type_field = true,
+      -- PseudoRandom and PcgRandom state is restorable
+      -- PseudoRandom has get_state method
+      -- PcgRandom has get_state and set_state methods (5.9.0)
+      random_state_restore = true,
+      -- core.after guarantees that coexisting jobs are executed primarily
+      -- in order of expiry and secondarily in order of registration (5.9.0)
+      after_order_expiry_registration = true,
+      -- wallmounted nodes mounted at floor or ceiling may additionally
+      -- be rotated by 90° with special param2 values (5.9.0)
+      wallmounted_rotate = true,
+      -- Availability of the `pointabilities` property in the item definition (5.9.0)
+      item_specific_pointabilities = true,
+      -- Nodes `pointable` property can be `"blocking"` (5.9.0)
+      blocking_pointability_type = true,
+      -- dynamic_add_media can be called at startup when leaving callback as `nil` (5.9.0)
+      dynamic_add_media_startup = true,
+      -- dynamic_add_media supports `filename` and `filedata` parameters (5.9.0)
+      dynamic_add_media_filepath = true,
+       -- L-system decoration type (5.9.0)
+      lsystem_decoration_type = true,
+      -- Overridable pointing range using the itemstack meta key `"range"` (5.9.0)
+      item_meta_range = true,
+      -- Allow passing an optional "actor" ObjectRef to the following functions:
+      -- core.place_node, core.dig_node, core.punch_node (5.9.0)
+      node_interaction_actor = true,
+      -- "new_pos" field in entity moveresult (5.9.0)
+      moveresult_new_pos = true,
+      -- Allow removing definition fields in `core.override_item` (5.9.0)
+      override_item_remove_fields = true,
+      -- The predefined hotbar is a Lua HUD element of type `hotbar` (5.10.0)
+      hotbar_hud_element = true,
+      -- Bulk LBM support (5.10.0)
+      bulk_lbms = true,
+      -- ABM supports field without_neighbors (5.10.0)
+      abm_without_neighbors = true,
+      -- biomes have a weight parameter (5.11.0)
+      biome_weights = true,
+      -- Particles can specify a "clip" blend mode (5.11.0)
+      particle_blend_clip = true,
+      -- The `match_meta` optional parameter is available for `InvRef:remove_item()` (5.12.0)
+      remove_item_match_meta = true,
+      -- The HTTP API supports the HEAD and PATCH methods (5.12.0)
+      httpfetch_additional_methods = true,
+      -- objects have get_guid method (5.13.0)
+      object_guids = true,
+      -- The NodeTimer `on_timer` callback is passed additional `node` and `timeout` args (5.14.0)
+      on_timer_four_args = true,
+      -- `ParticleSpawner` definition supports `exclude_player` field (5.14.0)
+      particlespawner_exclude_player = true,
+      -- core.generate_decorations() supports `use_mapgen_biomes` parameter (5.14.0)
+      generate_decorations_biomes = true,
+      -- 'chunksize' mapgen setting can be a vector, instead of a single number (5.15.0)
+      chunksize_vector = true,
+      -- Item definition fields `inventory_image`, `inventory_overlay`, `wield_image`
+      -- and `wield_overlay` accept a table containing animation definitions. (5.15.0)
+      item_image_animation = true,
+  }
+  ```
+
 ```ts
 /**
  * returns
@@ -102,6 +233,22 @@ get_player_information(this: void, player_name)
 ```
 
 
+
+* `core.protocol_versions`:
+
+  * Table mapping Luanti versions to corresponding protocol versions for modder convenience.
+  * For example, to check whether a client has at least the feature set
+    of Luanti 5.8.0 or newer, you could do:
+    `core.get_player_information(player_name).protocol_version >= core.protocol_versions["5.8.0"]`
+  * (available since 5.11)
+
+  ```lua
+  {
+      [version string] = protocol version at time of release
+      -- every major and minor version has an entry
+      -- patch versions only for the first release whose protocol version is not already present in the table
+  }
+  ```
 
 ```ts
 /**
@@ -1063,6 +1210,9 @@ register_on_mapblocks_changed(this: void, function(modified_blocks, modified_blo
 
 
 ## Setting-related
+
+* `core.settings`: Settings object containing all of the settings from the
+  main config file (`minetest.conf`). See [`Settings`](#settings).
 
 ```ts
 /**
@@ -2202,6 +2352,11 @@ mod_channel_join(this: void, channel_name)
 
 `core.get_inventory(location)`: returns an `InvRef`
 
+* `location` = e.g.
+  * `{type="player", name="celeron55"}`
+  * `{type="node", pos={x=, y=, z=}}`
+  * `{type="detached", name="creative"}`
+
 ```ts
 /**
  * returns
@@ -2767,6 +2922,9 @@ after(this: void, time, func, ...)
 
 
 
+* `job:cancel()`
+  * Cancels the job function from being called
+
 ## Async environment
 
 The engine allows you to submit jobs to be ran in an isolated environment
@@ -2814,11 +2972,54 @@ register_async_dofile(this: void, path)
 
 Classes:
 
+* `AreaStore`
+
+* `ItemStack`
+
+* `ValueNoise`
+
+* `ValueNoiseMap`
+
+* `PseudoRandom`
+
+* `PcgRandom`
+
+* `SecureRandom`
+
+* `VoxelArea`
+
+* `VoxelManip`
+  * only if transferred into environment; can't read/write to map
+
+* `Settings`
+
 Class instances that can be transferred between environments:
+
+* `ItemStack`
+
+* `ValueNoise`
+
+* `ValueNoiseMap`
+
+* `VoxelManip`
 
 Functions:
 
+* Standalone helpers such as logging, filesystem, encoding,
+  hashing or compression APIs
+
+* `core.register_portable_metatable`
+
+* IPC
+
 Variables:
+
+* `core.settings`
+
+* `core.registered_items`, `registered_nodes`, `registered_tools`,
+  `registered_craftitems` and `registered_aliases`
+  * with all functions and userdata values replaced by `true`, calling any
+    callbacks here is obviously not possible
 
 ## Mapgen environment
 
@@ -2884,9 +3085,52 @@ save_gen_notify(this: void, id, data)
 
 Classes:
 
+* `AreaStore`
+
+* `ItemStack`
+
+* `ValueNoise`
+
+* `ValueNoiseMap`
+
+* `PseudoRandom`
+
+* `PcgRandom`
+
+* `SecureRandom`
+
+* `VoxelArea`
+
+* `VoxelManip`
+  * only given by callbacks; cannot access rest of map
+
+* `Settings`
+
 Functions:
 
+* Standalone helpers such as logging, filesystem, encoding,
+  hashing or compression APIs
+
+* `core.get_biome_id`, `get_biome_name`, `get_heat`, `get_humidity`,
+  `get_biome_data`, `get_mapgen_object`, `get_mapgen_params`, `get_mapgen_edges`,
+  `get_mapgen_setting`, `get_noiseparams`, `get_decoration_id` and more
+
+* `core.get_node`, `set_node`, `find_node_near`, `find_nodes_in_area`,
+  `spawn_tree` and similar
+  * these only operate on the current chunk (if inside a callback)
+
+* IPC
+
 Variables:
+
+* `core.settings`
+
+* `core.registered_items`, `registered_nodes`, `registered_tools`,
+  `registered_craftitems` and `registered_aliases`
+  * with all functions and userdata values replaced by `true`, calling any
+    callbacks here is obviously not possible
+
+* `core.registered_biomes`, `registered_ores`, `registered_decorations`
 
 Note that node metadata does not exist in the mapgen env, we suggest deferring
 setting any metadata you need to the `on_generated` callback in the regular env.
@@ -3274,6 +3518,18 @@ request_http_api(this: void)
 ```
 
 
+
+* `HTTPApiTable.fetch(HTTPRequest req, callback)`
+  * Performs given request asynchronously and calls callback upon completion
+  * callback: `function(HTTPRequestResult res)`
+  * Use this HTTP function if you are unsure, the others are for advanced use
+
+* `HTTPApiTable.fetch_async(HTTPRequest req)`: returns handle
+  * Performs given request asynchronously and returns handle for
+    `HTTPApiTable.fetch_async_get`
+
+* `HTTPApiTable.fetch_async_get(handle)`: returns HTTPRequestResult
+  * Return response data for given asynchronous HTTP request
 
 ## Storage API
 
@@ -3767,9 +4023,78 @@ register_portable_metatable(this: void, name, mt)
 
 ## Global objects
 
+* `core.env`: `EnvRef` of the server environment and world.
+  * Any function in the `core` namespace can be called using the syntax
+    `core.env:somefunction(somearguments)`
+    instead of `core.somefunction(somearguments)`
+  * Deprecated, but support is not to be dropped soon
+
+* `minetest`: alias for the `core` namespace
+  * Deprecated, but support is not to be dropped soon
+
 ## Global tables
 
 ### Registered definition tables
+
+* `core.registered_items`
+  * Map of registered items, indexed by name
+
+* `core.registered_nodes`
+  * Map of registered node definitions, indexed by name
+
+* `core.registered_craftitems`
+  * Map of registered craft item definitions, indexed by name
+
+* `core.registered_tools`
+  * Map of registered tool definitions, indexed by name
+
+* `core.registered_entities`
+  * Map of registered entity prototypes, indexed by name
+  * Values in this table may be modified directly.
+    Note: changes to initial properties will only affect entities spawned afterwards,
+    as they are only read when spawning.
+
+* `core.objects_by_guid`
+  * Map of active object references, indexed by object GUID
+
+* `core.object_refs`
+  * **Obsolete:** Use `core.objects_by_guid` instead.
+    GUIDs are strictly more useful than active object IDs.
+  * Map of active object references, indexed by active object id
+
+* `core.luaentities`
+  * Map of Lua entities, indexed by active object id
+
+* `core.registered_abms`
+  * List of ABM definitions
+
+* `core.registered_lbms`
+  * List of LBM definitions
+
+* `core.registered_aliases`
+  * Map of registered aliases, indexed by name
+
+* `core.registered_ores`
+  * Map of registered ore definitions, indexed by the `name` field.
+  * If `name` is nil, the key is the object handle returned by
+    `core.register_ore`.
+
+* `core.registered_biomes`
+  * Map of registered biome definitions, indexed by the `name` field.
+  * If `name` is nil, the key is the object handle returned by
+    `core.register_biome`.
+
+* `core.registered_decorations`
+  * Map of registered decoration definitions, indexed by the `name` field.
+  * If `name` is nil, the key is the object handle returned by
+    `core.register_decoration`.
+
+* `core.registered_chatcommands`
+  * Map of registered chat command definitions, indexed by name
+
+* `core.registered_privileges`
+  * Map of registered privilege definitions, indexed by name
+  * Registered privileges can be modified directly in this table.
 
 ### Registered callback tables
 
@@ -3777,3 +4102,69 @@ All callbacks registered with [Global callback registration functions](#global-c
 to corresponding `core.registered_*` tables.
 
 For historical reasons, the use of an -s suffix in these names is inconsistent.
+
+* `core.registered_on_chat_messages`
+
+* `core.registered_on_chatcommands`
+
+* `core.registered_globalsteps`
+
+* `core.registered_on_punchnodes`
+
+* `core.registered_on_placenodes`
+
+* `core.registered_on_dignodes`
+
+* `core.registered_on_generateds`
+
+* `core.registered_on_newplayers`
+
+* `core.registered_on_dieplayers`
+
+* `core.registered_on_respawnplayers`
+
+* `core.registered_on_prejoinplayers`
+
+* `core.registered_on_joinplayers`
+
+* `core.registered_on_leaveplayers`
+
+* `core.registered_on_player_receive_fields`
+
+* `core.registered_on_cheats`
+
+* `core.registered_on_crafts`
+
+* `core.registered_craft_predicts`
+
+* `core.registered_on_item_eats`
+
+* `core.registered_on_item_pickups`
+
+* `core.registered_on_punchplayers`
+
+* `core.registered_on_authplayers`
+
+* `core.registered_on_player_inventory_actions`
+
+* `core.registered_allow_player_inventory_actions`
+
+* `core.registered_on_rightclickplayers`
+
+* `core.registered_on_mods_loaded`
+
+* `core.registered_on_shutdown`
+
+* `core.registered_on_protection_violation`
+
+* `core.registered_on_priv_grant`
+
+* `core.registered_on_priv_revoke`
+
+* `core.registered_can_bypass_userlimit`
+
+* `core.registered_on_modchannel_message`
+
+* `core.registered_on_liquid_transformed`
+
+* `core.registered_on_mapblocks_changed`
