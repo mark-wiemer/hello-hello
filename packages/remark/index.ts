@@ -187,3 +187,4 @@ const file = await unified()
   .use(remarkStringify) // Stringify AST back to Markdown
   .process(await read({ path: "lua_api_out.md" }));
 await write({ path: "lua_api_transformed.md", value: String(file) });
+// #endregion
