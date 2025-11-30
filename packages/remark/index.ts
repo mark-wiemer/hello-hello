@@ -140,13 +140,20 @@ const coreNamespaceRefToTS: BasicPlugin = () => {
               }
             });
           }
+
+          if (nestedChild.type === "code") {
+            // Include code blocks as-is in the description
+            descriptionParts.push(`\`\`\` ${nestedChild.lang || ""}`);
+            descriptionParts.push(nestedChild.value);
+            descriptionParts.push("```");
+          }
           // todo handle other nested child types
         });
 
         // Create JSDoc comment lines
         const jsdocLines = ["/**"];
         descriptionParts.forEach((part) => {
-          jsdocLines.push(` * ${part}`);
+          jsdocLines.push(` * ${part.replaceAll(/\n/g, "\n * ")}`);
         });
         jsdocLines.push(" */");
 
