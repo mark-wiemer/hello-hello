@@ -3,7 +3,7 @@ import remarkParse from "remark-parse";
 import remarkStringify from "remark-stringify";
 import { read, write } from "to-vfile";
 import { visit } from "unist-util-visit";
-import type { Root, RootContent } from "mdast";
+import type { PhrasingContent, Root, RootContent } from "mdast";
 import type { Options } from "remark-parse";
 
 // #region Basic processing pipeline with plugin
@@ -35,6 +35,9 @@ console.log(JSON.stringify(tree, null, 2));
 
 // #region Transform core namespace reference to TypeScript signatures
 type BasicPlugin = Plugin<[(Readonly<Options> | null | undefined)?], Root, Root>;
+
+const mapPhrasingContentToText = (child: PhrasingContent) =>
+  child.type === "text" ? child.value : child.type === "inlineCode" ? `\`${child.value}\`` : "";
 
 const coreNamespaceRefToTS: BasicPlugin = () => {
   return (tree) => {
@@ -98,13 +101,7 @@ const coreNamespaceRefToTS: BasicPlugin = () => {
 
         // Get summary (text after the colon)
         const summary = remainingText
-          .map((child) =>
-            child.type === "text"
-              ? child.value
-              : child.type === "inlineCode"
-                ? `\`${child.value}\``
-                : "",
-          )
+          .map(mapPhrasingContentToText)
           .join("")
           .replace(/^:\s*/, "") // Remove leading colon
           .trim();
@@ -131,13 +128,7 @@ const coreNamespaceRefToTS: BasicPlugin = () => {
 
               // Format the text of the nested paragraph
               const nestedText = nestedParagraph.children
-                .map((child) =>
-                  child.type === "text"
-                    ? child.value
-                    : child.type === "inlineCode"
-                      ? `\`${child.value}\``
-                      : "",
-                )
+                .map(mapPhrasingContentToText)
                 .join("")
                 .trim();
               if (nestedText) {
