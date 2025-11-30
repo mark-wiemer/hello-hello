@@ -148,16 +148,7 @@ const coreNamespaceRefToTS: BasicPlugin = () => {
           // Create code block with JSDoc + function signature
           const codeContent = jsdocLines.join("\n") + "\n" + signature;
 
-          transformedChildren.push({
-            type: "code",
-            lang: "ts",
-            value: codeContent,
-          });
-
-          transformedChildren.push({
-            type: "paragraph",
-            children: [],
-          });
+          transformedChildren.push({ type: "code", lang: "ts", value: codeContent });
         }
       } else {
         // Keep non-list nodes as-is (headings, etc.)

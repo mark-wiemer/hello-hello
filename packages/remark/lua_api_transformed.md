@@ -12,8 +12,6 @@ when loading a mod.
 get_current_modname(this: void)
 ```
 
-
-
 ```ts
 /**
  * returns the directory path for a mod,
@@ -26,8 +24,6 @@ or checking if a mod is enabled.
 get_modpath(this: void, modname)
 ```
 
-
-
 ```ts
 /**
  * returns a list of enabled mods, sorted alphabetically.
@@ -35,8 +31,6 @@ get_modpath(this: void, modname)
  */
 get_modnames(this: void)
 ```
-
-
 
 ```ts
 /**
@@ -47,8 +41,6 @@ can be manually read from  in the game's root directory.
 get_game_info(this: void)
 ```
 
-
-
 ```ts
 /**
  * returns e.g.
@@ -56,8 +48,6 @@ get_game_info(this: void)
  */
 get_worldpath(this: void)
 ```
-
-
 
 ```ts
 /**
@@ -71,15 +61,11 @@ time, which may lead to corruption if you are not careful.
 get_mod_data_path(this: void)
 ```
 
-
-
 ```ts
 /**
  */
 is_singleplayer(this: void)
 ```
-
-
 
 * `core.features`: Table containing *server-side* API feature flags
 
@@ -222,8 +208,6 @@ is_singleplayer(this: void)
 has_feature(this: void, arg)
 ```
 
-
-
 ```ts
 /**
  * Table containing information
@@ -231,8 +215,6 @@ about a player. Example return value:
  */
 get_player_information(this: void, player_name)
 ```
-
-
 
 * `core.protocol_versions`:
 
@@ -256,8 +238,6 @@ get_player_information(this: void, player_name)
 get_player_window_information(this: void, player_name)
 ```
 
-
-
 ```ts
 /**
  * returns true if the given path exists else false
@@ -265,8 +245,6 @@ get_player_window_information(this: void, player_name)
  */
 path_exists(this: void, path)
 ```
-
-
 
 ```ts
 /**
@@ -276,8 +254,6 @@ if they don't exist.
  */
 mkdir(this: void, path)
 ```
-
-
 
 ```ts
 /**
@@ -290,8 +266,6 @@ Otherwise, the directory will only be removed if it is empty.
 rmdir(this: void, path, recursive)
 ```
 
-
-
 ```ts
 /**
  * returns success.
@@ -301,8 +275,6 @@ rmdir(this: void, path, recursive)
  */
 cpdir(this: void, source, destination)
 ```
-
-
 
 ```ts
 /**
@@ -314,8 +286,6 @@ cpdir(this: void, source, destination)
 mvdir(this: void, source, destination)
 ```
 
-
-
 ```ts
 /**
  * returns list of entry names
@@ -323,8 +293,6 @@ mvdir(this: void, source, destination)
  */
 get_dir_list(this: void, path, [is_dir])
 ```
-
-
 
 ```ts
 /**
@@ -335,8 +303,6 @@ way. Use this instead of below code when writing e.g. database files:
  */
 safe_file_write(this: void, path, content)
 ```
-
-
 
 ```ts
 /**
@@ -359,8 +325,6 @@ whether the functions exported by the wanted features exist. For example:
 get_version(this: void)
 ```
 
-
-
 ```ts
 /**
  * returns the sha1 hash of data
@@ -369,8 +333,6 @@ get_version(this: void)
  */
 sha1(this: void, data, [raw])
 ```
-
-
 
 ```ts
 /**
@@ -381,8 +343,6 @@ sha1(this: void, data, [raw])
 sha256(this: void, data, [raw])
 ```
 
-
-
 ```ts
 /**
  * Converts a ColorSpec to a
@@ -392,8 +352,6 @@ ColorString. If the ColorSpec is invalid, returns .
 colorspec_to_colorstring(this: void, colorspec)
 ```
 
-
-
 ```ts
 /**
  * Converts a ColorSpec to a raw
@@ -402,8 +360,6 @@ string of four bytes in an RGBA layout, returned as a string.
  */
 colorspec_to_bytes(this: void, colorspec)
 ```
-
-
 
 ```ts
 /**
@@ -415,8 +371,6 @@ ColorStrings.
 colorspec_to_table(this: void, colorspec)
 ```
 
-
-
 ```ts
 /**
  * Returns a "day-night ratio" value
@@ -425,8 +379,6 @@ the given "time of day" value (as returned by ).
  */
 time_to_day_night_ratio(this: void, time_of_day)
 ```
-
-
 
 ```ts
 /**
@@ -445,8 +397,6 @@ You may use this to procedurally generate textures during server init.
 encode_png(this: void, width, height, data, [compression])
 ```
 
-
-
 ```ts
 /**
  * Encodes reserved URI characters by a
@@ -455,8 +405,6 @@ percent sign followed by two hex digits. See
  */
 urlencode(this: void, str)
 ```
-
-
 
 ## Logging
 
@@ -467,8 +415,6 @@ urlencode(this: void, str)
 debug(this: void, ...)
 ```
 
-
-
 ```ts
 /**
  * - `level` is one of `"none"`, `"error"`, `"warning"`, `"action"`,
@@ -476,8 +422,6 @@ debug(this: void, ...)
  */
 log(this: void, [level,] text)
 ```
-
-
 
 ## Registration functions
 
@@ -494,8 +438,6 @@ another registration to this function, as it will be modified.
 register_node(this: void, name, nodedef)
 ```
 
-
-
 ```ts
 /**
  * - register an item with its definition
@@ -504,8 +446,6 @@ register_node(this: void, name, nodedef)
 register_craftitem(this: void, name, itemdef)
 ```
 
-
-
 ```ts
 /**
  * - register a tool item with its definition
@@ -513,8 +453,6 @@ register_craftitem(this: void, name, itemdef)
  */
 register_tool(this: void, name, tooldef)
 ```
-
-
 
 ```ts
 /**
@@ -532,8 +470,6 @@ removes the sounds from the definition of the mese block.
 override_item(this: void, name, redefinition, del_fields)
 ```
 
-
-
 ```ts
 /**
  * - Unregisters the item from the engine, and deletes the entry with key
@@ -543,15 +479,11 @@ according to its nature (e.g. `core.registered_nodes`)
 unregister_item(this: void, name)
 ```
 
-
-
 ```ts
 /**
  */
 register_entity(this: void, name, entity definition)
 ```
-
-
 
 ```ts
 /**
@@ -559,15 +491,11 @@ register_entity(this: void, name, entity definition)
 register_abm(this: void, abm definition)
 ```
 
-
-
 ```ts
 /**
  */
 register_lbm(this: void, lbm definition)
 ```
-
-
 
 ```ts
 /**
@@ -577,15 +505,11 @@ mapgens. See  section above.
 register_alias(this: void, alias, original_name)
 ```
 
-
-
 ```ts
 /**
  */
 register_alias_force(this: void, alias, original_name)
 ```
-
-
 
 ```ts
 /**
@@ -596,8 +520,6 @@ ore on success.
 register_ore(this: void, ore definition)
 ```
 
-
-
 ```ts
 /**
  * - Returns an integer object handle uniquely identifying the registered
@@ -605,8 +527,6 @@ biome on success. To get the biome ID, use `core.get_biome_id`.
  */
 register_biome(this: void, biome definition)
 ```
-
-
 
 ```ts
 /**
@@ -619,8 +539,6 @@ and re-registered.
 unregister_biome(this: void, name)
 ```
 
-
-
 ```ts
 /**
  * - Returns an integer object handle uniquely identifying the registered
@@ -631,8 +549,6 @@ generation.
  */
 register_decoration(this: void, decoration definition)
 ```
-
-
 
 ```ts
 /**
@@ -647,8 +563,6 @@ filename.
 register_schematic(this: void, schematic definition)
 ```
 
-
-
 ```ts
 /**
  * - Clears all biomes currently registered.
@@ -659,16 +573,12 @@ afterwards be cleared and re-registered.
 clear_registered_biomes(this: void)
 ```
 
-
-
 ```ts
 /**
  * - Clears all decorations currently registered.
  */
 clear_registered_decorations(this: void)
 ```
-
-
 
 ```ts
 /**
@@ -677,16 +587,12 @@ clear_registered_decorations(this: void)
 clear_registered_ores(this: void)
 ```
 
-
-
 ```ts
 /**
  * - Clears all schematics currently registered.
  */
 clear_registered_schematics(this: void)
 ```
-
-
 
 ### Gameplay
 
@@ -696,8 +602,6 @@ clear_registered_schematics(this: void)
  */
 register_craft(this: void, recipe)
 ```
-
-
 
 ```ts
 /**
@@ -714,15 +618,11 @@ from the crafting method.
 clear_craft(this: void, recipe)
 ```
 
-
-
 ```ts
 /**
  */
 register_chatcommand(this: void, cmd, chatcommand definition)
 ```
-
-
 
 ```ts
 /**
@@ -731,16 +631,12 @@ register_chatcommand(this: void, cmd, chatcommand definition)
 override_chatcommand(this: void, name, redefinition)
 ```
 
-
-
 ```ts
 /**
  * - Unregisters a chatcommands registered with `register_chatcommand`.
  */
 unregister_chatcommand(this: void, name)
 ```
-
-
 
 ```ts
 /**
@@ -753,8 +649,6 @@ minetest.conf setting.
 register_privilege(this: void, name, definition)
 ```
 
-
-
 ```ts
 /**
  * - Registers an auth handler that overrides the builtin one.
@@ -762,8 +656,6 @@ register_privilege(this: void, name, definition)
  */
 register_authentication_handler(this: void, authentication handler definition)
 ```
-
-
 
 ## Global callback registration functions
 
@@ -777,8 +669,6 @@ Call these functions only at load time!
 register_globalstep(this: void, function(dtime)
 ```
 
-
-
 ```ts
 /**
  * - Called after all mods have finished loading and before the media is cached
@@ -786,8 +676,6 @@ or aliases are handled.
  */
 register_on_mods_loaded(this: void, function()
 ```
-
-
 
 ```ts
 /**
@@ -798,8 +686,6 @@ semi-frequent intervals as well as on server shutdown.
  */
 register_on_shutdown(this: void, function()
 ```
-
-
 
 ```ts
 /**
@@ -812,8 +698,6 @@ definition whenever possible.
 register_on_placenode(this: void, function(pos, newnode, placer, oldnode, itemstack, pointed_thing)
 ```
 
-
-
 ```ts
 /**
  * - Called after a node has been dug.
@@ -823,16 +707,12 @@ definition whenever possible.
 register_on_dignode(this: void, function(pos, oldnode, digger)
 ```
 
-
-
 ```ts
 /**
  * - Called when a node is punched
  */
 register_on_punchnode(this: void, function(pos, node, puncher, pointed_thing)
 ```
-
-
 
 ```ts
 /**
@@ -845,8 +725,6 @@ Consider  as an alternative.
 register_on_generated(this: void, function(minp, maxp, blockseed)
 ```
 
-
-
 ```ts
 /**
  * - Called when a new player enters the world for the first time
@@ -854,8 +732,6 @@ register_on_generated(this: void, function(minp, maxp, blockseed)
  */
 register_on_newplayer(this: void, function(player)
 ```
-
-
 
 ```ts
 /**
@@ -874,8 +750,6 @@ the puncher to the punched.
 register_on_punchplayer(this: void, function(player, hitter, time_from_last_punch, tool_capabilities, dir, damage)
 ```
 
-
-
 ```ts
 /**
  * - Called when the 'place/use' key was used while pointing a player
@@ -885,8 +759,6 @@ register_on_punchplayer(this: void, function(player, hitter, time_from_last_punc
  */
 register_on_rightclickplayer(this: void, function(player, clicker)
 ```
-
-
 
 ```ts
 /**
@@ -904,8 +776,6 @@ Non-modifiers receive the final HP change calculated by the modifiers.
 register_on_player_hpchange(this: void, function(player, hp_change, reason)
 ```
 
-
-
 ```ts
 /**
  * - Called when a player dies
@@ -914,8 +784,6 @@ register_on_player_hpchange(this: void, function(player, hp_change, reason)
  */
 register_on_dieplayer(this: void, function(ObjectRef, reason)
 ```
-
-
 
 ```ts
 /**
@@ -926,8 +794,6 @@ register_on_dieplayer(this: void, function(ObjectRef, reason)
 register_on_respawnplayer(this: void, function(ObjectRef)
 ```
 
-
-
 ```ts
 /**
  * - Called when a client connects to the server, prior to authentication
@@ -937,8 +803,6 @@ reason.
 register_on_prejoinplayer(this: void, function(name, ip)
 ```
 
-
-
 ```ts
 /**
  * - Called when a player joins the game
@@ -946,8 +810,6 @@ register_on_prejoinplayer(this: void, function(name, ip)
  */
 register_on_joinplayer(this: void, function(ObjectRef, last_login)
 ```
-
-
 
 ```ts
 /**
@@ -957,8 +819,6 @@ register_on_joinplayer(this: void, function(ObjectRef, last_login)
  */
 register_on_leaveplayer(this: void, function(ObjectRef, timed_out)
 ```
-
-
 
 ```ts
 /**
@@ -971,16 +831,12 @@ register_on_leaveplayer(this: void, function(ObjectRef, timed_out)
 register_on_authplayer(this: void, function(name, ip, is_success)
 ```
 
-
-
 ```ts
 /**
  * - Deprecated: use `core.register_on_authplayer(name, ip, is_success)` instead.
  */
 register_on_auth_fail(this: void, function(name, ip)
 ```
-
-
 
 ```ts
 /**
@@ -989,8 +845,6 @@ register_on_auth_fail(this: void, function(name, ip)
  */
 register_on_cheat(this: void, function(ObjectRef, cheat)
 ```
-
-
 
 ```ts
 /**
@@ -1001,8 +855,6 @@ not be sent to other players.
 register_on_chat_message(this: void, function(name, message)
 ```
 
-
-
 ```ts
 /**
  * - Called always when a chatcommand is triggered, before `core.registered_chatcommands`
@@ -1012,8 +864,6 @@ handlers will be prevented.
  */
 register_on_chatcommand(this: void, function(name, command, params)
 ```
-
-
 
 ```ts
 /**
@@ -1042,8 +892,6 @@ formspec element type:
 register_on_player_receive_fields(this: void, function(player, formname, fields)
 ```
 
-
-
 ```ts
 /**
  * - Called when `player` crafts something
@@ -1057,8 +905,6 @@ modify it.
 register_on_craft(this: void, function(itemstack, player, old_craft_grid, craft_inv)
 ```
 
-
-
 ```ts
 /**
  * - The same as before, except that it is called before the player crafts, to
@@ -1066,8 +912,6 @@ make craft prediction, and it should not change anything.
  */
 register_craft_predict(this: void, function(itemstack, player, old_craft_grid, craft_inv)
 ```
-
-
 
 ```ts
 /**
@@ -1079,8 +923,6 @@ moved. A value of `-1` for `take` will make the source stack infinite.
  */
 register_allow_player_inventory_action(this: void, function(player, action, inventory, inventory_info)
 ```
-
-
 
 ```ts
 /**
@@ -1095,8 +937,6 @@ register_allow_player_inventory_action(this: void, function(player, action, inve
 register_on_player_inventory_action(this: void, function(player, action, inventory, inventory_info)
 ```
 
-
-
 ```ts
 /**
  * - Called by `builtin` and mods when a player violates protection at a
@@ -1110,8 +950,6 @@ allow for multiple protection mods.
 register_on_protection_violation(this: void, function(pos, name)
 ```
 
-
-
 ```ts
 /**
  * - Called when an item is eaten, by `core.item_eat`
@@ -1119,8 +957,6 @@ register_on_protection_violation(this: void, function(pos, name)
  */
 register_on_item_eat(this: void, function(hp_change, replace_with_item, itemstack, user, pointed_thing)
 ```
-
-
 
 ```ts
 /**
@@ -1134,8 +970,6 @@ the item into inventory).
 register_on_item_pickup(this: void, function(itemstack, picker, pointed_thing, time_from_last_punch,  ...)
 ```
 
-
-
 ```ts
 /**
  * - Called when `granter` grants the priv `priv` to `name`.
@@ -1144,8 +978,6 @@ once with granter being the player name, and again with granter being nil.
  */
 register_on_priv_grant(this: void, function(name, granter, priv)
 ```
-
-
 
 ```ts
 /**
@@ -1156,8 +988,6 @@ once with revoker being the player name, and again with revoker being nil.
 register_on_priv_revoke(this: void, function(name, revoker, priv)
 ```
 
-
-
 ```ts
 /**
  * - Called when `name` user connects with `ip`.
@@ -1165,8 +995,6 @@ register_on_priv_revoke(this: void, function(name, revoker, priv)
  */
 register_can_bypass_userlimit(this: void, function(name, ip)
 ```
-
-
 
 ```ts
 /**
@@ -1176,8 +1004,6 @@ register_can_bypass_userlimit(this: void, function(name, ip)
  */
 register_on_modchannel_message(this: void, function(channel_name, sender, message)
 ```
-
-
 
 ```ts
 /**
@@ -1189,8 +1015,6 @@ with the corresponding index in pos_list.
  */
 register_on_liquid_transformed(this: void, function(pos_list, node_list)
 ```
-
-
 
 ```ts
 /**
@@ -1207,8 +1031,6 @@ The set is a table where the keys are hashes and the values are `true`.
 register_on_mapblocks_changed(this: void, function(modified_blocks, modified_block_count)
 ```
 
-
-
 ## Setting-related
 
 * `core.settings`: Settings object containing all of the settings from the
@@ -1222,8 +1044,6 @@ parses it as a position (in the format ). Returns a position or nil.
 setting_get_pos(this: void, name)
 ```
 
-
-
 ## Authentication
 
 ```ts
@@ -1235,8 +1055,6 @@ setting_get_pos(this: void, name)
 string_to_privs(this: void, str[, delim])
 ```
 
-
-
 ```ts
 /**
  * - Returns the string representation of `privs`
@@ -1245,15 +1063,11 @@ string_to_privs(this: void, str[, delim])
 privs_to_string(this: void, privs[, delim])
 ```
 
-
-
 ```ts
 /**
  */
 get_player_privs(this: void, name)
 ```
-
-
 
 ```ts
 /**
@@ -1265,8 +1079,6 @@ a table, e.g. `{ priva = true, privb = true }`.
  */
 check_player_privs(this: void, player_or_name, ...)
 ```
-
-
 
 ```ts
 /**
@@ -1280,8 +1092,6 @@ external protocols such as IRC, other uses are frowned upon.
 check_password_entry(this: void, name, entry, password)
 ```
 
-
-
 ```ts
 /**
  * - Convert a name-password pair to a password hash that Luanti can use.
@@ -1294,8 +1104,6 @@ in the db might use the new SRP verifier format.
 get_password_hash(this: void, name, raw_password)
 ```
 
-
-
 ```ts
 /**
  * returns an IP address string for the player
@@ -1304,8 +1112,6 @@ get_password_hash(this: void, name, raw_password)
  */
 get_player_ip(this: void, name)
 ```
-
-
 
 ```ts
 /**
@@ -1319,8 +1125,6 @@ already registered.
 get_auth_handler(this: void)
 ```
 
-
-
 ```ts
 /**
  * - Must be called by the authentication handler for privilege changes.
@@ -1329,8 +1133,6 @@ get_auth_handler(this: void)
 notify_authentication_modified(this: void, name)
 ```
 
-
-
 ```ts
 /**
  * Set password hash of
@@ -1338,8 +1140,6 @@ player .
  */
 set_player_password(this: void, name, password_hash)
 ```
-
-
 
 ```ts
 /**
@@ -1352,8 +1152,6 @@ This  the player privileges to `interact` and `fly`;
  */
 set_player_privs(this: void, name, privs)
 ```
-
-
 
 ```ts
 /**
@@ -1369,16 +1167,12 @@ All other privileges will remain unchanged.
 change_player_privs(this: void, name, changes)
 ```
 
-
-
 ```ts
 /**
  * - See `reload()` in authentication handler definition
  */
 auth_reload(this: void)
 ```
-
-
 
 `core.set_player_password`, `core.set_player_privs`,
 `core.get_player_privs` and `core.auth_reload` call the authentication
@@ -1393,8 +1187,6 @@ handler.
 chat_send_all(this: void, text)
 ```
 
-
-
 ```ts
 /**
  * send chat message to specific player
@@ -1402,8 +1194,6 @@ chat_send_all(this: void, text)
  */
 chat_send_player(this: void, name, text)
 ```
-
-
 
 ```ts
 /**
@@ -1415,8 +1205,6 @@ Refer to the documentation of the setting for a list of valid placeholders.
  */
 format_chat_message(this: void, name, message)
 ```
-
-
 
 ## Environment access
 
@@ -1431,16 +1219,12 @@ If param1 or param2 is omitted, it's set to `0`.
 set_node(this: void, pos, node)
 ```
 
-
-
 ```ts
 /**
  * alias to
  */
 add_node(this: void, pos, node)
 ```
-
-
 
 ```ts
 /**
@@ -1457,8 +1241,6 @@ times faster.
 bulk_set_node(this: void, {pos1, pos2, pos3, ...}, node)
 ```
 
-
-
 ```ts
 /**
  * - Swap node at position with another.
@@ -1467,16 +1249,12 @@ bulk_set_node(this: void, {pos1, pos2, pos3, ...}, node)
 swap_node(this: void, pos, node)
 ```
 
-
-
 ```ts
 /**
  * - Equivalent to `core.swap_node` but in bulk.
  */
 bulk_swap_node(this: void, {pos1, pos2, pos3, ...}, node)
 ```
-
-
 
 ```ts
 /**
@@ -1485,8 +1263,6 @@ bulk_swap_node(this: void, {pos1, pos2, pos3, ...}, node)
  */
 remove_node(this: void, pos)
 ```
-
-
 
 ```ts
 /**
@@ -1497,8 +1273,6 @@ remove_node(this: void, pos)
 get_node(this: void, pos)
 ```
 
-
-
 ```ts
 /**
  * - Same as `get_node` but returns `nil` for unloaded areas.
@@ -1506,8 +1280,6 @@ get_node(this: void, pos)
  */
 get_node_or_nil(this: void, pos)
 ```
-
-
 
 ```ts
 /**
@@ -1518,8 +1290,6 @@ get_node_or_nil(this: void, pos)
  */
 get_node_raw(this: void, x, y, z)
 ```
-
-
 
 ```ts
 /**
@@ -1534,8 +1304,6 @@ to get the light value of a neighbor.
 get_node_light(this: void, pos[, timeofday])
 ```
 
-
-
 ```ts
 /**
  * - Figures out the sunlight (or moonlight) value at pos at the given time of
@@ -1549,8 +1317,6 @@ unlikely
 get_natural_light(this: void, pos[, timeofday])
 ```
 
-
-
 ```ts
 /**
  * - Calculates the artificial light (light from e.g. torches) value from the
@@ -1563,8 +1329,6 @@ ensures compatibility.
 get_artificial_light(this: void, param1)
 ```
 
-
-
 ```ts
 /**
  * - Place node with the same effects that a player would cause
@@ -1572,8 +1336,6 @@ get_artificial_light(this: void, param1)
  */
 place_node(this: void, pos, node[, placer])
 ```
-
-
 
 ```ts
 /**
@@ -1584,8 +1346,6 @@ place_node(this: void, pos, node[, placer])
 dig_node(this: void, pos[, digger])
 ```
 
-
-
 ```ts
 /**
  * - Punch node with the same effects that a player would cause
@@ -1593,8 +1353,6 @@ dig_node(this: void, pos[, digger])
  */
 punch_node(this: void, pos[, puncher])
 ```
-
-
 
 ```ts
 /**
@@ -1604,8 +1362,6 @@ punch_node(this: void, pos[, puncher])
 spawn_falling_node(this: void, pos)
 ```
 
-
-
 ```ts
 /**
  * - Get a table of positions of nodes that have metadata within a region
@@ -1614,8 +1370,6 @@ spawn_falling_node(this: void, pos)
 find_nodes_with_meta(this: void, pos1, pos2)
 ```
 
-
-
 ```ts
 /**
  * - Get a `NodeMetaRef` at that position
@@ -1623,16 +1377,12 @@ find_nodes_with_meta(this: void, pos1, pos2)
 get_meta(this: void, pos)
 ```
 
-
-
 ```ts
 /**
  * - Get `NodeTimerRef`
  */
 get_node_timer(this: void, pos)
 ```
-
-
 
 ```ts
 /**
@@ -1645,8 +1395,6 @@ to unloaded and non-generated blocks.
 add_entity(this: void, pos, name, [staticdata])
 ```
 
-
-
 ```ts
 /**
  * Spawn item
@@ -1656,8 +1404,6 @@ add_entity(this: void, pos, name, [staticdata])
 add_item(this: void, pos, item)
 ```
 
-
-
 ```ts
 /**
  * Get an  to a player
@@ -1665,8 +1411,6 @@ add_item(this: void, pos, item)
  */
 get_player_by_name(this: void, name)
 ```
-
-
 
 ```ts
 /**
@@ -1681,8 +1425,6 @@ transparently takes care of this possibility.
 get_objects_inside_radius(this: void, center, radius)
 ```
 
-
-
 ```ts
 /**
  * - returns an iterator of valid objects
@@ -1690,8 +1432,6 @@ get_objects_inside_radius(this: void, center, radius)
  */
 objects_inside_radius(this: void, center, radius)
 ```
-
-
 
 ```ts
 /**
@@ -1703,16 +1443,12 @@ Use `core.objects_in_area` instead to iterate only valid objects.
 get_objects_in_area(this: void, min_pos, max_pos)
 ```
 
-
-
 ```ts
 /**
  * - returns an iterator of valid objects
  */
 objects_in_area(this: void, min_pos, max_pos)
 ```
-
-
 
 ```ts
 /**
@@ -1722,16 +1458,12 @@ objects_in_area(this: void, min_pos, max_pos)
 set_timeofday(this: void, val)
 ```
 
-
-
 ```ts
 /**
  * get time of day
  */
 get_timeofday(this: void)
 ```
-
-
 
 ```ts
 /**
@@ -1741,8 +1473,6 @@ created. The time is not available () before the first server step.
 get_gametime(this: void)
 ```
 
-
-
 ```ts
 /**
  * returns number days elapsed since world was
@@ -1751,8 +1481,6 @@ created.
  */
 get_day_count(this: void)
 ```
-
-
 
 ```ts
 /**
@@ -1765,8 +1493,6 @@ If true `pos` is also checked for the nodes
  */
 find_node_near(this: void, pos, radius, nodenames, [search_center])
 ```
-
-
 
 ```ts
 /**
@@ -1783,8 +1509,6 @@ as index
 find_nodes_in_area(this: void, pos1, pos2, nodenames, [grouped])
 ```
 
-
-
 ```ts
 /**
  * returns a
@@ -1796,8 +1520,6 @@ list of positions.
 find_nodes_in_area_under_air(this: void, pos1, pos2, nodenames)
 ```
 
-
-
 ```ts
 /**
  * - Return world-specific value noise.
@@ -1807,16 +1529,12 @@ find_nodes_in_area_under_air(this: void, pos1, pos2, nodenames)
 get_value_noise(this: void, noiseparams)
 ```
 
-
-
 ```ts
 /**
  * - Deprecated: use `core.get_value_noise(noiseparams)` instead.
  */
 get_value_noise(this: void, seeddiff, octaves, persistence, spread)
 ```
-
-
 
 ```ts
 /**
@@ -1825,16 +1543,12 @@ get_value_noise(this: void, seeddiff, octaves, persistence, spread)
 get_perlin(this: void, noiseparams)
 ```
 
-
-
 ```ts
 /**
  * - Deprecated: renamed to `core.get_value_noise` in version 5.12.0.
  */
 get_perlin(this: void, seeddiff, octaves, persistence, spread)
 ```
-
-
 
 ```ts
 /**
@@ -1843,8 +1557,6 @@ get_perlin(this: void, seeddiff, octaves, persistence, spread)
  */
 get_voxel_manip(this: void, [pos1, pos2])
 ```
-
-
 
 ```ts
 /**
@@ -1860,8 +1572,6 @@ colon and specifier added, e.g. `"default"` or `"default:dungeon_loot"`
 set_gen_notify(this: void, flags, [deco_ids], [custom_ids])
 ```
 
-
-
 ```ts
 /**
  * - Returns a flagstring, a table with the `deco_id`s and a table with
@@ -1869,8 +1579,6 @@ user-defined IDs.
  */
 get_gen_notify(this: void)
 ```
-
-
 
 ```ts
 /**
@@ -1880,16 +1588,12 @@ or `nil` on failure.
 get_decoration_id(this: void, decoration_name)
 ```
 
-
-
 ```ts
 /**
  * - Return requested mapgen object if available (see )
  */
 get_mapgen_object(this: void, objectname)
 ```
-
-
 
 ```ts
 /**
@@ -1898,16 +1602,12 @@ get_mapgen_object(this: void, objectname)
 get_heat(this: void, pos)
 ```
 
-
-
 ```ts
 /**
  * - Returns the humidity at the position, or `nil` on failure.
  */
 get_humidity(this: void, pos)
 ```
-
-
 
 ```ts
 /**
@@ -1917,8 +1617,6 @@ get_humidity(this: void, pos)
 get_biome_data(this: void, pos)
 ```
 
-
-
 ```ts
 /**
  * - Returns the biome id, as used in the biomemap Mapgen object and returned
@@ -1926,8 +1624,6 @@ by `core.get_biome_data(pos)`, for a given biome_name string.
  */
 get_biome_id(this: void, biome_name)
 ```
-
-
 
 ```ts
 /**
@@ -1938,8 +1634,6 @@ failure.
 get_biome_name(this: void, biome_id)
 ```
 
-
-
 ```ts
 /**
  * - Deprecated: use `core.get_mapgen_setting(name)` instead.
@@ -1947,8 +1641,6 @@ get_biome_name(this: void, biome_id)
  */
 get_mapgen_params(this: void)
 ```
-
-
 
 ```ts
 /**
@@ -1966,8 +1658,6 @@ prefix `"no"` is attached, clears instead.
 set_mapgen_params(this: void, MapgenParams)
 ```
 
-
-
 ```ts
 /**
  * - Returns the minimum and maximum possible generated node positions
@@ -1980,8 +1670,6 @@ of the  mapgen setting `"chunksize"`.
 get_mapgen_edges(this: void, [mapgen_limit[, chunksize]])
 ```
 
-
-
 ```ts
 /**
  * - Returns the currently active chunksize of the mapgen, as a vector.
@@ -1989,8 +1677,6 @@ The size is specified in blocks.
  */
 get_mapgen_chunksize(this: void)
 ```
-
-
 
 ```ts
 /**
@@ -2000,8 +1686,6 @@ format with the following order of precedence:
 get_mapgen_setting(this: void, name)
 ```
 
-
-
 ```ts
 /**
  * - Same as above, but returns the value as a NoiseParams table if the
@@ -2009,8 +1693,6 @@ setting `name` exists and is a valid NoiseParams.
  */
 get_mapgen_setting_noiseparams(this: void, name)
 ```
-
-
 
 ```ts
 /**
@@ -2024,16 +1706,12 @@ metafile contents.
 set_mapgen_setting(this: void, name, value, [override_meta])
 ```
 
-
-
 ```ts
 /**
  * - Same as above, except value is a NoiseParams table.
  */
 set_mapgen_setting_noiseparams(this: void, name, value, [override_meta])
 ```
-
-
 
 ```ts
 /**
@@ -2046,16 +1724,12 @@ active config.
 set_noiseparams(this: void, name, noiseparams, set_default)
 ```
 
-
-
 ```ts
 /**
  * - Returns a table of the noiseparams for name.
  */
 get_noiseparams(this: void, name)
 ```
-
-
 
 ```ts
 /**
@@ -2065,8 +1739,6 @@ from `pos1` to `pos2`.
  */
 generate_ores(this: void, vm[, pos1, pos2])
 ```
-
-
 
 ```ts
 /**
@@ -2081,8 +1753,6 @@ default: `false`
 generate_decorations(this: void, vm[, pos1, pos2, [use_mapgen_biomes]])
 ```
 
-
-
 ```ts
 /**
  * - Clear all objects in the environment
@@ -2090,8 +1760,6 @@ generate_decorations(this: void, vm[, pos1, pos2, [use_mapgen_biomes]])
  */
 clear_objects(this: void, [options])
 ```
-
-
 
 ```ts
 /**
@@ -2101,8 +1769,6 @@ clear_objects(this: void, [options])
  */
 load_area(this: void, pos1[, pos2])
 ```
-
-
 
 ```ts
 /**
@@ -2117,16 +1783,12 @@ emerged.
 emerge_area(this: void, pos1, pos2, [callback], [param])
 ```
 
-
-
 ```ts
 /**
  * - delete all mapblocks in the area from pos1 to pos2, inclusive
  */
 delete_area(this: void, pos1, pos2)
 ```
-
-
 
 ```ts
 /**
@@ -2139,8 +1801,6 @@ delete_area(this: void, pos1, pos2)
  */
 line_of_sight(this: void, pos1, pos2)
 ```
-
-
 
 ```ts
 /**
@@ -2157,8 +1817,6 @@ of item definitions. Default is `nil`.
  */
 raycast(this: void, pos1, pos2, objects, liquids, pointabilities)
 ```
-
-
 
 ```ts
 /**
@@ -2182,16 +1840,12 @@ on-the-fly
 find_path(this: void, pos1, pos2, searchdistance, max_jump, max_drop, algorithm)
 ```
 
-
-
 ```ts
 /**
  * - spawns L-system tree at given `pos` with definition in `treedef` table
  */
 spawn_tree(this: void, pos, treedef)
 ```
-
-
 
 ```ts
 /**
@@ -2201,16 +1855,12 @@ VoxelManip object `vmanip` instead of the map.
 spawn_tree_on_vmanip(this: void, vmanip, pos, treedef)
 ```
 
-
-
 ```ts
 /**
  * - add node to liquid flow update queue
  */
 transforming_liquid_add(this: void, pos)
 ```
-
-
 
 ```ts
 /**
@@ -2219,16 +1869,12 @@ transforming_liquid_add(this: void, pos)
 get_node_max_level(this: void, pos)
 ```
 
-
-
 ```ts
 /**
  * - get level of leveled node (water, snow)
  */
 get_node_level(this: void, pos)
 ```
-
-
 
 ```ts
 /**
@@ -2238,8 +1884,6 @@ get_node_level(this: void, pos)
 set_node_level(this: void, pos, level)
 ```
 
-
-
 ```ts
 /**
  * - increase level of leveled node by level, default `level` equals `1`
@@ -2248,8 +1892,6 @@ set_node_level(this: void, pos, level)
  */
 add_node_level(this: void, pos, level)
 ```
-
-
 
 ```ts
 /**
@@ -2266,8 +1908,6 @@ are relative to `pos`.
  */
 get_node_boxes(this: void, box_type, pos, [node])
 ```
-
-
 
 ```ts
 /**
@@ -2291,8 +1931,6 @@ might be removed.
 fix_light(this: void, pos1, pos2)
 ```
 
-
-
 ```ts
 /**
  * - causes an unsupported `group:falling_node` node to fall and causes an
@@ -2301,8 +1939,6 @@ unattached `group:attached_node` node to fall.
  */
 check_single_for_falling(this: void, pos)
 ```
-
-
 
 ```ts
 /**
@@ -2313,8 +1949,6 @@ of nodes to fall.
  */
 check_for_falling(this: void, pos)
 ```
-
-
 
 ```ts
 /**
@@ -2330,8 +1964,6 @@ full-node biome 'dust' nodes.
 get_spawn_level(this: void, x, z)
 ```
 
-
-
 ## Mod channels
 
 You can find mod channels communication scheme in `doc/mod_channels.png`.
@@ -2345,8 +1977,6 @@ should listen for incoming messages with
  */
 mod_channel_join(this: void, channel_name)
 ```
-
-
 
 ## Inventory
 
@@ -2372,16 +2002,12 @@ in future releases.
 create_detached_inventory(this: void, name, callbacks, [player_name])
 ```
 
-
-
 ```ts
 /**
  * - Returns a `boolean` indicating whether the removal succeeded.
  */
 remove_detached_inventory(this: void, name)
 ```
-
-
 
 ```ts
 /**
@@ -2390,8 +2016,6 @@ remove_detached_inventory(this: void, name)
  */
 do_item_eat(this: void, hp_change, replace_with_item, itemstack, user, pointed_thing)
 ```
-
-
 
 ## Formspec functions
 
@@ -2404,8 +2028,6 @@ do_item_eat(this: void, hp_change, replace_with_item, itemstack, user, pointed_t
  */
 show_formspec(this: void, playername, formname, formspec)
 ```
-
-
 
 ```ts
 /**
@@ -2420,8 +2042,6 @@ expression.
 close_formspec(this: void, playername, formname)
 ```
 
-
-
 ```ts
 /**
  * returns a string
@@ -2430,8 +2050,6 @@ in formspecs.
  */
 formspec_escape(this: void, string)
 ```
-
-
 
 ```ts
 /**
@@ -2445,8 +2063,6 @@ not already being formspec escaped.
 hypertext_escape(this: void, string)
 ```
 
-
-
 ```ts
 /**
  * returns a table
@@ -2455,8 +2071,6 @@ hypertext_escape(this: void, string)
  */
 explode_table_event(this: void, string)
 ```
-
-
 
 ```ts
 /**
@@ -2467,8 +2081,6 @@ explode_table_event(this: void, string)
 explode_textlist_event(this: void, string)
 ```
 
-
-
 ```ts
 /**
  * returns a table
@@ -2477,8 +2089,6 @@ explode_textlist_event(this: void, string)
  */
 explode_scrollbar_event(this: void, string)
 ```
-
-
 
 ```ts
 /**
@@ -2492,8 +2102,6 @@ Respawning is done via `ObjectRef:respawn`.
 show_death_screen(this: void, player, reason)
 ```
 
-
-
 ## Item handling
 
 ```ts
@@ -2502,8 +2110,6 @@ show_death_screen(this: void, player, reason)
  */
 inventorycube(this: void, img1, img2, img3)
 ```
-
-
 
 ```ts
 /**
@@ -2515,8 +2121,6 @@ to a node, then it will return the `above` position of the `pointed_thing`.
 get_pointed_thing_position(this: void, pointed_thing, above)
 ```
 
-
-
 ```ts
 /**
  * - Convert a vector to a facedir value, used in `param2` for
@@ -2527,8 +2131,6 @@ causes it to take the y component into account.
 dir_to_facedir(this: void, dir[, is6d])
 ```
 
-
-
 ```ts
 /**
  * - Convert a facedir back into a vector aimed directly out the "back" of a
@@ -2536,8 +2138,6 @@ node.
  */
 facedir_to_dir(this: void, facedir)
 ```
-
-
 
 ```ts
 /**
@@ -2547,8 +2147,6 @@ facedir_to_dir(this: void, facedir)
 dir_to_fourdir(this: void, dir)
 ```
 
-
-
 ```ts
 /**
  * - Convert a 4dir back into a vector aimed directly out the "back" of a
@@ -2556,8 +2154,6 @@ node.
  */
 fourdir_to_dir(this: void, fourdir)
 ```
-
-
 
 ```ts
 /**
@@ -2567,8 +2163,6 @@ fourdir_to_dir(this: void, fourdir)
 dir_to_wallmounted(this: void, dir)
 ```
 
-
-
 ```ts
 /**
  * - Convert a wallmounted value back into a vector aimed directly out the
@@ -2577,16 +2171,12 @@ dir_to_wallmounted(this: void, dir)
 wallmounted_to_dir(this: void, wallmounted)
 ```
 
-
-
 ```ts
 /**
  * - Convert a vector into a yaw (angle)
  */
 dir_to_yaw(this: void, dir)
 ```
-
-
 
 ```ts
 /**
@@ -2595,8 +2185,6 @@ dir_to_yaw(this: void, dir)
 yaw_to_dir(this: void, yaw)
 ```
 
-
-
 ```ts
 /**
  * - Returns a boolean. Returns `true` if the given `paramtype2` contains
@@ -2604,8 +2192,6 @@ color information (`color`, `colorwallmounted`, `colorfacedir`, etc.).
  */
 is_colored_paramtype(this: void, ptype)
 ```
-
-
 
 ```ts
 /**
@@ -2616,8 +2202,6 @@ information.
  */
 strip_param2_color(this: void, param2, paramtype2)
 ```
-
-
 
 ```ts
 /**
@@ -2633,8 +2217,6 @@ since 5.12.0 for games/mods implementing customized drops.
  */
 get_node_drops(this: void, node[, toolname, tool, digger, pos])
 ```
-
-
 
 ```ts
 /**
@@ -2653,8 +2235,6 @@ placed in `decremented_input.items`. Replacements can be placed in
 get_craft_result(this: void, input)
 ```
 
-
-
 ```ts
 /**
  * returns input
@@ -2668,8 +2248,6 @@ get_craft_result(this: void, input)
 get_craft_recipe(this: void, output)
 ```
 
-
-
 ```ts
 /**
  * returns a table or
@@ -2681,8 +2259,6 @@ or `nil` if no recipe was found.
 get_all_craft_recipes(this: void, query item)
 ```
 
-
-
 ```ts
 /**
  * - `drops`: list of itemstrings
@@ -2693,8 +2269,6 @@ ground)
  */
 handle_node_drops(this: void, pos, drops, digger)
 ```
-
-
 
 ```ts
 /**
@@ -2710,8 +2284,6 @@ table and native form.
 itemstring_with_palette(this: void, item, palette_index)
 ```
 
-
-
 ```ts
 /**
  * returns an item string
@@ -2726,8 +2298,6 @@ table and native form.
 itemstring_with_color(this: void, item, colorstring)
 ```
 
-
-
 ## Rollback
 
 ```ts
@@ -2739,8 +2309,6 @@ itemstring_with_color(this: void, item, colorstring)
 rollback_get_node_actions(this: void, pos, range, seconds, limit)
 ```
 
-
-
 ```ts
 /**
  * returns
@@ -2750,8 +2318,6 @@ rollback_get_node_actions(this: void, pos, range, seconds, limit)
  */
 rollback_revert_actions_by(this: void, actor, seconds)
 ```
-
-
 
 ## Defaults for the `on_place` and `on_drop` item definition functions
 
@@ -2766,8 +2332,6 @@ for the newly placed node to prevent a callback and placement loop
 item_place_node(this: void, itemstack, placer, pointed_thing[, param2, prevent_after_place])
 ```
 
-
-
 ```ts
 /**
  * - Place item as-is
@@ -2776,8 +2340,6 @@ item_place_node(this: void, itemstack, placer, pointed_thing[, param2, prevent_a
  */
 item_place_object(this: void, itemstack, placer, pointed_thing)
 ```
-
-
 
 ```ts
 /**
@@ -2790,8 +2352,6 @@ item_place_object(this: void, itemstack, placer, pointed_thing)
 item_place(this: void, itemstack, placer, pointed_thing[, param2])
 ```
 
-
-
 ```ts
 /**
  * - Runs callbacks registered by `core.register_on_item_pickup` and adds
@@ -2802,8 +2362,6 @@ the item to the picker's `"main"` inventory list.
 item_pickup(this: void, itemstack, picker, pointed_thing, time_from_last_punch, ...)
 ```
 
-
-
 ```ts
 /**
  * - Global secondary use callback. Does nothing.
@@ -2812,8 +2370,6 @@ item_pickup(this: void, itemstack, picker, pointed_thing, time_from_last_punch, 
  */
 item_secondary_use(this: void, itemstack, user)
 ```
-
-
 
 ```ts
 /**
@@ -2824,8 +2380,6 @@ item_secondary_use(this: void, itemstack, user)
  */
 item_drop(this: void, itemstack, dropper, pos)
 ```
-
-
 
 ```ts
 /**
@@ -2838,8 +2392,6 @@ the eaten stack, then the remainings go to a different spot, or are dropped.
 item_eat(this: void, hp_change[, replace_with_item])
 ```
 
-
-
 ## Defaults for the `on_punch` and `on_dig` node definition callbacks
 
 ```ts
@@ -2849,8 +2401,6 @@ item_eat(this: void, hp_change[, replace_with_item])
 node_punch(this: void, pos, node, puncher, pointed_thing)
 ```
 
-
-
 ```ts
 /**
  * - Checks if node can be dug, puts item into inventory, removes node
@@ -2858,8 +2408,6 @@ node_punch(this: void, pos, node, puncher, pointed_thing)
  */
 node_dig(this: void, pos, node, digger)
 ```
-
-
 
 ## Sounds
 
@@ -2876,16 +2424,12 @@ player actions (e.g. door closing).
 sound_play(this: void, spec, parameters, [ephemeral])
 ```
 
-
-
 ```ts
 /**
  * - `handle` is a handle returned by `core.sound_play`
  */
 sound_stop(this: void, handle)
 ```
-
-
 
 ```ts
 /**
@@ -2900,8 +2444,6 @@ Fading to zero will delete the sound.
  */
 sound_fade(this: void, handle, step, gain)
 ```
-
-
 
 ## Timing
 
@@ -2919,8 +2461,6 @@ measured with globalstep dtime.
  */
 after(this: void, time, func, ...)
 ```
-
-
 
 * `job:cancel()`
   * Cancels the job function from being called
@@ -2955,8 +2495,6 @@ with all of the return values as arguments.
 handle_async(this: void, func, callback, ...)
 ```
 
-
-
 ```ts
 /**
  * - Register a path to a Lua file to be imported when an async environment
@@ -2965,8 +2503,6 @@ later using `core.handle_async()`.
  */
 register_async_dofile(this: void, path)
 ```
-
-
 
 ### List of APIs available in an async environment
 
@@ -3044,8 +2580,6 @@ is initialized. Run in order of registration.
 register_mapgen_script(this: void, path)
 ```
 
-
-
 ### List of APIs exclusive to the mapgen env
 
 ```ts
@@ -3062,8 +2596,6 @@ is not necessary and is disallowed.
 register_on_generated(this: void, function(vmanip, minp, maxp, blockseed)
 ```
 
-
-
 ```ts
 /**
  * - Saves data for retrieval using the gennotify mechanism (see ).
@@ -3078,8 +2610,6 @@ was called with the same user-defined ID before.
  */
 save_gen_notify(this: void, id, data)
 ```
-
-
 
 ### List of APIs available in the mapgen env
 
@@ -3150,16 +2680,12 @@ Zero delay triggers an immediate shutdown.
 request_shutdown(this: void, [message],[reconnect],[delay])
 ```
 
-
-
 ```ts
 /**
  * cancel current delayed shutdown
  */
 cancel_shutdown_requests(this: void)
 ```
-
-
 
 ```ts
 /**
@@ -3173,16 +2699,12 @@ a player joined.
 get_server_status(this: void, name, joined)
 ```
 
-
-
 ```ts
 /**
  * returns the server uptime in seconds
  */
 get_server_uptime(this: void)
 ```
-
-
 
 ```ts
 /**
@@ -3191,8 +2713,6 @@ of the server in seconds or nil if server is not fully loaded yet
  */
 get_server_max_lag(this: void)
 ```
-
-
 
 ```ts
 /**
@@ -3206,8 +2726,6 @@ data too.
 remove_player(this: void, name)
 ```
 
-
-
 ```ts
 /**
  * remove player authentication data
@@ -3215,8 +2733,6 @@ remove_player(this: void, name)
  */
 remove_player_auth(this: void, name)
 ```
-
-
 
 ```ts
 /**
@@ -3235,8 +2751,6 @@ this can make transfer of bigger files painless (if set up).
 dynamic_add_media(this: void, options, callback)
 ```
 
-
-
 ## IPC
 
 The engine provides a generalized mechanism to enable sharing data between the
@@ -3252,8 +2766,6 @@ It is essentially a shared in-memory key-value store.
 ipc_get(this: void, key)
 ```
 
-
-
 ```ts
 /**
  * - Write a value to the shared data area.
@@ -3262,8 +2774,6 @@ ipc_get(this: void, key)
  */
 ipc_set(this: void, key, value)
 ```
-
-
 
 Interacting with the shared data will perform an operation comparable to
 (de)serialization on each access.
@@ -3291,8 +2801,6 @@ synchronization between threads.
 ipc_cas(this: void, key, old_value, new_value)
 ```
 
-
-
 ```ts
 /**
  * - Do a blocking wait until a value (other than `nil`) is present at the key.
@@ -3307,8 +2815,6 @@ thread any delays directly translate to lag felt by players.
 ipc_poll(this: void, key, timeout)
 ```
 
-
-
 ## Bans
 
 ```ts
@@ -3318,8 +2824,6 @@ ipc_poll(this: void, key, timeout)
 get_ban_list(this: void)
 ```
 
-
-
 ```ts
 /**
  * returns list of bans matching
@@ -3327,8 +2831,6 @@ IP address or name formatted as string
  */
 get_ban_description(this: void, ip_or_name)
 ```
-
-
 
 ```ts
 /**
@@ -3338,8 +2840,6 @@ get_ban_description(this: void, ip_or_name)
 ban_player(this: void, name)
 ```
 
-
-
 ```ts
 /**
  * remove ban record matching
@@ -3347,8 +2847,6 @@ IP address or name
  */
 unban_player_or_ip(this: void, ip_or_name)
 ```
-
-
 
 ```ts
 /**
@@ -3360,8 +2858,6 @@ reason.
 kick_player(this: void, name[, reason[, reconnect]])
 ```
 
-
-
 ```ts
 /**
  * disconnect a player with an
@@ -3371,8 +2867,6 @@ If no reason is given, it will default to 'Disconnected.'
  */
 disconnect_player(this: void, name[, reason[, reconnect]])
 ```
-
-
 
 ## Particles
 
@@ -3384,8 +2878,6 @@ expirationtime, size, collisiondetection, texture, playername)`
  */
 add_particle(this: void, particle definition)
 ```
-
-
 
 ```ts
 /**
@@ -3403,8 +2895,6 @@ collisiondetection, texture, playername)`
 add_particlespawner(this: void, particlespawner definition)
 ```
 
-
-
 ```ts
 /**
  * - Delete `ParticleSpawner` with `id` (return value from
@@ -3414,8 +2904,6 @@ otherwise on all clients.
  */
 delete_particlespawner(this: void, id, player)
 ```
-
-
 
 ## Schematics
 
@@ -3431,8 +2919,6 @@ according to the `slice_prob_list`.
  */
 create_schematic(this: void, p1, p2, probability_list, filename, slice_prob_list)
 ```
-
-
 
 ```ts
 /**
@@ -3454,8 +2940,6 @@ anew is to restart the server.
 place_schematic(this: void, pos, schematic, rotation, replacements, force_placement, flags)
 ```
 
-
-
 ```ts
 /**
  * - This function is analogous to core.place_schematic, but places a
@@ -3472,8 +2956,6 @@ invalidated.
 place_schematic_on_vmanip(this: void, vmanip, pos, schematic, rotation, replacement, force_placement, flags)
 ```
 
-
-
 ```ts
 /**
  * - Return the serialized schematic specified by schematic
@@ -3488,8 +2970,6 @@ format.
 serialize_schematic(this: void, schematic, format, options)
 ```
 
-
-
 ```ts
 /**
  * - Returns a Lua table representing the schematic (see: )
@@ -3498,8 +2978,6 @@ serialize_schematic(this: void, schematic, format, options)
  */
 read_schematic(this: void, schematic, options)
 ```
-
-
 
 ## HTTP Requests
 
@@ -3516,8 +2994,6 @@ been granted access by being listed in the `secure.http_mods` or
  */
 request_http_api(this: void)
 ```
-
-
 
 * `HTTPApiTable.fetch(HTTPRequest req, callback)`
   * Performs given request asynchronously and calls callback upon completion
@@ -3541,8 +3017,6 @@ request_http_api(this: void)
 get_mod_storage(this: void)
 ```
 
-
-
 ## Misc.
 
 ```ts
@@ -3552,16 +3026,12 @@ get_mod_storage(this: void)
 get_connected_players(this: void)
 ```
 
-
-
 ```ts
 /**
  * boolean, whether  is a player
  */
 is_player(this: void, obj)
 ```
-
-
 
 ```ts
 /**
@@ -3571,8 +3041,6 @@ is_player(this: void, obj)
 player_exists(this: void, name)
 ```
 
-
-
 ```ts
 /**
  * boolean, whether the given name
@@ -3580,8 +3048,6 @@ could be used as a player name (regardless of whether said player exists).
  */
 is_valid_player_name(this: void, name)
 ```
-
-
 
 ```ts
 /**
@@ -3591,8 +3057,6 @@ is_valid_player_name(this: void, name)
  */
 hud_replace_builtin(this: void, name, hud_definition)
 ```
-
-
 
 ```ts
 /**
@@ -3607,8 +3071,6 @@ parameter, using the chat command tilde notation.
 parse_relative_number(this: void, arg, relative_to)
 ```
 
-
-
 ```ts
 /**
  * - This function can be overridden by mods to change the join message.
@@ -3616,16 +3078,12 @@ parse_relative_number(this: void, arg, relative_to)
 send_join_message(this: void, player_name)
 ```
 
-
-
 ```ts
 /**
  * - This function can be overridden by mods to change the leave message.
  */
 send_leave_message(this: void, player_name, timed_out)
 ```
-
-
 
 ```ts
 /**
@@ -3637,8 +3095,6 @@ send_leave_message(this: void, player_name, timed_out)
 hash_node_position(this: void, pos)
 ```
 
-
-
 ```ts
 /**
  * returns a position
@@ -3646,8 +3102,6 @@ hash_node_position(this: void, pos)
  */
 get_position_from_hash(this: void, hash)
 ```
-
-
 
 ```ts
 /**
@@ -3657,8 +3111,6 @@ get_position_from_hash(this: void, hash)
 get_item_group(this: void, name, group)
 ```
 
-
-
 ```ts
 /**
  * returns a rating
@@ -3666,8 +3118,6 @@ get_item_group(this: void, name, group)
  */
 get_node_group(this: void, name, group)
 ```
-
-
 
 ```ts
 /**
@@ -3679,8 +3129,6 @@ id is created, with that name.
 raillike_group(this: void, name)
 ```
 
-
-
 ```ts
 /**
  * returns an integer
@@ -3689,8 +3137,6 @@ raillike_group(this: void, name)
 get_content_id(this: void, name)
 ```
 
-
-
 ```ts
 /**
  * returns a string
@@ -3698,8 +3144,6 @@ get_content_id(this: void, name)
  */
 get_name_from_content_id(this: void, content_id)
 ```
-
-
 
 ```ts
 /**
@@ -3714,8 +3158,6 @@ Otherwise returns `nil, err` (error message).
  */
 parse_json(this: void, string[, nullvalue, return_error])
 ```
-
-
 
 ```ts
 /**
@@ -3732,8 +3174,6 @@ returns `'[10, {"a": false}]'`
 write_json(this: void, data[, styled])
 ```
 
-
-
 ```ts
 /**
  * returns a string
@@ -3745,8 +3185,6 @@ write_json(this: void, data[, styled])
  */
 serialize(this: void, table)
 ```
-
-
 
 ```ts
 /**
@@ -3772,8 +3210,6 @@ returns `{foo="bar"}`
 deserialize(this: void, string[, safe])
 ```
 
-
-
 ```ts
 /**
  * returns
@@ -3786,8 +3222,6 @@ are:
 compress(this: void, data, method, ...)
 ```
 
-
-
 ```ts
 /**
  * returns data
@@ -3799,8 +3233,6 @@ methods.
 decompress(this: void, compressed_data, method, ...)
 ```
 
-
-
 ```ts
 /**
  * returns a string
@@ -3811,8 +3243,6 @@ decompress(this: void, compressed_data, method, ...)
 rgba(this: void, red, green, blue[, alpha])
 ```
 
-
-
 ```ts
 /**
  * returns string encoded in base64
@@ -3820,8 +3250,6 @@ rgba(this: void, red, green, blue[, alpha])
  */
 encode_base64(this: void, string)
 ```
-
-
 
 ```ts
 /**
@@ -3832,8 +3260,6 @@ encode_base64(this: void, string)
  */
 decode_base64(this: void, string)
 ```
-
-
 
 ```ts
 /**
@@ -3850,8 +3276,6 @@ not protected by the mod. This will allow using multiple protection mods.
 is_protected(this: void, pos, name)
 ```
 
-
-
 ```ts
 /**
  * - This function calls functions registered with
@@ -3859,8 +3283,6 @@ is_protected(this: void, pos, name)
  */
 record_protection_violation(this: void, pos, name)
 ```
-
-
 
 ```ts
 /**
@@ -3874,8 +3296,6 @@ implement a per-player Creative Mode.
  */
 is_creative_enabled(this: void, name)
 ```
-
-
 
 ```ts
 /**
@@ -3896,8 +3316,6 @@ cuboid for intersections.
 is_area_protected(this: void, pos1, pos2, player_name, interval)
 ```
 
-
-
 ```ts
 /**
  * - Attempt to predict the desired orientation of the facedir-capable node
@@ -3913,8 +3331,6 @@ rotate_and_place(this: void, itemstack, placer, pointed_thing[, infinitestacks,
 orient_flags, prevent_after_place])
 ```
 
-
-
 ```ts
 /**
  * - calls `rotate_and_place()` with `infinitestacks` set according to the state
@@ -3923,8 +3339,6 @@ parameter and `prevent_after_place` set to `true`.
  */
 rotate_node(this: void, itemstack, placer, pointed_thing)
 ```
-
-
 
 ```ts
 /**
@@ -3937,8 +3351,6 @@ change knockback behavior.
 calculate_knockback(this: void, player, hitter, time_from_last_punch,
 tool_capabilities, dir, distance, damage)
 ```
-
-
 
 ```ts
 /**
@@ -3957,8 +3369,6 @@ If the call would put the number of blocks over the limit, the call fails.
 forceload_block(this: void, pos[, transient[, limit]])
 ```
 
-
-
 ```ts
 /**
  * - stops forceloading the position `pos`
@@ -3968,8 +3378,6 @@ If `true`, frees a transient forceload.
 forceload_free_block(this: void, pos[, transient])
 ```
 
-
-
 ```ts
 /**
  * - Checks whether the mapblock at position `pos` is in the wanted condition.
@@ -3978,8 +3386,6 @@ forceload_free_block(this: void, pos[, transient])
  */
 compare_block_status(this: void, pos, condition)
 ```
-
-
 
 ```ts
 /**
@@ -3993,16 +3399,12 @@ insecure functions if the calling mod has been listed as trusted in the
 request_insecure_environment(this: void)
 ```
 
-
-
 ```ts
 /**
  * - Checks if a global variable has been set, without triggering a warning.
  */
 global_exists(this: void, name)
 ```
-
-
 
 ```ts
 /**
@@ -4018,8 +3420,6 @@ and the async environment for this mechanism to work.
  */
 register_portable_metatable(this: void, name, mt)
 ```
-
-
 
 ## Global objects
 
