@@ -15,7 +15,7 @@ get_current_modname(this: void)
 ```ts
 /**
  * returns the directory path for a mod,
- * e.g. .
+ * e.g. `"/home/user/.minetest/usermods/modname"`.
  * - Returns nil if the mod is not enabled or does not exist (not installed).
  * - Works regardless of whether the mod has been loaded yet.
  * - Useful for loading additional `.lua` modules or static data from a mod,
@@ -36,7 +36,7 @@ get_modnames(this: void)
 /**
  * returns a table containing information about the
  * current game. Note that other meta information (e.g. version/release number)
- * can be manually read from  in the game's root directory.
+ * can be manually read from `game.conf` in the game's root directory.
  * ``` lua
  * {
  *     id = string,
@@ -52,7 +52,7 @@ get_game_info(this: void)
 
 ```ts
 /**
- * returns e.g.
+ * returns e.g. `"/home/user/.minetest/world"`
  * - Useful for storing custom data
  */
 get_worldpath(this: void)
@@ -60,7 +60,7 @@ get_worldpath(this: void)
 
 ```ts
 /**
- * returns e.g.
+ * returns e.g. `"/home/user/.minetest/mod_data/mymod"`
  * - Useful for storing custom data .
  * - Must be called during mod load time.
  * - Can read or write to this directory at any time.
@@ -209,7 +209,7 @@ is_singleplayer(this: void)
 
 ```ts
 /**
- * returns
+ * returns `boolean, missing_features`
  * - checks for  feature availability
  * - `arg`: string or table in format `{foo=true, bar=true}`
  * - `missing_features`: `{foo=true, bar=true}`
@@ -431,7 +431,7 @@ sha256(this: void, data, [raw])
 ```ts
 /**
  * Converts a ColorSpec to a
- * ColorString. If the ColorSpec is invalid, returns .
+ * ColorString. If the ColorSpec is invalid, returns `nil`.
  * - `colorspec`: The ColorSpec to convert
  */
 colorspec_to_colorstring(this: void, colorspec)
@@ -449,7 +449,7 @@ colorspec_to_bytes(this: void, colorspec)
 ```ts
 /**
  * Converts a ColorSpec into RGBA table
- * form. If the ColorSpec is invalid, returns . You can use this to parse
+ * form. If the ColorSpec is invalid, returns `nil`. You can use this to parse
  * ColorStrings.
  * - `colorspec`: The ColorSpec to convert
  */
@@ -459,8 +459,8 @@ colorspec_to_table(this: void, colorspec)
 ```ts
 /**
  * Returns a "day-night ratio" value
- * (as accepted by ) that is equivalent to
- * the given "time of day" value (as returned by ).
+ * (as accepted by `ObjectRef:override_day_night_ratio`) that is equivalent to
+ * the given "time of day" value (as returned by `core.get_timeofday`).
  */
 time_to_day_night_ratio(this: void, time_of_day)
 ```
@@ -1124,7 +1124,7 @@ register_on_mapblocks_changed(this: void, function(modified_blocks, modified_blo
 ```ts
 /**
  * Loads a setting from the main settings and
- * parses it as a position (in the format ). Returns a position or nil.
+ * parses it as a position (in the format `(1,2,3)`). Returns a position or nil.
  */
 setting_get_pos(this: void, name)
 ```
@@ -1156,7 +1156,7 @@ get_player_privs(this: void, name)
 
 ```ts
 /**
- * returns
+ * returns `bool, missing_privs`
  * - A quickhand for checking privileges.
  * - `player_or_name`: Either a Player object or the name of a player.
  * - `...` is either a list of strings, e.g. `"priva", "privb"` or
@@ -1192,7 +1192,7 @@ get_password_hash(this: void, name, raw_password)
 ```ts
 /**
  * returns an IP address string for the player
- * .
+ * `name`.
  * - The player needs to be online for this to be successful.
  */
 get_player_ip(this: void, name)
@@ -1221,14 +1221,14 @@ notify_authentication_modified(this: void, name)
 ```ts
 /**
  * Set password hash of
- * player .
+ * player `name`.
  */
 set_player_password(this: void, name, password_hash)
 ```
 
 ```ts
 /**
- * Set privileges of player .
+ * Set privileges of player `name`.
  * - `privs` is a  of privileges:
  * A table where the keys are names of privileges and the values are `true`.
  * - Example: `core.set_player_privs("singleplayer", {interact = true, fly = true})`.
@@ -1306,7 +1306,7 @@ set_node(this: void, pos, node)
 
 ```ts
 /**
- * alias to
+ * alias to `core.set_node`
  */
 add_node(this: void, pos, node)
 ```
@@ -1491,7 +1491,7 @@ add_item(this: void, pos, item)
 
 ```ts
 /**
- * Get an  to a player
+ * Get an `ObjectRef` to a player
  * - Returns nothing in case of error (player offline, doesn't exist, ...).
  */
 get_player_by_name(this: void, name)
@@ -1553,7 +1553,7 @@ get_timeofday(this: void)
 ```ts
 /**
  * returns the time, in seconds, since the world was
- * created. The time is not available () before the first server step.
+ * created. The time is not available (`nil`) before the first server step.
  */
 get_gametime(this: void)
 ```
@@ -1570,7 +1570,7 @@ get_day_count(this: void)
 ```ts
 /**
  * returns
- * pos or .
+ * pos or `nil`.
  * - `radius`: using a maximum metric
  * - `nodenames`: e.g. `{"ignore", "group:tree"}` or `"default:dirt"`
  * - `search_center` is an optional boolean (default: `false`)
@@ -1877,7 +1877,7 @@ delete_area(this: void, pos1, pos2)
 
 ```ts
 /**
- * returns
+ * returns `boolean, pos`
  * - Checks if there is anything other than air between pos1 and pos2.
  * - Returns false if something is blocking the sight.
  * - Returns the position of the blocking node when `false`
@@ -1889,7 +1889,7 @@ line_of_sight(this: void, pos1, pos2)
 
 ```ts
 /**
- * returns
+ * returns `Raycast`
  * - Creates a `Raycast` object.
  * - `pos1`: start of the ray
  * - `pos2`: end of the ray
@@ -1996,7 +1996,7 @@ get_node_boxes(this: void, box_type, pos, [node])
 
 ```ts
 /**
- * returns /
+ * returns `true`/`false`
  * - resets the light in a cuboid-shaped part of
  * the map and removes lighting bugs.
  * - Loads the area if it is not loaded.
@@ -2075,7 +2075,7 @@ mod_channel_join(this: void, channel_name)
 ```ts
 /**
  * returns
- * an .
+ * an `InvRef`.
  * - `callbacks`: See
  * - `player_name`: Make detached inventory available to one player
  * exclusively, by default they will be sent to every player (even if not
@@ -2305,7 +2305,7 @@ get_node_drops(this: void, node[, toolname, tool, digger, pos])
 
 ```ts
 /**
- * returns
+ * returns `output, decremented_input`
  * - `input.method` = `"normal"` or `"cooking"` or `"fuel"`
  * - `input.width` = for example `3`
  * - `input.items` = for example
@@ -2335,7 +2335,7 @@ get_craft_recipe(this: void, output)
 
 ```ts
 /**
- * returns a table or
+ * returns a table or `nil`
  * - returns indexed table with all registered recipes for query item (node)
  * or `nil` if no recipe was found.
  * - recipe entry table:
@@ -2387,7 +2387,7 @@ itemstring_with_color(this: void, item, colorstring)
 
 ```ts
 /**
- * returns
+ * returns `{{actor, pos, time, oldnode, newnode}, ...}`
  * - Find who has done something to a node, or near a node
  * - `actor`: `"player:<name>"`, also `"liquid"`.
  */
@@ -2397,7 +2397,7 @@ rollback_get_node_actions(this: void, pos, range, seconds, limit)
 ```ts
 /**
  * returns
- * .
+ * `boolean, log_messages`.
  * - Revert latest actions of someone
  * - `actor`: `"player:<name>"`, also `"liquid"`.
  */
@@ -2756,7 +2756,7 @@ You can use the gennotify mechanism to transfer this information.
 ```ts
 /**
  * request for
- * server shutdown. Will display  to clients.
+ * server shutdown. Will display `message` to clients.
  * - `reconnect` == true displays a reconnect button
  * - `delay` adds an optional delay (in seconds) before shutdown.
  * Negative delay cancels the current active shutdown.
@@ -3106,14 +3106,14 @@ get_mod_storage(this: void)
 
 ```ts
 /**
- * returns list of
+ * returns list of `ObjectRefs`
  */
 get_connected_players(this: void)
 ```
 
 ```ts
 /**
- * boolean, whether  is a player
+ * boolean, whether `obj` is a player
  */
 is_player(this: void, obj)
 ```
@@ -3246,7 +3246,7 @@ parse_json(this: void, string[, nullvalue, return_error])
 
 ```ts
 /**
- * returns a string or  and an error
+ * returns a string or `nil` and an error
  * message.
  * - Convert a Lua table into a JSON string
  * - styled: Outputs in a human-readable format if this is set, defaults to
@@ -3297,7 +3297,7 @@ deserialize(this: void, string[, safe])
 
 ```ts
 /**
- * returns
+ * returns `compressed_data`
  * - Compress a string of data.
  * - `method` is a string identifying the compression method to be used.
  * - Supported compression methods:
@@ -3476,8 +3476,8 @@ compare_block_status(this: void, pos, condition)
 /**
  * returns an environment containing
  * insecure functions if the calling mod has been listed as trusted in the
- *  setting or security is disabled, otherwise returns
- * .
+ * `secure.trusted_mods` setting or security is disabled, otherwise returns
+ * `nil`.
  * - Only works at init time and must be called from the mod's main scope
  * (ie: the init.lua of the mod, not from another Lua file or within a function).
  */

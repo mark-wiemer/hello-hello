@@ -98,8 +98,13 @@ const coreNamespaceRefToTS: BasicPlugin = () => {
 
         // Get summary (text after the colon)
         const summary = remainingText
-          .filter((child) => child.type === "text")
-          .map((child) => child.value)
+          .map((child) =>
+            child.type === "text"
+              ? child.value
+              : child.type === "inlineCode"
+                ? `\`${child.value}\``
+                : "",
+          )
           .join("")
           .replace(/^:\s*/, "") // Remove leading colon
           .trim();
