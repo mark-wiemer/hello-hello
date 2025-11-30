@@ -44,7 +44,7 @@ const coreNamespaceRefToTS: BasicPlugin = () => {
       const node = tree.children[i];
 
       // Look for list items that contain API functions
-      if (node.type === "list" && node.children) {
+      if (node.type === "list") {
         for (const listItem of node.children) {
           if (listItem.type === "listItem" && listItem.children) {
             const paragraph = listItem.children.find((child) => child.type === "paragraph");
@@ -141,7 +141,7 @@ const coreNamespaceRefToTS: BasicPlugin = () => {
           }
         }
       } else {
-        // Keep non-empty-list nodes as-is (headings, etc.)
+        // Keep non-list nodes as-is (headings, etc.)
         transformedChildren.push(node);
       }
     }
