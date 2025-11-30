@@ -1,5 +1,7 @@
 # 'core' namespace reference
 
+Compare with [official docs](https://api.luanti.org/core-namespace-reference/)
+
 ## Utilities
 
 ```ts

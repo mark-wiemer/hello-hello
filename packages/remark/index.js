@@ -147,9 +147,40 @@ function transformLuaApiToTypeScript() {
   };
 }
 
+function addNote() {
+  return (tree) => {
+    // Find the first heading
+    const headingIndex = tree.children.findIndex((node) => node.type === "heading");
+
+    if (headingIndex !== -1) {
+      // Insert a paragraph with the note after the heading
+      tree.children.splice(headingIndex + 1, 0, {
+        type: "paragraph",
+        children: [
+          {
+            type: "text",
+            value: "Compare with ",
+          },
+          {
+            type: "link",
+            url: "https://api.luanti.org/core-namespace-reference/",
+            children: [
+              {
+                type: "text",
+                value: "official docs",
+              },
+            ],
+          },
+        ],
+      });
+    }
+  };
+}
+
 const file = await unified()
   .use(remarkParse) // Parse Markdown to AST
   .use(transformLuaApiToTypeScript)
+  .use(addNote)
   .use(remarkStringify) // Stringify AST back to Markdown
   .process(await read({ path: "lua_api_out.md" }));
 await write({ path: "lua_api_transformed.md", value: String(file) });
