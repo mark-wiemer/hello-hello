@@ -48,7 +48,7 @@ const coreNamespaceRefToTS: BasicPlugin = () => {
         for (const listItem of node.children) {
           if (listItem.type === "listItem" && listItem.children) {
             const paragraph = listItem.children.find((child) => child.type === "paragraph");
-            if (paragraph && paragraph.children) {
+            if (paragraph?.children?.[0]) {
               const firstChild = paragraph.children[0];
 
               // Check if this starts with a code block containing a function signature
@@ -59,26 +59,26 @@ const coreNamespaceRefToTS: BasicPlugin = () => {
                 firstChild.value.includes("(")
               ) {
                 // Extract function name and parameters
+                // Example: core.functionName(param1, param2)
                 const funcMatch = firstChild.value.match(/core\.(\w+)\(([^)]*)\)/);
                 if (funcMatch) {
                   const [, funcName, params] = funcMatch;
 
                   // Collect all text content for the description
-                  let description = "";
                   const remainingText = paragraph.children.slice(1);
 
                   // Process the description and sub-bullets
-                  const descriptionParts = [];
+                  const descriptionParts: string[] = [];
 
-                  // Get main description (text after the colon)
-                  const mainText = remainingText
+                  // Get summary (text after the colon)
+                  const summary = remainingText
                     .filter((child) => child.type === "text")
                     .map((child) => child.value)
                     .join("")
-                    .replace(/^:\s*/, ""); // Remove leading colon
-
-                  if (mainText.trim()) {
-                    descriptionParts.push(mainText.trim());
+                    .replace(/^:\s*/, "") // Remove leading colon
+                    .trim();
+                  if (summary) {
+                    descriptionParts.push(summary);
                   }
 
                   // Look for nested list items (sub-bullets)
