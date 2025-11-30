@@ -49,66 +49,68 @@ const coreNamespaceRefToTS: BasicPlugin = () => {
       //   - inlineCode (core.functionName(params))
       //   - text (: description)
       //   - list (sub-bullets)
-      if (node.type === "list") {
-        for (const listItem of node.children) {
-          // Skip non-listItem nodes or those without children (as a safety check)
-          if (listItem.type !== "listItem" || !listItem.children) {
-            transformedChildren.push(listItem);
-            continue;
-          }
+      if (node.type !== "list") {
+        transformedChildren.push(node);
+        continue;
+      }
+      for (const listItem of node.children) {
+        // Skip non-listItem nodes or those without children (as a safety check)
+        if (listItem.type !== "listItem" || !listItem.children) {
+          transformedChildren.push(listItem);
+          continue;
+        }
 
-          // Skip list items that don't have a paragraph child
-          const paragraph = listItem.children.find((child) => child.type === "paragraph");
-          if (!paragraph?.children?.[0]) {
-            transformedChildren.push(listItem);
-            continue;
-          }
+        // Skip list items that don't have a paragraph child
+        const paragraph = listItem.children.find((child) => child.type === "paragraph");
+        if (!paragraph?.children?.[0]) {
+          transformedChildren.push(listItem);
+          continue;
+        }
 
-          // Skip if the first child is not inlineCode with core.functionName(params)
-          const firstChild = paragraph.children[0];
-          if (
-            !firstChild ||
-            firstChild.type !== "inlineCode" ||
-            !firstChild.value.includes("core.") ||
-            !firstChild.value.includes("(")
-          ) {
-            transformedChildren.push(listItem);
-            continue;
-          }
+        // Skip if the first child is not inlineCode with core.functionName(params)
+        const firstChild = paragraph.children[0];
+        if (
+          !firstChild ||
+          firstChild.type !== "inlineCode" ||
+          !firstChild.value.includes("core.") ||
+          !firstChild.value.includes("(")
+        ) {
+          transformedChildren.push(listItem);
+          continue;
+        }
 
-          // Extract function name and parameters
-          // Example: core.functionName(param1, param2)
-          // Skip match failures (as a safety check)
-          const funcMatch = firstChild.value.match(/core\.(\w+)\(([^)]*)\)/);
-          if (!funcMatch) {
-            transformedChildren.push(listItem);
-            continue;
-          }
+        // Extract function name and parameters
+        // Example: core.functionName(param1, param2)
+        // Skip match failures (as a safety check)
+        const funcMatch = firstChild.value.match(/core\.(\w+)\(([^)]*)\)/);
+        if (!funcMatch) {
+          transformedChildren.push(listItem);
+          continue;
+        }
 
-          const [, funcName, params] = funcMatch;
+        const [, funcName, params] = funcMatch;
 
-          // Collect all text content for the description
-          const remainingText = paragraph.children.slice(1);
+        // Collect all text content for the description
+        const remainingText = paragraph.children.slice(1);
 
-          // Process the description and sub-bullets
-          const descriptionParts: string[] = [];
+        // Process the description and sub-bullets
+        const descriptionParts: string[] = [];
 
-          // Get summary (text after the colon)
-          const summary = remainingText
-            .filter((child) => child.type === "text")
-            .map((child) => child.value)
-            .join("")
-            .replace(/^:\s*/, "") // Remove leading colon
-            .trim();
-          if (summary) {
-            descriptionParts.push(summary);
-          }
+        // Get summary (text after the colon)
+        const summary = remainingText
+          .filter((child) => child.type === "text")
+          .map((child) => child.value)
+          .join("")
+          .replace(/^:\s*/, "") // Remove leading colon
+          .trim();
+        if (summary) {
+          descriptionParts.push(summary);
+        }
 
-          // Look for nested list items (sub-bullets)
-          const nestedList = listItem.children.find((child) => child.type === "list");
-
-          if (nestedList && nestedList.children) {
-            nestedList.children.forEach((nestedItem) => {
+        // Handle all children
+        listItem.children.forEach((nestedChild) => {
+          if (nestedChild.type === "list" && nestedChild.children) {
+            nestedChild.children.forEach((nestedItem) => {
               // Skip non-listItem nodes or those without children (as a safety check)
               if (nestedItem.type !== "listItem" || !nestedItem.children) {
                 return;
@@ -138,25 +140,23 @@ const coreNamespaceRefToTS: BasicPlugin = () => {
               }
             });
           }
+          // todo handle other nested child types
+        });
 
-          // Create JSDoc comment lines
-          const jsdocLines = ["/**"];
-          descriptionParts.forEach((part) => {
-            jsdocLines.push(` * ${part}`);
-          });
-          jsdocLines.push(" */");
+        // Create JSDoc comment lines
+        const jsdocLines = ["/**"];
+        descriptionParts.forEach((part) => {
+          jsdocLines.push(` * ${part}`);
+        });
+        jsdocLines.push(" */");
 
-          // Create function signature
-          const signature = `${funcName}(this: void${params.length > 0 ? ", " : ""}${params})`;
+        // Create function signature
+        const signature = `${funcName}(this: void${params.length > 0 ? ", " : ""}${params})`;
 
-          // Create code block with JSDoc + function signature
-          const codeContent = jsdocLines.join("\n") + "\n" + signature;
+        // Create code block with JSDoc + function signature
+        const codeContent = jsdocLines.join("\n") + "\n" + signature;
 
-          transformedChildren.push({ type: "code", lang: "ts", value: codeContent });
-        }
-      } else {
-        // Keep non-list nodes as-is (headings, etc.)
-        transformedChildren.push(node);
+        transformedChildren.push({ type: "code", lang: "ts", value: codeContent });
       }
     }
 
