@@ -106,39 +106,43 @@ const coreNamespaceRefToTS: BasicPlugin = () => {
 
           // Look for nested list items (sub-bullets)
           const nestedList = listItem.children.find((child) => child.type === "list");
+
           if (nestedList && nestedList.children) {
             nestedList.children.forEach((nestedItem) => {
-              if (nestedItem.type === "listItem" && nestedItem.children) {
-                const nestedParagraph = nestedItem.children.find(
-                  (child) => child.type === "paragraph",
-                );
-                if (nestedParagraph && nestedParagraph.children) {
-                  const nestedText = nestedParagraph.children
-                    .map((child) =>
-                      child.type === "text"
-                        ? child.value
-                        : child.type === "inlineCode"
-                          ? `\`${child.value}\``
-                          : "",
-                    )
-                    .join("")
-                    .trim();
-                  if (nestedText) {
-                    descriptionParts.push(`- ${nestedText}`);
-                  }
-                }
+              // Skip non-listItem nodes or those without children (as a safety check)
+              if (nestedItem.type !== "listItem" || !nestedItem.children) {
+                return;
+              }
+
+              // Skip if there is no paragraph within the nested item
+              const nestedParagraph = nestedItem.children.find(
+                (child) => child.type === "paragraph",
+              );
+              if (!nestedParagraph?.children) {
+                return;
+              }
+
+              // Format the text of the nested paragraph
+              const nestedText = nestedParagraph.children
+                .map((child) =>
+                  child.type === "text"
+                    ? child.value
+                    : child.type === "inlineCode"
+                      ? `\`${child.value}\``
+                      : "",
+                )
+                .join("")
+                .trim();
+              if (nestedText) {
+                descriptionParts.push(`- ${nestedText}`);
               }
             });
           }
 
           // Create JSDoc comment lines
           const jsdocLines = ["/**"];
-          descriptionParts.forEach((part, index) => {
-            if (index === 0) {
-              jsdocLines.push(` * ${part}`);
-            } else {
-              jsdocLines.push(` * ${part}`);
-            }
+          descriptionParts.forEach((part) => {
+            jsdocLines.push(` * ${part}`);
           });
           jsdocLines.push(" */");
 
