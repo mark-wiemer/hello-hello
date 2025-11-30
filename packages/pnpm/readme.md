@@ -2,6 +2,16 @@
 
 `pnpm` ([performant npm](https://pnpm.io/faq#what-does-pnpm-stand-for)) is a Node package manager, an alternative to `npm`
 
+## Usage
+
+`pnpm` can be used as an alternative to:
+
+- `npm install` (`pnpm add` for new packages, `pnpm install` for existing ones)
+- `npm start`
+- `npm run`
+- `npx` (`pnpx` or `pnpm dlx`)
+- more...
+
 ## Configuring
 
 [pnpm settings docs](https://pnpm.io/settings) lists each possible config value with a description.
