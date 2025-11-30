@@ -141,7 +141,7 @@ const transformCoreNamespaceRefToTS: BasicPlugin = () => {
           }
         }
       } else {
-        // Keep non-list nodes as-is (headings, etc.)
+        // Keep non-empty-list nodes as-is (headings, etc.)
         transformedChildren.push(node);
       }
     }
