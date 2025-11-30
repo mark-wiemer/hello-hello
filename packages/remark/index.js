@@ -31,9 +31,9 @@ console.log(JSON.stringify(tree, null, 2));
 */
 // #endregion Show full AST
 
-// #region Transform Lua API to TypeScript signatures
+// #region Transform core namespace reference to TypeScript signatures
 
-function transformLuaApiToTypeScript() {
+function transformCoreNamespaceRefToTS() {
   return (tree) => {
     const transformedChildren = [];
 
@@ -179,7 +179,7 @@ function addNote() {
 
 const file = await unified()
   .use(remarkParse) // Parse Markdown to AST
-  .use(transformLuaApiToTypeScript)
+  .use(transformCoreNamespaceRefToTS)
   .use(addNote)
   .use(remarkStringify) // Stringify AST back to Markdown
   .process(await read({ path: "lua_api_out.md" }));
