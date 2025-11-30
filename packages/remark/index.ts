@@ -1,8 +1,10 @@
-import { unified } from "unified";
+import { Plugin, unified } from "unified";
 import remarkParse from "remark-parse";
 import remarkStringify from "remark-stringify";
 import { read, write } from "to-vfile";
 import { visit } from "unist-util-visit";
+import type { Root, RootContent } from "mdast";
+import type { Options } from "remark-parse";
 
 // #region Basic processing pipeline with plugin
 /* /
@@ -32,10 +34,11 @@ console.log(JSON.stringify(tree, null, 2));
 // #endregion Show full AST
 
 // #region Transform core namespace reference to TypeScript signatures
+type BasicPlugin = Plugin<[(Readonly<Options> | null | undefined)?], Root, Root>;
 
-function transformCoreNamespaceRefToTS() {
+const transformCoreNamespaceRefToTS: BasicPlugin = () => {
   return (tree) => {
-    const transformedChildren = [];
+    const transformedChildren: RootContent[] = [];
 
     for (let i = 0; i < tree.children.length; i++) {
       const node = tree.children[i];
@@ -145,9 +148,9 @@ function transformCoreNamespaceRefToTS() {
 
     tree.children = transformedChildren;
   };
-}
+};
 
-function addNote() {
+const addNote: BasicPlugin = () => {
   return (tree) => {
     // Find the first heading
     const headingIndex = tree.children.findIndex((node) => node.type === "heading");
@@ -175,7 +178,7 @@ function addNote() {
       });
     }
   };
-}
+};
 
 const file = await unified()
   .use(remarkParse) // Parse Markdown to AST
