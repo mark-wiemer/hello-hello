@@ -59,9 +59,10 @@ Alternatively, use LuaLS with the Luanti or Luanti Full API addon
 ### Considerations for a solution
 
 - For doc writers to create and maintain it:
-  - Consistent format
+  - Consistent format for entire API
     - Enables automated parsing into other formats (EmmyLua, LuaCATS, TypeScript)
     - Removes decision fatigue on how to format things
+    - We may start with core namespace reference, but we want to include everything
   - Easy to validate whether updated docs are in correct format or not
     - Ideally a single automated tool exits with 0 or prints detailed errors
   - Do not need to fully rewrite `lua_api.md` by hand
