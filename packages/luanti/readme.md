@@ -15,9 +15,13 @@ Fortunately, I can translate the Hello World projects directly into further impr
 
 Ref [GitHub luanti-org/docs.luanti.org#296](https://github.com/luanti-org/docs.luanti.org/issues/296):
 
-Current problem: When writing code for a Luanti mod or game, I don't have info about the Luanti API in my IDE
+#### Current problem
 
-Current workaround: Use Luanti Tools for VS Code, which hasn't been updated since Luanti 5.11 (Feb 2025. We are in 5.14 as of November 2025)
+When writing code for a Luanti mod or game, I don't have info about the Luanti API in my IDE
+
+#### Current workaround
+
+Use Luanti Tools for VS Code, which hasn't been updated since Luanti 5.11 (Feb 2025. We are in 5.14 as of November 2025)
 
 - Provides several small features beyond core namespace info
   - new project boilerplate
@@ -30,15 +34,29 @@ Current workaround: Use Luanti Tools for VS Code, which hasn't been updated sinc
   - Maintenance of highly custom code is expensive, esp. compared to using an existing AST parser like remark
   - Extension has minimal unit tests or automated validations
 
-Considerations for a solution:
+#### Notes
+
+- ACorp in Discord says LuaLS plugins only work for VS Code, not cross-IDEs
+- LLS addons are not up to date
+  - luanti-full-api uses Luanti 5.4
+  - luanti no longer exists
+- ACorp's Discord requests
+  - https://irc.luanti.org/luanti-docs/2025-12-01#i_6301129
+  - > personally, i'm hoping a really detailed spec down to what number types/ranges are valid, typing ids (e.g. node ids are a subtype of strings), complete defined defaults (opposed to current undefined defaults), making distinctions on runtime vs startup vs on_mods_loaded vs async env vs mapgen env, making distinctions on engine's prefilled outputs vs inputs (e.g. getting sky parameters are prefilled with default values meaning you don't need to check. compare with setting sky parameters where all properties are optional)
+  - > number types would be integer and/or floats. most of luanti API can use both. but some have restrictions on integer size (i.e. u8 or i16) or specifically need integers (i.e. position hashing and voxelmanip/list indexing through API instead of table[i]) or has restrictions on acceptable ranges (i.e. light being between 0..LIGHT_MAX which is 0..14)
+
+#### Considerations for a solution
 
 - For doc writers to create and maintain it:
+  - Consistent format
+    - Enables automated parsing into other formats (EmmyLua, LuaCATS, TypeScript)
+    - Removes decision fatigue on how to format things
   - Similar to existing `lua_api.md` for ease of adoption
   - Very lightweight for adoption and long-term maintenance
     - Including comments :)
-  - Familiar to those writing Lua code
+  - Familiar syntax to Lua programmers
   - Easy to validate whether updated docs are correct or not
-  - Do not need to rewrite `lua_api.md` by hand
+  - Do not need to fully rewrite `lua_api.md` by hand
   - Should not need to manually do backlinking or other easily-automated tasks
 - For end-users to use it:
   - Available in multiple IDEs (at least: VS Code, Zed, emacs, vim)
@@ -48,7 +66,9 @@ Considerations for a solution:
     - Linux Mint or similar "simple" Linux distro, Windows, macOS
     - Shouldn't need to install "luacheck" files or other "random" files to work
 
-Proposed solution: Enforce strict "Markdown schema" and integrate with LuaLS
+#### Proposed solution
+
+Enforce strict "Markdown schema" and integrate with LuaLS
 
 1. Define a Markdown schema that allows doc writers to easily include additional info in a consistent format
    - Additional info fields
