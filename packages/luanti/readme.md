@@ -11,7 +11,14 @@ Fortunately, I can translate the Hello World projects directly into further impr
 
 ## Subprojects
 
-### Provide IntelliSense for core namespace
+### Mod: Hello World
+
+See the `sample_mod` folder for current progress.
+Use the `sumneko.lua` extension.
+[Enable the addon](https://luals.github.io/wiki/addons/#addon-manager) for Luanti and Luanti Full API.
+You shouldn't see any yellow or red squiggles.
+
+### Docs: Provide IntelliSense for core namespace
 
 Ref [GitHub luanti-org/docs.luanti.org#296](https://github.com/luanti-org/docs.luanti.org/issues/296):
 
@@ -51,12 +58,12 @@ Use Luanti Tools for VS Code, which hasn't been updated since Luanti 5.11 (Feb 2
   - Consistent format
     - Enables automated parsing into other formats (EmmyLua, LuaCATS, TypeScript)
     - Removes decision fatigue on how to format things
-  - Similar to existing `lua_api.md` for ease of adoption
+  - Easy to validate whether updated docs are in correct format or not
+    - Ideally a single automated tool exits with 0 or prints detailed errors
+  - Do not need to fully rewrite `lua_api.md` by hand
   - Very lightweight for adoption and long-term maintenance
     - Including comments :)
   - Familiar syntax to Lua programmers
-  - Easy to validate whether updated docs are correct or not
-  - Do not need to fully rewrite `lua_api.md` by hand
   - Should not need to manually do backlinking or other easily-automated tasks
 - For end-users to use it:
   - Available in multiple IDEs (at least: VS Code, Zed, emacs, vim)
