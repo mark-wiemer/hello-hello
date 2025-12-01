@@ -16,7 +16,7 @@ Use the `sumneko.lua` extension.
 [Enable the addon](https://luals.github.io/wiki/addons/#addon-manager) for Luanti and Luanti Full API.
 You shouldn't see any yellow or red squiggles.
 
-## Docs: Provide IntelliSense for core namespace
+## Docs: Provide IntelliSense for Luanti API
 
 Ref [GitHub luanti-org/docs.luanti.org#296](https://github.com/luanti-org/docs.luanti.org/issues/296):
 
@@ -39,12 +39,18 @@ Use Luanti Tools for VS Code, which hasn't been updated since Luanti 5.11 (Feb 2
   - Maintenance of highly custom code is expensive, esp. compared to using an existing AST parser like remark
   - Extension has minimal unit tests or automated validations
 
+Alternatively, use LuaLS with the Luanti or Luanti Full API addon
+
+- Uses types from 5.4 or earlier
+- Not maintained by official Luanti team
+
 ### Notes
 
+- Luanti Tools is the only source code I've seen that auto-generates IDE functionality
+  - All other options appear either handwritten or closed-source as to generating the end result
+  - Includes Luanti addon for LuaLS
+  - Includes Luanti Full API addon for LuaLS (luanti-ide-helper repo)
 - ACorp in Discord says LuaLS plugins only work for VS Code, not cross-IDEs
-- LLS addons are not up to date
-  - luanti-full-api uses Luanti 5.4
-  - luanti no longer exists
 - ACorp's Discord requests
   - https://irc.luanti.org/luanti-docs/2025-12-01#i_6301129
   - > personally, i'm hoping a really detailed spec down to what number types/ranges are valid, typing ids (e.g. node ids are a subtype of strings), complete defined defaults (opposed to current undefined defaults), making distinctions on runtime vs startup vs on_mods_loaded vs async env vs mapgen env, making distinctions on engine's prefilled outputs vs inputs (e.g. getting sky parameters are prefilled with default values meaning you don't need to check. compare with setting sky parameters where all properties are optional)
