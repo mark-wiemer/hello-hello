@@ -28,10 +28,6 @@ When writing code for a Luanti mod or game, I don't have info about the Luanti A
 
 Use Luanti Tools for VS Code, which hasn't been updated since Luanti 5.11 (Feb 2025. We are in 5.14 as of November 2025)
 
-- Provides several small features beyond core namespace info
-  - new project boilerplate
-  - luacheck integration
-  - supports docs outside of core namespace reference
 - Maintained by GreenXenith, who has complained about the high cost of maintenance
 - Current control flow for Luanti Tools is lua_api.md -> highly custom transformation code with regex -> smartsnippets.json -> VS Code extension
   - Does not solve core problem: Still missing any info not present in lua_api.md
