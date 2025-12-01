@@ -1,3 +1,4 @@
 pnpm-lock.yaml
+**/core_namespace_ref*
 **/lua_api.md
 **/lua_api_out.md
