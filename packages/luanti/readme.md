@@ -9,12 +9,22 @@
 
 Fortunately, I can translate the Hello World projects directly into further improvements to docs as well!
 
+## luanti-api
+
+Handwritten TypeScript API for Luanti
+
 ## sample-mod
 
 A minimal hello world mod to learn about the current tooling for mods written in Lua.
 [Enable the LuaLS addon](https://luals.github.io/wiki/addons/#addon-manager) for "Luanti" and "Luanti Full API".
 Also consider using Luanti Tools.
 You shouldn't see any yellow or red squiggles.
+
+## void-game-ts
+
+A very minimal game written in TypeScript alongside my handwritten TypeScript API.
+Development slowed after I realized how annoying it would be to maintain an handwritten TypeScript API.
+Ref [GitHub luanti-org/docs.luanti.org#296](https://github.com/luanti-org/docs.luanti.org/issues/296).
 
 ## Docs: Provide IntelliSense for Luanti API
 

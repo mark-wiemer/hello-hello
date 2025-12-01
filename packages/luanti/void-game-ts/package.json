@@ -1,0 +1,28 @@
+{
+  "name": "void",
+  "private": "true",
+  "version": "0.1.0",
+  "description": "Minimal Luanti game",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tstl && mkdir -p dist && find mods -type f ! -name '*.ts' -exec cp --parents {} dist \\; && cp game.conf dist/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mark-wiemer/luanti-void-game.git"
+  },
+  "keywords": [
+    "luanti"
+  ],
+  "author": "Mark Wiemer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mark-wiemer/luanti-void-game/issues"
+  },
+  "homepage": "https://github.com/mark-wiemer/luanti-void-game#readme",
+  "devDependencies": {
+    "@mark-wiemer/luanti-api": "file:../luanti-api",
+    "typescript": "^5.8.2",
+    "typescript-to-lua": "^1.31.0"
+  }
+}
