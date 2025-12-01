@@ -9,11 +9,11 @@
 
 Fortunately, I can translate the Hello World projects directly into further improvements to docs as well!
 
-## Mod: Hello World
+## sample-mod
 
-See the `sample_mod` folder for current progress.
-Use the `sumneko.lua` extension.
-[Enable the addon](https://luals.github.io/wiki/addons/#addon-manager) for Luanti and Luanti Full API.
+A minimal hello world mod to learn about the current tooling for mods written in Lua.
+[Enable the LuaLS addon](https://luals.github.io/wiki/addons/#addon-manager) for "Luanti" and "Luanti Full API".
+Also consider using Luanti Tools.
 You shouldn't see any yellow or red squiggles.
 
 ## Docs: Provide IntelliSense for Luanti API
