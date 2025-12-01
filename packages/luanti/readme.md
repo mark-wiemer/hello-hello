@@ -32,7 +32,7 @@ Use Luanti Tools for VS Code, which hasn't been updated since Luanti 5.11 (Feb 2
 - Current control flow for Luanti Tools is lua_api.md -> highly custom transformation code with regex -> smartsnippets.json -> VS Code extension
   - Does not solve core problem: Still missing any info not present in lua_api.md
   - Does not use industry standard LSP: Instead uses custom code and VS Code API
-  - Maintenance of highly custom code is expensive, esp. compared to using an existing AST parser like remark
+  - Maintenance of highly custom code is expensive, esp. compared to using an existing AST parser like [remark](../remark/readme.md)
   - Extension has minimal unit tests or automated validations
 
 Alternatively, use LuaLS with the Luanti or Luanti Full API addon
