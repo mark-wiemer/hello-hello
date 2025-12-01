@@ -5,6 +5,7 @@
     "esbenp.prettier-vscode",
     "meganrogge.template-string-converter",
     "pflannery.vscode-versionlens",
+    "sumneko.lua",
     "tyriar.sort-lines",
     "wmaurer.change-case"
   ]
