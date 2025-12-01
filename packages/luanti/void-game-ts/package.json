@@ -21,7 +21,8 @@
   },
   "homepage": "https://github.com/mark-wiemer/luanti-void-game#readme",
   "devDependencies": {
-    "@mark-wiemer/luanti-api": "file:../luanti-api",
+    "@mark-wiemer/luanti-api": "file:../luanti-ts-api",
+    "@typescript-to-lua/language-extensions": "^1.19.0",
     "typescript": "^5.8.2",
     "typescript-to-lua": "^1.31.0"
   }

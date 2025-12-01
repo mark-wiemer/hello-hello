@@ -9,9 +9,10 @@
 
 Fortunately, I can translate the Hello World projects directly into further improvements to docs as well!
 
-## luanti-api
+## luanti-ts-api
 
-Handwritten TypeScript API for Luanti
+Handwritten TypeScript API for Luanti.
+Paused in favor of [Make API docs parsable](https://github.com/luanti-org/docs.luanti.org/issues/296).
 
 ## sample-mod
 
@@ -24,11 +25,11 @@ You shouldn't see any yellow or red squiggles.
 
 A very minimal game written in TypeScript alongside my handwritten TypeScript API.
 Development slowed after I realized how annoying it would be to maintain an handwritten TypeScript API.
-Ref [GitHub luanti-org/docs.luanti.org#296](https://github.com/luanti-org/docs.luanti.org/issues/296).
+Ref [Make API docs parsable](https://github.com/luanti-org/docs.luanti.org/issues/296).
 
 ## Docs: Provide IntelliSense for Luanti API
 
-Ref [GitHub luanti-org/docs.luanti.org#296](https://github.com/luanti-org/docs.luanti.org/issues/296):
+Ref [Make API docs parsable](https://github.com/luanti-org/docs.luanti.org/issues/296):
 
 ### Current problem
 
