@@ -41,7 +41,6 @@ Alternatively, use LuaLS with the Luanti or Luanti Full API addon
     - We may start with core namespace reference, but we want to include everything
   - Easy to validate whether updated docs are in correct format or not
     - Ideally a single automated tool exits with 0 or prints detailed errors
-  - Do not need to fully rewrite `lua_api.md` by hand
   - Very lightweight for adoption and long-term maintenance
     - Including comments :)
   - Familiar syntax to Lua programmers
