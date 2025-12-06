@@ -56,24 +56,8 @@ Alternatively, use LuaLS with the Luanti or Luanti Full API addon
 
 ## Proposed solution
 
-Enforce strict "Markdown schema" and integrate with LuaLS
+Manually rewrite `lua_api.md` as `luanti_api.lua` in LuaCATS and integrate with LuaLS:
 
-1. Define a Markdown schema that allows doc writers to easily include additional info in a consistent format
-   - Additional info fields
-     - Function arg types
-     - Function return values
-     - Sample usage
-     - ...more, probably
-   - Consistent format
-     - Should be lightweight (closer to TOML than XML, minimal "markup" characters)
-     - Should match or nearly match existing Lua ecosystem formats (EmmyLua, LuaLS)
-1. Publish a Markdown parser to validate and enforce the consistent format
-   - Doc writers can run e.g. `node parse-core-ref.js` while in the folder of a draft version of `lua_api.md` to get results
-   - Parser should ignore anything outside the "core namespace reference" section
-   - Include informative error messages
-     - Start and end position of problematic characters
-     - Expected token type (e.g. arg type, return type)
-   - [Early POCs](https://github.com/mark-wiemer/hello-hello/blob/3a7ec587e27b2bcd468712f080849c86a0bc40f7/packages/remark/core_namespace_ref_transformed.md) are using `remark`, a JS package. See [Luanti docs chat](https://irc.luanti.org/luanti-docs/2025-11-30#i_6300991) for details.
 1. Update `lua_api.md` to `luanti_api.lua` with additional info in LuaCATS
    - If additional info isn't known, it can be left blank or explicitly marked as "unknown" in some way
    - We can test as we go using LuaLS :)
