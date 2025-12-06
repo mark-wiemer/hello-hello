@@ -31,10 +31,6 @@ Alternatively, use LuaLS with the Luanti or Luanti Full API addon
   - Includes Luanti Full API addon for LuaLS (luanti-ide-helper repo)
 - LuaLS plugins work in any IDE
   - easiest to install in VS Code using the LuaLS [addon manager](https://luals.github.io/wiki/addons/#installing-addons)
-- ACorp's Discord requests
-  - https://irc.luanti.org/luanti-docs/2025-12-01#i_6301129
-  - > personally, i'm hoping a really detailed spec down to what number types/ranges are valid, typing ids (e.g. node ids are a subtype of strings), complete defined defaults (opposed to current undefined defaults), making distinctions on runtime vs startup vs on_mods_loaded vs async env vs mapgen env, making distinctions on engine's prefilled outputs vs inputs (e.g. getting sky parameters are prefilled with default values meaning you don't need to check. compare with setting sky parameters where all properties are optional)
-  - > number types would be integer and/or floats. most of luanti API can use both. but some have restrictions on integer size (i.e. u8 or i16) or specifically need integers (i.e. position hashing and voxelmanip/list indexing through API instead of table[i]) or has restrictions on acceptable ranges (i.e. light being between 0..LIGHT_MAX which is 0..14)
 
 ## Considerations for a solution
 
