@@ -11,7 +11,7 @@ Fortunately, I can translate the Hello World projects directly into further impr
 
 ## doc-schema
 
-Make the docs parseable for extensions, plugins, and content type transformations.
+Make the docs parsable for extensions, plugins, and content type transformations.
 
 ## luanti-ts-api
 
