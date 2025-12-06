@@ -74,11 +74,10 @@ Enforce strict "Markdown schema" and integrate with LuaLS
      - Start and end position of problematic characters
      - Expected token type (e.g. arg type, return type)
    - [Early POCs](https://github.com/mark-wiemer/hello-hello/blob/3a7ec587e27b2bcd468712f080849c86a0bc40f7/packages/remark/core_namespace_ref_transformed.md) are using `remark`, a JS package. See [Luanti docs chat](https://irc.luanti.org/luanti-docs/2025-11-30#i_6300991) for details.
-1. Update `lua_api.md#core-namespace-reference` to include additional info in a consistent format
+1. Update `lua_api.md` to `luanti_api.lua` with additional info in LuaCATS
    - If additional info isn't known, it can be left blank or explicitly marked as "unknown" in some way
-1. Add a status check to PRs in the `luanti` repo to enforce new Markdown schema
-   - GitHub Actions workflow that uses the Markdown parser and a comment action in case of errors
-1. Transform `lua_api.md#core-namespace-reference` into a [LuaLS definition file](https://luals.github.io/wiki/definition-files)
-1. Publish the add-on under [LLS-Addons](https://github.com/LuaLS/LLS-Addons/tree/main/addons/luanti)
-1. Validate that everything works
+   - We can test as we go using LuaLS :)
+   - Mistakes will happen but should be easy to see, reproduce, and fix.
+   - Advanced automated tests are out of scope for now. They are possible but have low ROI.
+1. Create a LuaLS addon with the new `luanti_api.lua` under [LLS-Addons](https://github.com/LuaLS/LLS-Addons/tree/main/addons/luanti)
 1. Share with the world :)
