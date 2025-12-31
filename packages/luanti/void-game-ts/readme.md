@@ -24,7 +24,6 @@ Tools are listed alphabetically
 ### Packages
 
 - `@mark-wiemer/luanti-api` for declaring Luanti API functions in TypeScript
-- `cpy-cli` for cross-platform copying game files into the dist folder
 - `typescript` for writing the source code
 - `tstl`, TypeScriptToLua, for transpiling TypeScript to Lua
 
