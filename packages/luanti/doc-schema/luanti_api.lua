@@ -1,4 +1,5 @@
 ---@meta
+-- Handwritten copy of luanti_api.md with LuaCATS
 
 ---@class core
 ---The core namespace
