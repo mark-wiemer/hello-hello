@@ -1,10 +1,8 @@
-# Luanti Doc Schema
+# Luanti doc schema
 
-Ref [Make API docs parsable](https://github.com/luanti-org/docs.luanti.org/issues/296):
+When writing code for a Luanti mod or game, I don't have info about the [Luanti API](https://api.luanti.org) in my IDE.
 
-## Current problem
-
-When writing code for a Luanti mod or game, I don't have info about the Luanti API in my IDE
+Ref [Make API docs parsable](https://github.com/luanti-org/docs.luanti.org/issues/296)
 
 ## Current workaround
 
@@ -17,11 +15,30 @@ Use Luanti Tools for VS Code, which hasn't been updated since Luanti 5.11 (Feb 2
   - Maintenance of highly custom code is expensive, esp. compared to using an existing AST parser like [remark](../remark/readme.md)
   - Extension has minimal unit tests or automated validations
 
-Alternatively, use LuaLS with the Luanti or Luanti Full API addon
+Alternatively, use LuaLS with the "Luanti" or "Luanti Full API" addon:
 
-- Luanti addon no longer exists in GitHub, only stored within LuaLS extension files
-- Luanti Full API uses types from 5.4 or earlier, was never maintained by official Luanti team
+- "Luanti" addon no longer exists in GitHub, only stored within LuaLS extension files
+- "Luanti Full API" addon uses types from 5.4 or earlier, was never maintained by official Luanti team
 - Both addons are handwritten and will not be easy to maintain as Luanti evolves
+
+## Considerations for a solution
+
+- For doc writers to create and maintain it:
+  - Consistent format for entire API
+    - Enables automated parsing into other formats (EmmyLua, LuaCATS, TypeScript)
+    - Removes decision fatigue on how to format things
+  - Easy to validate whether updated docs are in correct format or not
+    - Ideally a single automated tool exits with 0 or prints detailed errors
+  - Very lightweight for adoption and long-term maintenance
+    - Including comments :)
+  - Familiar syntax to Lua programmers
+  - Should not need to manually do backlinking or other easily-automated tasks
+- For end-users to use it:
+  - Available in multiple IDEs (at least: VS Code, Zed, emacs, vim)
+  - Includes sample code with sample output (including hover text and squiggly underlines) to demonstrate most core features
+  - Works without any additional setup on most machines
+    - Linux Mint or similar "simple" Linux distro, Windows, macOS
+    - Shouldn't need to install "luacheck" files or other "random" files to work
 
 ## Notes
 
@@ -31,29 +48,49 @@ Alternatively, use LuaLS with the Luanti or Luanti Full API addon
   - Includes Luanti Full API addon for LuaLS (luanti-ide-helper repo)
 - LuaLS plugins work in any IDE
   - easiest to install in VS Code using the LuaLS [addon manager](https://luals.github.io/wiki/addons/#installing-addons)
+- core namespace functions have additional info hard to describe in LuaCATS
+  - [corpserot's notes](https://gist.github.com/corpserot/6f23ae3caca48f31b6b9b460507f23dc)
+    - number subtypes like `u16`
+    - enum values
+    - complex string values: "\<adjective\>\<color\>" -> "lightred", "darkblue", etc.
+    - default values for arguments:
+    - `nil` value vs value not provided behaves differently
+    - "environment" in which the function works: startup, main, async, async mapgen, maybe more
+      - some symbols can be written to in certain environments but read in others
 
-## Considerations for a solution
+## Approaches
 
-- For doc writers to create and maintain it:
-  - Consistent format for entire API
-    - Enables automated parsing into other formats (EmmyLua, LuaCATS, TypeScript)
-    - Removes decision fatigue on how to format things
-    - We may start with core namespace reference, but we want to include everything
-  - Easy to validate whether updated docs are in correct format or not
-    - Ideally a single automated tool exits with 0 or prints detailed errors
-  - Very lightweight for adoption and long-term maintenance
-    - Including comments :)
-  - Familiar syntax to Lua programmers
-  - Should not need to manually do backlinking or other easily-automated tasks
-- For end-users to use it:
-  - Available in multiple IDEs (at least: VS Code, Zed, emacs, vim)
-  - Covers entire core namespace reference
-  - Includes sample code with sample output (including hover text and squiggly underlines) to demonstrate most core features
-  - Works without any additional setup on most machines
-    - Linux Mint or similar "simple" Linux distro, Windows, macOS
-    - Shouldn't need to install "luacheck" files or other "random" files to work
+Below are some of the ways we could rewrite the docs in a canonical form. Approaches are alphabetical.
 
-## Proposed solution
+State: Backlog -> Researching -> Proposed or Rejected
+
+| Approach    | State       | Reason                                                                                     |
+| ----------- | ----------- | ------------------------------------------------------------------------------------------ |
+| EmmyLua     | Researching | Lua-centric syntax, but may not be mature or expressive enough                             |
+| JSON        | Backlog     | Minimal support for multi-line strings make this an unlikely candidate                     |
+| LuaLS addon | Backlog     | Research shows maturity but limitations in highly-complex scenarios                        |
+| Markdown    | Researching | Extremely expressive but would require custom AST handler                                  |
+| Teal        | Rejected    | Not expressive enough                                                                      |
+| TOML        | Backlog     | Very generic but might be a good lightweight option                                        |
+| TypeScript  | Backlog     | Very expressive but not a Lua-centric syntax                                               |
+| XML         | Backlog     | Likely too verbose                                                                         |
+| YAML        | Researching | Often annoying with complex, large documents, but may provide more structure than Markdown |
+
+<a id="emmylua"></a>
+
+### EmmyLua (researching)
+
+still Lua, decent underlying parser, development recently picked up. Not expressive enough.
+
+<a id="json"></a>
+
+### JSON (backlog)
+
+tons of tooling support. No clear schema, hard to handwrite.
+
+<a id="luals-addon"></a>
+
+### LuaLS addon (backlog)
 
 Manually rewrite `lua_api.md` as `luanti_api.lua` in LuaCATS and integrate with LuaLS:
 
@@ -64,3 +101,45 @@ Manually rewrite `lua_api.md` as `luanti_api.lua` in LuaCATS and integrate with 
    - Advanced automated tests are out of scope for now. They are possible but have low ROI.
 1. Create a LuaLS addon with the new `luanti_api.lua` under [LLS-Addons](https://github.com/LuaLS/LLS-Addons/tree/main/addons/luanti)
 1. Share with the world :)
+
+<a id="markdown"></a>
+
+### Markdown (researching)
+
+very expressive, tons of tooling support. No clear schema yet defined, no parser built.
+
+<a id="teal"></a>
+
+### Teal (rejected)
+
+Teal is a typed superset of Lua that's been in active development since 2019.
+
+Its type system is too lightweight to recommend (e.g. doesn't support number ranges)
+
+- [teal-types GH repo](https://github.com/teal-language/teal-types/tree/master/types)
+- [Types in Teal doc](https://teal-language.org/book/types_in_teal.html)
+- [Teal compiler contributions over time](https://github.com/teal-language/tl/graphs/contributors)
+
+<a id="toml"></a>
+
+### TOML (backlog)
+
+not explored
+
+<a id="typescript"></a>
+
+### TypeScript (backlog)
+
+extremely complex types supported, tons of tooling support. Not Lua, not used elsewhere in Luanti repo
+
+<a id="xml-xsd"></a>
+
+### XML/XSD (backlog)
+
+not explored, would be very verbose to handwrite. XSD = XML Schema Definition
+
+<a id="yaml"></a>
+
+### YAML (researching)
+
+tons of tooling support. No clear schema, can be easy to make mistakes
