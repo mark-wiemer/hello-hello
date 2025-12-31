@@ -9,24 +9,35 @@
 
 Fortunately, I can translate the Hello World projects directly into further improvements to docs as well!
 
-## doc-schema
+## Projects
+
+Projects are listed alphabetically.
+
+### doc-schema
 
 Make the docs parsable for extensions, plugins, and content type transformations.
 
-## luanti-ts-api
+### luanti-ts-api
 
 Handwritten TypeScript API for Luanti.
 Paused in favor of [Make API docs parsable](https://github.com/luanti-org/docs.luanti.org/issues/296).
 
-## sample-mod
+### sample-mod
 
 A minimal hello world mod to learn about the current tooling for mods written in Lua.
 [Enable the LuaLS addon](https://luals.github.io/wiki/addons/#addon-manager) for "Luanti" and "Luanti Full API".
 Also consider using Luanti Tools.
 You shouldn't see any yellow or red squiggles.
 
-## void-game-ts
+### void-game-ts
 
 A very minimal game written in TypeScript alongside my handwritten TypeScript API.
 Development slowed after I realized how annoying it would be to maintain an handwritten TypeScript API.
 Ref [Make API docs parsable](https://github.com/luanti-org/docs.luanti.org/issues/296).
+
+## People
+
+| Name      | IRC | Discord username | Discord ID   | GitHub    |
+| --------- | --- | ---------------- | ------------ | --------- |
+| corpserot |     | ACorp            | a.corp.serot | corpserot |
+| wsor      |     | wsor             | wsor4035     | wsor4035  |
