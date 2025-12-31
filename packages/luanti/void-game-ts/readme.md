@@ -14,6 +14,7 @@ This version uses [TypeScriptToLua](https://github.com/TypeScriptToLua/TypeScrip
 1. `pnpm run build` to compile TypeScript to Lua and move all game-necessary files to a `dist` folder. Re-run this whenever you change the TS.
 1. Copy `dist` into your Luanti games folder however you like, e.g. `cp -r dist path/to/luanti/games/void`
    - On Linux Mint, a common path is `~/.var/app/org.luanti.luanti/.minetest/games/void`
+   - `cp -r dist ~/.var/app/org.luanti.luanti/.minetest/games/void`
 1. The game should appear in Luanti!
 
 ## Toolchain
