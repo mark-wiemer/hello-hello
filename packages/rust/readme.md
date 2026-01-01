@@ -8,4 +8,6 @@ Installation:
 curl https://sh.rustup.rs -sSf | sh
 ```
 
+Restart the shell and `cargo` should work as a command!
+
 - [The Cargo Book](https://doc.rust-lang.org/cargo/index.html)
