@@ -19,9 +19,8 @@ function cleanupMetaInfoSection() {
 
 //#region globals (readonly)
 const metaInfoSelector = ".hero-static";
-const metaInfoMainRelativeSelector = "div:nth-of-type(1) > div";
-const metaInfoManageRelativeSelector = "div:nth-of-type(2) > div";
-const metaInfoManageSelector = `${metaInfoSelector} > ${metaInfoManageRelativeSelector}`;
+const metaInfoMainSelector = `${metaInfoSelector} > div:nth-of-type(1) > div`;
+const metaInfoManageSelector = `${metaInfoSelector} > div:nth-of-type(2) > div`;
 //#endregion
 
 /**
@@ -39,8 +38,7 @@ const metaInfoManageSelector = `${metaInfoSelector} > ${metaInfoManageRelativeSe
  * - Discord button
  */
 function cleanupMetaInfoMain() {
-  const mainAbsoluteSelector = `${metaInfoSelector} > ${metaInfoMainRelativeSelector}`;
-  /** All within the `mainAbsoluteSelector` */
+  /** All within the `metaInfoMainSelector` */
   const relativeSelectorsToHide = [
     "h5:nth-of-type(1)", // "game by Malcs" text
     "h3:nth-of-type(1)", // Patreon button
@@ -51,7 +49,7 @@ function cleanupMetaInfoMain() {
     "div:nth-of-type(5)", // platform syncs and expansions list (top of page)
   ];
   const absoluteSelectorsToHide = relativeSelectorsToHide.map(
-    (relativeSelector) => `${mainAbsoluteSelector} > ${relativeSelector}`,
+    (relativeSelector) => `${metaInfoMainSelector} > ${relativeSelector}`,
   );
   hideSelectors(absoluteSelectorsToHide);
 }
