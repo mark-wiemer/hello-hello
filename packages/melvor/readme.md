@@ -8,7 +8,7 @@ Melvor Idle hosts mods on [mod.io](../mod.io/readme.md), and modiom is a CLI cli
 
 ### Create new mod
 
-ClickOps in the GUI
+ClickOps in the GUI, be sure to check "Supported Game Version: 1.3.1" (or whatever the latest version is)
 
 ### Edit existing mod
 
@@ -17,7 +17,7 @@ ClickOps in the GUI
 Sample script:
 
 ```sh
-zip -r dist/cleanup-menu.zip . -i ./cleanup/menu/**
+rm -f dist/cleanup-menu.zip && (cd cleanup/menu && zip -r ../../dist/cleanup-menu.zip .)
 # 2869: game ID for Melvor Idle
 # 5641775: global mod ID, visible in mod.io
 modiom upload 2869 5641775 dist/cleanup-menu.zip --version 0.1.2 --changelog "Hello world"
