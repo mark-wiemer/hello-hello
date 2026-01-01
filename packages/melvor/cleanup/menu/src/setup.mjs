@@ -8,7 +8,8 @@ export function setup(ctx) {
 /**
  * Hides noisy elements within the "meta info section".
  * This is the left panel on desktop.
- * Does not appear on mobile.
+ * Also rearranges some elements for readability.
+ * Does not appear on mobile or thin viewports.
  */
 function cleanupMetaInfoSection() {
   cleanupMetaInfoMain();
