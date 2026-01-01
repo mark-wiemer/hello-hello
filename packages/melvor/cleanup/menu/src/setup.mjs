@@ -67,7 +67,7 @@ function cleanupMetaInfoMain(
  * All content is preserved by this func unless otherwise noted:
  * This section includes:
  * - mod manager button
- * - active mod profile text
+ * - active mod profile text (moved above the mod manager button)
  * - invisible button
  *   - presumably only to add empty space, as it does not have an onclick handler
  *   - this mod sets "display: none" instead of "display: inline-block", so empty space is removed
@@ -99,6 +99,18 @@ function cleanupMetaInfoManage(
     (relativeSelector) => `${manageAbsoluteSelector} > ${relativeSelector}`,
   );
   hideSelectors(manageAbsoluteSelectorsToHide);
+
+  //#region Move active mod profile text above the mod manager button
+  const activeModProfileText = document.querySelector(
+    `${manageAbsoluteSelector} > p:nth-of-type(1)`,
+  );
+  const modManagerButton = document.querySelector(`${manageAbsoluteSelector} > div:nth-of-type(1)`);
+  if (activeModProfileText && modManagerButton) {
+    modManagerButton.parentNode.insertBefore(activeModProfileText, modManagerButton);
+  } else {
+    console.error("Couldn't find both the active mod profile text and the mod manager button");
+  }
+  //#endregion
 }
 
 /**
