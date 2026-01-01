@@ -1,5 +1,6 @@
 {
   "namespace": "mark_wiemer",
   "icon": "assets/icon.png",
-  "setup": "src/setup.mjs"
+  "setup": "src/setup.mjs",
+  "load": ["assets/styles.css"]
 }

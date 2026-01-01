@@ -1,3 +1,4 @@
-export function setup() {
-  console.log("Hello From My Mod v0.1.3!");
+export function setup(ctx) {
+  console.log(`Hello From My Mod ${ctx.version}!`);
+  console.log(ctx);
 }
