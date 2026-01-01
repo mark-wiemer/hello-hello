@@ -3,14 +3,17 @@
 ## [0.2.0] - 2025-12-31
 
 - Remove cyan outline
-- Hide noise on left panel of main menu:
-  - "A game by Malcs" text
-  - Patreon badge
-  - Version number
-  - Melvor Idle 2 promo
-  - "Also available on" and "Your save is compatible" card
-  - Discord link
-  - Platform syncs and expansions list
+- Hide noise on left panel (meta info panel) of main menu:
+  - Main section:
+    - Platform syncs and expansions list
+    - "A game by Malcs" text
+    - Patreon badge
+    - Version number
+    - Melvor Idle 2 promo
+    - "Also available on" and "Your save is compatible" card
+    - Discord link
+  - Manage section:
+    - Invisible button
 - Hide local backup reminder in main menu
 
 ## [0.1.8] - 2025-12-31
