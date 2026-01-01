@@ -1,3 +1,6 @@
-h5 {
-  border: 1px solid cyan;
+.hero-static {
+  /* Hide platform syncs and expansions list */
+  div:nth-of-type(5) {
+    display: none;
+  }
 }

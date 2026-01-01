@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.1.9] - 2025-12-31
+
+- Remove cyan outline
+- Hide platform syncs and expansions list
+
 ## [0.1.8] - 2025-12-31
 
 - Outline all h5 elements in cyan via CSS
