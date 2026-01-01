@@ -69,6 +69,7 @@ State: Backlog -> Researching -> Proposed or Rejected
 | EmmyLua     | Researching | Lua-centric syntax, but may not be mature or expressive enough                             |
 | JSON        | Backlog     | Minimal support for multi-line strings make this an unlikely candidate                     |
 | LuaLS addon | Backlog     | Research shows maturity but limitations in highly-complex scenarios                        |
+| Luau        | Researching | Mature and Lua-centric, but might not be expressive enough                                 |
 | Markdown    | Researching | Extremely expressive but would require custom AST handler                                  |
 | Teal        | Rejected    | Not expressive enough                                                                      |
 | TOML        | Backlog     | Very generic but might be a good lightweight option                                        |
