@@ -20,7 +20,9 @@ if [ ! -f "$MOD_PATH/changelog.md" ]; then
 fi
 
 # Extract changelog for the specific version
-# Remove bullet points, mod.io renders each line as an unordered list item
+# Replace dash bullets with star bullets for modiom
+# mod.io only renders raw lines as unordered list items in some views
+# sticking to traditional Markdown is best for now
 CHANGELOG=$(awk -v ver="$VERSION" '
     /^## \[/ {
         if ($0 ~ "\\[" ver "\\]") {
@@ -33,7 +35,7 @@ CHANGELOG=$(awk -v ver="$VERSION" '
     found && /^[*-]/ {
         print
     }
-' "$MOD_PATH/changelog.md" | sed 's/^- //')
+' "$MOD_PATH/changelog.md" | sed 's/^- /* /')
 
 if [ -z "$CHANGELOG" ]; then
     echo "Error: No changelog found for version $VERSION in $MOD_PATH/changelog.md"
