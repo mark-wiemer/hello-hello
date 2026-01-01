@@ -20,6 +20,8 @@ function cleanupMetaInfoSection() {
 //#region globals (readonly)
 const metaInfoSelector = ".hero-static";
 const metaInfoMainRelativeSelector = "div:nth-of-type(1) > div";
+const metaInfoManageRelativeSelector = "div:nth-of-type(2) > div";
+const metaInfoManageSelector = `${metaInfoSelector} > ${metaInfoManageRelativeSelector}`;
 //#endregion
 
 /**
@@ -65,30 +67,14 @@ function cleanupMetaInfoMain() {
  *   - this mod sets "display: none" instead of "display: inline-block", so empty space is removed
  * - manage button
  * - logout button
- * @param {MetaInfoManageSelectors?} selectors
  */
-function hideMetaInfoManageNoise(
-  selectors = {
-    metaInfo: ".hero-static",
-    manageRelative: "div:nth-of-type(2) > div",
-  },
-) {
-  /**
-   * Prefer provided selectors when possible, fallback to defaults
-   * @type {Required<MetaInfoManageSelectors>}
-   */
-  const seles = {
-    metaInfo: ".hero-static",
-    manageRelative: "div:nth-of-type(2) > div",
-    ...selectors,
-  };
-  const manageAbsoluteSelector = `${seles.metaInfo} > ${seles.manageRelative}`;
-  /** All within the `manageAbsoluteSelector` */
+function hideMetaInfoManageNoise() {
+  /** All within `metaInfoManageSelector` */
   const relativeSelectorsToHide = [
     "button:nth-of-type(1)", // invisible button presumably there for padding
   ];
   const manageAbsoluteSelectorsToHide = relativeSelectorsToHide.map(
-    (relativeSelector) => `${manageAbsoluteSelector} > ${relativeSelector}`,
+    (relativeSelector) => `${metaInfoManageSelector} > ${relativeSelector}`,
   );
   hideSelectors(manageAbsoluteSelectorsToHide);
 }
@@ -97,28 +83,12 @@ function hideMetaInfoManageNoise(
  * Move the "active mod profile" text from below the "Mod Manager" button
  * to above that button.
  * Error to console if the text or button cannot be found.
- * @param {MetaInfoManageSelectors?} selectors
  */
-function moveActiveModProfileText(
-  selectors = {
-    metaInfo: ".hero-static",
-    manageRelative: "div:nth-of-type(2) > div",
-  },
-) {
-  /**
-   * Prefer provided selectors when possible, fallback to defaults
-   * @type {Required<MetaInfoManageSelectors>}
-   */
-  const seles = {
-    metaInfo: ".hero-static",
-    manageRelative: "div:nth-of-type(2) > div",
-    ...selectors,
-  };
-  const manageAbsoluteSelector = `${seles.metaInfo} > ${seles.manageRelative}`;
+function moveActiveModProfileText() {
   const activeModProfileText = document.querySelector(
-    `${manageAbsoluteSelector} > p:nth-of-type(1)`,
+    `${metaInfoManageSelector} > p:nth-of-type(1)`,
   );
-  const modManagerButton = document.querySelector(`${manageAbsoluteSelector} > div:nth-of-type(1)`);
+  const modManagerButton = document.querySelector(`${metaInfoManageSelector} > div:nth-of-type(1)`);
   if (activeModProfileText && modManagerButton) {
     modManagerButton.parentNode.insertBefore(activeModProfileText, modManagerButton);
   } else {
@@ -160,13 +130,3 @@ function styleSelectors(selectors, rule) {
   styleSheet.textContent = rules;
   document.head.appendChild(styleSheet);
 }
-
-//#region typedefs
-/**
- * Selectors for the meta info element and its manage section.
- * Any number can be provided, functions using this should merge with a default object.
- * @typedef {Object} MetaInfoManageSelectors
- * @property {string?} metaInfo default: `.hero-static`
- * @property {string?} manageRelative the inner div in the manage section of the meta info section (`div:nth-of-type(2) > div`)
- */
-//#endregion
