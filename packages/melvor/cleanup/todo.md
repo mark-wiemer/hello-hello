@@ -1,5 +1,6 @@
 # Cleanup todo
 
+- End-user configuration
 - Sentence case everywhere
 
 ## Menu
@@ -15,3 +16,4 @@
 - Refresh cloud saves button should disappear when disabled
 - Only show up to one new character slot
   - Show "all character slots used" when relevant (does it already do this?)
+- Center "Mod Manager" text even when Creator Toolkit is enabled
