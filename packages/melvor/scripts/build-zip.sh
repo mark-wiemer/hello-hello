@@ -5,7 +5,14 @@ SCRIPT_DIR=$(cd -- "$(dirname "$0")" && pwd)
 ROOT_DIR=$(cd "$SCRIPT_DIR/.." && pwd)
 cd "$ROOT_DIR"
 
-MOD_PATH="$1"
+RAW_MOD_PATH="$1"
+MOD_PATH="$RAW_MOD_PATH"
+
+# Normalize the mod path: drop leading "./" and trailing slashes
+while [[ "$MOD_PATH" == ./* ]]; do
+    MOD_PATH="${MOD_PATH#./}"
+done
+MOD_PATH="${MOD_PATH%/}"
 
 if [ -z "$MOD_PATH" ]; then
     echo "Usage: $0 <mod-path>"
