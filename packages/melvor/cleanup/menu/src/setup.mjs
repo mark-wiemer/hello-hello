@@ -2,6 +2,7 @@ export function setup(ctx) {
   console.log(`Hello From My Mod ${ctx.version}!`);
   console.log(ctx);
   cleanupMetaInfoSection();
+  cleanupMainSection();
 }
 
 /**
@@ -40,15 +41,11 @@ function hideSelectors(selectors) {
 }
 
 /**
- * Sets the element's display to none.
- *
- * Does nothing if the element is falsy.
- * @param {Element} el
+ * Hides the local backup reminder.
  */
-function hide(el) {
-  if (!el) {
-    console.log("element not found");
-    return;
-  }
-  el.style.display = "none";
+function cleanupMainSection() {
+  const characterSelectSelector = ".hero-alt > div:nth-of-type(5) > div:nth-of-type(2)";
+  const headerSelector = `${characterSelectSelector} > div:nth-of-type(1)`;
+  const localBackupSelector = `${headerSelector} > h5`;
+  hideSelectors([localBackupSelector]);
 }
