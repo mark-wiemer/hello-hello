@@ -1,10 +1,10 @@
 export function setup(ctx) {
   console.log(`Hello From My Mod ${ctx.version}!`);
   console.log(ctx);
-  const heroStatic = document.querySelector(".hero-static");
+  const heroStatic = document.querySelector(".hero-static > div:nth-of-type(1) > div");
   if (heroStatic) {
     // hide "A game by Malcs" text
-    hide(heroStatic.querySelector("div:nth-of-type(1) > div > h5:nth-of-type(1)"));
+    hide(heroStatic.querySelector("h5:nth-of-type(1)"));
   }
 }
 
