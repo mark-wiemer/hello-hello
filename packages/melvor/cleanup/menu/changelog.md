@@ -1,9 +1,16 @@
 # Changelog
 
-## [0.1.9] - 2025-12-31
+## [0.2.0] - unreleased
 
 - Remove cyan outline
-- Hide platform syncs and expansions list
+- Hide noise on left panel of main menu:
+  - "A game by Malcs" text
+  - Patreon badge
+  - Version number
+  - Melvor Idle 2 promo
+  - "Also available on" and "Your save is compatible" card
+  - Discord link
+  - Platform syncs and expansions list
 
 ## [0.1.8] - 2025-12-31
 
