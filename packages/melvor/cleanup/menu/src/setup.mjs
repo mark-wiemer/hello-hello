@@ -17,6 +17,11 @@ function cleanupMetaInfoSection() {
   moveActiveModProfileText();
 }
 
+//#region globals (readonly)
+const metaInfoSelector = ".hero-static";
+const metaInfoMainRelativeSelector = "div:nth-of-type(1) > div";
+//#endregion
+
 /**
  * Hide noisy elements in the main part of the meta info section.
  * This section includes everything from the top of the page down to, but not including,
@@ -30,24 +35,9 @@ function cleanupMetaInfoSection() {
  * - Melvor Idle 2 promo
  * - "also available on..." card
  * - Discord button
- * @param {MetaInfoMainSelectors?} selectors
  */
-function cleanupMetaInfoMain(
-  selectors = {
-    metaInfo: ".hero-static",
-    mainRelative: "div:nth-of-type(1) > div",
-  },
-) {
-  /**
-   * Prefer provided selectors when possible, fallback to defaults
-   * @type {Required<MetaInfoMainSelectors>}
-   */
-  const seles = {
-    metaInfo: ".hero-static",
-    mainRelative: "div:nth-of-type(1) > div",
-    ...selectors,
-  };
-  const mainAbsoluteSelector = `${seles.metaInfo} > ${seles.mainRelative}`;
+function cleanupMetaInfoMain() {
+  const mainAbsoluteSelector = `${metaInfoSelector} > ${metaInfoMainRelativeSelector}`;
   /** All within the `mainAbsoluteSelector` */
   const relativeSelectorsToHide = [
     "h5:nth-of-type(1)", // "game by Malcs" text
@@ -172,14 +162,6 @@ function styleSelectors(selectors, rule) {
 }
 
 //#region typedefs
-/**
- * Selectors for the meta info section and its main section.
- * Any number can be provided, functions using this should merge with a default object.
- * @typedef {Object} MetaInfoMainSelectors
- * @property {string?} metaInfo default: `.hero-static`
- * @property {string?} mainRelative the inner div in the main section of the meta info section (`div:nth-of-type(1) > div`)
- */
-
 /**
  * Selectors for the meta info element and its manage section.
  * Any number can be provided, functions using this should merge with a default object.
