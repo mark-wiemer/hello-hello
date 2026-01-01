@@ -28,7 +28,7 @@ Historically, I haven't followed a particular commit message style. But [Mocha](
 
 - [Bash](./packages/bash/readme.md): A cross-platform shell
 - [Git](./packages/git/readme.md): A version control system
-- [GitHub](./packages/hello-github/readme.md): Tools for editing GitHub settings via CLI
+- [GitHub](./packages/github/readme.md): Tools for editing GitHub settings via CLI
   - Includes details on `.github` folder
 - [jq (jqlang)](./packages/jq/readme.md): CLI tool for editing JSON files
 - [luanti](./packages/luanti/readme.md): An open-source engine, distribution platform, and client for "boxel" games
