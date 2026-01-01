@@ -11,6 +11,7 @@
   - "Also available on" and "Your save is compatible" card
   - Discord link
   - Platform syncs and expansions list
+- Hide local backup reminder in main menu
 
 ## [0.1.8] - 2025-12-31
 

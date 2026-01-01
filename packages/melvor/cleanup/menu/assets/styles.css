@@ -38,3 +38,20 @@
     }
   }
 }
+
+/* Main section */
+.hero-alt {
+  /* Inner main section (siblings are errs, etc.) */
+  > div:nth-of-type(5) {
+    /* Character select */
+    > div:nth-of-type(2) {
+      /* Header */
+      > div:nth-of-type(1) {
+        /* Local backup reminder */
+        h5 {
+          display: none;
+        }
+      }
+    }
+  }
+}
