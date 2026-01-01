@@ -21,6 +21,8 @@ function cleanupMetaInfoSection() {
 const metaInfoSelector = ".hero-static";
 const metaInfoMainSelector = `${metaInfoSelector} > div:nth-of-type(1) > div`;
 const metaInfoManageSelector = `${metaInfoSelector} > div:nth-of-type(2) > div`;
+const activeModProfileTextSelector = `${metaInfoManageSelector} > p:nth-of-type(1)`;
+const modManagerButtonSelector = `${metaInfoManageSelector} > div:nth-of-type(1)`;
 //#endregion
 
 /**
@@ -83,10 +85,8 @@ function hideMetaInfoManageNoise() {
  * Error to console if the text or button cannot be found.
  */
 function moveActiveModProfileText() {
-  const activeModProfileText = document.querySelector(
-    `${metaInfoManageSelector} > p:nth-of-type(1)`,
-  );
-  const modManagerButton = document.querySelector(`${metaInfoManageSelector} > div:nth-of-type(1)`);
+  const activeModProfileText = document.querySelector(activeModProfileTextSelector);
+  const modManagerButton = document.querySelector(modManagerButtonSelector);
   if (activeModProfileText && modManagerButton) {
     modManagerButton.parentNode.insertBefore(activeModProfileText, modManagerButton);
   } else {
