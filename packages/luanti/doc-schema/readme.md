@@ -48,7 +48,7 @@ Alternatively, use LuaLS with the "Luanti" or "Luanti Full API" addon:
   - Includes Luanti Full API addon for LuaLS (luanti-ide-helper repo)
 - LuaLS plugins work in any IDE
   - easiest to install in VS Code using the LuaLS [addon manager](https://luals.github.io/wiki/addons/#installing-addons)
-- core namespace functions have additional info hard to describe in LuaCATS
+- Expressiveness requests:
   - [corpserot's notes](https://gist.github.com/corpserot/6f23ae3caca48f31b6b9b460507f23dc)
     - number subtypes like `u16`
     - enum values
@@ -57,6 +57,8 @@ Alternatively, use LuaLS with the "Luanti" or "Luanti Full API" addon:
     - `nil` value vs value not provided behaves differently
     - "environment" in which the function works: startup, main, async, async mapgen, maybe more
       - some symbols can be written to in certain environments but read in others
+  - [Riseup pad](https://pad.riseup.net/p/Luanti-Docs)
+    - todo read this!
 
 ## Approaches
 
