@@ -12,7 +12,8 @@ export function setup(ctx) {
  */
 function cleanupMetaInfoSection() {
   cleanupMetaInfoMain();
-  cleanupMetaInfoManage();
+  hideMetaInfoManageNoise();
+  moveActiveModProfileText();
 }
 
 /**
@@ -67,7 +68,7 @@ function cleanupMetaInfoMain(
  * All content is preserved by this func unless otherwise noted:
  * This section includes:
  * - mod manager button
- * - active mod profile text (moved above the mod manager button)
+ * - active mod profile text
  * - invisible button
  *   - presumably only to add empty space, as it does not have an onclick handler
  *   - this mod sets "display: none" instead of "display: inline-block", so empty space is removed
@@ -75,7 +76,7 @@ function cleanupMetaInfoMain(
  * - logout button
  * @param {MetaInfoManageSelectors?} selectors
  */
-function cleanupMetaInfoManage(
+function hideMetaInfoManageNoise(
   selectors = {
     metaInfo: ".hero-static",
     manageRelative: "div:nth-of-type(2) > div",
@@ -99,8 +100,30 @@ function cleanupMetaInfoManage(
     (relativeSelector) => `${manageAbsoluteSelector} > ${relativeSelector}`,
   );
   hideSelectors(manageAbsoluteSelectorsToHide);
+}
 
-  //#region Move active mod profile text above the mod manager button
+/**
+ * Move the "active mod profile" text from below the "Mod Manager" button
+ * to above that button.
+ * Error to console if the text or button cannot be found.
+ * @param {MetaInfoManageSelectors?} selectors
+ */
+function moveActiveModProfileText(
+  selectors = {
+    metaInfo: ".hero-static",
+    manageRelative: "div:nth-of-type(2) > div",
+  },
+) {
+  /**
+   * Prefer provided selectors when possible, fallback to defaults
+   * @type {Required<MetaInfoManageSelectors>}
+   */
+  const seles = {
+    metaInfo: ".hero-static",
+    manageRelative: "div:nth-of-type(2) > div",
+    ...selectors,
+  };
+  const manageAbsoluteSelector = `${seles.metaInfo} > ${seles.manageRelative}`;
   const activeModProfileText = document.querySelector(
     `${manageAbsoluteSelector} > p:nth-of-type(1)`,
   );
@@ -110,7 +133,6 @@ function cleanupMetaInfoManage(
   } else {
     console.error("Couldn't find both the active mod profile text and the mod manager button");
   }
-  //#endregion
 }
 
 /**
