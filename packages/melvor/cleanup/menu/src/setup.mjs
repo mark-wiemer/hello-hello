@@ -5,7 +5,7 @@ export function setup(ctx) {
 }
 
 /**
- * Hide elements within the "meta info section".
+ * Hides noisy elements within the "meta info section".
  * This is the left panel on desktop.
  * Does not appear on mobile.
  */
