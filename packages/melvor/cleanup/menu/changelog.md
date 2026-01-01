@@ -1,6 +1,6 @@
 # Changelog
 
-## [0.2.0] - unreleased
+## [0.2.0] - 2025-12-31
 
 - Remove cyan outline
 - Hide noise on left panel of main menu:
