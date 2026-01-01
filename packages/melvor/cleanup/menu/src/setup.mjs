@@ -15,7 +15,6 @@ function cleanupMetaInfoSection() {
   cleanupMetaInfoManage();
 }
 
-// todo cleanup types
 /**
  * Hide noisy elements in the main part of the meta info section.
  * This section includes everything from the top of the page down to, but not including,
@@ -29,9 +28,7 @@ function cleanupMetaInfoSection() {
  * - Melvor Idle 2 promo
  * - "also available on..." card
  * - Discord button
- * @param {object} selectors optional selectors for
- * - metaInfo: the hero static element (default: `.hero-static`)
- * - mainRelative: the inner main div in the "hero static" element (`div:nth-of-type(1) > div`)
+ * @param {MetaInfoMainSelectors?} selectors
  */
 function cleanupMetaInfoMain(
   selectors = {
@@ -39,7 +36,10 @@ function cleanupMetaInfoMain(
     mainRelative: "div:nth-of-type(1) > div",
   },
 ) {
-  /** Prefer provided selectors when possible, fallback to defaults */
+  /**
+   * Prefer provided selectors when possible, fallback to defaults
+   * @type {Required<MetaInfoMainSelectors>}
+   */
   const seles = {
     metaInfo: ".hero-static",
     mainRelative: "div:nth-of-type(1) > div",
@@ -62,7 +62,6 @@ function cleanupMetaInfoMain(
   hideSelectors(absoluteSelectorsToHide);
 }
 
-// todo cleanup types
 /**
  * Hide noisy elements in the manage part of the meta info section.
  * All content is preserved by this func unless otherwise noted:
@@ -74,9 +73,7 @@ function cleanupMetaInfoMain(
  *   - this mod sets "display: none" instead of "display: inline-block", so empty space is removed
  * - manage button
  * - logout button
- * @param {object} selectors optional selectors for
- * - metaInfo: the hero static element (default: `.hero-static`)
- * - manageRelative: the inner div of the "manage" section (`div:nth-of-type(2) > div`)
+ * @param {MetaInfoManageSelectors?} selectors
  */
 function cleanupMetaInfoManage(
   selectors = {
@@ -84,7 +81,10 @@ function cleanupMetaInfoManage(
     manageRelative: "div:nth-of-type(2) > div",
   },
 ) {
-  /** Prefer provided selectors when possible, fallback to defaults */
+  /**
+   * Prefer provided selectors when possible, fallback to defaults
+   * @type {Required<MetaInfoManageSelectors>}
+   */
   const seles = {
     metaInfo: ".hero-static",
     manageRelative: "div:nth-of-type(2) > div",
@@ -135,3 +135,21 @@ function styleSelectors(selectors, rule) {
   styleSheet.textContent = rules;
   document.head.appendChild(styleSheet);
 }
+
+//#region typedefs
+/**
+ * Selectors for the meta info section and its main section.
+ * Any number can be provided, functions using this should merge with a default object.
+ * @typedef {Object} MetaInfoMainSelectors
+ * @property {string?} metaInfo default: `.hero-static`
+ * @property {string?} mainRelative the inner div in the main section of the meta info section (`div:nth-of-type(1) > div`)
+ */
+
+/**
+ * Selectors for the meta info element and its manage section.
+ * Any number can be provided, functions using this should merge with a default object.
+ * @typedef {Object} MetaInfoManageSelectors
+ * @property {string?} metaInfo default: `.hero-static`
+ * @property {string?} manageRelative the inner div in the manage section of the meta info section (`div:nth-of-type(2) > div`)
+ */
+//#endregion
