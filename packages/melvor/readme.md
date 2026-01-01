@@ -52,3 +52,7 @@ scripts/upload.sh cleanup/menu 0.1.8
 
 - [Mod Creation/Getting Started - Melvor Idle Wiki](https://wiki.melvoridle.com/w/Mod_Creation/Getting_Started)
 - [Mod Creation/Creator Toolkit - Melvor Idle Wiki](https://wiki.melvoridle.com/w/Mod_Creation/Creator_Toolkit): official system for loading mods locally instead of uploading each version to mod.io
+- [pixelcave OneUI](https://pixelcave.com/products/oneui): Melvor 1.3.1 uses OneUI 4.7.0 from 2020
+  - (DevTools > Sources > Page > top/melvoridle.com/assets/css/lib/oneui.css > first few lines)
+- [Font Awesome 5 icons](https://fontawesome.com/v5/search)
+  - `.fa` ruleset includes `font-family: "Font Awesome 5 Free"`
