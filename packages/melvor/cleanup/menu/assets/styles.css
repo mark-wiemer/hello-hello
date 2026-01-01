@@ -1,6 +1,10 @@
+/* Left panel of main menu */
 .hero-static {
-  /* Hide platform syncs and expansions list */
-  div:nth-of-type(5) {
-    display: none;
+  /* Main section */
+  > div:nth-of-type(1) > div {
+    /* Hide platform syncs and expansions list */
+    > div:nth-of-type(5) {
+      display: none;
+    }
   }
 }
