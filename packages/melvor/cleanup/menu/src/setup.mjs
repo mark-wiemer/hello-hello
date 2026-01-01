@@ -13,7 +13,7 @@ function cleanupMetaInfoSection() {
   const heroStaticSelector = ".hero-static > div:nth-of-type(1) > div";
 
   /** All within the `heroStaticSelector` */
-  const selectorsToHide = [
+  const relativeSelectorsToHide = [
     "h5:nth-of-type(1)", // "game by Malcs" text
     "h3:nth-of-type(1)", // Patreon badge
     "h5:nth-of-type(2)", // version number
@@ -22,14 +22,21 @@ function cleanupMetaInfoSection() {
     "div:nth-of-type(4)", // Discord link
     "div:nth-of-type(5)", // platform syncs and expansions list (top of page)
   ];
+  const absoluteSelectorsToHide = relativeSelectorsToHide.map(
+    (selector) => `${heroStaticSelector} > ${selector}`,
+  );
+  hideSelectors(absoluteSelectorsToHide);
+}
 
+/**
+ * Creates a `style` element applying `display: none` to each of the provided selectors
+ * @param {string[]} selectors CSS selectors
+ */
+function hideSelectors(selectors) {
   const styleSheet = document.createElement("style");
-  const rules = selectorsToHide
-    .map((selector) => `${heroStaticSelector} > ${selector} { display: none; }`)
-    .join("\n");
+  const rules = selectors.map((s) => `${s} { display: none }`).join("\n");
   styleSheet.textContent = rules;
   document.head.appendChild(styleSheet);
-  return;
 }
 
 /**
