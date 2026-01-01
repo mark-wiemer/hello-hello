@@ -2,7 +2,7 @@
 
 ## [0.2.1] - unreleased
 
-- Move active mod profile text above the mod manager button
+- Move "active mod profile" text above the Mod Manager button
 
 ## [0.2.0] - 2025-12-31
 
