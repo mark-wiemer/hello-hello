@@ -59,6 +59,8 @@ Alternatively, use LuaLS with the "Luanti" or "Luanti Full API" addon:
       - some symbols can be written to in certain environments but read in others
   - [Riseup pad](https://pad.riseup.net/p/Luanti-Docs)
     - todo read this!
+- [corpserot/luanti-api-spec in YAML](https://github.com/corpserot/luanti-api-spec)
+  - corpserot doesn't recommend YAML after building this
 
 ## Approaches
 
