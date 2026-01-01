@@ -12,22 +12,9 @@ export function setup(ctx) {
  */
 function cleanupMetaInfoSection() {
   const heroStaticSelector = ".hero-static";
-  const heroStaticMainSelector = `${heroStaticSelector} > div:nth-of-type(1) > div`;
-  /** All within the `heroStaticMainSelector` */
-  const mainRelativeSelectorsToHide = [
-    "h5:nth-of-type(1)", // "game by Malcs" text
-    "h3:nth-of-type(1)", // Patreon badge
-    "h5:nth-of-type(2)", // version number
-    "div:nth-of-type(2)", // Melvor Idle 2 promo
-    "div:nth-of-type(3)", // "also available on..." card
-    "div:nth-of-type(4)", // Discord link
-    "div:nth-of-type(5)", // platform syncs and expansions list (top of page)
-  ];
-  const mainAbsoluteSelectorsToHide = mainRelativeSelectorsToHide.map(
-    (s) => `${heroStaticMainSelector} > ${s}`,
-  );
-  hideSelectors(mainAbsoluteSelectorsToHide);
+  cleanupMetaInfoMain();
 
+  // #region mods, manage, logout
   const heroStaticManageSelector = `${heroStaticSelector} > div:nth-of-type(2) > div`;
   const manageRelativeSelectorsToHide = [
     "button:nth-of-type(1)", // invisible button presumably there for padding
@@ -36,6 +23,43 @@ function cleanupMetaInfoSection() {
     (s) => `${heroStaticManageSelector} > ${s}`,
   );
   hideSelectors(manageAbsoluteSelectorsToHide);
+  // #endregion
+}
+
+// todo cleanup types
+/**
+ * Hide noisy elements in the main part of the meta info section.
+ * @param {object} options optional selectors for
+ * - the hero static element (default: `.hero-static`)
+ * - the inner main div in the "hero static" element (`div:nth-of-type(1) > div`)
+ */
+function cleanupMetaInfoMain(
+  options = {
+    heroStaticSelector: ".hero-static",
+    mainSelector: "div:nth-of-type(1) > div",
+  },
+) {
+  /** Prefer provided options when possible, fallback to defaults */
+  const opts = {
+    heroStaticSelector: ".hero-static",
+    mainRelativeSelector: "div:nth-of-type(1) > div",
+    ...options,
+  };
+  const mainAbsoluteSelector = `${opts.heroStaticSelector} > ${opts.mainRelativeSelector}`;
+  /** All within the `heroStaticMainSelector` */
+  const relativeSelectorsToHide = [
+    "h5:nth-of-type(1)", // "game by Malcs" text
+    "h3:nth-of-type(1)", // Patreon badge
+    "h5:nth-of-type(2)", // version number
+    "div:nth-of-type(2)", // Melvor Idle 2 promo
+    "div:nth-of-type(3)", // "also available on..." card
+    "div:nth-of-type(4)", // Discord link
+    "div:nth-of-type(5)", // platform syncs and expansions list (top of page)
+  ];
+  const absoluteSelectorsToHide = relativeSelectorsToHide.map(
+    (relativeSelector) => `${mainAbsoluteSelector} > ${relativeSelector}`,
+  );
+  hideSelectors(absoluteSelectorsToHide);
 }
 
 /**
