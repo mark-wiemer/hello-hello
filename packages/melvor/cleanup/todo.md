@@ -4,8 +4,6 @@
 
 ## Menu
 
-- "Change language" should be button-styled, not link-styled
-  - Look and feel should match "return to character select"
 - Highlight button in manage section indicating which section is active
   - Manage (account)
   - Change language

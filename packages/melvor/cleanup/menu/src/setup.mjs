@@ -8,22 +8,34 @@ export function setup(ctx) {
 /**
  * Hides noisy elements within the "meta info section".
  * This is the left panel on desktop.
- * Also rearranges some elements for readability.
- * Does not appear on mobile or thin viewports.
+ * Also updates some elements for readability:
+ * - Moves "active mod profile" text above Mod Manager button
+ * - Revamps "Change language" into a traditional button in the manage section
+ * Meta info section not appear on mobile or thin viewports.
  */
 function cleanupMetaInfoSection() {
   cleanupMetaInfoMain();
   hideMetaInfoManageNoise();
   moveActiveModProfileText();
+  revampChangeLanguageButton();
 }
 
-//#region globals (readonly)
+//#region globals
 const metaInfoSelector = ".hero-static";
 const metaInfoMainSelector = `${metaInfoSelector} > div:nth-of-type(1) > div`;
+//#region meta info manage
 const metaInfoManageSelector = `${metaInfoSelector} > div:nth-of-type(2) > div`;
 const activeModProfileTextSelector = `${metaInfoManageSelector} > p:nth-of-type(1)`;
 const modManagerButtonSelector = `${metaInfoManageSelector} > div:nth-of-type(1)`;
-//#endregion
+const manageAccountButtonSelector = `${metaInfoManageSelector} > button:nth-of-type(3)`;
+//#endregion meta info manage
+const metaInfoFooterSelector = `${metaInfoSelector} > div:nth-of-type(3)`;
+/**
+ * Selector for the built-in "change language" button.
+ * This mod adds a revamped button and deletes the built-in one.
+ */
+const changeLanguageButtonSelector = `${metaInfoFooterSelector} > ul:nth-of-type(2) > li:nth-of-type(2)`;
+//#endregion globals
 
 /**
  * Hide noisy elements in the main part of the meta info section.
@@ -92,6 +104,55 @@ function moveActiveModProfileText() {
   } else {
     console.error("Couldn't find both the active mod profile text and the mod manager button");
   }
+}
+
+/**
+ * Revamp "change language" into a button just below the manage account button
+ */
+function revampChangeLanguageButton() {
+  //#region clone "manage account" button
+  const manageAccountButton = document.querySelector(manageAccountButtonSelector);
+  if (!manageAccountButton) {
+    console.error("Couldn't find the manage account button");
+    return;
+  }
+  const newChangeLanguageButton = manageAccountButton.cloneNode(true);
+  //#endregion
+
+  //#region update icon
+  const icon = newChangeLanguageButton.querySelector("i");
+  if (!icon) {
+    console.error("Couldn't find the `i` element");
+    return;
+  }
+  icon.classList.remove("fa-user-cog");
+  icon.classList.add("fa-language");
+  //#endregion
+
+  //#region update button text
+  const langString = newChangeLanguageButton.querySelector("lang-string");
+  if (!langString) {
+    console.error("Couldn't find the lang string");
+    return;
+  }
+  langString.setAttribute("lang-id", "MISC_STRING_11");
+  //#endregion
+
+  newChangeLanguageButton.onclick = () => changePageCharacterSelection(9);
+
+  manageAccountButton.parentNode.insertBefore(
+    newChangeLanguageButton,
+    manageAccountButton.nextSibling,
+  );
+
+  //#region Delete old "change language" button
+  const oldChangeLanguageButton = document.querySelector(changeLanguageButtonSelector);
+  if (oldChangeLanguageButton) {
+    oldChangeLanguageButton.remove();
+  } else {
+    console.error("Couldn't find the old change language button");
+  }
+  //#endregion
 }
 
 /**

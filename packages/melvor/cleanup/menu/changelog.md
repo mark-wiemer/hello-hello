@@ -3,6 +3,10 @@
 ## [1.0.0] - 2026-01-01
 
 - Move "active mod profile" text above the Mod Manager button
+- Revamp the "change language" button:
+  - Move it to the "manage" section between the "manage account" button and logout button
+    - Used to be in the meta info footer, near privacy policy button and copyright notice
+  - Style it like the "manage account" button, with its own icon and text
 
 ## [0.2.0] - 2025-12-31
 
