@@ -11,55 +11,94 @@ export function setup(ctx) {
  * Does not appear on mobile.
  */
 function cleanupMetaInfoSection() {
-  const heroStaticSelector = ".hero-static";
   cleanupMetaInfoMain();
-
-  // #region mods, manage, logout
-  const heroStaticManageSelector = `${heroStaticSelector} > div:nth-of-type(2) > div`;
-  const manageRelativeSelectorsToHide = [
-    "button:nth-of-type(1)", // invisible button presumably there for padding
-  ];
-  const manageAbsoluteSelectorsToHide = manageRelativeSelectorsToHide.map(
-    (s) => `${heroStaticManageSelector} > ${s}`,
-  );
-  hideSelectors(manageAbsoluteSelectorsToHide);
-  // #endregion
+  cleanupMetaInfoManage();
 }
 
 // todo cleanup types
 /**
  * Hide noisy elements in the main part of the meta info section.
- * @param {object} options optional selectors for
- * - the hero static element (default: `.hero-static`)
- * - the inner main div in the "hero static" element (`div:nth-of-type(1) > div`)
+ * This section includes everything from the top of the page down to, but not including,
+ * the mod manager button. All content is hidden by this func unless otherwise noted:
+ * - platform syncs
+ * - expansions list
+ * - logo (not hidden by this mod)
+ * - "game by Malcs" text
+ * - Patreon button
+ * - version number
+ * - Melvor Idle 2 promo
+ * - "also available on..." card
+ * - Discord button
+ * @param {object} selectors optional selectors for
+ * - metaInfo: the hero static element (default: `.hero-static`)
+ * - mainRelative: the inner main div in the "hero static" element (`div:nth-of-type(1) > div`)
  */
 function cleanupMetaInfoMain(
-  options = {
-    heroStaticSelector: ".hero-static",
-    mainSelector: "div:nth-of-type(1) > div",
+  selectors = {
+    metaInfo: ".hero-static",
+    mainRelative: "div:nth-of-type(1) > div",
   },
 ) {
-  /** Prefer provided options when possible, fallback to defaults */
-  const opts = {
-    heroStaticSelector: ".hero-static",
-    mainRelativeSelector: "div:nth-of-type(1) > div",
-    ...options,
+  /** Prefer provided selectors when possible, fallback to defaults */
+  const seles = {
+    metaInfo: ".hero-static",
+    mainRelative: "div:nth-of-type(1) > div",
+    ...selectors,
   };
-  const mainAbsoluteSelector = `${opts.heroStaticSelector} > ${opts.mainRelativeSelector}`;
-  /** All within the `heroStaticMainSelector` */
+  const mainAbsoluteSelector = `${seles.metaInfo} > ${seles.mainRelative}`;
+  /** All within the `mainAbsoluteSelector` */
   const relativeSelectorsToHide = [
     "h5:nth-of-type(1)", // "game by Malcs" text
-    "h3:nth-of-type(1)", // Patreon badge
+    "h3:nth-of-type(1)", // Patreon button
     "h5:nth-of-type(2)", // version number
     "div:nth-of-type(2)", // Melvor Idle 2 promo
     "div:nth-of-type(3)", // "also available on..." card
-    "div:nth-of-type(4)", // Discord link
+    "div:nth-of-type(4)", // Discord button
     "div:nth-of-type(5)", // platform syncs and expansions list (top of page)
   ];
   const absoluteSelectorsToHide = relativeSelectorsToHide.map(
     (relativeSelector) => `${mainAbsoluteSelector} > ${relativeSelector}`,
   );
   hideSelectors(absoluteSelectorsToHide);
+}
+
+// todo cleanup types
+/**
+ * Hide noisy elements in the manage part of the meta info section.
+ * All content is preserved by this func unless otherwise noted:
+ * This section includes:
+ * - mod manager button
+ * - active mod profile text
+ * - invisible button
+ *   - presumably only to add empty space, as it does not have an onclick handler
+ *   - this mod sets "display: none" instead of "display: inline-block", so empty space is removed
+ * - manage button
+ * - logout button
+ * @param {object} selectors optional selectors for
+ * - metaInfo: the hero static element (default: `.hero-static`)
+ * - manageRelative: the inner div of the "manage" section (`div:nth-of-type(2) > div`)
+ */
+function cleanupMetaInfoManage(
+  selectors = {
+    metaInfo: ".hero-static",
+    manageRelative: "div:nth-of-type(2) > div",
+  },
+) {
+  /** Prefer provided selectors when possible, fallback to defaults */
+  const seles = {
+    metaInfo: ".hero-static",
+    manageRelative: "div:nth-of-type(2) > div",
+    ...selectors,
+  };
+  const manageAbsoluteSelector = `${seles.metaInfo} > ${seles.manageRelative}`;
+  /** All within the `manageAbsoluteSelector` */
+  const relativeSelectorsToHide = [
+    "button:nth-of-type(1)", // invisible button presumably there for padding
+  ];
+  const manageAbsoluteSelectorsToHide = relativeSelectorsToHide.map(
+    (relativeSelector) => `${manageAbsoluteSelector} > ${relativeSelector}`,
+  );
+  hideSelectors(manageAbsoluteSelectorsToHide);
 }
 
 /**
