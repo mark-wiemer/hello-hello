@@ -30,6 +30,6 @@ ZIP_PATH="dist/${MOD_NAME}.zip"
 
 mkdir -p dist
 rm -f "$ZIP_PATH"
-(cd "$MOD_PATH" && zip -r "../../$ZIP_PATH" .)
+(cd "$MOD_PATH" && zip -r "../../$ZIP_PATH" . > /dev/null)
 
 echo "$ZIP_PATH"

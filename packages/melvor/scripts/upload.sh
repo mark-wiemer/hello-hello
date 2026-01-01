@@ -42,6 +42,6 @@ if [ -z "$CHANGELOG" ]; then
     exit 1
 fi
 
-ZIP_PATH=$(./build-zip.sh "$MOD_PATH")
+ZIP_PATH=$("$SCRIPT_DIR/build-zip.sh" "$MOD_PATH")
 
 modiom upload 2869 5641775 "$ZIP_PATH" --version "$VERSION" --changelog "$CHANGELOG"
