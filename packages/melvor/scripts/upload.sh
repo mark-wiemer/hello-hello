@@ -1,6 +1,10 @@
 #!/bin/bash
 set -e
 
+SCRIPT_DIR=$(cd -- "$(dirname "$0")" && pwd)
+ROOT_DIR=$(cd "$SCRIPT_DIR/.." && pwd)
+cd "$ROOT_DIR"
+
 MOD_PATH="$1"
 VERSION="$2"
 
@@ -10,18 +14,10 @@ if [ -z "$MOD_PATH" ] || [ -z "$VERSION" ]; then
     exit 1
 fi
 
-if [ ! -d "$MOD_PATH" ]; then
-    echo "Error: Mod directory '$MOD_PATH' not found"
-    exit 1
-fi
-
 if [ ! -f "$MOD_PATH/changelog.md" ]; then
     echo "Error: No changelog.md found in '$MOD_PATH'"
     exit 1
 fi
-
-# Extract mod name from path (e.g., cleanup/menu -> cleanup-menu)
-MOD_NAME=$(echo "$MOD_PATH" | tr '/' '-')
 
 # Extract changelog for the specific version
 # Replace dash bullet points with asterisk bullet points as modiom workaround
@@ -44,10 +40,6 @@ if [ -z "$CHANGELOG" ]; then
     exit 1
 fi
 
-# Build the zip
-ZIP_PATH="dist/${MOD_NAME}.zip"
-rm -f "$ZIP_PATH"
-(cd "$MOD_PATH" && zip -r "../../$ZIP_PATH" .)
+ZIP_PATH=$(./build-zip.sh "$MOD_PATH")
 
-# Upload to mod.io
 modiom upload 2869 5641775 "$ZIP_PATH" --version "$VERSION" --changelog "$CHANGELOG"

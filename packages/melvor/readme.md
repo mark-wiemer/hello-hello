@@ -17,7 +17,7 @@ ClickOps in the GUI, be sure to check "Supported Game Version: 1.3.1" (or whatev
 Sample script:
 
 ```sh
-./upload.sh cleanup/menu 0.1.8
+scripts/upload.sh cleanup/menu 0.1.8
 ```
 
 ## Projects
@@ -37,3 +37,4 @@ Sample script:
 ## Resources
 
 - [Mod Creation/Getting Started - Melvor Idle Wiki](https://wiki.melvoridle.com/w/Mod_Creation/Getting_Started)
+- [Mod Creation/Creator Toolkit](https://wiki.melvoridle.com/w/Mod_Creation/Creator_Toolkit): official system for loading mods locally instead of uploading each version to mod.io
