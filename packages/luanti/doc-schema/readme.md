@@ -59,6 +59,9 @@ Alternatively, use LuaLS with the "Luanti" or "Luanti Full API" addon:
       - some symbols can be written to in certain environments but read in others
   - [Riseup pad](https://pad.riseup.net/p/Luanti-Docs)
     - todo read this and its chat (bottom right)
+  - [Lars's comments](https://github.com/luanti-org/docs.luanti.org/issues/296#issuecomment-3703936047)
+    - Another (soft?) requirement: We have some operator overloading (e.g. arithmetic operators are defined for vectors), that should be supported.
+    - And maybe nice to have for objects: The ability to annotate whether something mutates an object or not (const).
 - [corpserot/luanti-api-spec in YAML](https://github.com/corpserot/luanti-api-spec)
   - corpserot doesn't recommend YAML after building this
 
@@ -119,7 +122,7 @@ very expressive, tons of tooling support. No clear schema yet defined, no parser
 
 Teal is a typed superset of Lua that's been in active development since 2019.
 
-Its type system is too lightweight to recommend (e.g. doesn't support number ranges)
+Its type system is too lightweight to recommend (e.g. doesn't support number ranges, [every type contains nil](https://github.com/teal-language/tl/issues/598))
 
 - [teal-types GH repo](https://github.com/teal-language/teal-types/tree/master/types)
 - [Types in Teal doc](https://teal-language.org/book/types_in_teal.html)
