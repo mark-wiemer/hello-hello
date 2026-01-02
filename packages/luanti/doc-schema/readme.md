@@ -71,18 +71,18 @@ Below are some of the ways we could rewrite the docs in a canonical form. Approa
 
 State: Backlog -> Researching -> Proposed or Rejected
 
-| Approach    | State       | Reason                                                                                     |
-| ----------- | ----------- | ------------------------------------------------------------------------------------------ |
-| EmmyLua     | Researching | Lua-centric syntax, but may not be mature or expressive enough                             |
-| JSON        | Rejected    | Minimal support for multi-line strings make this an unlikely candidate                     |
-| LuaLS addon | Backlog     | Research shows maturity but limitations in highly-complex scenarios                        |
-| Luau        | Researching | Mature and Lua-centric, but might not be expressive enough                                 |
-| Markdown    | Researching | Extremely expressive but would require custom AST handler                                  |
-| Teal        | Rejected    | Not expressive enough                                                                      |
-| TOML        | Rejected    | Very generic but might be a good lightweight option                                        |
-| TypeScript  | Backlog     | Very expressive but not a Lua-centric syntax                                               |
-| XML         | Rejected    | Likely too verbose                                                                         |
-| YAML        | Rejected    | Often annoying with complex, large documents, but may provide more structure than Markdown |
+| Approach    | State       | Reason                                                              |
+| ----------- | ----------- | ------------------------------------------------------------------- |
+| EmmyLua     | Researching | Lua-centric syntax, but may not be mature or expressive enough      |
+| JSON        | Rejected    | Markup language                                                     |
+| LuaLS addon | Backlog     | Research shows maturity but limitations in highly-complex scenarios |
+| Luau        | Researching | Mature and Lua-centric, but might not be expressive enough          |
+| Markdown    | Researching | Extremely expressive but would require custom AST handler           |
+| Teal        | Rejected    | Not expressive enough                                               |
+| TOML        | Rejected    | Markup language                                                     |
+| TypeScript  | Backlog     | Very expressive but not a Lua-centric syntax                        |
+| XML         | Rejected    | Markup language                                                     |
+| YAML        | Rejected    | Markup language                                                     |
 
 All markup languages have been rejected as they just aren't the right canonical format for end-user guides.
 
