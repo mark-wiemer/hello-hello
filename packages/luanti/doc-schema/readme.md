@@ -74,15 +74,17 @@ State: Backlog -> Researching -> Proposed or Rejected
 | Approach    | State       | Reason                                                                                     |
 | ----------- | ----------- | ------------------------------------------------------------------------------------------ |
 | EmmyLua     | Researching | Lua-centric syntax, but may not be mature or expressive enough                             |
-| JSON        | Backlog     | Minimal support for multi-line strings make this an unlikely candidate                     |
+| JSON        | Rejected    | Minimal support for multi-line strings make this an unlikely candidate                     |
 | LuaLS addon | Backlog     | Research shows maturity but limitations in highly-complex scenarios                        |
 | Luau        | Researching | Mature and Lua-centric, but might not be expressive enough                                 |
 | Markdown    | Researching | Extremely expressive but would require custom AST handler                                  |
 | Teal        | Rejected    | Not expressive enough                                                                      |
-| TOML        | Backlog     | Very generic but might be a good lightweight option                                        |
+| TOML        | Rejected    | Very generic but might be a good lightweight option                                        |
 | TypeScript  | Backlog     | Very expressive but not a Lua-centric syntax                                               |
-| XML         | Backlog     | Likely too verbose                                                                         |
-| YAML        | Researching | Often annoying with complex, large documents, but may provide more structure than Markdown |
+| XML         | Rejected    | Likely too verbose                                                                         |
+| YAML        | Rejected    | Often annoying with complex, large documents, but may provide more structure than Markdown |
+
+All markup languages have been rejected as they just aren't the right canonical format for end-user guides.
 
 <a id="emmylua"></a>
 
@@ -92,7 +94,9 @@ still Lua, decent underlying parser, development recently picked up. Not express
 
 <a id="json"></a>
 
-### JSON (backlog)
+### JSON (rejected)
+
+Rejected: Markup language
 
 tons of tooling support. No clear schema, hard to handwrite.
 
@@ -130,7 +134,9 @@ Its type system is too lightweight to recommend (e.g. doesn't support number ran
 
 <a id="toml"></a>
 
-### TOML (backlog)
+### TOML (rejected)
+
+Rejected: Markup language
 
 not explored
 
@@ -142,12 +148,16 @@ extremely complex types supported, tons of tooling support. Not Lua, not used el
 
 <a id="xml-xsd"></a>
 
-### XML/XSD (backlog)
+### XML/XSD (rejected)
+
+Rejected: Markup language
 
 not explored, would be very verbose to handwrite. XSD = XML Schema Definition
 
 <a id="yaml"></a>
 
-### YAML (researching)
+### YAML (rejected)
+
+Rejected: Markup language
 
 tons of tooling support. No clear schema, can be easy to make mistakes
