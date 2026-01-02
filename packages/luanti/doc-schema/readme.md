@@ -69,26 +69,32 @@ Alternatively, use LuaLS with the "Luanti" or "Luanti Full API" addon:
 
 Below are some of the ways we could rewrite the docs in a canonical form. Approaches are alphabetical.
 
-State: Backlog -> Researching -> Proposed or Rejected
+- (Scale: Min -> Low -> Medium -> High -> Max)
+  - Min indicates no known solution using this approach
+  - Max indicates enterprise-grade tooling widely used in the industry.
+- Research state: Backlog -> Researching -> Proposed or Rejected
+- Type maturity: Maturity of tooling to type a Lua project with this approach.
+- Expressiveness: The maximum complexity of types that can be expressed within the approach.
+- Ease of use: The "lightweight" factor, e.g. XML has a lot of overhead syntax, but YAML has less.
 
-| Approach    | State       | Reason                                                              |
-| ----------- | ----------- | ------------------------------------------------------------------- |
-| EmmyLua     | Researching | Lua-centric syntax, but may not be mature or expressive enough      |
-| JSON        | Rejected    | Markup language                                                     |
-| LuaLS addon | Backlog     | Research shows maturity but limitations in highly-complex scenarios |
-| Luau        | Researching | Mature and Lua-centric, but might not be expressive enough          |
-| Markdown    | Researching | Extremely expressive but would require custom AST handler           |
-| Teal        | Rejected    | Not expressive enough                                               |
-| TOML        | Rejected    | Markup language                                                     |
-| TypeScript  | Backlog     | Very expressive but not a Lua-centric syntax                        |
-| XML         | Rejected    | Markup language                                                     |
-| YAML        | Rejected    | Markup language                                                     |
+| Approach    | Research state | Type maturity | Expressiveness | Ease of use | Notes                                                                |
+| ----------- | -------------- | ------------- | -------------- | ----------- | -------------------------------------------------------------------- |
+| EmmyLua     | Backlog        | Medium        | ??             | ??          | Lua-centric syntax, but may not be mature or expressive enough       |
+| JSON        | Rejected       | Max           | Max            | Medium      | Markup language                                                      |
+| LuaLS addon | Researching    | High          | High           | High        | Research shows maturity but limitations in highly-complex scenarios  |
+| Luau        | Backlog        | Max           | ??             | ??          | Enterprise-grade and Lua-centric, but might not be expressive enough |
+| Markdown    | Researching    | Min           | Max            | Max         | Extremely expressive but would require custom AST handler            |
+| Teal        | Rejected       | High          | Medium         | High        | Not expressive enough                                                |
+| TOML        | Rejected       | Min           | Max            | Max         | Markup language                                                      |
+| TypeScript  | Backlog        | Max           | High           | Max         | Very expressive but not a Lua-centric syntax                         |
+| XML         | Rejected       | Min           | Max            | Medium      | Markup language                                                      |
+| YAML        | Rejected       | Min           | Max            | High        | Markup language                                                      |
 
 All markup languages have been rejected as they just aren't the right canonical format for end-user guides.
 
 <a id="emmylua"></a>
 
-### EmmyLua (researching)
+### EmmyLua (backlog)
 
 still Lua, decent underlying parser, development recently picked up. Not expressive enough.
 
@@ -102,7 +108,7 @@ tons of tooling support. No clear schema, hard to handwrite.
 
 <a id="luals-addon"></a>
 
-### LuaLS addon (backlog)
+### LuaLS addon (researching)
 
 Manually rewrite `lua_api.md` as `luanti_api.lua` in LuaCATS and integrate with LuaLS:
 
@@ -113,6 +119,12 @@ Manually rewrite `lua_api.md` as `luanti_api.lua` in LuaCATS and integrate with 
    - Advanced automated tests are out of scope for now. They are possible but have low ROI.
 1. Create a LuaLS addon with the new `luanti_api.lua` under [LLS-Addons](https://github.com/LuaLS/LLS-Addons/tree/main/addons/luanti)
 1. Share with the world :)
+
+<a id="luau"></a>
+
+### Luau (backlog)
+
+A mature, enterprise-grade Lua-centric type system, might not be expressive enough for our needs
 
 <a id="markdown"></a>
 
