@@ -1,0 +1,3 @@
+[submodule "packages/mocha/packages/mocha"]
+	path = packages/mocha/packages/mocha
+	url = https://github.com/mochajs/mocha.git

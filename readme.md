@@ -34,6 +34,8 @@ Historically, I haven't followed a particular commit message style. But [Mocha](
 - [luanti](./packages/luanti/readme.md): An open-source engine, distribution platform, and client for "boxel" games
 - [markwiemer.com](./packages/markwiemer.com/readme.md): My personal website!
 - [Melvor Idle](./packages/melvor/readme.md): A heavily moddable RuneScape-inspired game
+- [Mocha](./packages/mocha): A JavaScript test framework for Node.js & the browser
+  - This package is not a guide, it's the Mocha source code included in this repo as a submodule
 - [mod.io](./packages/mod.io/readme.md): A site for hosting game mods
 - [pnpm](./packages/pnpm/readme.md): Node package manager, alternative to npm
 - [POSIX](./packages/posix/readme.md): Set of cross-OS standards by IEEE

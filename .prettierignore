@@ -1,3 +1,5 @@
 pnpm-lock.yaml
 **/core_namespace_ref*
 **/lua_api_out.md
+# Mocha source code
+/packages/mocha/packages/mocha
