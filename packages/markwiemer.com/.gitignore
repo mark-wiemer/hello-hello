@@ -1,0 +1,5 @@
+dist
+node_modules
+site/politics/trump-litigation
+site/blog/*
+!site/blog/index.html

@@ -1,0 +1,14 @@
+{
+    "recommendations": [
+        "aaron-bond.better-comments",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "github.vscode-pull-request-github",
+        "mechatroner.rainbow-csv",
+        "meganrogge.template-string-converter",
+        "pflannery.vscode-versionlens",
+        "streetsidesoftware.code-spell-checker-cspell-bundled-dictionaries",
+        "tyriar.sort-lines",
+        "wmaurer.change-case"
+    ]
+}

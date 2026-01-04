@@ -1,0 +1,55 @@
+# 2026-01-03 US strikes in Venezuela
+
+## [LIVE: Trump speaks after US strikes Venezuela and captures Maduro (AP on YouTube)](https://www.youtube.com/watch?v=ezYNnFETXk0)
+
+### Summary
+
+Quotes are from Trump unless otherwise specified. Notes are not comprehensive, there was a lot of rambling.
+
+- JD Vance not present
+- "We've done some other good ones"
+- Afghanistan was "an embarrasment"
+- "We're a respected country again"
+- Trump says US "will run Venezuela," says newly sworn in Venezuela president (Maduro's VP) will "do anything to make Venezuela great again, ... [she] said 'we'll do whatever you need.'&nbsp;"
+    - "We're gonna run it until such time as a proper transition can take place"
+    - "The oil business has been a total bust"
+    - "We're going to have our very large United States oil companies ... fix the very broken infrastructure"
+    - "It's gonna make a lot of money"
+    - To the people of Venezuela: "You're gonna have some of the riches that have been stolen from you"
+    - We're gonna have a team working with the people of Venezuela
+- "We were prepared to do a second wave"
+    - "We assumed a second wave would be necessary, but now it's probably not ... we're prepared to do ... a much bigger wave"
+- "Everyone's coming back to us"
+- "Tariffs are--they've made our country rich, and they've made our national security strong, stronger than ever before"
+- "Other presidents may have lacked the courage or whatever to proect America"
+- Trump repeats threat: President of Colombia should "watch his ass"
+- Maduro will be brought to "New York"
+- "They stole our oil"
+- "We have tremendous energy in that country, it's very important that we protect it"
+- "Cuba is a failing nation ... we want to help the people in Cuba"
+    - Rubio: Maduro's security team was full of Cubans
+    - Rubio: "If I lived in Havana and I was part of the government I'd be concerned"
+- No contact with opposition leader Machado
+    - She doesn't have the support or respect within the country
+- Trump: "It won't cost us anything, because the money coming out of the ground is very substantial"
+- Pardoned convicted president of Honduras for drug trafficking
+    - "I endorsed ... the man who won in Honduras"
+    - "The man that I pardoned ... was treated like the Biden administration treated a man named Trump"
+- "We're gonna have a presence in Venezuela as it pertains to oil"
+- "That wealth is going to [Venezuela] and also to the United States of America in the form of reimbursement"
+- "Unless it's a bad question, in which case I'll go one way"
+- "[Putin and I] never spoke about Maduro"
+    - "He's killing too many people" (Trump RE Putin)
+    - "I thought one of the easier ones would be Russia Ukraine, it's not, they've both have done some pretty bad things"
+    - "That's Biden's war, it's not my war"
+    - "30,000 mostly soldiers were killed this last month"
+    - "I got NATO to pay 5% instead of the 2% that they weren't paying"
+    - "The United States is ... probably making money on that" (RE sending military equipment)
+    - "It's all a deal ... life is a big deal"
+    - "That war has become a bloodbath"
+
+### My thoughts
+
+This is just Afghanistan again :(
+
+Also... can Trump read?? He's really struggling here.

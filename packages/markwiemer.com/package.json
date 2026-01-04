@@ -1,0 +1,29 @@
+{
+    "type": "module",
+    "scripts": {
+        "build": "node src/build.js",
+        "eslint": "eslint",
+        "eslint//": "As an npm script to dedupe potential changes",
+        "format": "prettier --check .",
+        "format:fix": "prettier --write .",
+        "lint": "npm run sort-package-json && npm run format && npm run eslint",
+        "lint:fix": "npm run sort-package-json:fix && npm run format:fix && npm run eslint",
+        "sort-package-json": "sort-package-json --check",
+        "sort-package-json:fix": "sort-package-json",
+        "start": "http-server site -o",
+        "validate:fix": "npm run format:fix && npm run lint:fix && npm run sort-package-json:fix && cd pages/politics/trump-litigation && npm run validate:fix"
+    },
+    "prettier": {
+        "printWidth": 100,
+        "tabWidth": 4
+    },
+    "devDependencies": {
+        "@eslint/js": "^9.37.0",
+        "@types/node": "^22.15.32",
+        "eslint": "^9.37.0",
+        "globals": "^16.4.0",
+        "http-server": "^14.1.1",
+        "prettier": "^3.5.3",
+        "sort-package-json": "^2.12.0"
+    }
+}

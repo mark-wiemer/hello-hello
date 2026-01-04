@@ -1,0 +1,6 @@
+package-lock.json
+
+# politics/trump-litigation
+**/test-results/
+**/playwright-report/
+**/playwright/.cache/

@@ -32,6 +32,7 @@ Historically, I haven't followed a particular commit message style. But [Mocha](
   - Includes details on `.github` folder
 - [jq (jqlang)](./packages/jq/readme.md): CLI tool for editing JSON files
 - [luanti](./packages/luanti/readme.md): An open-source engine, distribution platform, and client for "boxel" games
+- [markwiemer.com](./packages/markwiemer.com/readme.md): My personal website!
 - [Melvor Idle](./packages/melvor/readme.md): A heavily moddable RuneScape-inspired game
 - [mod.io](./packages/mod.io/readme.md): A site for hosting game mods
 - [pnpm](./packages/pnpm/readme.md): Node package manager, alternative to npm
