@@ -1,8 +1,8 @@
 # Hello Hello!
 
-The starter project to start all starter projects.
+Why use many repo when one repo do trick?
 
-This is a monorepo hosting all my "Hello World" projects with various tools.
+This is a monorepo slowly growing to host all my personal work.
 It's organized as a `pnpm` workspace to filter out some of the noise.
 You can treat the root `package.json` as my minimal recommendations for any JS package.
 Although this repo isn't limited to JS, that's where I spend most of my time.
