@@ -1,4 +1,4 @@
-name: Handle stale issues and PRs
+name: _global - Handle stale issues and PRs
 
 on:
   schedule:

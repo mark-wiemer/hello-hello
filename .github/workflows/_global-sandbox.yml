@@ -1,5 +1,5 @@
 # Simple workflow for deploying static content to GitHub Pages
-name: Dev sandbox workflow
+name: _global - Dev sandbox workflow
 
 on:
   # Allows us to run this workflow manually from the Actions tab
