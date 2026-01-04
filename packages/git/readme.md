@@ -9,3 +9,13 @@ git update-index --assume-unchanged <filename>
 ```sh
 git update-index --no-assume-unchanged <filename>
 ```
+
+## Git LFS
+
+For tracking images and other binary/non-text files, see [Git LFS](https://git-lfs.com/).
+
+This command prints objects to commit and should include `(LFS)` to reference the files Git LFS is tracking vs `(Git)` for files that Git (core) is tracking but Git LFS is not tracking.
+
+```sh
+git lfs status
+```
