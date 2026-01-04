@@ -27,7 +27,7 @@ Historically, I haven't followed a particular commit message style. But [Mocha](
 ## Index
 
 - [Bash](./packages/bash/readme.md): A cross-platform shell
-- [Git](./packages/git/readme.md): A version control system. Includes notes on Git LFS.
+- [Git](./packages/git/readme.md): A version control system, includes notes on Git LFS
 - [GitHub](./packages/github/readme.md): Tools for editing GitHub settings via CLI
   - Includes details on `.github` folder
 - [jq (jqlang)](./packages/jq/readme.md): CLI tool for editing JSON files
@@ -35,11 +35,10 @@ Historically, I haven't followed a particular commit message style. But [Mocha](
 - [markwiemer.com](./packages/markwiemer.com/readme.md): My personal website!
 - [Melvor Idle](./packages/melvor/readme.md): A heavily moddable RuneScape-inspired game
 - [Mocha](./packages/mocha): A JavaScript test framework for Node.js & the browser
-  - This package is not a guide, it's the Mocha source code included in this repo as a submodule
 - [mod.io](./packages/mod.io/readme.md): A site for hosting game mods
 - [pnpm](./packages/pnpm/readme.md): Node package manager, alternative to npm
 - [POSIX](./packages/posix/readme.md): Set of cross-OS standards by IEEE
 - [Remark](./packages/remark/readme.md): Markdown toolchain for JS
-  - Created by [unified](https://unifiedjs.com/), the same collective behind [MDX](https://mdxjs.com/community/about/#who-governs-mdx) and other content processing toolchains
-- [Rust](./packages/rust/readme.md): A programming language emphasizing safety and performance.
+  - Created by [the unified collective](https://unifiedjs.com/), who maintain [MDX](https://mdxjs.com/community/about/#who-governs-mdx) and other content processing toolchains
+- [Rust](./packages/rust/readme.md): A programming language emphasizing safety and performance
 - [TypeScript](./packages/typescript/readme.md): A programming language that adds types to JavaScript
