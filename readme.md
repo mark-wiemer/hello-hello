@@ -26,6 +26,7 @@ Historically, I haven't followed a particular commit message style. But [Mocha](
 
 ## Index
 
+- [AHK++](./packages/ahkpp/readme.md): AHK++ is a language support IDE extension for AutoHotkey v1 and v2
 - [Bash](./packages/bash/readme.md): A cross-platform shell
 - [Git](./packages/git/readme.md): A version control system, includes notes on Git LFS
 - [GitHub](./packages/github/readme.md): Tools for editing GitHub settings via CLI
