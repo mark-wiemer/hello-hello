@@ -1,5 +1,7 @@
 pnpm-lock.yaml
 **/core_namespace_ref*
 **/lua_api_out.md
-# Mocha source code
+# Submodules with their own formatting rules
+# To format those, `cd` then `npm run format:fix`
 /packages/mocha/packages/mocha
+/packages/ahkpp/packages/ahkpp
