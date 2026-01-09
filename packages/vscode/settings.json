@@ -87,20 +87,20 @@
     "typescript": true,
     "csharp": true
   },
-  "playwright.reuseBrowser": false,
-  "debug.onTaskErrors": "abort",
-  "extensions.confirmedUriHandlerExtensionIds": [
-    "ms-dotnettools.dotnet-interactive-vscode",
-    "ms-dotnettools.vscode-dotnet-pack"
-  ],
-  "git.pullBeforeCheckout": true,
-  "git.fetchOnPull": true,
-  "playwright.showTrace": false,
-  "explorer.copyRelativePathSeparator": "/",
-  "markdown.preferredMdPathExtensionStyle": "includeExtension",
-  "editor.unicodeHighlight.allowedCharacters": {
-    "–": true
-  }
+  // "playwright.reuseBrowser": false,
+  // "debug.onTaskErrors": "abort",
+  // "extensions.confirmedUriHandlerExtensionIds": [
+  //   "ms-dotnettools.dotnet-interactive-vscode",
+  //   "ms-dotnettools.vscode-dotnet-pack"
+  // ],
+  // "git.pullBeforeCheckout": true,
+  // "git.fetchOnPull": true,
+  // "playwright.showTrace": false,
+  // "explorer.copyRelativePathSeparator": "/",
+  // "markdown.preferredMdPathExtensionStyle": "includeExtension",
+  // "editor.unicodeHighlight.allowedCharacters": {
+  //   "–": true
+  // }
   // "diffEditor.renderSideBySide": false,
   // "security.allowedUNCHosts": ["wsl.localhost"],
   // "workbench.panel.defaultLocation": "right",
