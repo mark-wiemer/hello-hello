@@ -8,6 +8,11 @@ Commonly known as VS Code, this is the [most popular IDE](https://survey.stackov
 
 This repo has a `settings.json` file that I use as my user settings. I create a symlink from this file to a new path that VS Code references in Linux Mint:
 
+```bash
+./link-settings.sh
+```
+
+
 ## Troubleshooting
 
 General steps for solving new issues
