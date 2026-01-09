@@ -69,24 +69,24 @@
   // },
   // "editor.stickyScroll.maxLineCount": 10,
   "files.associations": {
-    "*.txt": "plaintext",
-    ".prettierrc": "yaml",
-    "*.snap": "plaintext",
-    "*.ahk": "ahk2",
-    "*.json5": "jsonc",
+    // "*.txt": "plaintext",
+    // ".prettierrc": "yaml",
+    // "*.snap": "plaintext",
+    // "*.ahk": "ahk2",
+    // "*.json5": "jsonc",
     "*.json": "jsonc"
   },
-  "git.openRepositoryInParentFolders": "never",
-  "editor.inlineSuggest.enabled": true,
-  "github.copilot.enable": {
-    "*": false,
-    "plaintext": true,
-    "markdown": false,
-    "scminput": false,
-    "yaml": true,
-    "typescript": true,
-    "csharp": true
-  },
+  // "git.openRepositoryInParentFolders": "never",
+  // "editor.inlineSuggest.enabled": true,
+  // "github.copilot.enable": {
+  //   "*": false,
+  //   "plaintext": true,
+  //   "markdown": false,
+  //   "scminput": false,
+  //   "yaml": true,
+  //   "typescript": true,
+  //   "csharp": true
+  // },
   // "playwright.reuseBrowser": false,
   // "debug.onTaskErrors": "abort",
   // "extensions.confirmedUriHandlerExtensionIds": [
