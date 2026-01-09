@@ -23,7 +23,14 @@ console.log(Color.Red);
 // Output: r
 ```
 
+Running this:
+
 ```sh
-$ npx tsx index.ts
+npx tsx index.ts
+```
+
+Prints this:
+
+```
 r
 ```
