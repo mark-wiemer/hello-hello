@@ -1,10 +1,25 @@
 #!/bin/bash
 
+verbose=0
+for arg in "$@"; do
+    case "$arg" in
+        --verbose)
+            verbose=1
+            ;;
+        --help|-h)
+            echo "Usage: $(basename "$0") [--verbose]"
+            exit 0
+            ;;
+    esac
+done
+
 link_vscode_settings() {
     local os_type
     local vscode_settings
     local repo_settings
     local backup_path
+    local vscode_settings_win
+    local repo_settings_win
     
     # Detect OS
     if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" || "$OSTYPE" == "win32" ]]; then
@@ -50,11 +65,28 @@ link_vscode_settings() {
     echo "Creating symlink..."
     
     if [[ "$os_type" == "windows" ]]; then
-        # Windows: Use mklink via cmd.exe
-        cmd.exe /c "mklink \"$vscode_settings\" \"$repo_settings\"" >/dev/null 2>&1
+        # Windows: Use PowerShell to create a symlink reliably (works well in VS Code integrated terminals)
+        # Convert to native Windows paths for PowerShell
+        vscode_settings_win="$(cygpath -w "$vscode_settings")"
+        repo_settings_win="$(cygpath -w "$repo_settings")"
+
+    # Windows PowerShell 5.1 note: New-Item supports -Path (not -LiteralPath).
+    # Note: Creating symlinks may require elevated rights unless Developer Mode is enabled.
+    # If SymbolicLink fails, fall back to Junction (works without Developer Mode for directories).
+    ps_cmd="try { New-Item -ItemType SymbolicLink -Path '$vscode_settings_win' -Target '$repo_settings_win' -Force | Out-Null } catch { New-Item -ItemType Junction -Path '$vscode_settings_win' -Target '$repo_settings_win' -Force | Out-Null }"
+
+        if [[ $verbose -eq 1 ]]; then
+            powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "$ps_cmd"
+        else
+            powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "$ps_cmd" >/dev/null 2>&1
+        fi
     else
         # Linux/Mac: Use ln -s
-        ln -s "$repo_settings" "$vscode_settings"
+        if [[ $verbose -eq 1 ]]; then
+            ln -s "$repo_settings" "$vscode_settings"
+        else
+            ln -s "$repo_settings" "$vscode_settings" >/dev/null 2>&1
+        fi
     fi
     
     if [ $? -eq 0 ]; then
@@ -62,7 +94,8 @@ link_vscode_settings() {
         echo ""
         echo "Verification:"
         if [[ "$os_type" == "windows" ]]; then
-            dir "$vscode_settings" 2>/dev/null || ls -la "$vscode_settings"
+            # Use PowerShell for consistent output in Git Bash/MSYS
+            powershell.exe -NoProfile -Command "Get-Item -Force -Path '$vscode_settings_win' | Format-List FullName,LinkType,Target"
         else
             ls -la "$vscode_settings"
         fi
