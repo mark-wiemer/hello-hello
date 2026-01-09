@@ -20,6 +20,7 @@ link_vscode_settings() {
     local backup_path
     local vscode_settings_win
     local repo_settings_win
+    local is_windows_admin
     
     # Detect OS
     if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" || "$OSTYPE" == "win32" ]]; then
@@ -30,6 +31,19 @@ link_vscode_settings() {
     else
         os_type="linux"
         vscode_settings="$HOME/.config/Code/User/settings.json"
+    fi
+
+    # On Windows, require an elevated shell. If not elevated, exit without making changes.
+    if [[ "$os_type" == "windows" ]]; then
+        is_windows_admin=0
+        if powershell.exe -NoProfile -Command "exit ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator) ? 0 : 1" >/dev/null 2>&1; then
+            is_windows_admin=1
+        fi
+
+        if [[ $is_windows_admin -ne 1 ]]; then
+            echo "Sorry, this script only works in an elevated terminal"
+            return 1
+        fi
     fi
     
     # Path to settings.json in this monorepo
