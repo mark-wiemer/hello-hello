@@ -12,6 +12,15 @@ This repo has a `settings.json` file that I use as my user settings. I create a 
 ./link-settings.sh
 ```
 
+## Managing
+
+### Sorting settings.json
+
+```bash
+jq --sort-keys . settings.json > temp.json && mv temp.json settings.json
+```
+
+Note that this doesn't sort arrays, as order matters in some arrays.
 
 ## Troubleshooting
 
