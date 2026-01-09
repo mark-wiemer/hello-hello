@@ -22,14 +22,8 @@ Exact steps for fixing issues I've had before
 
 ### package.json "dependencies" versions not appearing on hover
 
-Expected behavior: When hovering over a dependency key in a package.json file, VS Code provides a hover, like it does here for me in a vanilla installation of VS Code:
+Expected behavior: When hovering over a dependency key in a package.json file, VS Code provides a hover:
 
 ![VS Code hover on package.json dependency key](hover-expected.png)
 
-However, this just isn't working for me despite a lot of troubleshooting!
-
-- New profile: cannot reproduce in new blank profile!
-- Extension bisect: I returned to my default profile. After disabling all installed extensions (not builtin ones), I can still reproduce the issue. I re-enabled all my extensions after this to maintain a control.
-- Settings: Commenting out my user settings.json results in me no longer being able to repro the issue!
-  - `files.associations["*.json"] = "jsonc"` causes this whole shebang not to work
-    - all because I wanted comments in my package.json files!
+This goes away if you have a setting like `files.associations["*.json"] = "jsonc"`. Ensure the "\*.json" files are associated with the "json" language (default) and you should OK.
