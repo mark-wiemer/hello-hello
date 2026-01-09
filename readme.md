@@ -40,6 +40,7 @@ Historically, I haven't followed a particular commit message style. But [Mocha](
 - [mod.io](./packages/mod.io/readme.md): A site for hosting game mods
 - [pnpm](./packages/pnpm/readme.md): Node package manager, alternative to npm
 - [POSIX](./packages/posix/readme.md): Set of cross-OS standards by IEEE
+- [React](./packages/react/readme.md): Library for creating complex interactive websites
 - [Remark](./packages/remark/readme.md): Markdown toolchain for JS
   - Created by [the unified collective](https://unifiedjs.com/), who maintain [MDX](https://mdxjs.com/community/about/#who-governs-mdx) and other content processing toolchains
 - [Rust](./packages/rust/readme.md): A programming language emphasizing safety and performance
