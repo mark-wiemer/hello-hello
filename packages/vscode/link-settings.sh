@@ -36,12 +36,13 @@ link_vscode_settings() {
     # On Windows, require an elevated shell. If not elevated, exit without making changes.
     if [[ "$os_type" == "windows" ]]; then
         is_windows_admin=0
-        if powershell.exe -NoProfile -Command "exit ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator) ? 0 : 1" >/dev/null 2>&1; then
+        if powershell.exe -NoProfile -NonInteractive -Command "if(([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { exit 0 } else { exit 1 }" >/dev/null 2>&1; then
             is_windows_admin=1
         fi
 
         if [[ $is_windows_admin -ne 1 ]]; then
-            echo "Sorry, this script only works in an elevated terminal"
+            echo "Detected Windows, but this terminal is NOT elevated (Administrator)."
+            echo "Refusing to modify VS Code settings.json. Re-run in an elevated terminal (Run as Administrator)."
             return 1
         fi
     fi
