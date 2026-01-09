@@ -45,6 +45,8 @@ scripts/upload.sh cleanup/menu 0.1.8
 
 ### QoL
 
+(Not created yet)
+
 - Does affect what players can do
   - e.g. macro to harvest, apply goop, and replant with one click
 
