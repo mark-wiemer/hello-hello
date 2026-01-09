@@ -45,6 +45,7 @@ Historically, I haven't followed a particular commit message style. But [Mocha](
   - Created by [the unified collective](https://unifiedjs.com/), who maintain [MDX](https://mdxjs.com/community/about/#who-governs-mdx) and other content processing toolchains
 - [Rust](./packages/rust/readme.md): A programming language emphasizing safety and performance
 - [TypeScript](./packages/typescript/readme.md): A programming language that adds types to JavaScript
+- [Visual Studio Code](./packages/vscode/readme.md): A popular IDE.
 
 ## License
 
