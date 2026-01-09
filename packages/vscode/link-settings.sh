@@ -13,14 +13,49 @@ for arg in "$@"; do
     esac
 done
 
+run_cmd() {
+    if [[ $verbose -eq 1 ]]; then
+        "$@"
+    else
+        "$@" >/dev/null 2>&1
+    fi
+}
+
+is_windows_admin() {
+    powershell.exe -NoProfile -NonInteractive -Command "if(([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { exit 0 } else { exit 1 }" >/dev/null 2>&1
+}
+
+backup_and_remove_if_exists() {
+    local target_path="$1"
+    local os_type="$2"
+    local backup_path
+
+    if [ -f "$target_path" ] || [ -L "$target_path" ]; then
+        if [[ "$os_type" == "windows" ]]; then
+            backup_path="$TEMP/vscode-settings-backup-$(date +%Y%m%d-%H%M%S).json"
+        else
+            backup_path="/tmp/vscode-settings-backup-$(date +%Y%m%d-%H%M%S).json"
+        fi
+
+        echo "Backing up existing settings to: $backup_path"
+        cp "$target_path" "$backup_path" 2>/dev/null || true
+        echo "✓ Backup created"
+
+        echo "Removing existing file at: $target_path"
+        rm "$target_path"
+        echo "✓ Removed"
+    else
+        echo "No existing settings.json found, skipping backup"
+    fi
+}
+
 link_vscode_settings() {
     local os_type
     local vscode_settings
     local repo_settings
-    local backup_path
     local vscode_settings_win
     local repo_settings_win
-    local is_windows_admin
+    local ps_cmd
     
     # Detect OS
     if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" || "$OSTYPE" == "win32" ]]; then
@@ -35,12 +70,7 @@ link_vscode_settings() {
 
     # On Windows, require an elevated shell. If not elevated, exit without making changes.
     if [[ "$os_type" == "windows" ]]; then
-        is_windows_admin=0
-        if powershell.exe -NoProfile -NonInteractive -Command "if(([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { exit 0 } else { exit 1 }" >/dev/null 2>&1; then
-            is_windows_admin=1
-        fi
-
-        if [[ $is_windows_admin -ne 1 ]]; then
+        if ! is_windows_admin; then
             echo "Sorry, this script only works in an elevated terminal"
             return 1
         fi
@@ -55,52 +85,26 @@ link_vscode_settings() {
     echo "Source: $repo_settings"
     echo ""
     
-    # Copy existing file to temp if it exists
-    if [ -f "$vscode_settings" ] || [ -L "$vscode_settings" ]; then
-        if [[ "$os_type" == "windows" ]]; then
-            backup_path="$TEMP/vscode-settings-backup-$(date +%Y%m%d-%H%M%S).json"
-        else
-            backup_path="/tmp/vscode-settings-backup-$(date +%Y%m%d-%H%M%S).json"
-        fi
-        
-        echo "Backing up existing settings to: $backup_path"
-        cp "$vscode_settings" "$backup_path" 2>/dev/null || true
-        echo "✓ Backup created"
-        
-        # Delete the existing file/symlink
-        echo "Removing existing file at: $vscode_settings"
-        rm "$vscode_settings"
-        echo "✓ Removed"
-    else
-        echo "No existing settings.json found, skipping backup"
-    fi
+    backup_and_remove_if_exists "$vscode_settings" "$os_type"
     
     # Create the symlink (platform-specific)
     echo "Creating symlink..."
     
     if [[ "$os_type" == "windows" ]]; then
-        # Windows: Use PowerShell to create a symlink reliably (works well in VS Code integrated terminals)
-        # Convert to native Windows paths for PowerShell
+    # Windows: Use PowerShell to create a symlink reliably (works well in VS Code integrated terminals)
+    # Convert to native Windows paths for PowerShell
         vscode_settings_win="$(cygpath -w "$vscode_settings")"
         repo_settings_win="$(cygpath -w "$repo_settings")"
 
     # Windows PowerShell 5.1 note: New-Item supports -Path (not -LiteralPath).
     # Note: Creating symlinks may require elevated rights unless Developer Mode is enabled.
-    # If SymbolicLink fails, fall back to Junction (works without Developer Mode for directories).
+    # If SymbolicLink fails, fall back to Junction.
     ps_cmd="try { New-Item -ItemType SymbolicLink -Path '$vscode_settings_win' -Target '$repo_settings_win' -Force | Out-Null } catch { New-Item -ItemType Junction -Path '$vscode_settings_win' -Target '$repo_settings_win' -Force | Out-Null }"
 
-        if [[ $verbose -eq 1 ]]; then
-            powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "$ps_cmd"
-        else
-            powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "$ps_cmd" >/dev/null 2>&1
-        fi
+    run_cmd powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "$ps_cmd"
     else
         # Linux/Mac: Use ln -s
-        if [[ $verbose -eq 1 ]]; then
-            ln -s "$repo_settings" "$vscode_settings"
-        else
-            ln -s "$repo_settings" "$vscode_settings" >/dev/null 2>&1
-        fi
+    run_cmd ln -s "$repo_settings" "$vscode_settings"
     fi
     
     if [ $? -eq 0 ]; then
