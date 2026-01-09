@@ -101,46 +101,46 @@
   "editor.unicodeHighlight.allowedCharacters": {
     "–": true
   },
-  "diffEditor.renderSideBySide": false,
-  "security.allowedUNCHosts": ["wsl.localhost"],
-  "workbench.panel.defaultLocation": "right",
-  "[ahk]": {
-    "editor.defaultFormatter": "mark-wiemer.vscode-autohotkey-plus-plus",
-    "editor.formatOnSave": false
-  },
-  "[ahk2]": {
-    "editor.formatOnSave": false
-  },
-  "explorer.confirmPasteNative": false,
-  "githubPullRequests.pullRequestDescription": "none",
-  "githubPullRequests.pushBranch": "always",
-  "githubPullRequests.defaultMergeMethod": "squash",
-  "files.autoSaveDelay": 300,
-  "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "githubPullRequests.createOnPublishBranch": "never",
-  "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "AHK++.v1.file": {
-    "interpreterPath": "C:\\Program Files\\AutoHotkey\\v1.1.37.02\\AutoHotkeyU64.exe",
-    "helpPath": "C:\\Program Files\\AutoHotkey\\v1.1.37.02\\AutoHotkey.chm"
-  },
-  "workbench.colorTheme": "Default Dark+",
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[yaml]": {
-    "diffEditor.ignoreTrimWhitespace": false
-  },
-  "[snippets]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "diffEditor.ignoreTrimWhitespace": false,
-  "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
+  // "diffEditor.renderSideBySide": false,
+  // "security.allowedUNCHosts": ["wsl.localhost"],
+  // "workbench.panel.defaultLocation": "right",
+  // "[ahk]": {
+  //   "editor.defaultFormatter": "mark-wiemer.vscode-autohotkey-plus-plus",
+  //   "editor.formatOnSave": false
+  // },
+  // "[ahk2]": {
+  //   "editor.formatOnSave": false
+  // },
+  // "explorer.confirmPasteNative": false,
+  // "githubPullRequests.pullRequestDescription": "none",
+  // "githubPullRequests.pushBranch": "always",
+  // "githubPullRequests.defaultMergeMethod": "squash",
+  // "files.autoSaveDelay": 300,
+  // "[json]": {
+  //   "editor.defaultFormatter": "esbenp.prettier-vscode"
+  // },
+  // "githubPullRequests.createOnPublishBranch": "never",
+  // "[jsonc]": {
+  //   "editor.defaultFormatter": "esbenp.prettier-vscode"
+  // },
+  // "AHK++.v1.file": {
+  //   "interpreterPath": "C:\\Program Files\\AutoHotkey\\v1.1.37.02\\AutoHotkeyU64.exe",
+  //   "helpPath": "C:\\Program Files\\AutoHotkey\\v1.1.37.02\\AutoHotkey.chm"
+  // },
+  // "workbench.colorTheme": "Default Dark+",
+  // "[javascript]": {
+  //   "editor.defaultFormatter": "esbenp.prettier-vscode"
+  // },
+  // "[yaml]": {
+  //   "diffEditor.ignoreTrimWhitespace": false
+  // },
+  // "[snippets]": {
+  //   "editor.defaultFormatter": "esbenp.prettier-vscode"
+  // },
+  // "diffEditor.ignoreTrimWhitespace": false,
+  // "[html]": {
+  //   "editor.defaultFormatter": "esbenp.prettier-vscode"
+  // },
   // "cSpell.userWords": [
   //   "ADDRES",
   //   "ahkpp",
