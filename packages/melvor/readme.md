@@ -36,6 +36,10 @@ scripts/upload.sh cleanup/menu 0.1.8
 
 ## Projects
 
+### Calc
+
+Quick independent scripts for calculations (e.g. player combat level). Not mods.
+
 ### Cleanup
 
 - Batch of mods organized by affected skill or view (bank, menu, settings, etc.)
