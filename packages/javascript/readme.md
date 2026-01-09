@@ -1,0 +1,7 @@
+# Hello JavaScript
+
+It's quite a popular language! This folder contains both reference JavaScript files and my guidance for structuring JavaScript-based projects (including TypeScript projects): tooling like linters, formatters, and test frameworks.
+
+## Related
+
+- [TypeScript](../typescript/readme.md)

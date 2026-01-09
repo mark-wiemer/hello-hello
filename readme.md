@@ -31,6 +31,7 @@ Historically, I haven't followed a particular commit message style. But [Mocha](
 - [Git](./packages/git/readme.md): A version control system, includes notes on Git LFS
 - [GitHub](./packages/github/readme.md): Tools for editing GitHub settings via CLI
   - Includes details on `.github` folder
+- [JavaScript](./packages/javascript/readme.md): A programming language originally for adding interactivity to websites
 - [jq (jqlang)](./packages/jq/readme.md): CLI tool for editing JSON files
 - [luanti](./packages/luanti/readme.md): An open-source engine, distribution platform, and client for "boxel" games
 - [markwiemer.com](./packages/markwiemer.com/readme.md): My personal website!
