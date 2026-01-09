@@ -2,6 +2,12 @@
 
 Commonly known as VS Code, this is the [most popular IDE](https://survey.stackoverflow.co/2025/technology/#1-dev-id-es) in the world!
 
+## Setting up
+
+### Importing settings.json
+
+This repo has a `settings.json` file that I use as my user settings. I create a symlink from this file to a new path that VS Code references in Linux Mint:
+
 ## Troubleshooting
 
 General steps for solving new issues
