@@ -1,6 +1,6 @@
 # Visual Studio Code
 
-Commonly known as VS Code, this is the most popular IDE in the world!
+Commonly known as VS Code, this is the [most popular IDE](https://survey.stackoverflow.co/2025/technology/#1-dev-id-es) in the world!
 
 ## Troubleshooting
 
