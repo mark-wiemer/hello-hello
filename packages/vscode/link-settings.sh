@@ -41,8 +41,7 @@ link_vscode_settings() {
         fi
 
         if [[ $is_windows_admin -ne 1 ]]; then
-            echo "Detected Windows, but this terminal is NOT elevated (Administrator)."
-            echo "Refusing to modify VS Code settings.json. Re-run in an elevated terminal (Run as Administrator)."
+            echo "Sorry, this script only works in an elevated terminal"
             return 1
         fi
     fi
