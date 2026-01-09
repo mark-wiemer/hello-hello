@@ -28,6 +28,7 @@ Expected behavior: When hovering over a dependency key in a package.json file, V
 
 However, this just isn't working for me despite a lot of troubleshooting!
 
-- Extension bisect: even after disabling all installed extensions, the issue repeats.
-- Settings: working on it...
-- New profile: cannot reproduce in new profile!
+- New profile: cannot reproduce in new blank profile!
+- Extension bisect: I returned to my default profile. After disabling all installed extensions (not builtin ones), I can still reproduce the issue. I re-enabled all my extensions after this to maintain a control.
+- Settings: Commenting out my user settings.json results in me no longer being able to repro the issue!
+  - Working on it...
