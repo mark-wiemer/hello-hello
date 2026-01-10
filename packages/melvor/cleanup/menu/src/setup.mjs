@@ -1,17 +1,28 @@
 export function setup(ctx) {
   console.log(`Hello from cleanup-main-menu ${ctx.version}!`);
   console.log(ctx);
-  useSentenceCase(ctx);
+  cleanupUserFacingText(ctx);
   cleanupMetaInfoSection();
   cleanupMainSection();
 }
 
-// todo implement
-export function useSentenceCase() {
+/**
+ * Makes user-facing text sentence case and clear.
+ * User-facing text is also known as "copy," but we avoid that term
+ * here for clarity.
+ * - Change "manage account" button text from "Manage" to "Manage acount"
+ */
+export function cleanupUserFacingText() {
   const currentLang = typeof setLang !== "undefined" ? setLang : "en";
-  console.log("setLang", setLang);
-  console.log("currentLang", currentLang);
-  console.log("loadedLangJson", loadedLangJson);
+
+  const enFixes = {
+    // Manage account button text
+    CHARACTER_SELECT_7: "Manage account",
+  };
+
+  if (currentLang === "en") {
+    loadedLangJson = { ...loadedLangJson, ...enFixes };
+  }
 }
 
 /**

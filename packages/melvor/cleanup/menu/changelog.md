@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.1.0] - unreleased
+
+- Change "manage account" button text from "Manage" to "Manage acount"
+
 ## [1.0.0] - 2026-01-01
 
 - Move "active mod profile" text above the Mod Manager button
