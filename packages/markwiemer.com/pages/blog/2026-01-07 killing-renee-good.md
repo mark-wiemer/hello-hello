@@ -14,9 +14,9 @@ All times are local, AM
     - Four cars pass her on video
     - She waves them on
     - "I'm not mad at you" - Good toward an ICE agent (unclear who) (heard on ICE agent video released by JD Vance)
-- 9:36:51: Good's wife and ICE agent exchange words, record each other - ABC News
+- 9:36:51: Good's wife and an ICE agent exchange words, record each other - ABC News
 - 9:37:13: ICE agent [Jonathan Ross](https://www.usatoday.com/story/news/nation/2026/01/08/jonathan-ross-ice-officer-shot-renee-good/88087720007/) fires three shots in 0.7 seconds (0, 0.4, 0.7 seconds since first shot) - ABC News
-- 9:37:55: Shooter approaches crashed vehicle, yells to "call 911"
+- 9:37:55: Ross approaches crashed vehicle, yells to "call 911"
     - Did he do this while near the vehicle or afterward?
     - Why didn't he call 911 himself?
     - What, if any, first aid did he administer? If none, why none?
@@ -115,7 +115,7 @@ RE the term "illegal immigrant": I use the term most likely to be used by people
     - ability, opportunity, and intention
     - why was the officer in front of the vehicle?
         - part of the totality of circumstances
-        - shooter was dragged by a vehicle on 2025-06-17
+        - Ross was dragged by a vehicle on 2025-06-17
             - https://www.usatoday.com/story/news/nation/2026/01/08/jonathan-ross-ice-officer-shot-renee-good/88087720007/
     - could he have stepped out of the way instead of shooting?
         - shooting doesn't help
