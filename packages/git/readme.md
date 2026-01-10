@@ -22,6 +22,14 @@ git lfs status
 
 ## Submodules
 
+After first clone of repo:
+
 ```sh
 git submodule update --init --recursive
+```
+
+Update all to match current remote:
+
+```sh
+git submodule update --remote
 ```
