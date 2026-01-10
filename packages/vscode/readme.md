@@ -4,7 +4,7 @@ Commonly known as VS Code, this is the [most popular IDE](https://survey.stackov
 
 ## Setting up
 
-There are two ways to use VS Code: local installation by downloading from [code.visualstudio.com](https://code.visualstudio.com) or in-browser editing via [vscode.dev](https://vscode.dev). For other cloud editors, see [Hello GitHub Codespaces](../github/codespaces/readme.md)
+There are two ways to use VS Code: local installation by downloading from [code.visualstudio.com](https://code.visualstudio.com) or in-browser via [vscode.dev](https://vscode.dev). See also [Hello GitHub Codespaces](../github/codespaces/readme.md), as Codespaces supports both local and browser-based versions of VS Code.
 
 ### Importing settings.json
 
@@ -13,6 +13,8 @@ This repo has a `settings.json` file that I use as my user settings. I create a 
 ```bash
 ./link-settings.sh
 ```
+
+You can also [enable settings sync](https://code.visualstudio.com/docs/configure/settings-sync). I use my GitHub account (not Microsoft account) for this. This works both locally and in-browser.
 
 ## Managing
 
