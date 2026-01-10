@@ -11,6 +11,10 @@ There are two ways to use VS Code: local installation by downloading from [code.
 This repo has a `settings.json` file that I use as my user settings. I create a symlink from this file to a new path that VS Code references in Linux Mint. This only works locally:
 
 ```bash
+chmod +x ./link-settings.sh
+```
+
+```bash
 ./link-settings.sh
 ```
 
