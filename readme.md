@@ -33,7 +33,7 @@ Historically, I haven't followed a particular commit message style. But [Mocha](
   - [Codespaces](./packages/github/codespaces/readme.md)
   - [GitHub REST API](./packages/github/rest/readme.md)
 - [JavaScript](./packages/javascript/readme.md): A programming language originally for adding interactivity to websites
-- [jq (jqlang)](./packages/jq/readme.md): CLI tool for editing JSON files
+  - [jq (jqlang)](./packages/javascript/jq/readme.md): CLI tool for editing JSON files
 - [luanti](./packages/luanti/readme.md): An open-source engine, distribution platform, and client for "boxel" games
 - [markwiemer.com](./packages/markwiemer.com/readme.md): My personal website!
 - [Melvor Idle](./packages/melvor/readme.md): A heavily moddable RuneScape-inspired game

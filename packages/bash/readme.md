@@ -54,7 +54,7 @@ However, functions are preferable to aliases according to the reference manual.
 
 ### Functions
 
-This function uses [`jq`](../jq/readme.md) to edit JSON files, editing the local `package.json` by default:
+This function uses [`jq`](../javascript/jq/readme.md) to edit JSON files, editing the local `package.json` by default:
 
 ```sh
 json_edit() {
