@@ -42,7 +42,6 @@ Historically, I haven't followed a particular commit message style. But [Mocha](
 - [POSIX](./packages/posix/readme.md): Set of cross-OS standards by IEEE
 - [React](./packages/react/readme.md): Library for creating complex interactive websites
 - [Remark](./packages/remark/readme.md): Markdown toolchain for JS
-  - Created by [the unified collective](https://unifiedjs.com/), who maintain [MDX](https://mdxjs.com/community/about/#who-governs-mdx) and other content processing toolchains
 - [Rust](./packages/rust/readme.md): A programming language emphasizing safety and performance
 - [TypeScript](./packages/typescript/readme.md): A programming language that adds types to JavaScript
 - [Visual Studio Code](./packages/vscode/readme.md): A popular IDE

@@ -1,7 +1,8 @@
 # Hello Remark
 
 A Markdown toolchain: Parse, stringify, and manipulate Markdown content in JS.
-Maintained by the [unified](https://unifiedjs.com/) collective.
+Maintained by the [unified](https://unifiedjs.com/) collective,
+who maintain [MDX](https://mdxjs.com/community/about/#who-governs-mdx) and other content processing toolchains.
 
 The `tsx` package is separate from the unified collective, see [the typescript project](../typescript/readme.md) for details.
 
