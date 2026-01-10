@@ -18,6 +18,8 @@ The Steam client is the recommended client for testing, as it's less prone to cr
 
 The Creator Toolkit has a [Directory Link](https://wiki.melvoridle.com/w/Mod_Creation/Creator_Toolkit#Directory_Link) feature to automatically build mod zips on reload. This can have a perf impact but is recommended for this project.
 
+I recommend using VS Code local, not in-browser. That way you can simply refresh Melvor to get the latest changes, instead of having to commit, pull from the cloud, and then refresh Melvor.
+
 #### Web client
 
 For me, the web client often crashes once I'm in the game, even without any mods installed, due to some failure to save to a cloud. I haven't researched because the Steam client is often sufficient. This issue appears to be slightly worse when using Cleanup Main Menu 1.0.0, but I haven't gathered data yet. 
