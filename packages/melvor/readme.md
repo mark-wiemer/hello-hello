@@ -6,6 +6,10 @@ OK it's time to clean up all these weird UX issues with Melvor!
 
 Melvor Idle hosts mods on [mod.io](../mod.io/readme.md), install modiom before getting started. modiom is a CLI client to manage mod.io artifacts.
 
+### API
+
+The mod API is not 100% documented, and there is no SDK or VS Code extension specific to the Melvor API. However, we can use the browser console to inspect the global variables following the [Enabling DevTools for the Steam and Epic Clients](https://wiki.melvoridle.com/w/Mod_Creation/Enabling_DevTools_for_the_Steam_and_Epic_Clients) documentation. This allows us to see values like `loadedLangJson` and edit them.
+
 ### Create new mod
 
 ClickOps in the GUI, be sure to check "Supported Game Version: 1.3.1" (or whatever the latest version is)
