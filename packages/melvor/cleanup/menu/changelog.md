@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.1.0] - unreleased
+## [1.1.0] - 2026-01-10
 
 - Change "manage account" button text from "Manage" to "Manage acount"
 - Change `Save Slot #${number}` to `Slot ${number}`
