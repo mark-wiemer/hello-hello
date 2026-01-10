@@ -35,7 +35,7 @@ CHANGELOG=$(awk -v ver="$VERSION" '
     found && /^[*-]/ {
         print
     }
-' "$MOD_PATH/changelog.md" | sed 's/^- /* /')
+' "$MOD_PATH/changelog.md" | sed 's/^\([ \t]*\)-/\1*/')
 
 if [ -z "$CHANGELOG" ]; then
     echo "Error: No changelog found for version $VERSION in $MOD_PATH/changelog.md"
