@@ -9,6 +9,16 @@ jq is a CLI JSON processor.
 jq . package.json
 ```
 
+Sort and format a JSON file inline (edits existing file):
+
+```bash
+filename="my-data.json"
+```
+
+```bash
+jq --sort-keys . $filename > temp.json && mv temp.json $filename
+```
+
 Set the top-level `author` prop to `Mark Wiemer` in package.json, updating the file itself.
 
 ```sh
