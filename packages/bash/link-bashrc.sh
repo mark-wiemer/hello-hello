@@ -61,8 +61,8 @@ link_files() {
     # todo stop hardcoding this
     target_path="$HOME/.bashrc"
 
-    # Path to settings.json in this monorepo
-    source_path="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/settings.json"
+    # todo stop hardcoding this
+    source_path="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/.bashrc"
     
     echo "Starting VS Code settings symlink setup..."
     echo "Target: $target_path"
