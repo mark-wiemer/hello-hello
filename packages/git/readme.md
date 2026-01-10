@@ -19,3 +19,9 @@ This command prints objects to commit and should include `(LFS)` to reference th
 ```sh
 git lfs status
 ```
+
+## Submodules
+
+```sh
+git submodule update --init --recursive
+```
