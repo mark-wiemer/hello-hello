@@ -1,8 +1,17 @@
 export function setup(ctx) {
   console.log(`Hello from cleanup-main-menu ${ctx.version}!`);
   console.log(ctx);
+  useSentenceCase(ctx);
   cleanupMetaInfoSection();
   cleanupMainSection();
+}
+
+// todo implement
+export function useSentenceCase() {
+  const currentLang = typeof setLang !== "undefined" ? setLang : "en";
+  console.log("setLang", setLang);
+  console.log("currentLang", currentLang);
+  console.log("loadedLangJson", loadedLangJson);
 }
 
 /**
