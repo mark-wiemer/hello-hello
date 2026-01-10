@@ -11,6 +11,7 @@
   - Last save
   - Local save
   - Privacy policy
+  - Reset client
   - Select your character
   - Show cloud saves
   - Show local saves

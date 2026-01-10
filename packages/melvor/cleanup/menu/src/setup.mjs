@@ -11,7 +11,6 @@ export function setup(ctx) {
  * - Change `Save Slot #${number}` to `Slot ${number}`
  * - Change various strings to sentence case
  *
- * todo "Reset Client" is not localized
  */
 export function cleanupUserFacingText() {
   const currentLang = typeof setLang !== "undefined" ? setLang : "en";
@@ -36,6 +35,14 @@ export function cleanupUserFacingText() {
   if (currentLang === "en") {
     loadedLangJson = { ...loadedLangJson, ...enFixes };
   }
+
+  // Find and update "Reset Client" button text
+  const resetClientElements = Array.from(document.querySelectorAll("*")).filter(
+    (el) => el.textContent.trim() === "Reset Client" && el.children.length === 0,
+  );
+  resetClientElements.forEach((el) => {
+    el.textContent = "Reset client";
+  });
 }
 
 /**
