@@ -10,7 +10,28 @@ This [How-To Geek article on the difference between terminal, shell, and console
   - `--posix` aligns more closely with POSIX. However, I don't use this flag.
   - "For almost every purpose, shell functions are preferable to aliases."
 
-## Variables
+<a id="link-bashrc"></a>
+<a id="bashrc"></a>
+
+## link-bashrc.sh and .bashrc
+
+Note that this `.bashrc` file is specific to Linux Mint and may not behave well on other operating systems.
+
+```bash
+chmod +x ./link-bashrc.sh
+```
+
+```bash
+./link-bashrc.sh
+```
+
+```bash
+source ./.bashrc
+```
+
+## Notes
+
+### Variables
 
 ```sh
 # Print "Hello world, x is 2" to stdout (excluding quotes)
@@ -22,7 +43,7 @@ y="Hello world"
 echo $y, x is $x
 ```
 
-## Aliases
+### Aliases
 
 ```sh
 # Open the .bashrc file in VS Code
@@ -31,7 +52,7 @@ alias bashedit='code ~/.bashrc'
 
 However, functions are preferable to aliases according to the reference manual.
 
-## Functions
+### Functions
 
 This function uses [`jq`](../jq/readme.md) to edit JSON files, editing the local `package.json` by default:
 
