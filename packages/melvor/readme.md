@@ -18,7 +18,7 @@ The Steam client is the recommended client for testing, as it's less prone to cr
 
 The Creator Toolkit has a [Directory Link](https://wiki.melvoridle.com/w/Mod_Creation/Creator_Toolkit#Directory_Link) feature to automatically build mod zips on reload. This can have a perf impact but is recommended for this project.
 
-I recommend using VS Code local, not in-browser. That way you can simply refresh Melvor to get the latest changes, instead of having to commit, pull from the cloud, and then refresh Melvor.
+We recommend using VS Code local, not in-browser. That way you can simply refresh Melvor to get the latest changes, instead of having to commit, pull from the cloud, and then refresh Melvor.
 
 See also [Enabling DevTools for the Steam and Epic Clients](https://wiki.melvoridle.com/w/Mod_Creation/Enabling_DevTools_for_the_Steam_and_Epic_Clients) to really speed up development!
 
