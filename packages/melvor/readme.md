@@ -22,7 +22,7 @@ I recommend using VS Code local, not in-browser. That way you can simply refresh
 
 #### Web client
 
-For me, the web client often crashes once I'm in the game, even without any mods installed, due to some failure to save to a cloud. I haven't researched because the Steam client is often sufficient. This issue appears to be slightly worse when using Cleanup Main Menu 1.0.0, but I haven't gathered data yet. 
+For me, the web client often crashes once I'm in the game, even without any mods installed, due to some failure to save to a cloud. I haven't researched because the Steam client is often sufficient. This issue appears to be slightly worse when using Cleanup Main Menu 1.0.0, but I haven't gathered data yet.
 
 Use the Creator Toolkit:
 
