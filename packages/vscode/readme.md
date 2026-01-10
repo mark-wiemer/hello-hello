@@ -29,7 +29,9 @@ Note that this doesn't sort arrays, as order matters in some arrays.
 General steps for solving new issues
 
 - Extension bisect: "Help: Start Extension Bisect"
-- Settings: the `@modified` tag can help narrow down the issue
+- Settings
+  - in the GUI, the `@modified` tag can help narrow down the issue
+  - in the JSON, commenting out sections of the settings.json and manually bisecting can help identify the issue
 - [New profile](https://code.visualstudio.com/docs/configure/profiles): try to reproduce the issue in a new VS Code profile
 
 ## Common issues
