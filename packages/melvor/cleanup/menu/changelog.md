@@ -3,6 +3,17 @@
 ## [1.1.0] - unreleased
 
 - Change "manage account" button text from "Manage" to "Manage acount"
+- Change `Save Slot #${number}` to `Slot ${number}`
+- Change various strings to sentence case:
+  - ${level} total level
+  - Change language
+  - Cloud save
+  - Last save
+  - Local save
+  - Privacy policy
+  - Select your character
+  - Show cloud saves
+  - Show local saves
 
 ## [1.0.0] - 2026-01-01
 

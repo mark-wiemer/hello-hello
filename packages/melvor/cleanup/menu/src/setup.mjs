@@ -1,16 +1,17 @@
 export function setup(ctx) {
   console.log(`Hello from cleanup-main-menu ${ctx.version}!`);
-  console.log(ctx);
-  cleanupUserFacingText(ctx);
+  cleanupUserFacingText();
   cleanupMetaInfoSection();
   cleanupMainSection();
 }
 
 /**
  * Makes user-facing text sentence case and clear.
- * User-facing text is also known as "copy," but we avoid that term
- * here for clarity.
  * - Change "manage account" button text from "Manage" to "Manage acount"
+ * - Change `Save Slot #${number}` to `Slot ${number}`
+ * - Change various strings to sentence case
+ *
+ * todo "Reset Client" is not localized
  */
 export function cleanupUserFacingText() {
   const currentLang = typeof setLang !== "undefined" ? setLang : "en";
@@ -18,6 +19,18 @@ export function cleanupUserFacingText() {
   const enFixes = {
     // Manage account button text
     CHARACTER_SELECT_7: "Manage account",
+    MENU_TEXT_SAVE_SLOT_NUM: "Slot ${number}",
+    //#region case changes only, manually sorted by key
+    CHARACTER_SELECT_30: "Last save:",
+    CHARACTER_SELECT_31: "Local save",
+    CHARACTER_SELECT_32: "Cloud save",
+    CHARACTER_SELECT_33: "Show cloud saves",
+    CHARACTER_SELECT_34: "Show local saves",
+    CHARACTER_SELECT_48: "Select your character",
+    CHARACTER_SELECT_71: "${level} total level",
+    CHARACTER_SELECT_9: "Privacy policy",
+    MISC_STRING_11: "Change language",
+    //#endregion
   };
 
   if (currentLang === "en") {
