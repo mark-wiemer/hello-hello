@@ -29,8 +29,9 @@ Historically, I haven't followed a particular commit message style. But [Mocha](
 - [AHK++](./packages/ahkpp/readme.md): AHK++ is a language support IDE extension for AutoHotkey v1 and v2
 - [Bash](./packages/bash/readme.md): A cross-platform shell
 - [Git](./packages/git/readme.md): A version control system, includes notes on Git LFS
-- [GitHub](./packages/github/readme.md): Tools for editing GitHub settings via CLI
-  - Includes details on `.github` folder
+- [GitHub](./packages/github/readme.md): The most popular DevOps platform
+  - [Codespaces](./packages/github/codespaces/readme.md)
+  - [GitHub REST API](./packages/github/rest/readme.md)
 - [JavaScript](./packages/javascript/readme.md): A programming language originally for adding interactivity to websites
 - [jq (jqlang)](./packages/jq/readme.md): CLI tool for editing JSON files
 - [luanti](./packages/luanti/readme.md): An open-source engine, distribution platform, and client for "boxel" games

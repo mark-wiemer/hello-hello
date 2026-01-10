@@ -14,3 +14,13 @@ Workflows are defined in workflow files.
 Workflow files must be in `/.github/workflows`, no subfolders allowed.
 
 - [stale.yml](/.github/workflows/stale.yml) handles stale issues and PRs. Ref [workflow run](https://github.com/mark-wiemer/hello-hello/actions/runs/19620829424)
+
+## Projects
+
+### codespaces
+
+[Hello GitHub Codespaces](./codespaces/readme.md)
+
+### rest
+
+[Hello GitHub REST API](./rest/readme.md)
