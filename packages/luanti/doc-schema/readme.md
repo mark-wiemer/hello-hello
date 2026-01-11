@@ -90,7 +90,7 @@ Below are some of the ways we could rewrite the docs in a canonical form. Approa
 | XML         | Rejected       | Min           | Max            | Medium      | Markup language                                                      |
 | YAML        | Rejected       | Min           | Max            | High        | Markup language                                                      |
 
-All markup languages have been rejected as they just aren't the right canonical format for end-user guides.
+All markup languages except Markdown have been rejected as they just aren't the right canonical format for end-user guides.
 
 <a id="emmylua"></a>
 
