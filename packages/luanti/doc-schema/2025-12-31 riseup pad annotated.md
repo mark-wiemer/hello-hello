@@ -5,16 +5,8 @@ language added to some code blocks,
 inline "lists" turned into multiline valid Markdown lists,
 huge comment blocks "unwrapped" (no longer a comment, just text),
 proposals wrapped in Markdown code blocks
+tiny edits to inline comments for clarity (documenting documentation is hard)
 -->
-
-<!--
-Please write any commentary inside comments like this.
-
-This color is ACorp. Hi!
-Mark here :)
--->
-
-<!-- at the bottom of this document, i've written my take on the markdown idea. -->
 
 ```md
 #### `node = core.get_node(pos)`
@@ -100,7 +92,7 @@ core: struct {
         node: MapNode, -- the node at the position
     ),
     ...
-    <!-- unclear how the parameterized type should look -->
+    -- (meta) -- unclear how the parameterized type should look
     -- Call a function after a specified amount of time
     after: fn<Ts..., Rs...>(
         duration: number, -- game time to pass in seconds until the function is called
@@ -151,7 +143,9 @@ Some further considerations:
 
 trying to express more properties within this lua-like lang. it is hard.
 
-```
+<!-- Not a shell section, but some colors are better than none here -->
+
+```sh
 core: struct {
     ...
     # i think we can keep the function keyword as in lua
@@ -188,7 +182,6 @@ PlayerRef: interface inherits ObjectRef {
 
 ---
 
-<!--
 I think the markdown syntax shows more promise. We don't really "need" to "limit" ourselves to markdown, but it sure makes reading and previewing them nice. I think retaining this property is desirable for writers and readers. Of course, markdown will still need to be processed like lua_api.md into HTML e.g. turning references into links. if there's any strong opinions objecting this, i'd like to hear it.
 
 i'll quickly propose a simple type system here.
@@ -216,14 +209,15 @@ for how we can express restrictions, assertions and bounds i think ideas from ru
 NOTE: if anyone is interested, they can pursue further in refining the type system into giving it more expressive power. But this foundation should fulfill like 80% of our objectives, completeness can come later. heck, personally i'm pretty satisfied if the type system stalls here.
 
 incomplete idea: NodeName is a trait for `string`s where the value must fulfill assertion below.
-	```lua
-	-- this refers to The Hand™
-	if v == ':' then return end
-	local start, colon = v:find('^[%w_]+:')
-	assert(start)
-	local _, stop = v:find(':[%w_]+$', start)
-	assert(stop)
-	```
+
+```lua
+-- this refers to The Hand™
+if v == ':' then return end
+local start, colon = v:find('^[%w_]+:')
+assert(start)
+local _, stop = v:find(':[%w_]+$', start)
+assert(stop)
+```
 
 making a custom type system sounds pretty dreadful right? An idea is to utilize typescript snippets as a way to define types of things. Theoretically, the work would be easier since typescript already has a type system and comes with its own checker. of course, we will be stuck within its limitation instead of carving our own. i picked typescript because how powerful it is compared to emmylua, luacats and python type hinting. if such approach is taken, then perhaps going full on typescript with extra information in comments may be better than markdown. note how it would parallel the lua-like type language proposal.
 
@@ -232,9 +226,9 @@ TODO: i have not yet conceived a way to make admonitions in the description of t
 TODO: the API specification should ideally absorb most if not all of the Lua API docs inside lua_api.md and docs.luanti.org.
 TODO: i have not yet considered how to define things outside of Lua stuff, i.e. formspec syntax, texture modifiers, l-system trees, schemas (world format, settings/confs, schematics), networking, file structures, etc.
 TODO: we can use mermaid diagrams or any of its similar friends. i have not explored that.
--->
 
-<!--
+---
+
 The markdown schema creates and uses types, but also attaches many kinds of information to things outside of types.
 
 An entry uses markdown heading. Shallower/Lower heading level entries own deeper/higher heading level entries e.g. Class `MetaDataRef` owns Method `get(key)`. Function `core.log(level, text)` owns Enumeration `Level`. Function `core.after(time, func, args...)` owns Function `F(args...)`. Examples after this section better illustrate the syntax.
@@ -242,6 +236,7 @@ An entry uses markdown heading. Shallower/Lower heading level entries own deeper
 We have Environment, Struct, Class, Enumeration, Namespace, Function, Method, Callback, Constructor entries. I'll refer to Function, Method, Callback, Constructor entries simply as callable entries, for brevity. TODO WIP are Value, maybe more??? entries.
 
 Sub-entries attaches information to an entry using lists. The motivation for sub-entries vs entries is to reduce heading-level spam for "simpler" things. There's WIP sub-entries too, but i don't list them here.
+
 - Environment has Contains.
 - Callables have Args, Returns, Envs.
 - Enumeration have Values.
@@ -249,27 +244,17 @@ Sub-entries attaches information to an entry using lists. The motivation for sub
 - Class have Fields, Envs.
   Notably, i don't think there's any classes that uses fields instead of getters.
 
-TODO i'm not yet confident choosing any solutions for how to group things together e.g. grouping together translation functions inside the `core` kitchen sink namespace. Some ideas:
-	- A Tags sub-entry for each entry. Very inelegant, duplicative and erroneous. Not a big fan, even if it fulfills predictable locality.
-	- An optional Category sub-entry for Namespace, Class, Struct entries which groups together owned Fields and callable entries. A bit annoying to maintain. Perhaps validation can help with that; "Entries with Category sub-entry must have all Fields and callables categorized to pass validation".
-	- Any other ideas?
+TODO i'm not yet confident choosing any solutions for how to group things together e.g. grouping together translation functions inside the `core` kitchen sink namespace. Some ideas: - A Tags sub-entry for each entry. Very inelegant, duplicative and erroneous. Not a big fan, even if it fulfills predictable locality. - An optional Category sub-entry for Namespace, Class, Struct entries which groups together owned Fields and callable entries. A bit annoying to maintain. Perhaps validation can help with that; "Entries with Category sub-entry must have all Fields and callables categorized to pass validation". - Any other ideas?
 
 TODO i have not yet define how reference to things will work in descriptions. it needs to follow a scheme so the static site HTML generator can auto-link references. ideally, it should be natural to read or figure out.
 
 An important idea that i want to incorporate is a healthy balance of predictable locality of information and simple source of truth. When i look at an entry, i should not need to jump to places i don't immediately expect. a thing's information should be close and if it isn't, it should be predictable where it is. The source of truth should avoid being 'hard to reason', 'easy to blunder' and duplicitous. I accept that these ideas aren't always possible, but they are good to follow within reason.
--->
 
-<!--
+---
+
 In Environment entries, the Contains sub-entry lists what is accessible in the environment. TODO i'm not yet confident about how we can associate environments with callables and classes; and the inverse. Quite a hard relationship to express naturally.
 
-Current environments. Yes, Luanti have many hence why it's awkward. There's also `all`, `server` and `client` many environment specifiers. `server` works on all server environments, `cilent` works on all client environments. TODO i have not yet define how to associate an environment with a specifier.
-	- server startup/load; general and before mods have loaded
-	- server main
-	- server async
-	- server async mapgen
-	- client CSM
-	- (future) client SSCSM
-	- (future) main menu (it would be nice if we can cover the main menu API too)
+Current environments. Yes, Luanti have many hence why it's awkward. There's also `all`, `server` and `client` many environment specifiers. `server` works on all server environments, `cilent` works on all client environments. TODO i have not yet define how to associate an environment with a specifier. - server startup/load; general and before mods have loaded - server main - server async - server async mapgen - client CSM - (future) client SSCSM - (future) main menu (it would be nice if we can cover the main menu API too)
 
 I propose that Contains sub-entry should be merely the view to the truth. The truth is defined at Envs sub-entries of callables and classes so it's easy to see what environment it can be used in. I'm suggesting that Contains sub-entry should be auto-generated by the processor so it's easier to verify by writers.
 
@@ -363,11 +348,9 @@ in active mapblocks.
     by the area being unattended. Note that the `chance` value can often
     be reduced to 1.
 
-<!--
 We can put functions in Lua structs, not just primitives. What does code/implementation as a piece of struct data distinct from class methods implies? i believe it means that it's a callback, hence why i chose to name struct functions specifically Callback instead of Function. It does have a big difference compared to normal functions, where content/game/mod devs are the ones defining what it does. the spec merely tells you at most expectations of what it should do and at least about when it is triggered.
 
 are there any struct functions that luanti doesn't tell you when it is triggered? as if content devs are also the ones to define when it is triggered. that's would still make it a callback i think.
--->
 
 ### Callback `action(pos, node, active_object_count, active_object_count_wider)`
 
@@ -378,7 +361,6 @@ Function triggered for each qualifying node.
   <!-- TODO should Callbacks get a sub-entry specifying when it is triggered? -->
 - Envs: <!-- TODO how should this work? what can we say about this? should it be here at all? -->
 
-<!--
 TODO relationship between ItemDef and NodeDef. generally, structs subtypes need to be able to override fields including overiding existence of parent struct fields and callbacks. some ItemDef fields are no-ops or behave differently for NodeDefs. classes should similarly get this ability, most notably ObjectRef, PlayerRef and EntityRef. ItemDef should not need to be aware of NodeDef in its definition.
 
 note: making parent fields absent doesn't fully break the type system because type expressions never had the ability to analyze structures of structs and classes in the first place. e.g. if `Shape` (erroneously) defines a field `side_count`; `Circle` inheriting `Shape` and declaring `side_count` absent doesn't affect `Shape` even now as it expands to `Shape | Circle | (other Shape subtypes...)`. it does break field existance guerantees though which is the main issue to be aware of.
@@ -506,7 +488,6 @@ Logs `text` with logging `level` if provided.
   - `"info"` : <!-- TODO description -->
   - `"verbose"` : <!-- TODO description -->
 
-<!--
 as promised, vargs and functions in the type system. I'll also include some extra stuff.
 
 type accesses generally work like this: `namespace.a`, `MyStruct.a` and `MyClass.a` refers to the type of accessing `a` for that namespace or instance of said type. it could be a callable, field, element, etc. A notable case can be seen below where we access a Function owned by a Function (which is owned by Namespace `core`). A stranger case could be accessing a Function owned by a Method owned by a Class.
@@ -538,7 +519,6 @@ introduction of vargs means the necessity of resolving combinations possible wit
 - `(A, B, C)?[]` equals `{(A, B, C)?...}` equals `{(A, B, C)...}|{nil...}`.
 - `(A, B, C)[]?` equals `{(A, B, C)...}|nil`.
 - `(A, B, C)` is illegal to use standalone as key or value types in mapping `{K: V}`
--->
 
 ### Function `core.after(time, func, args...)`
 
