@@ -81,9 +81,9 @@ Below are some of the ways we could rewrite the docs in a canonical form. Approa
 | ----------- | -------------- | ------------- | -------------- | ----------- | -------------------------------------------------------------------- |
 | EmmyLua     | Backlog        | Medium        | ??             | ??          | Lua-centric syntax, but may not be mature or expressive enough       |
 | JSON        | Rejected       | Max           | Max            | Medium      | Markup language                                                      |
-| LuaLS addon | Researching    | High          | High           | High        | Research shows maturity but limitations in highly-complex scenarios  |
+| LuaLS addon | Backlog        | High          | High           | High        | Research shows maturity but limitations in highly-complex scenarios  |
 | Luau        | Backlog        | Max           | ??             | ??          | Enterprise-grade and Lua-centric, but might not be expressive enough |
-| Markdown    | Researching    | Min           | Max            | Max         | Extremely expressive but would require custom AST handler            |
+| Markdown    | Proposed       | Min           | Max            | Max         | Extremely expressive but would require custom AST handler            |
 | Teal        | Rejected       | High          | Medium         | High        | Not expressive enough                                                |
 | TOML        | Rejected       | Min           | Max            | Max         | Markup language                                                      |
 | TypeScript  | Backlog        | Max           | High           | Max         | Very expressive but not a Lua-centric syntax                         |
@@ -108,7 +108,7 @@ tons of tooling support. No clear schema, hard to handwrite.
 
 <a id="luals-addon"></a>
 
-### LuaLS addon (researching)
+### LuaLS addon (backlog)
 
 Manually rewrite `lua_api.md` as `luanti_api.lua` in LuaCATS and integrate with LuaLS:
 
@@ -128,7 +128,7 @@ A mature, enterprise-grade Lua-centric type system, might not be expressive enou
 
 <a id="markdown"></a>
 
-### Markdown (researching)
+### Markdown (proposed)
 
 very expressive, tons of tooling support. No clear schema yet defined, no parser built.
 
