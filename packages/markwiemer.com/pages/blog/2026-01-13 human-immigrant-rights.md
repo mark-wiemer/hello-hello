@@ -4,11 +4,11 @@
 
 > We hold these truths to be self-evident, that all men are created equal, that they are endowed by their Creator with certain unalienable Rights, that among these are Life, Liberty and the pursuit of Happiness. - [The Declaration of Independence](https://www.archives.gov/founding-docs/declaration-transcript)
 
-While we can argue about who, exactly, the Founding Fathers meant when they said "men," we can certainly agree that today we believe all people on this planet have the rights listed above and more. Even if they're not from here. Even if they're "not supposed to be here."
+We can argue about who, exactly, the Founding Fathers meant when they said "men." But we can also agree that today we Americans believe this extends to all people on this planet. Even if they're not from here. Even if they're "not supposed to be here."
 
 I won't go full hippy-dippy on you. I fully recognize that there are many, let's say thousands, of violent criminal scum that have entered the United States with the intention of selling us drugs, kidnapping us, or just generally being evil.
 
-But there are millions of people that have left their country—Mexico, Venezuela, China, Ethiopia, Sudan, Syria, the list goes on and on—and come to the United States for a better life. Some entered legally and believed that staying beyond their permitted time was the best thing for them. Some entered illegally hoping for refugee status that was never granted. Some entered illegally knowing full well that our government might try to deport them if they were discovered, and have been living under the radar for years. Some were brought over, illegally, by their parents, when they were young children. They may not even remember their country of origin, and have only known the United States as their home. They probably said the Pledge of Allegiance every day in school.
+But there are millions of people that have left their country—Mexico, Venezuela, China, Ethiopia, Sudan, Syria, the list goes on and on—and come to the United States for a better life. Some entered legally and believed that staying beyond their permitted time was the best thing for them. Some entered illegally hoping for refugee status that was never granted. Some entered illegally knowing full well that our government might try to deport them if they were discovered and have been living under the radar for years. Some were brought over illegally when they were young children. They may not even remember their country of origin, and have only known the United States as their home. They probably said the Pledge of Allegiance every day in school.
 
 All of them—from the criminal scum to the peaceful resident—have rights. Because if we deny people rights, we deny them their humanity.
 
@@ -44,4 +44,4 @@ The other day, someone I deeply respect told me illegal immigrants don't have ri
 
 ---
 
-2026-01-13: Minor grammar fixes, formatting updates, and clarifications. Also, removed unclear (possibly wrong) statement about _habeas corpus_. I told you I'm not a legal scholar!
+2026-01-13: Minor grammar fixes, formatting updates, and clarifications. Also, removed unclear (possibly wrong) statement about _habeas corpus_. I really should've reviewed this more before publishing, sorry!
