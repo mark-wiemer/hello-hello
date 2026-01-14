@@ -34,7 +34,7 @@ The Supreme Court ruled against him.
 
 So why do I mention this case?
 
-Because Elias-Zacarias was an illegal immigrant! And our country respected his right to a trial. That right (_habeas corpus_) isn't even mentioned in the two Amendments I cited above 😉. He got a trial with an immigration judge, two trials with the Board of Immigration Appeals, one with the Ninth Circuit, and one with the Supreme Court! This 1992 version of the United States is one that clearly acknowledges its well-documented rights of illegal immigrants.
+Because Elias-Zacarias was an illegal immigrant! And our country respected his right to a trial. He got a trial with an immigration judge, two trials with the Board of Immigration Appeals, one with the Ninth Circuit, and one with the Supreme Court! This 1992 version of the United States is one that clearly acknowledges its well-documented rights of illegal immigrants.
 
 ---
 
@@ -44,4 +44,4 @@ The other day, someone I deeply respect told me illegal immigrants don't have ri
 
 ---
 
-2026-01-13: Minor grammar fixes, formatting updates, and clarifications.
+2026-01-13: Minor grammar fixes, formatting updates, and clarifications. Also, removed unclear (possibly wrong) statement about _habeas corpus_. I told you I'm not a legal scholar!
