@@ -140,12 +140,6 @@ alias gpm='b=$(__git_ps1 "%s") && git checkout main && git pull && git checkout 
 alias gpumo='b=$(__git_ps1 "%s") && git checkout upstream-main && git pull && git checkout $b && git merge upstream-main -X ours'
 alias gsur='git submodule update --remote'
 alias gurlo='git remote get-url origin'
-# npm Install with Legacy peer deps
-alias npmil='npm i --legacy-peer-deps'
-# npm install with version 6, then revert back to version 8
-alias npmi6='npm install npm@^6 --global && npm i && npm install npm@^8 --global'
-# Create a PR branch to review changes locally
-alias pr='git status && git branch -D pr; git checkout -b pr && git reset main'
 # Source Bash Run Commands
 alias sbrc='source ~/.bashrc'
 # Validate CI fix
