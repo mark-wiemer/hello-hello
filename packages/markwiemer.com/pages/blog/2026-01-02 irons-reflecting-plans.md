@@ -2,7 +2,19 @@
 
 Reflecting on 2025, excited for 2026!
 
-2026-01-02
+First published 2026-01-02, last modified 2026-01-14
+
+<figure>
+    <img
+        src="/assets/Blacksmith in the Goldfields by Felix Octavius Carr Darley from nga.gov.jpg"
+        alt="Blacksmith hammers metal as sparks fly, seated man and man on horseback observe, mountains and miners in the background"
+    />
+    <figcaption>
+        <a href="https://www.nga.gov/artworks/180670-blacksmith-goldfields">
+            Blacksmith in the Goldfields by Felix Octavius Carr Darley
+        </a>
+    </figcaption>
+</figure>
 
 2025 had a weird feel to it. Our felon president demolished a third of his (our!) house, [got his administration sued over 500 times](https://www.justsecurity.org/107087/tracker-litigation-legal-challenges-trump-administration/), "liberated" us with illegal tariffs fittingly close to April Fool's Day, [signed way too many executive orders](https://www.thetimes.com/us/news-today/article/trump-polls-today-approval-zd39xzh7z#4e98473c-3029-4731-91a5-e9b1cd13b781), [illegally deported residents without criminal records (or even charges filed)](https://www.unpopularfront.news/p/60-minutess-inside-cecot), and generally made hundreds of millions of lives worse. I started reading the news in February, and I didn't really stop, to the point of dedicating the entirety of May to recreating a Trump litigation tracker, this time data-driven. I got through the data part, realized I didn't have the energy to build a system to scrape updates, and dropped the project in early July. I very much enjoyed participating in the biggest single-day protest in American history, and have arrived at a new normal of tracking this craziness and reminding myself that I can't change much of it, but I can share what I learn.
 
@@ -10,7 +22,7 @@ Although I don't talk about work much, you're correct when you guess my job has 
 
 My non-technical personal life was pretty uneventful. I joined my first dating app, dated a lovely woman for a couple months, then we split and I didn't have the energy to start something new during the ICE protests. My cousin got married, and so did a friend from high school, so I spent September mostly in Wisconsin, plus a brief foray to Boston for the first time. Otherwise I spent plenty of time walking the dog, cooking, playing board games, and reading Mistborn, Red Rising, the new Hunger Games books, and Careless People.
 
-But on the technical side? Oh boy! I started the year by finishing up my work on [docs.luanti.org](https://docs.luanti.org), the new documentation site for the [open-source boxel game creation system](https://markwiemer.com/luanti). I love Luanti, and it's been amazing to see it grow just in the past year. More on Luanti later in this post! 😉
+But on the technical side? Oh boy! I started the year by finishing up my work on [docs.luanti.org](https://docs.luanti.org), the new documentation site for the [open-source "boxel" game creation system](https://markwiemer.com/luanti). I love Luanti, and it's been amazing to see it grow just in the past year. More on Luanti later in this post! 😉
 
 [I started maintaining Mocha](https://mochajs.org/next/) in August! Nothing like casually becoming a maintainer of a 15-year-old test framework [downloaded ten million times a week](https://npmjs.com/package/mocha). Mocha is very fun to maintain, I use it in [AHK++](http://ahkpp.com) and will of course be using it in new small projects now that I'm a maintainer. [Josh](https://joshuakgoldberg.com) is an excellent co-maintainer so I'm always happy to chip away at notifications when I have some time to spare.
 
@@ -36,4 +48,5 @@ Cheers to 2026!
 
 ---
 
-2026-01-02: Tiny grammar fixes
+- 2026-01-02: Tiny grammar fixes
+- 2026-01-14: Add image, wrap "boxel" in quotes
