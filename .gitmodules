@@ -4,3 +4,6 @@
 [submodule "packages/ahkpp/packages/ahkpp"]
 	path = packages/ahkpp/packages/ahkpp
 	url = https://github.com/mark-wiemer/vscode-autohotkey-plus-plus.git
+[submodule "packages/ahkpp/packages/ahkpp.com"]
+	path = packages/ahkpp/packages/ahkpp.com
+	url = https://github.com/mark-wiemer/ahkpp.com.git
