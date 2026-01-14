@@ -2,6 +2,21 @@
 
 Ref [annotated riseup pad](./2025-12-31%20riseup%20pad%20annotated.md)
 
+## GreenXenith's notes
+
+First notes:
+
+- userdata is not always hidden and may be important (such as player objects).
+- Lua tables are arrays and/or hash maps. Specifically defining tuples as a type, and using "lists" and "mappings" - instead of either the official designation or something familiar (list is ok, but "mapping" is out of place when it is usually just "maps" or "dictionaries"), seems odd. This is mostly semantics.
+- I assume the practical reason for Unions is when multiple types are allowed, or type casting (such as strings/numbers).
+- I would avoid getting into things like traits. Rust is cool but complex. KISS.
+- Examples should definitely be separate from descriptions as items. Some parsers may opt to omit examples (such as IDEs).
+- Organization and scope is a discussion that does need to happen
+
+And I am only 55 lines in 😩
+
+Next note: (Not necessarily a fault of your proposition) I strongly dislike defining things like ABMDefintion as a standalone struct. NodeJS has a bad habit of doing this as well. ABMDefinition will NEVER be used anywhere else. It is not really a struct, its a parameter table
+
 ## Defining Markdown doc format
 
 This section seems to define a detailed Markdown doc format:
