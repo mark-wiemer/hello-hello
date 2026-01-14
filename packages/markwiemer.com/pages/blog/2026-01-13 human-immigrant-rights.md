@@ -2,6 +2,18 @@
 
 2026-01-13
 
+<figure>
+    <img
+        src="/assets/The Spirit of '76 by Archibald Willard.png"
+        alt=""
+    />
+    <figcaption>
+        <a href="https://en.wikipedia.org/wiki/Archibald_Willard#The_Spirit_of_'76">
+            <i>The Spirit of '76</i> by Archibald Willard
+        </a>
+    </figcaption>
+</figure>
+
 > We hold these truths to be self-evident, that all men are created equal, that they are endowed by their Creator with certain unalienable Rights, that among these are Life, Liberty and the pursuit of Happiness. - [The Declaration of Independence](https://www.archives.gov/founding-docs/declaration-transcript)
 
 We can argue about who, exactly, the Founding Fathers meant when they said "men." But we can also agree that today we Americans believe this extends to all people on this planet. Even if they're not from here. Even if they're "not supposed to be here."
@@ -44,4 +56,5 @@ The other day, someone I deeply respect told me illegal immigrants don't have ri
 
 ---
 
-2026-01-13: Minor grammar fixes, formatting updates, and clarifications. Also, removed unclear (possibly wrong) statement about _habeas corpus_. I really should've reviewed this more before publishing, sorry!
+- 2026-01-13: Minor grammar fixes, formatting updates, and clarifications. Also, removed unclear (possibly wrong) statement about _habeas corpus_. I really should've reviewed this more before publishing, sorry!
+- 2026-01-14: Add image
