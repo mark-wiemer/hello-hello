@@ -56,5 +56,5 @@ The other day, someone I deeply respect told me illegal immigrants don't have ri
 
 ---
 
-- 2026-01-13: Minor grammar fixes, formatting updates, and clarifications. Also, removed unclear (possibly wrong) statement about _habeas corpus_. I really should've reviewed this more before publishing, sorry!
-- 2026-01-14: Add image
+- 2026-01-13: Applied minor grammar fixes, formatting updates, and clarifications. Also, removed unclear (possibly wrong) statement about _habeas corpus_. I really should've reviewed this more before publishing, sorry!
+- 2026-01-14: Added image and rewrote this changelog to be in past tense
