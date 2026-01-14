@@ -37,9 +37,10 @@ Ref [Make API docs parsable](https://github.com/luanti-org/docs.luanti.org/issue
 
 ## People
 
-| Name        | IRC         | Discord username | Discord ID   | GitHub      |
-| ----------- | ----------- | ---------------- | ------------ | ----------- |
-| corpserot   |             | ACorp            | a.corp.serot | corpserot   |
-| Lars Müller | appguru     | luatic           | luatic       | appgurueu   |
-| Mark        | mark-wiemer | Mark Wiemer      | mark.wiemer  | mark-wiemer |
-| wsor        |             | wsor             | wsor4035     | wsor4035    |
+| Name        | Pronouns  | IRC         | Discord username | Discord ID   | GitHub      | Website                                            |
+| ----------- | --------- | ----------- | ---------------- | ------------ | ----------- | -------------------------------------------------- |
+| corpserot   | they/them |             | ACorp            | a.corp.serot | corpserot   |
+| GreenXenith |           |             | GreenXenith      | greenxenith  | GreenXenith | https://www.greenxenith.com/portfolio/             |
+| Lars Müller |           | appguru     | luatic           | luatic       | appgurueu   | https://luatic.dev/                                |
+| Mark Wiemer | he/him    | mark-wiemer | Mark Wiemer      | mark.wiemer  | mark-wiemer | https://markwiemer.com                             |
+| wsor        |           |             | wsor             | wsor4035     | wsor4035    | https://blog.terraqueststudios.net/posts/why-hugo/ |
