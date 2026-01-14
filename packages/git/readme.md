@@ -33,3 +33,9 @@ Update all to match current remote:
 ```sh
 git submodule update --remote
 ```
+
+To add a new submodule:
+
+```sh
+git submodule add url relative_path
+```
