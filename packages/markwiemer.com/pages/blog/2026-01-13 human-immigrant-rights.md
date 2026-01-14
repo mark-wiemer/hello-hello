@@ -1,22 +1,22 @@
 # Why illegal immigrants have rights
 
+2026-01-13
+
 > We hold these truths to be self-evident, that all men are created equal, that they are endowed by their Creator with certain unalienable Rights, that among these are Life, Liberty and the pursuit of Happiness. - [The Declaration of Independence](https://www.archives.gov/founding-docs/declaration-transcript)
 
 While we can argue about who, exactly, the Founding Fathers meant when they said "men," we can certainly agree that today we believe all people on this planet have the rights listed above and more. Even if they're not from here. Even if they're "not supposed to be here."
 
 I won't go full hippy-dippy on you. I fully recognize that there are many, let's say thousands, of violent criminal scum that have entered the United States with the intention of selling us drugs, kidnapping us, or just generally being evil.
 
-But I do want to remind you that there are millions of people that have left their country—Mexico, Venezuela, China, Ethiopia, Sudan, Syria, the list goes on and on—and come to the United States for a better life. Some entered legally and believed that staying beyond their permitted time was the best thing for them. Some entered illegally hoping for refugee status that was never granted. Some entered illegally knowing full well that our government might try to deport them if they were discovered, and have been living under the radar for years. Some were brought over, illegally, by their parents, when they were young children. They may not even remember their country of origin, and have only known the United States as their home. They probably said the Pledge of Allegiance every day in school.
+But there are millions of people that have left their country—Mexico, Venezuela, China, Ethiopia, Sudan, Syria, the list goes on and on—and come to the United States for a better life. Some entered legally and believed that staying beyond their permitted time was the best thing for them. Some entered illegally hoping for refugee status that was never granted. Some entered illegally knowing full well that our government might try to deport them if they were discovered, and have been living under the radar for years. Some were brought over, illegally, by their parents, when they were young children. They may not even remember their country of origin, and have only known the United States as their home. They probably said the Pledge of Allegiance every day in school.
 
 All of them—from the criminal scum to the peaceful resident—have rights. Because if we deny people rights, we deny them their humanity.
 
 ---
 
-A note on terms: Many folks don't like the term "illegal immigrant." They'll say "no person is illegal" and use "undocumented immigrant" instead. Others still want to stick to terms like "illegal alien" or simply "an illegal." I don't have an answer, here, yet. I stuck with the term that I believe is least likely to repel the folks who have the most to gain from this article, while still respecting the inherent humanity in those who enter (or stay in) the United States without permission.
+A note on terms: Many folks don't like the term "illegal immigrant." They'll say "no person is illegal" and use "undocumented immigrant" instead. Others still want to stick to terms like "illegal alien" or simply "an illegal." I don't have an answer. I stuck with the term that I believe is least likely to repel the folks who have the most to gain from this article, while still respecting the inherent humanity in those who enter (or stay in) the United States without permission.
 
----
-
-_None of this is legal advice_
+Also: _None of this is legal advice_
 
 ---
 
@@ -26,7 +26,7 @@ I'm no legal scholar. And the Declaration of Independence isn't, technically, a 
 
 > ...nor shall any State deprive any person of life, liberty, or property, without due process of law; nor deny to any person within its jurisdiction the equal protection of the laws. [The Fourteenth Amendment](https://www.archives.gov/founding-docs/amendments-11-27#xiv)
 
-While the Fourteenth Amendment does spell out certain rights limited to citizens, that only makes it clearer that this "due process of law" applies to non-citizens as well. I won't try to enumerate every right that the Constitution grants, but did want to highlight two to clarify that it's not a fluke!
+While the Fourteenth Amendment does spell out certain rights limited to citizens, that only makes it clearer that this "due process of law" applies to non-citizens as well. I won't try to enumerate every right that the Constitution grants, but I did want to highlight two to clarify that it's not a fluke!
 
 And to see this in practice, let's review a Supreme Court case: [INS v. Elias-Zacarias](https://supreme.justia.com/cases/federal/us/502/478/), decided in January 1992. In July 1987, Jairo Jonathan Elias-Zacarias was arrested for illegally entering the United States. He testified that he had been approached by anti-government guerrillas around January of that year, refused to join their cause, and left in March out of fear that they'd return. An immigration judge denied his application for asylum, and the Board of Immigration Appeals (BIA) denied him as well. After this, he filed further evidence, got rejected by the BIA once more, and appealed to the Ninth Circuit Court of Appeals, which ruled in his favor. The government appealed to the Supreme Court.
 
@@ -38,4 +38,10 @@ Because Elias-Zacarias was an illegal immigrant! And our country respected his r
 
 ---
 
-At least one person I deeply respect told me illegal immigrants don't have rights the other day. This person is smart and kind and caring. This disagreement shocked me, and I've wondered how many smart, kind, and caring Americans have forgotten the ideals of our Founding Fathers. This forgetfulness is at the core of so much anger and violence in the United States. Many of us native-born citizens have forgotten the rights we share with those who weren't born here. We've forgotten the humanity we share with everyone else.
+The other day, someone I deeply respect told me illegal immigrants don't have rights. This person is smart and kind and caring. This claim shocked me, and I've wondered how many smart, kind, and caring Americans have forgotten the ideals of our Founding Fathers. This forgetfulness is at the core of so much anger and violence in the United States. Many of us native-born citizens have forgotten the rights we share with those who weren't born here. We've forgotten the humanity we share with everyone else.
+
+---
+
+---
+
+2026-01-13: Minor grammar fixes, formatting updates, and clarifications.
