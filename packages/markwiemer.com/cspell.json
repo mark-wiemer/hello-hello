@@ -1,9 +1,14 @@
 {
+    "version": "0.2",
+    "enabled": true,
+    "language": "en",
+    "files": ["pages/blog/**/*.md"],
     "words": [
         "asquare",
         "BBBS",
         "compatiblelicenses",
         "creativecommons",
+        "Dweck",
         "emojified",
         "headshot",
         "Libera",

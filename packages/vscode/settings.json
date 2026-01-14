@@ -164,6 +164,9 @@
     "graycheck",
     "greycheck",
     "groupbox",
+    "hardlink",
+    "hardlinked",
+    "Hardlinks",
     "HBITMAP",
     "HICON",
     "HKCC",
@@ -191,6 +194,7 @@
     "listbox",
     "LPARAM",
     "mapo",
+    "markw",
     "MENUDROPALIGNMENT",
     "MESSAGETABLE",
     "MIDEASTENABLED",
@@ -452,5 +456,6 @@
   "workbench.list.smoothScrolling": true,
   "workbench.panel.defaultLocation": "right",
   "workbench.secondarySideBar.defaultVisibility": "hidden",
-  "workbench.startupEditor": "newUntitledFile"
+  "workbench.startupEditor": "newUntitledFile",
+  "cSpell.enabled": false
 }
