@@ -4,9 +4,11 @@ import { defineConfig } from "eslint/config";
 
 export default defineConfig([
     {
+        ignores: ["**/assets/*", "**/dodge-the-creeps/**"],
+    },
+    {
         extends: ["js/recommended"],
         files: ["**/*.{js,mjs,cjs}"],
-        ignores: ["**/assets/*", "**/dodge-the-creeps/**"],
         languageOptions: { globals: globals.browser },
         plugins: { js },
     },
