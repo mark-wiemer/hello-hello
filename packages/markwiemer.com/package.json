@@ -12,7 +12,7 @@
         "sort-package-json": "sort-package-json --check",
         "sort-package-json:fix": "sort-package-json",
         "start": "http-server site -o",
-        "validate:fix": "npm run format:fix && npm run lint:fix && npm run sort-package-json:fix && cd pages/politics/trump-litigation && npm run validate:fix"
+        "validate:fix": "npm run format:fix && npm run lint:fix && npm run sort-package-json:fix"
     },
     "prettier": {
         "printWidth": 100,

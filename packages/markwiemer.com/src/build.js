@@ -6,9 +6,8 @@ import process from "process";
 // turn this from npm script into javascript
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRootDir = path.join(__dirname, "..", "pages");
-const trumpLitigationDir = path.join(projectRootDir, "politics", "trump-litigation");
 const blogDir = path.join(projectRootDir, "blog");
-const projectDirs = [trumpLitigationDir, blogDir];
+const projectDirs = [blogDir];
 
 try {
     for (let dir of projectDirs) {
