@@ -137,8 +137,8 @@ RE the term "illegal immigrant": I use the term most likely to be used by people
         - Co-founder of [Center for New Liberalism](https://en.wikipedia.org/wiki/Center_for_New_Liberalism), which identifies as center-left
     - Good summary of all other incidents and pattern of system-wide poor training, escalating violence
 - [2026-01-13 - Truth - Hank Green on YouTube](https://www.youtube.com/watch?v=FyStPztM7eo)
-	- "the goal ... is to establish dominance over the narrative as quickly and as forcefully as possible"
-	- "fundamentally disrespectful to the intelligence and agency of the American people"
-	- "do you think they would be lying about this if they didn't think the shooting deserved more justification than the facts gave us?"
-	- "they'd stick to the truth if they thought the truth was enough"
-	- "they're showing by their actions that they also don't believe the shooting was justified, otherwise they wouldn't be lying"
+    - "the goal ... is to establish dominance over the narrative as quickly and as forcefully as possible"
+    - "fundamentally disrespectful to the intelligence and agency of the American people"
+    - "do you think they would be lying about this if they didn't think the shooting deserved more justification than the facts gave us?"
+    - "they'd stick to the truth if they thought the truth was enough"
+    - "they're showing by their actions that they also don't believe the shooting was justified, otherwise they wouldn't be lying"
