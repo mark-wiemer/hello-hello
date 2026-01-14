@@ -6,7 +6,7 @@ export default defineConfig([
     {
         extends: ["js/recommended"],
         files: ["**/*.{js,mjs,cjs}"],
-        ignores: ["**/assets/*"],
+        ignores: ["**/assets/*", "**/dodge-the-creeps/**"],
         languageOptions: { globals: globals.browser },
         plugins: { js },
     },
