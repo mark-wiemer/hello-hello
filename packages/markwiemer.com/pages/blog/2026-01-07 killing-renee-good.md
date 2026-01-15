@@ -147,3 +147,14 @@ RE the term "illegal immigrant": I use the term most likely to be used by people
     - "do you think they would be lying about this if they didn't think the shooting deserved more justification than the facts gave us?"
     - "they'd stick to the truth if they thought the truth was enough"
     - "they're showing by their actions that they also don't believe the shooting was justified, otherwise they wouldn't be lying"
+- [2026-01-13 09:37 Pacific - 🚨BREAKING: ICE agents in Minneapolis violently detained, threatened, and arrested a U.S. citizen for one reason only, he refused to prove his citizenship. - TheJFreakinC on Twitter](https://x.com/thejfreakinc/status/2011130471481065497)
+	- Includes 3-minute bystander video with audio
+	- "You're a fuckin' bitch, and you're gonna learn the fuckin' hard way" - ICE agent to nonresisting detained US citizen. Three total agents were restraining the citizen. The comment was made in response the citizen saying "I'm not moving, bitch"
+	- "I just asked you for an ID that was it"
+		- Fourth Amendment protects all people on US soil against unreasonable search and seizure
+	- "You're a fucking US citizen, you shouldn't have done that, you dumbass" - Unclear what the (same) ICE agent is referring to, detained citizen is not resisting
+	- "Unlawful arrest" citizen repeats. "We'll see about that" ICE agent replies.
+	- "I'm fucking arresting child molesters" says the ICE agent, who is currently detaining a US citizen (we have no reason to believe that citizen is a child molester)
+	- Citizen is placed in ICE vehicle
+	- Unclear if he is arrested or just detained
+	- Unclear if/when he was released
