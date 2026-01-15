@@ -1,4 +1,4 @@
-# 2026-01-07 Killing of Renée Good
+# 2026-01-07 Killing of Renée Good and subsequent actions
 
 These are early stage personal notes, highly subject to change. It's also unclear to me whether her legal name includes the diacritic (Renee vs Renée), but it seems [she preferred to use the diacritic](https://en.wikipedia.org/wiki/Talk:Killing_of_Renee_Good#Requested_move_10_January_2026).
 
