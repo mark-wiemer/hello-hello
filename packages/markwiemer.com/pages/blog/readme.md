@@ -23,5 +23,5 @@ However, saving the file in VS Code breaks the hardlink and I don't know a worka
 To check if two files are hardlinked:
 
 ```sh
-ls -li "/home/markw/my-stuff/obsidian/News/2026-01-07 Killing of Renee Good.md" "./2026-01-07 killing-renee-good.md"
+ls -li "/home/markw/my-stuff/obsidian/News/2026-01-07 Killing of Renée Good and subsequent actions.md" "./2026-01-07 killing-renee-good.md"
 ```
