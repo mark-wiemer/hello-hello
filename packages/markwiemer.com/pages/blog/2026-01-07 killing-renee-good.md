@@ -150,11 +150,13 @@ RE the term "illegal immigrant": I use the term most likely to be used by people
 - [2026-01-13 09:37 Pacific - 🚨BREAKING: ICE agents in Minneapolis violently detained, threatened, and arrested a U.S. citizen for one reason only, he refused to prove his citizenship. - TheJFreakinC on Twitter](https://x.com/thejfreakinc/status/2011130471481065497)
 	- Includes 3-minute bystander video with audio
 	- "You're a fuckin' bitch, and you're gonna learn the fuckin' hard way" - ICE agent to nonresisting detained US citizen. Three total agents were restraining the citizen. The comment was made in response the citizen saying "I'm not moving, bitch"
-	- "I just asked you for an ID that was it"
+	- "I just asked you for an ID that was it" - ICE agent
 		- Fourth Amendment protects all people on US soil against unreasonable search and seizure
-	- "You're a fucking US citizen, you shouldn't have done that, you dumbass" - Unclear what the (same) ICE agent is referring to, detained citizen is not resisting
-	- "Unlawful arrest" citizen repeats. "We'll see about that" ICE agent replies.
+			- All people have the right to remain silent, though we must explicitly invoke it, see rights of illegal immigrants above. I believe this is Fifth Amendment. This includes refusing to identify yourself or hand over an ID. If this goes against the government's wishes, they can try to get a warrant and then search you. Or they can claim some probable cause if they believe you're likely to do something imminently dangerous based on your behavior. But if their claim is found to be unreasonable, then they've acted illegally and overstepped their power. As a reminder, none of this is legal advice.
+	- "You're a fucking US citizen, you shouldn't have done that, you dumbass" - Unclear what the ICE agent is referring to, detained citizen is not resisting and has not resisted
+	- "Unlawful arrest," citizen repeats. "We'll see about that," ICE agent replies.
 	- "I'm fucking arresting child molesters" says the ICE agent, who is currently detaining a US citizen (we have no reason to believe that citizen is a child molester)
 	- Citizen is placed in ICE vehicle
+	- Vehicle does not move, video ends
 	- Unclear if he is arrested or just detained
 	- Unclear if/when he was released
