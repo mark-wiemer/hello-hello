@@ -11,13 +11,16 @@ None of this is legal advice.
 I use the term illegal immigrant in these notes. I don't necessarily endorse it, but I also don't endorse any of the alternatives. I don't particularly care what short term we use to refer to people who reside in the United States without clear legal permission. I just want us to remember that they're people, they have rights, and after a trial they may very well be found to be legal immigrants who just hadn't completed the relevant paperwork due to their own ignorance or government failures.
 
 When I say "all people," I'm referring to all people under US sovereignty, unless otherwise specified. This includes native-born US citizens, naturalized US citizens, legal residents, legal immigrants, alleged illegal immigrants, immigrants known to be residing here illegally, and tourists. Probably some categories I'm forgetting, too. As long as they're on US soil, they're people under US sovereignty. Unless they're, like, foreign diplomats or their children or something. That's not so relevant here.
-## Context
+## Killing of Renée Good
 
+(list videos here)
 ### Minutes
 
 All times are local, AM
 
-- Good's wife was on-scene
+- Good's wife was on-scene, exchanging angry words with ICE (ICE agent video)
+- Protesters were "preventing [ICE] from leaving the scene" - Kristi Noem, Wednesday afternoon news conference
+    - Contradicts video evidence showing cars driving away after passing Good's vehicle sideways in the road
 - 9:35:05: Good's car stopped diagonally according to Reini-Grandell footage - ABC News
     - When was Good's car was first stopped like this?
     - Four cars pass her on video
@@ -29,8 +32,15 @@ All times are local, AM
     - Did he do this while near the vehicle or afterward?
     - Why didn't he call 911 himself?
     - What, if any, first aid did he administer? If none, why none?
-- Protesters were "preventing [ICE] from leaving the scene" - Kristi Noem, Wednesday afternoon news conference
-    - Contradicts video evidence showing cars driving away after passing Good's vehicle sideways in the road
+- 
+- [2026-01-07 7:53 PM - Noem says officer who shot woman was previously hit, dragged by vehicle in June - CBS](https://www.cbsnews.com/minnesota/live-updates/minneapolis-ice-agent-shooting-protesters-clash-fbi-investigation/#post-update-90c4c1ed)
+	- Officer was released from hospital within 10 hours
+	- She added that the officer, who has yet to be identified, was taken to the hospital after Wednesday's shooting and has since been released
+	- > "Our officer followed his training, did exactly what he's been taught to do in that situation and took actions to defend himself and defend his fellow law enforcement officers."
+- [2026-01-14 - ICE agent who shot Renee Good suffered internal bleeding, officials say - Ground News](https://ground.news/article/ice-agent-who-shot-renee-good-suffered-internal-bleeding-officials-say_23a903)
+	- Fun fact: minor bruises are a form of internal bleeding
+	- Also, we have no evidence this is true. He was admitted to a hospital, standard procedure, and released the same day. Claims from officials are not reliable here--always find hard evidence.
+	- 
 
 ### Hours
 
@@ -57,24 +67,17 @@ All times are local, AM
 - Everlasting discussions around immigration policy in the United States
 
 ## Illegal orders
-
 Can federal agents disobey orders without quitting?
-
 - Yes, when the orders are illegal
     - Whistleblower Act
     - Oath of office
         - All federal agents take an oath to "uphold Constitution against all enemies"
         - An illegal order is an enemy to the Constitution!
-
-## Sources and notes
-
-### Illegal orders
-
 - [5 USC 3331: Oath of office](<https://uscode.house.gov/view.xhtml?req=(title:5%20section:3331%20edition:prelim)>)
     - An individual, except the President, elected or appointed to an office of honor or profit in the civil service or uniformed services, shall take the following oath: “I, AB, do solemnly swear (or affirm) that I will support and defend the Constitution of the United States against all enemies, foreign and domestic; that I will bear true faith and allegiance to the same; that I take this obligation freely, without any mental reservation or purpose of evasion; and that I will well and faithfully discharge the duties of the office on which I am about to enter. So help me God.” This section does not affect other oaths required by law.
 - [Whistleblower Protections](https://www.dol.gov/general/topics/whistleblower)
 
-### Rights of illegal immigrants
+## Rights of illegal immigrants
 
 RE the term "illegal immigrant": I use the term most likely to be used by people that disagree with me. This focuses the issue on rights, not words. For now, I tolerate the use of this term and may write a blog post explaining my thoughts later.
 
@@ -102,7 +105,7 @@ RE the term "illegal immigrant": I use the term most likely to be used by people
 	- > If the individual does not have a know your rights card, you could inform your passenger that they have the right to remain silent, and to refuse to speak with the officer unless they have an immigration attorney present.
 	- > Among other things, the passenger has the right to refuse to answer any questions about their immigration status, where they were born, or how they entered the US.
 
-### Illegal immigration and crime
+## Illegal immigration and crime
 This section is specific to illegal immigration, in an effort to determine just how much violence is at stake here.
 
 Also, a quick note: why can't we just catch these violent illegal immigrants the same way we catch other violent people? Just a thought.
@@ -114,9 +117,25 @@ Also, a quick note: why can't we just catch these violent illegal immigrants the
 	- Illegal immigrants are more peaceful than legal immigrants and US citizens
 		- > A 2020 study found that native-born US citizens are incarcerated at higher rates for homicide in Texas than undocumented immigrants.[Citation 27](https://en.wikipedia.org/wiki/Illegal_immigration_to_the_United_States_and_crime#cite_note-27)
 
-### Immigration and the economy
+## Immigration and the economy
 (coming soon)
-### Use of force
+
+## Post-hoc accountability
+Post-hoc = after the fact. Ideally, stuff like this never happens. No trial will bring back Good. That's to say nothing of those who have died in ICE detainment centers, been deported (and brought back from) CECOT, or endured other assaults, detainments, deportations, harassment, and stress.
+- [2026-01-13 - Fed. Prosecutors Resign After Trump DOJ Push To Investigate ICE Shooting Victim’s Widow - Ground News](https://ground.news/article/3-prosecutors-quit-after-push-to-investigate-ice-shooting-victims-widow)
+	- Earliest article I can find is [2026-01-12 11:05 PM Pacific - Top DOJ officials quit after their division refused to probe Minnesota ICE shooting - MS NOW by MSNBC](https://www.ms.now/news/doj-civil-rights-division-officials-quit-harmeet-dhillon)
+	- I need to read more
+- 
+- [2026-01-13 7:06 PM Pacific - Trump administration efforts to shift blame for ICE shooting wreak havoc on Minnesota US attorney’s office - CNN](https://www.cnn.com/2026/01/13/politics/resignations-minnesota-prosecutors-trump-ice-shooting)
+	- Deputy Attorney General Todd Blanche says "There is currently no basis for a criminal civil rights investigation" into the killing
+		- CNN was first to break the news, [many other outlets follow suit - Ground News](https://ground.news/article/doj-sees-no-basis-for-civil-rights-investigation-following-ice-shooting-in-minneapolis-official-says_a1b2c6)
+		- This is the probably same investigation that Harmeet Dhillon didn't do
+- What other investigations might happen?
+	- FBI?
+	- ICE internal?
+	- 
+
+## Use of force
 
 - [1791-12-15 - Fourth Amendment of the United States Constitution - Library of Congress](https://constitution.congress.gov/constitution/amendment-4/)
     - > The right of the people to be secure in their persons, houses, papers, and effects, against unreasonable searches and seizures, shall not be violated, and no Warrants shall issue, but upon probable cause, supported by Oath or affirmation, and particularly describing the place to be searched, and the persons or things to be seized.
@@ -158,7 +177,7 @@ Also, a quick note: why can't we just catch these violent illegal immigrants the
                 - > prohibited from discharging firearms solely ... [t]o disable moving vehicles
                 - Only exceptions: warning shots and disabling fire: "may discharge firearms to disable moving vehicles, vessels, and other conveyances, and such disabling fire is classified as less-lethal force"
 
-### General coverage
+## General coverage
 
 - [Killing of Renee Good - Wikipedia](https://en.wikipedia.org/wiki/Killing_of_Renee_Good)
 - [2026-01-09 13:07 Pacific - Minneapolis ICE shooting: A minute-by-minute timeline of how Renee Nicole Good died - ABC News](https://abcnews.go.com/US/minneapolis-ice-shooting-minute-minute-timeline-renee-nicole/story?id=129021809)
@@ -195,14 +214,16 @@ Also, a quick note: why can't we just catch these violent illegal immigrants the
 	- > The Trump administration _wants_ confrontation.
 	- > Its priority is to intimidate its cultural enemies with heavy-handed displays of authority
 	- > Normally when a federal agent shoots someone fatally, the criminal arm of the DOJ’s Civil Rights Division will [look into it](https://www.ms.now/news/doj-civil-rights-division-officials-quit-harmeet-dhillon) to make sure the use of force was proper. In Good’s case, division head Harmeet Dhillon has already informed deputies that she won’t open an investigation, according to sources who spoke to the [_New York Times_](https://www.nytimes.com/2026/01/13/us/prosecutors-doj-resignation-ice-shooting.html?partner=slack&smid=sl-share).
+		- > Todd Blanche, the deputy attorney general, said in a statement that “there is currently no basis for a criminal civil rights investigation” into the ICE agent.
 		- So much for "There will be an investigation" :(
-		- (Have not read those links, no personal knowledge here)
+		- See also "post-hoc accountability"
 	- > [ICE is] reportedly now planning a “wartime recruitment” strategy that will [target gun shows and military enthusiasts](https://www.washingtonpost.com/technology/2025/12/31/ice-wartime-recruitment-push/)—not the sort of people, one would think, whose first impulse during confrontations will be to de-escalate.
 		- Have not read that link
 	- > In July of last year, [Gallup](https://news.gallup.com/poll/692522/surge-concern-immigration-abated.aspx) found 79 percent of Americans now believe immigration is a good thing for the United States, the highest level recorded this century.
 		- See also illegal immigration and crime
 	- > Despite the fact that his party controls both chambers of Congress, he and it have done little to try to make his policies permanent by enacting them legislatively.
 	- > What’s the endgame? The administration isn’t going to deport [14 million illegal immigrants](https://www.pewresearch.org/race-and-ethnicity/2025/08/21/u-s-unauthorized-immigrant-population-reached-a-record-14-million-in-2023/) before January 2029, and no one would like the economic consequences if it did.
-		- See also immigration and the economy
+		- See also "immigration and the economy"
 	- > It could be that they’re so drunk on ruthlessness that it’s become an end in itself
 	- > Or this might explain it: Trump and his party don’t intend to surrender power if they lose the next election.
+		- Chilling and extreme, but the full article makes a good case for it
