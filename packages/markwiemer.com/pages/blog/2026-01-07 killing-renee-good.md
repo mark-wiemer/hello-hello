@@ -1,7 +1,14 @@
 # 2026-01-07 Killing of Renée Good and subsequent actions
 
-These are early stage personal notes, highly subject to change. It's also unclear to me whether her legal name includes the diacritic (Renee vs Renée), but it seems [she preferred to use the diacritic](https://en.wikipedia.org/wiki/Talk:Killing_of_Renee_Good#Requested_move_10_January_2026).
+These are early stage personal notes, highly subject to change.
 
+None of this is legal advice.
+## A note on terms
+ It's unclear to me whether Good's legal first name includes the diacritic (Renee vs Renée), but it seems [she preferred to use the diacritic](https://en.wikipedia.org/wiki/Talk:Killing_of_Renee_Good#Requested_move_10_January_2026), so I'll use it too.
+
+I use the term illegal immigrant in these notes. I don't necessarily endorse it, but I also don't endorse any of the alternatives. I don't particularly care what short term we use to refer to people who reside in the United States without clear legal permission. I just want us to remember that they're people, they have rights, and after a trial they may very well be found to be legal immigrants who just hadn't completed the relevant paperwork due to their own ignorance or government failures.
+
+When I say "all people," I'm referring to all people under US sovereignty, unless otherwise specified. This includes native-born US citizens, naturalized US citizens, legal residents, legal immigrants, alleged illegal immigrants, immigrants known to be residing here illegally, and tourists. Probably some categories I'm forgetting, too. As long as they're on US soil, they're people under US sovereignty. Unless they're, like, foreign diplomats or their children or something. That's not so relevant here.
 ## Context
 
 ### Minutes
