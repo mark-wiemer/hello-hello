@@ -88,6 +88,12 @@ RE the term "illegal immigrant": I use the term most likely to be used by people
 
 - 2001-06-28 - Zadvydas v. Davis - Supreme Court
 - [2025-05-06 - Constitutional Rights Of Undocumented Immigrants: Do They Have Any? - Forbes](https://www.forbes.com/sites/andyjsemotiuk/2025/05/06/constitutional-rights-of--undocumented-immigrants-do-they-have-any/)
+- [Rights of Immigrants - American Bar Association](https://www.americanbar.org/groups/crsj/about/initiatives/civil-rights-civics-institute/rights-immigrants/)
+	- > You can help by ensuring that you or your passenger has a know your rights card.
+	- > The know your rights card should state that the 1 individual is exercising their right to remain silent.
+	- > The passenger may provide the card to the officer if questioned about their immigration status.
+	- > If the individual does not have a know your rights card, you could inform your passenger that they have the right to remain silent, and to refuse to speak with the officer unless they have an immigration attorney present.
+	- > Among other things, the passenger has the right to refuse to answer any questions about their immigration status, where they were born, or how they entered the US.
 
 #### Use of force
 
