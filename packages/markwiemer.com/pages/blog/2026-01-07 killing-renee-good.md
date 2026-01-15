@@ -64,17 +64,15 @@ Can federal agents disobey orders without quitting?
         - All federal agents take an oath to "uphold Constitution against all enemies"
         - An illegal order is an enemy to the Constitution!
 
-## Sources
+## Sources and notes
 
-### General
-
-#### Illegal orders
+### Illegal orders
 
 - [5 USC 3331: Oath of office](<https://uscode.house.gov/view.xhtml?req=(title:5%20section:3331%20edition:prelim)>)
     - An individual, except the President, elected or appointed to an office of honor or profit in the civil service or uniformed services, shall take the following oath: “I, AB, do solemnly swear (or affirm) that I will support and defend the Constitution of the United States against all enemies, foreign and domestic; that I will bear true faith and allegiance to the same; that I take this obligation freely, without any mental reservation or purpose of evasion; and that I will well and faithfully discharge the duties of the office on which I am about to enter. So help me God.” This section does not affect other oaths required by law.
 - [Whistleblower Protections](https://www.dol.gov/general/topics/whistleblower)
 
-#### Rights of illegal immigrants
+### Rights of illegal immigrants
 
 RE the term "illegal immigrant": I use the term most likely to be used by people that disagree with me. This focuses the issue on rights, not words. For now, I tolerate the use of this term and may write a blog post explaining my thoughts later.
 
@@ -102,11 +100,29 @@ RE the term "illegal immigrant": I use the term most likely to be used by people
 	- > If the individual does not have a know your rights card, you could inform your passenger that they have the right to remain silent, and to refuse to speak with the officer unless they have an immigration attorney present.
 	- > Among other things, the passenger has the right to refuse to answer any questions about their immigration status, where they were born, or how they entered the US.
 
-#### Use of force
+### Illegal immigration and crime
+This section is specific to illegal immigration, in an effort to determine just how much violence is at stake here.
+
+Also, a quick note: why can't we just catch these violent illegal immigrants the same way we catch other violent people? Just a thought.
+
+- [Illegal immigration to the United States and crime - Wikipedia](https://en.wikipedia.org/wiki/Illegal_immigration_to_the_United_States_and_crime)
+	- Detainment and deportation doesn't reduce crime
+		- > A 2016 study of an effort to reduce crime in [North Carolina](https://en.wikipedia.org/wiki/North_Carolina "North Carolina") by identifying and deporting illegal immigrants showed no correlation between increased deportation enforcement and local crime rates.[Citation 25](https://en.wikipedia.org/wiki/Illegal_immigration_to_the_United_States_and_crime#cite_note-25)
+		- > A 2018 study found no evidence that apprehensions of undocumented immigrants in districts in the United States reduced crime rates.[Citation 26](https://en.wikipedia.org/wiki/Illegal_immigration_to_the_United_States_and_crime#cite_note-26)
+	- Illegal immigrants are more peaceful than legal immigrants and US citizens
+		- > A 2020 study found that native-born US citizens are incarcerated at higher rates for homicide in Texas than undocumented immigrants.[Citation 27](https://en.wikipedia.org/wiki/Illegal_immigration_to_the_United_States_and_crime#cite_note-27)
+
+### Immigration and the economy
+(coming soon)
+### Use of force
 
 - [1791-12-15 - Fourth Amendment of the United States Constitution - Library of Congress](https://constitution.congress.gov/constitution/amendment-4/)
     - > The right of the people to be secure in their persons, houses, papers, and effects, against unreasonable searches and seizures, shall not be violated, and no Warrants shall issue, but upon probable cause, supported by Oath or affirmation, and particularly describing the place to be searched, and the persons or things to be seized.
     - (That's the entirety of the Fourth Amendment, 1791-12-15 is date of ratification)
+- 1985 - Tennessee v. Garner - Supreme Court
+	- overturns "fleeing felon" rule
+	- > It is not better that all felony suspects die than that they escape.
+	- there has to be some (other) good reason to use lethal force
 - 1989-05-15 - Graham v Connor et al - Supreme Court
     - the perspective of a reasonable officer on the scene
 - [2014-05-27 - Plumhoff v. Rickard - Supreme Court via Justia](https://supreme.justia.com/cases/federal/us/572/765/)
