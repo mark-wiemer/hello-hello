@@ -139,8 +139,7 @@ RE the term "illegal immigrant": I use the term most likely to be used by people
 - [2026-01-09 13:07 Pacific - Minneapolis ICE shooting: A minute-by-minute timeline of how Renee Nicole Good died - ABC News](https://abcnews.go.com/US/minneapolis-ice-shooting-minute-minute-timeline-renee-nicole/story?id=129021809)
 - [2026-01-09 - There Will Be More Renee Goods - Jeremiah Johnson for The Dispatch](https://thedispatch.com/article/renee-good-ice-federal-agents-death-immigration/)
     - [The Dispatch](https://en.wikipedia.org/wiki/The_Dispatch) is a center-right publication
-    - [Jeremiah Johnson](https://thedispatch.com/author/jeremiah-johnson/)
-        - Co-founder of [Center for New Liberalism](https://en.wikipedia.org/wiki/Center_for_New_Liberalism), which identifies as center-left
+    - [Jeremiah Johnson](https://thedispatch.com/author/jeremiah-johnson/) is the co-founder of [Center for New Liberalism](https://en.wikipedia.org/wiki/Center_for_New_Liberalism), which identifies as center-left
     - Good summary of all other incidents and pattern of system-wide poor training, escalating violence
 - [2026-01-13 - Truth - Hank Green on YouTube](https://www.youtube.com/watch?v=FyStPztM7eo)
     - "the goal ... is to establish dominance over the narrative as quickly and as forcefully as possible"
