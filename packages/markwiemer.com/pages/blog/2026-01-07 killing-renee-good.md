@@ -1,5 +1,7 @@
 # 2026-01-07 Killing of Renée Good and subsequent actions
 
+Last updated 2026-01-14
+
 These are early stage personal notes, highly subject to change.
 
 None of this is legal advice.
