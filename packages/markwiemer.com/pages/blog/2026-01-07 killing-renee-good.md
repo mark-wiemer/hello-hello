@@ -160,3 +160,24 @@ RE the term "illegal immigrant": I use the term most likely to be used by people
 	- Vehicle does not move, video ends
 	- Unclear if he is arrested or just detained
 	- Unclear if/when he was released
+- [2026-01-14 - The Goon Squad - Nick Catoggio for The Dispatch](https://thedispatch.com/newsletter/boilingfrogs/ice-minneapolis-trump-immigration-polling/)
+	- [The Dispatch](https://en.wikipedia.org/wiki/The_Dispatch) is a center-right publication
+	- [Nick Catoggio](https://thedispatch.com/author/nick-catoggio/) writes daily newsletters for The Dispatch
+	- "ICE is discrediting immigration enforcement."
+	- Data on American sentiment around Good, ICE, and immigration
+	- > It’s no exaggeration to say that a renegade ICE is the whole point of the second Trump administration.
+	- > It makes no sense as a strategy for effective law enforcement—but lots of sense as a pageant of domineering law-and-order assertiveness.
+	- > The Trump administration _wants_ confrontation.
+	- > Its priority is to intimidate its cultural enemies with heavy-handed displays of authority
+	- > Normally when a federal agent shoots someone fatally, the criminal arm of the DOJ’s Civil Rights Division will [look into it](https://www.ms.now/news/doj-civil-rights-division-officials-quit-harmeet-dhillon) to make sure the use of force was proper. In Good’s case, division head Harmeet Dhillon has already informed deputies that she won’t open an investigation, according to sources who spoke to the [_New York Times_](https://www.nytimes.com/2026/01/13/us/prosecutors-doj-resignation-ice-shooting.html?partner=slack&smid=sl-share).
+		- So much for "There will be an investigation" :(
+		- (Have not read those links, no personal knowledge here)
+	- > [ICE is] reportedly now planning a “wartime recruitment” strategy that will [target gun shows and military enthusiasts](https://www.washingtonpost.com/technology/2025/12/31/ice-wartime-recruitment-push/)—not the sort of people, one would think, whose first impulse during confrontations will be to de-escalate.
+		- Have not read that link
+	- > In July of last year, [Gallup](https://news.gallup.com/poll/692522/surge-concern-immigration-abated.aspx) found 79 percent of Americans now believe immigration is a good thing for the United States, the highest level recorded this century.
+		- See also illegal immigration and crime
+	- > Despite the fact that his party controls both chambers of Congress, he and it have done little to try to make his policies permanent by enacting them legislatively.
+	- > What’s the endgame? The administration isn’t going to deport [14 million illegal immigrants](https://www.pewresearch.org/race-and-ethnicity/2025/08/21/u-s-unauthorized-immigrant-population-reached-a-record-14-million-in-2023/) before January 2029, and no one would like the economic consequences if it did.
+		- See also immigration and the economy
+	- > It could be that they’re so drunk on ruthlessness that it’s become an end in itself
+	- > Or this might explain it: Trump and his party don’t intend to surrender power if they lose the next election.
