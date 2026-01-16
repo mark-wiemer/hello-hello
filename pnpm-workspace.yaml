@@ -1,1 +1,3 @@
 # https://pnpm.io/pnpm-workspace_yaml
+packages:
+  - "packages/astro"
