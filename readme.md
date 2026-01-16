@@ -49,6 +49,7 @@ Historically, I haven't followed a particular commit message style. But [Mocha](
 - [Rust](./packages/rust/readme.md): Programming language emphasizing safety and performance
 - [TypeScript](./packages/typescript/readme.md): Programming language that adds types to JavaScript
 - [Visual Studio Code](./packages/vscode/readme.md): IDE
+- [Website recommendations](./packages/web/readme.md): Recommendations for every site I maintain
 
 ## License
 
