@@ -79,7 +79,7 @@ Can federal agents disobey orders without quitting?
 
 ## Rights of illegal immigrants
 
-RE the term "illegal immigrant": I use the term most likely to be used by people that disagree with me. This focuses the issue on rights, not words. For now, I tolerate the use of this term and may write a blog post explaining my thoughts later.
+See also [2026-01-13 - Why illegal immigrants have rights - markwiemer.com](https://markwiemer.com/blog/human-immigrant-rights)
 
 - United States Constitution
     - Fifth Amendment: "No person shall be… deprived of life, liberty, or property, without due process of law."
@@ -116,6 +116,7 @@ Also, a quick note: why can't we just catch these violent illegal immigrants the
 		- > A 2018 study found no evidence that apprehensions of undocumented immigrants in districts in the United States reduced crime rates.[Citation 26](https://en.wikipedia.org/wiki/Illegal_immigration_to_the_United_States_and_crime#cite_note-26)
 	- Illegal immigrants are more peaceful than legal immigrants and US citizens
 		- > A 2020 study found that native-born US citizens are incarcerated at higher rates for homicide in Texas than undocumented immigrants.[Citation 27](https://en.wikipedia.org/wiki/Illegal_immigration_to_the_United_States_and_crime#cite_note-27)
+- [2024-04-11 - Explainer: Trump says migrants are fueling violent crime. Here is what the research shows - Reuters](https://www.reuters.com/world/us/trump-focuses-migrants-crime-here-is-what-research-shows-2024-04-11/)
 
 ## Immigration and the economy
 (coming soon)
