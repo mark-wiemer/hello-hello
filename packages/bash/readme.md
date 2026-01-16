@@ -10,6 +10,10 @@ This [How-To Geek article on the difference between terminal, shell, and console
   - `--posix` aligns more closely with POSIX. However, I don't use this flag.
   - "For almost every purpose, shell functions are preferable to aliases."
 
+## windows/.bashrc
+
+I don't use Windows enough to try to generalize my AI-generated "create symlink" script there, so just copy paste that file where you need it!
+
 <a id="link-bashrc"></a>
 <a id="bashrc"></a>
 

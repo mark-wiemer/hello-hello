@@ -39,6 +39,7 @@ Historically, I haven't followed a particular commit message style. But [Mocha](
 - [Melvor Idle](./packages/melvor/readme.md): A heavily moddable RuneScape-inspired game
 - [Mocha](./packages/mocha): A JavaScript test framework for Node.js & the browser
 - [mod.io](./packages/mod.io/readme.md): A site for hosting game mods
+- [New machine](./packages/new-machine/readme.md): Setup steps for any new machine
 - [pnpm](./packages/pnpm/readme.md): Node package manager, alternative to npm
 - [POSIX](./packages/posix/readme.md): Set of cross-OS standards by IEEE
 - [React](./packages/react/readme.md): Library for creating complex interactive websites
