@@ -17,10 +17,6 @@ Workflow files must be in `/.github/workflows`, no subfolders allowed.
 
 ## Projects
 
-### codespaces
-
-[Hello GitHub Codespaces](./codespaces/readme.md)
-
-### rest
-
-[Hello GitHub REST API](./rest/readme.md)
+- [Codespaces](./codespaces/readme.md)
+- [Pages](./pages/readme.md)
+- [REST API](./rest/readme.md)

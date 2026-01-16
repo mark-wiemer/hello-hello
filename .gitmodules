@@ -7,3 +7,6 @@
 [submodule "packages/ahkpp/packages/ahkpp.com"]
 	path = packages/ahkpp/packages/ahkpp.com
 	url = https://github.com/mark-wiemer/ahkpp.com.git
+[submodule "packages/github/pages"]
+	path = packages/github/pages
+	url = https://github.com/mark-wiemer/hello-github-pages
