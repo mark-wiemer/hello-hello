@@ -52,4 +52,4 @@ Expected behavior: When hovering over a dependency key in a package.json file, V
 
 ![VS Code hover on package.json dependency key](hover-expected.png)
 
-This goes away if you have a setting like `files.associations["*.json"] = "jsonc"`. Ensure the "\*.json" files are associated with the "json" language (default) and you should OK.
+This goes away if you have a setting like `files.associations["*.json"] = "jsonc"`. Ensure the "\*.json" files are associated with the "json" language (default) and you should be OK.
