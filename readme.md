@@ -26,28 +26,28 @@ Historically, I haven't followed a particular commit message style. But [Mocha](
 
 ## Index
 
-- [AHK++](./packages/ahkpp/readme.md): AHK++ is a language support IDE extension for AutoHotkey v1 and v2
-- [Bash](./packages/bash/readme.md): A cross-platform shell
-- [Git](./packages/git/readme.md): A version control system, includes notes on Git LFS
-- [GitHub](./packages/github/readme.md): The most popular DevOps platform
+- [AHK++](./packages/ahkpp/readme.md): IDE extension for AHK v1 and v2 language support
+- [Bash](./packages/bash/readme.md): Cross-platform shell
+- [Git](./packages/git/readme.md): Version control system, includes notes on Git LFS
+- [GitHub](./packages/github/readme.md): DevOps platform
   - [Codespaces](./packages/github/codespaces/readme.md)
   - [Pages](./packages/github/pages/readme.md)
   - [REST API](./packages/github/rest/readme.md)
-- [JavaScript](./packages/javascript/readme.md): A programming language originally for adding interactivity to websites
+- [JavaScript](./packages/javascript/readme.md): Programming language for adding interactivity to websites
   - [jq (jqlang)](./packages/javascript/jq/readme.md): CLI tool for editing JSON files
-- [luanti](./packages/luanti/readme.md): An open-source engine, distribution platform, and client for "boxel" games
+- [luanti](./packages/luanti/readme.md): Open-source engine, distribution platform, and client for "boxel" games
 - [markwiemer.com](./packages/markwiemer.com/readme.md): My personal website!
-- [Melvor Idle](./packages/melvor/readme.md): A heavily moddable RuneScape-inspired game
-- [Mocha](./packages/mocha): A JavaScript test framework for Node.js & the browser
-- [mod.io](./packages/mod.io/readme.md): A site for hosting game mods
+- [Melvor Idle](./packages/melvor/readme.md): Heavily moddable RuneScape-inspired game
+- [Mocha](./packages/mocha): JavaScript test framework for Node.js & the browser
+- [mod.io](./packages/mod.io/readme.md): Site for hosting game mods
 - [New machine](./packages/new-machine/readme.md): Setup steps for any new machine
 - [pnpm](./packages/pnpm/readme.md): Node package manager, alternative to npm
 - [POSIX](./packages/posix/readme.md): Set of cross-OS standards by IEEE
 - [React](./packages/react/readme.md): Library for creating complex interactive websites
 - [Remark](./packages/remark/readme.md): Markdown toolchain for JS
-- [Rust](./packages/rust/readme.md): A programming language emphasizing safety and performance
-- [TypeScript](./packages/typescript/readme.md): A programming language that adds types to JavaScript
-- [Visual Studio Code](./packages/vscode/readme.md): A popular IDE
+- [Rust](./packages/rust/readme.md): Programming language emphasizing safety and performance
+- [TypeScript](./packages/typescript/readme.md): Programming language that adds types to JavaScript
+- [Visual Studio Code](./packages/vscode/readme.md): IDE
 
 ## License
 
