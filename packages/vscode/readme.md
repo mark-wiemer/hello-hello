@@ -20,6 +20,8 @@ chmod +x ./link-settings.sh
 
 You can also [enable settings sync](https://code.visualstudio.com/docs/configure/settings-sync). I use my GitHub account (not Microsoft account) for this. This works both locally and in-browser.
 
+Note: this does not currently link `keybindings.json`, ref [issue 21: Symlink VS Code keybindings.json](https://github.com/mark-wiemer/hello-hello/issues/21)
+
 ## Managing
 
 ### Sorting settings.json
