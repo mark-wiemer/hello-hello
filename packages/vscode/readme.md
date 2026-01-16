@@ -24,6 +24,14 @@ Note: this does not currently link `keybindings.json`, ref [issue 21: Symlink VS
 
 ## Managing
 
+### Multi-root workspaces
+
+Command Palette > "Add Folder to Workspace..." > "path/to/packages/astro"
+
+Now Astro and its `.vscode` folder are respected!
+
+See [Multi-root Workspaces - Visual Studio Code](https://code.visualstudio.com/docs/editing/workspaces/multi-root-workspaces) for more details.
+
 ### Sorting settings.json
 
 ```bash
