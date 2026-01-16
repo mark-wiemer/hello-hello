@@ -1,5 +1,35 @@
 # Hello Git
 
+## .gitconfig
+
+Create a symlink from this tracked file to the location Git reads:
+
+```sh
+ln -sf .gitconfig ~/.gitconfig
+```
+
+Create `~/.gitconfig.local` that looks like this:
+
+```properties
+[user]
+    email = someaddress@example.com
+```
+
+Validate:
+
+```sh
+echo "Email: $(git config user.email)" && echo "Name: $(git config user.name)"
+```
+
+should give:
+
+```
+Email: someaddress@example.com
+Name: Mark Wiemer
+```
+
+## Temporarily ignore some files
+
 [How to ignore new changes to a tracked file with git](https://stackoverflow.com/questions/23673174/how-to-ignore-new-changes-to-a-tracked-file-with-git)
 
 ```sh
