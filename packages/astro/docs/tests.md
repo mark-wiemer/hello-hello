@@ -7,6 +7,17 @@ When moving the site to a different framework, be sure to check the following:
 1. External links open in a new tab
 1. Accessibility Insights FastPass passes
 
+## Userspace links
+
+These links should always redirect somewhere useful:
+
+- /games
+- /games/dodge-the-creeps
+- /games/racetrack-tycoon
+- /games/snake
+- /games/\*/index.html (any index.html file under the games folder, including /games/index.html)
+- todo more
+
 ## Link state matrix
 
 There are three colors: unvisited, visited, and plaintext. Plaintext color is, well, the color of plaintext.
