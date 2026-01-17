@@ -24,6 +24,8 @@ concurrency:
 
 jobs:
   deploy:
+    env:
+      SITE_DIR: packages/markwiemer.com
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -42,14 +44,16 @@ jobs:
         run: npm install -g pnpm
       - name: Install dependencies
         run: pnpm install
+        working-directory: ${{ env.SITE_DIR }}
       - name: Build static content
         run: pnpm run build
+        working-directory: ${{ env.SITE_DIR }}
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "dist"
+          path: "${{ env.SITE_DIR }}/dist"
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
