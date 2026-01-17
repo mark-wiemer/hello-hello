@@ -1,0 +1,20 @@
+---
+import { Image } from "astro:assets";
+
+interface Props {
+  alt: string;
+  src:
+    | ImageMetadata
+    | Promise<{
+        default: ImageMetadata;
+      }>;
+  caption: string;
+}
+---
+
+<figure>
+  <Image src={Astro.props.src} alt={Astro.props.alt} style="width: auto; height: auto;" />
+  <figcaption>
+    {Astro.props.caption}
+  </figcaption>
+</figure>
