@@ -414,6 +414,7 @@
   "git.replaceTagsWhenPull": true,
   "github.copilot.enable": {
     "*": false,
+    "astro": true,
     "csharp": true,
     "markdown": false,
     "plaintext": true,
