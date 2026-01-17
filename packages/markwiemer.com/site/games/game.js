@@ -6,15 +6,15 @@
  * @returns {Result<{canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D}>}
  */
 export function getDomElements() {
-    const canvas = document.querySelector("canvas");
-    if (canvas === null) {
-        return { success: false, error: "Failed to get canvas" };
-    }
-    const ctx = canvas.getContext("2d");
-    if (ctx === null) {
-        return { success: false, error: "Failed to get canvas context" };
-    }
-    return { success: true, value: { canvas, ctx } };
+  const canvas = document.querySelector("canvas");
+  if (canvas === null) {
+    return { success: false, error: "Failed to get canvas" };
+  }
+  const ctx = canvas.getContext("2d");
+  if (ctx === null) {
+    return { success: false, error: "Failed to get canvas context" };
+  }
+  return { success: true, value: { canvas, ctx } };
 }
 
 /**
@@ -29,11 +29,11 @@ export function getDomElements() {
  * - divisible by boardSize
  */
 export function calcCanvasSize(windowWidth, windowHeight, relativeSize, boardSize) {
-    // console.debug(`getCanvasSize(${windowWidth}, ${windowHeight}, ${relativeSize}, ${boardSize})`);
-    const rawSideLength = Math.min(windowWidth, windowHeight) * relativeSize;
-    const roundedSideLength = Math.floor(rawSideLength / boardSize) * boardSize;
-    // console.debug(`getCanvasSize returning ${roundedSideLength}`);
-    return roundedSideLength;
+  // console.debug(`getCanvasSize(${windowWidth}, ${windowHeight}, ${relativeSize}, ${boardSize})`);
+  const rawSideLength = Math.min(windowWidth, windowHeight) * relativeSize;
+  const roundedSideLength = Math.floor(rawSideLength / boardSize) * boardSize;
+  // console.debug(`getCanvasSize returning ${roundedSideLength}`);
+  return roundedSideLength;
 }
 
 /**
@@ -42,8 +42,8 @@ export function calcCanvasSize(windowWidth, windowHeight, relativeSize, boardSiz
  * @param {HTMLCanvasElement} canvas
  */
 export function setCanvasSize(size, canvas) {
-    canvas.setAttribute("width", size);
-    canvas.setAttribute("height", size);
+  canvas.setAttribute("width", size);
+  canvas.setAttribute("height", size);
 }
 
 /**
@@ -54,10 +54,10 @@ export function setCanvasSize(size, canvas) {
  * @returns {void} But returns ctx.fillStyle to previous value
  */
 export function fillCell(cell, color, cellSize, ctx) {
-    const oldFillStyle = ctx.fillStyle;
-    ctx.fillStyle = color;
-    ctx.fillRect(cell.x * cellSize, cell.y * cellSize, cellSize, cellSize, color);
-    ctx.fillStyle = oldFillStyle;
+  const oldFillStyle = ctx.fillStyle;
+  ctx.fillStyle = color;
+  ctx.fillRect(cell.x * cellSize, cell.y * cellSize, cellSize, cellSize, color);
+  ctx.fillStyle = oldFillStyle;
 }
 //#endregion Canvas an drawing
 
@@ -70,21 +70,21 @@ export function fillCell(cell, color, cellSize, ctx) {
  * @returns {import("../game.js").Vector2D | undefined} Direction vector or undefined if key doesn't match
  */
 export function keyToDir(key, dirs) {
-    switch (key) {
-        case "w":
-        case "ArrowUp":
-            return dirs.up;
-        case "s":
-        case "ArrowDown":
-            return dirs.down;
-        case "a":
-        case "ArrowLeft":
-            return dirs.left;
-        case "d":
-        case "ArrowRight":
-            return dirs.right;
-    }
-    return undefined;
+  switch (key) {
+    case "w":
+    case "ArrowUp":
+      return dirs.up;
+    case "s":
+    case "ArrowDown":
+      return dirs.down;
+    case "a":
+    case "ArrowLeft":
+      return dirs.left;
+    case "d":
+    case "ArrowRight":
+      return dirs.right;
+  }
+  return undefined;
 }
 //#endregion User input
 
@@ -125,10 +125,10 @@ export function keyToDir(key, dirs) {
  * @type {Directions}
  */
 export const dirs = {
-    up: { x: 0, y: -1 },
-    down: { x: 0, y: 1 },
-    left: { x: -1, y: 0 },
-    right: { x: 1, y: 0 },
+  up: { x: 0, y: -1 },
+  down: { x: 0, y: 1 },
+  left: { x: -1, y: 0 },
+  right: { x: 1, y: 0 },
 };
 
 /**
@@ -138,7 +138,7 @@ export const dirs = {
  * @returns {import("../game.js").Vector2D} Sum of two vectors
  */
 export function addVector2D(a, b) {
-    return { x: a.x + b.x, y: a.y + b.y };
+  return { x: a.x + b.x, y: a.y + b.y };
 }
 
 /**
@@ -148,7 +148,7 @@ export function addVector2D(a, b) {
  * @returns {boolean} True if vectors have same x and y components
  */
 export function eqVector2D(a, b) {
-    return a.x === b.x && a.y === b.y;
+  return a.x === b.x && a.y === b.y;
 }
 
 /**
@@ -157,7 +157,7 @@ export function eqVector2D(a, b) {
  * @returns {string} String in format "(x, y)"
  */
 export function strVector2D(v) {
-    return `(${v.x}, ${v.y})`;
+  return `(${v.x}, ${v.y})`;
 }
 //#endregion Vectors
 
@@ -177,31 +177,31 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 export function klona(val) {
-    let k, out, tmp;
+  let k, out, tmp;
 
-    if (Array.isArray(val)) {
-        out = Array((k = val.length));
-        while (k--) out[k] = (tmp = val[k]) && typeof tmp === "object" ? klona(tmp) : tmp;
-        return out;
+  if (Array.isArray(val)) {
+    out = Array((k = val.length));
+    while (k--) out[k] = (tmp = val[k]) && typeof tmp === "object" ? klona(tmp) : tmp;
+    return out;
+  }
+
+  if (Object.prototype.toString.call(val) === "[object Object]") {
+    out = {}; // null
+    for (k in val) {
+      if (k === "__proto__") {
+        Object.defineProperty(out, k, {
+          value: klona(val[k]),
+          configurable: true,
+          enumerable: true,
+          writable: true,
+        });
+      } else {
+        out[k] = (tmp = val[k]) && typeof tmp === "object" ? klona(tmp) : tmp;
+      }
     }
+    return out;
+  }
 
-    if (Object.prototype.toString.call(val) === "[object Object]") {
-        out = {}; // null
-        for (k in val) {
-            if (k === "__proto__") {
-                Object.defineProperty(out, k, {
-                    value: klona(val[k]),
-                    configurable: true,
-                    enumerable: true,
-                    writable: true,
-                });
-            } else {
-                out[k] = (tmp = val[k]) && typeof tmp === "object" ? klona(tmp) : tmp;
-            }
-        }
-        return out;
-    }
-
-    return val;
+  return val;
 }
 //#endregion Klona

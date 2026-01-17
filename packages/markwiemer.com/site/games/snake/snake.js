@@ -3,41 +3,38 @@ import * as core from "../game.js";
 main();
 
 function main() {
-    const getDomElementsResult = core.getDomElements();
-    if (!getDomElementsResult.success) {
-        console.error(getDomElementsResult.error);
-        return -1;
-    }
-    const { canvas, ctx } = getDomElementsResult.value;
-    /** Fraction of shorter side of screen to take up */
-    // includes small margin for scroll window for now
-    const relativeSize = 0.9;
+  const getDomElementsResult = core.getDomElements();
+  if (!getDomElementsResult.success) {
+    console.error(getDomElementsResult.error);
+    return -1;
+  }
+  const { canvas, ctx } = getDomElementsResult.value;
+  /** Fraction of shorter side of screen to take up */
+  // includes small margin for scroll window for now
+  const relativeSize = 0.9;
 
-    /** Number of cells per side */
-    const boardSize = 32;
-    const canvasSize = core.calcCanvasSize(
-        window.innerWidth,
-        window.innerHeight,
-        relativeSize,
-        boardSize,
-    );
-    core.setCanvasSize(canvasSize, canvas);
-    const cellSize = canvasSize / boardSize;
+  /** Number of cells per side */
+  const boardSize = 32;
+  const canvasSize = core.calcCanvasSize(
+    window.innerWidth,
+    window.innerHeight,
+    relativeSize,
+    boardSize,
+  );
+  core.setCanvasSize(canvasSize, canvas);
+  const cellSize = canvasSize / boardSize;
 
-    /** @type {GameState} */
-    let state = calcInitialState(boardSize, cellSize, ctx, core.dirs);
+  /** @type {GameState} */
+  let state = calcInitialState(boardSize, cellSize, ctx, core.dirs);
 
-    console.debug("Starting game with state:");
-    console.debug(state);
-    drawState(state);
+  console.debug("Starting game with state:");
+  console.debug(state);
+  drawState(state);
 
-    document.addEventListener("DOMContentLoaded", function () {
-        document.addEventListener("keydown", (e) => (state = handleInput(e, core.dirs, state)));
-        state.interval = setInterval(
-            () => (state = tick(core.klona(state))),
-            Math.floor(1000.0 / 16),
-        );
-    });
+  document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("keydown", (e) => (state = handleInput(e, core.dirs, state)));
+    state.interval = setInterval(() => (state = tick(core.klona(state))), Math.floor(1000.0 / 16));
+  });
 }
 
 /**
@@ -49,21 +46,21 @@ function main() {
  * @returns {GameState} a starting game state
  */
 function calcInitialState(boardSize, cellSize, ctx, dirs) {
-    /** @type {GameState} */
-    let state = {
-        boardSize,
-        cellSize,
-        ctx,
-        snakeDir: dirs.down,
-        snakeDirs: [],
-        snakePos: [
-            { x: 0, y: 2 },
-            { x: 0, y: 1 },
-            { x: 0, y: 0 },
-        ],
-    };
-    state.applePos = calcApplePos(state);
-    return state;
+  /** @type {GameState} */
+  let state = {
+    boardSize,
+    cellSize,
+    ctx,
+    snakeDir: dirs.down,
+    snakeDirs: [],
+    snakePos: [
+      { x: 0, y: 2 },
+      { x: 0, y: 1 },
+      { x: 0, y: 0 },
+    ],
+  };
+  state.applePos = calcApplePos(state);
+  return state;
 }
 
 /**
@@ -72,21 +69,21 @@ function calcInitialState(boardSize, cellSize, ctx, dirs) {
  * @returns {import("../game.js").Vector2D} A position that doesn't overlap with the snake
  */
 function calcApplePos(state) {
-    let foundValidPos = false;
-    do {
-        /** @type {import("../game.js").Vector2D} */
-        let applePos = {
-            x: Math.floor(Math.random() * state.boardSize),
-            y: Math.floor(Math.random() * state.boardSize),
-        };
-        foundValidPos = true; // assume it worked
-        // console.debug(`New apple pos: ${core.strVector2D(applePos)}`);
-        if (state.snakePos.some((pos) => core.eqVector2D(pos, applePos))) {
-            foundValidPos = false;
-            // console.debug("New apple position overlaps snake, trying again");
-        }
-        if (foundValidPos) return applePos;
-    } while (!foundValidPos);
+  let foundValidPos = false;
+  do {
+    /** @type {import("../game.js").Vector2D} */
+    let applePos = {
+      x: Math.floor(Math.random() * state.boardSize),
+      y: Math.floor(Math.random() * state.boardSize),
+    };
+    foundValidPos = true; // assume it worked
+    // console.debug(`New apple pos: ${core.strVector2D(applePos)}`);
+    if (state.snakePos.some((pos) => core.eqVector2D(pos, applePos))) {
+      foundValidPos = false;
+      // console.debug("New apple position overlaps snake, trying again");
+    }
+    if (foundValidPos) return applePos;
+  } while (!foundValidPos);
 }
 
 /**
@@ -97,15 +94,15 @@ function calcApplePos(state) {
  * @param {GameState} state
  */
 function drawState(state) {
-    // draw black background
-    state.ctx.fillStyle = "black";
-    state.ctx.fillRect(0, 0, state.cellSize * state.boardSize, state.cellSize * state.boardSize);
-    // draw each snake cell
-    for (const cell of state.snakePos) {
-        core.fillCell(cell, "cornflowerblue", state.cellSize, state.ctx);
-    }
-    // draw apple
-    core.fillCell(state.applePos, "darkred", state.cellSize, state.ctx);
+  // draw black background
+  state.ctx.fillStyle = "black";
+  state.ctx.fillRect(0, 0, state.cellSize * state.boardSize, state.cellSize * state.boardSize);
+  // draw each snake cell
+  for (const cell of state.snakePos) {
+    core.fillCell(cell, "cornflowerblue", state.cellSize, state.ctx);
+  }
+  // draw apple
+  core.fillCell(state.applePos, "darkred", state.cellSize, state.ctx);
 }
 
 /**
@@ -116,14 +113,14 @@ function drawState(state) {
  * @returns {GameState} updated game state (not pure)
  */
 function tick(newState) {
-    if (newState.paused) return newState;
-    calcGameOver(newState);
-    if (newState.gameOver) return newState;
-    moveSnake(newState);
-    drawState(newState);
-    // console.debug("tick, new state:");
-    // console.debug(newState);
-    return newState;
+  if (newState.paused) return newState;
+  calcGameOver(newState);
+  if (newState.gameOver) return newState;
+  moveSnake(newState);
+  drawState(newState);
+  // console.debug("tick, new state:");
+  // console.debug(newState);
+  return newState;
 }
 
 /**
@@ -133,32 +130,32 @@ function tick(newState) {
  * @param {GameState} state
  */
 function calcGameOver(state) {
-    if (state.gameOver) return;
-    const newDir = state.snakeDirs[0] ?? state.snakeDir;
-    const newHeadPos = core.addVector2D(state.snakePos[0], newDir);
-    // If crashed into wall
-    if (
-        newHeadPos.x < 0 ||
-        newHeadPos.x >= state.boardSize ||
-        newHeadPos.y < 0 ||
-        newHeadPos.y >= state.boardSize
-    ) {
-        // console.debug("Game over, crashed into wall");
-        state.gameOver = true;
-        return;
-    }
-    // If crashed into self
-    if (
-        state.snakePos
-            // first 4 positions can't intersect with new head pos
-            // last position intersecting isn't a problem, it will move out of the way
-            .slice(3, state.snakePos.length - 1)
-            .some((pos) => core.eqVector2D(pos, newHeadPos))
-    ) {
-        // console.debug("Game over, crashed into self");
-        state.gameOver = true;
-        return;
-    }
+  if (state.gameOver) return;
+  const newDir = state.snakeDirs[0] ?? state.snakeDir;
+  const newHeadPos = core.addVector2D(state.snakePos[0], newDir);
+  // If crashed into wall
+  if (
+    newHeadPos.x < 0 ||
+    newHeadPos.x >= state.boardSize ||
+    newHeadPos.y < 0 ||
+    newHeadPos.y >= state.boardSize
+  ) {
+    // console.debug("Game over, crashed into wall");
+    state.gameOver = true;
+    return;
+  }
+  // If crashed into self
+  if (
+    state.snakePos
+      // first 4 positions can't intersect with new head pos
+      // last position intersecting isn't a problem, it will move out of the way
+      .slice(3, state.snakePos.length - 1)
+      .some((pos) => core.eqVector2D(pos, newHeadPos))
+  ) {
+    // console.debug("Game over, crashed into self");
+    state.gameOver = true;
+    return;
+  }
 }
 
 /**
@@ -173,12 +170,12 @@ function calcGameOver(state) {
  * @param {GameState} state
  */
 function moveSnake(state) {
-    const oldHead = state.snakePos[0];
-    state.snakeDir = state.snakeDirs.shift() ?? state.snakeDir;
-    const newHead = core.addVector2D(oldHead, state.snakeDir);
-    state.snakePos.unshift(newHead);
-    if (core.eqVector2D(newHead, state.applePos)) state.applePos = calcApplePos(state);
-    else state.snakePos.pop();
+  const oldHead = state.snakePos[0];
+  state.snakeDir = state.snakeDirs.shift() ?? state.snakeDir;
+  const newHead = core.addVector2D(oldHead, state.snakeDir);
+  state.snakePos.unshift(newHead);
+  if (core.eqVector2D(newHead, state.applePos)) state.applePos = calcApplePos(state);
+  else state.snakePos.pop();
 }
 
 /**
@@ -190,37 +187,37 @@ function moveSnake(state) {
  * @param {GameState} state
  */
 function handleInput(e, dirs, state) {
-    const newState = core.klona(state);
-    // console.debug("keydown", e);
-    // Debug mode: tick then pause
-    if (e.key === " ") {
-        newState.paused = false;
-        tick(newState);
-        newState.paused = true;
-        return newState;
-    }
-    // Change direction
-    const newDir = core.keyToDir(e.key, dirs);
-    if (newDir) {
-        // console.debug("newDir", newDir);
-        if (isValidDir(newState, newDir)) {
-            newState.snakeDirs.push(newDir);
-        } else {
-            // console.debug("New direction not valid, ignoring");
-        }
-        return newState;
-    }
-    // Pause and unpause
-    if (e.key === "Escape") {
-        // console.debug(`${newState.paused ? "Unpausing" : "Pausing"}`);
-        newState.paused = !newState.paused;
-        return newState;
-    }
-    if (e.key === "r") {
-        return calcInitialState(state.boardSize, state.cellSize, state.ctx, dirs);
-    }
-    // console.debug(`Unused key pressed: '${e.key}'`);
+  const newState = core.klona(state);
+  // console.debug("keydown", e);
+  // Debug mode: tick then pause
+  if (e.key === " ") {
+    newState.paused = false;
+    tick(newState);
+    newState.paused = true;
     return newState;
+  }
+  // Change direction
+  const newDir = core.keyToDir(e.key, dirs);
+  if (newDir) {
+    // console.debug("newDir", newDir);
+    if (isValidDir(newState, newDir)) {
+      newState.snakeDirs.push(newDir);
+    } else {
+      // console.debug("New direction not valid, ignoring");
+    }
+    return newState;
+  }
+  // Pause and unpause
+  if (e.key === "Escape") {
+    // console.debug(`${newState.paused ? "Unpausing" : "Pausing"}`);
+    newState.paused = !newState.paused;
+    return newState;
+  }
+  if (e.key === "r") {
+    return calcInitialState(state.boardSize, state.cellSize, state.ctx, dirs);
+  }
+  // console.debug(`Unused key pressed: '${e.key}'`);
+  return newState;
 }
 
 /**
@@ -231,8 +228,8 @@ function handleInput(e, dirs, state) {
  * @returns {boolean} Whether the given dir can be queued onto the given state
  */
 function isValidDir(state, dir) {
-    const relevantDir = state.snakeDirs[state.snakeDirs.length - 1] ?? state.snakeDir;
-    return (relevantDir.x + dir.x) % 2 !== 0;
+  const relevantDir = state.snakeDirs[state.snakeDirs.length - 1] ?? state.snakeDir;
+  return (relevantDir.x + dir.x) % 2 !== 0;
 }
 
 /**

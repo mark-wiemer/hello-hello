@@ -1,17 +1,17 @@
 {
-    "type": "module",
-    "scripts": {
-        "build": "node build.js && npm run build:format && echo \"Blog build complete\"",
-        "build:format": "prettier ../../site/blog/** --write",
-        "clean": "find ../../site/blog -type f ! -name 'index.html' -exec rimraf {} +"
-    },
-    "dependencies": {
-        "prettier": "^3.6.2",
-        "rehype-external-links": "^3.0.0",
-        "rehype-raw": "^7.0.0",
-        "rehype-stringify": "^10.0.1",
-        "remark": "^15.0.1",
-        "remark-rehype": "^11.1.2",
-        "rimraf": "^6.0.1"
-    }
+  "type": "module",
+  "scripts": {
+    "build": "node build.js && npm run build:format && echo \"Blog build complete\"",
+    "build:format": "prettier ../../site/blog/** --write",
+    "clean": "find ../../site/blog -type f ! -name 'index.html' -exec rimraf {} +"
+  },
+  "dependencies": {
+    "prettier": "^3.6.2",
+    "rehype-external-links": "^3.0.0",
+    "rehype-raw": "^7.0.0",
+    "rehype-stringify": "^10.0.1",
+    "remark": "^15.0.1",
+    "remark-rehype": "^11.1.2",
+    "rimraf": "^6.0.1"
+  }
 }

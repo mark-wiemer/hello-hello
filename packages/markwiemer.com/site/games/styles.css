@@ -1,9 +1,9 @@
 .gameContainer {
-    display: flex;
-    align-items: center;
-    padding-top: 1px;
+  display: flex;
+  align-items: center;
+  padding-top: 1px;
 }
 
 .gameCanvas {
-    outline: 1px solid white;
+  outline: 1px solid white;
 }
