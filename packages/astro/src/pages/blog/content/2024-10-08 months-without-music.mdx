@@ -2,15 +2,20 @@
 postTitle: "Months without music: a divorce story"
 ---
 
-import CaptionedImage from "@/components/CaptionedImage.astro";
+import CustomImage from "@/components/CustomImage.astro";
 import AmberWynonna from "@/assets/2024-03-XX Amber Wynonna.jpg";
+import WynonnaCrate from "@/assets/2024-XX-XX Wynonna crate.jpg";
+import WeddingProfile from "@/assets/2024-09-14 wedding profile.jpg";
+import AHKPPReleases from "@/assets/2024-10-07 recent ahkpp releases.png";
+import WynonnaRaincoat from "@/assets/2024-04-29 Wynonna raincoat outside large.jpg";
 
 Originally posted at <a href="https://markwiemer.medium.com/months-without-music-a-divorce-story-f3cec31c9879">markwiemer<wbr />.medium<wbr />.com</a> on 2024-10-08
 
-<CaptionedImage
+<CustomImage
   src={AmberWynonna}
   alt="A red-orange lab, Amber, lying lazily next to an Australian Shepherd, Wynonna, also lying down"
   caption="Amber, lying lazily next to her little sister, Wynonna, who's always eager for pets"
+  eager
 />
 
 I didn't get covid until December 2023. I didn't get healthy again until March, three months later. I thoroughly enjoyed scheduling an appointment for the Long Covid clinic in February only to learn they didn't have any openings until May. My doctor told me I was lucky to get in so early. I told him I didn't plan to stay bedridden for the next three months.
@@ -37,7 +42,7 @@ I returned to work in March to the highest severity incident my team had ever be
 
 ---
 
-<img src="/assets/2024-XX-XX Wynonna crate.jpg" alt="Wynonna in her crate near a pile of toys" />
+<CustomImage src={WynonnaCrate} alt="Wynonna in her crate near a pile of toys" />
 
 And so the months went by. The house we'd lived in for nearly 20 years was sold to a new family. One parent got a new phone carrier, so all my "Mark + parents" chats were broken, never to be remade. I even have to track my Netflix history across two different accounts.
 
@@ -61,25 +66,21 @@ A few weeks of coding later I had merged my project with a different one, turnin
 
 ---
 
-<img
-  src="/assets/2024-09-14 wedding profile.jpg"
+<CustomImage
+  src={WeddingProfile}
   alt="Me, at a wedding, with a slight filter to make colors pop"
+  caption=""
 />
 
 I danced a lot during my week of vacation last month. Friends from college got married on September 7, and a friend from high school got married on September 14. I met a girl on the dance floor and we danced the night away, it's been a blast ever since. My parents' divorce was finalized on September 26.
 
 I took off work yesterday thinking I had to fast for an MRI, and who wants to work while fasting? Turns out I had things a bit twisted and that's not until Halloween, so I ended up giving myself a free day. Well, a free day to finish my 72-hour coding marathon that was reconfiguring AHK++ in a way that was less Wiemenstein, more Wiemer Inc: Automated tests, fully extracted config variables, more documentation, more features! 🤓 I even reduced the download size by ~100x.
 
-<figure>
-  <img
-    src="/assets/2024-10-07 recent ahkpp releases.png"
-    alt="Changelog for AHK++, showing 3 releases on 2024-10-07, fixing 12 issues"
-  />
-  <figcaption>
-    No, you don't have to read this! But look at all the fixes I published! Full text at{" "}
-    <a href="https://github.com/mark-wiemer/ahkpp/blob/main/changelog.md">ahkpp/changelog</a>
-  </figcaption>
-</figure>
+<CustomImage
+  src={AHKPPReleases}
+  alt="Changelog for AHK++, showing 3 releases on 2024-10-07, fixing 12 issues"
+  caption="No, you don't have to read this! But look at all the fixes I published! Full text at https://github.com/mark-wiemer/ahkpp/blob/main/changelog.md"
+/>
 
 But yesterday morning was also when my oldest brother recommended to me my new favorite song, Hi Ren. So I added it to my 2024 playlist.
 
@@ -97,4 +98,4 @@ I can listen to music!
 
 🕺
 
-<img alt="Wynonna in 2024" src="/assets/2024-04-29 Wynonna raincoat outside large.jpg" />
+<CustomImage src={WynonnaRaincoat} alt="Wynonna in 2024" caption="" />

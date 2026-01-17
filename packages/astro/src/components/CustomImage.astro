@@ -1,0 +1,46 @@
+---
+/**
+ * A custom image component that displays an image with an optional caption.
+ * Handles aspect ratio based on image metadata.
+ */
+import { Image } from "astro:assets";
+
+interface Props {
+  alt: string;
+  src: any; // ImageMetadata
+  caption?: string;
+  eager: boolean;
+}
+
+const { src, alt, caption, eager } = Astro.props;
+
+// Extract width and height from the image metadata
+const width = src.width;
+const height = src.height;
+const aspectRatio = width / height;
+---
+
+{
+  caption ? (
+    <figure>
+      <Image
+        src={src}
+        alt={alt}
+        width={width}
+        height={height}
+        loading={eager ? "eager" : "lazy"}
+        style={`aspect-ratio: ${aspectRatio}; width: 100%; height: auto;`}
+      />
+      <figcaption>{caption}</figcaption>
+    </figure>
+  ) : (
+    <Image
+      src={src}
+      alt={alt}
+      width={width}
+      height={height}
+      loading={eager ? "eager" : "lazy"}
+      style={`aspect-ratio: ${aspectRatio}; width: 100%; height: auto;`}
+    />
+  )
+}
