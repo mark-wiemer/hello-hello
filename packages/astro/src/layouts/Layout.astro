@@ -23,6 +23,46 @@ interface Props {
       <slot />
       <Footer />
     </div>
+    <script is:inline>
+      (() => {
+        const processLinks = () => {
+          const anchors = document.querySelectorAll("a[href]");
+          for (const a of anchors) {
+            const href = a.getAttribute("href");
+            if (!href) continue;
+            // opt-out if requested
+            if (a.getAttribute("data-external-target-ignore") === "true") continue;
+            // skip non-navigational or same-page links
+            if (
+              href.startsWith("#") ||
+              href.startsWith("mailto:") ||
+              href.startsWith("tel:") ||
+              href.startsWith("javascript:")
+            )
+              continue;
+            let url;
+            try {
+              url = new URL(href, document.baseURI);
+            } catch (e) {
+              continue;
+            }
+            // Only modify links that go to a different origin
+            if (url.origin !== window.location.origin) {
+              if (!a.hasAttribute("target")) a.setAttribute("target", "_blank");
+              const rel = (a.getAttribute("rel") || "").split(" ").filter(Boolean);
+              if (!rel.includes("noopener")) rel.push("noopener");
+              if (!rel.includes("noreferrer")) rel.push("noreferrer");
+              a.setAttribute("rel", rel.join(" "));
+            }
+          }
+        };
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", processLinks, { once: true });
+        } else {
+          processLinks();
+        }
+      })();
+    </script>
   </body>
 </html>
 

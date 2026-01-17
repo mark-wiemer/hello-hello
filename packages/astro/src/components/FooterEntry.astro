@@ -2,9 +2,10 @@
 interface Props {
   href: string;
   text: string;
-  external?: boolean;
+  /** Opens the link in a new tab if true. Defaults to false, opening in same tab. */
+  newTab?: boolean;
 }
-const { href, text, external } = Astro.props;
+const { href, text, newTab } = Astro.props;
 const currentPath = Astro.url.pathname;
 ---
 
@@ -14,11 +15,7 @@ const currentPath = Astro.url.pathname;
     text
   ) : (
     <span>
-      <a
-        href={href}
-        target={external ? "_blank" : "_self"}
-        rel={external ? "noreferrer" : undefined}
-      >
+      <a href={href} data-external-target-ignore={!newTab}>
         {text}
       </a>
     </span>
