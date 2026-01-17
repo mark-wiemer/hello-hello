@@ -5,10 +5,11 @@
   "scripts": {
     "dev": "astro dev --open",
     "build": "astro build",
-    "preview": "astro preview",
+    "preview": "astro preview --open",
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.16.10"
+    "astro": "^5.16.10",
+    "sharp": "^0.34.5"
   }
 }
