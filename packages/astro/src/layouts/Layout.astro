@@ -2,7 +2,7 @@
 import Footer from "../components/Footer.astro";
 import "../styles/global.css";
 interface Props {
-  PageTitle: string;
+  pageTitle: string;
 }
 ---
 
@@ -16,7 +16,7 @@ interface Props {
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <meta name="generator" content={Astro.generator} />
-    <title>{Astro.props.PageTitle} - markwiemer.com</title>
+    <title>{Astro.props.pageTitle} - markwiemer.com</title>
   </head>
   <body>
     <div class="article">
