@@ -2,12 +2,17 @@
 
 Why use many repo when one repo do trick?
 
-This is a monorepo slowly growing to host all my personal work.
-It's organized as a `pnpm` workspace to filter out some of the noise.
-You can treat the root `package.json` as my minimal recommendations for any JS package.
-Although this repo isn't limited to JS, that's where I spend most of my time.
+This is a monorepo of all my personal work, with minor exceptions.
+AHK++ will stay its own repo for better issue tracking and stargazing.
+Websites I maintain beyond markwiemer.com will stay their own repos
+because I use GitHub pages, which only supports one site per repo.
+
 
 ## Setting up pnpm
+
+This repo is organized as a `pnpm` workspace to filter out some of the noise.
+You can treat the root `package.json` as my minimal recommendations for any JS package.
+Although this repo isn't limited to JS, that's where I spend most of my time.
 
 This is also my first repo with pnpm, I was an npm guy before but it's time for a change!
 
