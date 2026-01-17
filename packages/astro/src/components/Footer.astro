@@ -1,11 +1,17 @@
+---
+import FooterEntry from "./FooterEntry.astro";
+
+const currentPath = Astro.url.pathname;
+---
+
 <footer>
   <hr />
   <nav style="display: flex; flex-direction: column; align-items: center">
-    {/* Wrap with spans to prevent the outline box from getting too big */}
-    <span><a href="/about">About</a></span>
-    <span><a href="/blog">Blog</a></span>
+    <FooterEntry href="/" text="Home" />
+    <span>{currentPath === "/about" ? "About" : <a href="/about">About</a>}</span>
+    <span>{currentPath.startsWith("/blog") ? "Blog" : <a href="/blog">Blog</a>}</span>
     <span><a href="https://ahkpp.com">AHK++</a></span>
-    <span><a href="/luanti">Luanti</a></span>
+    <span>{currentPath === "/luanti" ? "Luanti" : <a href="/luanti">Luanti</a>}</span>
   </nav>
   <a
     href="https://github.com/mark-wiemer/hello-hello/tree/main/packages/markwiemer.com"
