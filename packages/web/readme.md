@@ -26,3 +26,5 @@ Recommendations I try to follow for all websites I build, regardless of framewor
 - Transparency
   - Source code linked at bottom of each page
   - Licensed under MIT or other widely-recognized FOSS license
+- Tooling
+  - When working with source code, spell-checker should be enabled
