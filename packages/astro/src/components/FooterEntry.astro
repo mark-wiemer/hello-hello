@@ -2,8 +2,9 @@
 interface Props {
   href: string;
   text: string;
+  external?: boolean;
 }
-const { href, text } = Astro.props;
+const { href, text, external } = Astro.props;
 const currentPath = Astro.url.pathname;
 ---
 
@@ -13,7 +14,13 @@ const currentPath = Astro.url.pathname;
     text
   ) : (
     <span>
-      <a href={href}>{text}</a>
+      <a
+        href={href}
+        target={external ? "_blank" : "_self"}
+        rel={external ? "noreferrer" : undefined}
+      >
+        {text}
+      </a>
     </span>
   )
 }
