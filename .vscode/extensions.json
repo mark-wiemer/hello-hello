@@ -8,6 +8,7 @@
     "meganrogge.template-string-converter",
     "sumneko.lua",
     "tyriar.sort-lines",
+    "unifiedjs.vscode-mdx",
     "wmaurer.change-case"
   ]
 }
