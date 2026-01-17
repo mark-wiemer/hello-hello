@@ -19,3 +19,5 @@ There are three colors: unvisited, visited, and plaintext. Plaintext color is, w
 6. Active visited: plaintext outlined
 
 Then duplicate for light mode and dark mode!
+
+To simplify this work, see [Issue 13](https://github.com/mark-wiemer/hello-hello/issues/13)
