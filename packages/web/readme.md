@@ -21,6 +21,8 @@ Recommendations I try to follow for all websites I build, regardless of framewor
   - Test all pages with "Slow 3G" connection
   - Defer all images, but with Cumulative Layout Shift handled
   - Use low-res images first with optional high-res images based on connection speed, connection type?, user preferences
+  - Prioritize sending minified content instead of sending inspectable content
+    - Source code linked anyway, see "transparency" section
 - Transparency
   - Source code linked at bottom of each page
   - Licensed under MIT or other widely-recognized FOSS license
