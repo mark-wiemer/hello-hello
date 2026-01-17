@@ -1,4 +1,4 @@
-- Files in `assets` and `site/assets` copyright Mark Wiemer or my family, all rights reserved, except:
+- Files in `assets` and `src/assets` copyright Mark Wiemer or my family, all rights reserved, except:
   - `2020-02-01 profile picture blue shirt green background.jpg` copyright [Courtney K Lynch](https://www.linkedin.com/in/lynchcourtk/), all rights reserved, used with permission
   - `2023-07-20 profile.jpg` copyright Courtney K Lynch, all rights reserved, used with permission
   - `2024-04-29 Wynonna raincoat outside.jpg`: [Creative Commons Attribution-ShareAlike 4.0 International CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)

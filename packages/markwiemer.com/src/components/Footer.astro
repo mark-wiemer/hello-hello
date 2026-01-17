@@ -1,0 +1,22 @@
+---
+import FooterEntry from "./FooterEntry.astro";
+---
+
+<footer>
+  <hr />
+  <nav style="display: flex; flex-direction: column; align-items: center">
+    <FooterEntry href="/" text="Home" />
+    <FooterEntry href="/about" text="About" />
+    <FooterEntry href="/blog" text="Blog" />
+    <FooterEntry href="https://ahkpp.com" text="AHK++" />
+    <FooterEntry href="/luanti" text="Luanti" />
+    <FooterEntry href="https://mochajs.org" text="Mocha" newTab />
+  </nav>
+  <a
+    href="https://github.com/mark-wiemer/hello-hello/tree/main/packages/markwiemer.com"
+    target="_blank"
+    rel="noreferrer"
+  >
+    View website source
+  </a>
+</footer>

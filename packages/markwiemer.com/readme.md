@@ -21,3 +21,10 @@ Developer tools:
 - http-server for testing the site
 - Node.js to run QoL scripts
 - Prettier to format the repo
+
+Resources:
+
+- [Astro Discord server](https://astro.build/chat)
+- [Astro docs](https://docs.astro.build)
+- [Emojipedia](https://emojipedia.org/): Source for high-res transparent-background emojis (double-check that you can re-use them!)
+- [Favicon Converter](https://favicon.io/favicon-converter/): don't send copyrighted stuff here without investigating!
