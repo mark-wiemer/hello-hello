@@ -43,3 +43,4 @@ To learn more about the folder structure of an Astro project, refer to [our guid
 
 - [Astro docs](https://docs.astro.build)
 - [Discord server](https://astro.build/chat)
+- [Favicon Converter](https://favicon.io/favicon-converter/): don't send copyrighted stuff here without investigating!
