@@ -111,7 +111,6 @@ div.headerImages {
 img.headerImage {
   height: 12em;
   width: 12em;
-  border-radius: 5%;
 }
 
 /* Apply to divs to get center margin */
@@ -130,8 +129,7 @@ img.headerImage {
     margin-bottom: 12px;
   }
   img {
-    max-width: 640px;
-    border-radius: 5%;
+    border-radius: 10px;
   }
   figure img {
     max-width: 100%;
