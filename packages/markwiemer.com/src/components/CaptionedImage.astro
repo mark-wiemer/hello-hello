@@ -1,0 +1,51 @@
+---
+/**
+ * A custom image component that displays an image with an optional caption.
+ * Handles aspect ratio based on image metadata.
+ *
+ * Usage:
+ * - String caption: <CustomImage src={img} alt="..." caption="Text" />
+ * - Component caption: <CustomImage src={img} alt="..."><a href="#">Link</a></CustomImage>
+ */
+import CustomImage from "./CustomImage.astro";
+
+interface Props {
+  alt: string;
+  src: any; // ImageMetadata
+  caption?: string;
+  /** defaults to false */
+  eager?: boolean;
+  /** number between 0 and 1 */
+  widthFraction?: number;
+  border?: boolean;
+}
+
+const { src, alt, caption, eager, widthFraction, border } = Astro.props;
+
+// Extract width and height from the image metadata
+const trueWidthFraction =
+  widthFraction && widthFraction > 0 && widthFraction <= 1 ? widthFraction : 1;
+let klass = border ? "border" : ""; // keep this here in case of future styles
+
+const imageProps = {
+  src,
+  alt,
+  klass,
+  widthFraction: trueWidthFraction,
+  eager: !!eager,
+};
+---
+
+{
+  caption || Astro.slots.has("default") ? (
+    <figure class={trueWidthFraction !== 1 ? "center" : ""}>
+      <CustomImage {...imageProps} />
+      <figcaption>
+        {caption ? <span>{caption}</span> : null}
+        {Astro.slots.has("default") ? <slot /> : null}
+      </figcaption>
+    </figure>
+  ) : (
+    <CustomImage {...imageProps} />
+  )
+}

@@ -1,53 +1,34 @@
 ---
-/**
- * A custom image component that displays an image with an optional caption.
- * Handles aspect ratio based on image metadata.
- *
- * Usage:
- * - String caption: <CustomImage src={img} alt="..." caption="Text" />
- * - Component caption: <CustomImage src={img} alt="..."><a href="#">Link</a></CustomImage>
- */
 import { Image } from "astro:assets";
 
 interface Props {
-  alt: string;
   src: any; // ImageMetadata
-  caption?: string;
+  alt: string;
   /** defaults to false */
   eager?: boolean;
+  /** number between 0 and 1 (defaults to 1) */
+  widthFraction: number;
+  klass?: string;
 }
 
-const { src, alt, caption, eager } = Astro.props;
-
-// Extract width and height from the image metadata
+const { src, alt, klass } = Astro.props;
+const eager = !!Astro.props.eager;
+const widthFraction = Astro.props.widthFraction;
 const width = src.width;
 const height = src.height;
 const aspectRatio = width / height;
 ---
 
-{
-  caption || Astro.slots.has("default") ? (
-    <figure>
-      <Image
-        src={src}
-        alt={alt}
-        width={width}
-        height={height}
-        loading={eager ? "eager" : "lazy"}
-        style={`aspect-ratio: ${aspectRatio}; width: 100%; height: auto;`}
-      />
-      <figcaption>
-        <slot />
-      </figcaption>
-    </figure>
-  ) : (
-    <Image
-      src={src}
-      alt={alt}
-      width={width}
-      height={height}
-      loading={eager ? "eager" : "lazy"}
-      style={`aspect-ratio: ${aspectRatio}; width: 100%; height: auto;`}
-    />
-  )
-}
+<Image
+  src={src}
+  alt={alt}
+  width={width}
+  height={height}
+  loading={eager ? "eager" : "lazy"}
+  style={`
+    aspect-ratio: ${aspectRatio};
+    width: ${widthFraction * 100}%;
+    height: auto;
+  `}
+  class={klass}
+/>
