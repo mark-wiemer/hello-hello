@@ -3,3 +3,4 @@ packages:
   - "packages/astro"
   - "packages/github/pages"
   - "packages/markwiemer.com"
+  - "packages/remark"
