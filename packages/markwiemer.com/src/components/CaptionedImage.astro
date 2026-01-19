@@ -4,10 +4,12 @@
  * Handles aspect ratio based on image metadata.
  *
  * Usage:
- * - String caption: <CustomImage src={img} alt="..." caption="Text" />
- * - Component caption: <CustomImage src={img} alt="..."><a href="#">Link</a></CustomImage>
+ * - String caption: <CaptionedImage src={img} alt="..." caption="Text" />
+ * - Component caption: <CaptionedImage src={img} alt="..."><a href="#">Link</a></CaptionedImage>
  */
-import CustomImage from "./CustomImage.astro";
+
+import { Image } from "astro:assets";
+import type { ComponentProps } from "astro/types";
 
 interface Props {
   alt: string;
@@ -25,27 +27,34 @@ const { src, alt, caption, eager, widthFraction, border } = Astro.props;
 // Extract width and height from the image metadata
 const trueWidthFraction =
   widthFraction && widthFraction > 0 && widthFraction <= 1 ? widthFraction : 1;
+const aspectRatio = src.width / src.height;
 let klass = border ? "border" : ""; // keep this here in case of future styles
 
-const imageProps = {
+const imageProps: ComponentProps<typeof Image> = {
   src,
   alt,
-  klass,
-  widthFraction: trueWidthFraction,
-  eager: !!eager,
+  width: src.width,
+  height: src.height,
+  loading: eager ? "eager" : "lazy",
+  class: klass,
+  style: `
+    aspect-ratio: ${aspectRatio};
+    width: ${trueWidthFraction * 100}%;
+    height: auto;
+  `,
 };
 ---
 
 {
   caption || Astro.slots.has("default") ? (
     <figure class={trueWidthFraction !== 1 ? "center" : ""}>
-      <CustomImage {...imageProps} />
+      <Image {...imageProps} />
       <figcaption>
         {caption ? <span>{caption}</span> : null}
         {Astro.slots.has("default") ? <slot /> : null}
       </figcaption>
     </figure>
   ) : (
-    <CustomImage {...imageProps} />
+    <Image {...imageProps} />
   )
 }
