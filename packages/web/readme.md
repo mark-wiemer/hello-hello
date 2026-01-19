@@ -23,6 +23,8 @@ Recommendations I try to follow for all websites I build, regardless of framewor
   - Use low-res images first with optional high-res images based on connection speed, connection type?, user preferences
   - Prioritize sending minified content instead of sending inspectable content
     - Source code linked anyway, see "transparency" section
+  - Only apply CSS rules where necessary (e.g. don't apply rules to all `figure` elements if only some need them)
+  - Use stylesheets instead of repeated style attributes
 - Transparency
   - Source code linked at bottom of each page
   - Licensed under MIT or other widely-recognized FOSS license
