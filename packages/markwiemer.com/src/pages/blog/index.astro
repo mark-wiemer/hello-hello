@@ -3,13 +3,6 @@ import Layout from "@/layouts/Layout.astro";
 
 const glob = import.meta.glob("./content/*.mdx", { eager: true });
 
-function formatYyyyMmDdUtc(date: Date): string {
-  const year = date.getUTCFullYear();
-  const month = String(date.getUTCMonth() + 1).padStart(2, "0");
-  const day = String(date.getUTCDate()).padStart(2, "0");
-  return `${year}-${month}-${day}`;
-}
-
 type PostListItem = {
   date: string;
   slug: string;
@@ -24,11 +17,8 @@ const posts: PostListItem[] = Object.entries(glob)
     const filename = path.split("/").pop()?.replace(".mdx", "") || "";
     const date = filename.split(" ")[0] || "";
     const slug = filename.split(" ").slice(1).join("-");
-
     const rawTitle = module?.frontmatter?.postTitle ?? slug;
-
     const lastUpdated = module?.frontmatter?.lastUpdated;
-
     const title = String(rawTitle).replace(/^\d{4}-\d{2}-\d{2}\s+/, "");
     const isNotes = rawTitle !== title;
     return { date, slug, title, isNotes, lastUpdated };
