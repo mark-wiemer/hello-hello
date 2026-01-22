@@ -33,9 +33,11 @@ interface Props {
 const { module } = Astro.props;
 const { default: Content, frontmatter } = module;
 const postTitle = frontmatter?.postTitle || "Blog post";
+const lastUpdated = frontmatter?.lastUpdated;
 ---
 
 <Layout pageTitle={postTitle}>
   <h1>{postTitle}</h1>
+  {lastUpdated ? <p>Last updated {lastUpdated}</p> : null}
   <Content />
 </Layout>

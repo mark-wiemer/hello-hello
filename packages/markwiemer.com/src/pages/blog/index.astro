@@ -1,0 +1,56 @@
+---
+import Layout from "@/layouts/Layout.astro";
+
+const glob = import.meta.glob("./content/*.mdx", { eager: true });
+
+function formatYyyyMmDdUtc(date: Date): string {
+  const year = date.getUTCFullYear();
+  const month = String(date.getUTCMonth() + 1).padStart(2, "0");
+  const day = String(date.getUTCDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+type PostListItem = {
+  date: string;
+  slug: string;
+  title: string;
+  isNotes: boolean;
+  lastUpdated: string | undefined;
+};
+
+const posts: PostListItem[] = Object.entries(glob)
+  .map(([path, module]: [string, any]) => {
+    // './content/2024-10-08 months-without-music.mdx'
+    const filename = path.split("/").pop()?.replace(".mdx", "") || "";
+    const date = filename.split(" ")[0] || "";
+    const slug = filename.split(" ").slice(1).join("-");
+
+    const rawTitle = module?.frontmatter?.postTitle ?? slug;
+
+    const lastUpdated = module?.frontmatter?.lastUpdated;
+
+    const title = String(rawTitle).replace(/^\d{4}-\d{2}-\d{2}\s+/, "");
+    const isNotes = rawTitle !== title;
+    return { date, slug, title, isNotes, lastUpdated };
+  })
+  .filter((post) => post.date && post.slug)
+  .sort((a, b) => b.date.localeCompare(a.date));
+---
+
+<Layout pageTitle="Blog">
+  <h1>Blog</h1>
+  <ul>
+    {
+      posts.map((post) => (
+        <li>
+          {post.isNotes ? `${post.date} (notes): ` : `${post.date}: `}
+          <a href={`/blog/${post.slug}`}>{post.title}</a>
+          {post.lastUpdated ? ` (last updated ${post.lastUpdated})` : ""}
+        </li>
+      ))
+    }
+    <li>
+      Older posts: <a href="https://markwiemer.medium.com">markwiemer.medium.com</a>
+    </li>
+  </ul>
+</Layout>
