@@ -19,11 +19,10 @@ Wouldn't it be nice if we could quickly jump to the correct viewport in just a f
 
 The setup takes a bit: We need to instruct the Web Developer extension to resize the window such that the viewport is 320x256. However, the extension only knows the window's outer size (including UI like the address bar). Additionally, it can't account for the browser's zoom. We'll have to follow these steps to get exact values for the window's inner size, but we'll only have to do this once!
 
+{/* prettier-ignore */}
 1. Open a new tab and go to `about:blank`.
 1. Resize the browser so it takes up about half of the screen. This can be a rough approximation. Make sure to set the browser zoom to 100% (default zoom).
 1. Open the browser's console and undock it.
-
-{/* prettier-ignore */}
 1. Log the viewport size using this command: <code>\`width: $\{visualViewport.width}, height: $\{visualViewport.height}\`</code>.
 1. Use the "Edit Resize Dimensions…" button to create a new resize option in the Web Developer extension. This is found in the Resize menu. Set the dimensions to those that were logged in the previous step and save the new option with any name. If the logged dimensions are fractions, round down to the nearest whole number.
 1. Return to the blank browser tab and apply the new resize option. The browser should slightly change size.
