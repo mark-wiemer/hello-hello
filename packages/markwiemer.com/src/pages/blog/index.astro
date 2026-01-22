@@ -39,6 +39,10 @@ const posts: PostListItem[] = Object.entries(glob)
 
 <Layout pageTitle="Blog">
   <h1>Blog</h1>
+  <p>
+    I used to post exclusively on medium.com, but I'm slowly moving posts to this site. Some of the
+    newest posts are only available here.
+  </p>
   <ul>
     {
       posts.map((post) => (
@@ -50,7 +54,7 @@ const posts: PostListItem[] = Object.entries(glob)
       ))
     }
     <li>
-      Older posts: <a href="https://markwiemer.medium.com">markwiemer.medium.com</a>
+      Other posts: <a href="https://markwiemer.medium.com">markwiemer.medium.com</a>
     </li>
   </ul>
 </Layout>
