@@ -5,6 +5,10 @@ import { read, write } from "to-vfile";
 import { Plugin } from "unified";
 import { Root, Heading, Text } from "mdast";
 import process from "node:process";
+import path, { dirname } from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const ensureH1Plugin: Plugin<[], Root> = () => {
   return (tree: Root): void => {
@@ -36,9 +40,14 @@ const ensureH1Plugin: Plugin<[], Root> = () => {
 };
 
 const name = "lua-api";
+const vfile = await read({ path: path.join(__dirname, `${name}.md`) });
+if (!vfile.path) {
+  console.error("Error: File not found");
+  process.exit(1);
+}
 const file = await unified()
   .use(remarkParse) // Parse Markdown to AST
   .use(ensureH1Plugin)
   .use(remarkStringify) // Stringify AST back to Markdown
-  .process(await read({ path: `${name}.md` }));
-await write({ path: `${name}_transformed.md`, value: String(file) });
+  .process(vfile);
+await write({ path: path.join(__dirname, `${name}_transformed.md`), value: String(file) });
