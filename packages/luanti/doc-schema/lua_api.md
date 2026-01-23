@@ -1,4 +1,4 @@
-<!-- from 2025-11-27, https://github.com/luanti-org/luanti/blob/d30113a70a8464cb88ddc7e832d9a37ecf6ad063/doc/lua_api.md -->
+<!-- from 2025-11-27, https://github.com/luanti-org/luanti/blob/d30113a70/doc/lua_api.md -->
 <!-- reformatted with Prettier -->
 
 # Luanti Lua Modding API Reference
