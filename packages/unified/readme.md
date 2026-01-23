@@ -13,3 +13,7 @@ The [unified](https://unifiedjs.com/) collective is a group of software maintain
 - vfile
 
 The `tsx` package is separate from the unified collective, see [the typescript project](../typescript/readme.md) for details.
+
+## vfile
+
+[vfile](https://unifiedjs.com/explore/package/vfile/) is a small and browser friendly virtual file format that tracks metadata about files (such as its path and value) and lint messages.
