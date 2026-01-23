@@ -1,3 +1,4 @@
+// Magic file used by tsx, esbuild, and typescript to compile TS to JS in a specific way
 {
   "compilerOptions": {
     "baseUrl": ".",
