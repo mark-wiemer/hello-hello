@@ -2,5 +2,6 @@
 packages:
   - "packages/astro"
   - "packages/github/pages"
+  - "packages/luanti/doc-schema"
   - "packages/markwiemer.com"
   - "packages/remark"

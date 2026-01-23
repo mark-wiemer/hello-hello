@@ -28,6 +28,31 @@ importers:
         version: 0.34.5
 
   packages/luanti/doc-schema:
+    dependencies:
+      '@types/mdast':
+        specifier: ^4.0.4
+        version: 4.0.4
+      remark:
+        specifier: ^15.0.1
+        version: 15.0.1
+      remark-parse:
+        specifier: ^11.0.0
+        version: 11.0.0
+      remark-stringify:
+        specifier: ^11.0.0
+        version: 11.0.0
+      to-vfile:
+        specifier: ^8.0.0
+        version: 8.0.0
+      tsx:
+        specifier: ^4.21.0
+        version: 4.21.0
+      unified:
+        specifier: ^11.0.5
+        version: 11.0.5
+      unist-util-visit:
+        specifier: ^5.0.0
+        version: 5.0.0
     devDependencies:
       sort-package-json:
         specifier: ^3.4.0
