@@ -7,7 +7,6 @@ AHK++ will stay its own repo for better issue tracking and stargazing.
 Websites I maintain beyond markwiemer.com will stay their own repos
 because I use GitHub pages, which only supports one site per repo.
 
-
 ## Setting up pnpm
 
 This repo is organized as a `pnpm` workspace to filter out some of the noise.
@@ -50,9 +49,9 @@ Historically, I haven't followed a particular commit message style. But [Mocha](
 - [pnpm](./packages/pnpm/readme.md): Node package manager, alternative to npm
 - [POSIX](./packages/posix/readme.md): Set of cross-OS standards by IEEE
 - [React](./packages/react/readme.md): Library for creating complex interactive websites
-- [Remark](./packages/remark/readme.md): Markdown toolchain for JS
 - [Rust](./packages/rust/readme.md): Programming language emphasizing safety and performance
 - [TypeScript](./packages/typescript/readme.md): Programming language that adds types to JavaScript
+- [Unified](./packages/unified/readme.md): Software collective for content processing
 - [Visual Studio Code](./packages/vscode/readme.md): IDE
 - [Website recommendations](./packages/web/readme.md): Recommendations for every site I maintain
 
