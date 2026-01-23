@@ -23,4 +23,14 @@ const file = await unified()
   .use(ensureH1Plugin)
   .use(remarkStringify) // Stringify AST back to Markdown
   .process(vfile);
+
+if (file.messages.length === 0) {
+  console.log("No issues found.");
+} else {
+  console.log(`Found ${file.messages.length} issue${file.messages.length > 1 ? "s" : ""}:`);
+  file.messages.forEach((message) => {
+    console.log(`${message.message} (Source: ${message.source})`);
+  });
+}
+
 await write({ path: path.join(__dirname, `${name}_transformed.md`), value: String(file) });
