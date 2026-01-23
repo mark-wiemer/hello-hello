@@ -7,3 +7,4 @@ export type { Root, Heading, Text } from "mdast";
 export { default as process } from "node:process";
 export { default as path, dirname } from "node:path";
 export { fileURLToPath } from "node:url";
+export { expect, test } from "vitest";
