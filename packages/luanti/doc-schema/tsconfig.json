@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "esModuleInterop": true,
     "module": "nodenext",
+    "paths": {
+      "@/*": ["src/*"]
+    },
     "types": ["node"]
   }
 }
