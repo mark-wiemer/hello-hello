@@ -10,6 +10,8 @@
   "scripts": {
     "start": "tsx src/index.ts",
     "test": "vitest",
+    "test:ci": "vitest --run",
+    "validate:ci": "sort-package-json --check && pnpm test:ci && echo Ready for review!",
     "validate:fix": "sort-package-json"
   },
   "dependencies": {
