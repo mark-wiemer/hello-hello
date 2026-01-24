@@ -426,7 +426,7 @@ Older:
 
 1. https://accounts.adblockplus.org/en/premium
 
-## Snipaste
+### Snipaste
 
 1. Update preferences:
 
