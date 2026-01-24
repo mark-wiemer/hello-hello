@@ -429,8 +429,13 @@ Older:
 ### Snipaste
 
 1. Update preferences:
-
-   ![new preferences](https://github.com/user-attachments/assets/f3e6199e-f7e4-4c8e-b45f-83272b3e6ffa)
+   - Snip: F7
+   - Snip and copy: Ctrl + F7
+   - Custom snip: (unbound)
+   - Paste: F8
+   - Hide/Show all images: Ctrl + F8
+   - Switch to another image group: (unbound)
+   - Toggle mouse click-through: (unbound)
 
 ### Remove recycle bin desktop icon
 
