@@ -31,6 +31,7 @@ Historically, I haven't followed a particular commit message style. But [Mocha](
 ## Index
 
 - [AHK++](./packages/ahkpp/readme.md): IDE extension for AHK v1 and v2 language support
+- [Aspire](./packages/aspire/readme.md): Orchestration toolkit for distributed applications
 - [Astro](./packages/astro/readme.md): Web framework for content-driven websites
 - [Bash](./packages/bash/readme.md): Cross-platform shell
 - [Git](./packages/git/readme.md): Version control system, includes notes on Git LFS
