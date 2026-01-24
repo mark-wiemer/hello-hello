@@ -1,14 +1,14 @@
-# Hello new machine
-
-Setup steps for any new machine that I use
-
-Most of this is already covered in the relevant package folders, like `git` and `vscode`.
-
-## Linux Mint
+# Linux Mint
 
 Linux Mint Cinnamon has been my main operating system since August 2025. It's very easy to get started with, I highly recommend it!
 
-### Glossary
+## Troubleshooting
+
+- Disable secure boot in BIOS
+- Check drivers, kernel, and other software
+- Post in Discord
+
+## Glossary
 
 | Windows                  | Linux Mint                 |
 | ------------------------ | -------------------------- |
@@ -17,18 +17,18 @@ Linux Mint Cinnamon has been my main operating system since August 2025. It's ve
 | Windows key, abbr. `Win` | Super key, abbr. `<Super>` |
 | Shortcut                 | `.desktop` file            |
 
-### Installing arbitrary software
+## Installing arbitrary software
 
 `amd64.deb` files are best for my current machine, others may vary. I should probably learn what all the variations are all about, huh? [Microsoft Edge download](https://www.microsoft.com/en-us/edge/) seems to be pretty good at automatically choosing the right version for the current machine, probably copy whatever that installs.
 
-### Clipboard history: Diodon
+## Clipboard history: Diodon
 
 1. Install from Software Manager
 1. Set custom keyboard shortcut to `/usr/bin/diodon`
 
 (Parcellite is not used because it just doesn't paste into this file in GitHub + Firefox, for instance)
 
-### Firefox
+## Firefox
 
 (Honestly I only use Firefox when working on RAM-intensive tasks like huge GitHub PRs)
 
@@ -37,33 +37,33 @@ Linux Mint Cinnamon has been my main operating system since August 2025. It's ve
 3. Firefox is probably up-to-date, but can only be updated via [Update Manager](https://forums.linuxmint.com/viewtopic.php?t=412975)
    > View current version at Menu > Help > About Firefox
 
-### Cinnamenu
+## Cinnamenu
 
 1. Install from Applets
 2. Set to search with Bing
 3. Disable sidebar
 4. Right click panel > Panel settings > Panel edit mode > Drag Cinnamenu to the left, replacing Menu
 
-### Flameshot (for screenshots, like Snipaste)
+## Flameshot (for screenshots, like Snipaste)
 
 1. Install from Software Manager
 2. Setup a keyboard shortcut that activates `flameshot gui` on `F7`
 3. Use Ctrl+C to copy Flameshot selections :)
 
-### FSearch (for file search, like Everything)
+## FSearch (for file search, like Everything)
 
 1. Install from Software Manager
 2. To set it to scan everything, select Other Locations > This Computer
 
-### Baobob Disk Usage Analyzer (like WinDirStat)
+## Baobob Disk Usage Analyzer (like WinDirStat)
 
 1. Install from https://flathub.org/apps/org.gnome.baobab
 
-### Proton Pass
+## Proton Pass
 
 1. Install from https://proton.me/pass/download
 
-### Godot
+## Godot
 
 1. Install from [godotengine.org](https://godotengine.org)
 2. Extract
@@ -82,7 +82,7 @@ Linux Mint Cinnamon has been my main operating system since August 2025. It's ve
    > SVG from https://godotengine.org/assets/press/icon_color.svg, works fine without it, just nice QoL
 5. Run from typing "Godot" in home menu as a sanity check
 
-### rclone for OneDrive
+## rclone for OneDrive
 
 1. `sudo apt install rclone`
 2. `rclone config`
