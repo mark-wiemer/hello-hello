@@ -33,23 +33,19 @@ interface Props {
 const { module } = Astro.props;
 let { default: Content, frontmatter } = module;
 frontmatter ??= {};
+/* todo handle "orginally posted on Medium.com" stuff */
 const { postTitle, postDate, postTime, lastUpdated, postType } = frontmatter;
+let preface = `${postDate}${postTime ? `, ${postTime}.` : "."}`;
+
+preface += lastUpdated ? ` Last updated ${lastUpdated}.` : "";
+preface +=
+  postType === "notes"
+    ? ` These are personal notes, subject to change. None of this is legal advice.`
+    : "";
 ---
 
 <Layout pageTitle={postTitle}>
   <h1>{postTitle}</h1>
-  {
-    (
-      <p>
-        {/* todo handle "orginally posted on Medium.com" stuff */}
-        {`${postDate}${postTime ? `, ${postTime}.` : "."}`}
-        {lastUpdated ? `Last updated ${lastUpdated}.` : ""}
-        {postType === "notes"
-          ? `These are personal notes, subject to change. None of this is legal advice.`
-          : ""}
-      </p>
-    )
-  }
-
+  <p>{preface}</p>
   <Content />
 </Layout>
