@@ -1,6 +1,6 @@
 # [markwiemer.com](https://markwiemer.com)
 
-My personal site hosting my articles, pictures of my dog, and other stuff I like 😊
+My personal site hosting my articles, pictures of my dog, and other stuff I like 😊 For change history earlier than 2026-01-03, see [archived markwiemer.com GitHub repo](https://github.com/mark-wiemer/markwiemer.com)
 
 ## Developer notes
 
