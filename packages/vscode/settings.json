@@ -460,7 +460,8 @@
     "plaintext": true,
     "scminput": false,
     "typescript": true,
-    "yaml": true
+    "yaml": true,
+    "mdx": false
   },
   "github.copilot.nextEditSuggestions.enabled": true,
   "githubPullRequests.codingAgent.codeLens": false,
