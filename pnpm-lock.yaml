@@ -76,7 +76,7 @@ importers:
         specifier: ^0.34.5
         version: 0.34.5
 
-  packages/remark:
+  packages/unified:
     dependencies:
       '@types/mdast':
         specifier: ^4.0.4

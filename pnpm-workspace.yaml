@@ -4,4 +4,4 @@ packages:
   - "packages/github/pages"
   - "packages/luanti/doc-schema"
   - "packages/markwiemer.com"
-  - "packages/remark"
+  - "packages/unified"
