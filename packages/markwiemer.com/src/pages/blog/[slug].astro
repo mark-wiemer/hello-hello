@@ -31,13 +31,25 @@ interface Props {
 }
 
 const { module } = Astro.props;
-const { default: Content, frontmatter } = module;
-const postTitle = frontmatter?.postTitle || "Blog post";
-const lastUpdated = frontmatter?.lastUpdated;
+let { default: Content, frontmatter } = module;
+frontmatter ??= {};
+const { postTitle, postDate, postTime, lastUpdated, postType } = frontmatter;
 ---
 
 <Layout pageTitle={postTitle}>
   <h1>{postTitle}</h1>
-  {lastUpdated ? <p>Last updated {lastUpdated}</p> : null}
+  {
+    (
+      <p>
+        {/* todo handle "orginally posted on Medium.com" stuff */}
+        {`${postDate}${postTime ? `, ${postTime}.` : "."}`}
+        {lastUpdated ? `Last updated ${lastUpdated}.` : ""}
+        {postType === "notes"
+          ? `These are personal notes, subject to change. None of this is legal advice.`
+          : ""}
+      </p>
+    )
+  }
+
   <Content />
 </Layout>

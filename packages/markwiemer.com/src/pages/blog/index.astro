@@ -4,41 +4,40 @@ import Layout from "@/layouts/Layout.astro";
 const glob = import.meta.glob("./content/*.mdx", { eager: true });
 
 type PostListItem = {
-  date: string;
-  slug: string;
-  title: string;
-  isNotes: boolean;
+  postDate: string;
+  postTime: string | undefined;
+  postTitle: string;
+  postType: string;
   lastUpdated: string | undefined;
+  slug: string;
 };
 
 const posts: PostListItem[] = Object.entries(glob)
   .map(([path, module]: [string, any]) => {
     // './content/2024-10-08 months-without-music.mdx'
+    const frontmatter = module?.frontmatter;
+    const { postDate, postTime, postTitle, lastUpdated, postType } = frontmatter;
     const filename = path.split("/").pop()?.replace(".mdx", "") || "";
-    const date = filename.split(" ")[0] || "";
     const slug = filename.split(" ").slice(1).join("-");
-    const rawTitle = module?.frontmatter?.postTitle ?? slug;
-    const lastUpdated = module?.frontmatter?.lastUpdated;
-    const title = String(rawTitle).replace(/^\d{4}-\d{2}-\d{2}\s+/, "");
-    const isNotes = rawTitle !== title;
-    return { date, slug, title, isNotes, lastUpdated };
+    return { postDate, postTime, postTitle, lastUpdated, postType, slug };
   })
-  .filter((post) => post.date && post.slug)
-  .sort((a, b) => b.date.localeCompare(a.date));
+  .filter((post) => post.postDate && post.slug)
+  .sort((a, b) => b.postDate.localeCompare(a.postDate));
 ---
 
 <Layout pageTitle="Blog">
   <h1>Blog</h1>
   <p>
     I used to post exclusively on medium.com, but I'm slowly moving posts to this site. Some of the
-    newest posts are only available here.
+    newest posts are only available here, but I plan to automatically sync them with Medium
+    eventually.
   </p>
   <ul>
     {
       posts.map((post) => (
         <li>
-          {post.isNotes ? `${post.date} (notes): ` : `${post.date}: `}
-          <a href={`/blog/${post.slug}`}>{post.title}</a>
+          {post.postType === "notes" ? `${post.postDate} (notes): ` : `${post.postDate}: `}
+          <a href={`/blog/${post.slug}`}>{post.postTitle}</a>
           {post.lastUpdated ? ` (last updated ${post.lastUpdated})` : ""}
         </li>
       ))
