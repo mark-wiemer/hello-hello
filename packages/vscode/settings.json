@@ -435,7 +435,6 @@
     "**/HR-TAL-Lnr-NetCoursePlayer": true
   },
   "git.autofetch": true,
-  "git.branchProtection": ["main"],
   "git.confirmSync": false,
   "git.enableSmartCommit": true,
   "git.fetchOnPull": true,
