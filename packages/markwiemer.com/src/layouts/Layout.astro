@@ -25,6 +25,7 @@ interface Props {
       <Footer />
     </div>
     <script is:inline>
+      // make external links open in new tab
       (() => {
         const processLinks = () => {
           const anchors = document.querySelectorAll("a[href]");
