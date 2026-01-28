@@ -1,0 +1,57 @@
+---
+postTitle: "Fixing with AI: An audio case study"
+# todo validate date
+# Conversation link: https://copilot.microsoft.com/shares/aq3h3G1VnJsBHiD5gv63o
+# Start of convo: 6:13 PM PST according to first message timestamp in network call
+# Ordered DAC at 7:11 PM PST according to ebay order history
+---
+
+## You found a draft!
+
+Hey, you're probably not supposed to be here, you silly goose! Please don't judge me for what's written here, this is an early draft. I draft things publicly in the spirit of radical transparency, so, congrats on finding this Easter egg :D
+
+## Contents
+
+Welcome back, finally, to my regularly scheduled programming. Today, I'll tell the story of how I may have just fixed a years-long issue in an hour after debugging entirely with Microsoft Copilot. And that means it's time for everyone's favorite disclaimer! I work for Microsoft. This article was written in my free time and all opinions are my own.
+
+A few years ago, my friend gave me a wonderful sound system, a Logitech Z313. It's got a subwoofer and two satellite speakers, and it's worked like a charm for years. The controller has an easy physical dial to adjust volume and a simple button with an LED to toggle the entire thing on and off. I use it for everything: desktop Windows, desktop Linux, personal laptop, and multiple work laptops. I'm no audiophile, but I do like being able to hear things.
+
+So I've put up with the weird hum that appears from this sound system whenever I go to my personal website. Or to github.com. Because it's only some websites: it doesn't appear when I go to `about:blank` or copilot.microsoft.com.
+
+But no longer! In my eternal quest to pamper myself so that I can actually get things done without being annoyed, I have decided to finally solve this specific issue.
+
+---
+
+What took me so long? Well, I probably got these speakers in 2021. ChatGPT was just a twinkle in Altman's eye. How the heck do I search for "weird hum on some websites from subwoofer" in a traditional search engine? I never even bothered, honestly, because I didn't think I'd get any good results at all.
+
+But, as someone who's been enthusiastic about LLMs since early 2023, I've finally realized that maybe something like Microsoft Copilot can genuinely help me solve my problem. So I asked it my question, in detail:
+
+> I have wired speakers and subwoofer plugged into my monitor. Everything is wired. Most of the time, things work totally fine, and the speakers are silent when no audio is playing. However, on some websites or in some apps, the speakers have an audible hum. These websites or apps do not try to play audio, so I am very confused. What could be causing this?
+
+Immediately, it started spitting out words. It's really good at that. It spit out a **lot** of words. As I skimmed through the response, something jumped out:
+
+> Some apps or websites briefly **activate the audio device** even if they don't play sound ... This happens a lot when speakers are plugged into a monitor's headphone jack, because monitors are notoriously noisy audio pass-through devices.
+
+Interesting. Now, I'm not going to lie to you. I hate how much AI talks at me. Like, yo, shut up. So I have a personal rule to just follow-up on the first interesting thing I see and not even scroll to the rest of the message. I'm very much a one-thing-at-a-time guy. (This entire conversation will be available on GitHub later.)
+
+I'll also note that at this point I'm signed out of Microsoft and sending messages to Copilot anonymously. I sign in part-way through the conversation (I don't remember exactly when) but quickly turn off all personalization and training. This is as close to a "vanilla" experience as I can get: the results you see here should be similar to anyone else's experience, I'm not hiding any settings.
+
+So I explained my constraints and asked for more info. I had never heard of most of the stuff I read, so I sent:
+
+> OK, I have to keep these speakers plugged in to the monitor. I don't want to change browser settings or Windows settings. What is a ground-loop isolator?
+
+Copilot told me this is a small device that sits between my monitor and speakers and is designed to solve my problem. That sounds promising.
+
+But I wanted a software fix, so I asked about that, tried the suggested fix, and didn't see any improvements. One option down.
+
+If it was a hardware issue, why did it only happen on certain websites? Well, because it was really a software issue: Chromium enables its audio subsystem sometimes when it's not needed, and that enablement opens the hardware audio channel that causes my hum. With a better browser, this issue might not happen to me in the first place. But Chromium is baked in to many desktop apps as well, so it's probably best to avoid a Chromium-specific fix.
+
+I was curious, though, if there was anything I could do to solve this issue for all users that visit my site. Some sort of a flag or property I could set that would prevent Chromium from eagerly-loading an unnecessary system. Alongside solving this issue, it might also make my site load even faster! So I asked Copilot, and Copilot replied with a gazillion words, and I just said:
+
+> Let's go one at a time. There is no `video` or `audio` tag on the site. In fact, here's the hello world page:
+>
+> \<html lang="en" ... \> ... \</html\>
+
+The message includes my entire homepage. AI is good at reading HTML and won't yell at me for spewing hypermedia at it, I figured. I was right. Immediately AI was like "Bro OMG ProtonPass is like super sketch" and I said "nah mate" and it said "oh, OK, let's try `about:blank`" and I said "oh yeah that one works fine" and it said "OK so links are basically the problem" and I said "so if I remove links I'll be fine" and it said "no no no just the concept of links being possibly able to be added to your page is the problem, Chromium be wild like that" and I said...
+
+Anyway, I learned a lot in that conversation.
