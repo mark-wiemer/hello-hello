@@ -41,6 +41,7 @@ Historically, I haven't followed a particular commit message style. But [Mocha](
   - [REST API](./packages/github/rest/readme.md)
 - [JavaScript](./packages/javascript/readme.md): Programming language for adding interactivity to websites
   - [jq (jqlang)](./packages/javascript/jq/readme.md): CLI tool for editing JSON files
+- [jj (Jujutsu)](./packages/jj/readme.md): Replacement for Git
 - [luanti](./packages/luanti/readme.md): Open-source engine, distribution platform, and client for "boxel" games
 - [markwiemer.com](./packages/markwiemer.com/readme.md): My personal website!
 - [Melvor Idle](./packages/melvor/readme.md): Heavily moddable RuneScape-inspired game
