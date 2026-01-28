@@ -1,7 +1,10 @@
-# https://pnpm.io/pnpm-workspace_yaml
 packages:
-  - "packages/astro"
-  - "packages/github/pages"
-  - "packages/luanti/doc-schema"
-  - "packages/markwiemer.com"
-  - "packages/unified"
+  - packages/astro
+  - packages/github/pages
+  - packages/luanti/doc-schema
+  - packages/markwiemer.com
+  - packages/unified
+
+onlyBuiltDependencies:
+  - esbuild
+  - sharp
