@@ -7,27 +7,6 @@ AHK++ will stay its own repo for better issue tracking and stargazing.
 Websites I maintain beyond markwiemer.com will stay their own repos
 because I use GitHub pages, which only supports one site per repo.
 
-## Setting up pnpm
-
-This repo is organized as a `pnpm` workspace to filter out some of the noise.
-You can treat the root `package.json` as my minimal recommendations for any JS package.
-Although this repo isn't limited to JS, that's where I spend most of my time.
-
-This is also my first repo with pnpm, I was an npm guy before but it's time for a change!
-
-I followed `https://pnpm.io/installation`:
-
-```bash
-curl -fsSL https://get.pnpm.io/install.sh | sh -
-```
-
-This gave me `pnpm 10.23.0` bundled with Node 20.11.1, but I don't plan to use the bundled version.
-I use `fnm` to manage Node versions and I generally use an LTS version (22.21.1 as of writing)
-
-## Commit messages
-
-Historically, I haven't followed a particular commit message style. But [Mocha](https://mochajs.org/next/) follows [Angular commit conventions](https://github.com/angular/angular/blob/26fed34e0e340166b70702d6177ad639bbfa94aa/contributing-docs/commit-message-guidelines.md) to auto-generate release logs and I think this is worth trying out :)
-
 ## Index
 
 - [AHK++](./packages/ahkpp/readme.md): IDE extension for AHK v1 and v2 language support
@@ -56,6 +35,29 @@ Historically, I haven't followed a particular commit message style. But [Mocha](
 - [Unified](./packages/unified/readme.md): Software collective for content processing
 - [Visual Studio Code](./packages/vscode/readme.md): IDE
 - [Website recommendations](./packages/web/readme.md): Recommendations for every site I maintain
+
+## Setting up pnpm
+
+This repo is organized as a `pnpm` workspace to filter out some of the noise.
+You can treat the root `package.json` as my minimal recommendations for any JS package.
+Although this repo isn't limited to JS, that's where I spend most of my time.
+
+This is also my first repo with pnpm, I was an npm guy before but it's time for a change!
+
+I followed `https://pnpm.io/installation` on Linux Mint:
+
+```bash
+curl -fsSL https://get.pnpm.io/install.sh | sh -
+```
+
+This gave me `pnpm 10.23.0` bundled with Node 20.11.1, but I don't plan to use the bundled version.
+I use `fnm` to manage Node versions and I generally use an LTS version (22.21.1 as of writing)
+
+I don't remember how I got pnpm on Windows, honestly.
+
+## Commit messages
+
+Historically, I haven't followed a particular commit message style. But [Mocha](https://mochajs.org/next/) follows [Angular commit conventions](https://github.com/angular/angular/blob/26fed34e0e340166b70702d6177ad639bbfa94aa/contributing-docs/commit-message-guidelines.md) to auto-generate release logs and I think this is worth trying out :)
 
 ## License
 
