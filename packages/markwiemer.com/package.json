@@ -1,12 +1,12 @@
 {
-  "name": "@mark-wiemer/hello-astro",
+  "name": "markwiemer.com",
+  "private": "true",
   "type": "module",
-  "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev --open",
+    "astro": "astro",
     "build": "astro build",
-    "preview": "astro preview --open",
-    "astro": "astro"
+    "dev": "astro dev --open",
+    "preview": "astro preview --open"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.13",
