@@ -1,0 +1,4 @@
+- **Article**: In the context of the blog, an article is a natural language series of paragraphs and whatnot. Generally posted at a specific time and only updated to fix typos and mistakes, not to add new information.
+- **Blog**: Consists of a homepage and a set of posts
+- **Notes**: In the context of the blog, a page of notes is a series of nested bulleted lists with many sources and analyses, not necessarily meant to be read in order. The same page may be frequently updated with additional information. A large page of notes may be split into multiple smaller pages for organization.
+- **Post**: In the context of the blog, a post is either an article or a page of notes
