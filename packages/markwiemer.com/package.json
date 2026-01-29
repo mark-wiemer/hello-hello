@@ -7,7 +7,8 @@
     "build": "astro build",
     "dev": "astro dev --open",
     "preview": "astro preview --open",
-    "test": "vitest --config config/vitest.config.js"
+    "test": "vitest --config config/vitest.config.js",
+    "validate:fix": "sort-package-json"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.13",
