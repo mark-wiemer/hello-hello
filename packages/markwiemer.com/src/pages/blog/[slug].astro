@@ -1,21 +1,27 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 
+/**
+ * Magic function used by Astro.
+ * https://docs.astro.build/en/guides/routing/#dynamic-routes
+ */
 export async function getStaticPaths() {
   // Get all files from src/pages/blog/content
   const glob = import.meta.glob("./content/*.mdx", { eager: true });
 
+  // path: e.g. './content/2024-10-08 months-without-music.mdx'
+  // module: MDX module
   const paths = Object.entries(glob).map(([path, module]) => {
     // Extract filename from path:
-    // './content/2024-10-08 months-without-music.mdx'
-    // -> '2024-10-08 months-without-music'
+    /** e.g. '2024-10-08 months-without-music' */
     const filename = path.split("/").pop()?.replace(".mdx", "") || "";
     // Extract slug from filename:
-    // '2024-10-08 months-without-music' -> 'months-without-music'
+    /** e.g. 'months-without-music' */
     const slug = filename.split(" ").slice(1).join("-");
 
     return {
-      params: { slug },
+      /** Variable must have this exact name to match filename `[slug].astro` */
+      params: { slug: slug },
       props: {
         module,
         filename,
