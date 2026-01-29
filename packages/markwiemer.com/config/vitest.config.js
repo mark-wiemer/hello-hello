@@ -1,7 +1,8 @@
-import { defineConfig } from "vitest/config";
+// reference Vitest types for better IDE support of `test` prop
+/// <reference types="vitest" />
+import { getViteConfig } from "astro/config";
 
-export default defineConfig({
-  test: {
-    include: ["src/**/hello-vitest.js"],
-  },
+export default getViteConfig({
+  // https://vitest.dev/config/
+  test: {},
 });
