@@ -24,3 +24,19 @@ pnpm config set -g init-type module
 pnpm config set -g init-license MIT
 pnpm config set -g init-version 0.1.0
 ```
+
+### Scripts
+
+According to AI, on Windows, `pnpm` cannot call itself, so something like:
+
+```jsonc
+// package.json
+{
+  "scripts": {
+    "test": "vitest",
+    "test:ci": "pnpm test --run", // doesn't work!
+  },
+}
+```
+
+I can't find a good workaround here, closest I can think is to create a JS file for each re-used command, but that doesn't sound fun to say the least.
