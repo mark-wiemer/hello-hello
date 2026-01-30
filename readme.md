@@ -21,7 +21,7 @@ because I use GitHub pages, which only supports one site per repo.
 - [JavaScript](./packages/javascript/readme.md): Programming language for adding interactivity to websites
   - [jq (jqlang)](./packages/javascript/jq/readme.md): CLI tool for editing JSON files
 - [jj (Jujutsu)](./packages/jj/readme.md): Replacement for Git
-- [luanti](./packages/luanti/readme.md): Open-source engine, distribution platform, and client for "boxel" games
+- [Luanti](./packages/luanti/readme.md): Open-source engine, distribution platform, and client for "boxel" games
 - [markwiemer.com](./packages/markwiemer.com/readme.md): My personal website!
 - [Melvor Idle](./packages/melvor/readme.md): Heavily moddable RuneScape-inspired game
 - [Mocha](./packages/mocha): JavaScript test framework for Node.js & the browser
