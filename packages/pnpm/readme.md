@@ -1,6 +1,6 @@
 # Hello pnpm
 
-`pnpm` ([performant npm](https://pnpm.io/faq#what-does-pnpm-stand-for)) is a Node package manager, an alternative to `npm`
+`pnpm` ([performant npm](https://pnpm.io/faq#what-does-pnpm-stand-for)) is a Node package manager, an alternative to `npm`. I use Linux for all pnpm-related development: if you have issues on Windows, I can't help!
 
 ## Usage
 
@@ -34,9 +34,13 @@ According to AI, on Windows, `pnpm` cannot call itself, so something like:
 {
   "scripts": {
     "test": "vitest",
-    "test:ci": "pnpm test --run", // doesn't work!
+    "test:ci": "pnpm test --run", // just doesn't work!
   },
 }
 ```
 
 I can't find a good workaround here, closest I can think is to create a JS file for each re-used command, but that doesn't sound fun to say the least.
+
+I was using an unofficial approach to Node installations on Windows (fnm), so I didn't expect support there. Docker was a pain, to say the least. Chocolatey didn't quite work. Corepack is just plain bad, at least, I can't get it to work.
+
+I've switched to Linux for all pnpm-related development instead, because it does work on Linux.
