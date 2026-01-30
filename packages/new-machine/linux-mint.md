@@ -30,7 +30,7 @@ Linux Mint Cinnamon has been my main operating system since August 2025. It's ve
 
 ## Firefox
 
-(Honestly I only use Firefox when working on RAM-intensive tasks like huge GitHub PRs)
+(I only use Firefox when working on RAM-intensive tasks like huge GitHub PRs)
 
 1. Vertical tabs: `about:config` > `sidebar.verticalTabs` > `true`
 2. Change default search engine
