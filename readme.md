@@ -25,8 +25,8 @@ because I use GitHub pages, which only supports one site per repo.
 - [markwiemer.com](./packages/markwiemer.com/readme.md): My personal website!
 - [Melvor Idle](./packages/melvor/readme.md): Heavily moddable RuneScape-inspired game
 - [Mocha](./packages/mocha): JavaScript test framework for Node.js & the browser
-- [mod.io](./packages/mod.io/readme.md): Site for hosting game mods
-- [Modrinth](./packages/modrinth/readme.md): App for managing Minecraft versions and mods
+- [mod.io](./packages/mod.io/readme.md): Site for hosting UGC
+- [Modrinth](./packages/modrinth/readme.md): App for managing Minecraft versions and UGC
 - [New machine](./packages/new-machine/readme.md): Setup steps for any new machine
 - [pnpm](./packages/pnpm/readme.md): Node package manager, alternative to npm
 - [POSIX](./packages/posix/readme.md): Set of cross-OS standards by IEEE
@@ -36,6 +36,13 @@ because I use GitHub pages, which only supports one site per repo.
 - [Unified](./packages/unified/readme.md): Software collective for content processing
 - [Visual Studio Code](./packages/vscode/readme.md): IDE
 - [Website recommendations](./packages/web/readme.md): Recommendations for every site I maintain
+
+## Glossary
+
+- **boxel**: Cubic voxel. Think of games like Minecraft, but not like Astroneer or A Game About Digging a Hole. (I made up this term for this context and haven't seen it in broad use yet, so I almost always wrap it in quotes: "boxel")
+- **DevOps**: Developer operations. Includes security. DevSecOps is a mess of a term, let's stick with DevOps.
+- **UGC**: User-generated content. An umbrella term for mods, texture packs, shaders, etc.
+- **voxel**: Volumetric pixel. Generally refers to a type of game where players can permanently modify the terrain.
 
 ## Setting up pnpm
 
