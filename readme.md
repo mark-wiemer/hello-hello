@@ -24,7 +24,7 @@ because I use GitHub pages, which only supports one site per repo.
 - [Luanti](./packages/luanti/readme.md): Open-source engine, distribution platform, and client for "boxel" games
 - [markwiemer.com](./packages/markwiemer.com/readme.md): My personal website!
 - [Melvor Idle](./packages/melvor/readme.md): Heavily moddable RuneScape-inspired game
-- [Mocha](./packages/mocha): JavaScript test framework for Node.js & the browser
+- [Mocha](./packages/mocha): JavaScript test framework for Node.js and the browser
 - [mod.io](./packages/mod.io/readme.md): Site for hosting UGC
 - [Modrinth](./packages/modrinth/readme.md): App for managing Minecraft versions and UGC
 - [New machine](./packages/new-machine/readme.md): Setup steps for any new machine
