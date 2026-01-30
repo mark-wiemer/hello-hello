@@ -42,3 +42,6 @@ Thumbs.db
 # Temporary folders
 tmp/
 temp/
+
+# Krita
+*-autosave.kra
