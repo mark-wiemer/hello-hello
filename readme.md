@@ -59,9 +59,7 @@ curl -fsSL https://get.pnpm.io/install.sh | sh -
 ```
 
 This gave me `pnpm 10.23.0` bundled with Node 20.11.1, but I don't plan to use the bundled version.
-I use `fnm` to manage Node versions and I generally use an LTS version (22.21.1 as of writing)
-
-I don't remember how I got pnpm on Windows, honestly.
+I use `fnm` to manage Node versions and I generally use an LTS version (22.21.1 as of writing). I don't use pnpm on Windows, see [/packages/pnpm/readme.md](/packages/pnpm/readme.md) for more info.
 
 ## Commit messages
 
