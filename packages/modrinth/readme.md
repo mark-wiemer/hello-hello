@@ -4,7 +4,7 @@
 
 The `code` folder is a submodule cloning the client itself, the upstream is [modrinth/code on GitHub](https://github.com/modrinth/code).
 
-There are [longstanding known issues with running Modrinth on Linux](https://github.com/modrinth/code/issues/3057). There are some workarounds published there if your CPU has an integrated graphics card, but mine doesn't. So I plan to build an old version of the code and run that. Wish me luck!
+There are [longstanding known issues with running Modrinth on Linux](https://github.com/modrinth/code/issues/3057). There are some workarounds published there if your CPU has an integrated graphics card, but mine doesn't. So I built an old version of the code and I run that! Below is how I did it.
 
 ```
 git remote add upstream https://github.com/modrinth/code
@@ -16,16 +16,29 @@ git push origin --tags
 ```
 
 1. Tag `v0.9.0` is the [last tag before this issue became critical](https://github.com/modrinth/code/issues/3057#issuecomment-2561992479).
-1. I've created branch `0.9.0-linux` in an effort to build the source and run it.
-1. I've `cd`-ed to `apps/app` and read the readme
+1. I've created branch `0.9.0-linux` on my fork in an effort to build the source and run it.
+1. I've `cd`-ed to `./code/apps/app` and read the readme
 1. I already have Node.js, pnpm, and Rust installed.
-1. I'm installing the [system dependencies for Debian-based Linux machines to use Tauri](https://v2.tauri.app/start/prerequisites/#linux)
-1. Tauri didn't tell me to install anything else
+1. I'm installing the [system dependencies for Debian-based Linux machines to use Tauri](https://v2.tauri.app/start/prerequisites/#linux), specifically:
+
+   ```sh
+   sudo apt update
+   sudo apt install libwebkit2gtk-4.1-dev \
+   build-essential \
+   curl \
+   wget \
+   file \
+   libxdo-dev \
+   libssl-dev \
+   libayatana-appindicator3-dev \
+   librsvg2-dev
+   ```
+
 1. `pnpm install` worked
 1. `pnpm app:dev` gave "command not found", looks like `pnpm dev` is what I need
 1. `pnpm dev` is taking 30+ seconds to build but is giving several lines of output per second and no obvious errors or warnings. Now that it's building package 724, it's giving a few warnings but noting that appears critical. An app window has launched but an ERROR is also logged in the terminal. The webpage says the app failed to load, and details the same error that's in the console:
 
-```
+```log
    Compiling theseus v0.9.0 (/home/markw/my-stuff/hello-hello/packages/modrinth/code/packages/app-lib)
    Compiling tauri-plugin-single-instance v2.2.0
 warning: struct `OfflinePayload` is never constructed
@@ -68,13 +81,13 @@ warning: `theseus_gui` (bin "theseus_gui") generated 1 warning (run `cargo fix -
 1. I ran `pnpm i` again to be safe, it succeeded in a few seconds.
 1. I ran `pnpm dev` and a window opened very quickly, the terminal stopped giving output for a few seconds, then gave some output and the window loaded Modrinth :)
 
-At this point, I've recompiled Modrinth 0.9.0 and it seems to work on my Linux Mint machine with an NVIDIA graphics card and an Intel CPU without an integrated graphics card. I'm able to import `mrpack` files, launch Minecraft, and have Minecraft render with my NVIDIA GPU. Modrinth itself is a bit slow, but very usable.
+At this point, I've recompiled Modrinth 0.9.0 and it seems to work on my Linux Mint machine with an NVIDIA graphics card and an Intel CPU without an integrated graphics card. I'm able to import `mrpack` files, launch Minecraft, and have Minecraft render with my NVIDIA GPU (F3). Modrinth itself is a bit slow, but very usable.
 
-1. I closed Modrinth, which, after a few seconds, automatically killed the terminal process
-1. I ran `pnpm build` hoping to get a more performant build. It tooks about 30 seconds and output some warnings starting at package 846: theseus, but otherwise gave fast continual build logs multiple times a second. Package 847, `theseus gui(bin)`, gave no output for ~30+ seconds, but eventually finished. The command then started giving `Bundling ...` output. The amd64.appImage bundle didn't give output for 30+ seconds, but did finish without issue. The terminal command ended at that point, no errors.
+1. I closed the Modrinth app window, which, after a few seconds, automatically killed the terminal process
+1. I ran `pnpm build` hoping to get a more performant build. After about 30 seconds it started outputting some warnings at package 846: theseus. Otherwise it gave fast continual build logs multiple times a second. Package 847, `theseus gui(bin)`, gave no output for ~30+ seconds, but eventually finished. The command then started giving `Bundling ...` output. The amd64.appImage bundle didn't give output for 30+ seconds, but did finish without issue. The terminal command ended at that point, no errors. 30 seconds is an arbitrary estimate, and my PC is very fast, it may take 10+ minutes on older machines: be patient!
 1. I opened `./code/target/release/bundle/deb/Modrinth App_0.9.0_amd64.deb` from the Files app (not an IDE), which prompted me to install the package
 1. I clicked `Install Package` and followed the installation steps. Installation was successful.
 
-I can now launch Modrinth from Cinnamenu on Linux Mint 22.1 Cinnamon, and when viewing settings in Modrinth it shows that Modrinth is at version 0.9.0. Modrinth is still relatively laggy, probably the same as when running via `pnpm dev`, but still works.
+I can now launch Modrinth from Cinnamenu on Linux Mint 22.1 Cinnamon, and when viewing settings in Modrinth (bottom left gear icon) it shows that Modrinth is at version 0.9.0. Modrinth is still relatively laggy, probably the same as when running via `pnpm dev`, but it works. Minecraft can be launched, and Minecraft uses my NVIDIA GPU according to F3.
 
 <!-- todo remove Modrinth branding assets (how??) -->
