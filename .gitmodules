@@ -10,3 +10,6 @@
 [submodule "packages/github/pages"]
 	path = packages/github/pages
 	url = https://github.com/mark-wiemer/hello-github-pages
+[submodule "packages/modrinth/code"]
+	path = packages/modrinth/code
+	url = https://github.com/mark-wiemer/modrinth-code

@@ -26,6 +26,7 @@ because I use GitHub pages, which only supports one site per repo.
 - [Melvor Idle](./packages/melvor/readme.md): Heavily moddable RuneScape-inspired game
 - [Mocha](./packages/mocha): JavaScript test framework for Node.js & the browser
 - [mod.io](./packages/mod.io/readme.md): Site for hosting game mods
+- [Modrinth](./packages/modrinth/readme.md): App for managing Minecraft versions and mods
 - [New machine](./packages/new-machine/readme.md): Setup steps for any new machine
 - [pnpm](./packages/pnpm/readme.md): Node package manager, alternative to npm
 - [POSIX](./packages/posix/readme.md): Set of cross-OS standards by IEEE
