@@ -39,7 +39,7 @@ because I use GitHub pages, which only supports one site per repo.
 
 ## Glossary
 
-- **boxel**: Cubic voxel. Think of games like Minecraft, but not like Astroneer or A Game About Digging a Hole. (I made up this term for this context and haven't seen it in broad use yet, so I almost always wrap it in quotes: "boxel")
+- **boxel**: Cubic voxel. Think of games like Minecraft, but not like Astroneer or A Game About Digging a Hole. (I made up this term for this context and haven't seen it in broad use, so I almost always wrap it in quotes: "boxel")
 - **DevOps**: Developer operations. Includes security. DevSecOps is a mess of a term, let's stick with DevOps.
 - **UGC**: User-generated content. An umbrella term for mods, texture packs, shaders, etc.
 - **voxel**: Volumetric pixel. Generally refers to a type of game where players can permanently modify the terrain.
