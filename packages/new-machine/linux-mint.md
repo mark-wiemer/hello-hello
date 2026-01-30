@@ -59,6 +59,10 @@ Linux Mint Cinnamon has been my main operating system since August 2025. It's ve
 
 1. Install from https://flathub.org/apps/org.gnome.baobab
 
+## Krita (like Paint.NET)
+
+1. Install from Software Manager
+
 ## Proton Pass
 
 1. Install from https://proton.me/pass/download
