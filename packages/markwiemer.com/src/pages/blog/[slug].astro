@@ -1,6 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import { getBlogPostPaths } from "@/utils/recent-posts";
+import { getBlogPostPaths, getPreface } from "@/utils/recent-posts";
 
 /**
  * Magic function used by Astro.
@@ -13,17 +13,10 @@ let { default: Content, frontmatter } = module;
 frontmatter ??= {};
 /* todo handle "orginally posted on Medium.com" stuff */
 const { postTitle, postDate, postTime, lastUpdated, postType } = frontmatter;
-let preface = `${postDate}${postTime ? `, ${postTime}.` : "."}`;
-
-preface += lastUpdated ? ` Last updated ${lastUpdated}.` : "";
-preface +=
-  postType === "notes"
-    ? ` These are personal notes, subject to change. None of this is legal advice.`
-    : "";
 ---
 
 <Layout pageTitle={postTitle}>
   <h1>{postTitle}</h1>
-  <p>{preface}</p>
+  <p>{getPreface(postDate, postTime, lastUpdated, postType)}</p>
   <Content />
 </Layout>
