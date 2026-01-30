@@ -63,4 +63,18 @@ warning: `theseus_gui` (bin "theseus_gui") generated 1 warning (run `cargo fix -
 ~/my-stuff/hello-hello/packages/modrinth/code/apps/app (0.9.0-linux) Node v22.21.1
 ```
 
+1. I've restarted my VS Code window in an effort to clean up my known commands. I don't think it made a difference.
+1. I was very careful and deleted `~/.local/share/ModrinthApp/` to ensure my system wasn't trying to fetch irrelevant DB migrations.
+1. I ran `pnpm i` again to be safe, it succeeded in a few seconds.
+1. I ran `pnpm dev` and a window opened very quickly, the terminal stopped giving output for a few seconds, then gave some output and the window loaded Modrinth :)
+
+At this point, I've recompiled Modrinth 0.9.0 and it seems to work on my Linux Mint machine with an NVIDIA graphics card and an Intel CPU without an integrated graphics card. I'm able to import `mrpack` files, launch Minecraft, and have Minecraft render with my NVIDIA GPU. Modrinth itself is a bit slow, but very usable.
+
+1. I closed Modrinth, which, after a few seconds, automatically killed the terminal process
+1. I ran `pnpm build` hoping to get a more performant build. It tooks about 30 seconds and output some warnings starting at package 846: theseus, but otherwise gave fast continual build logs multiple times a second. Package 847, `theseus gui(bin)`, gave no output for ~30+ seconds, but eventually finished. The command then started giving `Bundling ...` output. The amd64.appImage bundle didn't give output for 30+ seconds, but did finish without issue. The terminal command ended at that point, no errors.
+1. I opened `./code/target/release/bundle/deb/Modrinth App_0.9.0_amd64.deb` from the Files app (not an IDE), which prompted me to install the package
+1. I clicked `Install Package` and followed the installation steps. Installation was successful.
+
+I can now launch Modrinth from Cinnamenu on Linux Mint 22.1 Cinnamon, and when viewing settings in Modrinth it shows that Modrinth is at version 0.9.0. Modrinth is still relatively laggy, probably the same as when running via `pnpm dev`, but still works.
+
 <!-- todo remove Modrinth branding assets (how??) -->
