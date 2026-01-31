@@ -10,17 +10,39 @@ As such, I need to genuinely rebrand this repo before actively sharing it. As mu
 
 ## All reviewed files
 
-Before sharing, I need to review every single file in `./code`:
+Before sharing, I need to review every single file in `./code/apps/app` and make sure it complies with Modrinth's rules (or isn't part of the core app):
 
 - .cargo: good
 - .github: rebranded
--
+- .idea: good
+- .vscode: good
+- apps
+  - app
+    - capabilities: removed ads
+    - icons: rebranded. `icns` file (macOS) removed
+    - nsis: good
+    - src
+      - api: skimmed, doesn't seem to have Modrinth branding
+      - macos: skipped, we're only building for Linux
+      - (other files): skimmed, doesn't seem to have Modrinth branding
+    - Cargo.toml: rebranded
+    - packge.json: rebranded
+    - README.md: rebranded
+    - tauri.\*.conf.json: branded
+  - (all other folders in `apps` were skipped as they're not part of the core app)
 
 ### Final checks
 
-- [ ] Ctrl+F "modrinth"
+- [x] Ctrl+F "modrinth"
 - [ ] find and manually preview all image files
-  - [ ] png
-  - [ ] ico (not just immediate top layer but all bundled layers)
-  - [ ] jpg
+  - [x] png
+  - [x] ico (not just immediate top layer but all bundled layers)
+  - [x] jpg
   - [ ] others? list all file extensions and go from there
+- [x] use `example.com` in place of `modrinth.com` where necessary
+
+### Other modules
+
+I'm not going to rebrand everything all at once. Below are non-core modules that should be rebranded before sharing, but are not part of the core NML app:
+
+- todo
