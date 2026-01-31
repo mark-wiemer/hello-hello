@@ -37,7 +37,6 @@ Before sharing, I need to review every single file in `./code/apps/app` and make
 - [x] find and manually preview all image files
   - [x] png
   - [x] ico (not just immediate top layer but all bundled layers)
-  - [x] jpg
   - [x] others? list all file extensions and go from there
     - ```sh
       git ls-files | grep -oE '\.[^./]+$' | sort -u
@@ -49,6 +48,8 @@ Before sharing, I need to review every single file in `./code/apps/app` and make
 - [x] use `example.com` in place of `modrinth.com` where necessary
 - [x] splash screen
 - [x] remove Modrinth sign in
+  - [x] bottom left
+  - [x] friend list (removed all friends logic)
 
 ### Other modules
 
