@@ -34,12 +34,21 @@ Before sharing, I need to review every single file in `./code/apps/app` and make
 ### Final checks
 
 - [x] Ctrl+F "modrinth"
-- [ ] find and manually preview all image files
+- [x] find and manually preview all image files
   - [x] png
   - [x] ico (not just immediate top layer but all bundled layers)
   - [x] jpg
-  - [ ] others? list all file extensions and go from there
+  - [x] others? list all file extensions and go from there
+    - ```sh
+      git ls-files | grep -oE '\.[^./]+$' | sort -u
+      ```
+    - ```sh
+      git ls-files '*.ico' '*.png' '*.kra' '*.svg' '*.webp'
+      ```
+    - Everything reviewed and rebranded accordingly
 - [x] use `example.com` in place of `modrinth.com` where necessary
+- [x] splash screen
+- [x] remove Modrinth sign in
 
 ### Other modules
 
