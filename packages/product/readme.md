@@ -16,7 +16,7 @@ Recommendations I try to follow for all products I build, regardless of framewor
   - No cookie banner: Only use strictly necessary cookies
   - Transparent tracking: If I do track info, it's always
     - Opt-in
-    - Easy to opt out (max 3 clicks: settings > telemetry > opt out)
+    - Easy to opt out (max 4 clicks: menu > settings > telemetry > opt out)
     - Clear what data is being sent (sample JSON payload)
     - Clear what data will never be sent (IP, location, etc.)
     - Clear when the tracked data changes
