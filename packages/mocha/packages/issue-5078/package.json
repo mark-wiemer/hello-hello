@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "test:debug": "DEBUG=* npm test",
+    "test": "mocha index.test.js"
+  },
+  "dependencies": {
+    "mocha": "file:../mocha"
+  }
+}
