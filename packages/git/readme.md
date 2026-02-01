@@ -70,4 +70,10 @@ To add a new submodule:
 git submodule add url relative_path
 ```
 
+To remove a submodule:
+
+```sh
+git rm path_to_submodule
+```
+
 To rename a submodule, simply delete it and re-add it in a renamed folder.
