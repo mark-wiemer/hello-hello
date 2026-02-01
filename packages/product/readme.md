@@ -3,7 +3,15 @@
 Recommendations I try to follow for all products I build, regardless of framework:
 
 - Accessibility
-  - Accessibility Insights full assessment every 90 days
+  - Full assessment every 90 days
+    - Accessibility Insights assessment
+  - All features thoroughly tested
+    - One finger
+    - Mouse-only
+    - Keyboard-only
+    - Eyes closed + screen reader
+    - Sound disabled
+  - See also usability
 - Performance
   - Test all pages with "Slow 3G" connection
   - Defer all images, but with Cumulative Layout Shift handled
