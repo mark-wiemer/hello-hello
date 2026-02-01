@@ -30,12 +30,12 @@ because I use GitHub pages, which only supports one site per repo.
 - [New machine](./packages/new-machine/readme.md): Setup steps for any new machine
 - [pnpm](./packages/pnpm/readme.md): Node package manager, alternative to npm
 - [POSIX](./packages/posix/readme.md): Set of cross-OS standards by IEEE
+- [Product recommendations](./packages/product/readme.md): Recommendations for products I maintain
 - [React](./packages/react/readme.md): Library for creating complex interactive websites
 - [Rust](./packages/rust/readme.md): Programming language emphasizing safety and performance
 - [TypeScript](./packages/typescript/readme.md): Programming language that adds types to JavaScript
 - [Unified](./packages/unified/readme.md): Software collective for content processing
 - [Visual Studio Code](./packages/vscode/readme.md): IDE
-- [Website recommendations](./packages/web/readme.md): Recommendations for every site I maintain
 
 ## Glossary
 

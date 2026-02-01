@@ -1,9 +1,17 @@
-# Website recommendations
+# Hello Product
 
-Recommendations I try to follow for all websites I build, regardless of framework:
+Recommendations I try to follow for all products I build, regardless of framework:
 
 - Accessibility
   - Accessibility Insights full assessment every 90 days
+- Performance
+  - Test all pages with "Slow 3G" connection
+  - Defer all images, but with Cumulative Layout Shift handled
+  - Use low-res images first with optional high-res images based on connection speed, connection type?, user preferences
+  - Prioritize sending minified content instead of sending inspectable content
+    - Source code linked anyway, see "transparency" section
+  - Only apply CSS rules where necessary (e.g. don't apply rules to all `figure` elements if only some need them)
+  - Use stylesheets instead of repeated style attributes
 - Privacy
   - No cookie banner: Only use strictly necessary cookies
   - Transparent tracking: If I do track info, it's always
@@ -17,14 +25,6 @@ Recommendations I try to follow for all websites I build, regardless of framewor
       - Notification? (max 1 change per month if so? Notification spam sucks)
 - Security
   - I only build static sites right now, so no special concerns here
-- Performance
-  - Test all pages with "Slow 3G" connection
-  - Defer all images, but with Cumulative Layout Shift handled
-  - Use low-res images first with optional high-res images based on connection speed, connection type?, user preferences
-  - Prioritize sending minified content instead of sending inspectable content
-    - Source code linked anyway, see "transparency" section
-  - Only apply CSS rules where necessary (e.g. don't apply rules to all `figure` elements if only some need them)
-  - Use stylesheets instead of repeated style attributes
 - Transparency
   - Source code linked at bottom of each page
   - Licensed under MIT or other widely-recognized FOSS license
