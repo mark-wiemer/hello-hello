@@ -77,3 +77,18 @@ git rm path_to_submodule
 ```
 
 To rename a submodule, simply delete it and re-add it in a renamed folder.
+
+## Tags
+
+```
+git tag tagname
+```
+
+```
+git push --tags
+```
+
+```
+git tag -d tagname
+git push --delete remote tagname
+```
