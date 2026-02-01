@@ -13,6 +13,3 @@
 [submodule "packages/modrinth/code"]
 	path = packages/modrinth/code
 	url = https://github.com/mark-wiemer/modrinth-code
-[submodule "packages/mocha/packages/issue-5708"]
-	path = packages/mocha/packages/issue-5708
-	url = https://github.com/mark-wiemer/mocha-issue-5708
