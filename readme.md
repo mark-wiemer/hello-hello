@@ -67,6 +67,8 @@ Historically, I haven't followed a particular commit message style. But [Mocha](
 
 ## License
 
+Some software subpackages are restricted by their own license. All subpackages are free and open-source to the best of my knowledge. When not otherwise specified, the MIT license below applies.
+
 MIT
 
 Copyright (c) 2026 Mark Wiemer
