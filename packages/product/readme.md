@@ -1,6 +1,6 @@
 # Hello Product
 
-Recommendations I try to follow for all products I build, regardless of framework:
+Recommendations I try to follow for all products I build, regardless of framework. Presented in alphabetical order:
 
 - Accessibility
   - Full assessment every 90 days
@@ -12,6 +12,28 @@ Recommendations I try to follow for all products I build, regardless of framewor
     - Eyes closed + screen reader
     - Sound disabled
   - See also usability
+- Documentation
+  - Markdown documents for everything
+  - Ideally everything is in one `docs` folder except for `readme.md`
+  - Comment liberally: it's easier to remove than it is to add later
+- Generative artificial intelligence (GenAI)
+  - Never creative
+    - AI-generated images/video/audio is only used for demo/explanatory purposes
+    - AI-generated text is never copy-pasted, always rewritten by me
+      - Generally I only use GenAI with writing to correct typos
+  - Always optional
+    - Users should be able to easily navigate the site without using GenAI tools
+    - See also usability
+  - Always disclosed
+    - Prominent "AI-generated content may be incorrect" or similar disclaimer near every message
+  - Never tries to "be a person"
+    - Never refers to itself as "I" or "we", instead says things like "this bot" or "this product"
+    - Not open to general conversation, always focused on purpose-built tasks
+  - Never trusted
+    - All AI output is checked by handwritten procedures, e.g., making sure all links exist
+    - Comprehensive e2e tests are in place and pass before any GenAI changes are deployed
+  - Ethically trained
+    - StarCoder LLM
 - Performance
   - Test all pages with "Slow 3G" connection
   - Defer all images, but with Cumulative Layout Shift handled
@@ -31,10 +53,25 @@ Recommendations I try to follow for all products I build, regardless of framewor
       - Users are automatically opted out?
       - Subtle badge appears in settings submenu
       - Notification? (max 1 change per month if so? Notification spam sucks)
+- Project management
+  - Use the lightest tools that work
+  - Use automation whenever reasonable
+    - Re-evaluate bot configs on a regular basis
+  - Infrastructure as code (e.g. GitHub REST API for new repos)
 - Security
   - I only build static sites right now, so no special concerns here
+- Testing
+  - Automated tests for as much as possible
+  - If automated tests are infeasible:
+    - Detailed manual repro steps are available (GitHub Gist or commit)
+    - Issue is opened for automating tests for that area
 - Transparency
-  - Source code linked at bottom of each page
+  - Source code linked to each project
   - Licensed under MIT or other widely-recognized FOSS license
 - Tooling
   - When working with source code, spell-checker should be enabled
+- Usability
+  - Command palette should be available for all interactions with the site
+    - All settings discoverable
+    - All pages discoverable
+    - Actions like "sign out", "sign in"
