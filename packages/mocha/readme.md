@@ -8,6 +8,4 @@ I'm a maintainer of [Mocha](https://mochajs.org), a JavaScript testing framework
 
 The [Mocha source code](https://github.com/mochajs/mocha)
 
-## to-do
-
-Prettier doesn't like monorepos, to say the least.
+When formatting the Mocha source code, run Prettier with `--no-config`. Ref [Mocha issue 5621](https://github.com/mochajs/mocha/issues/5621) for details.
