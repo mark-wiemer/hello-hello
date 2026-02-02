@@ -1,0 +1,6 @@
+# Output of new solution creation
+out.log.dev
+
+# .NET
+obj
+bin
