@@ -13,7 +13,7 @@ because I use GitHub pages, which only supports one site per repo.
 - [Aspire](./packages/aspire/readme.md): Orchestration toolkit for distributed applications
 - [Astro](./packages/astro/readme.md): Web framework for content-driven websites
 - [Bash](./packages/bash/readme.md): Cross-platform shell
-- [.NET (dotnet)](./packages/dotnet/readme.md): Microsoft's open-source framework for any software
+- [.NET (dotnet)](./packages/dotnet/readme.md): Open-source framework for any software
 - [Git](./packages/git/readme.md): Version control system, includes notes on Git LFS
 - [GitHub](./packages/github/readme.md): DevOps platform
   - [Codespaces](./packages/github/codespaces/readme.md)
