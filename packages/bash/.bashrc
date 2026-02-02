@@ -254,3 +254,6 @@ case ":$PATH:" in
 esac
 #endregion
 . "$HOME/.cargo/env"
+
+# Added by get-aspire-cli.sh
+export PATH="$HOME/.aspire/bin:$PATH"
