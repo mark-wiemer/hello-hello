@@ -73,7 +73,8 @@ warning: `theseus_gui` (bin "theseus_gui") generated 1 warning (run `cargo fix -
 ```
 
 1. I've restarted my VS Code window in an effort to clean up my known commands. I don't think it made a difference.
-1. I was very careful and deleted `~/.local/share/ModrinthApp/` to ensure my system wasn't trying to fetch irrelevant DB migrations.
+1. I (should've made backups before I) was very careful and deleted `~/.local/share/ModrinthApp/` to ensure my system wasn't trying to fetch irrelevant DB migrations.
+   - Note: this will delete your instances and saves/worlds! Make backups first!
 1. I ran `pnpm i` again to be safe, it succeeded in a few seconds.
 1. I ran `pnpm dev` and a window opened very quickly, the terminal stopped giving output for a few seconds, then gave some output and the window loaded Modrinth :)
 
