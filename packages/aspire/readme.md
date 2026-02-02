@@ -11,5 +11,6 @@ Most important feedback at the top
 - `aspire new` should include `.gitignore`
 - Would be great to have CLI options baked-in to first `aspire new` run instead of clicking through GUI to create test project, etc.
 - Output log on `aspire new` not so good
+- Why did `.aspire/settings.json` appear after `aspire run`? Should I commit it?
 - Site should clarify pre-reqs clearer?
 - `slnx` support would be great
