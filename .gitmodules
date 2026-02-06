@@ -16,3 +16,6 @@
 [submodule "packages/modrinth/nml"]
 	path = packages/modrinth/nml
 	url = https://github.com/mark-wiemer/nerds-minecraft-launcher
+[submodule "packages/mocha/packages/personal-mocha"]
+	path = packages/mocha/packages/personal-mocha
+	url = https://github.com/mark-wiemer/mocha
