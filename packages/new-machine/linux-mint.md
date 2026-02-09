@@ -7,6 +7,7 @@ Linux Mint Cinnamon has been my main operating system since August 2025. It's ve
 - Disable secure boot in BIOS
 - Check drivers, kernel, and other software
 - Post in Discord
+- Try to run program from terminal
 
 ## Glossary
 
@@ -19,7 +20,24 @@ Linux Mint Cinnamon has been my main operating system since August 2025. It's ve
 
 ## Installing arbitrary software
 
-`amd64.deb` files are best for my current machine, others may vary. I should probably learn what all the variations are all about, huh? [Microsoft Edge download](https://www.microsoft.com/en-us/edge/) seems to be pretty good at automatically choosing the right version for the current machine, probably copy whatever that installs.
+1. First, check Software Manager
+1. Otherwise, check for `amd64.deb` files from trusted sources
+   - `amd64` is a common CPU architecture, compared to `arm` for very new CPUs
+   - `deb` is for Debian-based distros
+
+## Microsoft Edge
+
+Troubleshooting:
+
+```sh
+microsoft-edge-stable
+```
+
+Config files:
+
+```sh
+cd ~/.config/microsoft-edge
+```
 
 ## Clipboard history: Diodon
 
