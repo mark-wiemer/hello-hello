@@ -3,7 +3,14 @@ import Footer from "../components/Footer.astro";
 const style = "/styles.css";
 interface Props {
   pageTitle: string;
+  /** Optional CSS class to apply to the main container */
+  klass?: string;
+  /** Defaults to true */
+  showFooter?: boolean;
 }
+
+const classToUse = Astro.props.klass ? Astro.props.klass : "article";
+const showFooter = Astro.props.showFooter !== false;
 ---
 
 <!doctype html>
@@ -20,9 +27,9 @@ interface Props {
     <title>{Astro.props.pageTitle} - markwiemer.com</title>
   </head>
   <body>
-    <div class="article">
+    <div class={classToUse}>
       <slot />
-      <Footer />
+      {showFooter && <Footer />}
     </div>
     <script is:inline>
       // make external links open in new tab

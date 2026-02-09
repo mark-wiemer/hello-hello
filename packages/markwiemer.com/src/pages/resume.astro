@@ -1,0 +1,146 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import "@/assets/resume.css";
+
+const colophonId = "colophon";
+const rowClass = "row";
+---
+
+<script define:vars={{ id: colophonId }} is:inline>
+  function equalizeColophonElWidths() {
+    const left = document.getElementById(`${id}-left`);
+    const right = document.getElementById(`${id}-right`);
+    if (!left || !right) return;
+
+    // Reset widths to auto to measure natural sizes
+    left.style.width = "auto";
+    right.style.width = "auto";
+
+    // add a small buffer to prevent wrapping
+    const maxWidth = Math.max(left.offsetWidth, right.offsetWidth) + 2;
+    left.style.width = `${maxWidth}px`;
+    right.style.width = `${maxWidth}px`;
+  }
+
+  document.addEventListener("DOMContentLoaded", equalizeColophonElWidths);
+  window.addEventListener("resize", equalizeColophonElWidths);
+</script>
+
+<Layout pageTitle="Resume" klass="resume" showFooter={false}>
+  <h1>Mark Wiemer</h1>
+  <div id={colophonId}>
+    <span id={`${colophonId}-left`}><a href="/">markwiemer.com</a></span>
+    <p>February 2026</p>
+    <p id={`${colophonId}-right`}>markwiemer at outlook 🤓</p>
+  </div>
+
+  <hr />
+
+  <h2>Education</h2>
+  <div class={rowClass}>
+    <p><b>University of Wisconsin-Madison</b></p>
+    <p><b>Graduated:</b> May 2020</p>
+  </div>
+  <div class={rowClass}>
+    <p><b>Bachelor of Science:</b> Computer Science, Mathematics</p>
+    <p><b>GPA:</b> 4.0/4.0</p>
+  </div>
+  <div class={rowClass}>
+    <p><b>Certificate (Minor):</b> French</p>
+    <!-- empty cell for alignment -->
+    <p></p>
+  </div>
+
+  <hr />
+
+  <h2>Experience</h2>
+  <div class={rowClass}>
+    <p><b>Software Engineer II</b> (Microsoft)</p>
+    <p>March 2024 – present</p>
+  </div>
+  <ul>
+    <li>
+      Delivered 4 AI-powered apps using Semantic Kernel, Copilot Studio, and Declarative Agents for
+      M365 Copilot
+    </li>
+    <li>Reduced data access time from days to seconds across several scenarios</li>
+    <li>Decreased time to competency for Technical Support Engineers by 50%</li>
+  </ul>
+
+  <div class={rowClass}>
+    <p><b>Software Engineer</b> (Microsoft)</p>
+    <p>August 2020 – March 2024</p>
+  </div>
+  <ul>
+    <li>
+      Delivered React app for 200+ administrators to upload, target, and combine 10,000+ trainings
+    </li>
+    <li>Rebuilt intuitive end-to-end learning path experience for 250,000+ learners</li>
+    <li>
+      Ensured WCAG 2.1 AA accessibility compliance across dozens of webpages from design onward
+    </li>
+  </ul>
+
+  <div class={rowClass}>
+    <p><b>Software Engineering Intern</b> (Bloomberg, L.P.)</p>
+    <p>May 2019 – July 2019</p>
+  </div>
+  <ul>
+    <li>Used Jenkins, Docker, and pytest in new CI pipeline</li>
+    <li>Reduced dev loop time from hours to minutes</li>
+  </ul>
+
+  <hr />
+
+  <h2>Projects</h2>
+  <div class={rowClass}>
+    <p><b><a href="https://ahkpp.com">AHK++</a></b> (VS Code language extension)</p>
+    <p>November 2020 – present</p>
+  </div>
+  <ul>
+    <li>Added automated tests and new features to deprecated language support extension</li>
+    <li>Acquired 420,000+ installs with a 4.8/5.0 rating across 28 reviews</li>
+  </ul>
+
+  <div class={rowClass}>
+    <p><b><a href="https://mochajs.org">Mocha</a></b> (JavaScript testing framework)</p>
+    <p>August 2025 – present</p>
+  </div>
+  <ul>
+    <li>Reviewed community-led PRs and issues across critical components</li>
+    <li>Maintained 12,000,000+ weekly downloads and 22,000+ GitHub stars</li>
+  </ul>
+
+  <hr />
+
+  <h2>Volunteering</h2>
+  <div class={rowClass}>
+    <p><b>Volunteer</b> (Bridge Disability Ministries)</p>
+    <p>December 2025 – present</p>
+  </div>
+  <ul>
+    <li>
+      Helped with general cleaning and assisted with activities at social events for disabled adults
+    </li>
+  </ul>
+
+  <div class={rowClass}>
+    <p><b>Court Appointed Special Advocate (CASA)</b> (King County Superior Court)</p>
+    <p>October 2025 – present</p>
+  </div>
+  <ul>
+    <li>Advocated for the best interests of children removed from their homes</li>
+    <li>
+      Reviewed 1,000+ pages of court documents, conducted monthly interviews, and testified in court
+    </li>
+  </ul>
+
+  <div class={rowClass}>
+    <p><b>Big Brother</b> (Big Brothers Big Sisters of Puget Sound)</p>
+    <p>February 2021 – present</p>
+  </div>
+  <ul>
+    <li>Befriended my Little Brother, serving as role model and #1 fan</li>
+    <li>Continued relationship to present day after ending formal program in September 2025</li>
+  </ul>
+</Layout>

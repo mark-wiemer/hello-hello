@@ -1,0 +1,44 @@
+.resume {
+  margin: 0 auto;
+  max-width: 960px;
+  @media (max-width: 960px) {
+    /* Adjust vertical padding as well, generally "cozier" view */
+    padding: 4px;
+    max-width: calc(100vw - 24px);
+  }
+
+  & > hr {
+    height: 28px;
+    border: 0;
+  }
+}
+
+#colophon {
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  & #colophon-right {
+    text-align: end;
+  }
+}
+
+.row {
+  flex-direction: row;
+  justify-content: space-between;
+  & > :last-child {
+    text-align: end;
+  }
+}
+
+h2 {
+  margin: 2px;
+}
+
+p {
+  margin: 2px;
+}
+
+ul {
+  margin: 2px;
+}
