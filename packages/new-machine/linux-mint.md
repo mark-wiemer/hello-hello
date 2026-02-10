@@ -1,4 +1,4 @@
-# Linux Mint
+## Linux Mint
 
 Linux Mint Cinnamon has been my main operating system since August 2025. It's very easy to get started with, I highly recommend it!
 
