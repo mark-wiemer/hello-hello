@@ -1,10 +1,27 @@
 /* https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascading_variables/Using_custom_properties */
+/* :root is a common practice for global reference */
 :root {
+  --body-bg-dark: black;
+  --body-bg-light: white;
+  --code-bg-dark: rgb(33, 38, 44);
+  --code-bg-light: rgb(214, 223, 233);
+  --img-border-dark: var(--text-primary-dark);
+  --img-border-light: var(--text-primary-light);
+  --link-active-dark: var(--text-primary-dark);
+  --link-active-light: var(--text-primary-light);
+  --link-primary-dark: rgb(0, 162, 174);
+  --link-primary-light: rgb(9 115 131);
+  --link-visited-dark: rgb(219, 8, 219);
+  --link-visited-light: rgb(107, 2, 107);
+  --nav-bg-dark: var(--body-bg-dark);
+  --nav-bg-light: var(--body-bg-light);
+  --text-primary-dark: gainsboro;
+  --text-primary-light: black;
   --z-index-nav: 1;
 }
 
 nav {
-  background-color: black;
+  background-color: var(--nav-bg-dark);
   height: 100%;
   left: 0;
   overflow-x: hidden;
@@ -21,9 +38,11 @@ nav {
 }
 
 body {
+  line-height: 1.5em;
   /* Add 1em below to allow user to sanity-check it's the true end-of-page */
   /* Use margin instead of padding as most user agents have a margin we don't want */
   margin: 0 0 1em 0;
+  /* Order matters for font-family */
   font-family:
     "Segoe UI",
     "Segoe UI Web (West European)",
@@ -33,10 +52,10 @@ body {
     "Helvetica Neue",
     sans-serif;
   font-size: 18px;
-  line-height: 1.5em;
+
   @media (prefers-color-scheme: dark) {
-    background-color: black;
-    color: gainsboro;
+    background-color: var(--body-bg-dark);
+    color: var(--text-primary-dark);
   }
 }
 
@@ -81,43 +100,43 @@ a {
   border-radius: 5px;
 
   /* See docs/tests.md for link state test matrix */
-  color: rgb(9 115 131);
+  color: var(--link-primary-light);
   &:hover {
-    outline: 2px solid rgb(9 115 131);
+    outline: 2px solid var(--link-primary-light);
   }
   &:visited {
-    color: rgb(107, 2, 107);
+    color: var(--link-visited-light);
   }
   &:visited:hover {
-    outline: 2px solid rgb(107, 2, 107);
+    outline: 2px solid var(--link-visited-light);
   }
   &:visited:active {
-    outline: 2px solid black;
-    color: black;
+    outline: 2px solid var(--link-active-light);
+    color: var(--link-active-light);
   }
   &:active {
-    outline: 2px solid black;
-    color: black;
+    outline: 2px solid var(--link-active-light);
+    color: var(--link-active-light);
   }
 
   @media (prefers-color-scheme: dark) {
-    color: rgb(0, 162, 174);
+    color: var(--link-primary-dark);
     &:hover {
-      outline: 2px solid rgb(0, 162, 174);
+      outline: 2px solid var(--link-primary-dark);
     }
     &:visited {
-      color: rgb(219, 8, 219);
+      color: var(--link-visited-dark);
     }
     &:visited:hover {
-      outline: 2px solid rgb(219, 8, 219);
+      outline: 2px solid var(--link-visited-dark);
     }
     &:visited:active {
-      outline: 2px solid gainsboro;
-      color: gainsboro;
+      outline: 2px solid var(--link-active-dark);
+      color: var(--link-active-dark);
     }
     &:active {
-      outline: 2px solid gainsboro;
-      color: gainsboro;
+      outline: 2px solid var(--link-active-dark);
+      color: var(--link-active-dark);
     }
   }
 }
@@ -164,10 +183,10 @@ blockquote {
 
 img.border {
   @media (prefers-color-scheme: dark) {
-    border: 2px solid gainsboro;
+    border: 2px solid var(--img-border-dark);
   }
   @media (prefers-color-scheme: light) {
-    border: 2px solid black;
+    border: 2px solid var(--img-border-light);
   }
 }
 
@@ -180,9 +199,9 @@ figure.center {
 code {
   font-size: smaller;
   @media (prefers-color-scheme: dark) {
-    background-color: rgb(33, 38, 44);
+    background-color: var(--code-bg-dark);
   }
   @media (prefers-color-scheme: light) {
-    background-color: rgb(214, 223, 233);
+    background-color: var(--code-bg-light);
   }
 }
