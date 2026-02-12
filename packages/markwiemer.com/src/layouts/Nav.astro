@@ -1,0 +1,26 @@
+---
+import FooterEntry from "@/components/FooterEntry.astro";
+---
+
+<button id="openNav">☰</button>
+<nav>
+  <button id="closeNav">X</button>
+  <FooterEntry href="/" text="Home" />
+  <FooterEntry href="/about" text="About" />
+  <FooterEntry href="/blog" text="Blog" />
+  <FooterEntry href="https://ahkpp.com" text="AHK++" />
+  <FooterEntry href="/luanti" text="Luanti" />
+  <FooterEntry href="https://mochajs.org" text="Mocha" newTab />
+</nav>
+
+<script is:inline data-notes="handle nav toggle">
+  const openButton = document.querySelector("#openNav");
+  const closeButton = document.querySelector("#closeNav");
+  const nav = document.querySelector("nav");
+  openButton?.addEventListener("click", () => {
+    nav.setAttribute("aria-expanded", "true");
+  });
+  closeButton?.addEventListener("click", () => {
+    nav.setAttribute("aria-expanded", "false");
+  });
+</script>

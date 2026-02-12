@@ -1,5 +1,6 @@
 ---
 import Footer from "../components/Footer.astro";
+import Nav from "./Nav.astro";
 const style = "/styles.css";
 interface Props {
   pageTitle: string;
@@ -27,6 +28,7 @@ const showFooter = Astro.props.showFooter !== false;
     <title>{Astro.props.pageTitle} - markwiemer.com</title>
   </head>
   <body>
+    <Nav />
     <div class={classToUse}>
       <slot />
       {showFooter && <Footer />}

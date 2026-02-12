@@ -1,3 +1,25 @@
+/* https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascading_variables/Using_custom_properties */
+:root {
+  --z-index-nav: 1;
+}
+
+nav {
+  background-color: black;
+  height: 100%;
+  left: 0;
+  overflow-x: hidden;
+  padding-top: 60px;
+  position: fixed;
+  top: 0;
+  transition: 0.2s;
+  width: 0;
+  z-index: var(--z-index-nav);
+
+  &[aria-expanded="true"] {
+    width: 10%;
+  }
+}
+
 body {
   /* Add 1em below to allow user to sanity-check it's the true end-of-page */
   /* Use margin instead of padding as most user agents have a margin we don't want */
