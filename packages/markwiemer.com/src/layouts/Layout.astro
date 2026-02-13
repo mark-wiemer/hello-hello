@@ -32,7 +32,9 @@ const showFooter = Astro.props.showFooter !== false;
     <Nav />
     <!-- todo use `article` element when reasonable -->
     <div class={classToUse}>
-      <slot />
+      <main>
+        <slot />
+      </main>
       {showFooter && <Footer />}
     </div>
     <script is:inline data-notes="make external links open in new tab">
