@@ -15,11 +15,12 @@
   --link-visited-light: rgb(107, 2, 107);
   --nav-bg-dark: var(--body-bg-dark);
   --nav-bg-light: var(--body-bg-light);
-  --nav-open-width: 10vw;
+  --nav-open-width: calc(max(72px, 10vw));
   --nav-open-time: 0.2s;
   --text-primary-dark: gainsboro;
   --text-primary-light: black;
-  --z-index-nav: 1;
+  --z-index-nav-main: 1;
+  --z-index-nav-button: 2;
 }
 
 ::selection {
@@ -35,6 +36,8 @@
 
 nav {
   background-color: var(--nav-bg-dark);
+  display: flex;
+  flex-direction: column;
   height: 100%;
   left: 0;
   overflow-x: hidden;
@@ -43,15 +46,22 @@ nav {
   top: 0;
   transition: var(--nav-open-time);
   width: 0;
-  z-index: var(--z-index-nav);
+  z-index: var(--z-index-nav-main);
+
+  & > * {
+    padding-left: 4px;
+  }
 
   &[aria-expanded="true"] {
+    /* todo border disappears before transition is done */
+    border-right: 1px solid gainsboro;
     width: var(--nav-open-width);
   }
 }
 
 #openNav {
   background: transparent;
+  width: 30px;
   border: 1px solid white;
   border-radius: 4px;
   margin-top: 4px;
@@ -62,7 +72,8 @@ nav {
 }
 
 body.nav-open #openNav {
-  transform: translateX(var(--nav-open-width));
+  transform: translateX(calc(var(--nav-open-width) - 27px));
+  z-index: var(--z-index-nav-button);
 }
 
 body,
