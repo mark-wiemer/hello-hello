@@ -7,6 +7,8 @@ Primarily HTML and CSS. For JavaScript, see [Hello JavaScript](../javascript/rea
 - Non-tag part of an element is called `content`
 - `strong`, `em`, and `mark` are preferred over `b`, `i`, and `u`, respectively
   - [Emphasis and importance - MDN](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Emphasis_and_importance)
+- `dl` is great for glossaries, use `dt` for terms and `dd` for definitions.
+  - [Lists - MDN](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Lists)
 
 ### Fun facts
 
