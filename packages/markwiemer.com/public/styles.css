@@ -17,7 +17,7 @@
   --link-visited-light: rgb(107, 2, 107);
   --nav-bg-dark: var(--body-bg-dark);
   --nav-bg-light: var(--body-bg-light);
-  --nav-open-width: calc(max(72px, 10vw));
+  --nav-open-width: calc(max(144px, 20vw));
   --nav-open-time: 0.2s;
   --text-primary-dark: gainsboro;
   --text-primary-light: black;
@@ -67,9 +67,13 @@ nav {
   }
 
   &[aria-expanded="true"] {
-    /* todo border disappears before transition is done */
-    border-right: 1px solid gainsboro;
     width: var(--nav-open-width);
+    /* todo border disappears before transition is done */
+    border-right: 1px solid var(--text-primary-light);
+
+    @media (prefers-color-scheme: dark) {
+      border-color: var(--text-primary-dark);
+    }
   }
 }
 
