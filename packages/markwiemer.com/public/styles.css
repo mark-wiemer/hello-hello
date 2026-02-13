@@ -37,7 +37,6 @@
 }
 
 nav {
-  background-color: var(--nav-bg-dark);
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -59,6 +58,14 @@ nav {
     line-height: var(--line-height-default);
   }
 
+  background-color: var(--nav-bg-light);
+  color: var(--text-primary-light);
+
+  @media (prefers-color-scheme: dark) {
+    background-color: var(--nav-bg-dark);
+    color: var(--text-primary-dark);
+  }
+
   &[aria-expanded="true"] {
     /* todo border disappears before transition is done */
     border-right: 1px solid gainsboro;
@@ -68,7 +75,7 @@ nav {
 
 #openNav {
   width: 30px;
-  border: 1px solid white;
+  border: 1px solid var(--text-primary-light);
   border-radius: 4px;
   margin-top: 4px;
   margin-left: -2px;
@@ -77,6 +84,10 @@ nav {
   top: 0;
   left: 0;
   transition: transform var(--nav-open-time) ease;
+
+  @media (prefers-color-scheme: dark) {
+    border-color: var(--text-primary-dark);
+  }
 }
 
 body.nav-open #openNav {
