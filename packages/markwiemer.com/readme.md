@@ -28,3 +28,10 @@ Resources:
 - [Astro docs](https://docs.astro.build)
 - [Emojipedia](https://emojipedia.org/): Source for high-res transparent-background emojis (double-check that you can re-use them!)
 - [Favicon Converter](https://favicon.io/favicon-converter/): don't send copyrighted stuff here without investigating!
+
+## Todo
+
+These will be GitHub issues eventually maybe ;)
+
+- Use `section` around each `hN` element for a11y
+- See code for more `todo` comments

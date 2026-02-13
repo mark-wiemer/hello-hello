@@ -30,6 +30,7 @@ const showFooter = Astro.props.showFooter !== false;
   </head>
   <body>
     <Nav />
+    <!-- todo use `article` element when reasonable -->
     <div class={classToUse}>
       <slot />
       {showFooter && <Footer />}
