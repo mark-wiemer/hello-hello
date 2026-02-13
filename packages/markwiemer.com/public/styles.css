@@ -67,7 +67,9 @@ nav {
   margin-top: 4px;
   margin-left: -2px;
   cursor: pointer;
-  position: absolute;
+  position: fixed;
+  top: 0;
+  left: 0;
   transition: transform var(--nav-open-time) ease;
 }
 
