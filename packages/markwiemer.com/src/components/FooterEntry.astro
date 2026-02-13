@@ -12,7 +12,7 @@ const currentPath = Astro.url.pathname;
 {/* Wrap `a` with `span` to prevent the outline box from getting too big */}
 {
   currentPath === href ? (
-    text
+    <span>{text}</span>
   ) : (
     <span>
       <a href={href} data-external-target-ignore={!newTab}>
