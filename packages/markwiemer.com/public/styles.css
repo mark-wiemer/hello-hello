@@ -20,6 +20,17 @@
   --z-index-nav: 1;
 }
 
+::selection {
+  /* todo make a:hover border go away when ::selection is applied */
+  color: var(--text-primary-light);
+  background-color: var(--link-primary-light);
+
+  @media (prefers-color-scheme: dark) {
+    color: var(--text-primary-dark);
+    background-color: var(--link-primary-dark);
+  }
+}
+
 nav {
   background-color: var(--nav-bg-dark);
   height: 100%;
