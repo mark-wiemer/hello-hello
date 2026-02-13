@@ -29,6 +29,7 @@ because I use GitHub pages, which only supports one site per repo.
 - [mod.io](./packages/mod.io/readme.md): Site for hosting UGC
 - [Modrinth](./packages/modrinth/readme.md): App for managing Minecraft versions and UGC
 - [New machine](./packages/new-machine/readme.md): Setup steps for any new machine
+- [Notes](./packages/notes/readme.md): Miscellaneous notes
 - [pnpm](./packages/pnpm/readme.md): Node package manager, alternative to npm
 - [Podman](./packages/podman/readme.md): Open-source containerization platform, like Docker
 - [POSIX](./packages/posix/readme.md): Set of cross-OS standards by IEEE
