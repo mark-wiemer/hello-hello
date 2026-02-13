@@ -5,8 +5,10 @@
   --body-bg-light: white;
   --code-bg-dark: rgb(33, 38, 44);
   --code-bg-light: rgb(214, 223, 233);
+  --font-size-default: 18px;
   --img-border-dark: var(--text-primary-dark);
   --img-border-light: var(--text-primary-light);
+  --line-height-default: 1.5em;
   --link-active-dark: var(--text-primary-dark);
   --link-active-light: var(--text-primary-light);
   --link-primary-dark: rgb(0, 162, 174);
@@ -52,6 +54,11 @@ nav {
     padding-left: 4px;
   }
 
+  & > h2 {
+    font-size: var(--font-size-default);
+    line-height: var(--line-height-default);
+  }
+
   &[aria-expanded="true"] {
     /* todo border disappears before transition is done */
     border-right: 1px solid gainsboro;
@@ -79,7 +86,7 @@ body.nav-open #openNav {
 
 body,
 button {
-  line-height: 1.5em;
+  line-height: var(--line-height-default);
   /* Order matters for font-family */
   font-family:
     "Segoe UI",
@@ -89,7 +96,7 @@ button {
     Roboto,
     "Helvetica Neue",
     sans-serif;
-  font-size: 18px;
+  font-size: var(--font-size-default);
 
   background-color: var(--body-bg-light);
   color: var(--text-primary-light);

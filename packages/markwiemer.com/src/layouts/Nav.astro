@@ -1,16 +1,18 @@
 ---
-import FooterEntry from "@/components/FooterEntry.astro";
+import NavEntry from "@/components/NavEntry.astro";
 ---
 
 <!-- todo this button is a bit small? -->
 <button id="openNav">☰</button>
 <nav aria-expanded="false">
-  <FooterEntry href="/" text="Home" />
-  <FooterEntry href="/about" text="About" />
-  <FooterEntry href="/blog" text="Blog" />
-  <FooterEntry href="https://ahkpp.com" text="AHK++" />
-  <FooterEntry href="/luanti" text="Luanti" />
-  <FooterEntry href="https://mochajs.org" text="Mocha" newTab />
+  <h2>Here</h2>
+  <NavEntry href="/" text="Home" />
+  <NavEntry href="/about" text="About" />
+  <NavEntry href="/blog" text="Blog" />
+  <NavEntry href="/luanti" text="Luanti" />
+  <h2>Elsewhere</h2>
+  <NavEntry href="https://ahkpp.com" text="AHK++" />
+  <NavEntry href="https://mochajs.org" text="Mocha" newTab />
 </nav>
 
 <script is:inline data-notes="handle nav toggle">
