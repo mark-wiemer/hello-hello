@@ -15,6 +15,8 @@
   --link-visited-light: rgb(107, 2, 107);
   --nav-bg-dark: var(--body-bg-dark);
   --nav-bg-light: var(--body-bg-light);
+  --nav-open-width: 10vw;
+  --nav-open-time: 0.2s;
   --text-primary-dark: gainsboro;
   --text-primary-light: black;
   --z-index-nav: 1;
@@ -39,12 +41,12 @@ nav {
   padding-top: 60px;
   position: fixed;
   top: 0;
-  transition: 0.2s;
+  transition: var(--nav-open-time);
   width: 0;
   z-index: var(--z-index-nav);
 
   &[aria-expanded="true"] {
-    width: 10%;
+    width: var(--nav-open-width);
   }
 }
 
@@ -56,6 +58,11 @@ nav {
   margin-left: -2px;
   cursor: pointer;
   position: absolute;
+  transition: transform var(--nav-open-time) ease;
+}
+
+body.nav-open #openNav {
+  transform: translateX(var(--nav-open-width));
 }
 
 body,
