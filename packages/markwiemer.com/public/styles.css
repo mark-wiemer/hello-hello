@@ -97,7 +97,8 @@ nav {
 }
 
 body.nav-open #openNav {
-  transform: translateX(calc(var(--nav-open-width) - 27px));
+  /* todo currently optically aligned, research how to clean this up */
+  transform: translateX(calc(var(--nav-open-width) - 28px));
   z-index: var(--z-index-nav-button);
 }
 
