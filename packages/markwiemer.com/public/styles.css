@@ -37,11 +37,18 @@ nav {
   }
 }
 
-body {
+button {
+  background: transparent;
+  border: 1px solid white;
+  border-radius: 4px;
+  margin-top: 4px;
+  margin-left: -2px;
+  cursor: pointer;
+}
+
+body,
+button {
   line-height: 1.5em;
-  /* Add 1em below to allow user to sanity-check it's the true end-of-page */
-  /* Use margin instead of padding as most user agents have a margin we don't want */
-  margin: 0 0 1em 0;
   /* Order matters for font-family */
   font-family:
     "Segoe UI",
@@ -57,6 +64,12 @@ body {
     background-color: var(--body-bg-dark);
     color: var(--text-primary-dark);
   }
+}
+
+body {
+  /* Add 1em below to allow user to sanity-check it's the true end-of-page */
+  /* Use margin instead of padding as most user agents have a margin we don't want */
+  margin: 0 0 1em 0;
 }
 
 figcaption {
