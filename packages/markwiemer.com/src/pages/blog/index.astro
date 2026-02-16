@@ -9,19 +9,22 @@ type PostListItem = {
   postTitle: string;
   postType: string;
   lastUpdated: string | undefined;
+  /** Whether to list the post in the index and home page */
+  listed: boolean | undefined;
   slug: string;
 };
 
 const posts: PostListItem[] = Object.entries(glob)
   .map(([path, module]: [string, any]) => {
-    // './content/2024-10-08 months-without-music.mdx'
-    const frontmatter = module?.frontmatter;
-    const { postDate, postTime, postTitle, lastUpdated, postType } = frontmatter;
+    // path === './content/2024-10-08 months-without-music.mdx'
+    // filename === '2024-10-08 months-without-music'
     const filename = path.split("/").pop()?.replace(".mdx", "") || "";
+    // slug === 'months-without-music'
     const slug = filename.split(" ").slice(1).join("-");
-    return { postDate, postTime, postTitle, lastUpdated, postType, slug };
+    const listed = module?.frontmatter.listed ?? true;
+    return { ...module?.frontmatter, slug, listed };
   })
-  .filter((post) => post.postDate && post.slug)
+  .filter((post) => post.postDate && post.slug && !!post.listed)
   .sort((a, b) => b.postDate.localeCompare(a.postDate));
 ---
 

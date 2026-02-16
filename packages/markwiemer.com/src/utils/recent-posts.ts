@@ -17,6 +17,7 @@ interface BlogPost {
   };
 }
 
+// todo use in `pages/blog/content/index.astro`
 export function getBlogPostPaths(): BlogPost[] {
   // path: e.g. '/src/pages/blog/content/2024-10-08 months-without-music.mdx'
   // module: object representing the module at that location
