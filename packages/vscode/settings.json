@@ -472,7 +472,7 @@
     "astro": true,
     "csharp": true,
     "markdown": false,
-    "plaintext": true,
+    "plaintext": false,
     "scminput": false,
     "typescript": true,
     "yaml": true,
