@@ -541,5 +541,7 @@
   "workbench.panel.defaultLocation": "right",
   "workbench.secondarySideBar.defaultVisibility": "hidden",
   "workbench.startupEditor": "newUntitledFile",
-  "cSpell.enabled": false
+  "cSpell.enabled": false,
+  "scm.repositories.selectionMode": "single",
+  "window.confirmSaveUntitledWorkspace": false
 }
