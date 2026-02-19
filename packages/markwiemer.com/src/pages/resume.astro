@@ -4,8 +4,108 @@ import "@/assets/resume.css";
 
 const colophonId = "colophon";
 const rowClass = "row";
-// todo make this data-driven
-// todo replace `b` with `strong` where reasonable
+
+type Entry = {
+  title: string;
+  dates: [string, string];
+  bullets: string[];
+};
+
+interface ExperienceEntry extends Entry {
+  organization: string;
+}
+
+interface ProjectEntry extends Entry {
+  description: string;
+  url: string;
+  organization: string;
+}
+
+const experience: ExperienceEntry[] = [
+  {
+    title: "Software Engineer II",
+    organization: "Microsoft",
+    dates: ["March 2024", "present"],
+    bullets: [
+      "Delivered 4 AI-powered apps using Semantic Kernel, Copilot Studio, and Declarative Agents for M365 Copilot",
+      "Reduced data access time from days to seconds across core scenarios",
+      "Decreased time to competency for Technical Support Engineers by 50%",
+    ],
+  },
+  {
+    title: "Software Engineer",
+    organization: "Microsoft",
+    dates: ["August 2020", "March 2024"],
+    bullets: [
+      "Delivered React app for 200+ administrators to upload, target, and combine 10,000+ trainings",
+      "Rebuilt intuitive end-to-end learning path experience for 250,000+ learners",
+      "Ensured WCAG 2.1 AA accessibility compliance across dozens of webpages from design onward",
+    ],
+  },
+  {
+    title: "Software Engineering Intern",
+    organization: "Bloomberg L.P.",
+    dates: ["May 2019", "July 2019"],
+    bullets: [
+      "Used Jenkins, Docker, and pytest in new CI pipeline",
+      "Reduced dev loop time from hours to minutes",
+    ],
+  },
+];
+
+const volunteering: ExperienceEntry[] = [
+  {
+    title: "Volunteer",
+    organization: "Bridge Disability Ministries",
+    dates: ["December 2025", "present"],
+    bullets: [
+      "Helped with general cleaning and assisted with activities at social events for disabled adults",
+    ],
+  },
+  {
+    title: "Court Appointed Special Advocate (CASA)",
+    organization: "King County Superior Court",
+    dates: ["October 2025", "present"],
+    bullets: [
+      "Advocated for the best interests of children removed from their homes",
+      "Reviewed 1,000+ pages of court documents, conducted monthly interviews, and testified in court",
+    ],
+  },
+  {
+    title: "Big Brother",
+    organization: "Big Brothers Big Sisters of Puget Sound",
+    dates: ["February 2021", "present"],
+    bullets: [
+      "Befriended my Little Brother, serving as role model and #1 fan",
+      "Continued relationship to present day after ending formal program in September 2025",
+    ],
+  },
+];
+
+const projects: ProjectEntry[] = [
+  {
+    title: "AHK++",
+    description: "VS Code language extension",
+    url: "https://ahkpp.com",
+    organization: "",
+    dates: ["November 2020", "present"],
+    bullets: [
+      "Added automated tests and new features to deprecated language support extension",
+      "Acquired 420,000+ installs with a 4.8/5.0 rating across 28 reviews",
+    ],
+  },
+  {
+    title: "Mocha",
+    description: "JavaScript testing framework",
+    url: "https://mochajs.org",
+    organization: "",
+    dates: ["August 2025", "present"],
+    bullets: [
+      "Reviewed community-led PRs and issues across critical components",
+      "Maintained 12,000,000+ weekly downloads and 22,000+ GitHub stars",
+    ],
+  },
+];
 ---
 
 <script define:vars={{ id: colophonId }} is:inline>
@@ -56,93 +156,66 @@ const rowClass = "row";
   <hr />
 
   <h2>Experience</h2>
-  <div class={rowClass}>
-    <p><b>Software Engineer II</b> (Microsoft)</p>
-    <p>March 2024 – present</p>
-  </div>
-  <ul>
-    <li>
-      Delivered 4 AI-powered apps using Semantic Kernel, Copilot Studio, and Declarative Agents for
-      M365 Copilot
-    </li>
-    <li>Reduced data access time from days to seconds across core scenarios</li>
-    <li>Decreased time to competency for Technical Support Engineers by 50%</li>
-  </ul>
-
-  <div class={rowClass}>
-    <p><b>Software Engineer</b> (Microsoft)</p>
-    <p>August 2020 – March 2024</p>
-  </div>
-  <ul>
-    <li>
-      Delivered React app for 200+ administrators to upload, target, and combine 10,000+ trainings
-    </li>
-    <li>Rebuilt intuitive end-to-end learning path experience for 250,000+ learners</li>
-    <li>
-      Ensured WCAG 2.1 AA accessibility compliance across dozens of webpages from design onward
-    </li>
-  </ul>
-
-  <div class={rowClass}>
-    <p><b>Software Engineering Intern</b> (Bloomberg L.P.)</p>
-    <p>May 2019 – July 2019</p>
-  </div>
-  <ul>
-    <li>Used Jenkins, Docker, and pytest in new CI pipeline</li>
-    <li>Reduced dev loop time from hours to minutes</li>
-  </ul>
+  {
+    experience.map((exp) => (
+      <>
+        <div class={rowClass}>
+          <p>
+            <b>{exp.title}</b> ({exp.organization})
+          </p>
+          <p>{`${exp.dates[0]} – ${exp.dates[1]}`}</p>
+        </div>
+        <ul>
+          {exp.bullets.map((bullet) => (
+            <li>{bullet}</li>
+          ))}
+        </ul>
+      </>
+    ))
+  }
 
   <hr />
 
   <h2>Projects</h2>
-  <div class={rowClass}>
-    <p><b><a href="https://ahkpp.com">AHK++</a></b> (VS Code language extension)</p>
-    <p>November 2020 – present</p>
-  </div>
-  <ul>
-    <li>Added automated tests and new features to deprecated language support extension</li>
-    <li>Acquired 420,000+ installs with a 4.8/5.0 rating across 28 reviews</li>
-  </ul>
-
-  <div class={rowClass}>
-    <p><b><a href="https://mochajs.org">Mocha</a></b> (JavaScript testing framework)</p>
-    <p>August 2025 – present</p>
-  </div>
-  <ul>
-    <li>Reviewed community-led PRs and issues across critical components</li>
-    <li>Maintained 12,000,000+ weekly downloads and 22,000+ GitHub stars</li>
-  </ul>
+  {
+    projects.map((project) => (
+      <>
+        <div class={rowClass}>
+          <p>
+            <b>
+              <a href={project.url}>{project.title}</a>
+            </b>{" "}
+            ({project.description})
+          </p>
+          <p>{`${project.dates[0]} – ${project.dates[1]}`}</p>
+        </div>
+        <ul>
+          {project.bullets.map((bullet) => (
+            <li>{bullet}</li>
+          ))}
+        </ul>
+      </>
+    ))
+  }
 
   <hr />
 
   <h2>Volunteering</h2>
-  <div class={rowClass}>
-    <p><b>Volunteer</b> (Bridge Disability Ministries)</p>
-    <p>December 2025 – present</p>
-  </div>
-  <ul>
-    <li>
-      Helped with general cleaning and assisted with activities at social events for disabled adults
-    </li>
-  </ul>
-
-  <div class={rowClass}>
-    <p><b>Court Appointed Special Advocate (CASA)</b> (King County Superior Court)</p>
-    <p>October 2025 – present</p>
-  </div>
-  <ul>
-    <li>Advocated for the best interests of children removed from their homes</li>
-    <li>
-      Reviewed 1,000+ pages of court documents, conducted monthly interviews, and testified in court
-    </li>
-  </ul>
-
-  <div class={rowClass}>
-    <p><b>Big Brother</b> (Big Brothers Big Sisters of Puget Sound)</p>
-    <p>February 2021 – present</p>
-  </div>
-  <ul>
-    <li>Befriended my Little Brother, serving as role model and #1 fan</li>
-    <li>Continued relationship to present day after ending formal program in September 2025</li>
-  </ul>
+  {
+    volunteering.map((vol) => (
+      <>
+        <div class={rowClass}>
+          <p>
+            <b>{vol.title}</b> ({vol.organization})
+          </p>
+          <p>{`${vol.dates[0]} – ${vol.dates[1]}`}</p>
+        </div>
+        <ul>
+          {vol.bullets.map((bullet) => (
+            <li>{bullet}</li>
+          ))}
+        </ul>
+      </>
+    ))
+  }
 </Layout>
