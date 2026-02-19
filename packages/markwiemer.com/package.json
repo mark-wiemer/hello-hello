@@ -5,8 +5,8 @@
   "scripts": {
     "astro": "astro",
     "build": "astro build",
-    "dev": "astro dev --open",
-    "preview": "astro preview --open",
+    "dev": "astro dev",
+    "preview": "astro preview",
     "test": "vitest --config config/vitest.config.js",
     "test:ci": "pnpm test --run",
     "validate:fix": "sort-package-json"
