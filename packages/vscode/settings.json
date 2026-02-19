@@ -460,7 +460,6 @@
   },
   "git.autofetch": true,
   "git.confirmSync": false,
-  "git.enableSmartCommit": true,
   "git.fetchOnPull": true,
   "git.ignoreRebaseWarning": true,
   "git.inputValidationLength": 99999,
@@ -543,5 +542,6 @@
   "workbench.startupEditor": "newUntitledFile",
   "cSpell.enabled": false,
   "scm.repositories.selectionMode": "single",
-  "window.confirmSaveUntitledWorkspace": false
+  "window.confirmSaveUntitledWorkspace": false,
+  "git.branchProtection": ["main"]
 }
