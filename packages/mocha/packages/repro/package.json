@@ -1,12 +1,13 @@
 {
   "scripts": {
-    "test:debug": "DEBUG=* npm test",
+    "test:debug": "npx cross-env DEBUG=* npm test",
     "test": "mocha index.test.js"
   },
   "dependencies": {
     "mocha": "file:../mocha"
   },
   "devDependencies": {
-    "chai": "^6.2.2"
+    "chai": "^6.2.2",
+    "cross-env": "^10.1.0"
   }
 }
