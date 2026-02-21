@@ -1,5 +1,5 @@
 describe("the module", function () {
   it("works", function () {
-    return 0;
+    return 1;
   });
 });
