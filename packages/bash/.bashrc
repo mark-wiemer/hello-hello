@@ -253,7 +253,39 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 #endregion
-. "$HOME/.cargo/env"
 
+#region Rust (language)
+. "$HOME/.cargo/env"
+#endregion
+
+#region Aspire
 export PATH="$HOME/.aspire/bin:$PATH"
 export ASPIRE_CONTAINER_RUNTIME=podman
+#endregion
+
+#region custom scripts
+# see new-machine/linux
+export PATH="$HOME/my-stuff/scripts:$PATH"
+#endregion
+
+#region path deduplication (must be last region)
+# Remove duplicate entries from PATH
+deduplicate_path() {
+    if [ -n "$PATH" ]; then
+        old_PATH=$PATH:; PATH=
+        while [ -n "$old_PATH" ]; do
+            x=${old_PATH%%:*}
+            case $PATH: in
+                *:"$x":*) ;;
+                *) PATH=$PATH:$x;;
+            esac
+            old_PATH=${old_PATH#*:}
+        done
+        PATH=${PATH#:}
+        export PATH
+    fi
+}
+
+# Call at the end of .bashrc
+deduplicate_path
+#endregion

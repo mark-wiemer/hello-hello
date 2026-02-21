@@ -121,3 +121,11 @@ cd ~/.config/microsoft-edge
      ```sh
      rclone sync ./onedrive onedrive: --verbose
      ```
+
+## Scripts
+
+```sh
+mkdir -p /home/markw/my-stuff/scripts/
+ln -s $HOME/my-stuff/hello-hello/packages/new-machine/linux/discord-update.sh /home/markw/my-stuff/scripts/discord-update
+ln -s $HOME/my-stuff/hello-hello/packages/new-machine/linux/vscode-update.sh /home/markw/my-stuff/scripts/vscode-update
+```
