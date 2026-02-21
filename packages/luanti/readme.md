@@ -1,6 +1,9 @@
 # Hello Luanti
 
-[Luanti](https://docs.luanti.org/) (formerly Minetest) has three parts: an open-source "boxel" game engine for making games like Minecraft, a distribution platform for creators, and an application for players.
+[Luanti](https://docs.luanti.org/) (formerly Minetest) has three parts:
+an open-source "boxel" game engine for making games like Minecraft,
+a distribution platform for creators,
+and an application for players.
 
 [I've helped a lot with Luanti docs](https://markwiemer.com/luanti), and this space is both for:
 
