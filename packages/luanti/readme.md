@@ -24,6 +24,10 @@ Make the docs parsable for extensions, plugins, and content type transformations
 
 [Official doc site](https://docs.luanti.org) launched December 2024. [View on GitHub](https://github.com/luanti-org/docs.luanti.org).
 
+### luanti
+
+Source code for the game engine and application for players.
+
 ### luanti-ts-api
 
 Handwritten TypeScript API for Luanti.

@@ -22,3 +22,6 @@
 [submodule "packages/luanti/docs.luanti.org"]
 	path = packages/luanti/docs.luanti.org
 	url = https://github.com/luanti-org/docs.luanti.org.git
+[submodule "packages/luanti/luanti"]
+	path = packages/luanti/luanti
+	url = https://github.com/mark-wiemer/luanti.git
