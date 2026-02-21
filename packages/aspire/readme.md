@@ -4,6 +4,10 @@
 
 I've installed the pre-reqs and I'm following the [build your first app](https://aspire.dev/get-started/first-app/?lang=csharp) guide.
 
+## Configuration
+
+[Deploy your first app](https://aspire.dev/get-started/deploy-first-app/?lang=csharp#prerequisites) requires Docker, Podman, or Azure CLI. I chose Azure CLI.
+
 ## Feedback
 
 Most important feedback at the top
