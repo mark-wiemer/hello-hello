@@ -543,6 +543,5 @@
   "cSpell.enabled": false,
   "scm.repositories.selectionMode": "single",
   "window.confirmSaveUntitledWorkspace": false,
-  "git.branchProtection": ["main"],
   "git.suggestSmartCommit": false
 }
