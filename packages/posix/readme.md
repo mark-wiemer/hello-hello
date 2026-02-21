@@ -26,7 +26,7 @@ Full name: Volume: XCU, Chapter 2: Shell Command Language
 
 ### Redirecting output
 
-[Redirecting output](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/V3_chap02.html#tag_18_07_02)
+[2.7.2 Redirecting output](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/V3_chap02.html#tag_18_07_02)
 
 ```sh
 # Print stdout to a file
@@ -38,4 +38,13 @@ echo Hello > out.log
 # Print stdout and stderr to the same file
 # 2.7.6 Duplicating an Output File Descriptor
 echo Hello > out.log 2>&1
+```
+
+### Pipelines
+
+[2.9.2 Pipelines](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/V3_chap02.html#tag_19_09_02)
+
+```sh
+echo "Hello
+world" | grep Hello
 ```
