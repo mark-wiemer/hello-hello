@@ -42,8 +42,24 @@ I prefer `westus2` for no particular reason.
 - [Define your naming convention](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-naming) (includes examples)
 - [Naming rules and restrictions](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/resource-name-rules)
 
-## Resource groups
+## Resources
+
+```sh
+az resource list --query [].id
+```
+
+### Resource groups
 
 ```sh
 az group create -n rg-uat -l westus2
 ```
+
+### Resource types
+
+| Provider                      | Type                       |
+| ----------------------------- | -------------------------- |
+| Microsoft.App/containerApps   | Container App              |
+| Microsoft.App/environments    | Container Apps Environment |
+| Microsoft.ContainerRegistry   | Container registry         |
+| Microsoft.ManagedIdentity     | Managed identity           |
+| Microsoft.OperationalInsights | Log Analytics workspace    |
