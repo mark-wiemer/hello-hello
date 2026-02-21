@@ -12,6 +12,7 @@ because I use GitHub pages, which only supports one site per repo.
 - [AHK++](./packages/ahkpp/readme.md): IDE extension for AHK v1 and v2 language support
 - [Aspire](./packages/aspire/readme.md): Orchestration toolkit for distributed applications
 - [Astro](./packages/astro/readme.md): Web framework for content-driven websites
+- [Azure](./packages/azure/readme.md): Cloud computing platform
 - [Bash](./packages/bash/readme.md): Cross-platform shell
 - [.NET (dotnet)](./packages/dotnet/readme.md): Open-source framework for any software
 - [Git](./packages/git/readme.md): Version control system, includes notes on Git LFS
