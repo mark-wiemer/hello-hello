@@ -13,13 +13,13 @@ Fortunately, I can translate the Hello World projects directly into further impr
 
 Projects are listed alphabetically.
 
-### docs.luanti.org
-
-[Official doc site](https://docs.luanti.org) launched December 2024. [View on GitHub](https://github.com/luanti-org/docs.luanti.org).
-
 ### doc-schema
 
 Make the docs parsable for extensions, plugins, and content type transformations.
+
+### docs.luanti.org
+
+[Official doc site](https://docs.luanti.org) launched December 2024. [View on GitHub](https://github.com/luanti-org/docs.luanti.org).
 
 ### luanti-ts-api
 
