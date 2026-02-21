@@ -50,7 +50,7 @@ Ref [Make API docs parsable](https://github.com/luanti-org/docs.luanti.org/issue
 
 | Name        | Pronouns  | IRC         | Discord username | Discord ID   | GitHub      | Website                                            |
 | ----------- | --------- | ----------- | ---------------- | ------------ | ----------- | -------------------------------------------------- |
-| corpserot   | they/them |             | ACorp            | a.corp.serot | corpserot   |
+| corpserot   | they/them |             | ACorp            | a.corp.serot | corpserot   |                                                    |
 | GreenXenith |           |             | GreenXenith      | greenxenith  | GreenXenith | https://www.greenxenith.com/portfolio/             |
 | Lars Müller |           | appguru     | luatic           | luatic       | appgurueu   | https://luatic.dev/                                |
 | Mark Wiemer | he/him    | mark-wiemer | Mark Wiemer      | mark.wiemer  | mark-wiemer | https://markwiemer.com                             |
