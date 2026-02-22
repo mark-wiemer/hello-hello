@@ -143,7 +143,7 @@ Some further considerations:
 
 trying to express more properties within this lua-like lang. it is hard.
 
-<!-- Not a shell section, but some colors are better than none here -->
+<!-- Mark: Not a shell section, but some colors are better than none here -->
 
 ```sh
 core: struct {
@@ -244,7 +244,11 @@ Sub-entries attaches information to an entry using lists. The motivation for sub
 - Class have Fields, Envs.
   Notably, i don't think there's any classes that uses fields instead of getters.
 
-TODO i'm not yet confident choosing any solutions for how to group things together e.g. grouping together translation functions inside the `core` kitchen sink namespace. Some ideas: - A Tags sub-entry for each entry. Very inelegant, duplicative and erroneous. Not a big fan, even if it fulfills predictable locality. - An optional Category sub-entry for Namespace, Class, Struct entries which groups together owned Fields and callable entries. A bit annoying to maintain. Perhaps validation can help with that; "Entries with Category sub-entry must have all Fields and callables categorized to pass validation". - Any other ideas?
+TODO i'm not yet confident choosing any solutions for how to group things together e.g. grouping together translation functions inside the `core` kitchen sink namespace. Some ideas:
+
+- A Tags sub-entry for each entry. Very inelegant, duplicative and erroneous. Not a big fan, even if it fulfills predictable locality.
+- An optional Category sub-entry for Namespace, Class, Struct entries which groups together owned Fields and callable entries. A bit annoying to maintain. Perhaps validation can help with that; "Entries with Category sub-entry must have all Fields and callables categorized to pass validation".
+- Any other ideas?
 
 TODO i have not yet define how reference to things will work in descriptions. it needs to follow a scheme so the static site HTML generator can auto-link references. ideally, it should be natural to read or figure out.
 
