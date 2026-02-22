@@ -4,8 +4,11 @@ Azure is Microsoft's cloud platform. I use it at work.
 
 ## General resources
 
-- [Azure CLI - Microsoft Learn](https://learn.microsoft.com/en-us/cli/azure/?view=azure-cli-latest)
-- [Cloud Adoption Framework - Microsoft Learn](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
+- [Azure](https://learn.microsoft.com/en-us/azure/)
+- [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/?view=azure-cli-latest)
+- [Hello auth - Mark Wiemer](../notes/auth.md)
+- [Microsoft Cloud for Developers](https://learn.microsoft.com/en-us/microsoft-cloud/)
+  - includes Azure, GitHub, M365, Power Platform, D365, and Industry and Government
 - [Monthly Azure credits for Visual Studio subscribers](https://azure.microsoft.com/en-us/pricing/member-offers/credit-for-visual-studio-subscribers)
 - [Pricing calculator - Microsoft Azure](https://azure.microsoft.com/en-gb/pricing/calculator/)
 
