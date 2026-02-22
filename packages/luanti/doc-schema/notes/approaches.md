@@ -63,6 +63,8 @@ A mature, enterprise-grade Lua-centric type system, might not be expressive enou
 
 ## Markdown (proposed)
 
+For full details, see [markdown-approach.md](./markdown-approach.md)
+
 Markdown is the most common language for documentation, with extensive tooling support for translating it into HTML and other common markup langauges. It's extremely easy to write Markdown, and Markdown previews are built-in to VS Code and other popular IDEs, so documentation writers will be able to pick it up quickly. Additionally, we can leverage the existing Markdown ecosystem (e.g. remark by the unified collective) to efficiently parse, validate, and warn against potential violations of any Markdown schema we define.
 
 This approach would require:
@@ -79,21 +81,6 @@ This approach would require:
 MDX brands itself as "Markdown for the component era" and could introduce interactivity and reduced boilerplate into our documentation. However, the primary goal of this project remains to rewrite existing documentation and integrate static content with IDEs for IntelliSense support, not adding interactivity to the documentation. Regarding boilerplate, we have an alternative with Markdown: Advanced custom transformer logic. For example, to add a `copy` button next to any `blockquote` element, we would simply add that logic to our transformer using HTML template text instead of trying to support a `CopyableBlockquote` MDX element.
 
 Finally, if we really do want to integrate MDX later, it's not difficult, because MDX is a superset of Markdown that utilizes the same toolchain. Any valid Markdown file is already valid MDX, so there would be no need to rewrite our docs. MDX is maintained by the unified collective, the same people that maintain remark and many other content-processing tools. Additionally, if some changes are needed to the schema to better support MDX when we do integrate it, we can simply write a second transformer that takes in docs matching the "then-current" schema and spits out docs matching the updated schema. We then update the first transformer to handle the updated schema and output the same LSP data, and nothing else in our custom toolchain has to change.
-
-### Glossary
-
-- canon: The primary form of a document, e.g., a page may be written canonically in Markdown, then transformed into HTML for viewing in a web browser
-- checker: program that accepts a Markdown snippet and a schema, and returns whether that snippet matches the schema. Returns detailed error messages.
-- documentation writers: people that change the contents of `lua_api.md`, either by fixing typos or adding new information
-- domain-specific language: a more precise term for "schema," e.g. HTML is a DSL for web pages. In our case, our Markdown schema is a DSL for Luanti's Lua API docs, as it includes details specific to Luanti, like the Luanti environment in which certain symbols can be interacted with.
-- LSP: Language Server Protocol, an IDE-agnostic way to communicate information about an API
-- Markdown: a lightweight markup language (this page is canonically written in Markdown)
-- MDX: Superset of Markdown containing support for interactive components
-- schema: an unambiguous definition of the form a document must take. Does not necessarily impose strong limitations on all parts of the document, e.g. a "notes" section may allow nearly any content, as long as it includes a clear ending marker. Very similar to a domain-specific language (DSL), we use the term schema to emphasize that the requirements will be lightweight with a small learning curve for documentation writers.
-- snippet: section of text in a specific language. Could be an entire document or just a few characters.
-- transformer: program that accepts a valid snippet, a schema, and an output schema. It returns the snippet transformed to match the output schema.
-- unified collective: a group of people maintaining remark, MDX, and other content-processing tools
-- valid: a snippet is valid for a schema if it matches the schema
 
 <a id="teal"></a>
 
