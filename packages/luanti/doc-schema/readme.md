@@ -57,7 +57,7 @@ Alternatively, use LuaLS with the "Luanti" or "Luanti Full API" addon:
   - Requests (not requirements!)
     - number subtypes like `u16`
     - enum values
-    - complex string values: "\<adjective\>\<color\>" -> "lightred", "darkblue", etc.
+    - complex string values: "&lt;adjective&gt;&lt;color&gt;" -> "lightred", "darkblue", etc.
     - default values for arguments:
     - `nil` value vs value not provided behaves differently
     - "environment" in which the function works: startup, main, async, async mapgen, maybe more
