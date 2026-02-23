@@ -48,29 +48,24 @@ Alternatively, use LuaLS with the "Luanti" or "Luanti Full API" addon:
   - Includes Luanti Full API addon for LuaLS (luanti-ide-helper repo)
 - LuaLS plugins work in any IDE
   - easiest to install in VS Code using the LuaLS [addon manager](https://luals.github.io/wiki/addons/#installing-addons)
-- Expressiveness
-  - Artifacts
-    - 2025-12-06: [corpserot's notes](https://gist.github.com/corpserot/6f23ae3caca48f31b6b9b460507f23dc)
-    - 2025-12-31: [Riseup pad](https://pad.riseup.net/p/Luanti-Docs)
-      - todo read this and its chat (bottom right)
-    - 2026-01-01: [Lars's comments](https://github.com/luanti-org/docs.luanti.org/issues/296#issuecomment-3703936047)
-  - Requests (not requirements!)
-    - number subtypes like `u16`
-    - enum values
-    - complex string values: "&lt;adjective&gt;&lt;color&gt;" -> "lightred", "darkblue", etc.
-    - default values for arguments:
-    - `nil` value vs value not provided behaves differently
-    - "environment" in which the function works: startup, main, async, async mapgen, maybe more
-      - some symbols can be written to in certain environments but read in others
-    - operator overloading (e.g. arithmetic operators are defined for vectors)
-    - whether something mutates an object (const)
+- Expressiveness requests
+  - number subtypes like `u16`
+  - enum values
+  - complex string values: "&lt;adjective&gt;&lt;color&gt;" -> "lightred", "darkblue", etc.
+  - default values for arguments:
+  - `nil` value vs value not provided behaves differently
+  - "environment" in which the function works: startup, main, async, async mapgen, maybe more
+    - some symbols can be written to in certain environments but read in others
+  - operator overloading (e.g. arithmetic operators are defined for vectors)
+  - whether something mutates an object (const)
 - Canonical document
-  - Needs five levels of headings
-    - Current doc has multiple h1 elements, which is not good for accessibility
+  - Needs 4-5 levels of headings
+    - Current doc has 39 h1 elements
+      - Accessibility recommends exactly 1 h1 per page
       - Each h1 element corresponds to its own webpage though
       - 39 h1 elements in total
-    - Current doc has 55 h4 elements, so we can't change the depth.
-    - Current doc has 0 h5 elements.
+    - Current doc has 55 h4 elements
+    - Current doc has 0 h5 elements
 
 <a id="approaches"></a>
 Approaches are now documented in [approaches.md](notes/approaches.md)
