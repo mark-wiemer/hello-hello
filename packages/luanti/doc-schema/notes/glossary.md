@@ -14,6 +14,7 @@ From 2025-12-31 riseup pad:
 
 ## General
 
+- backend: a system that a user does not directly interact with. For example, users go to a website and click a download button to get Luanti. The backend is a separate non-website server that gives the Luanti program to the user's machine, but the user only interacts with the website.
 - canon: The primary form of a document, e.g., a page may be written canonically in Markdown, then transformed into HTML for viewing in a web browser
 - checker: program that accepts a Markdown snippet and a schema, and returns whether that snippet matches the schema. Returns detailed error messages.
 - documentation writers: people that change the contents of `lua_api.md`, either by fixing typos or adding new information
