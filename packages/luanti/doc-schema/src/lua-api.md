@@ -14,6 +14,8 @@ Welcome to the new Luanti docs 🤓
 
 ## 'core' namespace reference
 
+### Utilities
+
 - `core.get_current_modname()`: returns the currently loading mod's name,
   when loading a mod.
 
