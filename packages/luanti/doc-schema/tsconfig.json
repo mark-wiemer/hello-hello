@@ -5,6 +5,7 @@
     "esModuleInterop": true,
     "module": "nodenext",
     "paths": {
+      // should match vitest.config.ts
       "@/*": ["src/*"]
     },
     "types": ["node"]
