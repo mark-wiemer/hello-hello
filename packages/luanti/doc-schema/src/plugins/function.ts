@@ -10,6 +10,7 @@ export const functionPlugin: Plugin<[], Root> = () => {
   return (tree: Root, file): void => {
     const makeMessage = makeMessageFactory("function", file);
     // First, we fetch the section of the document that references the 'core' namespace, which should be an h2 heading with the coreNamespaceHeadingText. We get everything starting at that heading until the next heading of the same or higher level.
+    //#region Find core section
     const headings = tree.children.filter((node) => node.type === "heading") as Heading[];
     const coreHeadingIndex = headings.findIndex(
       (heading) =>
@@ -19,9 +20,12 @@ export const functionPlugin: Plugin<[], Root> = () => {
     );
 
     if (coreHeadingIndex === -1) {
-      makeMessage("Could not find 'core' namespace heading", {
-        place: zeroPosition,
-      });
+      makeMessage(
+        `Could not find core namespace heading, expected h2 with text "${coreNamespaceHeadingText}"`,
+        {
+          place: zeroPosition,
+        },
+      );
       return;
     }
 
@@ -37,6 +41,7 @@ export const functionPlugin: Plugin<[], Root> = () => {
 
     const endPosition = nextHeadingPosition === -1 ? tree.children.length : nextHeadingPosition;
     const coreSection = tree.children.slice(coreHeadingPosition + 1, endPosition);
+    //#endregion Find 'core' namespace section
 
     // For each list in this section, check top-level list items
     // For each list item that starts with a code span, check if it matches the pattern `core.functionName(params)`
@@ -58,7 +63,7 @@ export const functionPlugin: Plugin<[], Root> = () => {
         if (trueItemStart.type !== "inlineCode") return;
         if (!trueItemStart.value.startsWith("core.")) {
           makeMessage(
-            "Expected list item to contain a core API function call like `core.functionName(params)`",
+            "Expected code list item to start with `core.`, found " + `\`${trueItemStart.value}\`.`,
             { place: trueItemStart.position },
           );
           return;

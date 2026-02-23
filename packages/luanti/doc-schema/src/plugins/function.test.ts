@@ -18,11 +18,21 @@ const rawCases = [
       - \`not_core.get_current_modname()\`: this is not a core API function.
     `,
     expectedMessage:
-      "Expected list item to contain a core API function call like `core.functionName(params)`",
+      "Expected code list item to start with `core.`, found `not_core.get_current_modname()`.",
     expectedPosition: {
       start: { line: 3, column: 3, offset: 33 },
       end: { line: 3, column: 35, offset: 65 },
     },
+  },
+  {
+    name: "passes when list item in other section starts with a different code span",
+    markdown: `
+      ## Other section
+      
+      - \`other_namespace.functionName()\`: this is not a core API function.
+    `,
+    expectedMessage: undefined,
+    expectedPosition: undefined,
   },
 ];
 
