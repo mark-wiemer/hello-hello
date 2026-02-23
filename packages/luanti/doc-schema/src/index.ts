@@ -9,6 +9,7 @@ import {
   unified,
   write,
 } from "@/types.js";
+import { functionPlugin } from "./plugins/function.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -21,6 +22,7 @@ if (!vfile.path) {
 const file = await unified()
   .use(remarkParse) // Parse Markdown to AST
   .use(h1Plugin)
+  .use(functionPlugin)
   .use(remarkStringify) // Stringify AST back to Markdown
   .process(vfile);
 
