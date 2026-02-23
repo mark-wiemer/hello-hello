@@ -3,7 +3,7 @@ import { Plugin, Root, Heading, Text } from "@/types.js";
 /**
  * Expects exactly one h1 heading with the text "Luanti Lua Modding API Reference".
  */
-export const ensureH1Plugin: Plugin<[], Root> = () => {
+export const h1Plugin: Plugin<[], Root> = () => {
   const source = "ensure-h1";
   return (tree: Root, file): void => {
     const h1s = tree.children.filter(

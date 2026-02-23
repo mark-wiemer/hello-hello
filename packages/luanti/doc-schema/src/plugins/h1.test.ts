@@ -1,12 +1,12 @@
 import { expect, test } from "vitest";
 import { unified } from "unified";
 import remarkParse from "remark-parse";
-import { ensureH1Plugin } from "./ensure-h1.js";
+import { h1Plugin } from "./h1.js";
 import remarkStringify from "remark-stringify";
 
 const expectedH1Text = "Luanti Lua Modding API Reference";
 const expectedPluginName = "ensure-h1";
-const processor = unified().use(remarkParse).use(ensureH1Plugin).use(remarkStringify);
+const processor = unified().use(remarkParse).use(h1Plugin).use(remarkStringify);
 const parse = async (markdown: string) => await processor.process(markdown);
 test.each([
   {

@@ -1,4 +1,4 @@
-import { ensureH1Plugin } from "@/plugins/ensure-h1.js";
+import { h1Plugin } from "@/plugins/h1.js";
 import {
   dirname,
   fileURLToPath,
@@ -20,7 +20,7 @@ if (!vfile.path) {
 }
 const file = await unified()
   .use(remarkParse) // Parse Markdown to AST
-  .use(ensureH1Plugin)
+  .use(h1Plugin)
   .use(remarkStringify) // Stringify AST back to Markdown
   .process(vfile);
 
