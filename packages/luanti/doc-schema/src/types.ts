@@ -2,6 +2,8 @@ export { unified } from "unified";
 export { default as remarkParse } from "remark-parse";
 export { default as remarkStringify } from "remark-stringify";
 export { read, write } from "to-vfile";
+export type { VFile, MessageOptions } from "vfile";
+export type { Position } from "unist";
 export type { Plugin } from "unified";
 export type { Root, Heading, Text } from "mdast";
 export { default as process } from "node:process";

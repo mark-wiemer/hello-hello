@@ -17,3 +17,8 @@ The `tsx` package is separate from the unified collective, see [the typescript p
 ## vfile
 
 [vfile](https://unifiedjs.com/explore/package/vfile/) is a small and browser friendly virtual file format that tracks metadata about files (such as its path and value) and lint messages.
+
+[vfile-message](https://unifiedjs.com/explore/package/vfile-message/#vfilemessagereason-options) is clear:
+
+- `source` should be a namespace, constant for all plugins in a package
+- `ruleId` is a specific rule that can vary by plugin

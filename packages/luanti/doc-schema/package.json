@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@types/mdast": "^4.0.4",
+    "@types/unist": "^3.0.3",
     "remark": "^15.0.1",
     "remark-parse": "^11.0.0",
     "remark-stringify": "^11.0.0",
@@ -23,6 +24,7 @@
     "tsx": "^4.21.0",
     "unified": "^11.0.5",
     "unist-util-visit": "^5.0.0",
+    "vfile": "^6.0.3",
     "vitest": "^4.0.18"
   },
   "devDependencies": {

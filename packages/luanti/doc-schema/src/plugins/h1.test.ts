@@ -3,41 +3,49 @@ import { unified } from "unified";
 import remarkParse from "remark-parse";
 import { h1Plugin } from "./h1.js";
 import remarkStringify from "remark-stringify";
+import { zeroPosition } from "@/constants.js";
 
 const expectedH1Text = "Luanti Lua Modding API Reference";
-const expectedPluginName = "ensure-h1";
+const expectedSource = "luanti-doc-schema";
 const processor = unified().use(remarkParse).use(h1Plugin).use(remarkStringify);
 const parse = async (markdown: string) => await processor.process(markdown);
 test.each([
   {
-    name: "passes when single h1 with correct text exists",
+    name: "single h1 with correct text exists",
     markdown: `# ${expectedH1Text}`,
-    expectedLength: 0,
     expectedMessage: undefined,
+    expectedPosition: undefined,
   },
   {
-    name: "throws when no h1 heading found",
+    name: "no h1 heading found",
     markdown: "## hello world",
-    expectedLength: 1,
     expectedMessage: "Expected one h1 heading, found 0",
+    expectedPosition: zeroPosition,
   },
   {
-    name: "throws when multiple h1 headings exist",
+    name: "multiple h1 headings exist",
     markdown: "# hello world\n\n# another h1",
-    expectedLength: 1,
     expectedMessage: "Expected one h1 heading, found 2",
+    expectedPosition: {
+      start: { line: 3, column: 1, offset: 15 },
+      end: { line: 3, column: 13, offset: 27 },
+    },
   },
   {
-    name: "throws when h1 text does not match expected",
+    name: "h1 text does not match expected",
     markdown: "# wrong text",
-    expectedLength: 1,
     expectedMessage: 'h1 text is "wrong text", expected "Luanti Lua Modding API Reference"',
+    expectedPosition: {
+      start: { line: 1, column: 1, offset: 0 },
+      end: { line: 1, column: 13, offset: 12 },
+    },
   },
-])("$name", async ({ markdown, expectedLength, expectedMessage }) => {
+])("$name", async ({ markdown, expectedMessage, expectedPosition }) => {
   const result = await parse(markdown);
-  expect(result.messages).toHaveLength(expectedLength);
+  expect(result.messages).toHaveLength(expectedMessage ? 1 : 0);
   if (expectedMessage) {
     expect(result.messages[0].message).toContain(expectedMessage);
-    expect(result.messages[0].source).toBe(expectedPluginName);
+    expect(result.messages[0].source).toBe(expectedSource);
+    expect(result.messages[0].place).toEqual(expectedPosition);
   }
 });
