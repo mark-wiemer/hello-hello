@@ -147,6 +147,27 @@ alias vcf='npm run validate:ci:fix'
 #endregion
 
 #region functions
+git_link() {
+    # Get the git repository root
+    repo_root=$(git rev-parse --show-toplevel 2>/dev/null)
+    if [ -z "$repo_root" ]; then
+        echo "Error: Not in a git repository" >&2
+        return 1
+    fi
+    
+    # Get relative path from repo root
+    rel_path=$(realpath --relative-to="$repo_root" "$PWD")
+    
+    # Get current commit hash
+    commit_hash=$(git rev-parse HEAD)
+    
+    # Get the origin remote URL and remove .git suffix
+    origin=$(git remote get-url origin | sed 's|\.git$||')
+    
+    # GitHub format
+    echo "${origin}/blob/${commit_hash}/${rel_path}"
+}
+
 json_edit() {
     if [ $# -eq 0 ]; then
         echo "Usage: json_edit 'jq_filter' [file]"
