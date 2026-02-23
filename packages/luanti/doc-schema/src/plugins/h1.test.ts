@@ -1,10 +1,10 @@
 import { h1Plugin } from "./h1.js";
 import { zeroPosition } from "@/constants.js";
-import { testArray, TestCase } from "@/test-utils.js";
+import { testArray } from "@/test-utils.js";
 
 const expectedH1Text = "Luanti Lua Modding API Reference";
 
-const cases: TestCase[] = [
+testArray(h1Plugin, [
   {
     name: "single h1 with correct text exists",
     markdown: `# ${expectedH1Text}`,
@@ -29,12 +29,10 @@ const cases: TestCase[] = [
   {
     name: "h1 text does not match expected",
     markdown: "# wrong text",
-    expectedMessage: 'h1 text is "wrong text", expected "Luanti Lua Modding API Reference"',
+    expectedMessage: `h1 text is "wrong text", expected "${expectedH1Text}"`,
     expectedPosition: {
       start: { line: 1, column: 1, offset: 0 },
       end: { line: 1, column: 13, offset: 12 },
     },
   },
-];
-
-testArray(h1Plugin, cases);
+]);
