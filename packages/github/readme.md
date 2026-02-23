@@ -20,3 +20,9 @@ Workflow files must be in `/.github/workflows`, no subfolders allowed.
 - [Codespaces](./codespaces/readme.md)
 - [Pages](./pages/readme.md)
 - [REST API](./rest/readme.md)
+
+## Miscellaneous
+
+[SO question on GitHub URL `tree` vs `blob](https://stackoverflow.com/questions/39400848/in-github-urls-what-is-the-difference-between-a-tree-and-a-blob)
+
+Basically, `tree` is a folder and `blob` is a file.
