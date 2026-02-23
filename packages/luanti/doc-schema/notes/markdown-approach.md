@@ -45,6 +45,31 @@ A tag-based syntax would use XML-like or HTML-like tags. I've never handwritten 
 </method>
 ```
 
+[corpserot proposed](https://github.com/luanti-org/docs.luanti.org/issues/297#issuecomment-3736418828) a middle-ground tag-based syntax on 2026-01-11, something like this:
+
+```xml
+<method name="get_modnames([load_order]: boolean)">
+  Returns a list of the mods' names that are loaded or are yet to be loaded during startup.
+  <param name="load_order" default="false" available-since="5.16.0">
+    defines the order of the names
+    <value-description value="true">sorted according to load order</value-description>
+    <value-description value="false">sorted alphabetically</value-description>
+  </param>
+</method>
+```
+
+[wsor also proposed](https://github.com/luanti-org/docs.luanti.org/issues/297#issuecomment-3736422678) a tag-based syntax on 2026-01-11, something like this:
+
+```xml
+<block>
+  <function>core.get_modnames([load_order])</function>
+  <param type="boolean" default="false">load_order</param>
+  <description>
+    *Luanti* function that ~~does~~ things
+  </description>
+</block>
+```
+
 ### Alternatives
 
 In theory, our schema could accept both, but it'd be easier to support one:
