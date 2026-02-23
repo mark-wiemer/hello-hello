@@ -1,15 +1,10 @@
-import { expect, test } from "vitest";
-import { unified } from "unified";
-import remarkParse from "remark-parse";
 import { h1Plugin } from "./h1.js";
-import remarkStringify from "remark-stringify";
 import { zeroPosition } from "@/constants.js";
+import { testArray, TestCase } from "@/test-utils.js";
 
 const expectedH1Text = "Luanti Lua Modding API Reference";
-const expectedSource = "luanti-doc-schema";
-const processor = unified().use(remarkParse).use(h1Plugin).use(remarkStringify);
-const parse = async (markdown: string) => await processor.process(markdown);
-test.each([
+
+const cases: TestCase[] = [
   {
     name: "single h1 with correct text exists",
     markdown: `# ${expectedH1Text}`,
@@ -40,12 +35,6 @@ test.each([
       end: { line: 1, column: 13, offset: 12 },
     },
   },
-])("$name", async ({ markdown, expectedMessage, expectedPosition }) => {
-  const result = await parse(markdown);
-  expect(result.messages).toHaveLength(expectedMessage ? 1 : 0);
-  if (expectedMessage) {
-    expect(result.messages[0].message).toContain(expectedMessage);
-    expect(result.messages[0].source).toBe(expectedSource);
-    expect(result.messages[0].place).toEqual(expectedPosition);
-  }
-});
+];
+
+testArray(h1Plugin, cases);
