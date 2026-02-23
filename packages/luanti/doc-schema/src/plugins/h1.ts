@@ -6,22 +6,21 @@ import { makeMessageFactory } from "@/utils.js";
  * Expects exactly one h1 heading with the text "Luanti Lua Modding API Reference".
  */
 export const h1Plugin: Plugin<[], Root> = () => {
-  const makeMessage = makeMessageFactory("h1");
-
   return (tree: Root, file): void => {
+    const makeMessage = makeMessageFactory("h1", file);
     const h1s = tree.children.filter(
       (node): node is Heading => node.type === "heading" && node.depth === 1,
     );
 
     if (h1s.length === 0) {
-      makeMessage(file, "Expected one h1 heading, found 0", {
+      makeMessage("Expected one h1 heading, found 0", {
         place: zeroPosition,
       });
       return;
     }
 
     if (h1s.length > 1) {
-      makeMessage(file, `Expected one h1 heading, found ${h1s.length}`, {
+      makeMessage(`Expected one h1 heading, found ${h1s.length}`, {
         place: h1s[1].position,
       });
       return;
@@ -34,7 +33,7 @@ export const h1Plugin: Plugin<[], Root> = () => {
 
     const expectedH1 = "Luanti Lua Modding API Reference";
     if (h1Text !== expectedH1) {
-      makeMessage(file, `h1 text is "${h1Text}", expected "${expectedH1}"`, {
+      makeMessage(`h1 text is "${h1Text}", expected "${expectedH1}"`, {
         place: h1s[0].position,
       });
     }
