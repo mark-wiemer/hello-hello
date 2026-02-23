@@ -147,7 +147,11 @@ alias vcf='npm run validate:ci:fix'
 #endregion
 
 #region functions
-git_link() {
+github_link() {
+    # Outputs GitHub link to current path in current repo
+    # Designed for Linux Mint with HTTPS connection to remotes
+    # Assumes remote is named `origin` on local machine
+
     # Get the git repository root
     repo_root=$(git rev-parse --show-toplevel 2>/dev/null)
     if [ -z "$repo_root" ]; then
