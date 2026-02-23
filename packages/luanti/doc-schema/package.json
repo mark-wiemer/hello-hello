@@ -29,6 +29,7 @@
   },
   "devDependencies": {
     "@types/node": "^25.0.10",
+    "dedent": "^1.7.1",
     "sort-package-json": "^3.4.0"
   },
   "packageManager": "pnpm@10.23.0",
