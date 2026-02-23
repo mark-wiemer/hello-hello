@@ -25,6 +25,7 @@
     "unified": "^11.0.5",
     "unist-util-visit": "^5.0.0",
     "vfile": "^6.0.3",
+    "vfile-reporter": "^8.1.1",
     "vitest": "^4.0.18"
   },
   "devDependencies": {

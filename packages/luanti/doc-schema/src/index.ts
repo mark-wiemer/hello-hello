@@ -10,6 +10,7 @@ import {
   write,
 } from "@/types.js";
 import { functionPlugin } from "./plugins/function.js";
+import { reporter } from "vfile-reporter";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -26,13 +27,12 @@ const file = await unified()
   .use(remarkStringify) // Stringify AST back to Markdown
   .process(vfile);
 
-if (file.messages.length === 0) {
-  console.log("No issues found.");
-} else {
-  console.log(`Found ${file.messages.length} issue${file.messages.length > 1 ? "s" : ""}:`);
-  file.messages.forEach((message) => {
-    console.log(`${message.message} (Source: ${message.source})`);
-  });
-}
+console.log(reporter(file));
 
-await write({ path: path.join(__dirname, `${name}_transformed.md`), value: String(file) });
+try {
+  const transformedName = `${name}_transformed.md`;
+  await write({ path: path.join(__dirname, transformedName), value: String(file) });
+  console.log(`Wrote ${transformedName}.`);
+} catch (error) {
+  console.error("Error writing transformed file:", error);
+}
