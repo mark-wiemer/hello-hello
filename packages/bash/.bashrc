@@ -166,18 +166,6 @@ json_edit() {
 
 luanti_games_relative_path="~/.var/app/org.luanti.luanti/.minetest/games"
 
-luanti_trash() {
-    if [ $# -eq 0 ]; then
-        echo "Move Luanti game folder to recycle bin"
-        echo "Usage: luanti_trash target"
-        echo "Examples:"
-        echo "  luanti_trash mwvl # Move mwvl Luanti game to recycle bin"
-        return 1
-    fi
-    local dest="$1"
-    eval gio trash "$luanti_games_relative_path/$dest"
-}
-
 luanti_dev() {
     if [ $# -eq 0 ]; then
         echo "Copy Luanti files from given folder into Luanti games folder,"
@@ -200,12 +188,16 @@ luanti_dev() {
     flatpak run org.luanti.luanti
 }
 
-ni() {
-    node index.js
-}
-
-ns() {
-    pnpm start
+luanti_trash() {
+    if [ $# -eq 0 ]; then
+        echo "Move Luanti game folder to recycle bin"
+        echo "Usage: luanti_trash target"
+        echo "Examples:"
+        echo "  luanti_trash mwvl # Move mwvl Luanti game to recycle bin"
+        return 1
+    fi
+    local dest="$1"
+    eval gio trash "$luanti_games_relative_path/$dest"
 }
 
 new_project() {
@@ -216,6 +208,14 @@ new_project() {
     local dir_name=$(basename "$PWD")
     json_edit ".name = \"@mark-wiemer/$dir_name\""
     pnpm run validate:fix
+}
+
+ni() {
+    node index.js
+}
+
+ns() {
+    pnpm start
 }
 
 reset_project() {
