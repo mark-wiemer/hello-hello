@@ -224,7 +224,7 @@ div.headerImages {
   row-gap: 1em;
   align-self: center;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: center;
   padding-bottom: 1em;
 }
 
