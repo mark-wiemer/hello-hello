@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import { getImage } from "astro:assets";
 
 interface Props {
   alt: string;
@@ -9,6 +10,9 @@ interface Props {
 }
 
 const { alt, src, thumbnailSrc, class: className } = Astro.props;
+
+// Pre-process the full-size image to get optimized URL (WebP conversion, etc.)
+const optimizedFull = await getImage({ src });
 ---
 
 <div class="adaptive-image-wrapper">
@@ -16,7 +20,7 @@ const { alt, src, thumbnailSrc, class: className } = Astro.props;
     alt={alt}
     src={thumbnailSrc}
     class={`adaptive-image ${className || ""}`}
-    data-full-src={src.src}
+    data-full-src={optimizedFull.src}
     loading="lazy"
   />
 </div>
