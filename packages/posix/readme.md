@@ -16,6 +16,17 @@ POSIX also defines the [Shell Command Language](https://pubs.opengroup.org/onlin
   - This page also lists all built-in utilities, like `cd` and `mkdir`.
   - Volume: [XCU](https://pubs.opengroup.org/onlinepubs/9799919799/mindex.html) (utilities)
 
+## Utilities
+
+### grep
+
+[grep](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/grep.html)
+
+```sh
+# Search this monorepo for "auth.md", succeeding even if nothing is found
+grep -RIn --exclude-dir=node_modules -- "auth.md" ./path/to/hello-hello || true
+```
+
 ## Shell Command Language
 
 Links are to official sources unless otherwise specified. Citations in code use the same numbering and name as in official sources.
