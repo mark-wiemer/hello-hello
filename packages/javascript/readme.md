@@ -6,6 +6,10 @@ It's quite a popular language! This folder contains both reference JavaScript fi
 
 To run JavaScript, one must first install a JavaScript runtime. There are three major players: Node, Deno, and Bun. I use Node, which has the world's most annoying [installation configuration](https://nodejs.org/en/download) as of writing (2026-01-28). For most projects, I use [Bash](../bash/readme.md), Node 22, `fnm`, and `pnpm` on both Windows and Linux. I use `npm` for [Mocha](../mocha/readme.md)-related work or any advanced work on Windows, like AHK++. `fnm` on Windows is not recommended by Node but I'm not about to install Docker just for this and Chocolatey isn't sufficient. `fnm` and `pnpm` on Windows don't get along, so I do almost all development on Linux.
 
+For Linux, see [Hello Linux Mint](../new-machine/linux/linux-mint.md)
+
+For Windows, try:
+
 1. ```sh
    sudo choco install fnm
    fnm install 22.21.1

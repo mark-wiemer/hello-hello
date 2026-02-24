@@ -10,28 +10,18 @@ General notes:
 
 Hosting tools:
 
-- GitHub Pages
-- namecheap.com
+- [GitHub Pages](../github/pages/readme.md)
+- [Namecheap](https://www.namecheap.com/)
 
 Developer tools:
 
-- @types/node to silence false positive errors on references to Node globals
-- Git LFS to better track changes to images
-- GitHub Actions to automatically deploy the site
-- http-server for testing the site
-- Node.js to run QoL scripts
-- Prettier to format the repo
+- [Astro](../astro/readme.md) to build the site
+- [Git LFS](../git/readme.md) to better track changes to images
+- [GitHub Actions](../github/readme.md) to automatically deploy the site
+- [Node.js](../javascript/readme.md) to run QoL scripts
+- [Prettier](https://prettier.io) to format the repo
 
 Resources:
 
-- [Astro Discord server](https://astro.build/chat)
-- [Astro docs](https://docs.astro.build)
 - [Emojipedia](https://emojipedia.org/): Source for high-res transparent-background emojis (double-check that you can re-use them!)
 - [Favicon Converter](https://favicon.io/favicon-converter/): don't send copyrighted stuff here without investigating!
-
-## Todo
-
-These will be GitHub issues eventually maybe ;)
-
-- Use `section` around each `hN` element for a11y
-- See code for more `todo` comments
