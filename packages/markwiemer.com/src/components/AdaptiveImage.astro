@@ -1,0 +1,82 @@
+---
+import { Image } from "astro:assets";
+
+interface Props {
+  alt: string;
+  src: ImageMetadata;
+  thumbnailSrc: ImageMetadata;
+  class?: string;
+}
+
+const { alt, src, thumbnailSrc, class: className } = Astro.props;
+---
+
+<div class="adaptive-image-wrapper">
+  <Image
+    alt={alt}
+    src={thumbnailSrc}
+    class={`adaptive-image ${className || ""}`}
+    data-full-src={src.src}
+    loading="lazy"
+  />
+</div>
+
+<script is:inline data-notes="shouldLoadHighRes">
+  function shouldLoadHighRes() {
+    if (!("connection" in navigator)) {
+      return true;
+    }
+    const connection = navigator.connection;
+    const effectiveType = connection.effectiveType;
+    const saveData = connection.saveData;
+    if (saveData) {
+      return false; // User requested reduced data usage
+    }
+    const shouldLoadHigh = effectiveType === "4g";
+    return shouldLoadHigh;
+  }
+
+  function tryLoadHighRes() {
+    if (!shouldLoadHighRes()) {
+      return;
+    }
+
+    const images = document.querySelectorAll("[data-full-src]");
+    images.forEach((img) => {
+      const fullSrc = img.getAttribute("data-full-src");
+      if (fullSrc && img instanceof HTMLImageElement) {
+        // Preload the high-res image
+        const link = document.createElement("link");
+        link.rel = "preload";
+        link.as = "image";
+        link.href = fullSrc;
+        document.head.appendChild(link);
+
+        // Swap the image once it's loaded
+        const highResImg = new Image();
+        highResImg.onload = () => {
+          img.src = fullSrc;
+          img.removeAttribute("data-full-src");
+        };
+        highResImg.onerror = () => {
+          console.error("[AdaptiveImage] Failed to load high-res image:", fullSrc);
+        };
+        highResImg.src = fullSrc;
+      }
+    });
+  }
+
+  // Check connection on page load
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", tryLoadHighRes);
+  } else {
+    tryLoadHighRes();
+  }
+
+  // Also listen for connection changes
+  if ("connection" in navigator) {
+    navigator.connection.addEventListener("change", () => {
+      tryLoadHighRes();
+    });
+  }
+</script>

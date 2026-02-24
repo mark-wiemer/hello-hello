@@ -1,13 +1,15 @@
 import { Image } from "astro:assets";
-import Mark2023 from "@/assets/2023-07-20 profile.jpg";
+import Mark2026 from "@/assets/2026-02-03-profile-square.jpg";
+import Mark2026Thumb from "@/assets/2026-02-03-profile-square-thumb.jpg";
 import Wynonna2024 from "@/assets/2024-04-29 Wynonna raincoat outside.jpg";
 import Layout from "@/layouts/Layout.astro";
+import AdaptiveImage from "@/components/AdaptiveImage.astro";
 
 <Layout pageTitle="Home">
 {/* prettier-ignore */}
 <h1>mark<wbr />wiemer<wbr />.com</h1>
 <div class="headerImages">
-  <Image alt="Mark in 2023" src={Mark2023} class="headerImage" />
+  <AdaptiveImage alt="Mark in 2026" src={Mark2026} thumbnailSrc={Mark2026Thumb} class="headerImage" />
   <Image alt="Wynonna in 2024" src={Wynonna2024} class="headerImage" />
 </div>
 
