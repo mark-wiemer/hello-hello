@@ -32,3 +32,10 @@ There are three colors: unvisited, visited, and plaintext. Plaintext color is, w
 Then duplicate for light mode and dark mode!
 
 To simplify this work, see [Issue 13](https://github.com/mark-wiemer/hello-hello/issues/13)
+
+## Breakpoints
+
+### 320-480px
+
+- Homepage heading should still be unbroken
+- Header images should still be side-by-side

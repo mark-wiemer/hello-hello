@@ -145,6 +145,11 @@ h1 {
   line-height: 52px;
   text-align: center;
   margin-bottom: 12px;
+
+  /* breakpoint-very-thin */
+  @media (max-width: 480px) {
+    font-size: 2em;
+  }
 }
 
 div {
@@ -231,6 +236,12 @@ div.headerImages {
 img.headerImage {
   height: 12em;
   width: 12em;
+
+  /* breakpoint-very-thin */
+  @media (max-width: 480px) {
+    height: 7em;
+    width: 7em;
+  }
 }
 
 /* Apply to divs to get center margin */
