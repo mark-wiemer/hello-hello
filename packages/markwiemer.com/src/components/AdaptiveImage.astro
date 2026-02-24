@@ -25,7 +25,7 @@ const optimizedFull = await getImage({ src });
   />
 </div>
 
-<!-- todo dedupe this script -->
+<!-- todo dedupe this script / use srcset instead -->
 <script is:inline data-notes="shouldLoadHighRes">
   console.debug("[AdaptiveImage] Client script loaded...");
   // test changes with a new tab, not just refreshing
@@ -43,9 +43,9 @@ const optimizedFull = await getImage({ src });
       return false;
     }
 
-    // downlink is megabits per second
+    // downlink is megabits per second, but usually not provided to avoid fingerprinting
     console.debug("[AdaptiveImage] Connection info:", { effectiveType, saveData, downlink });
-    return effectiveType === "4g" && downlink >= 3;
+    return effectiveType === "4g";
   }
 
   function tryLoadHighRes() {
