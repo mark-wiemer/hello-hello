@@ -5,6 +5,7 @@
 - This is not a partisan issue
   - Let's look at the facts, and make our decision from there
   - No, we won't know everything, but what do we know? What evidence do we have, beyond just claims?
+  - Why align ourselves with a group of people that want us to think a certain way?
 - Hold them all accountable / lives lost forever
   - Yes, Renee Good is accountable for driving away, Pretti for bringing a gun, democrats for speaking the way they do
   - But also Republicans are accountable for starting this whole thing and then executing smear campaigns minutes after folks are dead
@@ -14,6 +15,7 @@
   - Poke holes, but on both sides
   - They don't need to cite chapter and verse, but they should show something
   - These people are in charge of hundreds of millions of lives, yes, we should hold them to an extremely high standard
+- Violent crime in the United States
 
 #### Past precedent
 
@@ -32,11 +34,19 @@
     - Two ICE agents accused by their bosses of lying under oath in 2026
 - Martin Luther King Jr
 
+#### Immigration
+
+- Crime rates among legal immigrants, illegal immigrants, native-born
+- Impact on economy
+- History of American immigration policy
+- 2024 attempts to adjust immigration
+- Current path to citizenship and paperwork requirements
+
 ### Personal
 
 - Fixing the algorithm
   - Just delete social media :)
-- The Mac and cheese that saved my life
+- The mac and cheese that saved my life
 
 ### Software
 
