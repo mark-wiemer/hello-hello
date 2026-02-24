@@ -36,3 +36,18 @@ Resources:
 
 - [Emojipedia](https://emojipedia.org/): Source for high-res transparent-background emojis (double-check that you can re-use them!)
 - [Favicon Converter](https://favicon.io/favicon-converter/): don't send copyrighted stuff here without investigating!
+
+Console logs:
+
+- I use `console.debug` to keep things clean unless folks are really digging in!
+- Edge reports some logs even though I don't want it to:
+  - ```
+    [Intervention] Images loaded lazily and replaced with placeholders. Load events are deferred. See https://go.microsoft.com/fwlink/?linkid=2048113
+    ```
+
+    - Any site that has `img[loading="lazy"]` will have this
+  - ```
+    Navigated to https://markwiemer.com
+    ```
+
+    - Edge just does this for every site
