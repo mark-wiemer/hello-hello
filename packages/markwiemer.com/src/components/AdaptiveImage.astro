@@ -22,18 +22,22 @@ const { alt, src, thumbnailSrc, class: className } = Astro.props;
 </div>
 
 <script is:inline data-notes="shouldLoadHighRes">
+  // test changes with a new tab, not just refreshing
   function shouldLoadHighRes() {
     if (!("connection" in navigator)) {
-      return true;
+      return false;
     }
     const connection = navigator.connection;
     const effectiveType = connection.effectiveType;
     const saveData = connection.saveData;
+    const downlink = connection.downlink;
+
     if (saveData) {
-      return false; // User requested reduced data usage
+      return false;
     }
-    const shouldLoadHigh = effectiveType === "4g";
-    return shouldLoadHigh;
+
+    // downlink is megabits per second
+    return effectiveType === "4g" && downlink >= 3;
   }
 
   function tryLoadHighRes() {
