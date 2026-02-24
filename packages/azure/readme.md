@@ -6,7 +6,7 @@ Azure is Microsoft's cloud platform. I use it at work.
 
 - [Azure](https://learn.microsoft.com/en-us/azure/)
 - [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/?view=azure-cli-latest)
-- [Hello auth - Mark Wiemer](../notes/auth.md)
+- [Hello security - Mark Wiemer](../notes/security.md)
 - [Microsoft Cloud for Developers](https://learn.microsoft.com/en-us/microsoft-cloud/)
   - includes Azure, GitHub, M365, Power Platform, D365, and Industry and Government
 - [Monthly Azure credits for Visual Studio subscribers](https://azure.microsoft.com/en-us/pricing/member-offers/credit-for-visual-studio-subscribers)

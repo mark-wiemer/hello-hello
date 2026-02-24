@@ -1,6 +1,6 @@
-# Hello auth
+# Hello security
 
-Authentication, authorization, and everything closely related to it.
+Authentication, authorization, policy enforcement, and everything closely related to it.
 
 ## General resources
 
