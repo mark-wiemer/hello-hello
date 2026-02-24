@@ -25,8 +25,10 @@ const optimizedFull = await getImage({ src });
   />
 </div>
 
+<!-- todo dedupe this script -->
 <script is:inline data-notes="shouldLoadHighRes">
   // test changes with a new tab, not just refreshing
+  // todo add user config to toggle this feature if they want
   function shouldLoadHighRes() {
     if (!("connection" in navigator)) {
       return false;
