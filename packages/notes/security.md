@@ -25,7 +25,13 @@ All Policy objects are visible to any principal with any role on an affected Azu
 
 ### Built-in Policy objects
 
-[azure-policy - GitHub](https://github.com/Azure/azure-policy) documents all Azure Policy objects built-in to Azure.
+[azure-policy - GitHub](https://github.com/Azure/azure-policy) documents all Azure Policy objects built-in to Azure. [Azure Policy built-ins - Microsoft Learn](https://learn.microsoft.com/en-us/azure/governance/policy/samples/) does the same.
+
+### Policy definition structure
+
+[Azure Policy definition structure basics](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/definition-structure-basics)
+
+[Mode](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/definition-structure-basics#mode) can be `all` for everything, `indexed` for resources that support tags and location, or a [Resource Provider mode](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/definition-structure-basics#resource-provider-modes) for deeper integration with specific resource types, like Kubernetes or Key Vault. However, unless explicitly stated, Resource Provider modes only support built-in policy definitions.
 
 ## Azure RBAC (role-based access control)
 
