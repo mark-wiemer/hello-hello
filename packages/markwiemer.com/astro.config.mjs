@@ -41,7 +41,7 @@ async function generateThumbnails() {
     }
 
     const thumbName = file.replace(/\.(\w+)$/, "-thumb.$1");
-    const thumbPath = path.join(assetsDir, thumbName);
+    const thumbPath = path.join(assetsDir, "thumbnails", thumbName);
 
     // Skip if thumbnail already exists
     if (fs.existsSync(thumbPath)) {
