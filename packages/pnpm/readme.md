@@ -25,9 +25,9 @@ pnpm config set -g init-license MIT
 pnpm config set -g init-version 0.1.0
 ```
 
-### Scripts
+## Scripts
 
-#### Workspace scripts
+### Workspace scripts
 
 Add `-r` for recursion and optionally specify `--cwd` to the monorepo's root to run a given script in all packages that define it.
 
@@ -35,7 +35,7 @@ Add `-r` for recursion and optionally specify `--cwd` to the monorepo's root to 
 pnpm -r --cwd /path/to/monorepo/root clean
 ```
 
-#### Issues on Windows
+### Issues on Windows
 
 According to AI, on Windows, `pnpm` cannot call itself, so something like:
 
