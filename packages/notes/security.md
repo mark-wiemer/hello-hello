@@ -7,6 +7,32 @@ Authentication, authorization, policy enforcement, and everything closely relate
 - [Azure security documentation](https://learn.microsoft.com/en-us/azure/security/)
 - [Microsoft Security](https://learn.microsoft.com/en-us/security/)
 
+## Azure Policy
+
+[Azure Policy documentation](https://learn.microsoft.com/en-us/azure/governance/policy/)
+
+Business rules are known as **policy definitions** and are defined in JSON. A group of policy definitions can be organized into a **policy initiative**, also known as a `policySet`. Then the **Policy object** (definition or intiative) is assigned to a scope of supported resources: this is a **policy assignment**. Policy assignments are also policy objects.
+
+The JSON schema supports functions, params, aliases, etc.
+
+Evaluation occurs when things change and every 24 hours.
+
+Evalution response includes logging, modifying, or blocking the action. Response could also deploy related resources or take some other form.
+
+### RBAC in Azure Policy
+
+All Policy objects are visible to any principal with any role on an affected Azure resource--no security by obfuscation here!
+
+### Built-in Policy objects
+
+[azure-policy - GitHub](https://github.com/Azure/azure-policy) documents all Azure Policy objects built-in to Azure.
+
+## Azure RBAC (role-based access control)
+
+[Azure RBAC documentation](https://learn.microsoft.com/en-us/azure/role-based-access-control/)
+
+This documents [all Microsoft.X providers](https://learn.microsoft.com/en-us/azure/role-based-access-control/resource-provider-operations), e.g. [Microsoft.Authorization](https://learn.microsoft.com/en-us/azure/role-based-access-control/permissions/management-and-governance#microsoftauthorization).
+
 ## Microsoft Defender
 
 [Microsoft Defender products and services](https://learn.microsoft.com/en-us/defender/)
