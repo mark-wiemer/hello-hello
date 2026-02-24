@@ -2,11 +2,21 @@
 
 My personal site hosting my articles, pictures of my dog, and other stuff I like 😊 For change history earlier than 2026-01-03, see [archived markwiemer.com GitHub repo](https://github.com/mark-wiemer/markwiemer.com)
 
-## Developer notes
+## Running locally
 
-General notes:
+Pre-requisites:
 
-- Some pages are tracked directly in the `site` folder, others are in the `pages` folder
+- [Node.js](../javascript/readme.md)
+- [pnpm](../pnpm/readme.md)
+
+Setup:
+
+```sh
+pnpm i
+pnpm dev
+```
+
+## Notes
 
 Hosting tools:
 
@@ -18,7 +28,8 @@ Developer tools:
 - [Astro](../astro/readme.md) to build the site
 - [Git LFS](../git/readme.md) to better track changes to images
 - [GitHub Actions](../github/readme.md) to automatically deploy the site
-- [Node.js](../javascript/readme.md) to run QoL scripts
+- [Node.js](../javascript/readme.md) to run JavaScript
+- [pnpm](../pnpm/readme.md) to manage packages
 - [Prettier](https://prettier.io) to format the repo
 
 Resources:
