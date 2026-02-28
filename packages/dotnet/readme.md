@@ -23,6 +23,8 @@ powershell ./Build.cmd
 powershell ./Test.cmd
 ```
 
+Right now, many tests are failing, and it took 2042 seconds to run the tests on my local machine on Windows. So I'll have to dig in!
+
 ### Improvements
 
 - Links in readme should to go local files, not GitHub main branch
