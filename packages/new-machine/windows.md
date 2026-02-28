@@ -372,6 +372,9 @@ git config --global core.longpaths true
 
 ## Visual Studio
 
-[Visual Studio](https://visualstudio.microsoft.com/) is a closed-source Windows-only IDE originally built for .NET, but now has plugins for many languages. I use Visual Studio Community 2026 on my personal machine, not Insiders.
+[Visual Studio](https://visualstudio.microsoft.com/) is a closed-source Windows-only IDE originally built for .NET, but now has plugins for many languages.
 
-I sign in with my GitHub account.
+- Use Visual Studio Community 2026 (not Insiders)
+- Sign in with your GitHub account
+- Use Unix (LF) line endings
+- All Settings > Environment > Keyboard > ... mapping scheme > Visual Studio Code
