@@ -351,3 +351,19 @@ Registry editor > Computer\HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Window
 1. Install PowerToys (todo add to above `winget` command)
 
 - Lua is preferred over LuaJIT as performance is not a high priority but ease of setup is. `luajit chess.lua` doesn't work out-of-the-box as of this writing, but `lua chess.lua` does.
+
+## PowerToys
+
+Use PowerToys Win+Space instead of the Start menu as it seems the Start menu is officially permabloated.
+
+## Long filenames
+
+```powershell
+# PowerShell (any version)
+reg add HKLM\SYSTEM\CurrentControlSet\Control\FileSystem `
+ /v LongPathsEnabled /t REG_DWORD /d 1 /f
+```
+
+```sh
+git config --global core.longpaths true
+```
