@@ -2,12 +2,22 @@
 
 This includes C#, ASP.NET, .NET SDK 10, everything :)
 
+## General resources
+
+- [.NET documentation](https://learn.microsoft.com/en-us/dotnet/)
+
+## Getting started
+
 [Installation steps for Linux Mint](https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu-install?tabs=dotnet10&pivots=os-linux-ubuntu-2404):
 
 ```sh
 sudo apt-get update && \
   sudo apt-get install -y dotnet-sdk-10.0
 ```
+
+## Console
+
+The [`console` folder](./console/readme.md) is a minimal project to learn the fundamentals of .NET.
 
 ## Roslyn
 
