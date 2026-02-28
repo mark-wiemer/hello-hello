@@ -1,1 +1,1 @@
-﻿Console.WriteLine("Hello from .NET console app!");
+Console.WriteLine("Hello from .NET console app!");
