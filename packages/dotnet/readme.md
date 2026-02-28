@@ -8,3 +8,7 @@ This includes C#, ASP.NET, .NET SDK 10, everything :)
 sudo apt-get update && \
   sudo apt-get install -y dotnet-sdk-10.0
 ```
+
+## Roslyn
+
+The [`roslyn` folder](./roslyn/README.md) is a submodule of [Roslyn](https://github.com/mark-wiemer/roslyn), the .NET compiler platform.
