@@ -25,3 +25,6 @@
 [submodule "packages/luanti/luanti"]
 	path = packages/luanti/luanti
 	url = https://github.com/mark-wiemer/luanti.git
+[submodule "packages/dotnet/roslyn"]
+	path = packages/dotnet/roslyn
+	url = https://github.com/mark-wiemer/roslyn

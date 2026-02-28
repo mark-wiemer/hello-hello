@@ -15,6 +15,7 @@ because I use GitHub pages, which only supports one site per repo.
 - [Azure](./packages/azure/readme.md): Cloud computing platform
 - [Bash](./packages/bash/readme.md): Cross-platform shell
 - [.NET (dotnet)](./packages/dotnet/readme.md): Open-source framework for any software
+  - [Roslyn](./packages/dotnet/roslyn/README.md): The .NET compiler platform
 - [Git](./packages/git/readme.md): Version control system, includes notes on Git LFS
 - [GitHub](./packages/github/readme.md): DevOps platform
   - [Codespaces](./packages/github/codespaces/readme.md)
