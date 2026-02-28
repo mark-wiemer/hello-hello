@@ -11,4 +11,18 @@ sudo apt-get update && \
 
 ## Roslyn
 
-The [`roslyn` folder](./roslyn/README.md) is a submodule of [Roslyn](https://github.com/mark-wiemer/roslyn), the .NET compiler platform.
+The [`roslyn` folder](./roslyn/README.md) is a submodule of [Roslyn](https://github.com/mark-wiemer/roslyn), the .NET compiler platform. I primarily develop this on Windows to gain comfort working in [Visual Studio](../new-machine/windows.md#visual-studio).
+
+### Getting started
+
+[Windows docs](./roslyn/docs/contributing/Building,%20Debugging,%20and%20Testing%20on%20Windows.md)
+
+```sh
+powershell ./Restore.cmd
+powershell ./Build.cmd
+powershell ./Test.cmd
+```
+
+### Improvements
+
+- Links in readme should to go local files, not GitHub main branch
