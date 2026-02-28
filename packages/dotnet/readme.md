@@ -11,9 +11,17 @@ sudo apt-get update && \
 
 ## Roslyn
 
-The [`roslyn` folder](./roslyn/README.md) is a submodule of [Roslyn](https://github.com/mark-wiemer/roslyn), the .NET compiler platform. I primarily develop this on Windows to gain comfort working in [Visual Studio](../new-machine/windows.md#visual-studio).
+The [`roslyn` folder](./roslyn/README.md) is a submodule of [Roslyn](https://github.com/mark-wiemer/roslyn), the .NET compiler platform. I primarily develop this on Windows to gain comfort working in [Visual Studio](../new-machine/windows.md#visual-studio). The [Roslyn docs](https://learn.microsoft.com/en-us/dotnet/csharp/roslyn-sdk/) guide developers in using (not developing) Roslyn in their projects.
 
-### Getting started
+### Using Roslyn
+
+Roslyn is mostly a behind-the-scenes project that runs when you compile .NET code. As [the Roslyn docs](https://learn.microsoft.com/en-us/dotnet/csharp/roslyn-sdk/) put it:
+
+> This is the core mission of the Roslyn APIs: opening up the opaque boxes and allowing tools and end users to share in the wealth of information compilers have about our code.
+
+### Contributing
+
+#### Getting started
 
 [Windows docs](./roslyn/docs/contributing/Building,%20Debugging,%20and%20Testing%20on%20Windows.md)
 
