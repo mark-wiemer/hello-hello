@@ -344,14 +344,6 @@ Settings > Personalization > Themes > Desktop icon settings > uncheck "Recycle B
 
 Registry editor > Computer\HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows > New key > Personalization > New DWORD (32-bit) Value > NoLockScreen > NoLockScreen = 1
 
-## Other programs
-
-1. `winget install Git.Git vscodium voidtools.Everything snipaste devcom.lua fnm autohotkey.autohotkey golang.go optipng paint.net GitHub.cli`
-1. Install WinDirStat (todo add to above `winget` command)
-1. Install PowerToys (todo add to above `winget` command)
-
-- Lua is preferred over LuaJIT as performance is not a high priority but ease of setup is. `luajit chess.lua` doesn't work out-of-the-box as of this writing, but `lua chess.lua` does.
-
 ## PowerToys
 
 Use PowerToys Win+Space instead of the Start menu as it seems the Start menu is officially permabloated.
@@ -380,3 +372,10 @@ git config --global core.longpaths true
 - All Settings > Environment > Keyboard > ... mapping scheme > Visual Studio Code
 
 See the sibling `.vssettings` file for all settings. We can import this file following Tools > Import and Export Settings. There are a couple errors when doing this but it mostly works.
+## Other programs
+
+1. `winget install Git.Git vscodium voidtools.Everything snipaste devcom.lua fnm autohotkey.autohotkey golang.go optipng paint.net GitHub.cli`
+1. Install WinDirStat (todo add to above `winget` command)
+1. Install PowerToys (todo add to above `winget` command)
+
+- Lua is preferred over LuaJIT as performance is not a high priority but ease of setup is. `luajit chess.lua` doesn't work out-of-the-box as of this writing, but `lua chess.lua` does.
