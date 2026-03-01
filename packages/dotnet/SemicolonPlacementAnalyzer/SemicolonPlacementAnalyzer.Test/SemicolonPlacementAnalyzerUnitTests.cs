@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 
+using Microsoft.CodeAnalysis.Testing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using VerifyCS = SemicolonPlacementAnalyzer.Test.CSharpCodeFixVerifier<
@@ -15,7 +16,7 @@ namespace SemicolonPlacementAnalyzer.Test
         [TestMethod]
         public async Task TestMethod1()
         {
-            var test = @"";
+            string test = @"";
 
             await VerifyCS.VerifyAnalyzerAsync(test);
         }
@@ -24,7 +25,7 @@ namespace SemicolonPlacementAnalyzer.Test
         [TestMethod]
         public async Task TestMethod2()
         {
-            var test = @"
+            string test = @"
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -39,7 +40,7 @@ namespace SemicolonPlacementAnalyzer.Test
         }
     }";
 
-            var fixtest = @"
+            string fixtest = @"
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -54,7 +55,7 @@ namespace SemicolonPlacementAnalyzer.Test
         }
     }";
 
-            var expected = VerifyCS.Diagnostic("SemicolonPlacementAnalyzer").WithLocation(0).WithArguments("TypeName");
+            DiagnosticResult expected = VerifyCS.Diagnostic("SemicolonPlacementAnalyzer").WithLocation(0).WithArguments("TypeName");
             await VerifyCS.VerifyCodeFixAsync(test, expected, fixtest);
         }
     }
