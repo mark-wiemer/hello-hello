@@ -40,7 +40,9 @@ You should see a complaint that lowercase letters are present:
 
 ![VS complaining about lowercase letters in Program.cs](./assets/2026-02-28-complaint.png)
 
-The guide says that there is also a fix provided, but I'm not seeing that at this point.
+The guide says that there is also a fix provided, but I'm not seeing that at this point:
+
+![VS not offering a fix in Program.cs](./assets/2026-02-28-no-fix.png)
 
 The unit tests all pass.
 
