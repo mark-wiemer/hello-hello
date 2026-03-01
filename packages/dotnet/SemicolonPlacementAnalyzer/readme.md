@@ -1,6 +1,6 @@
-# Semi-colon Placement Analyzer (SCPA)
+# Semicolon Placement Analyzer (SCPA)
 
-The [.NET Compiler Platform SDK](https://learn.microsoft.com/en-us/dotnet/csharp/roslyn-sdk/), AKA Roslyn, allows developers to create custom "analyzers" that run when code is built or formatted. This is effectively a nice plugin system for exposing compiler information, and this is a sample project to build a single Roslyn analyzer. The goal of this analyzer is to better format weirdly-placed semi-colons, for example:
+The [.NET Compiler Platform SDK](https://learn.microsoft.com/en-us/dotnet/csharp/roslyn-sdk/), AKA Roslyn, allows developers to create custom "analyzers" that run when code is built or formatted. This is effectively a nice plugin system for exposing compiler information, and this is a sample project to build a single Roslyn analyzer. The goal of this analyzer is to better format weirdly-placed semicolons, for example:
 
 ```cs
 Console.WriteLine("")

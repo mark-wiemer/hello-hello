@@ -32,3 +32,4 @@ Prefer the most common spelling for the audience. If it's unclear, follow these 
 
 - built-in, not builtin
 - open-source, not open source
+- semicolon, not semi-colon
