@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="SemicolonPlacementAnalyzer.CodeFixes/SemicolonPlacementAnalyzer.CodeFixes.csproj" />
+  <Project Path="SemicolonPlacementAnalyzer.Package/SemicolonPlacementAnalyzer.Package.csproj" />
+  <Project Path="SemicolonPlacementAnalyzer.Test/SemicolonPlacementAnalyzer.Test.csproj" />
+  <Project Path="SemicolonPlacementAnalyzer.Vsix/SemicolonPlacementAnalyzer.Vsix.csproj" />
+  <Project Path="SemicolonPlacementAnalyzer/SemicolonPlacementAnalyzer.csproj" />
+</Solution>

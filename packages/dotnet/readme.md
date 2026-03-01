@@ -27,9 +27,11 @@ For Windows, you can simply install [Visual Studio](../new-machine/windows.md#vi
 
 The [`console` folder](./console/readme.md) is a minimal project to learn the fundamentals of .NET.
 
+<!-- this is linked from elsewhere, don't rename without updating links -->
+
 ## Roslyn
 
-The [`roslyn` folder](./roslyn/README.md) is a submodule of [Roslyn](https://github.com/mark-wiemer/roslyn), the .NET compiler platform. I primarily develop this on Windows to gain comfort working in [Visual Studio](../new-machine/windows.md#visual-studio). The [Roslyn docs](https://learn.microsoft.com/en-us/dotnet/csharp/roslyn-sdk/) guide developers in using (not developing) Roslyn in their projects.
+The [`roslyn` folder](./roslyn/README.md) is a submodule of [Roslyn](https://github.com/mark-wiemer/roslyn), AKA the .NET Compiler Platform SDK. I primarily develop this on Windows to gain comfort working in [Visual Studio](../new-machine/windows.md#visual-studio). The [Roslyn docs](https://learn.microsoft.com/en-us/dotnet/csharp/roslyn-sdk/) guide developers in using (not developing) Roslyn in their projects.
 
 ### Using Roslyn
 
@@ -54,3 +56,7 @@ Right now, many tests are failing, and it took 2042 seconds (34 minutes!) to run
 ### Improvements
 
 - Links in readme should to go local files, not GitHub main branch
+
+## SemicolonPlacementAnalyzer (SCPA)
+
+A minimal [Roslyn](#roslyn) analyzer.
