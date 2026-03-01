@@ -1,4 +1,9 @@
 <Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path=".gitignore" />
+    <File Path="readme.md" />
+  </Folder>
   <Project Path="SemicolonPlacementAnalyzer.CodeFixes/SemicolonPlacementAnalyzer.CodeFixes.csproj" />
   <Project Path="SemicolonPlacementAnalyzer.Package/SemicolonPlacementAnalyzer.Package.csproj" />
   <Project Path="SemicolonPlacementAnalyzer.Test/SemicolonPlacementAnalyzer.Test.csproj" />
