@@ -377,6 +377,16 @@ Some important settings might not get updated:
 
 - The default code cleanup profile should include all fixers (Configure Code Cleanup)
 
+### Todo
+
+- Better Comments
+- Keyboard shortcuts
+  - To import/export
+  - Misc VS Code custom shortcuts
+- Settings
+  - Where to look for and save new projects or solutions
+- CSharpier?
+
 ## Other programs
 
 1. `winget install Git.Git vscodium voidtools.Everything snipaste devcom.lua fnm autohotkey.autohotkey golang.go optipng paint.net GitHub.cli`
