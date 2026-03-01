@@ -372,6 +372,11 @@ git config --global core.longpaths true
 - All Settings > Environment > Keyboard > ... mapping scheme > Visual Studio Code
 
 See the sibling `.vssettings` file for all settings. We can import this file following Tools > Import and Export Settings. There are a couple errors when doing this but it mostly works.
+
+Some important settings might not get updated:
+
+- The default code cleanup profile should include all fixers (Configure Code Cleanup)
+
 ## Other programs
 
 1. `winget install Git.Git vscodium voidtools.Everything snipaste devcom.lua fnm autohotkey.autohotkey golang.go optipng paint.net GitHub.cli`
