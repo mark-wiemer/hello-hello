@@ -378,3 +378,5 @@ git config --global core.longpaths true
 - Sign in with your GitHub account
 - Use Unix (LF) line endings
 - All Settings > Environment > Keyboard > ... mapping scheme > Visual Studio Code
+
+See the sibling `.vssettings` file for all settings. We can import this file following Tools > Import and Export Settings. There are a couple errors when doing this but it mostly works.
