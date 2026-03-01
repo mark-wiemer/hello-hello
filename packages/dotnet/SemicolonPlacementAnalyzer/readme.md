@@ -42,4 +42,6 @@ You should see a complaint that lowercase letters are present:
 
 The guide says that there is also a fix provided, but I'm not seeing that at this point.
 
+The unit tests all pass.
+
 Note that this project doesn't work with `dotnet run` or other .NET CLI commands out of the box. This is apparently due to compatibility issues with modern versions of MSBuild, not very interesting.
