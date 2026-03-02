@@ -53,6 +53,15 @@ powershell ./Test.cmd
 
 Right now, many tests are failing, and it took 2042 seconds (34 minutes!) to run the tests on my local machine on Windows. So I'll have to dig in!
 
+### Notes
+
+``Filename`2+Test.cs`` is an intentional pattern:
+
+- `` `2`` indicates two type parameters in the outermost class
+- `+Test` indicates it has a nested test file
+
+Note that these are also partial class definitions so the same class is defined in two files. I don't know enough to understand the benefits of this, but off the bat I don't like it. I'm going to keep it for now to avoid breaking things.
+
 ### Improvements
 
 - Links in readme should to go local files, not GitHub main branch
