@@ -451,7 +451,8 @@
     "*.json5": "jsonc",
     "*.snap": "plaintext",
     "*.txt": "plaintext",
-    ".prettierrc": "yaml"
+    ".prettierrc": "yaml",
+    "*.vssettings": "xml"
   },
   "files.autoSaveDelay": 300,
   "files.exclude": {
