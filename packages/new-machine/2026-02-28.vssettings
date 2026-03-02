@@ -2111,7 +2111,12 @@
           <Shortcut Command="View.ViewDesigner" Scope="Global">Shift+F7</Shortcut>
         </DefaultShortcuts>
         <ShortcutsScheme>Visual Studio Code</ShortcutsScheme>
-        <UserShortcuts/>
+        <UserShortcuts>
+          <Shortcut Command="Chat" Scope="Global">Ctrl+I</Shortcut>
+          <RemoveShortcut Command="Edit.IncrementalSearch" Scope="Text Editor">Ctrl+I</RemoveShortcut>
+          <Shortcut Command="View.GitHub.Copilot.Chat" Scope="Global">Ctrl+Alt+I</Shortcut>
+          <Shortcut Command="Debug.Immediate" Scope="Global">Ctrl+K, Ctrl+Alt+I</Shortcut>
+        </UserShortcuts>
       </KeyboardShortcuts>
     </Category>
     <Category name="Environment_NewProjectDialogPreferredLanguage" Category="{77E22C0C-9F4A-4bfb-AD3A-3F3F4711E9ED}" Package="{DA9FB551-C724-11d0-AE1F-00A0C90FFFC3}" RegisteredName="Environment_NewProjectDialogPreferredLanguage" PackageName="CVsShellPackage">
