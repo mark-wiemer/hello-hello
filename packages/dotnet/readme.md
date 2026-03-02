@@ -65,6 +65,12 @@ Note that these are also partial class definitions so the same class is defined 
 ### Improvements
 
 - Links in readme should to go local files, not GitHub main branch
+- [Contributing Code](https://github.com/dotnet/roslyn/blob/main/docs/wiki/Contributing-Code.md) hasn't been updated since 2021
+  - Is referenced from Roslyn readme
+- [Analyzer Actions Semantics](https://github.com/dotnet/roslyn/blob/main/docs/analyzers/Analyzer%20Actions%20Semantics.md) hasn't been updated since 2018
+  - Is referenced from tutorial-generated code (see [SCPA](#scpa))
+
+<a id="scpa"></a>
 
 ## SemicolonPlacementAnalyzer (SCPA)
 
