@@ -383,6 +383,7 @@ Some important settings might not get updated:
 - Keyboard shortcuts
   - To import/export
   - Misc VS Code custom shortcuts
+    - `Ctrl+K, W` should close all tabs, not `Ctrl+K, Ctrl+W`
 - Settings
   - Where to look for and save new projects or solutions
 - CSharpier?
@@ -391,6 +392,5 @@ Some important settings might not get updated:
 
 1. `winget install Git.Git vscodium voidtools.Everything snipaste devcom.lua fnm autohotkey.autohotkey golang.go optipng paint.net GitHub.cli`
 1. Install WinDirStat (todo add to above `winget` command)
-1. Install PowerToys (todo add to above `winget` command)
 
 - Lua is preferred over LuaJIT as performance is not a high priority but ease of setup is. `luajit chess.lua` doesn't work out-of-the-box as of this writing, but `lua chess.lua` does.
