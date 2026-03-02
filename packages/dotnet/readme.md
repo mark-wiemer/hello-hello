@@ -68,4 +68,4 @@ Note that these are also partial class definitions so the same class is defined 
 
 ## SemicolonPlacementAnalyzer (SCPA)
 
-A minimal [Roslyn](#roslyn) analyzer.
+[SemicolonPlacementAnalyzer](./SemicolonPlacement/readme.md) is a minimal [Roslyn](#roslyn) analyzer.

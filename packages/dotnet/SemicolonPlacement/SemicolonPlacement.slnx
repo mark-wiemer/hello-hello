@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path=".gitignore" />
+    <File Path="readme.md" />
+  </Folder>
+  <Project Path="SemicolonPlacement.CodeFixes/SemicolonPlacement.CodeFixes.csproj" />
+  <Project Path="SemicolonPlacement.Package/SemicolonPlacement.Package.csproj" />
+  <Project Path="SemicolonPlacement.Test/SemicolonPlacement.Test.csproj" />
+  <Project Path="SemicolonPlacement.Vsix/SemicolonPlacement.Vsix.csproj" />
+  <Project Path="SemicolonPlacement/SemicolonPlacement.csproj" />
+</Solution>
