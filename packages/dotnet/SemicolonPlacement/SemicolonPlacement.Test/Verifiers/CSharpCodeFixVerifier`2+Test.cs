@@ -4,6 +4,8 @@ using Microsoft.CodeAnalysis.CSharp.Testing;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Testing.Verifiers;
 
+using SemicolonPlacement.Test.Verifiers;
+
 namespace SemicolonPlacement.Test
 {
     public static partial class CSharpCodeFixVerifier<TAnalyzer, TCodeFix>
