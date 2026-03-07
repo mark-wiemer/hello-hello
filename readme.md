@@ -68,7 +68,7 @@ I use `fnm` to manage Node versions and I generally use an LTS version (22.21.1 
 
 ## Commit messages
 
-Historically, I haven't followed a particular commit message style. But [Mocha](https://mochajs.org/next/) follows [Angular commit conventions](https://github.com/angular/angular/blob/26fed34e0e340166b70702d6177ad639bbfa94aa/contributing-docs/commit-message-guidelines.md) to auto-generate release logs and I think this is worth trying out :)
+Right now, I follow a simple "Use imperative, keep it short" approach. Because [Mocha](https://mochajs.org/next/) follows [Angular commit conventions](https://github.com/angular/angular/blob/26fed34e0e340166b70702d6177ad639bbfa94aa/contributing-docs/commit-message-guidelines.md) to auto-generate release logs, I used that for a while. However, it has the same "folder vs tag" problem of not being able to label a commit as, e.g. impacting both "vscode" and "new-machine". There is also the general "false categorization" problem of "is this a chore? is it a docs update? does it matter?" that is fatiguing. Keeping it simple and relying on a system to review the actual code changes and generate reports from that is more reliable. I don't have such a system, but we can all imagine one, right?
 
 ## License
 
