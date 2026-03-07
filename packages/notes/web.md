@@ -69,3 +69,9 @@ Shorthand rules apply in the order of `top, right, bottom, left` or, `top-bottom
 ### [Pseudo-classes and pseudo-elements](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Pseudo_classes_and_elements)
 
 `::selection` styles the selected text
+
+<!-- todo below this line is not necessarily a continuation of the track above -->
+
+### [CSS grid layout](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Grids)
+
+[`fr` is short for fraction](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/flex_value) and is a CSS data type only used in grids.
