@@ -25,6 +25,16 @@
   --width-button-nav: 30px;
   --z-index-nav-main: 1;
   --z-index-nav-button: 2;
+
+  /** reference values */
+  /* not currently used directly due to technical issues */
+  /* todo find better CSS system */
+  /* [320, 640) px */
+  --breakpoint-thin: 640px;
+  /* [var(--breakpoint-thin), 1280) px */
+  /* anything wider is just "wide" and is not really handled well right now */
+  /* todo handle very wide viewports */
+  --breakpoint-medium: 1280px;
 }
 
 ::selection {
