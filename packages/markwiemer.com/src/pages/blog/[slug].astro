@@ -11,7 +11,7 @@ export const getStaticPaths = getBlogPostPaths;
 const { module } = Astro.props;
 let { default: Content, frontmatter } = module;
 frontmatter ??= {};
-/* todo handle "orginally posted on Medium.com" stuff */
+/* todo handle "originally posted on Medium.com" stuff */
 const { postTitle, postDate, postTime, lastUpdated, postType } = frontmatter;
 ---
 
