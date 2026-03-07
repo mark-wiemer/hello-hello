@@ -2,6 +2,6 @@
   "version": "0.2",
   "enabled": true,
   "language": "en",
-  "files": ["src/pages/**/*.mdx"],
+  "files": ["src/pages/**/*.mdx", "src/pages/**/*.html", "src/pages/**/*.astro"],
   "words": []
 }
