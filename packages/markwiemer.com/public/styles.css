@@ -32,8 +32,6 @@
   /* [320, 640) px */
   --breakpoint-thin: 640px;
   /* [var(--breakpoint-thin), 1280) px */
-  /* anything wider is just "wide" and is not really handled well right now */
-  /* todo handle very wide viewports */
   --breakpoint-medium: 1280px;
 }
 
