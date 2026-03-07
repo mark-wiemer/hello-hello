@@ -71,7 +71,7 @@ const sections = [
     > :)
   </p>
   <!-- todo we need to add automated tests! -->
-  <p>This page is very new, for best results, use a wide screen (1280px+)</p>
+  <p>For best results, use a wide screen (1280px+)</p>
   <div class="grid">
     {
       sections.map((section) => (
@@ -90,10 +90,11 @@ const sections = [
 
 <style>
   .grid {
-    --card-min-width: 220px;
+    /* each visible card spans 2 cols, so 2×110px = 220px min per card */
+    --card-min-width: 110px;
     --grid-gap: 20px;
     --row-min: 160px;
-    --grid-columns: 5;
+    --grid-columns: 10;
     display: grid;
     gap: var(--grid-gap);
     grid-template-columns: repeat(var(--grid-columns), minmax(var(--card-min-width), 1fr));
@@ -106,6 +107,7 @@ const sections = [
   }
 
   .card {
+    grid-column: span 2;
     box-sizing: border-box;
     border: 1px solid #ccc;
     border-radius: 8px;
@@ -129,11 +131,22 @@ const sections = [
   }
 
   .manifests {
-    grid-column: span 3;
+    grid-column: span 5;
   }
 
   .deploy {
-    grid-column: span 2;
+    grid-column: span 5;
+  }
+
+  @media (max-width: 1280px) {
+    .card {
+      grid-column: span 1;
+    }
+
+    .manifests,
+    .deploy {
+      grid-column: span 2;
+    }
   }
 
   @media (max-width: 640px) {
@@ -141,6 +154,7 @@ const sections = [
       --grid-columns: 1;
     }
 
+    .card,
     .manifests,
     .deploy {
       grid-column: span 1;
