@@ -1,6 +1,13 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 
+/*
+We're using the lens "parts of a system" not "actions to manage a system"
+Parts are a bit easier to think about. Actions usually act on parts anyway, not the whole.
+
+- Focus on nouns, not verbs
+*/
+
 const topSections = [
   {
     className: "editor",
@@ -26,7 +33,7 @@ const topSections = [
   {
     className: "env",
     title: "Env",
-    items: ["Managing secrets", "Non-source-controllable assets"],
+    items: ["Secrets", "Non-source-controllable assets"],
   },
   {
     className: "observability",
@@ -36,7 +43,7 @@ const topSections = [
   {
     className: "deploy",
     title: "Deployment",
-    items: ["Manual (test environments)", "Infrastructure as code", "Automated CI/CD"],
+    items: ["Test environments", "Infrastructure as code", "Automated CI/CD", "Automated recovery"],
   },
 ];
 
@@ -49,24 +56,18 @@ const bottomSections = [
   {
     className: "maintenance",
     title: "Maintenance",
-    items: [
-      "Work item refinement",
-      "Avoid tech debt",
-      "Validate scenario test coverage",
-      "Track innovations",
-      "Ideate often",
-    ],
+    items: ["Project management", "Test coverage validation", "Perennial innovations"],
   },
   {
     className: "comms",
     title: "Communications",
-    items: ["Announcements and blogs", "External contributors"],
+    items: ["Announcements and blogs", "External contributor collaboration", "User support"],
   },
   {
     className: "agents",
     title: "Agents + AI",
     items: [
-      "(Missing) integrations",
+      "Integrations",
       "Security",
       "Hallucinations",
       "Costs (financial, reputational, ecological)",
@@ -76,18 +77,15 @@ const bottomSections = [
 ---
 
 <Layout pageTitle="Software" klass="chart">
-  <h1>A modern app</h1>
+  <h1>Software</h1>
+  <!-- todo we need to add automated tests! -->
   <p>
     Software is crazy, but we can manage it if we have names for the things we're building. Here's
-    my mental map for all projects.
+    my mental map for all projects. This map was heavily inspired by a secret presentation from <a
+      href="https://safia.rocks/">Safia Abdalla</a
+    > :) For best results, use a wide screen (1280px+).
   </p>
-  <p>
-    This map was heavily inspired by a secret presentation from <a href="https://safia.rocks/"
-      >Safia Abdalla</a
-    > :)
-  </p>
-  <!-- todo we need to add automated tests! -->
-  <p>For best results, use a wide screen (1280px+)</p>
+  <h2>A modern app</h2>
   <div class="top-grid">
     {
       topSections.map((section) => (
