@@ -3,22 +3,27 @@ import Layout from "@/layouts/Layout.astro";
 
 const sections = [
   {
+    className: "editor",
     title: "Editor/IDE",
     items: ["Operating systems", "Shells + terminals", "Coding agents", "Extensions"],
   },
   {
+    className: "frontends",
     title: "Frontends",
     items: ["Endless languages + frameworks"],
   },
   {
+    className: "services",
     title: "Services",
     items: ["Databases + storage", "Auth", "Caches + queues", "Messaging"],
   },
   {
+    className: "agents",
     title: "Agents + AI",
     items: ["Models, deployments, frameworks"],
   },
   {
+    className: "env",
     title: "Env",
     items: [
       "Secrets/tokens/keys",
@@ -28,26 +33,28 @@ const sections = [
     ],
   },
   {
+    className: "backends",
     title: "Backends",
     items: ["Microservices, monoliths, containers, VMs"],
   },
   {
+    className: "observability",
     title: "Observability",
     items: ["Different data pipelines for different parts of the app"],
   },
   {
+    className: "manifests",
     title: "Manifests + Scripts",
     items: [
       "Manifest languages (YAML, JSON, Dockerfiles)",
       "Hard-to-read scripts (Bash, pwsh)",
       'README.md, internal wikis, "tribal knowledge"',
     ],
-    size: "wide",
   },
   {
+    className: "deploy",
     title: "Deployment handoff",
     items: ["Manual deployments", "Automated CI/CD", "Enterprise devops workflow"],
-    size: "wide",
   },
 ];
 ---
@@ -58,10 +65,15 @@ const sections = [
     Software is crazy, but we can manage it if we have names for the things we're building. Here's
     my mental map for all projects.
   </p>
+  <p>
+    This map was heavily inspired by a secret presentation from <a href="https://safia.rocks/"
+      >Safia Abdalla</a
+    > :)
+  </p>
   <div class="grid">
     {
       sections.map((section) => (
-        <section class={`box ${section.size === "wide" ? "wide" : ""}`}>
+        <section class={`card ${section.className}`}>
           <h2>{section.title}</h2>
           <ul>
             {section.items.map((item) => (
@@ -77,38 +89,43 @@ const sections = [
 <style>
   .grid {
     display: grid;
-    gap: 1rem;
+    gap: 20px;
     grid-template-columns: repeat(5, minmax(220px, 1fr));
+    grid-template-rows: repeat(3, minmax(160px, auto));
     align-items: start;
   }
 
-  .box {
+  .card {
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 1rem;
   }
 
-  .box h2 {
+  .card h2 {
     margin: 0 0 0.5rem 0;
     font-size: 1.1rem;
   }
 
-  .box ul {
+  .card ul {
     margin: 0;
     padding-left: 1.2rem;
   }
 
-  .box.wide {
+  .editor,
+  .services,
+  .env {
+    grid-row: span 2;
+  }
+
+  .manifests {
+    grid-column: span 3;
+  }
+
+  .deploy {
     grid-column: span 2;
   }
 
-  @media (max-width: 1200px) {
-    .grid {
-      grid-template-columns: repeat(3, minmax(220px, 1fr));
-    }
-  }
-
-  @media (max-width: 900px) {
+  @media (max-width: 1280px) {
     .grid {
       grid-template-columns: repeat(2, minmax(220px, 1fr));
     }
@@ -119,7 +136,8 @@ const sections = [
       grid-template-columns: 1fr;
     }
 
-    .box.wide {
+    .manifests,
+    .deploy {
       grid-column: span 1;
     }
   }
