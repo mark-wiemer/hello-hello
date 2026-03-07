@@ -43,15 +43,23 @@ Roslyn is mostly a behind-the-scenes project that runs when you compile .NET cod
 
 #### Getting started
 
-[Windows docs](./roslyn/docs/contributing/Building,%20Debugging,%20and%20Testing%20on%20Windows.md)
+There are [Windows docs](./roslyn/docs/contributing/Building,%20Debugging,%20and%20Testing%20on%20Windows.md) and [Linux docs](./roslyn/docs/contributing/Building,%20Debugging,%20and%20Testing%20on%20Unix.md)
 
 ```sh
+# Git Bash on Windows
 powershell ./Restore.cmd
 powershell ./Build.cmd
 powershell ./Test.cmd
 ```
 
-Right now, many tests are failing, and it took 2042 seconds (34 minutes!) to run the tests on my local machine on Windows. So I'll have to dig in!
+```sh
+# Bash on Linux
+./build.sh --restore
+./build.sh --build
+./build.sh --test
+```
+
+Right now, many tests are failing on Windows, and it took 2042 seconds (34 minutes!) to run the tests on my local machine on Windows. So I'll have to dig in! On Linux, many tests are skipped. Because Roslyn is so closely tied to Windows, I'll be primarily developing Roslyn on Windows.
 
 ### Notes
 
