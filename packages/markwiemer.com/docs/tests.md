@@ -35,7 +35,27 @@ To simplify this work, see [Issue 13](https://github.com/mark-wiemer/hello-hello
 
 ## Breakpoints
 
+### Names
+
+- 320: Minimum
+- 320-480: Very thin
+- 480-640: Thin
+- 640-1280: Medium
+- 1280+: Wide
+
 ### 320-480px
 
 - Homepage heading should still be unbroken
 - Header images should still be side-by-side
+
+### 320-640px
+
+- Modern app chart has 1 column
+
+### 640-1280px
+
+- Modern app chart has 3 columns
+
+### 1280px+
+
+- Modern app chart has 5 columns
