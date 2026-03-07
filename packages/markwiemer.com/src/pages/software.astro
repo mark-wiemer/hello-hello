@@ -88,14 +88,19 @@ const sections = [
 
 <style>
   .grid {
+    --card-min-width: 220px;
+    --grid-gap: 20px;
+    --row-min: 160px;
+    --grid-columns: 5;
     display: grid;
-    gap: 20px;
-    grid-template-columns: repeat(5, minmax(220px, 1fr));
-    grid-template-rows: repeat(3, minmax(160px, auto));
-    align-items: start;
+    gap: var(--grid-gap);
+    grid-template-columns: repeat(var(--grid-columns), minmax(var(--card-min-width), 1fr));
+    grid-template-rows: repeat(3, minmax(var(--row-min), auto));
+    align-items: stretch;
   }
 
   .card {
+    box-sizing: border-box;
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 1rem;
@@ -127,13 +132,13 @@ const sections = [
 
   @media (max-width: 1280px) {
     .grid {
-      grid-template-columns: repeat(2, minmax(220px, 1fr));
+      --grid-columns: 2;
     }
   }
 
   @media (max-width: 640px) {
     .grid {
-      grid-template-columns: 1fr;
+      --grid-columns: 1;
     }
 
     .manifests,
