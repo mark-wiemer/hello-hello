@@ -1,0 +1,126 @@
+---
+import Layout from "@/layouts/Layout.astro";
+
+const sections = [
+  {
+    title: "Editor/IDE",
+    items: ["Operating systems", "Shells + terminals", "Coding agents", "Extensions"],
+  },
+  {
+    title: "Frontends",
+    items: ["Endless languages + frameworks"],
+  },
+  {
+    title: "Services",
+    items: ["Databases + storage", "Auth", "Caches + queues", "Messaging"],
+  },
+  {
+    title: "Agents + AI",
+    items: ["Models, deployments, frameworks"],
+  },
+  {
+    title: "Env",
+    items: [
+      "Secrets/tokens/keys",
+      "Provisioning parameters",
+      "Non-source-controllable assets",
+      "Changing ports and dependencies",
+    ],
+  },
+  {
+    title: "Backends",
+    items: ["Microservices, monoliths, containers, VMs"],
+  },
+  {
+    title: "Observability",
+    items: ["Different data pipelines for different parts of the app"],
+  },
+  {
+    title: "Manifests + Scripts",
+    items: [
+      "Manifest languages (YAML, JSON, Dockerfiles)",
+      "Hard-to-read scripts (Bash, pwsh)",
+      'README.md, internal wikis, "tribal knowledge"',
+    ],
+    size: "wide",
+  },
+  {
+    title: "Deployment handoff",
+    items: ["Manual deployments", "Automated CI/CD", "Enterprise devops workflow"],
+    size: "wide",
+  },
+];
+---
+
+<Layout pageTitle="Software" klass="chart">
+  <h1>A modern app</h1>
+  <p>
+    Software is crazy, but we can manage it if we have names for the things we're building. Here's
+    my mental map for all projects.
+  </p>
+  <div class="grid">
+    {
+      sections.map((section) => (
+        <section class={`box ${section.size === "wide" ? "wide" : ""}`}>
+          <h2>{section.title}</h2>
+          <ul>
+            {section.items.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </section>
+      ))
+    }
+  </div>
+</Layout>
+
+<style>
+  .grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(5, minmax(220px, 1fr));
+    align-items: start;
+  }
+
+  .box {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 1rem;
+  }
+
+  .box h2 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+  }
+
+  .box ul {
+    margin: 0;
+    padding-left: 1.2rem;
+  }
+
+  .box.wide {
+    grid-column: span 2;
+  }
+
+  @media (max-width: 1200px) {
+    .grid {
+      grid-template-columns: repeat(3, minmax(220px, 1fr));
+    }
+  }
+
+  @media (max-width: 900px) {
+    .grid {
+      grid-template-columns: repeat(2, minmax(220px, 1fr));
+    }
+  }
+
+  @media (max-width: 640px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+
+    .box.wide {
+      grid-column: span 1;
+    }
+  }
+</style>

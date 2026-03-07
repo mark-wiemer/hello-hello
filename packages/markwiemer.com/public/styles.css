@@ -261,6 +261,25 @@ img.headerImage {
   }
 }
 
+/* Apply to divs to get center margin */
+.chart {
+  margin: 0 auto;
+  padding: 24px;
+
+  @media (max-width: 640px) {
+    /* Adjust vertical padding as well, generally "cozier" view */
+    padding: 4px;
+    max-width: calc(100vw - 24px);
+  }
+
+  img {
+    border-radius: 10px;
+  }
+  figure img {
+    max-width: 100%;
+  }
+}
+
 blockquote {
   border-left: 4px solid;
   padding-left: 1em;
