@@ -10,37 +10,37 @@ const sections = [
   {
     className: "frontends",
     title: "Frontends",
-    items: ["Endless languages + frameworks"],
+    items: ["Endless frameworks", "Web, mobile, desktop", "UX design"],
   },
   {
     className: "services",
     title: "Services",
-    items: ["Databases + storage", "Auth", "Caches + queues", "Messaging"],
+    items: ["Storage", "Auth", "Async compute"],
   },
   {
     className: "agents",
     title: "Agents + AI",
-    items: ["Models, deployments, frameworks"],
+    items: [
+      "(Missing) integrations",
+      "Security",
+      "Hallucinations",
+      "Costs (financial, reputational, ecological)",
+    ],
   },
   {
     className: "env",
     title: "Env",
-    items: [
-      "Secrets/tokens/keys",
-      "Provisioning parameters",
-      "Non-source-controllable assets",
-      "Changing ports and dependencies",
-    ],
+    items: ["Managing secrets", "Non-source-controllable assets"],
   },
   {
     className: "backends",
     title: "Backends",
-    items: ["Microservices, monoliths, containers, VMs"],
+    items: ["More endless frameworks"],
   },
   {
     className: "observability",
     title: "Observability",
-    items: ["Different data pipelines for different parts of the app"],
+    items: ["OpenTelemetry", "Alerting"],
   },
   {
     className: "manifests",
@@ -70,6 +70,8 @@ const sections = [
       >Safia Abdalla</a
     > :)
   </p>
+  <!-- todo we need to add automated tests! -->
+  <p>This page is very new, for best results, use a wide screen (1280px+)</p>
   <div class="grid">
     {
       sections.map((section) => (
@@ -97,6 +99,10 @@ const sections = [
     grid-template-columns: repeat(var(--grid-columns), minmax(var(--card-min-width), 1fr));
     grid-template-rows: repeat(3, minmax(var(--row-min), auto));
     align-items: stretch;
+
+    @media (max-width: 1280px) {
+      --grid-columns: 2;
+    }
   }
 
   .card {
@@ -128,12 +134,6 @@ const sections = [
 
   .deploy {
     grid-column: span 2;
-  }
-
-  @media (max-width: 1280px) {
-    .grid {
-      --grid-columns: 2;
-    }
   }
 
   @media (max-width: 640px) {
