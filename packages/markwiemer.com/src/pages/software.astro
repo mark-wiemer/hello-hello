@@ -8,7 +8,8 @@ Parts are a bit easier to think about. Actions usually act on parts anyway, not 
 - Focus on nouns, not verbs
 */
 
-const topSections = [
+//#region Modern app data
+const modernAppTopSections = [
   {
     className: "editor",
     title: "Editor/IDE",
@@ -47,7 +48,7 @@ const topSections = [
   },
 ];
 
-const bottomSections = [
+const modernAppBottomSections = [
   {
     className: "docs",
     title: "Documentation",
@@ -79,6 +80,7 @@ const bottomSections = [
     ],
   },
 ];
+//#endregion
 ---
 
 <Layout pageTitle="Software" klass="chart">
@@ -95,7 +97,7 @@ const bottomSections = [
   <h2>A modern app</h2>
   <div class="top-grid">
     {
-      topSections.map((section) => (
+      modernAppTopSections.map((section) => (
         <section class={`card ${section.className}`}>
           <h3>{section.title}</h3>
           <ul>
@@ -109,7 +111,7 @@ const bottomSections = [
   </div>
   <div class="bottom-grid">
     {
-      bottomSections.map((section) => (
+      modernAppBottomSections.map((section) => (
         <section class={`card ${section.className}`}>
           <h3>{section.title}</h3>
           <ul>
