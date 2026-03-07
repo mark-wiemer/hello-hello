@@ -18,7 +18,6 @@ interface ExperienceEntry extends Entry {
 interface ProjectEntry extends Entry {
   description: string;
   url: string;
-  organization: string;
 }
 
 const experience: ExperienceEntry[] = [
@@ -87,7 +86,6 @@ const projects: ProjectEntry[] = [
     title: "AHK++",
     description: "VS Code language extension",
     url: "https://ahkpp.com",
-    organization: "",
     dates: ["November 2020", "present"],
     bullets: [
       "Added automated tests and new features to deprecated language support extension",
@@ -98,7 +96,6 @@ const projects: ProjectEntry[] = [
     title: "Mocha",
     description: "JavaScript testing framework",
     url: "https://mochajs.org",
-    organization: "",
     dates: ["August 2025", "present"],
     bullets: [
       "Reviewed community-led PRs and issues across critical components",
