@@ -5,7 +5,13 @@ const sections = [
   {
     className: "editor",
     title: "Editor/IDE",
-    items: ["Operating systems", "Shells + terminals", "Coding agents", "Extensions"],
+    items: [
+      "Operating systems",
+      "Shells + terminals",
+      "Coding agents",
+      "Extensions",
+      "Team vs personal configs",
+    ],
   },
   {
     className: "frontends",
@@ -13,9 +19,45 @@ const sections = [
     items: ["Endless frameworks", "Web, mobile, desktop", "UX design"],
   },
   {
-    className: "services",
-    title: "Services",
-    items: ["Storage", "Auth", "Async compute"],
+    className: "backends",
+    title: "Backends",
+    items: ["More endless frameworks", "Storage", "Auth", "Async compute"],
+  },
+  {
+    className: "env",
+    title: "Env",
+    items: ["Managing secrets", "Non-source-controllable assets"],
+  },
+  {
+    className: "observability",
+    title: "Observability",
+    items: ["OpenTelemetry", "Alerting"],
+  },
+  {
+    className: "deploy",
+    title: "Deployment",
+    items: ["Manual (test environments)", "Infrastructure as code", "Automated CI/CD"],
+  },
+  {
+    className: "docs",
+    title: "Documentation",
+    items: ["Code comments", "Markdown files", "Wiki site", "On-call runbooks"],
+  },
+  {
+    className: "maintenance",
+    title: "Maintenance",
+    items: [
+      "Work item refinement",
+      "Avoid tech debt",
+      "Validate scenario test coverage",
+      "Track innovations",
+      "Ideate often",
+    ],
+  },
+  {
+    className: "comms",
+    title: "Communications",
+    items: ["Announcements and blogs", "External contributors"],
   },
   {
     className: "agents",
@@ -26,35 +68,6 @@ const sections = [
       "Hallucinations",
       "Costs (financial, reputational, ecological)",
     ],
-  },
-  {
-    className: "env",
-    title: "Env",
-    items: ["Managing secrets", "Non-source-controllable assets"],
-  },
-  {
-    className: "backends",
-    title: "Backends",
-    items: ["More endless frameworks"],
-  },
-  {
-    className: "observability",
-    title: "Observability",
-    items: ["OpenTelemetry", "Alerting"],
-  },
-  {
-    className: "manifests",
-    title: "Manifests + Scripts",
-    items: [
-      "Manifest languages (YAML, JSON, Dockerfiles)",
-      "Hard-to-read scripts (Bash, pwsh)",
-      'README.md, internal wikis, "tribal knowledge"',
-    ],
-  },
-  {
-    className: "deploy",
-    title: "Deployment handoff",
-    items: ["Manual deployments", "Automated CI/CD", "Enterprise devops workflow"],
   },
 ];
 ---
