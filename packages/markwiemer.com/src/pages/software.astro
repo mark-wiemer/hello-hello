@@ -142,8 +142,9 @@ const bottomSections = [
     grid-template-rows: repeat(2, minmax(var(--row-min), auto));
   }
 
+  /* 3 columns: Docs | Maintenance | Comms, then Agents full-width */
   .bottom-grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .card {
@@ -189,6 +190,11 @@ const bottomSections = [
     grid-row: 1 / 3;
   }
 
+  /* Bottom grid: agents spans all 3 columns */
+  .agents {
+    grid-column: 1 / -1;
+  }
+
   @media (max-width: 1280px) {
     .top-grid {
       grid-template-columns: repeat(2, 1fr);
@@ -208,6 +214,10 @@ const bottomSections = [
 
     .bottom-grid {
       grid-template-columns: repeat(2, 1fr);
+    }
+
+    .comms {
+      grid-column: 1 / -1;
     }
   }
 
