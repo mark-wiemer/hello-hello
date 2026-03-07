@@ -92,7 +92,7 @@ const bottomSections = [
     {
       topSections.map((section) => (
         <section class={`card ${section.className}`}>
-          <h2>{section.title}</h2>
+          <h3>{section.title}</h3>
           <ul>
             {section.items.map((item) => (
               <li>{item}</li>
@@ -106,7 +106,7 @@ const bottomSections = [
     {
       bottomSections.map((section) => (
         <section class={`card ${section.className}`}>
-          <h2>{section.title}</h2>
+          <h3>{section.title}</h3>
           <ul>
             {section.items.map((item) => (
               <li>{item}</li>
@@ -122,6 +122,10 @@ const bottomSections = [
   :root {
     --grid-gap: 20px;
     --row-min: 160px;
+  }
+
+  h2 {
+    text-align: center;
   }
 
   .top-grid,
@@ -150,7 +154,7 @@ const bottomSections = [
     padding: 1rem;
   }
 
-  .card h2 {
+  .card h3 {
     margin: 0 0 0.5rem 0;
     font-size: 1.1rem;
   }
