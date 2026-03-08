@@ -2,10 +2,8 @@
 interface Props {
   href: string;
   text: string;
-  /** Opens the link in a new tab if true. Defaults to false, opening in same tab. */
-  newTab?: boolean;
 }
-const { href, text, newTab } = Astro.props;
+const { href, text } = Astro.props;
 let currentPath = Astro.url.pathname;
 if (currentPath.endsWith("/")) {
   currentPath = currentPath.slice(0, -1);
@@ -17,9 +15,7 @@ if (currentPath.endsWith("/")) {
     <li>{text}</li>
   ) : (
     <li>
-      <a href={href} data-external-target-ignore={!newTab}>
-        {text}
-      </a>
+      <a href={href}>{text}</a>
     </li>
   )
 }
