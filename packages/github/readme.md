@@ -13,6 +13,7 @@ Interesting subpages:
 Workflows are defined in workflow files.
 Workflow files must be in `/.github/workflows`, no subfolders allowed.
 
+- [_global-a11y-review.yml](/.github/workflows/_global-a11y-review.yml) creates an issue every six months to prompt for an a11y review
 - [stale.yml](/.github/workflows/stale.yml) handles stale issues and PRs. Ref [workflow run](https://github.com/mark-wiemer/hello-hello/actions/runs/19620829424)
 
 ## Projects
