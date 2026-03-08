@@ -126,12 +126,64 @@ const modernAppBottomSections = [
   <h2>Mocha</h2>
   <div class="article">
     <p>
-      <a href="https://mochajs.org">Mocha</a> is the classic, reliable, trusted JavaScript testing framework
-      for Node.js and the browser that was created in 2011. I've been a maintainer since August 2025,
-      so I'm certainly no expert yet, but I've used Mocha significantly for testing <a
-        href="https://ahkpp.com">AHK++</a
+      <a href="https://mochajs.org">Mocha</a> is the classic, reliable, trusted test framework for Node.js
+      and the browser that was created in 2011. I've been a maintainer since August 2025, so I'm certainly
+      no expert yet, but I've used Mocha significantly for testing <a href="https://ahkpp.com"
+        >AHK++</a
       >, a VS Code extension that provides language support for a niche programming language.
     </p>
+    <h3>Priorities</h3>
+    <ul>
+      <li>Modernization: ESM support, modern Node versions, good dependencies</li>
+      <li>Stability: Test coverage, backporting fixes, minimal breaking changes</li>
+    </ul>
+    <h3>My key contributions</h3>
+    <ul>
+      <li>
+        Fixed critical <code>require(ESM)</code> bug (<a
+          href="https://github.com/mochajs/mocha/pull/5498">#5498</a
+        >)
+      </li>
+      <li>
+        Monitored and improved CI pipeline reliability (<a
+          href="https://github.com/mochajs/mocha/issues/5361">#5361</a
+        >)
+      </li>
+      <li>
+        Oversaw rewrite of "watch mode" logic (<a href="https://github.com/mochajs/mocha/pull/5409"
+          >#5409</a
+        >)
+      </li>
+    </ul>
+    <h3>My roadmap for Mocha</h3>
+    <p>
+      You can view <a href="https://github.com/orgs/mochajs/projects/6/views/2"
+        >my prioritized backlog</a
+      >, but in summary:
+    </p>
+    <ul>
+      <li>
+        Release Mocha 12, supporting <code>require(ESM)</code> and much more (<a
+          href="https://github.com/mochajs/mocha/issues/5357">#5357</a
+        >)
+      </li>
+      <li>
+        <a
+          href="https://github.com/mochajs/mocha/issues?q=sort%3Aupdated-desc%20is%3Aissue%20is%3Aopen%20label%3A%22type%3A%20bug%22"
+          >Bugfixes, bugfixes, bugfixes!</a
+        >
+      </li>
+      <li>
+        Add project automation for stale issues, security reports, and more (<a
+          href="https://github.com/mochajs/mocha/issues/5601">#5601</a
+        >)
+      </li>
+      <li>
+        Document broader project resources (<a href="https://github.com/mochajs/mocha/issues/5639"
+          >#5639</a
+        >)
+      </li>
+    </ul>
   </div>
 </Layout>
 
