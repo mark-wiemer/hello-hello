@@ -18,7 +18,7 @@
 // - done!
 // milestone 2.5: handle `*` as `+` and without preceding `.`
 // - `+` matches one or more, easier to start with
-// - done?
+// - done
 // - at this point, I'm considering TONS of test cases
 // - I'm new to leetcode, but it'll be good to learn this tool
 //   and show my dedication to scenario coverage
@@ -30,6 +30,7 @@
 // - Keep paper minimum and use block comments as much as possible
 // milestone 3: handle `*` as `*` without preceding `.`
 // - `*` matches zero or more, so we need to lookahead while matching
+// - done, check out all my tests :)
 // milestone 4: handle `*` with preceding `.`
 
 /*
@@ -77,6 +78,8 @@ function tests() {
     ["ab", "a*b", true],
     ["b", "a*b", true],
     ["abc", "a*b", false],
+    // star multiple
+    ["aaabc", "a*d*bcd*", true],
     // dot basic
     ["abc", ".bc", true],
     ["abc", "a.c", true],
@@ -176,12 +179,6 @@ function isMatch(str: string, pattern: string): boolean {
       // we haven't matched the whole string
       // so return false
       console.log("matched entire pattern, but not string");
-      if (pattern[pattern.length - 1] === "*" && iS >= str.length - 2) {
-        console.log("we're at end of pattern");
-        console.log("pattern ends with `*`");
-        console.log("returning true");
-        return true;
-      }
       console.log("returning false");
       return false;
     }
