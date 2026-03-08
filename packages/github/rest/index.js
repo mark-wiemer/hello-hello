@@ -22,7 +22,11 @@ const response = await octokit.request(
     branch: branch,
     required_status_checks: null,
     enforce_admins: true,
-    required_pull_request_reviews: null,
+    required_pull_request_reviews: {
+      dismiss_stale_reviews: true,
+      require_code_owner_reviews: false,
+      required_approving_review_count: 1,
+    },
     restrictions: null,
     required_linear_history: false,
     allow_force_pushes: false,
