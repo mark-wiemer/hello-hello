@@ -293,6 +293,11 @@ export ASPIRE_CONTAINER_RUNTIME=podman
 export PATH="$HOME/my-stuff/scripts:$PATH"
 #endregion
 
+#region Bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+#endregion
+
 #region path deduplication (must be last region)
 # Remove duplicate entries from PATH
 deduplicate_path() {
