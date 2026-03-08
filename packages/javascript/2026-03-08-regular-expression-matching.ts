@@ -116,6 +116,15 @@ function tests() {
     // we've added `isGivingBack` and though we needed `fullyMatchedIndex` (fmi)
     // but tests are all passing without fmi!
     // can we think of a case that might fail without fmi?
+    ["aba", ".*b", false],
+    ["abcd", "a.*b", false],
+    // nothing comes to mind, esp knowing the implementation
+    // we are always setting `isGivingBack` to `false` before incrementing `iS`
+    // (manually verified, in a non-toy I'd refactor to enforce)
+    // we are always decrementing on non-matches when giving back
+    // (manually verified, my console logs really helped here)
+    // (again non-toy would refactor)
+    // so this feels pretty solid, going to submit!
   ];
   let anyFailed = false;
   for (let myCase of cases) {
@@ -263,6 +272,7 @@ function isMatch(str: string, pattern: string): boolean {
 
     console.log("charS matches charP");
     iP++;
+    isGivingBack = false;
     iS++;
     console.log("moving to next char in both strings");
   }
