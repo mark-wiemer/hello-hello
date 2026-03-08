@@ -112,6 +112,10 @@ function tests() {
     // star-dot?
     // greedy?
     ["aba", ".*a", true], // match greedy by default, non-greedy would be advanced regex
+    // more more more cases
+    // we've added `isGivingBack` and though we needed `fullyMatchedIndex` (fmi)
+    // but tests are all passing without fmi!
+    // can we think of a case that might fail without fmi?
   ];
   let anyFailed = false;
   for (let myCase of cases) {
@@ -158,7 +162,6 @@ function isMatch(str: string, pattern: string): boolean {
   /** index of pattern */
   let iP = 0;
   let isGivingBack = false;
-  let fullyMatchedIndex = 0;
   console.log(`iS\tcS\tiP\tcP\tigb\tfmi`);
   while (iS < str.length || iP < pattern.length) {
     // index access works anywhere in JS/TS
@@ -166,7 +169,7 @@ function isMatch(str: string, pattern: string): boolean {
     const charStr = str[iS];
     const charP = pattern[iP];
     const nextCharP = pattern[iP + 1];
-    console.log(`${iS}\t${charStr}\t${iP}\t${charP}\t${isGivingBack}\t${fullyMatchedIndex}`);
+    console.log(`${iS}\t${charStr}\t${iP}\t${charP}\t${isGivingBack}`);
     if (iS >= str.length) {
       // we've matched the whole string
       // but not the whole pattern
@@ -248,6 +251,12 @@ function isMatch(str: string, pattern: string): boolean {
     console.log("handling basic path, looking for exact match");
     if (charStr !== charP) {
       console.log("charS does not match charP");
+      if (isGivingBack) {
+        console.log("giving back");
+        iS--;
+        continue;
+      }
+      console.log("not giving back");
       console.log("returning false");
       return false;
     }
