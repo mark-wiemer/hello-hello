@@ -252,8 +252,8 @@ img.headerImage {
   }
 }
 
-/* Apply to divs to get center margin */
-.article {
+/* Apply to article elements to get center margin */
+article {
   margin: 0 auto;
   max-width: 640px;
   @media (max-width: 640px) {
