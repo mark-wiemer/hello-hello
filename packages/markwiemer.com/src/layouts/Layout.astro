@@ -74,6 +74,8 @@ const classToUse = Astro.props.klass ? Astro.props.klass : "article";
       })();
     </script>
     <script is:inline data-notes="prevent Space key from scrolling on skip link">
+      // we intentionally only apply this to the skip link
+      // Space **should** scroll the page for all other links
       (() => {
         const skipLink = document.querySelector(".skip-link");
         if (skipLink) {
