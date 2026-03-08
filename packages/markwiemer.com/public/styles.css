@@ -110,6 +110,18 @@ nav {
   }
 }
 
+.skip-link {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%) translateY(-100%);
+  z-index: calc(var(--z-index-nav-button) + 1);
+
+  &:focus-visible {
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
 body.nav-open #openNav {
   transform: translateX(
     calc(var(--nav-open-width) - var(--width-button-nav) + var(--border-radius-button))

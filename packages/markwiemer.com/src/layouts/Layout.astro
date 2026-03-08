@@ -25,10 +25,11 @@ const classToUse = Astro.props.klass ? Astro.props.klass : "article";
     <title>{Astro.props.pageTitle} - markwiemer.com</title>
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
     <Nav />
     <!-- todo use `article` element when reasonable -->
     <div class={classToUse}>
-      <main>
+      <main id="main-content">
         <slot />
       </main>
     </div>
@@ -69,6 +70,21 @@ const classToUse = Astro.props.klass ? Astro.props.klass : "article";
           document.addEventListener("DOMContentLoaded", processLinks, { once: true });
         } else {
           processLinks();
+        }
+      })();
+    </script>
+    <script is:inline data-notes="prevent Space key from scrolling on skip link">
+      // we intentionally only apply this to the skip link
+      // Space **should** scroll the page for all other links
+      (() => {
+        const skipLink = document.querySelector(".skip-link");
+        if (skipLink) {
+          skipLink.addEventListener("keydown", (e) => {
+            if (e.key === " " || e.key === "Spacebar") {
+              e.preventDefault();
+              skipLink.click();
+            }
+          });
         }
       })();
     </script>
