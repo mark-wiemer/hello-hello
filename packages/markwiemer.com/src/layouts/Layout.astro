@@ -25,10 +25,11 @@ const classToUse = Astro.props.klass ? Astro.props.klass : "article";
     <title>{Astro.props.pageTitle} - markwiemer.com</title>
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
     <Nav />
     <!-- todo use `article` element when reasonable -->
     <div class={classToUse}>
-      <main>
+      <main id="main-content">
         <slot />
       </main>
     </div>
