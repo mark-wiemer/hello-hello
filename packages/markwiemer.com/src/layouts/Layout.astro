@@ -6,8 +6,6 @@ interface Props {
   /** Optional CSS class to apply to the main container */
   klass?: string;
 }
-
-const classToUse = Astro.props.klass ? Astro.props.klass : "article";
 ---
 
 <!doctype html>
@@ -26,12 +24,11 @@ const classToUse = Astro.props.klass ? Astro.props.klass : "article";
   </head>
   <body>
     <Nav />
-    <!-- todo use `article` element when reasonable -->
-    <div class={classToUse}>
+    <article class={Astro.props.klass || undefined}>
       <main>
         <slot />
       </main>
-    </div>
+    </article>
     <script is:inline data-notes="make external links open in new tab">
       (() => {
         const processLinks = () => {
