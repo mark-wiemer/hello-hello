@@ -6,6 +6,9 @@
     "astro": "astro",
     "build": "astro build",
     "dev": "astro dev",
+    "playwright": "playwright test",
+    "preci": "npx playwright install --with-deps chromium",
+    "ci": "start-server-and-test preview http-get://localhost:4321 playwright",
     "preview": "astro preview",
     "test": "vitest --config config/vitest.config.js",
     "test:ci": "pnpm test --run",
@@ -16,5 +19,9 @@
     "astro": "^5.16.10",
     "sharp": "^0.34.5",
     "vitest": "^4.0.18"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.53.1",
+    "start-server-and-test": "^2.0.12"
   }
 }
