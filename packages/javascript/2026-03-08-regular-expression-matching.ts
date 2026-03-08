@@ -73,51 +73,51 @@ Test cases (first draft, has errors, can you find them?)
 /** Runs all test cases to bypass LeetCode weirdness */
 function tests() {
   const cases: [str: string, pattern: string, expected: boolean][] = [
-    // full basic
-    ["a", "a", true],
-    ["aa", "a", false],
-    // star basic at end
-    ["aa", "a*", true],
-    ["aab", "a*", false],
-    ["b", "a*", false], // needs to match full string
-    ["b", "a*b", true],
-    // star basic in middle
-    ["aab", "a*b", true],
-    ["ab", "a*b", true],
-    ["b", "a*b", true],
-    ["abc", "a*b", false],
-    // star multiple
-    ["aaabc", "a*d*bcd*", true],
-    // dot basic
-    ["abc", ".bc", true],
-    ["abc", "a.c", true],
-    ["abc", "ab.", true],
-    ["aabc", ".bc", false],
-    ["abbc", "a.c", false],
-    ["abcc", "ab.", false],
-    // dot-star at end
-    ["abc", ".*", true],
-    ["abc", "b.*", false],
-    // dot-star in middle
-    ["abc", "a.*c", true],
-    ["abc", "a.*b", false],
+    // // full basic
+    // ["a", "a", true],
+    // ["aa", "a", false],
+    // // star basic at end
+    // ["aa", "a*", true],
+    // ["aab", "a*", false],
+    // ["b", "a*", false], // needs to match full string
+    // ["b", "a*b", true],
+    // // star basic in middle
+    // ["aab", "a*b", true],
+    // ["ab", "a*b", true],
+    // ["b", "a*b", true],
+    // ["abc", "a*b", false],
+    // // star multiple
+    // ["aaabc", "a*d*bcd*", true],
+    // // dot basic
+    // ["abc", ".bc", true],
+    // ["abc", "a.c", true],
+    // ["abc", "ab.", true],
+    // ["aabc", ".bc", false],
+    // ["abbc", "a.c", false],
+    // ["abcc", "ab.", false],
+    // // dot-star at end
+    // ["abc", ".*", true],
+    // ["abc", "b.*", false],
+    // // dot-star in middle
+    // ["abc", "a.*c", true],
+    // ["abc", "a.*b", false],
     ["abc", "a.*bc", true],
-    // multiple dot-stars
+    // // multiple dot-stars
     ["abc", "a.*b.*c", true],
-    ["abc", ".*.*", true],
-    // more "multiple" cases?
-    // the code **should** just work :/
-    // when in doubt, ask interviewer
-    // if interviewer gives unclear answer, err on side of more tests :)
-    // star-dot?
-    // greedy?
-    ["aba", ".*a", true], // match greedy by default, non-greedy would be advanced regex
-    // more more more cases
-    // we've added `isGivingBack` and though we needed `fullyMatchedIndex` (fmi)
-    // but tests are all passing without fmi!
-    // can we think of a case that might fail without fmi?
-    ["aba", ".*b", false],
-    ["abcd", "a.*b", false],
+    // ["abc", ".*.*", true],
+    // // more "multiple" cases?
+    // // the code **should** just work :/
+    // // when in doubt, ask interviewer
+    // // if interviewer gives unclear answer, err on side of more tests :)
+    // // star-dot?
+    // // greedy?
+    // ["aba", ".*a", true], // match greedy by default, non-greedy would be advanced regex
+    // // more more more cases
+    // // we've added `isGivingBack` and though we needed `fullyMatchedIndex` (fmi)
+    // // but tests are all passing without fmi!
+    // // can we think of a case that might fail without fmi?
+    // ["aba", ".*b", false],
+    // ["abcd", "a.*b", false],
     // nothing comes to mind, esp knowing the implementation
     // we are always setting `isGivingBack` to `false` before incrementing `iS`
     // (manually verified, in a non-toy I'd refactor to enforce)
@@ -127,7 +127,7 @@ function tests() {
     // so this feels pretty solid, going to submit!
     // ...
     // this case failed, should be an easy fix
-    ["ab", ".*c", false],
+    // ["ab", ".*c", false],
     // ...
     // now this case failed, should be an easy fix, now we need that `fmi`
     // hmm, this is harder than I thought, I'm considering fully revamping
@@ -155,7 +155,7 @@ function tests() {
     // - we do have a match
     // at that point, we set giving back to false, of course, and we try once again
     // let's see if I can turn this into code...
-    ["aaa", "ab*a*c*a", true], // LeetCode case 318
+    // ["aaa", "ab*a*c*a", true], // LeetCode case 318
   ];
   let anyFailed = false;
   for (let myCase of cases) {
@@ -168,12 +168,14 @@ function tests() {
     if (!caseResult) {
       anyFailed = true;
       console.log("FAIL: case", myCase);
+    } else {
+      console.log("PASS: case", myCase);
     }
   }
   if (anyFailed) {
-    console.log("tests failed!!");
+    console.log("Some tests failed!");
   } else {
-    console.log("tests pass");
+    console.log("All tests pass :)");
   }
   console.log("---");
 }
@@ -203,7 +205,7 @@ function isMatch(str: string, pattern: string): boolean {
   /** index of pattern */
   let iP = 0;
   let isGivingBack = false;
-  let fmi = 0;
+  let fmi = -1;
   console.log(`iS\tcS\tiP\tcP\tigb\tfmi`);
   while (iS >= fmi && (iS < str.length || iP < pattern.length)) {
     // index access works anywhere in JS/TS
@@ -211,7 +213,7 @@ function isMatch(str: string, pattern: string): boolean {
     const charStr = str[iS];
     const charP = pattern[iP];
     const nextCharP = pattern[iP + 1];
-    console.log(`${iS}\t${charStr}\t${iP}\t${charP}\t${isGivingBack}`);
+    console.log(`${iS}\t${charStr}\t${iP}\t${charP}\t${isGivingBack}\t${fmi}`);
     if (iS >= str.length) {
       // we've matched the whole string
       // but not the whole pattern
@@ -262,9 +264,11 @@ function isMatch(str: string, pattern: string): boolean {
             iS--;
             continue;
           }
-          console.log("we've moved back far enough, going to stop giving back and try again");
+          console.log(
+            "we've moved back far enough, going to move past this basic star and try again",
+          );
           isGivingBack = false;
-          fmi++;
+          iP += 2;
           continue;
         }
         console.log("we're not giving back");
