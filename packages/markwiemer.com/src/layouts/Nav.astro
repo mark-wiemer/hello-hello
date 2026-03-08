@@ -6,29 +6,38 @@ import NavEntry from "@/components/NavEntry.astro";
 <button id="openNav">☰</button>
 <nav aria-expanded="false">
   <h2>Here</h2>
-  <NavEntry href="/" text="Home" />
-  <NavEntry href="/about" text="About" />
-  <NavEntry href="/blog" text="Blog" />
-  <NavEntry href="/games" text="Games" />
-  <NavEntry href="/luanti" text="Luanti" />
-  <NavEntry href="/resume" text="Resume" />
-  <NavEntry href="/software" text="Software" />
+  <ul>
+    <NavEntry href="/" text="Home" />
+    <NavEntry href="/about" text="About" />
+    <NavEntry href="/blog" text="Blog" />
+    <NavEntry href="/games" text="Games" />
+    <NavEntry href="/luanti" text="Luanti" />
+    <NavEntry href="/resume" text="Resume" />
+    <NavEntry href="/software" text="Software" />
+  </ul>
   <h2>Elsewhere</h2>
-  <NavEntry href="https://ahkpp.com" text="AHK++" />
-  <NavEntry href="https://mochajs.org" text="Mocha" newTab />
+  <ul>
+    <NavEntry href="https://ahkpp.com" text="AHK++" />
+    <NavEntry href="https://mochajs.org" text="Mocha" newTab />
+    <!-- invisible char is non-breaking space -->
+    <!-- todo find way to use `nbsp;` in source without IDE replacing it -->
+    <NavEntry
+      href="https://github.com/mark-wiemer/hello-hello/tree/main/packages/markwiemer.com"
+      text="Website source"
+    />
+  </ul>
+  <script is:inline data-notes="handle nav toggle">
+    const toggleButton = document.querySelector("#openNav");
+    const nav = document.querySelector("nav");
+    toggleButton?.addEventListener("click", () => {
+      if (nav.getAttribute("aria-expanded") === "true") {
+        nav.setAttribute("aria-expanded", "false");
+        document.body.classList.remove("nav-open");
+        return;
+      } else {
+        nav.setAttribute("aria-expanded", "true");
+        document.body.classList.add("nav-open");
+      }
+    });
+  </script>
 </nav>
-
-<script is:inline data-notes="handle nav toggle">
-  const toggleButton = document.querySelector("#openNav");
-  const nav = document.querySelector("nav");
-  toggleButton?.addEventListener("click", () => {
-    if (nav.getAttribute("aria-expanded") === "true") {
-      nav.setAttribute("aria-expanded", "false");
-      document.body.classList.remove("nav-open");
-      return;
-    } else {
-      nav.setAttribute("aria-expanded", "true");
-      document.body.classList.add("nav-open");
-    }
-  });
-</script>

@@ -12,15 +12,14 @@ if (currentPath.endsWith("/")) {
 }
 ---
 
-{/* Wrap `a` with `span` to prevent the outline box from getting too big */}
 {
   currentPath === href || (currentPath.length < 2 && href === "/") ? (
-    <span>{text}</span>
+    <li>{text}</li>
   ) : (
-    <span>
+    <li>
       <a href={href} data-external-target-ignore={!newTab}>
         {text}
       </a>
-    </span>
+    </li>
   )
 }
