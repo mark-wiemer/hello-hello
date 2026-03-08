@@ -1,17 +1,5 @@
 // https://leetcode.com/problems/regular-expression-matching/
 
-// draft algo:
-// let i be index of input
-// for each character in pattern
-// - if normal char, make sure input char at next position matches
-// - if `.`, do stuff
-// - if `*`, look at charPatPrev (guaranteed by constraint)
-//   - if charPatPrev does not match charStr, move to next index in both
-//   - if charPatPrev matches charStr, move to next index in charStr, but not pattern
-//   - if previous char is `.`, then look at nextPatternChar
-//     - iterate from i to the next input entry that matches nextPatternChar
-//     - unclear to me whether we match greedily: what should `isMatch('aba', '.*a')` return?
-
 // milestone 1: handle basic matching
 // - lol this is just `pattern === input`
 // milestone 2: handle `.`
@@ -32,6 +20,8 @@
 // - `*` matches zero or more, so we need to lookahead while matching
 // - done, check out all my tests :)
 // milestone 4: handle `*` with preceding `.`
+// let's revisit the draft algo and make sure it's correct
+// ew, draft algo is too minimal, I'm going to try folding code and reviewing implementation
 
 /*
 Test cases (first draft, has errors, can you find them?)
@@ -182,6 +172,24 @@ function isMatch(str: string, pattern: string): boolean {
       console.log("returning false");
       return false;
     }
+
+    if (nextCharP === "*") {
+      console.log("nextCharP is `*`");
+      if (charStr !== charP) {
+        console.log("charS does not match charP");
+        console.log("bumping iP twice since `*` is fully matched");
+        iP += 2;
+        console.log("keeping iS here to make sure it matches next pattern char");
+        console.log("going to next iteration");
+        continue;
+      }
+      console.log("charS matches charP");
+      console.log("going to next char in str");
+      iS++;
+      console.log("staying on this char in pattern");
+      continue;
+    }
+
     if (charP === ".") {
       // match anything!
       console.log("charP is `.`");
@@ -212,23 +220,6 @@ function isMatch(str: string, pattern: string): boolean {
     }
     // charP is not `.` or `*`
     console.log("charP is not `.` or `*`");
-
-    if (nextCharP === "*") {
-      console.log("nextCharP is `*`");
-      if (charStr !== charP) {
-        console.log("charS does not match charP");
-        console.log("bumping iP twice since `*` is fully matched");
-        iP += 2;
-        console.log("keeping iS here to make sure it matches next pattern char");
-        console.log("going to next iteration");
-        continue;
-      }
-      console.log("charS matches charP");
-      console.log("going to next char in str");
-      iS++;
-      console.log("staying on this char in pattern");
-      continue;
-    }
     console.log("nextCharP is not `*`");
 
     console.log("handling basic path, looking for exact match");
