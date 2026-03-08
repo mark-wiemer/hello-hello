@@ -13,7 +13,8 @@ Interesting subpages:
 Workflows are defined in workflow files.
 Workflow files must be in `/.github/workflows`, no subfolders allowed.
 
-- [stale.yml](/.github/workflows/stale.yml) handles stale issues and PRs. Ref [workflow run](https://github.com/mark-wiemer/hello-hello/actions/runs/19620829424)
+- [_global-add-to-project.yml](/.github/workflows/_global-add-to-project.yml) auto-adds new issues to the project board
+- [_global-stale.yml](/.github/workflows/_global-stale.yml) handles stale issues and PRs. Ref [workflow run](https://github.com/mark-wiemer/hello-hello/actions/runs/19620829424)
 
 ## Projects
 
