@@ -144,8 +144,9 @@ function tests() {
   }
   if (anyFailed) {
     console.log("tests failed!!");
+  } else {
+    console.log("tests pass");
   }
-  console.log("tests pass");
   console.log("---");
 }
 
