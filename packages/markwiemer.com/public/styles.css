@@ -160,11 +160,6 @@ h1 {
   }
 }
 
-div {
-  display: flex;
-  flex-direction: column;
-}
-
 figure {
   margin: 0;
 }
@@ -230,6 +225,7 @@ a {
 }
 
 div.headerImages {
+  display: flex;
   flex-direction: row;
   align-items: center;
   column-gap: 1em;
@@ -238,7 +234,7 @@ div.headerImages {
   align-self: center;
   flex-wrap: wrap;
   justify-content: center;
-  padding-bottom: 1em;
+  margin-bottom: 1em;
 }
 
 img.headerImage {
