@@ -2,10 +2,12 @@
 import NavEntry from "@/components/NavEntry.astro";
 ---
 
-<button id="openNav">☰</button>
+<button id="openNav" aria-label="Navigation">☰</button>
 <nav aria-expanded="false" inert>
   <h2>Here</h2>
   <ul>
+    <!-- Make sure all entries here are also linked in the home page for a11y -->
+    <!-- https://github.com/mark-wiemer/hello-hello/issues/16 -->
     <NavEntry href="/" text="Home" />
     <NavEntry href="/about" text="About" />
     <NavEntry href="/blog" text="Blog" />
