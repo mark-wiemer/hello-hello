@@ -2,6 +2,7 @@
 // (tested 22.22.1, 24.14.0, and 25.8.0)
 // `tsx` package does :)
 // use `pnpm start` to run this file
+// `bun run index.ts` also works ;)
 enum Color {
   Red = "r",
   Green = "g",

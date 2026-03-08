@@ -11,6 +11,8 @@ but Node doesn't support `enum` syntax as of writing.
 The `tsx` package (not to be confused with the TSX language) seems to be a great option for small TS projects :)
 As of writing, `tsx` uses `esbuild` behind the scenes, and `tsconfig.json` is optional.
 
+Even more modern, we can use [Bun](../notes/bun.md) to run all (most?) TS files directly.
+
 ```ts
 // index.ts
 enum Color {
@@ -29,6 +31,12 @@ Running this:
 npx tsx index.ts
 ```
 
+or this:
+
+```sh
+bun run index.ts
+```
+
 Prints this:
 
 ```
@@ -37,4 +45,5 @@ r
 
 ## Related
 
+- [Hello Bun](../notes/bun.md)
 - [Hello JavaScript](../javascript/readme.md)
