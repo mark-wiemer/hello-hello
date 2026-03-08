@@ -476,15 +476,7 @@
   "git.pullBeforeCheckout": true,
   "git.replaceTagsWhenPull": true,
   "github.copilot.enable": {
-    "*": false,
-    "plaintext": false,
-    "markdown": false,
-    "scminput": false,
-    "astro": false,
-    "csharp": true,
-    "typescript": true,
-    "yaml": true,
-    "mdx": false
+    "*": false
   },
   "github.copilot.nextEditSuggestions.enabled": true,
   "githubPullRequests.codingAgent.codeLens": false,
