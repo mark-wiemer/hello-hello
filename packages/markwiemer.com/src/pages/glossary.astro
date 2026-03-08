@@ -1,0 +1,93 @@
+---
+import Layout from "@/layouts/Layout.astro";
+
+type TermDef = [term: string, definition: string];
+
+// todo enforce this as alphabetical
+// todo ensure IDE highlights these as orange
+// todo support links in definitions
+// todo support multiple definitions for a single term
+// todo support multiple terms for a definition
+// todo highlight term in URL
+const glossary: TermDef[] = [
+  [
+    "Chromium",
+    "An open-source web browser. Google Chrome, Microsoft Edge, and other browsers are Chromium wrappers.",
+  ],
+  [
+    "CJS",
+    "CommonJS module, the original way of using multiple JS files in a project. See also ESM.",
+  ],
+  ["cognitive load", "Mental effort, usually to solve complex problems."],
+  [
+    "Ecma",
+    "Organization that defines ECMAScript. Short for Ecma International, originally short for European Computer Manufacturers Association.",
+  ],
+  [
+    "ECMAScript",
+    "A specification of how website scripting languages must behave. JavaScript is the most popular implementation of ECMAScript.",
+  ],
+  [
+    "ESM",
+    "ECMAScript modules, the modern way of using multiple JS files in a project. See also CJS.",
+  ],
+  [
+    "hardware",
+    "Physical devices like a keyboard, mouse, and monitor. Also applies to non-digital domains: a wrench, a hammer, etc. See also software.",
+  ],
+  ["JavaScript", "A programming language originally built for websites."],
+  ["JS", "JavaScript"],
+  ["Node", "Node.js"],
+  ["Node.js", "A JavaScript runtime wrapped around V8."],
+  [
+    "require(ESM)",
+    "A compatibility feature in Node.js for CJS projects to work with ESM projects.",
+  ],
+  [
+    "software",
+    "Non-physical digital technology. This website is software, but your monitor or phone are not software. See also hardware.",
+  ],
+  [
+    '"type": "module"',
+    "A package.json property instructing Node to load modules using ESM instead of CJS.",
+  ],
+  [
+    "ubiquitous language",
+    "A common set of terms used in a cross-disciplinary team to improve communication.",
+  ],
+  ["V8", "A JavaScript engine used by Node.js, Chromium, and more"],
+  [
+    "wrapper",
+    "A piece of software whose core functionality is provided by the software it wraps. ",
+  ],
+];
+
+const toId = (term: string): string => {
+  return term
+    .toLowerCase()
+    .replaceAll(/[ (.]/g, "-")
+    .replaceAll(/[:")]/g, "")
+    .replaceAll(/-+/g, "-");
+};
+---
+
+<Layout pageTitle="Glossary">
+  <h1>Glossary</h1>
+  <p>
+    Words are hard. A glossary, even for a small project, greatly reduces <a href="#cognitive-load"
+      >cognitive load</a
+    > and makes work easier. I started this practice after reading Domain-Driven Design by Eric Evans,
+    who coined the term "ubiquitous language."
+  </p>
+
+  <dl>
+    {
+      glossary.map((termDef) => (
+        <>
+          <dt id={toId(termDef[0])}>{termDef[0]}</dt>
+          <dd>{termDef[1]}</dd>
+        </>
+      ))
+    }
+  </dl>
+</Layout>
