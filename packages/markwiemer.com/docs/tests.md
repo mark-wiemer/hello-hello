@@ -59,3 +59,16 @@ To simplify this work, see [Issue 13](https://github.com/mark-wiemer/hello-hello
 ### 1280px+
 
 - Modern app chart has 5 columns
+
+## Accessibility
+
+- Home page
+- Snake game
+- "About" blog post (includes `figure`)
+- Glossary (includes `dl`)
+- Resume
+- Software (includes `grid`)
+
+### States
+
+- Nav open vs closed
