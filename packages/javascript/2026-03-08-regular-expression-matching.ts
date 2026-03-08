@@ -128,6 +128,17 @@ function tests() {
     // ...
     // this case failed, should be an easy fix
     ["ab", ".*c", false],
+    // ...
+    // now this case failed, should be an easy fix, now we need that `fmi`
+    // hmm, this is harder than I thought, I'm considering fully revamping
+    // we definitely need a nested loop: do we go with recursion or a finite-state machine?
+    // we do want to manage transitions here a bit better
+    // but we're already almost done (317/354 LeetCode cases, unclear how complex remaining cases are)
+    // do we want to rewrite everything?
+    // transitions are already pretty-well managed, let's not go to FSM
+    // recursion sucks though, can we try iterative?
+    // gonna take a break...
+    ["aaa", "ab*a*c*a", true],
   ];
   let anyFailed = false;
   for (let myCase of cases) {
@@ -175,8 +186,9 @@ function isMatch(str: string, pattern: string): boolean {
   /** index of pattern */
   let iP = 0;
   let isGivingBack = false;
+  let fmi = 0;
   console.log(`iS\tcS\tiP\tcP\tigb\tfmi`);
-  while (iS >= 0 && (iS < str.length || iP < pattern.length)) {
+  while (iS >= fmi && (iS < str.length || iP < pattern.length)) {
     // index access works anywhere in JS/TS
     // worst case, these vals are undefined
     const charStr = str[iS];
@@ -248,12 +260,14 @@ function isMatch(str: string, pattern: string): boolean {
     }
 
     if (charP === ".") {
-      // match anything!
       console.log("charP is `.`");
+      console.log("charS matches charP (matches anything");
+      console.log("moving to next char in both strings");
       iP++;
       isGivingBack = false;
       iS++;
-      console.log("moving to next char in both strings");
+      console.log("bumping fmi as well");
+      fmi++;
       continue;
     }
 
@@ -275,11 +289,13 @@ function isMatch(str: string, pattern: string): boolean {
     }
 
     console.log("charS matches charP");
+    console.log("moving to next char in both strings");
     iP++;
     isGivingBack = false;
     iS++;
-    console.log("moving to next char in both strings");
-  }
+    console.log("bumping fmi as well");
+    fmi++;
+  } // end of loop
   if (iS < str.length) {
     console.log("didn't get to end of string");
     console.log("returning false");
