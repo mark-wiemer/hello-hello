@@ -14,7 +14,7 @@ if (currentPath.endsWith("/")) {
 
 {/* Wrap `a` with `span` to prevent the outline box from getting too big */}
 {
-  currentPath === href ? (
+  currentPath === href || (currentPath.length < 2 && href === "/") ? (
     <span>{text}</span>
   ) : (
     <span>
