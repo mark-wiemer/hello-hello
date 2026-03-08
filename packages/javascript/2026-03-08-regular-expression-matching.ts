@@ -101,9 +101,9 @@ function tests() {
     // // dot-star in middle
     // ["abc", "a.*c", true],
     // ["abc", "a.*b", false],
-    ["abc", "a.*bc", true],
+    // ["abc", "a.*bc", true],
     // // multiple dot-stars
-    ["abc", "a.*b.*c", true],
+    // ["abc", "a.*b.*c", true],
     // ["abc", ".*.*", true],
     // // more "multiple" cases?
     // // the code **should** just work :/
@@ -118,15 +118,15 @@ function tests() {
     // // can we think of a case that might fail without fmi?
     // ["aba", ".*b", false],
     // ["abcd", "a.*b", false],
-    // nothing comes to mind, esp knowing the implementation
-    // we are always setting `isGivingBack` to `false` before incrementing `iS`
-    // (manually verified, in a non-toy I'd refactor to enforce)
-    // we are always decrementing on non-matches when giving back
-    // (manually verified, my console logs really helped here)
-    // (again non-toy would refactor)
-    // so this feels pretty solid, going to submit!
-    // ...
-    // this case failed, should be an easy fix
+    // // nothing comes to mind, esp knowing the implementation
+    // // we are always setting `isGivingBack` to `false` before incrementing `iS`
+    // // (manually verified, in a non-toy I'd refactor to enforce)
+    // // we are always decrementing on non-matches when giving back
+    // // (manually verified, my console logs really helped here)
+    // // (again non-toy would refactor)
+    // // so this feels pretty solid, going to submit!
+    // // ...
+    // // this case failed, should be an easy fix
     // ["ab", ".*c", false],
     // ...
     // now this case failed, should be an easy fix, now we need that `fmi`
@@ -137,11 +137,12 @@ function tests() {
     // do we want to rewrite everything?
     // transitions are already pretty-well managed, let's not go to FSM
     // recursion sucks though, can we try iterative?
-    // gonna take a break...
+    // gonna take a break
+    // ...
     // let's walk through this case:
-    // consume the first a, bumping fmi to 1
-    // jump past the b* because str has no b's
-    // consume the rest of the a's because now we're at a*
+    // consume the first a, bumping fmi to 0 (we've consumed the char at index 0 in str)
+    // jump past the b* because str has no b's (fmi should still be 0)
+    // consume the rest of the a's because now we're at a* ()
     // now we're at the end of the string, but not the pattern
     // start giving back
     // we should give back until iS is 1 again
@@ -155,7 +156,12 @@ function tests() {
     // - we do have a match
     // at that point, we set giving back to false, of course, and we try once again
     // let's see if I can turn this into code...
-    // ["aaa", "ab*a*c*a", true], // LeetCode case 318
+    // ...
+    // If I were to revamp, I'd tokenize: if nextCharP is `*`, print that.
+    // This case fails because we don't have a good way to "un-give back"
+    // At this point, it's best to start over
+    // But my priorities lie elsewhere, so don't expect me to fix this anytime soon!
+    ["aaa", "ab*a*c*a", true], // LeetCode case 318
   ];
   let anyFailed = false;
   for (let myCase of cases) {
@@ -206,14 +212,16 @@ function isMatch(str: string, pattern: string): boolean {
   let iP = 0;
   let isGivingBack = false;
   let fmi = -1;
-  console.log(`iS\tcS\tiP\tcP\tigb\tfmi`);
+  console.log(`iS\tcS\tiP\ttP\tigb\tfmi`);
   while (iS >= fmi && (iS < str.length || iP < pattern.length)) {
     // index access works anywhere in JS/TS
     // worst case, these vals are undefined
     const charStr = str[iS];
     const charP = pattern[iP];
     const nextCharP = pattern[iP + 1];
-    console.log(`${iS}\t${charStr}\t${iP}\t${charP}\t${isGivingBack}\t${fmi}`);
+    console.log(
+      `${iS}\t${charStr}\t${iP}\t${charP + (nextCharP === "*" ? "*" : "")}\t${isGivingBack}\t${fmi}`,
+    );
     if (iS >= str.length) {
       // we've matched the whole string
       // but not the whole pattern
