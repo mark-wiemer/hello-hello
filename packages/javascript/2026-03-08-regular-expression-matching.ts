@@ -125,6 +125,9 @@ function tests() {
     // (manually verified, my console logs really helped here)
     // (again non-toy would refactor)
     // so this feels pretty solid, going to submit!
+    // ...
+    // this case failed, should be an easy fix
+    ["ab", ".*c", false],
   ];
   let anyFailed = false;
   for (let myCase of cases) {
@@ -172,7 +175,7 @@ function isMatch(str: string, pattern: string): boolean {
   let iP = 0;
   let isGivingBack = false;
   console.log(`iS\tcS\tiP\tcP\tigb\tfmi`);
-  while (iS < str.length || iP < pattern.length) {
+  while (iS >= 0 && (iS < str.length || iP < pattern.length)) {
     // index access works anywhere in JS/TS
     // worst case, these vals are undefined
     const charStr = str[iS];
@@ -276,7 +279,11 @@ function isMatch(str: string, pattern: string): boolean {
     iS++;
     console.log("moving to next char in both strings");
   }
-  // strings were of equal length
-  console.log("strings were of equal length, returning true");
+  if (iS < str.length) {
+    console.log("didn't get to end of string");
+    console.log("returning false");
+    return false;
+  }
+  console.log("returning true");
   return true;
 }
