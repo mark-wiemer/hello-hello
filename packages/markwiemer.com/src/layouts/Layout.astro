@@ -73,5 +73,18 @@ const classToUse = Astro.props.klass ? Astro.props.klass : "article";
         }
       })();
     </script>
+    <script is:inline data-notes="prevent Space key from scrolling on skip link">
+      (() => {
+        const skipLink = document.querySelector(".skip-link");
+        if (skipLink) {
+          skipLink.addEventListener("keydown", (e) => {
+            if (e.key === " " || e.key === "Spacebar") {
+              e.preventDefault();
+              skipLink.click();
+            }
+          });
+        }
+      })();
+    </script>
   </body>
 </html>
