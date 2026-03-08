@@ -3,7 +3,7 @@ import NavEntry from "@/components/NavEntry.astro";
 ---
 
 <button id="openNav" aria-label="Navigation">☰</button>
-<nav aria-expanded="false">
+<nav aria-expanded="false" inert>
   <h2>Here</h2>
   <ul>
     <!-- Make sure all entries here are also linked in the home page for a11y -->
@@ -36,10 +36,12 @@ import NavEntry from "@/components/NavEntry.astro";
     toggleButton?.addEventListener("click", () => {
       if (nav.getAttribute("aria-expanded") === "true") {
         nav.setAttribute("aria-expanded", "false");
+        nav.setAttribute("inert", "");
         document.body.classList.remove("nav-open");
         return;
       } else {
         nav.setAttribute("aria-expanded", "true");
+        nav.removeAttribute("inert");
         document.body.classList.add("nav-open");
       }
     });
