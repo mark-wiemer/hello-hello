@@ -26,6 +26,10 @@ For Windows, try:
 
 This doesn't seem to quite work: https://github.com/pnpm/pnpm/issues/10531. Likely a corepack issue? I hate corepack.
 
+Again, I just use Linux.
+
+Also, I've started running `ts` files directly with Node, e.g. `node index.ts`. For more advanced TS features, see [Hello TypeScript](../typescript/readme.md).
+
 ## Resources
 
 - [Chocolatey (choco)](https://github.com/chocolatey/choco)

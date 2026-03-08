@@ -37,4 +37,4 @@ r
 
 ## Related
 
-- [JavaScript](../javascript/readme.md)
+- [Hello JavaScript](../javascript/readme.md)
