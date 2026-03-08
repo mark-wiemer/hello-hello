@@ -138,7 +138,24 @@ function tests() {
     // transitions are already pretty-well managed, let's not go to FSM
     // recursion sucks though, can we try iterative?
     // gonna take a break...
-    ["aaa", "ab*a*c*a", true],
+    // let's walk through this case:
+    // consume the first a, bumping fmi to 1
+    // jump past the b* because str has no b's
+    // consume the rest of the a's because now we're at a*
+    // now we're at the end of the string, but not the pattern
+    // start giving back
+    // we should give back until iS is 1 again
+    // then we go back to consuming, but iP has moved forward to c*
+    // c* is zero, we get to the final `a` in the pattern
+    // but we've given back too much!
+    // at this point, we can bump fmi and try again, because str[iS] == str[1] == a == charP
+    // so we only bump fmi if:
+    // - we were previously giving back,
+    // - we're just above the previous fmi,
+    // - we do have a match
+    // at that point, we set giving back to false, of course, and we try once again
+    // let's see if I can turn this into code...
+    ["aaa", "ab*a*c*a", true], // LeetCode case 318
   ];
   let anyFailed = false;
   for (let myCase of cases) {
@@ -240,8 +257,14 @@ function isMatch(str: string, pattern: string): boolean {
         console.log("charS does not match charP");
         if (isGivingBack) {
           console.log("we're giving back");
-          console.log("we're going to move back further");
-          iS--;
+          if (iS > fmi + 1) {
+            console.log("we're going to move back further");
+            iS--;
+            continue;
+          }
+          console.log("we've moved back far enough, going to stop giving back and try again");
+          isGivingBack = false;
+          fmi++;
           continue;
         }
         console.log("we're not giving back");
@@ -279,8 +302,15 @@ function isMatch(str: string, pattern: string): boolean {
     if (charStr !== charP) {
       console.log("charS does not match charP");
       if (isGivingBack) {
-        console.log("giving back");
-        iS--;
+        console.log("we're giving back");
+        if (iS > fmi + 1) {
+          console.log("we're going to move back further");
+          iS--;
+          continue;
+        }
+        console.log("we've moved back far enough, going to stop giving back and try again");
+        isGivingBack = false;
+        fmi++;
         continue;
       }
       console.log("not giving back");
