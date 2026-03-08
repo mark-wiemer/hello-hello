@@ -15,17 +15,16 @@ const { alt, src, thumbnailSrc, class: className } = Astro.props;
 const optimizedFull = await getImage({ src });
 ---
 
-<div class="adaptive-image-wrapper">
+<div class="adaptive-image-wrapper" data-full-src={optimizedFull.src}>
   <Image
     alt={alt}
     src={thumbnailSrc}
     class={`adaptive-image ${className || ""}`}
-    data-full-src={optimizedFull.src}
     loading="lazy"
   />
 </div>
 
-<!-- todo dedupe this script / use srcset instead -->
+<!-- todo dedupe this script -->
 <script is:inline data-notes="shouldLoadHighRes">
   console.debug("[AdaptiveImage] Client script loaded...");
   // test changes with a new tab, not just refreshing
@@ -55,28 +54,38 @@ const optimizedFull = await getImage({ src });
     }
 
     console.debug("[AdaptiveImage] Conditions met, loading high-res images...");
-    const images = document.querySelectorAll("[data-full-src]");
-    images.forEach((img) => {
-      const fullSrc = img.getAttribute("data-full-src");
-      if (fullSrc && img instanceof HTMLImageElement) {
-        // Preload the high-res image
-        const link = document.createElement("link");
-        link.rel = "preload";
-        link.as = "image";
-        link.href = fullSrc;
-        document.head.appendChild(link);
+    const wrappers = document.querySelectorAll(".adaptive-image-wrapper[data-full-src]");
+    wrappers.forEach((wrapper) => {
+      const fullSrc = wrapper.getAttribute("data-full-src");
+      if (!fullSrc || !(wrapper instanceof HTMLElement)) return;
 
-        // Swap the image once it's loaded
-        const highResImg = new Image();
-        highResImg.onload = () => {
-          img.src = fullSrc;
-          img.removeAttribute("data-full-src");
-        };
-        highResImg.onerror = () => {
-          console.error("[AdaptiveImage] Failed to load high-res image:", fullSrc);
-        };
-        highResImg.src = fullSrc;
+      // Remove attribute immediately to prevent double-loading on repeated calls
+      wrapper.removeAttribute("data-full-src");
+
+      // Preload the high-res image
+      const link = document.createElement("link");
+      link.rel = "preload";
+      link.as = "image";
+      link.href = fullSrc;
+      document.head.appendChild(link);
+
+      // Create a high-res overlay image that fades in on top of the thumbnail.
+      // This avoids flicker: the thumbnail stays visible while the high-res loads.
+      const thumbnailImg = wrapper.querySelector("img");
+      const fullImg = new Image();
+      fullImg.className = "adaptive-image-full";
+      if (thumbnailImg) {
+        fullImg.alt = thumbnailImg.alt;
       }
+      fullImg.onload = () => {
+        fullImg.classList.add("loaded");
+      };
+      fullImg.onerror = () => {
+        console.error("[AdaptiveImage] Failed to load high-res image:", fullSrc);
+        fullImg.remove();
+      };
+      fullImg.src = fullSrc;
+      wrapper.appendChild(fullImg);
     });
   }
 
