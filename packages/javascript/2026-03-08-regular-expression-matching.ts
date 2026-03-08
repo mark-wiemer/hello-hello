@@ -24,6 +24,24 @@
 // ew, draft algo is too minimal, I'm going to try folding code and reviewing implementation
 
 /*
+* Dot-star algo
+need to introduce concept of "giving back"
+we are greedy until it fails
+once we fail, we give back until we find the first match
+(this is why greedy matching is slow and can be vulnerable to DOS)
+
+int fullyMatchedIndex // cannot give back beyond this point
+bool isGivingBack
+if at end of string and not end of pattern and not special case
+- set isGivingBack to true
+- bump iP by 2 to get to non-special char
+- try to decrement iS
+- if iS becomes <= fullyMatchedIndex, return false
+- else go to next iteration
+(got bored, started folding code and writing again)
+*/
+
+/*
 Test cases (first draft, has errors, can you find them?)
 * basic
 "a", "a", true
@@ -139,15 +157,16 @@ function isMatch(str: string, pattern: string): boolean {
   let iS = 0;
   /** index of pattern */
   let iP = 0;
-  console.log(`iS\tcS\tiP\tcP`);
+  let isGivingBack = false;
+  let fullyMatchedIndex = 0;
+  console.log(`iS\tcS\tiP\tcP\tigb\tfmi`);
   while (iS < str.length || iP < pattern.length) {
     // index access works anywhere in JS/TS
     // worst case, these vals are undefined
     const charStr = str[iS];
-    const prevCharP = pattern[iP - 1];
     const charP = pattern[iP];
     const nextCharP = pattern[iP + 1];
-    console.log(iS + "\t" + charStr + "\t" + iP + "\t" + charP);
+    console.log(`${iS}\t${charStr}\t${iP}\t${charP}\t${isGivingBack}\t${fullyMatchedIndex}`);
     if (iS >= str.length) {
       // we've matched the whole string
       // but not the whole pattern
@@ -160,8 +179,11 @@ function isMatch(str: string, pattern: string): boolean {
         return true;
       }
       console.log("not a special case");
-      console.log("returning false");
-      return false;
+      console.log("going to try giving back");
+      isGivingBack = true;
+      iS--;
+      iP += 2; // move past the star, try matching the next char
+      continue;
     }
     if (iP >= pattern.length) {
       // we're at the end of the pattern
@@ -175,8 +197,26 @@ function isMatch(str: string, pattern: string): boolean {
 
     if (nextCharP === "*") {
       console.log("nextCharP is `*`");
+      if (charP === ".") {
+        console.log("charP is `.`");
+        console.log("Handling dot-star branch");
+        console.log("Incrementing iS, keeping iP the same");
+        isGivingBack = false;
+        iS++;
+        continue;
+      }
+
+      console.log("charP is not `.`");
+      console.log("Handling `basic star` branch");
       if (charStr !== charP) {
         console.log("charS does not match charP");
+        if (isGivingBack) {
+          console.log("we're giving back");
+          console.log("we're going to move back further");
+          iS--;
+          continue;
+        }
+        console.log("we're not giving back");
         console.log("bumping iP twice since `*` is fully matched");
         iP += 2;
         console.log("keeping iS here to make sure it matches next pattern char");
@@ -185,6 +225,7 @@ function isMatch(str: string, pattern: string): boolean {
       }
       console.log("charS matches charP");
       console.log("going to next char in str");
+      isGivingBack = false;
       iS++;
       console.log("staying on this char in pattern");
       continue;
@@ -194,30 +235,12 @@ function isMatch(str: string, pattern: string): boolean {
       // match anything!
       console.log("charP is `.`");
       iP++;
+      isGivingBack = false;
       iS++;
       console.log("moving to next char in both strings");
       continue;
     }
 
-    if (charP === "*") {
-      // - if charPatPrev matches charStr, move to next index in charStr, but not pattern
-      console.log("charP is `*`");
-      console.log("prevCharP is " + prevCharP);
-      // if prevCharP does not match charStr, move to next index in both
-      if (charStr !== prevCharP) {
-        console.log("charStr does not match prevCharP");
-        iP++;
-        iS++;
-        console.log("moving to next char in both strings");
-        continue;
-      }
-      // prevCharP matches charStr
-      // move to next index in charStr, but not pattern
-      console.log("charStr matches prevCharP");
-      iS++;
-      console.log("moving to next char in str");
-      continue;
-    }
     // charP is not `.` or `*`
     console.log("charP is not `.` or `*`");
     console.log("nextCharP is not `*`");
