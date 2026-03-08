@@ -2,7 +2,7 @@
 import NavEntry from "@/components/NavEntry.astro";
 ---
 
-<!-- todo this button is a bit small? -->
+<!-- todo this button is a bit small -->
 <button id="openNav">☰</button>
 <nav aria-expanded="false">
   <h2>Here</h2>
@@ -19,8 +19,10 @@ import NavEntry from "@/components/NavEntry.astro";
   <ul>
     <NavEntry href="https://ahkpp.com" text="AHK++" />
     <NavEntry href="https://mochajs.org" text="Mocha" />
-    <!-- invisible char is non-breaking space -->
+    <!-- invisible char U+00a0 is non-breaking space -->
+    <!-- https://en.wikipedia.org/wiki/Non-breaking_space -->
     <!-- todo find way to use `nbsp;` in source without IDE replacing it -->
+    <!-- todo secretly make nav full width immediately to avoid using nbsp here? -->
     <NavEntry
       href="https://github.com/mark-wiemer/hello-hello/tree/main/packages/markwiemer.com"
       text="Website source"
