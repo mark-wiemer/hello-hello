@@ -1,17 +1,13 @@
 ---
-import Footer from "../components/Footer.astro";
 import Nav from "./Nav.astro";
 const style = "/styles.css";
 interface Props {
   pageTitle: string;
   /** Optional CSS class to apply to the main container */
   klass?: string;
-  /** Defaults to true */
-  showFooter?: boolean;
 }
 
 const classToUse = Astro.props.klass ? Astro.props.klass : "article";
-const showFooter = Astro.props.showFooter !== false;
 ---
 
 <!doctype html>
@@ -35,7 +31,6 @@ const showFooter = Astro.props.showFooter !== false;
       <main>
         <slot />
       </main>
-      {showFooter && <Footer />}
     </div>
     <script is:inline data-notes="make external links open in new tab">
       (() => {
