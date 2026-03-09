@@ -7,6 +7,7 @@
     "build": "astro build",
     "dev": "astro dev",
     "preview": "astro preview",
+    "pull-medium-posts": "bun run scripts/pull-medium-posts.ts",
     "test": "vitest --config config/vitest.config.js",
     "test:ci": "pnpm test --run",
     "validate:fix": "sort-package-json"
