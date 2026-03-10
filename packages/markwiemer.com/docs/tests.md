@@ -72,3 +72,7 @@ To simplify this work, see [Issue 13](https://github.com/mark-wiemer/hello-hello
 ### States
 
 - Nav open vs closed
+
+## Images
+
+Homepage when zoom is 200%: Header images should use the 2x src

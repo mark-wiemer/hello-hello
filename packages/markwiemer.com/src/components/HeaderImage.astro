@@ -1,0 +1,30 @@
+---
+import { Image } from "astro:assets";
+
+interface Props {
+  alt: string;
+  src: ImageMetadata;
+}
+
+const sizePx = 216; // 12em;
+---
+
+{/* https://docs.astro.build/en/reference/modules/astro-assets/#responsive-image-properties */}
+<Image
+  alt={Astro.props.alt}
+  src={Astro.props.src}
+  class="headerImage"
+  layout="fixed"
+  width={sizePx}
+  height={sizePx}
+/>
+
+<style>
+  img.headerImage {
+    /* breakpoint-very-thin */
+    @media (max-width: 480px) {
+      height: 7em;
+      width: 7em;
+    }
+  }
+</style>
