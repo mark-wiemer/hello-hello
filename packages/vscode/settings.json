@@ -420,7 +420,12 @@
     "https://github.com/microsoft/vscode/issues": {
       "approveRequest": false,
       "approveResponse": true
-    }
+    },
+    "https://github.com/actions/upload-pages-artifact": true,
+    "https://github.com/actions": true,
+    "https://github.com": true,
+    "https://github.com/oven-sh/setup-bun": true,
+    "https://github.com/oven-sh": true
   },
   "chat.viewSessions.enabled": false,
   "debug.onTaskErrors": "abort",
