@@ -40,7 +40,7 @@ because I use GitHub pages, which only supports one site per repo.
 - [Rust](./packages/rust/readme.md): Programming language emphasizing safety and performance
 - [TypeScript](./packages/typescript/readme.md): Programming language that adds types to JavaScript
 - [Unified](./packages/unified/readme.md): Software collective for content processing
-- [Visual Studio Code](./packages/vscode/readme.md): IDE
+- [Visual Studio Code](./packages/vscode/readme.md): IDE, includes sample extension
 
 ## Glossary
 

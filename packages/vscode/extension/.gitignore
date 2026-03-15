@@ -1,0 +1,7 @@
+# Also in `.prettierignore`
+out
+dist
+node_modules
+.vscode-test/
+*.vsix
+syntaxes/*.json
