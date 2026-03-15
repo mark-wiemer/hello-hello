@@ -8,7 +8,7 @@ on:
       - ".github/workflows/vscode-extension-deploy.yml"
   workflow_dispatch:
 
-name: Deploy Extension
+name: vscode/extension CD
 jobs:
   deploy:
     env:
