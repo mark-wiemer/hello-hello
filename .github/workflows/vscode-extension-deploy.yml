@@ -6,15 +6,19 @@ on:
     paths:
       - "packages/vscode/extension/**"
       - ".github/workflows/vscode-extension-deploy.yml"
+  workflow_dispatch:
 
 name: Deploy Extension
 jobs:
   deploy:
+    env:
+      packageDir: packages/vscode/extension
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3.3.0
-      - uses: actions/setup-node@v3.6.0
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
       - run: npm ci
+        working-directory: ${{ env.packageDir }}
       - name: Publish to Open VSX Registry
         uses: HaaLeo/publish-vscode-extension@v1
         with:

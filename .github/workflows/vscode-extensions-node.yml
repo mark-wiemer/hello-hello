@@ -14,27 +14,26 @@ on:
     paths:
       - "packages/vscode/extension/**"
       - ".github/workflows/vscode-extension-node.yml"
+  workflow_dispatch:
 
 jobs:
   build:
+    env:
+      packageDir: packages/vscode/extension
     strategy:
       matrix:
-        # TODO add macos-latest and fix https://github.com/mark-wiemer/vscode-helloworld/issues/10
         os: [windows-latest]
-        node-version: [20.x]
+        node-version: [22.x]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
       - name: Install Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
       - run: npm install
-      # ubuntu "Failed to connect": see https://github.com/microsoft/vscode-test/issues/127
-      - run: xvfb-run -a npm run validate:ci
-        if: runner.os == 'Linux'
-      # mac "CoreText note": https://github.com/electron/fiddle/issues/586
+        working-directory: ${{ env.packageDir }}
       - run: npm run validate:ci
-        if: runner.os != 'Linux'
+        working-directory: ${{ env.packageDir }}
