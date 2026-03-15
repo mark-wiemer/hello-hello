@@ -31,7 +31,7 @@ because I use GitHub pages, which only supports one site per repo.
 - [mod.io](./packages/mod.io/readme.md): Site for hosting UGC
 - [Modrinth](./packages/modrinth/readme.md): App for managing Minecraft versions and UGC
 - [New machine](./packages/new-machine/readme.md): Setup steps for any new machine
-- [Notes](./packages/notes/readme.md): Miscellaneous notes
+- [Notes](./packages/notes/readme.md): Miscellaneous notes: Blog, Bun, Deno, JDial, security, style, web.
 - [pnpm](./packages/pnpm/readme.md): Node package manager, alternative to npm
 - [Podman](./packages/podman/readme.md): Open-source containerization platform, like Docker
 - [POSIX](./packages/posix/readme.md): Set of cross-OS standards by IEEE
@@ -40,7 +40,7 @@ because I use GitHub pages, which only supports one site per repo.
 - [Rust](./packages/rust/readme.md): Programming language emphasizing safety and performance
 - [TypeScript](./packages/typescript/readme.md): Programming language that adds types to JavaScript
 - [Unified](./packages/unified/readme.md): Software collective for content processing
-- [Visual Studio Code](./packages/vscode/readme.md): IDE, includes sample extension
+- [Visual Studio Code](./packages/vscode/readme.md): Mostly open-source IDE, includes sample extension
 
 ## Glossary
 
