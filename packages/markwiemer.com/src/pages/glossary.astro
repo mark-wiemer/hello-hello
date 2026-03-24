@@ -11,8 +11,12 @@ type TermDef = [term: string, definition: string];
 // todo highlight term in URL
 // todo create and enforce style guide
 const glossary: TermDef[] = [
+  // todo make this ID `c-sharp`  
+  [".NET", 'Pronounced and sometimes written `dotnet`. An open-source software toolkit developed by Microsoft.'],
   ["boxel", "Voxels that are boxes, like in Minecraft. Usually wrapped in quotes as it's a a term I made up 🤓"],
   ["Bun", "A TypeScript toolkit originally by an independent team that includes its own runtime and more. Ultimately owned by Anthropic."],
+  // todo make this ID `c-sharp`
+  ["C#", 'Pronounced and sometimes written `C Sharp`. An open-source programming language developed by Microsoft.'],
   [
     "Chromium",
     "An open-source web browser. Google Chrome, Microsoft Edge, and other browsers are Chromium wrappers. Ultimately owned by Google.",
@@ -35,9 +39,10 @@ const glossary: TermDef[] = [
     "Ecma",
     "Organization that defines ECMAScript. Short for Ecma International, originally short for European Computer Manufacturers Association.",
   ],
+  // ECMAScript is a hub
   [
     "ECMAScript",
-    "A specification of how website scripting languages must behave. JavaScript is the most popular implementation of ECMAScript.",
+    'A specification of how website scripting languages must behave. JavaScript is the most popular implementation of ECMAScript. See also TypeScript.',
   ],
   ["engine", "A system used to execute code. Common JavaScript engines are JavaScriptCore and V8."],
   [
@@ -52,13 +57,16 @@ const glossary: TermDef[] = [
     "Physical devices like a keyboard, mouse, and monitor. Also applies to non-digital domains: a wrench, a hammer, etc. See also software.",
   ],
   ["JavaScript", "A programming language originally built for websites. See also EcmaScript."],
+  ["JavaScriptCore", "A JavaScript engine used by WebKit (Safari) and Bun."],
   ["JS", "JavaScript"],
   ["knowledge elicitation", "The process of gathering information from people."],
-  ["libre", "Something that is available with minimal limitations, but may still cost money to access. From the Latin līber, like liberty. See also FOSS, open-source."],
+  // libre is a hub
+  ["libre", 'Something that is available with minimal limitations, but may still cost money to access. From the Latin līber, like liberty. "Free as in free speech, not free beer." See also FOSS, open-source.'],
   ["Node", "Node.js"],
   ["Node.js", "A JavaScript runtime wrapped around V8."],
   ["npm", "The default package manager for Node.js. Open-source and ultimately owned by Microsoft. See also package manager."],
   ["open-source", "Software that is available to inspect, download, copy, and redistribute with minimal limitations. The most common limitation is that any distributed copies must also be open-source. Some open-source projects require monetary payment to access. See also libre."],
+  // package manager is a hub
   ["package manager", "A system for managing external modules for a project. For JavaScript, common package managers are Bun, Deno, npm, pnpm, and yarn."],
   ["pnpm", '"performant npm" built by a different team than npm. A package manager for JavaScript. See also package manager.'],
   [
