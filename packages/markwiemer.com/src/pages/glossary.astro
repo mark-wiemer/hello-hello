@@ -12,15 +12,17 @@ type TermDef = [term: string, definition: string];
 // todo create and enforce style guide
 const glossary: TermDef[] = [
   ["boxel", "Voxels that are boxes, like in Minecraft. Usually wrapped in quotes as it's a a term I made up 🤓"],
+  ["Bun", "A TypeScript toolkit including its own engine, runtime, and more. Yes, this is the same definition as Deno 😉 See also Node.js."],
   [
     "Chromium",
-    "An open-source web browser. Google Chrome, Microsoft Edge, and other browsers are Chromium wrappers.",
+    "An open-source web browser. Google Chrome, Microsoft Edge, and other browsers are Chromium wrappers. Ultimately owned by Google.",
   ],
   [
     "CJS",
     "CommonJS module, the original way of using multiple JS files in a project. See also ESM.",
   ],
   ["cognitive load", "Mental effort, usually to solve complex problems."],
+  ["Deno", "A TypeScript toolkit including its own engine, runtime, and more. Yes, this is the same definition as Bun 😉 See also Node.js."],
   [
     "dividend",
     "The number that is split in division. In `6 / 2`, `6` is the dividend. See also divisor.",
@@ -42,14 +44,22 @@ const glossary: TermDef[] = [
     "ECMAScript modules, the modern way of using multiple JS files in a project. See also CJS.",
   ],
   [
+    "FOSS", "free and open-source software. See also libre."
+  ],
+  [
     "hardware",
     "Physical devices like a keyboard, mouse, and monitor. Also applies to non-digital domains: a wrench, a hammer, etc. See also software.",
   ],
   ["JavaScript", "A programming language originally built for websites."],
   ["JS", "JavaScript"],
   ["knowledge elicitation", "The process of gathering information from people."],
+  ["libre", "Something that is available with minimal limitations, but may still cost money to access. From the Latin līber, like liberty. See also FOSS, open-source."],
   ["Node", "Node.js"],
-  ["Node.js", "A JavaScript runtime wrapped around V8."],
+  ["Node.js", "A JavaScript runtime wrapped around V8. See also Bun, Deno."],
+  ["npm", "The default package manager for Node.js. Open-source and ultimately owned by Microsoft. See also package manager."],
+  ["open-source", "Software that is available to inspect, download, copy, and redistribute with minimal limitations. The most common limitation is that any distributed copies must also be open-source. Some open-source projects require monetary payment to access. See also libre."],
+  ["package manager", "A system for managing external modules for a project. For JavaScript, common package managers are Bun, Deno, npm, pnpm, and yarn."],
+  ["pnpm", '"performant npm" built by a different team than npm. A package manager for JavaScript. See also package manager.'],
   [
     "require(ESM)",
     "A compatibility feature in Node.js for CJS projects to work with ESM projects.",
@@ -62,6 +72,7 @@ const glossary: TermDef[] = [
     '"type": "module"',
     "A package.json property instructing Node to load modules using ESM instead of CJS.",
   ],
+  ["TypeScript", "A superset of JavaScript that adds and enforces types. Originally, TypeScript had to be transpiled to JavaScript outside of most runtimes. Now, transpilation or direct TypeScript execution is bundled to varying degrees within common runtimes. Ultimately owned by Microsoft."],
   [
     "ubiquitous language",
     "A common set of terms used in a cross-disciplinary team to improve communication.",
