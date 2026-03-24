@@ -12,7 +12,7 @@ type TermDef = [term: string, definition: string];
 // todo create and enforce style guide
 const glossary: TermDef[] = [
   ["boxel", "Voxels that are boxes, like in Minecraft. Usually wrapped in quotes as it's a a term I made up 🤓"],
-  ["Bun", "A TypeScript toolkit including its own engine, runtime, and more. Yes, this is the same definition as Deno 😉 See also Node.js."],
+  ["Bun", "A TypeScript toolkit originally by an independent team that includes its own runtime and more. Ultimately owned by Anthropic."],
   [
     "Chromium",
     "An open-source web browser. Google Chrome, Microsoft Edge, and other browsers are Chromium wrappers. Ultimately owned by Google.",
@@ -22,7 +22,7 @@ const glossary: TermDef[] = [
     "CommonJS module, the original way of using multiple JS files in a project. See also ESM.",
   ],
   ["cognitive load", "Mental effort, usually to solve complex problems."],
-  ["Deno", "A TypeScript toolkit including its own engine, runtime, and more. Yes, this is the same definition as Bun 😉 See also Node.js."],
+  ["Deno", "A TypeScript toolkit by the creator of Node.js that includes its own runtime and more. Ultimately owned by 'the Deno authors.'"],
   [
     "dividend",
     "The number that is split in division. In `6 / 2`, `6` is the dividend. See also divisor.",
@@ -39,6 +39,7 @@ const glossary: TermDef[] = [
     "ECMAScript",
     "A specification of how website scripting languages must behave. JavaScript is the most popular implementation of ECMAScript.",
   ],
+  ["engine", "A system used to execute code. Common JavaScript engines are JavaScriptCore and V8."],
   [
     "ESM",
     "ECMAScript modules, the modern way of using multiple JS files in a project. See also CJS.",
@@ -50,12 +51,12 @@ const glossary: TermDef[] = [
     "hardware",
     "Physical devices like a keyboard, mouse, and monitor. Also applies to non-digital domains: a wrench, a hammer, etc. See also software.",
   ],
-  ["JavaScript", "A programming language originally built for websites."],
+  ["JavaScript", "A programming language originally built for websites. See also EcmaScript."],
   ["JS", "JavaScript"],
   ["knowledge elicitation", "The process of gathering information from people."],
   ["libre", "Something that is available with minimal limitations, but may still cost money to access. From the Latin līber, like liberty. See also FOSS, open-source."],
   ["Node", "Node.js"],
-  ["Node.js", "A JavaScript runtime wrapped around V8. See also Bun, Deno."],
+  ["Node.js", "A JavaScript runtime wrapped around V8."],
   ["npm", "The default package manager for Node.js. Open-source and ultimately owned by Microsoft. See also package manager."],
   ["open-source", "Software that is available to inspect, download, copy, and redistribute with minimal limitations. The most common limitation is that any distributed copies must also be open-source. Some open-source projects require monetary payment to access. See also libre."],
   ["package manager", "A system for managing external modules for a project. For JavaScript, common package managers are Bun, Deno, npm, pnpm, and yarn."],
@@ -64,15 +65,19 @@ const glossary: TermDef[] = [
     "require(ESM)",
     "A compatibility feature in Node.js for CJS projects to work with ESM projects.",
   ],
+  ["runtime", "A system used to both execute code and interact with 'external' software objects. For example, in JavaScript, an engine can run `1 + 1`, but only a runtime can interact with the `document` object on a webpage. Common JavaScript runtimes are Bun, Deno, and Node.js"],
   [
     "software",
     "Non-physical digital technology. This website is software, but your monitor or phone are not software. See also hardware.",
   ],
   [
+    "toolkit", "A set of related tools to accomplish a variety of tasks. Number of tools and scope of work accomplished by the tools varies widely."
+  ],
+  [
     '"type": "module"',
     "A package.json property instructing Node to load modules using ESM instead of CJS.",
   ],
-  ["TypeScript", "A superset of JavaScript that adds and enforces types. Originally, TypeScript had to be transpiled to JavaScript outside of most runtimes. Now, transpilation or direct TypeScript execution is bundled to varying degrees within common runtimes. Ultimately owned by Microsoft."],
+  ["TypeScript", "A superset of JavaScript that adds and enforces types. Originally, TypeScript had to be transpiled to JavaScript outside of most runtimes. Now, transpilation or direct TypeScript execution is bundled to varying degrees in common runtimes. As such, the terms 'JavaScript' and 'TypeScript' are becoming increasingly interchangeable. Ultimately owned by Microsoft."],
   [
     "ubiquitous language",
     "A common set of terms used in a cross-disciplinary team to improve communication.",
