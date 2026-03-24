@@ -74,6 +74,7 @@ export default defineConfig({
   integrations: [mdx(), thumbnailIntegration],
   redirects: {
     "/ahkpp": "https://ahkpp.com",
+    "/luanti": "/software/luanti",
   },
   vite: {
     plugins: [
