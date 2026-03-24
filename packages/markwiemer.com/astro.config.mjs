@@ -72,6 +72,9 @@ await generateThumbnails();
 // https://astro.build/config
 export default defineConfig({
   integrations: [mdx(), thumbnailIntegration],
+  redirects: {
+    "/ahkpp": "https://ahkpp.com",
+  },
   vite: {
     plugins: [
       {
