@@ -11,12 +11,24 @@ type TermDef = [term: string, definition: string];
 // todo highlight term in URL
 // todo create and enforce style guide
 const glossary: TermDef[] = [
-  // todo make this ID `c-sharp`  
-  [".NET", 'Pronounced and sometimes written `dotnet`. An open-source software toolkit developed by Microsoft.'],
-  ["boxel", "Voxels that are boxes, like in Minecraft. Usually wrapped in quotes as it's a a term I made up 🤓"],
-  ["Bun", "A TypeScript toolkit originally by an independent team that includes its own runtime and more. Ultimately owned by Anthropic."],
   // todo make this ID `c-sharp`
-  ["C#", 'Pronounced and sometimes written `C Sharp`. An open-source programming language developed by Microsoft.'],
+  [
+    ".NET",
+    "Pronounced and sometimes written `dotnet`. An open-source software toolkit developed by Microsoft.",
+  ],
+  [
+    "boxel",
+    "Voxels that are boxes, like in Minecraft. Usually wrapped in quotes as it's a term I made up 🤓",
+  ],
+  [
+    "Bun",
+    "A TypeScript toolkit originally by an independent team that includes its own runtime and more. Ultimately owned by Anthropic.",
+  ],
+  // todo make this ID `c-sharp`
+  [
+    "C#",
+    "Pronounced and sometimes written `C Sharp`. An open-source programming language developed by Microsoft.",
+  ],
   [
     "Chromium",
     "An open-source web browser. Google Chrome, Microsoft Edge, and other browsers are Chromium wrappers. Ultimately owned by Google.",
@@ -25,8 +37,13 @@ const glossary: TermDef[] = [
     "CJS",
     "CommonJS module, the original way of using multiple JS files in a project. See also ESM.",
   ],
+  ["code coverage", "A usually-ambiguous term referring to some form of test coverage"],
   ["cognitive load", "Mental effort, usually to solve complex problems."],
-  ["Deno", "A TypeScript toolkit by the creator of Node.js that includes its own runtime and more. Ultimately owned by 'the Deno authors.'"],
+  ["coverage", "Test coverage"],
+  [
+    "Deno",
+    "A TypeScript toolkit by the creator of Node.js that includes its own runtime and more. Ultimately owned by 'the Deno authors.'",
+  ],
   [
     "dividend",
     "The number that is split in division. In `6 / 2`, `6` is the dividend. See also divisor.",
@@ -42,16 +59,14 @@ const glossary: TermDef[] = [
   // ECMAScript is a hub
   [
     "ECMAScript",
-    'A specification of how website scripting languages must behave. JavaScript is the most popular implementation of ECMAScript. See also TypeScript.',
+    "A specification of how website scripting languages must behave. JavaScript is the most popular implementation of ECMAScript. See also TypeScript.",
   ],
   ["engine", "A system used to execute code. Common JavaScript engines are JavaScriptCore and V8."],
   [
     "ESM",
     "ECMAScript modules, the modern way of using multiple JS files in a project. See also CJS.",
   ],
-  [
-    "FOSS", "free and open-source software. See also libre."
-  ],
+  ["FOSS", "free and open-source software. See also libre."],
   [
     "hardware",
     "Physical devices like a keyboard, mouse, and monitor. Also applies to non-digital domains: a wrench, a hammer, etc. See also software.",
@@ -61,37 +76,72 @@ const glossary: TermDef[] = [
   ["JS", "JavaScript"],
   ["knowledge elicitation", "The process of gathering information from people."],
   // libre is a hub
-  ["libre", 'Something that is available with minimal limitations, but may still cost money to access. From the Latin līber, like liberty. "Free as in free speech, not free beer." See also FOSS, open-source.'],
+  [
+    "libre",
+    'Something that is available with minimal limitations, but may still cost money to access. From the Latin līber, like liberty. "Free as in free speech, not free beer." See also FOSS, open-source.',
+  ],
   ["Node", "Node.js"],
   ["Node.js", "A JavaScript runtime wrapped around V8."],
-  ["npm", "The default package manager for Node.js. Open-source and ultimately owned by Microsoft. See also package manager."],
-  ["open-source", "Software that is available to inspect, download, copy, and redistribute with minimal limitations. The most common limitation is that any distributed copies must also be open-source. Some open-source projects require monetary payment to access. See also libre."],
+  [
+    "npm",
+    "The default package manager for Node.js. Open-source and ultimately owned by Microsoft. See also package manager.",
+  ],
+  [
+    "open-source",
+    "Software that is available to inspect, download, copy, and redistribute with minimal limitations. The most common limitation is that any distributed copies must also be open-source. Some open-source projects require monetary payment to access. See also libre.",
+  ],
   // package manager is a hub
-  ["package manager", "A system for managing external modules for a project. For JavaScript, common package managers are Bun, Deno, npm, pnpm, and yarn."],
-  ["pnpm", '"performant npm" built by a different team than npm. A package manager for JavaScript. See also package manager.'],
+  [
+    "package manager",
+    "A system for managing external modules for a project. For JavaScript, common package managers are Bun, Deno, npm, pnpm, and yarn.",
+  ],
+  [
+    "pnpm",
+    '"performant npm" built by a different team than npm. A package manager for JavaScript. See also package manager.',
+  ],
   [
     "require(ESM)",
     "A compatibility feature in Node.js for CJS projects to work with ESM projects.",
   ],
-  ["runtime", "A system used to both execute code and interact with 'external' software objects. For example, in JavaScript, an engine can run `1 + 1`, but only a runtime can interact with the `document` object on a webpage. Common JavaScript runtimes are Bun, Deno, and Node.js"],
+  ["requirements coverage", "A form of test coverage that considers documented requirements."],
+  [
+    "runtime",
+    "A system used to both execute code and interact with 'external' software objects. For example, in JavaScript, an engine can run `1 + 1`, but only a runtime can interact with the `document` object on a webpage. Common JavaScript runtimes are Bun, Deno, and Node.js",
+  ],
+  [
+    "scenario coverage",
+    "A form of test coverage that considers real-world scenarios, not just lines of code. For example, a single line of code might call `IsNullOrWhiteSpace` and have full condition coverage with two tests, but would require several tests for scenario coverage: `null`, empty string, string with all spaces, string with all tabs, string with mix of other whitespace, etc. Also useful when automated coverage reporting is unavailable, e.g. in integration or end-to-end tests. Sometimes referred by others to as code coverage. Sometimes wrapped in quotes as it's a term I made up, but a common concept in the industry.",
+  ],
   [
     "software",
     "Non-physical digital technology. This website is software, but your monitor or phone are not software. See also hardware.",
   ],
+  // test coverage is a hub
   [
-    "toolkit", "A set of related tools to accomplish a variety of tasks. Number of tools and scope of work accomplished by the tools varies widely."
+    "test coverage",
+    "A measure of how much of a software project is covered by automated tests. Common metrics are lines of code (line coverage aka statement coverage), branches executed (branch coverage), functions called (function coverage), and conditional values evaluated (condition coverage). See also code coverage, scenario coverage, requirements coverage.",
+  ],
+  [
+    "toolkit",
+    "A set of related tools to accomplish a variety of tasks. Number of tools and scope of work accomplished by the tools varies widely.",
   ],
   [
     '"type": "module"',
     "A package.json property instructing Node to load modules using ESM instead of CJS.",
   ],
-  ["TypeScript", "A superset of JavaScript that adds and enforces types. Originally, TypeScript had to be transpiled to JavaScript outside of most runtimes. Now, transpilation or direct TypeScript execution is bundled to varying degrees in common runtimes. As such, the terms 'JavaScript' and 'TypeScript' are becoming increasingly interchangeable. Ultimately owned by Microsoft."],
+  [
+    "TypeScript",
+    "A superset of JavaScript that adds and enforces types. Originally, TypeScript had to be transpiled to JavaScript outside of most runtimes. Now, transpilation or direct TypeScript execution is bundled to varying degrees in common runtimes. As such, the terms 'JavaScript' and 'TypeScript' are becoming increasingly interchangeable. Ultimately owned by Microsoft.",
+  ],
   [
     "ubiquitous language",
     "A common set of terms used in a cross-disciplinary team to improve communication.",
   ],
   ["V8", "A JavaScript engine used by Node.js, Chromium, and more"],
-  ["voxel", "Volumetric pixel, usually in reference to player-editable 3D terrain, like in Minecraft or Astroneer. See also boxel."],
+  [
+    "voxel",
+    "Volumetric pixel, usually in reference to player-editable 3D terrain, like in Minecraft or Astroneer. See also boxel.",
+  ],
   [
     "wrapper",
     "A piece of software whose core functionality is provided by the software it wraps. ",
