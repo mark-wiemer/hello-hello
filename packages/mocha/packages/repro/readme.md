@@ -6,7 +6,157 @@ My setup: current Mocha main, Node 22.21.1, Linux Mint 22.1 Cinnamon
 
 Two errors reported: `.mocharc.js` and `.mocharc.mjs`. I cannot repro either issue.
 
-`.mocharc.js`: Cannot repro, instead I get this output:
+## 11.7.5 (partial repro)
+
+`.mocharc.js`: Cannot repro
+
+```log
+$ pnpm run test:debug
+
+> @ test:debug /home/markw/my-stuff/hello-hello/packages/mocha/packages/repro
+> npx cross-env DEBUG=* npm test
+
+
+> test
+> cross-env NODE_ENV=test mocha
+
+  mocha:esm-utils assigning requireOrImport, require_module === true +0ms
+  mocha:cli:config findConfig: found config file /home/markw/my-stuff/hello-hello/packages/mocha/packages/repro/.mocharc.js +0ms
+  mocha:cli:config loadConfig: trying to parse config at /home/markw/my-stuff/hello-hello/packages/mocha/packages/repro/.mocharc.js +0ms
+  mocha:cli:config parsers: load cwd-relative path: "/home/markw/my-stuff/hello-hello/packages/mocha/packages/repro/.mocharc.js" +0ms
+mocha config
+  mocha:cli:options no config found in /home/markw/my-stuff/hello-hello/packages/mocha/packages/repro/package.json +0ms
+  mocha:cli:mocha loaded opts {
+  _: [],
+  config: false,
+  package: false,
+  __esModule: true,
+  default: {
+    extension: [ 'ts', 'tsx' ],
+    'node-option': [ 'import=tsx' ],
+    recursive: true,
+    reporter: 'spec',
+    require: [ './test/setup.ts' ],
+    spec: [ 'src/**/*.test.ts' ],
+    timeout: 5000,
+    'watch-files': [ 'src/**/*.ts', 'test/**/*.ts' ]
+  },
+  diff: true,
+  extension: [ 'js', 'cjs', 'mjs' ],
+  reporter: 'spec',
+  slow: 75,
+  timeout: 2000,
+  ui: 'bdd',
+  'watch-ignore': [ 'node_modules', '.git' ]
+} +0ms
+  mocha:cli:mocha running Mocha in-process +1ms
+  mocha:cli:cli entered main with raw args [] +0ms
+  mocha:plugin-loader registered plugin def "mochaHooks" +0ms
+  mocha:plugin-loader registered plugin def "mochaGlobalSetup" +0ms
+  mocha:plugin-loader registered plugin def "mochaGlobalTeardown" +0ms
+  mocha:plugin-loader registered 3 plugin defs (0 ignored) +0ms
+  mocha:plugin-loader finalized plugins: [Object: null prototype] {} +0ms
+  mocha:cli:run post-yargs config {
+  package: [Getter/Setter],
+  _: [],
+  config: false,
+  __esModule: true,
+  default: {
+    extension: [ 'ts', 'tsx' ],
+    'node-option': [ 'import=tsx' ],
+    recursive: true,
+    reporter: 'spec',
+    require: [ './test/setup.ts' ],
+    spec: [ 'src/**/*.test.ts' ],
+    timeout: 5000,
+    'watch-files': [ 'src/**/*.ts', 'test/**/*.ts' ]
+  },
+  diff: true,
+  extension: [ 'js', 'cjs', 'mjs' ],
+  reporter: 'spec',
+  slow: 75,
+  timeout: 2000,
+  ui: 'bdd',
+  'watch-ignore': [ 'node_modules', '.git' ],
+  watchIgnore: [ 'node_modules', '.git' ],
+  'pass-on-failing-test-suite': false,
+  passOnFailingTestSuite: false,
+  spec: [ 'test' ],
+  '$0': 'mocha'
+} +0ms
+  mocha:suite slow 75 +0ms
+  mocha:suite timeout 2000 +0ms
+  mocha:mocha configured 0 global setup functions +0ms
+  mocha:mocha configured 0 global teardown functions +0ms
+  mocha:cli:lookup-files looking for files using glob pattern: test+(.js|.cjs|.mjs) +0ms
+  mocha:cli:run:helpers test files (in order):  [] +0ms
+Error: No test files found: "test"
+ ELIFECYCLE  Command failed with exit code 1.
+```
+
+`.mocharc.mjs`: Does repro
+
+```log
+$ pnpm run test:debug
+
+> @ test:debug /home/markw/my-stuff/hello-hello/packages/mocha/packages/repro
+> npx cross-env DEBUG=* npm test
+
+
+> test
+> cross-env NODE_ENV=test mocha
+
+  mocha:esm-utils assigning requireOrImport, require_module === true +0ms
+  mocha:cli:options no config found in /home/markw/my-stuff/hello-hello/packages/mocha/packages/repro/package.json +0ms
+  mocha:cli:mocha loaded opts {
+  _: [],
+  config: false,
+  package: false,
+  diff: true,
+  extension: [ 'js', 'cjs', 'mjs' ],
+  reporter: 'spec',
+  slow: 75,
+  timeout: 2000,
+  ui: 'bdd',
+  'watch-ignore': [ 'node_modules', '.git' ]
+} +0ms
+  mocha:cli:mocha running Mocha in-process +0ms
+  mocha:cli:cli entered main with raw args [] +0ms
+  mocha:plugin-loader registered plugin def "mochaHooks" +0ms
+  mocha:plugin-loader registered plugin def "mochaGlobalSetup" +0ms
+  mocha:plugin-loader registered plugin def "mochaGlobalTeardown" +0ms
+  mocha:plugin-loader registered 3 plugin defs (0 ignored) +0ms
+  mocha:plugin-loader finalized plugins: [Object: null prototype] {} +0ms
+  mocha:cli:run post-yargs config {
+  package: [Getter/Setter],
+  _: [],
+  config: false,
+  diff: true,
+  extension: [ 'js', 'cjs', 'mjs' ],
+  reporter: 'spec',
+  slow: 75,
+  timeout: 2000,
+  ui: 'bdd',
+  'watch-ignore': [ 'node_modules', '.git' ],
+  watchIgnore: [ 'node_modules', '.git' ],
+  'pass-on-failing-test-suite': false,
+  passOnFailingTestSuite: false,
+  spec: [ 'test' ],
+  '$0': 'mocha'
+} +0ms
+  mocha:suite slow 75 +0ms
+  mocha:suite timeout 2000 +0ms
+  mocha:mocha configured 0 global setup functions +0ms
+  mocha:mocha configured 0 global teardown functions +0ms
+  mocha:cli:lookup-files looking for files using glob pattern: test+(.js|.cjs|.mjs) +0ms
+  mocha:cli:run:helpers test files (in order):  [] +0ms
+Error: No test files found: "test"
+ ELIFECYCLE  Command failed with exit code 1.
+```
+
+## Main (b0a89ce5, cannot repro)
+
+`.mocharc.js`:
 
 ```log
 $ pnpm run test:debug
@@ -64,7 +214,7 @@ Node.js v22.21.1
  ELIFECYCLE  Command failed with exit code 1.
 ```
 
-`.mocharc.mjs`: Cannot repro, instead I get this output:
+`.mocharc.mjs`:
 
 ```log
 $ pnpm run test:debug
