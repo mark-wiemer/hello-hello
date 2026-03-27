@@ -541,7 +541,6 @@
   "window.restoreWindows": "preserve",
   "window.titleBarStyle": "custom",
   "window.titleSeparator": " - ",
-  "workbench.colorTheme": "Default Dark+",
   "workbench.editor.decorations.colors": true,
   "workbench.editor.highlightModifiedTabs": true,
   "workbench.editor.wrapTabs": true,
