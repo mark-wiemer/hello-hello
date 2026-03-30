@@ -79,6 +79,7 @@
     "artifacting",
     "asquare",
     "Astroneer",
+    "atresia",
     "autoclicker",
     "autohotkey",
     "backcolor",
@@ -97,6 +98,7 @@
     "BSTR",
     "btns",
     "BYREF",
+    "cacio",
     "callout",
     "callouts",
     "Catoggio",
@@ -187,7 +189,9 @@
     "esbenp",
     "Española",
     "Exif",
+    "extracardiac",
     "fgrep",
+    "Fontan",
     "fontes",
     "forza",
     "FOSS",
@@ -420,7 +424,8 @@
     "YYYYWW",
     "Zacarias",
     "Zadvydas",
-    "Zeroize"
+    "Zeroize",
+    "zipperless"
   ],
   "chat.tools.urls.autoApprove": {
     "https://github.com/microsoft/vscode/issues": {
