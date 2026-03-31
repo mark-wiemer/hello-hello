@@ -1,0 +1,37 @@
+---
+import { getAllBlogPosts } from "@/utils/blog";
+
+type PostListItem = {
+  postDate: string;
+  postTime: string | undefined;
+  postTitle: string;
+  postType: string;
+  lastUpdated: string | undefined;
+  /** Whether to list the post in the index and home page */
+  listed: boolean;
+  slug: string;
+};
+
+const posts: PostListItem[] = getAllBlogPosts()
+  .map<PostListItem>(({ params, props }) => {
+    const listed = props.module?.frontmatter.listed ?? true;
+    return { ...props.module?.frontmatter, slug: params.slug, listed };
+  })
+  .filter((post) => post.postDate && post.slug && post.listed)
+  .sort((a, b) => b.postDate.localeCompare(a.postDate));
+---
+
+<ul>
+  {
+    posts.map((post) => (
+      <li>
+        {post.postType === "notes" ? `${post.postDate} (notes): ` : `${post.postDate}: `}
+        <a href={`/blog/${post.slug}`}>{post.postTitle}</a>
+        {post.lastUpdated ? ` (last updated ${post.lastUpdated})` : ""}
+      </li>
+    ))
+  }
+  <li>
+    Other posts: <a href="https://markwiemer.medium.com">markwiemer.medium.com</a>
+  </li>
+</ul>
