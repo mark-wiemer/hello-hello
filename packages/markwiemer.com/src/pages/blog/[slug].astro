@@ -1,12 +1,12 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import { getBlogPostPaths, getPreface } from "@/utils/blog";
+import { getAllBlogPosts, getPreface } from "@/utils/blog";
 
 /**
  * Magic function used by Astro.
  * https://docs.astro.build/en/guides/routing/#dynamic-routes
  */
-export const getStaticPaths = getBlogPostPaths;
+export const getStaticPaths = getAllBlogPosts;
 
 const { module } = Astro.props;
 let { default: Content, frontmatter } = module;
