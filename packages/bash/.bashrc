@@ -147,6 +147,24 @@ alias vcf='npm run validate:ci:fix'
 #endregion
 
 #region functions
+add_remote() {
+    if [ $# -eq 0 ]; then
+        echo "Adds remote of current repo for the given GitHub user"
+        echo "  and checks out that branch from that remote."
+        echo "Usage: add_remote user:branch"
+        echo "Example: add_remote mark-wiemer:marks-branch"
+        return 1
+    fi
+
+    local user="${1%%:*}"
+    local branch="${1##*:}"
+    local repo=$(basename "$(git rev-parse --show-toplevel)")
+
+    git remote add "$user" "https://github.com/$user/$repo.git"
+    git fetch "$user"
+    git checkout "$branch"
+}
+
 github_link() {
     # Outputs GitHub link to current path in current repo
     # Designed for Linux Mint with HTTPS connection to remotes
@@ -288,7 +306,7 @@ export PATH="$HOME/.aspire/bin:$PATH"
 export ASPIRE_CONTAINER_RUNTIME=podman
 #endregion
 
-#region custom scripts
+#region add my-stuff/scripts to PATH
 # see new-machine/linux
 export PATH="$HOME/my-stuff/scripts:$PATH"
 #endregion

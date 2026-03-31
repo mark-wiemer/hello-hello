@@ -6,29 +6,19 @@
     padding: 4px;
     max-width: calc(100vw - 24px);
   }
-
-  & > hr {
-    height: 28px;
-    border: 0;
-  }
 }
 
 #colophon {
+  display: flex;
   flex-direction: row;
   justify-content: space-between;
   flex-wrap: wrap;
-
-  & #colophon-right {
-    text-align: end;
-  }
 }
 
 .row {
+  display: flex;
   flex-direction: row;
   justify-content: space-between;
-  & > :last-child {
-    text-align: end;
-  }
 }
 
 h2 {

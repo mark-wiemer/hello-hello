@@ -11,7 +11,8 @@
     "ci": "start-server-and-test preview http-get://localhost:4321 playwright",
     "preview": "astro preview",
     "test": "vitest --config config/vitest.config.js",
-    "test:ci": "pnpm test --run",
+    "//test:ci": "todo enable these in CI for realsies",
+    "test:ci": "bun run test --run",
     "validate:fix": "sort-package-json"
   },
   "dependencies": {
