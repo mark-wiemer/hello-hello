@@ -4,6 +4,7 @@ name: _global - Auto-add issues to project
 
 on:
   issues:
+    # todo stop triggering on edit to save runs
     types: [opened, edited]
 
 jobs:
@@ -18,8 +19,9 @@ jobs:
         with:
           app-id: ${{ secrets.APP_ID }}
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
+          owner: mark-wiemer-org
       # https://github.com/actions/add-to-project
       - uses: actions/add-to-project@v1.0.2
         with:
-          project-url: https://github.com/users/mark-wiemer/projects/2
+          project-url: https://github.com/orgs/mark-wiemer-org/projects/1
           github-token: ${{ steps.app-token.outputs.token }}
