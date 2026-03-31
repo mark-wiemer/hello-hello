@@ -39,6 +39,7 @@ const posts: PostListItem[] = Object.entries(glob)
     {
       posts.map((post) => (
         <li>
+          {/* Format the list entry (not the preface at the top of the post) */}
           {post.postType === "notes" ? `${post.postDate} (notes): ` : `${post.postDate}: `}
           <a href={`/blog/${post.slug}`}>{post.postTitle}</a>
           {post.lastUpdated ? ` (last updated ${post.lastUpdated})` : ""}
