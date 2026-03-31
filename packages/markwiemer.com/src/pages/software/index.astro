@@ -161,10 +161,9 @@ const modernAppBottomSections = [
     max-width: 1280px;
   }
 
-  /* 4 columns: Editor | Front/Back | Env/Observe | Deploy */
+  /* 5 columns: Editor | Frontends | Backends | Env | Observability, then Deploy */
   .top-grid {
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(2, minmax(var(--row-min), auto));
+    grid-template-columns: repeat(5, 1fr);
   }
 
   /* 3 columns: Docs | Maintenance | Comms, then Agents full-width */
@@ -189,52 +188,14 @@ const modernAppBottomSections = [
     padding-left: 1.2rem;
   }
 
-  /* Top grid: explicit placement */
-  .editor {
-    grid-column: 1;
-    grid-row: 1 / 3;
-  }
-  .frontends {
-    grid-column: 2;
-    grid-row: 1;
-  }
-  .backends {
-    grid-column: 2;
-    grid-row: 2;
-  }
-  .env {
-    grid-column: 3;
-    grid-row: 1;
-  }
-  .observability {
-    grid-column: 3;
-    grid-row: 2;
-  }
-  .deploy {
-    grid-column: 4;
-    grid-row: 1 / 3;
-  }
-
-  /* Bottom grid: agents spans all 3 columns */
+  /* Bottom grid: agents spans all columns */
   .agents {
     grid-column: 1 / -1;
   }
 
   @media (max-width: 1280px) {
     .top-grid {
-      grid-template-columns: repeat(2, 1fr);
-      grid-template-rows: none;
-    }
-
-    /* reset explicit placement so auto-placement takes over */
-    .editor,
-    .frontends,
-    .backends,
-    .env,
-    .observability,
-    .deploy {
-      grid-column: unset;
-      grid-row: unset;
+      grid-template-columns: repeat(3, 1fr);
     }
 
     .bottom-grid {

@@ -41,25 +41,19 @@ test.describe("320-640px (thin)", () => {
 test.describe("640-1280px (medium)", () => {
   test.use({ viewport: { width: 900, height: 800 } });
 
-  test("modern app chart has 2 columns", async ({ page }) => {
+  test("modern app chart has 3 columns", async ({ page }) => {
     await page.goto("/software");
     const columns = await getColumnCount(page, ".top-grid");
-    expect(columns).toBe(2);
+    expect(columns).toBe(3);
   });
 });
 
 test.describe("1280px+ (wide)", () => {
   test.use({ viewport: { width: 1440, height: 900 } });
 
-  test("modern app chart top section has 4 columns", async ({ page }) => {
+  test("modern app chart has 5 columns", async ({ page }) => {
     await page.goto("/software");
     const columns = await getColumnCount(page, ".top-grid");
-    expect(columns).toBe(4);
-  });
-
-  test("modern app chart bottom section has 3 columns", async ({ page }) => {
-    await page.goto("/software");
-    const columns = await getColumnCount(page, ".bottom-grid");
-    expect(columns).toBe(3);
+    expect(columns).toBe(5);
   });
 });
