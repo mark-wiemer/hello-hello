@@ -1,7 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-
-const glob = import.meta.glob("./content/*.mdx", { eager: true });
+import { getAllBlogPosts } from "@/utils/blog";
 
 type PostListItem = {
   postDate: string;
@@ -14,15 +13,10 @@ type PostListItem = {
   slug: string;
 };
 
-const posts: PostListItem[] = Object.entries(glob)
-  .map(([path, module]: [string, any]) => {
-    // path === './content/2024-10-08 months-without-music.mdx'
-    // filename === '2024-10-08 months-without-music'
-    const filename = path.split("/").pop()?.replace(".mdx", "") || "";
-    // slug === 'months-without-music'
-    const slug = filename.split(" ").slice(1).join("-");
-    const listed = module?.frontmatter.listed ?? true;
-    return { ...module?.frontmatter, slug, listed };
+const posts: PostListItem[] = getAllBlogPosts()
+  .map(({ params, props }) => {
+    const listed = props.module?.frontmatter.listed ?? true;
+    return { ...props.module?.frontmatter, slug: params.slug, listed };
   })
   .filter((post) => post.postDate && post.slug && !!post.listed)
   .sort((a, b) => b.postDate.localeCompare(a.postDate));
