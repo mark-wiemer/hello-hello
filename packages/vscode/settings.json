@@ -78,6 +78,8 @@
     "antialiasing",
     "artifacting",
     "asquare",
+    "Astroneer",
+    "atresia",
     "autoclicker",
     "autohotkey",
     "backcolor",
@@ -96,6 +98,7 @@
     "BSTR",
     "btns",
     "BYREF",
+    "cacio",
     "callout",
     "callouts",
     "Catoggio",
@@ -110,6 +113,7 @@
     "clipbackup",
     "CLSID",
     "cntrl",
+    "Codeberg",
     "combobox",
     "Connor",
     "Consolas",
@@ -186,14 +190,18 @@
     "esbenp",
     "Española",
     "Exif",
+    "extracardiac",
     "fgrep",
+    "Fontan",
     "fontes",
     "forza",
+    "FOSS",
     "Freakin",
     "frontends",
     "frontmatter",
     "fuckin",
     "GETPARTS",
+    "Gitea",
     "Grandell",
     "graycheck",
     "greycheck",
@@ -232,6 +240,8 @@
     "Kyklish",
     "LCID",
     "Lexikos",
+    "libc",
+    "līber",
     "Libera",
     "linefeeds",
     "listbox",
@@ -243,6 +253,7 @@
     "mapo",
     "markw",
     "markwiemer",
+    "MCVE",
     "Melvor",
     "MENUDROPALIGNMENT",
     "MESSAGETABLE",
@@ -307,6 +318,7 @@
     "Paren",
     "PCRE",
     "Pederick",
+    "Pelle",
     "PENWINDOWS",
     "Pgdn",
     "Pgup",
@@ -414,13 +426,19 @@
     "YYYYWW",
     "Zacarias",
     "Zadvydas",
-    "Zeroize"
+    "Zeroize",
+    "zipperless"
   ],
   "chat.tools.urls.autoApprove": {
     "https://github.com/microsoft/vscode/issues": {
       "approveRequest": false,
       "approveResponse": true
-    }
+    },
+    "https://github.com/actions/upload-pages-artifact": true,
+    "https://github.com/actions": true,
+    "https://github.com": true,
+    "https://github.com/oven-sh/setup-bun": true,
+    "https://github.com/oven-sh": true
   },
   "chat.viewSessions.enabled": false,
   "debug.onTaskErrors": "abort",
@@ -530,7 +548,6 @@
   "window.restoreWindows": "preserve",
   "window.titleBarStyle": "custom",
   "window.titleSeparator": " - ",
-  "workbench.colorTheme": "Default Dark+",
   "workbench.editor.decorations.colors": true,
   "workbench.editor.highlightModifiedTabs": true,
   "workbench.editor.wrapTabs": true,
@@ -544,5 +561,21 @@
   "cSpell.enabled": false,
   "scm.repositories.selectionMode": "single",
   "window.confirmSaveUntitledWorkspace": false,
-  "git.suggestSmartCommit": false
+  "git.suggestSmartCommit": false,
+  "chat.tools.terminal.autoApprove": {
+    "git tag": true,
+    "git rev-parse": true,
+    "npx semver": true
+  },
+  "json.schemaDownload.trustedDomains": {
+    "https://developer.microsoft.com/json-schemas/": true,
+    "https://json-schema.org/": true,
+    "https://json.schemastore.org/": true,
+    "https://raw.githubusercontent.com/devcontainers/spec/": true,
+    "https://raw.githubusercontent.com/googleapis/release-please/v17.1.3/schemas/config.json": true,
+    "https://raw.githubusercontent.com/microsoft/vscode/": true,
+    "https://schemastore.azurewebsites.net/": true,
+    "https://unpkg.com/knip%406/schema-jsonc.json": true,
+    "https://www.schemastore.org/": true
+  }
 }

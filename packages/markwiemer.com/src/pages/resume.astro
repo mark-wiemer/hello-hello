@@ -115,7 +115,7 @@ const projects: ProjectEntry[] = [
     left.style.width = "auto";
     right.style.width = "auto";
 
-    // add a small buffer to prevent wrapping
+    // add a 2px buffer to prevent wrapping
     const maxWidth = Math.max(left.offsetWidth, right.offsetWidth) + 2;
     left.style.width = `${maxWidth}px`;
     right.style.width = `${maxWidth}px`;

@@ -1,4 +1,4 @@
-name: markwiemer.com - Deploy to GitHub Pages
+name: markwiemer.com CD
 
 on:
   push:
@@ -32,26 +32,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           lfs: true
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-      # Use pnpm for performance
-      - name: Install pnpm
-        run: npm install -g pnpm
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
       - name: Install dependencies
-        run: pnpm install
+        run: bun install
         working-directory: ${{ env.SITE_DIR }}
       - name: Build static content
-        run: pnpm run build
+        run: bun run build
         working-directory: ${{ env.SITE_DIR }}
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: "${{ env.SITE_DIR }}/dist"
       - name: Deploy to GitHub Pages

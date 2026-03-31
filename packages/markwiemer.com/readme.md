@@ -6,15 +6,17 @@ My personal site hosting my articles, pictures of my dog, and other stuff I like
 
 Pre-requisites:
 
-- [Node.js](../javascript/readme.md)
-- [pnpm](../pnpm/readme.md)
+- [Bun](../notes/bun.md)
 
 Setup:
 
 ```sh
-pnpm i
-pnpm dev
+bun i
+bun dev
+o
 ```
+
+`o` while the `dev` script is running prompts Vite to **o**pen a browser tab with your page.
 
 ## Notes
 
@@ -26,10 +28,9 @@ Hosting tools:
 Developer tools:
 
 - [Astro](../astro/readme.md) to build the site
+- [Bun](../notes/bun.md) to run JavaScript and manage packages
 - [Git LFS](../git/readme.md) to better track changes to images
 - [GitHub Actions](../github/readme.md) to automatically deploy the site
-- [Node.js](../javascript/readme.md) to run JavaScript
-- [pnpm](../pnpm/readme.md) to manage packages
 - [Prettier](https://prettier.io) to format the repo
 
 Resources:
@@ -46,6 +47,7 @@ Console logs:
     ```
 
     - Any site that has `img[loading="lazy"]` will have this
+
   - ```
     Navigated to https://markwiemer.com
     ```

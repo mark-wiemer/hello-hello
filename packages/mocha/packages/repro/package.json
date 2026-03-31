@@ -1,10 +1,11 @@
 {
+  "type": "module",
   "scripts": {
     "test:debug": "npx cross-env DEBUG=* npm test",
-    "test": "mocha --parallel index.test.js --reporter json --watch --no-color --no-bail"
+    "test": "cross-env NODE_ENV=test mocha"
   },
   "dependencies": {
-    "mocha": "file:../mocha"
+    "mocha": "11.7.5"
   },
   "devDependencies": {
     "chai": "^6.2.2",

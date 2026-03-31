@@ -85,16 +85,19 @@ const modernAppBottomSections = [
 
 <Layout pageTitle="Software" klass="chart">
   <h1>Software</h1>
+  <div class="article">
+    <p>I spend a lot of time on software, below are some of my current priorities 🤓</p>
+  </div>
   <!-- todo we need to add automated tests! -->
+  <h2>A modern app</h2>
   <div class="article">
     <p>
-      Software is crazy, but we can manage it if we have names for the things we're building. Here's
-      my mental map for all projects. This map was heavily inspired by a secret presentation from <a
-        href="https://safia.rocks/">Safia Abdalla</a
-      > :) For best results, use a wide screen (1280px+).
+      Even a single app is crazy complex, but we can manage it if we have names for its parts.
+      Here's my mental map for each of my projects. This map was heavily inspired by a secret
+      presentation from <a href="https://safia.rocks/">Safia Abdalla</a> :) For best results, use a wide
+      screen (1280px+).
     </p>
   </div>
-  <h2>A modern app</h2>
   <div class="top-grid">
     {
       modernAppTopSections.map((section) => (
@@ -123,67 +126,30 @@ const modernAppBottomSections = [
       ))
     }
   </div>
+  <h2>Luanti</h2>
+  <div class="article">
+    <p>
+      <a href="/software/luanti">Luanti</a> is an open-source "<a href="/glossary#boxel">boxel</a>"
+      game creation system including a game engine, distribution site, and application for players.
+      I'm currently working on <a href="https://github.com/luanti-org/docs.luanti.org/issues/296"
+        >rewriting Luanti's documentation</a
+      > into a domain-specific language so that we can better maintain improvements and translate the
+      docs from Lua to TypeScript and beyond.
+    </p>
+  </div>
   <h2>Mocha</h2>
   <div class="article">
     <p>
-      <a href="https://mochajs.org">Mocha</a> is the classic, reliable, trusted test framework for Node.js
+      <a href="/software/mocha">Mocha</a> is the classic, reliable, trusted test framework for Node.js
       and the browser that was created in 2011. I've been a maintainer since August 2025, so I'm certainly
       no expert yet, but I've used Mocha significantly for testing <a href="https://ahkpp.com"
         >AHK++</a
       >, a VS Code extension that provides language support for a niche programming language.
     </p>
-    <h3>Priorities</h3>
-    <ul>
-      <li>Modernization: ESM support, modern Node versions, good dependencies</li>
-      <li>Stability: Test coverage, backporting fixes, minimal breaking changes</li>
-    </ul>
-    <h3>My key contributions</h3>
-    <ul>
-      <li>
-        Fixed critical <a href="https://github.com/mochajs/mocha/pull/5498"
-          ><code>require(ESM)</code> bug (#5498)</a
-        >
-      </li>
-      <li>
-        Monitored and improved <a href="https://github.com/mochajs/mocha/issues/5361"
-          >CI pipeline reliability (#5361)</a
-        >
-      </li>
-      <li>
-        Oversaw <a href="https://github.com/mochajs/mocha/pull/5409"
-          >rewrite of "watch mode" logic (#5409)</a
-        >
-      </li>
-    </ul>
-    <h3>My roadmap for Mocha</h3>
-    <p>
-      You can view <a href="https://github.com/orgs/mochajs/projects/6/views/2"
-        >my prioritized backlog</a
-      >, but in summary:
-    </p>
-    <ul>
-      <li>
-        <a href="https://github.com/mochajs/mocha/issues/5357"
-          >Release Mocha 12, supporting <code>require(ESM)</code> and much more (#5357)</a
-        >
-      </li>
-      <li>
-        <a
-          href="https://github.com/mochajs/mocha/issues?q=sort%3Aupdated-desc%20is%3Aissue%20is%3Aopen%20label%3A%22type%3A%20bug%22"
-          >Bugfixes, bugfixes, bugfixes!</a
-        >
-      </li>
-      <li>
-        <a href="https://github.com/mochajs/mocha/issues/5601"
-          >Add project automation for stale issues, security reports, and more (#5601)</a
-        >
-      </li>
-      <li>
-        <a href="https://github.com/mochajs/mocha/issues/5639"
-          >Document broader project resources (#5639)</a
-        >
-      </li>
-    </ul>
+  </div>
+  <h2>GitHub</h2>
+  <div class="article">
+    <p><a href="/software/github">GitHub</a> has tons of features that I'm learning more about.</p>
   </div>
 </Layout>
 
