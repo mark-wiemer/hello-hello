@@ -2,6 +2,7 @@ import HeaderImage from "@/components/HeaderImage.astro";
 import Mark2026 from "@/assets/2026-02-03-profile-square.jpg";
 import Wynonna2024 from "@/assets/2024-04-29 Wynonna raincoat outside.jpg";
 import Layout from "@/layouts/Layout.astro";
+import BlogPostList from "@/components/BlogPostList.astro";
 
 <Layout pageTitle="Home">
 {/* prettier-ignore */}
@@ -24,16 +25,14 @@ Check out [my page on software](/software) for everything I know about digital s
 
 Recent posts:
 
-- [Pericarditis and spoons](/blog/heart-condition-spoons) (2026-03-30)
-- [I got the job!](/blog/got-dream-job) (2026-03-27)
-- [Acceptance, rejection, balance](/blog/acceptance-rejection-balance) (2026-03-12)
-- [Crying over breakfast](/blog/crying-over-breakfast) (2026-01-27)
-- [Good guy with a gun](/blog/good-guy-gun) (2026-01-26)
-- [Stay in your lane](/blog/stay-your-lane) (2026-01-25)
-- [They're killing us](/blog/theyre-killing-us) (2026-01-24)
-- [The 2026 PC build is complete!](/blog/2026-pc-build) (2026-01-18)
-- [Why illegal immigrants have rights](/blog/human-immigrant-rights) (2026-01-13)
-- [Killing of Renée Good and subsequent actions](/blog/killing-renee-good) (Last updated 2026-01-25)
+export const recentFilter = (post) => {
+  // Runs at build time, but better than nothing :)
+  const cutoff = new Date();
+  cutoff.setDate(cutoff.getDate() - 60);
+  return new Date(post.postDate) >= cutoff;
+};
+
+<BlogPostList filter={recentFilter} limit={5} />
 
 [All posts](/blog)
 

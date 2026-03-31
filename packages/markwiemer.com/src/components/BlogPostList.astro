@@ -12,13 +12,22 @@ type PostListItem = {
   slug: string;
 };
 
-const posts: PostListItem[] = getAllBlogPosts()
+interface Props {
+  filter?: (post: PostListItem) => boolean;
+  limit?: number;
+}
+
+const { filter, limit } = Astro.props;
+
+let posts: PostListItem[] = getAllBlogPosts()
   .map<PostListItem>(({ params, props }) => {
     const listed = props.module?.frontmatter.listed ?? true;
     return { ...props.module?.frontmatter, slug: params.slug, listed };
   })
   .filter((post) => post.postDate && post.slug && post.listed)
-  .sort((a, b) => b.postDate.localeCompare(a.postDate));
+  .sort((a, b) => b.postDate.localeCompare(a.postDate))
+  .filter(filter ?? (() => true))
+  .slice(0, limit ?? undefined);
 ---
 
 <ul>
