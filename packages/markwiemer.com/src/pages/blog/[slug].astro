@@ -1,6 +1,7 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import { getAllBlogPosts, getPreface } from "@/utils/blog";
+import CustomDate from "@/components/CustomDate.astro";
+import { getAllBlogPosts } from "@/utils/blog";
 
 /**
  * Magic function used by Astro.
@@ -13,10 +14,19 @@ let { default: Content, frontmatter } = module;
 frontmatter ??= {};
 /* todo handle "originally posted on Medium.com" stuff */
 const { postTitle, postDate, postTime, lastUpdated, postType } = frontmatter;
+
+const notesDisclaimer =
+  postType === "notes"
+    ? " These are personal notes, subject to change. None of this is legal advice."
+    : "";
 ---
 
 <Layout pageTitle={postTitle}>
   <h1>{postTitle}</h1>
-  <p>{getPreface(postDate, postTime, lastUpdated, postType)}</p>
+  <p>
+    <CustomDate date={postDate} />{postTime ? `, ${postTime}.` : "."}
+    {lastUpdated ? <>{" "}Last updated <CustomDate date={lastUpdated} />.</> : ""}
+    {notesDisclaimer}
+  </p>
   <Content />
 </Layout>

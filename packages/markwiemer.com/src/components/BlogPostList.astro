@@ -1,5 +1,6 @@
 ---
 import { getAllBlogPosts } from "@/utils/blog";
+import CustomDate from "@/components/CustomDate.astro";
 
 type PostListItem = {
   postDate: string;
@@ -34,9 +35,9 @@ let posts: PostListItem[] = getAllBlogPosts()
   {
     posts.map((post) => (
       <li>
-        {post.postType === "notes" ? `${post.postDate} (notes): ` : `${post.postDate}: `}
+        <CustomDate date={post.postDate} />{post.postType === "notes" ? " (notes): " : ": "}
         <a href={`/blog/${post.slug}`}>{post.postTitle}</a>
-        {post.lastUpdated ? ` (last updated ${post.lastUpdated})` : ""}
+        {post.lastUpdated ? <>{" "}(last updated <CustomDate date={post.lastUpdated} />)</> : ""}
       </li>
     ))
   }
