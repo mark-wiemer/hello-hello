@@ -9,9 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     permissions: {}
     steps:
-      # https://github.com/actions/create-github-app-token
-      # GitHub App private key doesn't expire (unlike PATs); mints short-lived tokens per run
-      # Requires APP_ID and APP_PRIVATE_KEY secrets (GitHub App with Projects: write permission)
+      # Action: https://github.com/actions/create-github-app-token
+      # App: https://github.com/settings/apps/mark-wiemer-app
+      # Secrets: https://github.com/mark-wiemer/hello-hello/settings/secrets/actions
+      # More details: https://markwiemer.com/software/github/apps/
       - uses: actions/create-github-app-token@v1
         id: app-token
         with:
