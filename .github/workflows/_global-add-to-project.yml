@@ -4,7 +4,7 @@ name: _global - Auto-add issues to project
 
 on:
   issues:
-    types: [opened]
+    types: [opened, edited]
 
 jobs:
   add-to-project:
