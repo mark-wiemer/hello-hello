@@ -3,6 +3,7 @@
   "short_name": "markwiemer",
   "start_url": "/",
   "display": "standalone",
+  "background_color": "black",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",

@@ -1,6 +1,7 @@
 /* https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascading_variables/Using_custom_properties */
 /* :root is a common practice for global reference */
 :root {
+  /* --body-bg-X is also used in Layout.astro */
   --body-bg-dark: black;
   --body-bg-light: white;
   --border-radius-button: 4px;
