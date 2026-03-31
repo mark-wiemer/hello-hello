@@ -1,3 +1,5 @@
+# Uses issue context to add the opened issue to the project
+# https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#issues
 name: _global - Auto-add issues to project
 
 on:
@@ -9,10 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions: {}
     steps:
-      # Action: https://github.com/actions/create-github-app-token
-      # App: https://github.com/settings/apps/mark-wiemer-app
-      # Secrets: https://github.com/mark-wiemer/hello-hello/settings/secrets/actions
-      # More details: https://markwiemer.com/software/github/apps/
+      # https://github.com/actions/create-github-app-token
+      # https://markwiemer.com/software/github/apps/
       - uses: actions/create-github-app-token@v1
         id: app-token
         with:
