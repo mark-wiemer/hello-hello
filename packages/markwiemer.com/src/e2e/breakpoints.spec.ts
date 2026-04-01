@@ -24,6 +24,7 @@ test.describe("modern app chart", () => {
   };
 
   test.describe("[320-640] px", () => {
+    // todo use property-based testing
     for (const width of [320, 480, 640]) {
       test(`at ${width}px`, async ({ page }) => {
         await expectColumnTuple(page, width, [1, 1]);
@@ -39,24 +40,11 @@ test.describe("modern app chart", () => {
     }
   });
 
-  test("has 2 columns at 900px (medium)", async ({ page }) => {
-    await page.setViewportSize({ width: 900, height: 800 });
-    await page.goto("/software");
-    const columns = await getColumnCount(page, ".top-grid");
-    expect(columns).toBe(2);
-  });
-
-  test("top half has 4 columns at 1440px (wide)", async ({ page }) => {
-    await page.setViewportSize({ width: 1440, height: 900 });
-    await page.goto("/software");
-    const columns = await getColumnCount(page, ".top-grid");
-    expect(columns).toBe(4);
-  });
-
-  test("bottom half has 3 columns at 1440px (wide)", async ({ page }) => {
-    await page.setViewportSize({ width: 1440, height: 900 });
-    await page.goto("/software");
-    const columns = await getColumnCount(page, ".bottom-grid");
-    expect(columns).toBe(3);
+  test.describe("(1280, inf) px", () => {
+    for (const width of [1281, 1920, 9999]) {
+      test(`at ${width}px`, async ({ page }) => {
+        await expectColumnTuple(page, width, [4, 3]);
+      });
+    }
   });
 });

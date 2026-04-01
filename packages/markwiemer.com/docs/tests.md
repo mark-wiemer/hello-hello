@@ -39,11 +39,6 @@ When moving the site to a different framework, be sure to check the following:
 - Homepage heading should still be unbroken
 - Header images should still be side-by-side
 
-### 1280px+
-
-- Modern app chart top half has 4 columns
-- Modern app chart bottom half has 3 columns
-
 ## Images
 
 Homepage when zoom is 200%: Header images should use the 2x src
