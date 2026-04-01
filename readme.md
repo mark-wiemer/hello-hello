@@ -4,8 +4,8 @@ Why use many repo when one repo do trick?
 
 This is a monorepo of all my personal work, with minor exceptions.
 AHK++ will stay its own repo for better issue tracking and stargazing.
-Websites I maintain beyond markwiemer.com will stay their own repos
-because I use GitHub pages, which only supports one site per repo.
+Websites I maintain beyond markwiemer.com will stay as their own repos
+because I use GitHub Pages, which only supports one site per repo.
 
 ## Index
 
