@@ -19,6 +19,11 @@ test.describe("theme toggle", () => {
     await page.goto("/");
   });
 
+  test("theme toggle is not inside nav landmark", async ({ page }) => {
+    const toggle = page.locator("nav #themeToggle");
+    await expect(toggle).toHaveCount(0);
+  });
+
   test("defaults to system theme", async ({ page }) => {
     const toggle = await openNavAndGetToggle(page);
     await expect(toggle).toHaveText(label(system));
