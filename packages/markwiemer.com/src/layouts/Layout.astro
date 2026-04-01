@@ -21,6 +21,10 @@ const classToUse = Astro.props.klass ? Astro.props.klass : "article";
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <!-- Copied from --body-bg-X in public/styles.css -->
+    <meta name="theme-color" content="white" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="black" media="(prefers-color-scheme: dark)" />
     <link rel="stylesheet" href={style} />
     <title>{Astro.props.pageTitle} - markwiemer.com</title>
   </head>
@@ -87,6 +91,11 @@ const classToUse = Astro.props.klass ? Astro.props.klass : "article";
           });
         }
       })();
+    </script>
+    <script is:inline data-notes="register service worker for PWA support">
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("/sw.js").catch(() => {});
+      }
     </script>
   </body>
 </html>
