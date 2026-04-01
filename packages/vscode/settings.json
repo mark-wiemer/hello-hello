@@ -565,7 +565,10 @@
   "chat.tools.terminal.autoApprove": {
     "git tag": true,
     "git rev-parse": true,
-    "npx semver": true
+    "npx semver": true,
+    "git lfs": true,
+    "awk": true,
+    "git rev-list": true
   },
   "json.schemaDownload.trustedDomains": {
     "https://developer.microsoft.com/json-schemas/": true,
