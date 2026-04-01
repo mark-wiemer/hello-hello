@@ -120,10 +120,10 @@
   }
 }
 
-/* button to open the nav */
-/* todo rmove rounded border on right side while expanded */
+/* button */
+/* todo remove rounded border on right side while expanded */
 /* this would mirror the existing appearance on the left while collapsed */
-#openNav {
+#toggleMenu {
   width: var(--width-button-nav);
   border: 1px solid var(--text-primary);
   border-radius: var(--border-radius-button);
@@ -148,7 +148,7 @@
   }
 }
 
-body.nav-open #openNav {
+body.nav-open #toggleMenu {
   transform: translateX(
     calc(var(--nav-open-width) - var(--width-button-nav) + var(--border-radius-button))
   );

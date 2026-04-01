@@ -8,7 +8,7 @@ const label = (theme: string) => `Theme: ${theme[0].toUpperCase()}${theme.slice(
 
 /** Opens the nav and returns the theme toggle button */
 async function openNavAndGetToggle(page: Page) {
-  await page.click("#openNav");
+  await page.click("#toggleMenu");
   const toggle = page.locator("#themeToggle");
   await expect(toggle).toBeVisible();
   return toggle;
