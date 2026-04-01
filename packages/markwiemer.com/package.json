@@ -3,13 +3,19 @@
   "private": "true",
   "type": "module",
   "scripts": {
+    "//todo": "use eslint-plugin-package-json",
     "astro": "astro",
     "build": "astro build",
     "dev": "astro dev",
+    "e2e:install": "bunx playwright install --with-deps chromium",
+    "e2e": "start-server-and-test preview http-get://localhost:4321 playwright",
+    "playwright": "playwright test",
+    "playwright//": "To be used as part of `e2e`",
     "preview": "astro preview",
     "test": "vitest --config config/vitest.config.js",
-    "//test:ci": "todo enable these in CI for realsies",
     "test:ci": "bun run test --run",
+    "test:ci//": "//todo enable these in CI for realsies",
+    "validate:ci": "bun run test:ci && bun run e2e:install && bun run build && bun run e2e",
     "validate:fix": "sort-package-json"
   },
   "dependencies": {
@@ -17,5 +23,9 @@
     "astro": "^5.16.10",
     "sharp": "^0.34.5",
     "vitest": "^4.0.18"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.53.1",
+    "start-server-and-test": "^2.0.12"
   }
 }
