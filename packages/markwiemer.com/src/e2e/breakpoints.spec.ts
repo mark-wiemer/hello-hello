@@ -20,7 +20,7 @@ test.describe("modern app chart", () => {
     await page.goto("/software");
     const columnsTop = await getColumnCount(page, ".top-grid");
     const columnsBottom = await getColumnCount(page, ".bottom-grid");
-    expect([columnsTop, columnsBottom]).toEqual([1, 1]);
+    expect([columnsTop, columnsBottom]).toEqual(expected);
   };
 
   test.describe("[320-640] px", () => {
@@ -31,7 +31,13 @@ test.describe("modern app chart", () => {
     }
   });
 
-  test.describe("(640-1280] px", () => {});
+  test.describe("(640-1280] px", () => {
+    for (const width of [641, 960, 1280]) {
+      test(`at ${width}px`, async ({ page }) => {
+        await expectColumnTuple(page, width, [2, 2]);
+      });
+    }
+  });
 
   test("has 2 columns at 900px (medium)", async ({ page }) => {
     await page.setViewportSize({ width: 900, height: 800 });
