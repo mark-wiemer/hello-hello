@@ -31,8 +31,6 @@ There are three colors: unvisited, visited, and plaintext. Plaintext color is, w
 
 Then duplicate for light mode and dark mode!
 
-To simplify this work, see [Issue 13](https://github.com/mark-wiemer/hello-hello/issues/13)
-
 ## Breakpoints
 
 ### Names
@@ -54,11 +52,12 @@ To simplify this work, see [Issue 13](https://github.com/mark-wiemer/hello-hello
 
 ### 640-1280px
 
-- Modern app chart has 3 columns
+- Modern app chart has 2 columns
 
 ### 1280px+
 
-- Modern app chart has 5 columns
+- Modern app chart top half has 4 columns
+- Modern app chart bottom half has 3 columns
 
 ## Accessibility
 
