@@ -65,4 +65,35 @@ test.describe("theme toggle", () => {
     const toggleAfterClear = await openNavAndGetToggle(page);
     await expect(toggleAfterClear).toHaveText(label(system));
   });
+
+  test("light theme applies correct colors", async ({ page }) => {
+    const toggle = await openNavAndGetToggle(page);
+    await toggle.click();
+    await expect(toggle).toHaveText(label(light));
+
+    const body = page.locator("body");
+    const nav = page.locator("nav");
+    const link = page.locator("a[href]").first();
+
+    await expect.soft(body).toHaveCSS("background-color", "rgb(255, 255, 255)");
+    await expect.soft(body).toHaveCSS("color", "rgb(0, 0, 0)");
+    await expect.soft(nav).toHaveCSS("background-color", "rgb(255, 255, 255)");
+    await expect.soft(link).toHaveCSS("color", "rgb(9, 115, 131)");
+  });
+
+  test("dark theme applies correct colors", async ({ page }) => {
+    const toggle = await openNavAndGetToggle(page);
+    await toggle.click();
+    await toggle.click();
+    await expect(toggle).toHaveText(label(dark));
+
+    const body = page.locator("body");
+    const nav = page.locator("nav");
+    const link = page.locator("a[href]").first();
+
+    await expect.soft(body).toHaveCSS("background-color", "rgb(0, 0, 0)");
+    await expect.soft(body).toHaveCSS("color", "rgb(220, 220, 220)");
+    await expect.soft(nav).toHaveCSS("background-color", "rgb(0, 0, 0)");
+    await expect.soft(link).toHaveCSS("color", "rgb(0, 162, 174)");
+  });
 });
