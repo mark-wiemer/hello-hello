@@ -83,22 +83,16 @@ const modernAppBottomSections = [
 //#endregion
 ---
 
-<Layout pageTitle="Software" klass="chart">
+<Layout pageTitle="Software">
   <h1>Software</h1>
-  <div class="article">
-    <p>I spend a lot of time on software, below are some of my current priorities 🤓</p>
-  </div>
-  <!-- todo we need to add automated tests! -->
+  <p>I spend a lot of time on software, below are some of my current priorities 🤓</p>
   <h2>A modern app</h2>
-  <div class="article">
-    <p>
-      Even a single app is crazy complex, but we can manage it if we have names for its parts.
-      Here's my mental map for each of my projects. This map was heavily inspired by a secret
-      presentation from <a href="https://safia.rocks/">Safia Abdalla</a> :) For best results, use a wide
-      screen (1280px+).
-    </p>
-  </div>
-  <div class="top-grid">
+  <p>
+    Even a single app is crazy complex, but we can manage it if we have names for its parts. Here's
+    my mental map for each of my projects. This map was heavily inspired by a secret presentation
+    from <a href="https://safia.rocks/">Safia Abdalla</a> :) For best results, use a wide screen (1280px+).
+  </p>
+  <div class="top-grid chart">
     {
       modernAppTopSections.map((section) => (
         <section class={`card ${section.className}`}>
@@ -112,7 +106,7 @@ const modernAppBottomSections = [
       ))
     }
   </div>
-  <div class="bottom-grid">
+  <div class="bottom-grid chart">
     {
       modernAppBottomSections.map((section) => (
         <section class={`card ${section.className}`}>
@@ -127,34 +121,26 @@ const modernAppBottomSections = [
     }
   </div>
   <h2>Luanti</h2>
-  <div class="article">
-    <p>
-      <a href="/software/luanti">Luanti</a> is an open-source "<a href="/glossary#boxel">boxel</a>"
-      game creation system including a game engine, distribution site, and application for players.
-      I'm currently working on <a href="https://github.com/luanti-org/docs.luanti.org/issues/296"
-        >rewriting Luanti's documentation</a
-      > into a domain-specific language so that we can better maintain improvements and translate the
-      docs from Lua to TypeScript and beyond.
-    </p>
-  </div>
+  <p>
+    <a href="/software/luanti">Luanti</a> is an open-source "<a href="/glossary#boxel">boxel</a>"
+    game creation system including a game engine, distribution site, and application for players.
+    I'm currently working on <a href="https://github.com/luanti-org/docs.luanti.org/issues/296"
+      >rewriting Luanti's documentation</a
+    > into a domain-specific language so that we can better maintain improvements and translate the docs
+    from Lua to TypeScript and beyond.
+  </p>
   <h2>Mocha</h2>
-  <div class="article">
-    <p>
-      <a href="/software/mocha">Mocha</a> is the classic, reliable, trusted test framework for Node.js
-      and the browser that was created in 2011. I've been a maintainer since August 2025, so I'm certainly
-      no expert yet, but I've used Mocha significantly for testing <a href="https://ahkpp.com"
-        >AHK++</a
-      >, a VS Code extension that provides language support for a niche programming language.
-    </p>
-  </div>
+  <p>
+    <a href="/software/mocha">Mocha</a> is the classic, reliable, trusted test framework for Node.js
+    and the browser that was created in 2011. I've been a maintainer since August 2025, so I'm certainly
+    no expert yet, but I've used Mocha significantly for testing <a href="https://ahkpp.com"
+      >AHK++</a
+    >, a VS Code extension that provides language support for a niche programming language.
+  </p>
   <h2>GitHub</h2>
-  <div class="article">
-    <p><a href="/software/github">GitHub</a> has tons of features that I'm learning more about.</p>
-  </div>
-  <div class="article" data-notes="Link to home">
-    <hr />
-    <p>See also <a href="/">Home - markwiemer.com</a></p>
-  </div>
+  <p><a href="/software/github">GitHub</a> has tons of features that I'm learning more about.</p>
+  <hr />
+  <p>See also <a href="/">Home - markwiemer.com</a></p>
 </Layout>
 
 <style>
@@ -167,13 +153,22 @@ const modernAppBottomSections = [
     text-align: center;
   }
 
+  /* Break out of article's max-width to use full viewport width */
+  .chart {
+    width: calc(100vw - 48px);
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    box-sizing: border-box;
+    max-width: 1280px;
+    margin: var(--grid-gap) 0;
+  }
+
   .top-grid,
   .bottom-grid {
     display: grid;
     gap: var(--grid-gap);
     align-items: stretch;
-    margin: 0 auto var(--grid-gap);
-    max-width: 1280px;
   }
 
   /* 4 columns: Editor | Front/Back | Env/Observe | Deploy */

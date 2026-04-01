@@ -14,6 +14,6 @@ const userspaceLinks = [
 for (const link of userspaceLinks) {
   test(`${link} loads successfully`, async ({ page }) => {
     const response = await page.goto(link);
-    expect(response?.ok()).toBe(true);
+    expect(response?.ok(), `${response?.status()}`).toBe(true);
   });
 }
