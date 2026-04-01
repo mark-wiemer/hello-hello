@@ -1,11 +1,13 @@
 name: markwiemer.com CD
 
 on:
-  push:
-    branches: ["main"]
-    paths:
-      - "packages/markwiemer.com/**"
-      - ".github/workflows/markwiemer.com-static.yml"
+  # todo restore auto-deploy after fixing Git LFS bandwidth issue
+  # https://github.com/mark-wiemer/hello-hello/issues/65
+  # push:
+  #   branches: ["main"]
+  #   paths:
+  #     - "packages/markwiemer.com/**"
+  #     - ".github/workflows/markwiemer.com-static.yml"
 
   # Allows us to run this workflow manually from the Actions tab
   workflow_dispatch:
