@@ -1,0 +1,27 @@
+name: _global - Prompt for a11y review
+
+on:
+  # https://crontab.guru/
+  # Midnight UTC on January 1st and July 1st (every six months)
+  schedule:
+    - cron: "0 0 1 1,7 *"
+  workflow_dispatch:
+
+jobs:
+  create-issue:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+
+    steps:
+      - name: Create a11y review issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: "Perform a11y review",
+              body: "It's been six months — time for a full accessibility review!\n\nSee [Hello Product](https://github.com/mark-wiemer/hello-hello/blob/main/packages/product/readme.md) for the full checklist.",
+              labels: ["accessibility"],
+            });
