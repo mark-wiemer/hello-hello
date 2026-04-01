@@ -4,10 +4,13 @@ name: markwiemer.com daily deploy
 
 on:
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "0 0 * * *" # Daily at midnight UTC
 
   # Allows us to run this workflow manually from the Actions tab
   workflow_dispatch:
+
+env:
+  WORKFLOW_FILE: markwiemer.com-deploy.yml
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
@@ -37,7 +40,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           LAST_SHA=$(gh api \
-            "repos/${{ github.repository }}/actions/workflows/markwiemer.com-static.yml/runs?status=success&per_page=1" \
+            "repos/${{ github.repository }}/actions/workflows/${{ env.WORKFLOW_FILE }}/runs?status=success&per_page=1" \
             --jq '.workflow_runs[0].head_sha' 2>/dev/null || echo "")
 
           if [ -z "$LAST_SHA" ] || [ "$LAST_SHA" = "null" ]; then
@@ -51,7 +54,7 @@ jobs:
 
           CHANGES=$(git diff --name-only "$LAST_SHA" "${{ github.sha }}" -- \
             "packages/markwiemer.com/" \
-            ".github/workflows/markwiemer.com-static.yml" 2>/dev/null || echo "FORCE_DEPLOY")
+            ".github/workflows/${{ env.WORKFLOW_FILE }}" 2>/dev/null || echo "FORCE_DEPLOY")
 
           if [ -n "$CHANGES" ]; then
             echo "Changes detected:"
