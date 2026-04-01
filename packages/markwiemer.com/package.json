@@ -3,6 +3,7 @@
   "private": "true",
   "type": "module",
   "scripts": {
+    "//todo": "use eslint-plugin-package-json",
     "astro": "astro",
     "build": "astro build",
     "dev": "astro dev",
