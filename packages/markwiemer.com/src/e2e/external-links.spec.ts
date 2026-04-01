@@ -1,27 +1,21 @@
 import { test, expect } from "@playwright/test";
 
-/**
- * External links should open in a new tab.
- * Reference: docs/tests.md
- */
-
-const pagesToCheck = ["/", "/software"];
-
-for (const path of pagesToCheck) {
-  test(`external links on ${path} open in a new tab`, async ({ page }) => {
-    await page.goto(path);
-
-    const externalLinks = page.locator("a[target='_blank']");
-    const count = await externalLinks.count();
-
-    // Each page should have at least one external link
-    expect(count).toBeGreaterThan(0);
-
-    for (let i = 0; i < count; i++) {
-      const link = externalLinks.nth(i);
-      const rel = await link.getAttribute("rel");
-      expect(rel).toContain("noopener");
-      expect(rel).toContain("noreferrer");
-    }
-  });
-}
+test(`external links on home page open in a new tab`, async ({ page }) => {
+  await page.goto("/");
+  const externalLinks = page.locator('a[href^="https://"]');
+  const count = await externalLinks.count();
+  expect(count).toBeGreaterThan(0);
+  const goodExternalLinks = page.locator(
+    'a[href^="https://"][target="_blank"][rel~="noopener"][rel~="noreferrer"]',
+  );
+  const goodExternalLinksCount = await goodExternalLinks.count();
+  expect.soft(goodExternalLinksCount).toBe(count);
+  if (goodExternalLinksCount === count) return;
+  // Document failure details
+  const evalToHref = (links: (SVGElement | HTMLElement)[]): string[] => links.map(mapToHref);
+  const mapToHref = (link: SVGElement | HTMLElement): string => (link as HTMLAnchorElement).href;
+  const allHrefs = await externalLinks.evaluateAll(evalToHref);
+  const goodHrefs = await goodExternalLinks.evaluateAll(evalToHref);
+  const badHrefs = allHrefs.filter((href) => !goodHrefs.includes(href));
+  expect(goodExternalLinksCount, `Bad external links: [${badHrefs.join(", ")}]`).toBe(count);
+});
