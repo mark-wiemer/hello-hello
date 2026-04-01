@@ -259,17 +259,6 @@ div.headerImages {
   margin-bottom: 1em;
 }
 
-img.headerImage {
-  height: 12em;
-  width: 12em;
-
-  /* breakpoint-very-thin */
-  @media (max-width: 480px) {
-    height: 7em;
-    width: 7em;
-  }
-}
-
 /* Apply to article elements to get center margin */
 article {
   margin: 0 auto;
