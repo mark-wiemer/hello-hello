@@ -83,7 +83,7 @@ const modernAppBottomSections = [
 //#endregion
 ---
 
-<Layout pageTitle="Software" klass="chart">
+<Layout pageTitle="Software">
   <h1>Software</h1>
   <p>I spend a lot of time on software, below are some of my current priorities 🤓</p>
   <h2>A modern app</h2>
@@ -92,7 +92,7 @@ const modernAppBottomSections = [
     my mental map for each of my projects. This map was heavily inspired by a secret presentation
     from <a href="https://safia.rocks/">Safia Abdalla</a> :) For best results, use a wide screen (1280px+).
   </p>
-  <div class="top-grid">
+  <div class="top-grid chart">
     {
       modernAppTopSections.map((section) => (
         <section class={`card ${section.className}`}>
@@ -106,7 +106,7 @@ const modernAppBottomSections = [
       ))
     }
   </div>
-  <div class="bottom-grid">
+  <div class="bottom-grid chart">
     {
       modernAppBottomSections.map((section) => (
         <section class={`card ${section.className}`}>
@@ -153,13 +153,17 @@ const modernAppBottomSections = [
     text-align: center;
   }
 
+  .chart {
+    max-width: 1280px;
+    padding: 24px;
+  }
+
   .top-grid,
   .bottom-grid {
     display: grid;
     gap: var(--grid-gap);
     align-items: stretch;
     margin: 0 auto var(--grid-gap);
-    max-width: 1280px;
   }
 
   /* 4 columns: Editor | Front/Back | Env/Observe | Deploy */
