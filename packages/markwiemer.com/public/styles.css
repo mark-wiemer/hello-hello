@@ -86,7 +86,7 @@
   background-color: var(--link-primary);
 }
 
-#sidebar {
+#siteMenu {
   box-sizing: border-box;
   height: 100%;
   left: 0;

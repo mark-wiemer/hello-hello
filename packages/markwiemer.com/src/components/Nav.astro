@@ -7,7 +7,7 @@ import NavEntry from "@/components/NavEntry.astro";
 <!-- todo research **details** of making this inert -->
 <!-- can people still easily access this nav? -->
 <button id="toggleMenu" aria-label="Menu">☰</button>
-<div id="sidebar" aria-expanded="false" inert>
+<div id="siteMenu" aria-expanded="false" inert>
   <nav>
     <h2>Here</h2>
     <ul>
@@ -36,16 +36,16 @@ import NavEntry from "@/components/NavEntry.astro";
     </ul>
     <script is:inline data-notes="handle nav toggle">
       const toggleButton = document.querySelector("#toggleMenu");
-      const sidebar = document.querySelector("#sidebar");
+      const siteMenu = document.querySelector("#siteMenu");
       toggleButton?.addEventListener("click", () => {
-        if (sidebar.getAttribute("aria-expanded") === "true") {
-          sidebar.setAttribute("aria-expanded", "false");
-          sidebar.setAttribute("inert", "");
+        if (siteMenu.getAttribute("aria-expanded") === "true") {
+          siteMenu.setAttribute("aria-expanded", "false");
+          siteMenu.setAttribute("inert", "");
           document.body.classList.remove("nav-open");
           return;
         } else {
-          sidebar.setAttribute("aria-expanded", "true");
-          sidebar.removeAttribute("inert");
+          siteMenu.setAttribute("aria-expanded", "true");
+          siteMenu.removeAttribute("inert");
           document.body.classList.add("nav-open");
         }
       });

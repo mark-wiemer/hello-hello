@@ -77,12 +77,12 @@ test.describe("theme toggle", () => {
     await expect(toggle).toHaveText(label(light));
 
     const body = page.locator("body");
-    const sidebar = page.locator("#sidebar");
+    const siteMenu = page.locator("#siteMenu");
     const link = page.locator("a[href]").first();
 
     await expect.soft(body).toHaveCSS("background-color", "rgb(255, 255, 255)");
     await expect.soft(body).toHaveCSS("color", "rgb(0, 0, 0)");
-    await expect.soft(sidebar).toHaveCSS("background-color", "rgb(255, 255, 255)");
+    await expect.soft(siteMenu).toHaveCSS("background-color", "rgb(255, 255, 255)");
     await expect.soft(link).toHaveCSS("color", "rgb(9, 115, 131)");
   });
 
@@ -93,12 +93,12 @@ test.describe("theme toggle", () => {
     await expect(toggle).toHaveText(label(dark));
 
     const body = page.locator("body");
-    const sidebar = page.locator("#sidebar");
+    const siteMenu = page.locator("#siteMenu");
     const link = page.locator("a[href]").first();
 
     await expect.soft(body).toHaveCSS("background-color", "rgb(0, 0, 0)");
     await expect.soft(body).toHaveCSS("color", "rgb(220, 220, 220)");
-    await expect.soft(sidebar).toHaveCSS("background-color", "rgb(0, 0, 0)");
+    await expect.soft(siteMenu).toHaveCSS("background-color", "rgb(0, 0, 0)");
     await expect.soft(link).toHaveCSS("color", "rgb(0, 162, 174)");
   });
 });
