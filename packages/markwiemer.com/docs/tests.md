@@ -72,6 +72,10 @@ Then duplicate for light mode and dark mode!
 
 - Nav open vs closed
 
+### Navigation
+
+- Each page has a backlink to its parent page
+
 ## Images
 
 Homepage when zoom is 200%: Header images should use the 2x src
