@@ -1,10 +1,5 @@
 import { test, expect } from "@playwright/test";
 
-/**
- * Userspace links that should always redirect somewhere useful.
- * Reference: docs/tests.md
- */
-
 const userspaceLinks = [
   "/games",
   "/games/index.html",

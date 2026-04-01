@@ -59,9 +59,4 @@ Then duplicate for light mode and dark mode!
 
 These links should always redirect somewhere useful:
 
-- /games
-- /games/dodge-the-creeps
-- /games/racetrack-tycoon
-- /games/snake
-- /games/\*/index.html (any index.html file under the games folder, including /games/index.html)
 - todo more
