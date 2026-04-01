@@ -33,6 +33,46 @@ import NavEntry from "@/components/NavEntry.astro";
       text="Website source"
     />
   </ul>
+  <h2>Settings</h2>
+  <button id="themeToggle" aria-live="polite">Theme: System</button>
+  <script is:inline data-notes="handle theme toggle">
+    (() => {
+      const themeToggle = document.querySelector("#themeToggle");
+      const themes = ["system", "light", "dark"];
+      const labels = { system: "Theme: System", light: "Theme: Light", dark: "Theme: Dark" };
+
+      const getStoredTheme = () => localStorage.getItem("theme") || "system";
+
+      const applyTheme = (theme) => {
+        if (theme === "system") {
+          document.documentElement.removeAttribute("data-theme");
+        } else {
+          document.documentElement.setAttribute("data-theme", theme);
+        }
+      };
+
+      const updateButton = (theme) => {
+        if (themeToggle) themeToggle.textContent = labels[theme];
+      };
+
+      // Initialize button text from current state
+      const current = getStoredTheme();
+      updateButton(current);
+
+      themeToggle?.addEventListener("click", () => {
+        const current = getStoredTheme();
+        const nextIndex = (themes.indexOf(current) + 1) % themes.length;
+        const next = themes[nextIndex];
+        if (next === "system") {
+          localStorage.removeItem("theme");
+        } else {
+          localStorage.setItem("theme", next);
+        }
+        applyTheme(next);
+        updateButton(next);
+      });
+    })();
+  </script>
   <script is:inline data-notes="handle nav toggle">
     const toggleButton = document.querySelector("#openNav");
     const nav = document.querySelector("nav");
