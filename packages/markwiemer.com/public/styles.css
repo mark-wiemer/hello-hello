@@ -42,20 +42,51 @@
   --breakpoint-thin: 640px;
   /* (640, 1280] px */
   --breakpoint-medium: 1280px;
+
+  /* Resolved theme properties (default: light) */
+  --body-bg: var(--body-bg-light);
+  --code-bg: var(--code-bg-light);
+  --img-border: var(--img-border-light);
+  --link-active: var(--link-active-light);
+  --link-primary: var(--link-primary-light);
+  --link-visited: var(--link-visited-light);
+  --nav-bg: var(--nav-bg-light);
+  --text-primary: var(--text-primary-light);
+}
+
+/* System dark preference (when user hasn't chosen "light") */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --body-bg: var(--body-bg-dark);
+    --code-bg: var(--code-bg-dark);
+    --img-border: var(--img-border-dark);
+    --link-active: var(--link-active-dark);
+    --link-primary: var(--link-primary-dark);
+    --link-visited: var(--link-visited-dark);
+    --nav-bg: var(--nav-bg-dark);
+    --text-primary: var(--text-primary-dark);
+  }
+}
+
+/* Explicit dark theme override */
+:root[data-theme="dark"] {
+  --body-bg: var(--body-bg-dark);
+  --code-bg: var(--code-bg-dark);
+  --img-border: var(--img-border-dark);
+  --link-active: var(--link-active-dark);
+  --link-primary: var(--link-primary-dark);
+  --link-visited: var(--link-visited-dark);
+  --nav-bg: var(--nav-bg-dark);
+  --text-primary: var(--text-primary-dark);
 }
 
 ::selection {
   /* todo make a:hover border go away when ::selection is applied */
-  color: var(--text-primary-light);
-  background-color: var(--link-primary-light);
-
-  @media (prefers-color-scheme: dark) {
-    color: var(--text-primary-dark);
-    background-color: var(--link-primary-dark);
-  }
+  color: var(--text-primary);
+  background-color: var(--link-primary);
 }
 
-nav {
+#siteMenu {
   box-sizing: border-box;
   height: 100%;
   left: 0;
@@ -68,40 +99,33 @@ nav {
   width: 0;
   z-index: var(--z-index-nav-main);
 
-  & > * {
+  & > *,
+  & > nav > * {
     padding-left: 4px;
   }
 
-  & > h2 {
+  & > h2,
+  & > nav > h2 {
     font-size: var(--font-size-default);
     line-height: var(--line-height-default);
   }
 
-  background-color: var(--nav-bg-light);
-  color: var(--text-primary-light);
-
-  @media (prefers-color-scheme: dark) {
-    background-color: var(--nav-bg-dark);
-    color: var(--text-primary-dark);
-  }
+  background-color: var(--nav-bg);
+  color: var(--text-primary);
 
   &[aria-expanded="true"] {
     width: var(--nav-open-width);
     /* todo border disappears before transition is done */
-    border-right: 1px solid var(--text-primary-light);
-
-    @media (prefers-color-scheme: dark) {
-      border-color: var(--text-primary-dark);
-    }
+    border-right: 1px solid var(--text-primary);
   }
 }
 
-/* button to open the nav */
-/* todo rmove rounded border on right side while expanded */
+/* button */
+/* todo remove rounded border on right side while expanded */
 /* this would mirror the existing appearance on the left while collapsed */
-#openNav {
+#toggleMenu {
   width: var(--width-button-nav);
-  border: 1px solid var(--text-primary-light);
+  border: 1px solid var(--text-primary);
   border-radius: var(--border-radius-button);
   margin-top: 4px;
   margin-left: calc(-1 * var(--border-radius-button));
@@ -110,10 +134,6 @@ nav {
   top: 0;
   left: 0;
   transition: transform var(--nav-open-time) ease;
-
-  @media (prefers-color-scheme: dark) {
-    border-color: var(--text-primary-dark);
-  }
 }
 
 .skip-link {
@@ -128,7 +148,7 @@ nav {
   }
 }
 
-body.nav-open #openNav {
+body.nav-open #toggleMenu {
   transform: translateX(
     calc(var(--nav-open-width) - var(--width-button-nav) + var(--border-radius-button))
   );
@@ -149,13 +169,8 @@ button {
     sans-serif;
   font-size: var(--font-size-default);
 
-  background-color: var(--body-bg-light);
-  color: var(--text-primary-light);
-
-  @media (prefers-color-scheme: dark) {
-    background-color: var(--body-bg-dark);
-    color: var(--text-primary-dark);
-  }
+  background-color: var(--body-bg);
+  color: var(--text-primary);
 }
 
 body {
@@ -205,44 +220,23 @@ a {
   border-radius: 5px;
 
   /* See docs/tests.md for link state test matrix */
-  color: var(--link-primary-light);
+  color: var(--link-primary);
   &:hover {
-    outline: 2px solid var(--link-primary-light);
+    outline: 2px solid var(--link-primary);
   }
   &:visited {
-    color: var(--link-visited-light);
+    color: var(--link-visited);
   }
   &:visited:hover {
-    outline: 2px solid var(--link-visited-light);
+    outline: 2px solid var(--link-visited);
   }
   &:visited:active {
-    outline: 2px solid var(--link-active-light);
-    color: var(--link-active-light);
+    outline: 2px solid var(--link-active);
+    color: var(--link-active);
   }
   &:active {
-    outline: 2px solid var(--link-active-light);
-    color: var(--link-active-light);
-  }
-
-  @media (prefers-color-scheme: dark) {
-    color: var(--link-primary-dark);
-    &:hover {
-      outline: 2px solid var(--link-primary-dark);
-    }
-    &:visited {
-      color: var(--link-visited-dark);
-    }
-    &:visited:hover {
-      outline: 2px solid var(--link-visited-dark);
-    }
-    &:visited:active {
-      outline: 2px solid var(--link-active-dark);
-      color: var(--link-active-dark);
-    }
-    &:active {
-      outline: 2px solid var(--link-active-dark);
-      color: var(--link-active-dark);
-    }
+    outline: 2px solid var(--link-active);
+    color: var(--link-active);
   }
 }
 
@@ -283,12 +277,7 @@ blockquote {
 }
 
 img.border {
-  @media (prefers-color-scheme: dark) {
-    border: 2px solid var(--img-border-dark);
-  }
-  @media (prefers-color-scheme: light) {
-    border: 2px solid var(--img-border-light);
-  }
+  border: 2px solid var(--img-border);
 }
 
 figure.center {
@@ -299,10 +288,17 @@ figure.center {
 
 code {
   font-size: smaller;
-  @media (prefers-color-scheme: dark) {
-    background-color: var(--code-bg-dark);
-  }
-  @media (prefers-color-scheme: light) {
-    background-color: var(--code-bg-light);
-  }
+  background-color: var(--code-bg);
+}
+
+#themeToggle {
+  background: none;
+  border: 1px solid var(--text-primary);
+  border-radius: var(--border-radius-button);
+  color: var(--text-primary);
+  cursor: pointer;
+  font-size: smaller;
+  margin-left: 4px;
+  margin-top: 8px;
+  padding: 2px 6px;
 }
