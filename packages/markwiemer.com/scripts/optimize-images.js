@@ -1,3 +1,5 @@
+// todo manually review this AI-generated script for funsies
+
 /**
  * Converts all .jpg/.jpeg/.png images in src/assets/ to .webp format,
  * updates all import references in src/, and deletes the originals.
