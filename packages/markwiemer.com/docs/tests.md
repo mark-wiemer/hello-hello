@@ -7,29 +7,22 @@ When moving the site to a different framework, be sure to check the following:
 1. External links open in a new tab
 1. Accessibility Insights FastPass passes
 
-## Userspace links
+## Accessibility
 
-These links should always redirect somewhere useful:
+- Home page
+- Snake game
+- "About" blog post (includes `figure`)
+- Glossary (includes `dl`)
+- Resume
+- Software (includes `grid`)
 
-- /games
-- /games/dodge-the-creeps
-- /games/racetrack-tycoon
-- /games/snake
-- /games/\*/index.html (any index.html file under the games folder, including /games/index.html)
-- todo more
+### States
 
-## Link state matrix
+- Nav open vs closed
 
-There are three colors: unvisited, visited, and plaintext. Plaintext color is, well, the color of plaintext.
+### Navigation
 
-1. No hover, unvisited: unvisited
-2. Hover unvisited: unvisited outlined
-3. No hover, visited: visited
-4. Hover visited: visited outlined
-5. Active unvisited: plaintext outlined
-6. Active visited: plaintext outlined
-
-Then duplicate for light mode and dark mode!
+- Each page has a backlink to its parent page
 
 ## Breakpoints
 
@@ -59,23 +52,30 @@ Then duplicate for light mode and dark mode!
 - Modern app chart top half has 4 columns
 - Modern app chart bottom half has 3 columns
 
-## Accessibility
-
-- Home page
-- Snake game
-- "About" blog post (includes `figure`)
-- Glossary (includes `dl`)
-- Resume
-- Software (includes `grid`)
-
-### States
-
-- Nav open vs closed
-
-### Navigation
-
-- Each page has a backlink to its parent page
-
 ## Images
 
 Homepage when zoom is 200%: Header images should use the 2x src
+
+## Link state matrix
+
+There are three colors: unvisited, visited, and plaintext. Plaintext color is, well, the color of plaintext.
+
+1. No hover, unvisited: unvisited
+2. Hover unvisited: unvisited outlined
+3. No hover, visited: visited
+4. Hover visited: visited outlined
+5. Active unvisited: plaintext outlined
+6. Active visited: plaintext outlined
+
+Then duplicate for light mode and dark mode!
+
+## Userspace links
+
+These links should always redirect somewhere useful:
+
+- /games
+- /games/dodge-the-creeps
+- /games/racetrack-tycoon
+- /games/snake
+- /games/\*/index.html (any index.html file under the games folder, including /games/index.html)
+- todo more
