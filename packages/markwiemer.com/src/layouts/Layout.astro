@@ -20,9 +20,12 @@ interface Props {
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.webp" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.webp" />
     <link rel="manifest" href="/site.webmanifest" />
+
     <!-- Copied from --body-bg-X in public/styles.css -->
+    <!-- Styles browser UI around the site -->
     <meta name="theme-color" content="white" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="black" media="(prefers-color-scheme: dark)" />
+
     <link rel="stylesheet" href={style} />
     <script is:inline data-notes="apply saved theme before paint">
       (() => {
