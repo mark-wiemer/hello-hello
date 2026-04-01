@@ -1,17 +1,15 @@
-import { Image } from "astro:assets";
+import HeaderImage from "@/components/HeaderImage.astro";
 import Mark2026 from "@/assets/2026-02-03-profile-square.jpg";
-import Mark2026Thumb from "@/assets/thumbnails/2026-02-03-profile-square-thumb.jpg";
 import Wynonna2024 from "@/assets/2024-04-29 Wynonna raincoat outside.jpg";
-import Wynonna2024Thumb from "@/assets/thumbnails/2024-04-29 Wynonna raincoat outside-thumb.jpg";
 import Layout from "@/layouts/Layout.astro";
-import AdaptiveImage from "@/components/AdaptiveImage.astro";
+import BlogPostList from "@/components/BlogPostList.astro";
 
 <Layout pageTitle="Home">
 {/* prettier-ignore */}
 <h1>mark<wbr />wiemer<wbr />.com</h1>
 <div class="headerImages">
-  <AdaptiveImage alt="Mark in 2026" src={Mark2026} thumbnailSrc={Mark2026Thumb} class="headerImage" />
-  <AdaptiveImage alt="Wynonna in 2024" src={Wynonna2024} thumbnailSrc={Wynonna2024Thumb} class="headerImage" />
+  <HeaderImage alt="Mark in 2026" src={Mark2026}/>
+  <HeaderImage alt="Wynonna in 2024" src={Wynonna2024}/>
 </div>
 
 Hello, world! Welcome to my little corner of the internet :) I'm the human in the above photos.
@@ -27,13 +25,14 @@ Check out [my page on software](/software) for everything I know about digital s
 
 Recent posts:
 
-- [Crying over breakfast](/blog/crying-over-breakfast) (2026-01-27)
-- [Good guy with a gun](/blog/good-guy-gun) (2026-01-26)
-- [Stay in your lane](/blog/stay-your-lane) (2026-01-25)
-- [They're killing us](/blog/theyre-killing-us) (2026-01-24)
-- [The 2026 PC build is complete!](/blog/2026-pc-build) (2026-01-18)
-- [Why illegal immigrants have rights](/blog/human-immigrant-rights) (2026-01-13)
-- [Killing of Renée Good and subsequent actions](/blog/killing-renee-good) (Last updated 2026-01-25)
+export const recentFilter = (post) => {
+  // Runs at build time, but better than nothing :)
+  const cutoff = new Date();
+  cutoff.setDate(cutoff.getDate() - 60);
+  return new Date(post.postDate) >= cutoff;
+};
+
+<BlogPostList filter={recentFilter} limit={5} />
 
 [All posts](/blog)
 
@@ -71,9 +70,5 @@ I can't be everywhere all at once! Here are some places I've enjoyed being, and 
 - [Luanti Forums](https://forum.luanti.org/memberlist.php?mode=viewprofile&u=51858)
 - [NixOS Discourse](https://discourse.nixos.org/u/mark-wiemer/activity)
 - [phpBB](https://www.phpbb.com/community/memberlist.php?mode=viewprofile&u=2243077)
-
-## A note on mistakes
-
-I created this site as a random guy who wanted to share his thoughts via a fast-loading, independent website. I also wanted to take this site as an opportunity to learn about new web frameworks. As such, this site is the first site I've ever built with a new framework I'm learning. Before this framework, all dates were manually updated. Many still are. As I begin to update this site more frequently, some "last updated" dates, and other minor things like site formatting, may be incorrect. I'm sorry about this and am working better automate these processes. In the meantime, please give me grace, and reach out on Medium if you have questions: you can comment on any of my recent articles requesting clarity on anything, even if it's unrelated to the article. To see my progress, you can look at the [Git commit history](https://github.com/mark-wiemer/hello-hello/commits/main/packages/markwiemer.com). You're more than welcome to create GitHub issues as well.
 
 </Layout>

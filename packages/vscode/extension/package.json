@@ -1,0 +1,103 @@
+{
+    "name": "helloworld-2022",
+    "displayName": "HelloWorld 2022",
+    "version": "0.3.1",
+    "description": "Because helloworld was taken!",
+    "categories": [
+        "Other"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/mark-wiemer/vscode-helloworld.git"
+    },
+    "license": "MIT",
+    "publisher": "mark-wiemer",
+    "main": "./out/extension.js",
+    "scripts": {
+        "clean:all": "npm run clean:dist && && npm run clean:out",
+        "clean:dist": "del-cli dist",
+        "clean:out": "del-cli out",
+        "compile": "npm run compile-grammar && npm run compile-ts",
+        "compile-grammar": "js-yaml syntaxes/abc.tmGrammar.yaml > syntaxes/abc.tmGrammar.json",
+        "precompile-ts": "npm run clean:out",
+        "compile-ts": "tsc -b",
+        "eslint": "npm run eslint:files -- src",
+        "eslint:files": "eslint --max-warnings=0 --ext ts",
+        "eslint:fix": "npm run eslint:files -- src --fix",
+        "format": "prettier --check .",
+        "format:fix": "prettier --write .",
+        "lint": "npm run format && npm run eslint && npm run sort-package-json",
+        "lint:ci": "npm run eslint && npm run sort-package-json",
+        "package": "vsce package",
+        "publish": "vsce publish",
+        "sort-package-json": "sort-package-json --check",
+        "sort-package-json:fix": "sort-package-json",
+        "test": "npm run test-grammar && npm run test-unit",
+        "pretest-grammar": "npm run compile-grammar",
+        "test-grammar": "vscode-tmgrammar-snap src/test/suite/grammar/samples/*.abc",
+        "pretest-unit": "npm run compile-ts",
+        "test-unit": "node ./out/test/runTest.js",
+        "test:ci": "npm run test-grammar",
+        "validate": "npm run lint && npm run test && npm run package",
+        "validate:ci": "npm run lint:ci && npm run test:ci && npm run package",
+        "vscode:prepublish": "npm run compile && echo Packaging..."
+    },
+    "contributes": {
+        "commands": [
+            {
+                "command": "helloworld.helloWorld",
+                "title": "Hello World"
+            },
+            {
+                "command": "helloworld.time",
+                "title": "Current time"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "abc",
+                "scopeName": "source.abc",
+                "path": "./syntaxes/abc.tmGrammar.json"
+            }
+        ],
+        "languages": [
+            {
+                "id": "abc",
+                "extensions": [
+                    ".abc"
+                ],
+                "icon": {
+                    "dark": "./icons/ahk-file-icon-dark.svg",
+                    "light": "./icons/ahk-file-icon-light.svg"
+                }
+            }
+        ]
+    },
+    "devDependencies": {
+        "@types/glob": "^7.2.0",
+        "@types/mocha": "^9.1.1",
+        "@types/node": "16.x",
+        "@types/vscode": "^1.67.0",
+        "@typescript-eslint/eslint-plugin": "^5.29.0",
+        "@typescript-eslint/parser": "^5.29.0",
+        "@vscode/test-electron": "^2.5.2",
+        "@vscode/vsce": "^3.0.0",
+        "del-cli": "^5.1.0",
+        "eslint": "^8.16.0",
+        "glob": "^8.0.3",
+        "js-yaml": "^4.1.1",
+        "mocha": "^10.8.2",
+        "prettier": "^3.3.3",
+        "sort-package-json": "^1.57.0",
+        "typescript": "^4.7.2",
+        "vscode-tmgrammar-test": "^0.1.1"
+    },
+    "engines": {
+        "vscode": "^1.92.0"
+    },
+    "icon": "icon.png",
+    "galleryBanner": {
+        "color": "#8cf287",
+        "theme": "light"
+    }
+}

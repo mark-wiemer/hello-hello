@@ -17,7 +17,10 @@ interface BlogPost {
   };
 }
 
-export function getBlogPostPaths(): BlogPost[] {
+/**
+ * Returns all blog posts.
+ */
+export function getAllBlogPosts(): BlogPost[] {
   // path: e.g. '/src/pages/blog/content/2024-10-08 months-without-music.mdx'
   // module: object representing the module at that location
   const paths = getRawBlogPostPaths().map(([path, module]) => {

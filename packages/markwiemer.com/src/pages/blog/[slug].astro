@@ -1,12 +1,12 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import { getBlogPostPaths, getPreface } from "@/utils/recent-posts";
+import { getAllBlogPosts, getPreface } from "@/utils/blog";
 
 /**
  * Magic function used by Astro.
  * https://docs.astro.build/en/guides/routing/#dynamic-routes
  */
-export const getStaticPaths = getBlogPostPaths;
+export const getStaticPaths = getAllBlogPosts;
 
 const { module } = Astro.props;
 let { default: Content, frontmatter } = module;
@@ -19,4 +19,6 @@ const { postTitle, postDate, postTime, lastUpdated, postType } = frontmatter;
   <h1>{postTitle}</h1>
   <p>{getPreface(postDate, postTime, lastUpdated, postType)}</p>
   <Content />
+  <hr /><hr />
+  <p>See also <a href="/blog">Blog - markwiemer.com</a></p>
 </Layout>

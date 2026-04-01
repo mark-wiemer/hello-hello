@@ -1,0 +1,44 @@
+import Layout from "@/layouts/Layout.astro";
+
+<Layout pageTitle="Mocha 12">
+
+# Mocha 12
+
+Mocha 12 (sometimes "v12") is an upcoming release of [Mocha](/software/mocha) which updates internal dependencies while maintaining a stable end-user experience. There are minimal planned breaking changes between Mocha 11 and Mocha 12.
+
+We've released 10 betas as of March 2026, and I'm personally aiming for a release candidate in early April and a full release in late April.
+
+## Remaining work
+
+All links are to GitHub. Issues and PRs are ordered by ascending creation time. 🤓 indicates my current priority.
+
+- [🤓 #5357: Mocha 12 Release Plan](https://github.com/mochajs/mocha/issues/5357)
+  - I asked about necessary docs on 2026-03-26
+  - Going to draft some docs and circle them privately
+- [#5400: Repo: Switch from CJS to ESM internally](https://github.com/mochajs/mocha/issues/5400)
+  - Pelle is working on this one :) (2026-03-26)
+- [#5763: Bug: beta versions should use semver-style dot numeric separator (instead of dash)](https://github.com/mochajs/mocha/issues/5763)
+  - I proposed a fix in the evening of 2026-03-26
+- [#5672: Bug: process.exit(0) ends mocha silently](https://github.com/mochajs/mocha/issues/5672)
+  - Has a fix PR ([#5776: fix!: intercept process.exit during test execution](https://github.com/mochajs/mocha/pull/5776)) that I can review, but... (2026-03-26)
+  - Asked about landing this in v12 vs v13 given major release strategy (2026-03-26)
+
+## Likely removed from milestone
+
+These issues weren't super important for v12, and turned out to be more complicated than we thought, so I plan to push them to v13+.
+
+- [#5335: Package: Bump supports-color from 8 to 10](https://github.com/mochajs/mocha/issues/5335)
+  - Asked to push out of v12 given weird complexities on 2026-03-26
+- [#5471: feat: remove supports-color dependency](https://github.com/mochajs/mocha/pull/5471)
+  - Would replace #5335, called it out again in that issue on 2026-03-26
+  - Requires dependency PR to merge ([picocolors#96: Don't force-enable color if env.CI is set](https://github.com/alexeyraspopov/picocolors/pull/96))
+  - `picocolors` hasn't been updated in 2+ years, asked maintainers publicly about forking it
+
+## References
+
+All links are to GitHub.
+
+- [2026-02-21 - Major releases (MAINTAINERS.md)](https://github.com/mochajs/mocha/blob/557473828570f8883c55cb0e450f153f3f9f8f74/MAINTAINERS.md#major-releases)
+- [Mocha v12.0.0 milestone](https://github.com/mochajs/mocha/milestone/66)
+
+</Layout>

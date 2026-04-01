@@ -1,6 +1,7 @@
 /* https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascading_variables/Using_custom_properties */
 /* :root is a common practice for global reference */
 :root {
+  /* --body-bg-X is also used in Layout.astro */
   --body-bg-dark: black;
   --body-bg-light: white;
   --border-radius-button: 4px;
@@ -18,7 +19,7 @@
   --link-visited-light: rgb(107, 2, 107);
   --nav-bg-dark: var(--body-bg-dark);
   --nav-bg-light: var(--body-bg-light);
-  /* should be divisible by 1.1, 1.25, 1.5, 1.75, 2, 2.5, 3, 4, and 5 */
+  /* ideally is divisible by 1.1, 1.25, 1.5, 1.75, 2, 2.5, 3, 4, and 5 */
   /* these are the zoom levels of Microsoft Edge and likely other browsers */
   /* should also be close to 150px of course */
   /* 165px is my favorite candidate */
@@ -35,9 +36,11 @@
   /** reference values */
   /* not currently used directly due to technical issues */
   /* todo find better CSS system */
-  /* [320, 640) px */
+  /* [320, 480] px */
+  --breakpoint-very-thin: 480px;
+  /* (480, 640] px */
   --breakpoint-thin: 640px;
-  /* [var(--breakpoint-thin), 1280) px */
+  /* (640, 1280] px */
   --breakpoint-medium: 1280px;
 }
 
@@ -93,6 +96,9 @@ nav {
   }
 }
 
+/* button to open the nav */
+/* todo rmove rounded border on right side while expanded */
+/* this would mirror the existing appearance on the left while collapsed */
 #openNav {
   width: var(--width-button-nav);
   border: 1px solid var(--text-primary-light);
@@ -253,19 +259,8 @@ div.headerImages {
   margin-bottom: 1em;
 }
 
-img.headerImage {
-  height: 12em;
-  width: 12em;
-
-  /* breakpoint-very-thin */
-  @media (max-width: 480px) {
-    height: 7em;
-    width: 7em;
-  }
-}
-
-/* Apply to divs to get center margin */
-.article {
+/* Apply to article elements to get center margin */
+article {
   margin: 0 auto;
   max-width: 640px;
   @media (max-width: 640px) {
@@ -273,25 +268,6 @@ img.headerImage {
     padding: 4px;
     max-width: calc(100vw - 24px);
   }
-  img {
-    border-radius: 10px;
-  }
-  figure img {
-    max-width: 100%;
-  }
-}
-
-/* Apply to divs to get center margin */
-.chart {
-  margin: 0 auto;
-  padding: 24px;
-
-  @media (max-width: 640px) {
-    /* Adjust vertical padding as well, generally "cozier" view */
-    padding: 4px;
-    max-width: calc(100vw - 24px);
-  }
-
   img {
     border-radius: 10px;
   }

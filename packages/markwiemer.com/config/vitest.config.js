@@ -4,5 +4,7 @@ import { getViteConfig } from "astro/config";
 
 export default getViteConfig({
   // https://vitest.dev/config/
-  test: {},
+  test: {
+    exclude: ["./src/e2e/**", "**/node_modules/**", "**/.git/**"],
+  },
 });

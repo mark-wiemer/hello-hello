@@ -1,0 +1,38 @@
+import Layout from "@/layouts/Layout.astro";
+
+<Layout pageTitle="Mocha">
+
+# Mocha
+
+[Mocha](https://mochajs.org) is the classic, reliable, trusted test framework for Node.js
+and the browser that was created in 2011. I've been a maintainer since August 2025, so I'm certainly
+no expert yet, but I've enjoyed learning and working to improve this framework that so many projects rely on.
+
+## Priorities
+
+- Modernization: ESM support, modern Node versions, good dependencies
+- Stability: Test coverage, backporting fixes, minimal breaking changes
+
+## My key contributions
+
+- Fixed critical [`require(ESM)` bug (#5498)](https://github.com/mochajs/mocha/pull/5498)
+- Monitored and improved [CI pipeline reliability (#5361)](https://github.com/mochajs/mocha/issues/5361)
+- Oversaw [rewrite of "watch mode" logic (#5409)](https://github.com/mochajs/mocha/pull/5409)
+
+## My roadmap for Mocha
+
+You can view [my prioritized backlog](https://github.com/orgs/mochajs/projects/6/views/2), but in summary:
+
+- [Release Mocha 12, supporting `require(ESM)` and much more (#5357)](https://github.com/mochajs/mocha/issues/5357)
+- [Bugfixes, bugfixes, bugfixes!](https://github.com/mochajs/mocha/issues?q=sort%3Aupdated-desc%20is%3Aissue%20is%3Aopen%20label%3A%22type%3A%20bug%22)
+- [Add project automation for stale issues, security reports, and more (#5601)](https://github.com/mochajs/mocha/issues/5601)
+- [Document broader project resources (#5639)](https://github.com/mochajs/mocha/issues/5639)
+
+## Subprojects
+
+Within the realm of bugfixes lies a treasure trove of research to be conducted. Some areas I'm focusing on:
+
+- [Issues with Mocha's usage of Node's `require(ESM)` functionality](https://github.com/mochajs/mocha/pull/5498)
+- [Documenting Mocha's architecture](https://gist.github.com/mark-wiemer/e98f4aa9e49fd749519e6789d6ae564d)
+
+</Layout>
