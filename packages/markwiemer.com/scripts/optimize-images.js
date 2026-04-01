@@ -148,7 +148,7 @@ async function main() {
   if (dryRun) {
     console.log(`\n  This was a dry run. Re-run without --dry-run to apply changes.\n`);
   } else {
-    console.log(`\n  Done! Original files deleted. WebP files are not tracked by LFS.\n`);
+    console.log(`\n  Done! Original files deleted.\n`);
   }
 }
 
