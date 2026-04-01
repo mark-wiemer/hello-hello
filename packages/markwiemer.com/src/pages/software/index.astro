@@ -153,9 +153,15 @@ const modernAppBottomSections = [
     text-align: center;
   }
 
+  /* Break out of article's max-width to use full viewport width */
   .chart {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    box-sizing: border-box;
     max-width: 1280px;
-    padding: 0 24px;
+    margin: 24px 0;
   }
 
   .top-grid,

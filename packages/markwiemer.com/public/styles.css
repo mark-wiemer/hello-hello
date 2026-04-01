@@ -276,17 +276,6 @@ article {
   }
 }
 
-/* Break out of article's max-width to use full viewport width */
-.chart {
-  width: 100vw;
-  max-width: 1280px;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 0 24px;
-  box-sizing: border-box;
-}
-
 blockquote {
   border-left: 4px solid;
   padding-left: 1em;
