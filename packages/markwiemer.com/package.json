@@ -16,6 +16,8 @@
     "test": "vitest --config config/vitest.config.js",
     "test:ci": "bun run test --run",
     "test:ci//": "//todo enable these in CI for realsies",
+    "optimize-images": "bun scripts/optimize-images.js",
+    "optimize-images:dry": "bun scripts/optimize-images.js --dry-run",
     "validate:ci": "bun run test:ci && bun run e2e:install && bun run build && bun run e2e",
     "validate:fix": "sort-package-json"
   },
