@@ -7,16 +7,15 @@
     "astro": "astro",
     "build": "astro build",
     "dev": "astro dev",
-    "pree2e": "npx playwright install --with-deps chromium",
+    "e2e:install": "bunx playwright install --with-deps chromium",
     "e2e": "start-server-and-test preview http-get://localhost:4321 playwright",
     "playwright": "playwright test",
     "playwright//": "To be used as part of `e2e`",
-    "prepreview": "bun run build",
     "preview": "astro preview",
     "test": "vitest --config config/vitest.config.js",
     "test:ci": "bun run test --run",
     "test:ci//": "//todo enable these in CI for realsies",
-    "validate:ci": "bun run test:ci && bun run e2e",
+    "validate:ci": "bun run test:ci && bun run e2e:install && bun run build && bun run e2e",
     "validate:fix": "sort-package-json"
   },
   "dependencies": {
