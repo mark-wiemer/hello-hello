@@ -9,7 +9,7 @@
     "dev": "astro dev",
     "e2e:install": "bunx playwright install --with-deps chromium",
     "e2e": "start-server-and-test \"bun run preview:e2e\" http-get://localhost:8910 \"bun run playwright\"",
-    "playwright": "playwright test",
+    "playwright": "playwright test --config config/playwright.config.ts",
     "playwright//": "To be used as part of `e2e`",
     "preview": "astro preview",
     "preview:e2e": "bun run preview --port 8910",
