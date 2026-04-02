@@ -1,31 +1,39 @@
-// todo manually review this AI-generated script for funsies
+/*
+Converts all .jpg/.jpeg/.png images in src/assets/ to .webp format,
+updates all import references in src/, and deletes the originals.
 
-/**
- * Converts all .jpg/.jpeg/.png images in src/assets/ to .webp format,
- * updates all import references in src/, and deletes the originals.
- *
- * Usage: bun run optimize-images
- *
- * Options:
- *   --dry-run    Show what would happen without making changes
- *   --max-width  Max pixel width to resize to (default: 1920)
- *   --quality    WebP quality 1-100 (default: 80)
- */
+Usage: bun run optimize-images
+
+Options:
+  --dry-run    Show what would happen without making changes
+  --max-width  Max pixel width to resize to (default: 1920)
+  --quality    WebP quality 1-100 (default: 80)
+*/
 
 import sharp from "sharp";
 import { readdir, stat, unlink, readFile, writeFile } from "fs/promises";
 import { join, extname, relative } from "path";
 
-const ASSETS_DIR = new URL("../src/assets/", import.meta.url).pathname;
-const SRC_DIR = new URL("../src/", import.meta.url).pathname;
+const assetsDir = new URL("../src/assets/", import.meta.url).pathname;
+const srcDir = new URL("../src/", import.meta.url).pathname;
 
 const args = process.argv.slice(2);
 const dryRun = args.includes("--dry-run");
+/** Max width in pixels */
+// Found by looking at flag preceding the number
 const maxWidth = Number(args.find((_, i, a) => a[i - 1] === "--max-width")) || 1920;
+/** WebP quality */
+// Found by looking at flag preceding the number
 const quality = Number(args.find((_, i, a) => a[i - 1] === "--quality")) || 80;
 
-const CONVERTIBLE_EXTS = new Set([".jpg", ".jpeg", ".png"]);
-const SOURCE_EXTS = new Set([".astro", ".mdx", ".md", ".ts", ".js", ".jsx", ".tsx"]);
+/**
+ * Extensions to convert from.
+ * Each entry starts with a `.`
+ * This set must be hardcoded to jpg, jpeg, and png for now.
+ */
+const convertibleExts = new Set([".jpg", ".jpeg", ".png"]);
+/** Extensions of non-image files. Each entry starts with a `.` */
+const sourceExts = new Set([".astro", ".mdx", ".md", ".ts", ".js", ".jsx", ".tsx"]);
 
 /** Recursively yield all file paths under a directory */
 async function* walk(dir) {
@@ -43,10 +51,16 @@ function formatSize(bytes) {
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
 }
 
+/**
+ * Converts the image at the path to a WebP image,
+ * or just prints logs if `dryRun` is `true`
+ */
 async function convertImage(filePath) {
-  const webpPath = filePath.replace(/\.(jpe?g|png)$/i, ".webp");
-  const relPath = relative(ASSETS_DIR, filePath);
+  // Replace the last `.` and everything after it with `.webp`
+  const webpPath = filePath.replace(/\.[^.]*$/, ".webp");
+  const relPath = relative(assetsDir, filePath);
 
+  // `sharp` is an image handling library
   const image = sharp(filePath);
   const metadata = await image.metadata();
 
@@ -74,6 +88,7 @@ async function convertImage(filePath) {
     `  ✓ ${relPath} → .webp${resizeNote}: ${formatSize(oldSize)} → ${formatSize(newSize)} (${savings}% smaller)`,
   );
 
+  // Delete the old image (OK because it's somewhere else / likely in git history)
   await unlink(filePath);
   return { relPath, oldSize, newSize, saved: oldSize - newSize };
 }
@@ -82,17 +97,23 @@ async function updateImports() {
   let filesUpdated = 0;
   let importsUpdated = 0;
 
-  for await (const filePath of walk(SRC_DIR)) {
+  for await (const filePath of walk(srcDir)) {
     const ext = extname(filePath).toLowerCase();
-    if (!SOURCE_EXTS.has(ext)) continue;
+    if (!sourceExts.has(ext)) continue;
 
     const content = await readFile(filePath, "utf-8");
-    // Match import paths ending in .jpg, .jpeg, or .png (case-insensitive)
-    const updated = content.replace(/(?<=["'])([^"']*)\.(jpe?g|png)(?=["'])/gi, "$1.webp");
+    /**
+     * Matches import paths ending in .jpg, .jpeg, or .png (case-insensitive)
+     * $1 is the file path before the current extension (e.g. `@/assets/2026-02-03-profile-square`)
+     * $2 is the current extension after the dot (e.g. `jpg`)
+     */
+    const srcRefRegex = /(?<=["'])([^"']*)\.(jpe?g|png)(?=["'])/gi;
+
+    const updated = content.replace(srcRefRegex, "$1.webp");
 
     if (updated !== content) {
-      const relPath = relative(SRC_DIR, filePath);
-      const count = (content.match(/(?<=["'])([^"']*)\.(jpe?g|png)(?=["'])/gi) || []).length;
+      const relPath = relative(srcDir, filePath);
+      const count = (content.match(srcRefRegex) || []).length;
       if (dryRun) {
         console.log(`  [dry-run] Would update ${count} import(s) in: ${relPath}`);
       } else {
@@ -108,25 +129,25 @@ async function updateImports() {
 }
 
 async function main() {
-  console.log(`\nImage Optimization Script`);
+  console.log(`Optimizing images...`);
   console.log(`  Max width: ${maxWidth}px | WebP quality: ${quality} | Dry run: ${dryRun}\n`);
 
   // Step 1: Convert images
   console.log("Converting images to WebP...");
   const results = [];
-  for await (const filePath of walk(ASSETS_DIR)) {
+  for await (const filePath of walk(assetsDir)) {
     const ext = extname(filePath).toLowerCase();
-    if (CONVERTIBLE_EXTS.has(ext)) {
+    if (convertibleExts.has(ext)) {
       try {
         results.push(await convertImage(filePath));
       } catch (err) {
-        console.error(`  ✗ ${relative(ASSETS_DIR, filePath)}: ${err.message}`);
+        console.error(`  ✗ ${relative(assetsDir, filePath)}: ${err.message}`);
       }
     }
   }
 
   if (results.length === 0) {
-    console.log("  No .jpg/.jpeg/.png images found in src/assets/. Nothing to do.\n");
+    console.log(`  No ${[...convertibleExts]} images found in ${assetsDir}. Nothing to do.\n`);
     return;
   }
 
@@ -139,7 +160,7 @@ async function main() {
   const totalNew = results.reduce((sum, r) => sum + r.newSize, 0);
   const totalSaved = totalOld - totalNew;
 
-  console.log(`\n--- Summary ---`);
+  console.log(`\n`);
   console.log(`  Images converted: ${results.length}`);
   if (!dryRun) {
     console.log(
