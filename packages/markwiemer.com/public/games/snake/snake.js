@@ -31,44 +31,54 @@ function main() {
   console.debug(state);
   drawState(state);
 
-  document.addEventListener("DOMContentLoaded", function () {
-    document.addEventListener("keydown", (e) => (state = handleInput(e, core.dirs, state)));
+  document.addEventListener("keydown", (e) => (state = handleInput(e, core.dirs, state)));
 
-    // Swipe support for mobile
-    canvas.style.touchAction = "none";
-    let touchStartX = null;
-    let touchStartY = null;
-    canvas.addEventListener("touchstart", (e) => {
-      const touch = e.touches[0];
-      touchStartX = touch.clientX;
-      touchStartY = touch.clientY;
-    });
-    canvas.addEventListener("touchend", (e) => {
-      if (touchStartX === null || touchStartY === null) return;
-      const touch = e.changedTouches[0];
-      const dx = touch.clientX - touchStartX;
-      const dy = touch.clientY - touchStartY;
-      touchStartX = null;
-      touchStartY = null;
-      const minSwipeDistance = 10;
-      if (Math.abs(dx) < minSwipeDistance && Math.abs(dy) < minSwipeDistance) return;
-      const newDir =
-        Math.abs(dx) > Math.abs(dy)
-          ? dx > 0
-            ? core.dirs.right
-            : core.dirs.left
-          : dy > 0
-            ? core.dirs.down
-            : core.dirs.up;
-      const newState = core.klona(state);
-      if (isValidDir(newState, newDir)) {
-        newState.snakeDirs.push(newDir);
-      }
-      state = newState;
-    });
-
-    state.interval = setInterval(() => (state = tick(core.klona(state))), Math.floor(1000.0 / 16));
+  // Swipe support for mobile
+  canvas.style.touchAction = "none";
+  let touchStartX = null;
+  let touchStartY = null;
+  let touchStartId = null;
+  canvas.addEventListener("touchstart", (e) => {
+    const touch = e.changedTouches[0];
+    if (!touch) return;
+    touchStartX = touch.clientX;
+    touchStartY = touch.clientY;
+    touchStartId = touch.identifier;
   });
+  canvas.addEventListener("touchcancel", () => {
+    touchStartX = null;
+    touchStartY = null;
+    touchStartId = null;
+  });
+  canvas.addEventListener("touchend", (e) => {
+    if (touchStartX === null || touchStartY === null || touchStartId === null) return;
+    const touch = [...e.changedTouches].find(
+      (changedTouch) => changedTouch.identifier === touchStartId,
+    );
+    if (!touch) return;
+    const dx = touch.clientX - touchStartX;
+    const dy = touch.clientY - touchStartY;
+    touchStartX = null;
+    touchStartY = null;
+    touchStartId = null;
+    const minSwipeDistance = 24;
+    if (Math.abs(dx) < minSwipeDistance && Math.abs(dy) < minSwipeDistance) return;
+    const newDir =
+      Math.abs(dx) > Math.abs(dy)
+        ? dx > 0
+          ? core.dirs.right
+          : core.dirs.left
+        : dy > 0
+          ? core.dirs.down
+          : core.dirs.up;
+    const newState = core.klona(state);
+    if (isValidDir(newState, newDir)) {
+      newState.snakeDirs.push(newDir);
+    }
+    state = newState;
+  });
+
+  state.interval = setInterval(() => (state = tick(core.klona(state))), Math.floor(1000.0 / 16));
 }
 
 /**
