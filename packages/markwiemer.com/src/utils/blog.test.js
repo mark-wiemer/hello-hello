@@ -1,7 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { getAllBlogPosts, getPreface } from "./blog";
 
-// todo run tests on build / commit
 describe("getAllBlogPosts", () => {
   it("includes the expected slug and filename", () => {
     const paths = getAllBlogPosts();
