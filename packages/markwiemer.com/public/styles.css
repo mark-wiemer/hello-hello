@@ -27,6 +27,7 @@
   /* todo improve nav component alignment (border, button) */
   --nav-open-width: 165px;
   --nav-open-time: 0.2s;
+  --padding-table: 10px;
   --text-primary-dark: gainsboro;
   --text-primary-light: black;
   --width-button-nav: 30px;
@@ -171,6 +172,7 @@ button {
 
   background-color: var(--body-bg);
   color: var(--text-primary);
+  scrollbar-color: var(--text-primary) var(--body-bg);
 }
 
 body {
@@ -310,11 +312,10 @@ table {
 
 .wide-section {
   position: relative;
-  left: calc(50% - 50vw);
-  width: 100vw;
+  left: calc(50% - 50vw + var(--padding-table));
+  width: calc(100vw - var(--padding-table) * 2);
   overflow-x: auto;
   box-sizing: border-box;
-  padding: 0 1rem;
 }
 
 th,
