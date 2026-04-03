@@ -10,12 +10,17 @@ type TermDef = [term: string, definition: string];
 // todo support multiple terms for a definition
 // todo highlight term in URL
 // todo create and enforce style guide
+
 const glossary: TermDef[] = [
-  // todo make this ID `c-sharp`
   [
     ".NET",
     "Pronounced and sometimes written `dotnet`. An open-source software toolkit developed by Microsoft.",
   ],
+  [
+    "article",
+    "In the context of my blog, an article is a natural language series of paragraphs and whatnot. Generally posted at a specific time and only updated to fix typos and mistakes, not to add new information.",
+  ],
+  ["blog", "Consists of a homepage and a set of posts"],
   [
     "boxel",
     "Voxels that are boxes, like in Minecraft. Usually wrapped in quotes as it's a term I made up 🤓",
@@ -28,7 +33,6 @@ const glossary: TermDef[] = [
     "browser",
     "A browser is a tool for listing, viewing, and navigating between records of a certain type: webpages, files, etc. In context, 'browser' may refer specifically to a web browser, file browser, or other particular browser.",
   ],
-  // todo make this ID `c-sharp`
   [
     "C#",
     "Pronounced and sometimes written `C Sharp`. An open-source programming language developed by Microsoft.",
@@ -44,6 +48,7 @@ const glossary: TermDef[] = [
   ["code coverage", "A usually-ambiguous term referring to some form of test coverage"],
   ["cognitive load", "Mental effort, usually to solve complex problems."],
   ["coverage", "Test coverage"],
+  ["C Sharp", "C#"],
   [
     "Deno",
     "A TypeScript toolkit by the creator of Node.js that includes its own runtime and more. Ultimately owned by 'the Deno authors.'",
@@ -56,6 +61,7 @@ const glossary: TermDef[] = [
     "divisor",
     "The number that goes into the other one in division. In `6 / 2`, `2` is the divisor. See also dividend.",
   ],
+  ["dotnet", ".NET"],
   [
     "Ecma",
     "Organization that defines ECMAScript. Short for Ecma International, originally short for European Computer Manufacturers Association.",
@@ -75,7 +81,7 @@ const glossary: TermDef[] = [
     "hardware",
     "Physical devices like a keyboard, mouse, and monitor. Also applies to non-digital domains: a wrench, a hammer, etc. See also software.",
   ],
-  ["JavaScript", "A programming language originally built for websites. See also EcmaScript."],
+  ["JavaScript", "A programming language originally built for websites. See also ECMAScript."],
   ["JavaScriptCore", "A JavaScript engine used by WebKit (Safari) and Bun."],
   ["JS", "JavaScript"],
   ["knowledge elicitation", "The process of gathering information from people."],
@@ -93,6 +99,10 @@ const glossary: TermDef[] = [
   ["Node", "Node.js"],
   ["Node.js", "A JavaScript runtime wrapped around V8."],
   [
+    "notes",
+    "In the context of my blog, a page of notes is a series of nested bulleted lists with many sources and analyses, not necessarily meant to be read in order. The same page may be frequently updated with additional information. A large page of notes may be split into multiple smaller pages for organization.",
+  ],
+  [
     "npm",
     "The default package manager for Node.js. Open-source and ultimately owned by Microsoft. See also package manager.",
   ],
@@ -109,6 +119,7 @@ const glossary: TermDef[] = [
     "pnpm",
     '"performant npm" built by a different team than npm. A package manager for JavaScript. See also package manager.',
   ],
+  ["post", "In the context of my blog, a post is either an article or a page of notes"],
   [
     "require(ESM)",
     "A compatibility feature in Node.js for CJS projects to work with ESM projects.",
