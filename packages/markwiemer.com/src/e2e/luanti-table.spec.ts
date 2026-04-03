@@ -5,16 +5,16 @@ test.describe("luanti people table", () => {
     await page.goto("/software/luanti");
   });
 
-  test("table is centered on the page", async ({ page }) => {
-    const isCentered = await page.evaluate(() => {
+  test("table is centered on the page @headed", async ({ page }) => {
+    const tableDistanceFromCenter = await page.evaluate(() => {
       const table = document.querySelector("table");
       if (!table) return false;
       const tableRect = table.getBoundingClientRect();
-      const viewportWidth = window.innerWidth;
+      const docWidth = document.documentElement.scrollWidth;
       const tableCenter = tableRect.left + tableRect.width / 2;
-      return Math.abs(tableCenter - viewportWidth / 2) < 2;
+      return Math.abs(tableCenter - docWidth / 2);
     });
-    expect(isCentered).toBe(true);
+    expect(tableDistanceFromCenter).toBeLessThan(2);
   });
 
   test("table cells have a border", async ({ page }) => {

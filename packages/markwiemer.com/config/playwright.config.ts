@@ -20,6 +20,12 @@ export default defineConfig({
     {
       name: "chromium",
       use: { ...devices["Desktop Chrome"] },
+      grepInvert: /@headed/,
+    },
+    {
+      name: "chromium-headed",
+      use: { ...devices["Desktop Chrome"], headless: false },
+      grep: /@headed/,
     },
   ],
 });
