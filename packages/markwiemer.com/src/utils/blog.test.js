@@ -1,5 +1,4 @@
 import { describe, expect, it } from "vitest";
-import { getAllBlogPosts } from "./blog";
 import { getAllBlogPosts, getPreface } from "./blog";
 
 // todo run tests on build / commit
