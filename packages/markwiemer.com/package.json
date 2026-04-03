@@ -13,6 +13,7 @@
     "playwright": "playwright test --config config/playwright.config.ts",
     "playwright//": "To be used as part of `e2e`",
     "preview": "astro preview --config config/astro.config.mjs",
+    "prepreview:e2e": "bun run build",
     "preview:e2e": "bun run preview --port 8910",
     "test": "vitest --config config/vitest.config.js",
     "test:ci": "bun run test --run",
