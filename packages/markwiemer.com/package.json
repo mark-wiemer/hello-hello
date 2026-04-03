@@ -7,6 +7,7 @@
     "astro": "astro --config config/astro.config.mjs",
     "build": "astro build --config config/astro.config.mjs",
     "dev": "astro dev --config config/astro.config.mjs",
+    "dev:e2e": "bun run dev --port 8910",
     "e2e:install": "bunx playwright install --with-deps chromium",
     "e2e": "start-server-and-test \"bun run preview:e2e\" http-get://localhost:8910 \"bun run playwright\"",
     "playwright": "playwright test --config config/playwright.config.ts",
