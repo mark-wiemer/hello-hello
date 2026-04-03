@@ -1,0 +1,27 @@
+name: markwiemer.com - Build
+
+on:
+  pull_request:
+    paths:
+      - packages/markwiemer.com/**
+  workflow_dispatch:
+
+jobs:
+  validate:
+    name: validate:ci
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/markwiemer.com
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Run validate:ci
+        run: bun run validate:ci
