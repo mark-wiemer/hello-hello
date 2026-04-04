@@ -1,68 +1,68 @@
 {
   "AHK++.v1.file": {
     "helpPath": "C:\\Program Files\\AutoHotkey\\v1.1.37.02\\AutoHotkey.chm",
-    "interpreterPath": "C:\\Program Files\\AutoHotkey\\v1.1.37.02\\AutoHotkeyU64.exe",
+    "interpreterPath": "C:\\Program Files\\AutoHotkey\\v1.1.37.02\\AutoHotkeyU64.exe"
   },
   "AHK++.v1.formatter": {
     "allowedNumberOfEmptyLines": 1,
-    "trimExtraSpaces": false,
+    "trimExtraSpaces": false
   },
   "AutoHotkey2.AutoLibInclude": "All",
   "AutoHotkey2.Files.Exclude": ["excluded.ahk"],
   "AutoHotkey2.FormatOptions": {
-    "brace_style": "One True Brace",
+    "brace_style": "One True Brace"
   },
   "C_Cpp.clang_format_fallbackStyle": "GNU",
   "[ahk2]": {
-    "editor.formatOnSave": false,
+    "editor.formatOnSave": false
   },
   "[ahk]": {
     "editor.defaultFormatter": "mark-wiemer.vscode-autohotkey-plus-plus",
-    "editor.formatOnSave": false,
+    "editor.formatOnSave": false
   },
   "[csharp]": {
-    "editor.defaultFormatter": "csharpier.csharpier-vscode",
+    "editor.defaultFormatter": "csharpier.csharpier-vscode"
   },
   "[css]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[lua]": {
-    "editor.defaultFormatter": "JohnnyMorganz.stylua",
+    "editor.defaultFormatter": "JohnnyMorganz.stylua"
   },
   "[markdown]": {
     "editor.quickSuggestions": {
       "comments": "off",
       "other": "off",
-      "strings": "off",
+      "strings": "off"
     },
-    "editor.wordWrap": "bounded",
+    "editor.wordWrap": "bounded"
   },
   "[mdx]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.quickSuggestions": {
-      "other": "off",
-    },
+      "other": "off"
+    }
   },
   "[snippets]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[yaml]": {
-    "diffEditor.ignoreTrimWhitespace": false,
+    "diffEditor.ignoreTrimWhitespace": false
   },
   "cSpell.blockCheckingWhenLineLengthGreaterThan": 1000000,
   "cSpell.blockCheckingWhenTextChunkSizeGreaterThan": 5000,
@@ -390,6 +390,7 @@
     "Trackbar",
     "triggerings",
     "Truffula",
+    "Trumpers",
     "uefi",
     "unclickable",
     "undock",
@@ -437,21 +438,21 @@
     "Zacarias",
     "Zadvydas",
     "Zeroize",
-    "zipperless",
+    "zipperless"
   ],
   "chat.tools.urls.autoApprove": {
     "https://code.visualstudio.com": true,
     "https://github.com/microsoft/vscode/wiki/*": true,
     "https://github.com/microsoft/vscode/issues": {
       "approveRequest": false,
-      "approveResponse": true,
+      "approveResponse": true
     },
     "https://github.com/actions/upload-pages-artifact": true,
     "https://github.com/actions": true,
     "https://github.com": true,
     "https://github.com/oven-sh/setup-bun": true,
     "https://github.com/oven-sh": true,
-    "https://docs.astro.build": true,
+    "https://docs.astro.build": true
   },
   "chat.viewSessions.enabled": false,
   "debug.onTaskErrors": "abort",
@@ -471,7 +472,7 @@
   "editor.stickyTabStops": true,
   "editor.suggest.preview": true,
   "editor.unicodeHighlight.allowedCharacters": {
-    "–": true,
+    "–": true
   },
   "editor.wordWrap": "bounded",
   "editor.wordWrapColumn": 120,
@@ -482,7 +483,7 @@
   "explorer.openEditors.sortOrder": "alphabetical",
   "extensions.confirmedUriHandlerExtensionIds": [
     "ms-dotnettools.dotnet-interactive-vscode",
-    "ms-dotnettools.vscode-dotnet-pack",
+    "ms-dotnettools.vscode-dotnet-pack"
   ],
   "extensions.ignoreRecommendations": true,
   "files.associations": {
@@ -491,12 +492,12 @@
     "*.snap": "plaintext",
     "*.txt": "plaintext",
     ".prettierrc": "yaml",
-    "*.vssettings": "xml",
+    "*.vssettings": "xml"
   },
   "files.autoSaveDelay": 300,
   "files.exclude": {
     "**/.node_modules": true,
-    "**/HR-TAL-Lnr-NetCoursePlayer": true,
+    "**/HR-TAL-Lnr-NetCoursePlayer": true
   },
   "git.autofetch": true,
   "git.confirmSync": false,
@@ -507,7 +508,7 @@
   "git.pullBeforeCheckout": true,
   "git.replaceTagsWhenPull": true,
   "github.copilot.enable": {
-    "*": false,
+    "*": false
   },
   "github.copilot.nextEditSuggestions.enabled": true,
   "githubPullRequests.codingAgent.codeLens": false,
@@ -526,7 +527,7 @@
   "playwright.reuseBrowser": false,
   "playwright.showTrace": false,
   "search.exclude": {
-    "**/node_modules": false,
+    "**/node_modules": false
   },
   "security.allowedUNCHosts": ["wsl.localhost"],
   "security.workspace.trust.untrustedFiles": "newWindow",
@@ -534,22 +535,22 @@
   "terminal.integrated.profiles.osx": {
     "bash": {
       "icon": "terminal-bash",
-      "path": "bash",
+      "path": "bash"
     },
     "fish": {
-      "path": "fish",
+      "path": "fish"
     },
     "pwsh": {
       "icon": "terminal-powershell",
-      "path": "pwsh",
+      "path": "pwsh"
     },
     "tmux": {
       "icon": "terminal-tmux",
-      "path": "tmux",
+      "path": "tmux"
     },
     "zsh": {
-      "path": "zsh",
-    },
+      "path": "zsh"
+    }
   },
   "terminal.integrated.smoothScrolling": true,
   "terminal.integrated.tabs.enabled": false,
@@ -565,7 +566,7 @@
   "workbench.editor.highlightModifiedTabs": true,
   "workbench.editor.wrapTabs": true,
   "workbench.editorAssociations": {
-    "*.out": "default",
+    "*.out": "default"
   },
   "workbench.list.smoothScrolling": true,
   "workbench.panel.defaultLocation": "right",
@@ -581,7 +582,7 @@
     "npx semver": true,
     "git lfs": true,
     "awk": true,
-    "git rev-list": true,
+    "git rev-list": true
   },
   "json.schemaDownload.trustedDomains": {
     "https://developer.microsoft.com/json-schemas/": true,
@@ -592,6 +593,6 @@
     "https://raw.githubusercontent.com/microsoft/vscode/": true,
     "https://schemastore.azurewebsites.net/": true,
     "https://unpkg.com/knip%406/schema-jsonc.json": true,
-    "https://www.schemastore.org/": true,
-  },
+    "https://www.schemastore.org/": true
+  }
 }
