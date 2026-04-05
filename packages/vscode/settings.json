@@ -583,7 +583,8 @@
     "npx semver": true,
     "git lfs": true,
     "awk": true,
-    "git rev-list": true
+    "git rev-list": true,
+    "npm run -s test-node-run": true
   },
   "json.schemaDownload.trustedDomains": {
     "https://developer.microsoft.com/json-schemas/": true,
