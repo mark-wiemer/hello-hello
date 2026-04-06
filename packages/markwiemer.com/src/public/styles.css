@@ -109,6 +109,12 @@
   & > nav > h2 {
     font-size: var(--font-size-default);
     line-height: var(--line-height-default);
+    margin: 0;
+  }
+
+  & > nav > ul,
+  & > ul {
+    margin: 0;
   }
 
   background-color: var(--nav-bg);
