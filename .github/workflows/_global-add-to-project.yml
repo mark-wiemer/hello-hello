@@ -4,8 +4,7 @@ name: _global - Auto-add issues to project
 
 on:
   issues:
-    # todo stop triggering on edit to save runs
-    types: [opened, edited]
+    types: [opened]
 
 jobs:
   add-to-project:
