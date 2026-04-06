@@ -34,20 +34,3 @@ export function getAllBlogPosts(): BlogPost[] {
 
   return paths;
 }
-
-export function getPreface(
-  postDate: string,
-  postTime?: string,
-  lastUpdated?: string,
-  postType?: string,
-): string {
-  let preface = `${postDate}${postTime ? `, ${postTime}.` : "."}`;
-
-  preface += lastUpdated ? ` Last updated ${lastUpdated}.` : "";
-  preface +=
-    postType === "notes"
-      ? ` These are personal notes, subject to change. None of this is legal advice.`
-      : "";
-
-  return preface;
-}
