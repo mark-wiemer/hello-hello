@@ -52,19 +52,16 @@ self.addEventListener("fetch", (event) => {
   if (url.pathname.startsWith("/_astro/")) {
     // Cache-first: content-hashed assets never change
     event.respondWith(
-      caches
-        .open(cacheName)
-        .then((cache) =>
-          cache
-            .match(request)
-            .then(
-              (cached) =>
-                cached ||
-                fetch(request).then((response) =>
-                  cache.put(request, response.clone()).then(() => response),
-                ),
-            ),
+      caches.open(cacheName).then((cache) =>
+        cache.match(request).then(
+          (cached) =>
+            cached ||
+            fetch(request)
+              .then((response) => cache.put(request, response.clone()).then(() => response))
+              // Network failed and nothing in cache — let the browser handle it.
+              .catch(() => cache.match(request)),
         ),
+      ),
     );
   } else {
     // Network-first: always try fresh content, fall back to cache offline
