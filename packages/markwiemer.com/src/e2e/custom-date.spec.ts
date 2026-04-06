@@ -7,7 +7,7 @@ function getTimes(page: Page) {
 /** Opens the nav and returns the theme toggle button */
 async function openNavAndGetDateToggle(page: Page) {
   await page.locator("#toggleMenu").click();
-  const toggle = page.locator("#dateFormatToggle");
+  const toggle = page.locator("#datetimeFormatToggle");
   await expect(toggle).toBeVisible();
   return toggle;
 }

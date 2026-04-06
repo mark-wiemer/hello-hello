@@ -92,24 +92,24 @@ import NavEntry from "@/components/NavEntry.astro";
     })();
   </script>
 
-  <button id="dateFormatToggle" aria-live="polite">Datetimes: System</button>
+  <button id="datetimeFormatToggle" aria-live="polite">Datetimes: System</button>
   <script is:inline data-notes="handle date format toggle">
     (() => {
-      const dateFormatToggle = document.querySelector("#dateFormatToggle");
+      const datetimeFormatToggle = document.querySelector("#datetimeFormatToggle");
       const formats = ["system", "iso"];
       const labels = { system: "System", iso: "ISO" };
 
       const getStoredFormat = () => localStorage.getItem("dateFormat") || "system";
 
       const updateButton = (format) => {
-        if (dateFormatToggle) dateFormatToggle.textContent = `Datetimes: ${labels[format]}`;
+        if (datetimeFormatToggle) datetimeFormatToggle.textContent = `Datetimes: ${labels[format]}`;
       };
 
       // Initialize button text from current state
       const current = getStoredFormat();
       updateButton(current);
 
-      dateFormatToggle?.addEventListener("click", () => {
+      datetimeFormatToggle?.addEventListener("click", () => {
         const current = getStoredFormat();
         const nextIndex = (formats.indexOf(current) + 1) % formats.length;
         const next = formats[nextIndex];
