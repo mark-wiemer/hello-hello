@@ -52,7 +52,7 @@ import NavEntry from "@/components/NavEntry.astro";
     </script>
   </nav>
   <h2>Settings</h2>
-  <button id="themeToggle" aria-live="polite">Theme: System</button>
+  <button id="themeToggle" aria-live="polite">Theme: System</button>
   <script is:inline data-notes="handle theme toggle">
     (() => {
       const themeToggle = document.querySelector("#themeToggle");
@@ -92,17 +92,17 @@ import NavEntry from "@/components/NavEntry.astro";
     })();
   </script>
 
-  <button id="dateFormatToggle" aria-live="polite">Datetimes: System</button>
+  <button id="dateFormatToggle" aria-live="polite">Datetimes: System</button>
   <script is:inline data-notes="handle date format toggle">
     (() => {
       const dateFormatToggle = document.querySelector("#dateFormatToggle");
       const formats = ["system", "iso"];
-      const labels = { system: "Datetimes: System", iso: "Datetimes: ISO" };
+      const labels = { system: "System", iso: "ISO" };
 
       const getStoredFormat = () => localStorage.getItem("dateFormat") || "system";
 
       const updateButton = (format) => {
-        if (dateFormatToggle) dateFormatToggle.textContent = labels[format];
+        if (dateFormatToggle) dateFormatToggle.textContent = `Datetimes: ${labels[format]}`;
       };
 
       // Initialize button text from current state
