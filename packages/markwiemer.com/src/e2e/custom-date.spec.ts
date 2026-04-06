@@ -158,5 +158,78 @@ test.describe("Datetimes toggle", () => {
   });
 });
 
+test.describe("Inline date conversion (rehype plugin)", () => {
+  test("blog post body content dates are wrapped in <time> elements", async ({ page }) => {
+    // This post has dates in its edit log at the bottom of the body content
+    await page.goto("/blog/irons-reflecting-plans/");
+    const times = getTimes(page);
+    const count = await times.count();
+    // At minimum, the post date from frontmatter + dates from edit log
+    expect(count).toBeGreaterThanOrEqual(2);
+
+    for (let i = 0; i < count; i++) {
+      const datetime = await times.nth(i).getAttribute("datetime");
+      expect.soft(datetime).toMatch(isoRegex);
+    }
+  });
+
+  test("non-blog page dates are wrapped in <time> elements", async ({ page }) => {
+    // The about page has dates in its body content
+    await page.goto("/about/");
+    const times = getTimes(page);
+    const count = await times.count();
+    expect(count).toBeGreaterThanOrEqual(1);
+
+    for (let i = 0; i < count; i++) {
+      const datetime = await times.nth(i).getAttribute("datetime");
+      expect.soft(datetime).toMatch(isoRegex);
+    }
+  });
+
+  test("inline dates respond to ISO toggle", async ({ page }) => {
+    await page.goto("/blog/irons-reflecting-plans/");
+    await page.evaluate(() => localStorage.setItem("dateFormat", "iso"));
+    await page.reload();
+    const times = getTimes(page);
+    const count = await times.count();
+    expect(count).toBeGreaterThanOrEqual(2);
+
+    // All dates should be in ISO format
+    for (let i = 0; i < count; i++) {
+      const text = await times.nth(i).textContent();
+      expect.soft(text).toMatch(isoRegex);
+    }
+  });
+
+  test("inline dates respond to System format", async ({ page }) => {
+    await page.goto("/blog/irons-reflecting-plans/");
+    await page.evaluate(() => localStorage.removeItem("dateFormat"));
+    await page.reload();
+    const times = getTimes(page);
+    await expect(times.first()).toBeVisible();
+
+    // All dates should be in locale format (not ISO)
+    const count = await times.count();
+    for (let i = 0; i < count; i++) {
+      const text = await times.nth(i).textContent();
+      expect.soft(text).not.toMatch(isoRegex);
+    }
+  });
+
+  test("non-blog page dates also respond to toggle", async ({ page }) => {
+    await page.goto("/about/");
+    await page.evaluate(() => localStorage.setItem("dateFormat", "iso"));
+    await page.reload();
+    const times = getTimes(page);
+    const count = await times.count();
+    expect(count).toBeGreaterThanOrEqual(1);
+
+    for (let i = 0; i < count; i++) {
+      const text = await times.nth(i).textContent();
+      expect.soft(text).toMatch(isoRegex);
+    }
+  });
+});
+
 // todo test for unexpected visual space between date and subsequent element
 // that space reappears if we place the `script` element after the `time` element
