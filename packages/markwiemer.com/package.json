@@ -30,6 +30,7 @@
     "vitest": "^4.0.18"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.11.1",
     "@playwright/test": "^1.53.1",
     "start-server-and-test": "^2.0.12"
   }
