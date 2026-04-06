@@ -24,8 +24,18 @@ const notesDisclaimer =
 <Layout pageTitle={postTitle}>
   <h1>{postTitle}</h1>
   <p>
+    <!-- todo incorporate postTime into CustomDate -->
     <CustomDate date={postDate} />{postTime ? `, ${postTime}.` : "."}
-    {lastUpdated ? <>{" "}Last updated <CustomDate date={lastUpdated} />.</> : ""}
+    {
+      lastUpdated ? (
+        <>
+          {" "}
+          Last updated <CustomDate date={lastUpdated} />.
+        </>
+      ) : (
+        ""
+      )
+    }
     {notesDisclaimer}
   </p>
   <Content />
