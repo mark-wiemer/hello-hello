@@ -1,0 +1,325 @@
+/* https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascading_variables/Using_custom_properties */
+/* :root is a common practice for global reference */
+:root {
+  /* --body-bg-X is also used in Layout.astro */
+  --body-bg-dark: black;
+  --body-bg-light: white;
+  --border-radius-button: 4px;
+  --code-bg-dark: rgb(33, 38, 44);
+  --code-bg-light: rgb(214, 223, 233);
+  --font-size-default: 18px;
+  --img-border-dark: var(--text-primary-dark);
+  --img-border-light: var(--text-primary-light);
+  --line-height-default: 1.5em;
+  --link-active-dark: var(--text-primary-dark);
+  --link-active-light: var(--text-primary-light);
+  --link-primary-dark: rgb(0, 162, 174);
+  --link-primary-light: rgb(9 115 131);
+  --link-visited-dark: rgb(219, 8, 219);
+  --link-visited-light: rgb(107, 2, 107);
+  --nav-bg-dark: var(--body-bg-dark);
+  --nav-bg-light: var(--body-bg-light);
+  /* ideally is divisible by 1.1, 1.25, 1.5, 1.75, 2, 2.5, 3, 4, and 5 */
+  /* these are the zoom levels of Microsoft Edge and likely other browsers */
+  /* should also be close to 150px of course */
+  /* 165px is my favorite candidate */
+  /* fails at 1.75, 2, and 4, but passes all others */
+  /* todo improve nav component alignment (border, button) */
+  --nav-open-width: 165px;
+  --nav-open-time: 0.2s;
+  --padding-table: 10px;
+  --text-primary-dark: gainsboro;
+  --text-primary-light: black;
+  --width-button-nav: 30px;
+  --z-index-nav-main: 1;
+  --z-index-nav-button: 2;
+
+  /** reference values */
+  /* not currently used directly due to technical issues */
+  /* todo find better CSS system */
+  /* [320, 480] px */
+  --breakpoint-very-thin: 480px;
+  /* (480, 640] px */
+  --breakpoint-thin: 640px;
+  /* (640, 1280] px */
+  --breakpoint-medium: 1280px;
+
+  /* Resolved theme properties (default: light) */
+  --body-bg: var(--body-bg-light);
+  --code-bg: var(--code-bg-light);
+  --img-border: var(--img-border-light);
+  --link-active: var(--link-active-light);
+  --link-primary: var(--link-primary-light);
+  --link-visited: var(--link-visited-light);
+  --nav-bg: var(--nav-bg-light);
+  --text-primary: var(--text-primary-light);
+}
+
+/* System dark preference (when user hasn't chosen "light") */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --body-bg: var(--body-bg-dark);
+    --code-bg: var(--code-bg-dark);
+    --img-border: var(--img-border-dark);
+    --link-active: var(--link-active-dark);
+    --link-primary: var(--link-primary-dark);
+    --link-visited: var(--link-visited-dark);
+    --nav-bg: var(--nav-bg-dark);
+    --text-primary: var(--text-primary-dark);
+  }
+}
+
+/* Explicit dark theme override */
+:root[data-theme="dark"] {
+  --body-bg: var(--body-bg-dark);
+  --code-bg: var(--code-bg-dark);
+  --img-border: var(--img-border-dark);
+  --link-active: var(--link-active-dark);
+  --link-primary: var(--link-primary-dark);
+  --link-visited: var(--link-visited-dark);
+  --nav-bg: var(--nav-bg-dark);
+  --text-primary: var(--text-primary-dark);
+}
+
+::selection {
+  /* todo make a:hover border go away when ::selection is applied */
+  color: var(--text-primary);
+  background-color: var(--link-primary);
+}
+
+#siteMenu {
+  box-sizing: border-box;
+  height: 100%;
+  left: 0;
+  overflow-x: hidden;
+  padding-bottom: 8px;
+  padding-top: 40px;
+  position: fixed;
+  top: 0;
+  transition: var(--nav-open-time);
+  width: 0;
+  z-index: var(--z-index-nav-main);
+
+  & > *,
+  & > nav > * {
+    padding-left: 4px;
+  }
+
+  & > h2,
+  & > nav > h2 {
+    font-size: var(--font-size-default);
+    line-height: var(--line-height-default);
+  }
+
+  background-color: var(--nav-bg);
+  color: var(--text-primary);
+
+  &[aria-expanded="true"] {
+    width: var(--nav-open-width);
+    /* todo border disappears before transition is done */
+    border-right: 1px solid var(--text-primary);
+  }
+}
+
+/* button */
+/* todo remove rounded border on right side while expanded */
+/* this would mirror the existing appearance on the left while collapsed */
+#toggleMenu {
+  width: var(--width-button-nav);
+  border: 1px solid var(--text-primary);
+  border-radius: var(--border-radius-button);
+  margin-top: 4px;
+  margin-left: calc(-1 * var(--border-radius-button));
+  cursor: pointer;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transition: transform var(--nav-open-time) ease;
+}
+
+.skip-link {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%) translateY(-100%);
+  z-index: calc(var(--z-index-nav-button) + 1);
+
+  &:focus-visible {
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+body.nav-open #toggleMenu {
+  transform: translateX(
+    calc(var(--nav-open-width) - var(--width-button-nav) + var(--border-radius-button))
+  );
+  z-index: var(--z-index-nav-button);
+}
+
+body,
+button {
+  line-height: var(--line-height-default);
+  /* Order matters for font-family */
+  font-family:
+    "Segoe UI",
+    "Segoe UI Web (West European)",
+    -apple-system,
+    BlinkMacSystemFont,
+    Roboto,
+    "Helvetica Neue",
+    sans-serif;
+  font-size: var(--font-size-default);
+
+  background-color: var(--body-bg);
+  color: var(--text-primary);
+  scrollbar-color: var(--text-primary) var(--body-bg);
+}
+
+body {
+  /* Add 1em below to allow user to sanity-check it's the true end-of-page */
+  /* Use margin instead of padding as most user agents have a margin we don't want */
+  margin: 0 0 1em 0;
+}
+
+figcaption {
+  font-size: smaller;
+  text-align: center;
+}
+
+h1 {
+  font-size: 3em;
+  font-weight: 600;
+  line-height: 52px;
+  text-align: center;
+  margin-bottom: 12px;
+
+  /* breakpoint-very-thin */
+  @media (max-width: 480px) {
+    font-size: 2em;
+  }
+}
+
+figure {
+  margin: 0;
+}
+
+footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  & hr {
+    width: 640px;
+  }
+}
+
+hr {
+  width: 320px;
+  max-width: calc(100% - 64px);
+}
+
+a {
+  text-decoration: underline;
+  border-radius: 5px;
+
+  /* See docs/tests.md for link state test matrix */
+  color: var(--link-primary);
+  &:hover {
+    outline: 2px solid var(--link-primary);
+  }
+  &:visited {
+    color: var(--link-visited);
+  }
+  &:visited:hover {
+    outline: 2px solid var(--link-visited);
+  }
+  &:visited:active {
+    outline: 2px solid var(--link-active);
+    color: var(--link-active);
+  }
+  &:active {
+    outline: 2px solid var(--link-active);
+    color: var(--link-active);
+  }
+}
+
+div.headerImages {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 1em;
+  /* Row-gap in case of wraparound */
+  row-gap: 1em;
+  align-self: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 1em;
+}
+
+/* Apply to article elements to get center margin */
+article {
+  margin: 0 auto;
+  max-width: 640px;
+  @media (max-width: 640px) {
+    /* Adjust vertical padding as well, generally "cozier" view */
+    padding: 4px;
+    max-width: calc(100vw - 24px);
+  }
+  img {
+    border-radius: 10px;
+  }
+  figure img {
+    max-width: 100%;
+  }
+}
+
+blockquote {
+  border-left: 4px solid;
+  padding-left: 1em;
+  margin-left: 0;
+}
+
+img.border {
+  border: 2px solid var(--img-border);
+}
+
+figure.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+code {
+  font-size: smaller;
+  background-color: var(--code-bg);
+}
+
+#themeToggle {
+  background: none;
+  border: 1px solid var(--text-primary);
+  border-radius: var(--border-radius-button);
+  color: var(--text-primary);
+  cursor: pointer;
+  font-size: smaller;
+  margin-left: 4px;
+  margin-top: 8px;
+  padding: 2px 6px;
+}
+
+table {
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+
+.wide-section {
+  position: relative;
+  left: calc(50% - 50vw + var(--padding-table));
+  width: calc(100vw - var(--padding-table) * 2);
+  overflow-x: auto;
+  box-sizing: border-box;
+}
+
+th,
+td {
+  border: 1px solid var(--text-primary);
+  padding: 4px 8px;
+}

@@ -18,14 +18,12 @@ o
 
 `o` while the `dev` script is running prompts Vite to **o**pen a browser tab with your page.
 
-## Notes
-
-Hosting tools:
+## Hosting tools
 
 - [GitHub Pages](../github/pages/readme.md)
 - [Namecheap](https://www.namecheap.com/)
 
-Developer tools:
+## Developer tools
 
 - [Astro](../astro/readme.md) to build the site
 - [Bun](../notes/bun.md) to run JavaScript and manage packages
@@ -33,12 +31,7 @@ Developer tools:
 - [GitHub Actions](../github/readme.md) to automatically deploy the site
 - [Prettier](https://prettier.io) to format the repo
 
-Resources:
-
-- [Emojipedia](https://emojipedia.org/): Source for high-res transparent-background emojis (double-check that you can re-use them!)
-- [Favicon Converter](https://favicon.io/favicon-converter/): don't send copyrighted stuff here without investigating!
-
-Console logs:
+## Console logs
 
 - I use `console.debug` to keep things clean unless folks are really digging in!
 - Edge reports some logs even though I don't want it to:
@@ -53,3 +46,12 @@ Console logs:
     ```
 
     - Edge just does this for every site
+
+## License
+
+This is FOSS I promise, see [docs/license.txt](./docs/license.txt) for details :)
+
+## Resources
+
+- [Emojipedia](https://emojipedia.org/): Source for high-res transparent-background emojis (double-check that you can re-use them!)
+- [Favicon Converter](https://favicon.io/favicon-converter/): don't send copyrighted stuff here without investigating!

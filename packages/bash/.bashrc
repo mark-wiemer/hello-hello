@@ -316,6 +316,10 @@ export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 #endregion
 
+#region Chrome for Karma
+export CHROME_BIN="/usr/bin/chromium"
+#endregion
+
 #region path deduplication (must be last region)
 # Remove duplicate entries from PATH
 deduplicate_path() {

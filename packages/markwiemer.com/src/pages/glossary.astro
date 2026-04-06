@@ -4,21 +4,32 @@ import Layout from "@/layouts/Layout.astro";
 type TermDef = [term: string, definition: string];
 
 // todo enforce this as alphabetical
-// todo ensure IDE highlights these as orange
+// todo ensure IDE highlights these todos
 // todo support links in definitions
 // todo support multiple definitions for a single term
-// todo support multiple terms for a definition
-// todo highlight term in URL
+// todo if a term appears in URL (e.g. https://markwiemer.com/glossary#article), highlight that term on the page
 // todo create and enforce style guide
+// todo add search
+// todo add tags and filtering
+// todo add custom list creation, saving, and sharing (local storage)
+
 const glossary: TermDef[] = [
-  // todo make this ID `c-sharp`
   [
     ".NET",
     "Pronounced and sometimes written `dotnet`. An open-source software toolkit developed by Microsoft.",
   ],
   [
+    "article",
+    "In the context of my blog, an article is a natural language series of paragraphs and whatnot. Generally posted at a specific time and only updated to fix typos and mistakes, not to add new information.",
+  ],
+  ["blog", "My blog is a homepage and a set of posts."],
+  [
     "boxel",
-    "Voxels that are boxes, like in Minecraft. Usually wrapped in quotes as it's a term I made up 🤓",
+    "Voxels that are boxes, like in Minecraft. Usually wrapped in scare quotes as it's a term I made up 🤓",
+  ],
+  [
+    "border czar",
+    `In American politics, this term was first used by media in the late '90s to describe Alan Bersin, whose official title was U.S. attorney and Special Representative for the Southwest Border, Department of Justice. Under Trump's second administration, czar titles became official for the first time, with Trump appointing Tom Homan as the Border Czar, reporting directly to Trump, on 2025-01-20.`,
   ],
   [
     "Bun",
@@ -28,10 +39,13 @@ const glossary: TermDef[] = [
     "browser",
     "A browser is a tool for listing, viewing, and navigating between records of a certain type: webpages, files, etc. In context, 'browser' may refer specifically to a web browser, file browser, or other particular browser.",
   ],
-  // todo make this ID `c-sharp`
   [
     "C#",
     "Pronounced and sometimes written `C Sharp`. An open-source programming language developed by Microsoft.",
+  ],
+  [
+    "czar",
+    `In American politics, this is a mostly unofficial term to refer to officials appointed by the US president to handle specific issues. It follows a tradition of unofficial czar titles for simplification dating back to 1919's "industry czar." Trump made the term part of official titles for the first time in American politics during his second administration, naming a White House AI and Crypto Czar, Border Czar, and Pardon Czar. Despite this, the titles are still usually put in scare quotes by other publications.`,
   ],
   [
     "Chromium",
@@ -44,6 +58,9 @@ const glossary: TermDef[] = [
   ["code coverage", "A usually-ambiguous term referring to some form of test coverage"],
   ["cognitive load", "Mental effort, usually to solve complex problems."],
   ["coverage", "Test coverage"],
+  ["C Sharp", "C#"],
+  ["CWE", "Common Weakness Enumeration"],
+  ["CVSS", "Common Vulnerability Scoring System"],
   [
     "Deno",
     "A TypeScript toolkit by the creator of Node.js that includes its own runtime and more. Ultimately owned by 'the Deno authors.'",
@@ -56,6 +73,7 @@ const glossary: TermDef[] = [
     "divisor",
     "The number that goes into the other one in division. In `6 / 2`, `2` is the divisor. See also dividend.",
   ],
+  ["dotnet", ".NET"],
   [
     "Ecma",
     "Organization that defines ECMAScript. Short for Ecma International, originally short for European Computer Manufacturers Association.",
@@ -75,7 +93,8 @@ const glossary: TermDef[] = [
     "hardware",
     "Physical devices like a keyboard, mouse, and monitor. Also applies to non-digital domains: a wrench, a hammer, etc. See also software.",
   ],
-  ["JavaScript", "A programming language originally built for websites. See also EcmaScript."],
+  ["IRC", "Internet Relay Chat"],
+  ["JavaScript", "A programming language originally built for websites. See also ECMAScript."],
   ["JavaScriptCore", "A JavaScript engine used by WebKit (Safari) and Bun."],
   ["JS", "JavaScript"],
   ["knowledge elicitation", "The process of gathering information from people."],
@@ -93,6 +112,10 @@ const glossary: TermDef[] = [
   ["Node", "Node.js"],
   ["Node.js", "A JavaScript runtime wrapped around V8."],
   [
+    "notes",
+    "In the context of my blog, a page of notes is a series of nested bulleted lists with many sources and analyses, not necessarily meant to be read in order. The same page may be frequently updated with additional information. A large page of notes may be split into multiple smaller pages for organization.",
+  ],
+  [
     "npm",
     "The default package manager for Node.js. Open-source and ultimately owned by Microsoft. See also package manager.",
   ],
@@ -109,14 +132,20 @@ const glossary: TermDef[] = [
     "pnpm",
     '"performant npm" built by a different team than npm. A package manager for JavaScript. See also package manager.',
   ],
+  ["post", "In the context of my blog, a post is either an article or a page of notes."],
   [
     "require(ESM)",
     "A compatibility feature in Node.js for CJS projects to work with ESM projects.",
   ],
   ["requirements coverage", "A form of test coverage that considers documented requirements."],
+  ["RSS", "Really Simple Syndication or Resource Description Framework Site Summary"],
   [
     "runtime",
-    "A system used to both execute code and interact with 'external' software objects. For example, in JavaScript, an engine can run `1 + 1`, but only a runtime can interact with the `document` object on a webpage. Common JavaScript runtimes are Bun, Deno, and Node.js",
+    "A system used to both execute code and interact with 'external' software objects. For example, in JavaScript, an engine can run `1 + 1`, but only a runtime can interact with the `document` object on a webpage. Common JavaScript runtimes are Bun, Deno, and Node.js.",
+  ],
+  [
+    "scare quotes",
+    `Quotation marks wrapped around a non-standard term, e.g. "Bacteria can 'walk' across the surface of your teeth."`,
   ],
   [
     "scenario coverage",
@@ -125,6 +154,14 @@ const glossary: TermDef[] = [
   [
     "software",
     "Non-physical digital technology. This website is software, but your monitor or phone are not software. See also hardware.",
+  ],
+  [
+    "TACO",
+    `Trump Always Chickens Out. Coined May 2025 in reference to Trump-announced tariffs, which were often delayed or entirely cancelled. It's since been used to reference many of Trump's subsequent actions.`,
+  ],
+  [
+    "TDS",
+    "Trump Derangement Syndrome. Originally following in the footsteps of Bush Derangement Syndrome and others like it, it remains primarily used by Trump supporters to criticize anti-Trump people, claiming that anti-Trumpers are against everything Trump does because it's Trump doing it. However, unlike previous president derangement syndromes, TDS is now being used by anti-Trump people to criticize Trump supporters, claiming that they're in favor of everything Trump does because it's Trump doing it.",
   ],
   // test coverage is a hub
   [
@@ -135,6 +172,11 @@ const glossary: TermDef[] = [
   [
     "toolkit",
     "A set of related tools to accomplish a variety of tasks. Number of tools and scope of work accomplished by the tools varies widely.",
+  ],
+  // Trump is a hub
+  [
+    "Trump",
+    "Donald Trump, 45th and 47th president of the United States. See also border czar, TACO, TDS.",
   ],
   [
     '"type": "module"',
