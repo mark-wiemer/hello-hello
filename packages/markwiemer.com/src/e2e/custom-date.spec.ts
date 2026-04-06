@@ -13,6 +13,11 @@ async function openNavAndGetDateToggle(page: Page) {
 }
 
 const isoRegex = /^\d{4}-\d{2}-\d{2}$/;
+const datetimePrefix = "Dates: ";
+const system = "System";
+const iso = "ISO";
+const systemLabel = datetimePrefix + system;
+const isoLabel = datetimePrefix + iso;
 
 test.describe("CustomDate component", () => {
   test("blog list renders dates in <time> elements", async ({ page }) => {
@@ -52,10 +57,10 @@ test.describe("Datetimes toggle", () => {
     await page.evaluate(() => localStorage.removeItem("dateFormat"));
   });
 
-  test("toggle button is present and defaults to 'Datetimes: System'", async ({ page }) => {
+  test(`toggle button is present and defaults to ${systemLabel}`, async ({ page }) => {
     const toggle = await openNavAndGetDateToggle(page);
     await expect(toggle).toBeVisible();
-    await expect(toggle).toHaveText("Datetimes: System");
+    await expect(toggle).toHaveText(systemLabel);
   });
 
   test("clicking toggle switches to ISO format", async ({ page }) => {
@@ -63,7 +68,7 @@ test.describe("Datetimes toggle", () => {
 
     // Click to switch to ISO
     await toggle.click();
-    await expect(toggle).toHaveText("Datetimes: ISO");
+    await expect(toggle).toHaveText(isoLabel);
 
     // All dates should now be in ISO format
     const times = getTimes(page);
@@ -79,11 +84,11 @@ test.describe("Datetimes toggle", () => {
 
     // Click to ISO
     await toggle.click();
-    await expect(toggle).toHaveText("Datetimes: ISO");
+    await expect(toggle).toHaveText(isoLabel);
 
     // Click back to System
     await toggle.click();
-    await expect(toggle).toHaveText("Datetimes: System");
+    await expect(toggle).toHaveText(systemLabel);
 
     // Dates should not be in ISO format
     const firstDate = getTimes(page).first();
@@ -96,12 +101,12 @@ test.describe("Datetimes toggle", () => {
 
     // Switch to ISO
     await toggle.click();
-    await expect(toggle).toHaveText("Datetimes: ISO");
+    await expect(toggle).toHaveText(isoLabel);
 
     // Navigate to a blog post
     await page.goto("/blog/testing-accessibility-reflow/");
     toggle = await openNavAndGetDateToggle(page);
-    await expect(toggle).toHaveText("Datetimes: ISO");
+    await expect(toggle).toHaveText(isoLabel);
 
     // Dates on the blog post should be ISO
     const times = getTimes(page);
