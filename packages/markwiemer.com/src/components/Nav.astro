@@ -57,7 +57,7 @@ import NavEntry from "@/components/NavEntry.astro";
     (() => {
       const themeToggle = document.querySelector("#themeToggle");
       const themes = ["system", "light", "dark"];
-      const labels = { system: "Theme: System", light: "Theme: Light", dark: "Theme: Dark" };
+      const labels = { system: "System", light: "Light", dark: "Dark" };
 
       const getStoredTheme = () => localStorage.getItem("theme") || "system";
 
@@ -70,7 +70,7 @@ import NavEntry from "@/components/NavEntry.astro";
       };
 
       const updateButton = (theme) => {
-        if (themeToggle) themeToggle.textContent = labels[theme];
+        if (themeToggle) themeToggle.textContent = `Theme: ${labels[theme]}`;
       };
 
       // Initialize button text from current state
