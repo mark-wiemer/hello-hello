@@ -17,7 +17,7 @@ When moving the site to a different framework, be sure to check the following:
 
 ### States
 
-- Nav open vs closed
+- Site menu open vs closed
 
 ### Navigation
 

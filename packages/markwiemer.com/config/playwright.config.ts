@@ -32,6 +32,7 @@ export default defineConfig({
   reporter: "html",
   timeout: 3000,
   use: {
+    locale: "en-US", // to test date formatting
     trace: "on-first-retry",
     baseURL: "http://localhost:8910",
   },

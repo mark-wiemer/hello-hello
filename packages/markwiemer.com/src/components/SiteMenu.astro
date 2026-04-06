@@ -52,12 +52,12 @@ import NavEntry from "@/components/NavEntry.astro";
     </script>
   </nav>
   <h2>Settings</h2>
-  <button id="themeToggle" aria-live="polite">Theme: System</button>
+  <button id="themeToggle" class="toggle" aria-live="polite">Error</button>
   <script is:inline data-notes="handle theme toggle">
     (() => {
       const themeToggle = document.querySelector("#themeToggle");
       const themes = ["system", "light", "dark"];
-      const labels = { system: "Theme: System", light: "Theme: Light", dark: "Theme: Dark" };
+      const labels = { system: "System", light: "Light", dark: "Dark" };
 
       const getStoredTheme = () => localStorage.getItem("theme") || "system";
 
@@ -70,7 +70,7 @@ import NavEntry from "@/components/NavEntry.astro";
       };
 
       const updateButton = (theme) => {
-        if (themeToggle) themeToggle.textContent = labels[theme];
+        if (themeToggle) themeToggle.textContent = `Theme: ${labels[theme]}`;
       };
 
       // Initialize button text from current state
@@ -88,6 +88,38 @@ import NavEntry from "@/components/NavEntry.astro";
         }
         applyTheme(next);
         updateButton(next);
+      });
+    })();
+  </script>
+
+  <button id="datetimeFormatToggle" class="toggle" aria-live="polite">Error</button>
+  <script is:inline data-notes="handle date format toggle">
+    (() => {
+      const datetimeFormatToggle = document.querySelector("#datetimeFormatToggle");
+      const formats = ["system", "iso"];
+      const labels = { system: "System", iso: "ISO" };
+
+      const getStoredFormat = () => localStorage.getItem("dateFormat") || "system";
+
+      const updateButton = (format) => {
+        if (datetimeFormatToggle) datetimeFormatToggle.textContent = `Dates: ${labels[format]}`;
+      };
+
+      // Initialize button text from current state
+      const current = getStoredFormat();
+      updateButton(current);
+
+      datetimeFormatToggle?.addEventListener("click", () => {
+        const current = getStoredFormat();
+        const nextIndex = (formats.indexOf(current) + 1) % formats.length;
+        const next = formats[nextIndex];
+        if (next === "system") {
+          localStorage.removeItem("dateFormat");
+        } else {
+          localStorage.setItem("dateFormat", next);
+        }
+        updateButton(next);
+        window.dispatchEvent(new Event("dateformat-changed"));
       });
     })();
   </script>
