@@ -91,4 +91,36 @@ import NavEntry from "@/components/NavEntry.astro";
       });
     })();
   </script>
+
+  <button id="dateFormatToggle" aria-live="polite">Datetimes: System</button>
+  <script is:inline data-notes="handle date format toggle">
+    (() => {
+      const dateFormatToggle = document.querySelector("#dateFormatToggle");
+      const formats = ["system", "iso"];
+      const labels = { system: "Datetimes: System", iso: "Datetimes: ISO" };
+
+      const getStoredFormat = () => localStorage.getItem("dateFormat") || "system";
+
+      const updateButton = (format) => {
+        if (dateFormatToggle) dateFormatToggle.textContent = labels[format];
+      };
+
+      // Initialize button text from current state
+      const current = getStoredFormat();
+      updateButton(current);
+
+      dateFormatToggle?.addEventListener("click", () => {
+        const current = getStoredFormat();
+        const nextIndex = (formats.indexOf(current) + 1) % formats.length;
+        const next = formats[nextIndex];
+        if (next === "system") {
+          localStorage.removeItem("dateFormat");
+        } else {
+          localStorage.setItem("dateFormat", next);
+        }
+        updateButton(next);
+        window.dispatchEvent(new Event("dateformat-changed"));
+      });
+    })();
+  </script>
 </div>

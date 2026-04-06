@@ -7,8 +7,8 @@ const dark = "dark";
 const label = (theme: string) => `Theme: ${theme[0].toUpperCase()}${theme.slice(1)}`;
 
 /** Opens the nav and returns the theme toggle button */
-async function openNavAndGetToggle(page: Page) {
-  await page.click("#toggleMenu");
+async function openNavAndGetThemeToggle(page: Page) {
+  await page.locator("#toggleMenu").click();
   const toggle = page.locator("#themeToggle");
   await expect(toggle).toBeVisible();
   return toggle;
@@ -25,13 +25,13 @@ test.describe("theme toggle", () => {
   });
 
   test("defaults to system theme", async ({ page }) => {
-    const toggle = await openNavAndGetToggle(page);
+    const toggle = await openNavAndGetThemeToggle(page);
     await expect(toggle).toHaveText(label(system));
     await expect(page.locator("html")).not.toHaveAttribute(themeAttr);
   });
 
   test(`cycles through ${system} → ${light} → ${dark} → ${system}`, async ({ page }) => {
-    const toggle = await openNavAndGetToggle(page);
+    const toggle = await openNavAndGetThemeToggle(page);
 
     await toggle.click();
     await expect(toggle).toHaveText(label(light));
@@ -47,19 +47,19 @@ test.describe("theme toggle", () => {
   });
 
   test("persists theme across page loads", async ({ page }) => {
-    const toggle = await openNavAndGetToggle(page);
+    const toggle = await openNavAndGetThemeToggle(page);
     await toggle.click();
     await expect(toggle).toHaveText(label(light));
 
     await page.reload();
     await expect(page.locator("html")).toHaveAttribute(themeAttr, light);
 
-    const toggleAfterReload = await openNavAndGetToggle(page);
+    const toggleAfterReload = await openNavAndGetThemeToggle(page);
     await expect(toggleAfterReload).toHaveText(label(light));
   });
 
   test("clearing localStorage resets to system theme", async ({ page }) => {
-    const toggle = await openNavAndGetToggle(page);
+    const toggle = await openNavAndGetThemeToggle(page);
     await toggle.click();
     await expect(toggle).toHaveText(label(light));
 
@@ -67,12 +67,12 @@ test.describe("theme toggle", () => {
     await page.reload();
 
     await expect(page.locator("html")).not.toHaveAttribute(themeAttr);
-    const toggleAfterClear = await openNavAndGetToggle(page);
+    const toggleAfterClear = await openNavAndGetThemeToggle(page);
     await expect(toggleAfterClear).toHaveText(label(system));
   });
 
   test("light theme applies correct colors", async ({ page }) => {
-    const toggle = await openNavAndGetToggle(page);
+    const toggle = await openNavAndGetThemeToggle(page);
     await toggle.click();
     await expect(toggle).toHaveText(label(light));
 
@@ -87,7 +87,7 @@ test.describe("theme toggle", () => {
   });
 
   test("dark theme applies correct colors", async ({ page }) => {
-    const toggle = await openNavAndGetToggle(page);
+    const toggle = await openNavAndGetThemeToggle(page);
     await toggle.click();
     await toggle.click();
     await expect(toggle).toHaveText(label(dark));
