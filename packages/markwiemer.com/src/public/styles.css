@@ -100,21 +100,25 @@
   width: 0;
   z-index: var(--z-index-nav-main);
 
-  & > *,
-  & > nav > * {
+  /* apply padding to all direct children to maintain button styles */
+  & > * {
     padding-left: 4px;
   }
 
-  & > h2,
-  & > nav > h2 {
+  & h2 {
     font-size: var(--font-size-default);
     line-height: var(--line-height-default);
     margin: 0;
+
+    &:not(:first-child) {
+      padding-top: 8px;
+    }
   }
 
-  & > nav > ul,
-  & > ul {
+  & ul {
     margin: 0;
+    list-style: none;
+    padding-left: 0;
   }
 
   background-color: var(--nav-bg);

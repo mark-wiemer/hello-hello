@@ -1,5 +1,5 @@
 ---
-import Nav from "@/components/Nav.astro";
+import SiteMenu from "@/components/SiteMenu.astro";
 const style = "/styles.css";
 interface Props {
   pageTitle: string;
@@ -39,7 +39,7 @@ interface Props {
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to main content</a>
-    <Nav />
+    <SiteMenu />
     <article class={Astro.props.klass || undefined}>
       <main id="main-content">
         <slot />
