@@ -22,6 +22,6 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               title: "Perform a11y review",
-              body: "It's been six months — time for a full accessibility review!\n\nSee [Hello Product](https://github.com/mark-wiemer/hello-hello/blob/main/packages/product/readme.md) for the full checklist.",
+              body: "It's been six months — time for a full accessibility review!\n\nSee [Hello Product](https://github.com/mark-wiemer/hello-hello/blob/main/packages/markwiemer.com/src/product/readme.md) for the full checklist.",
               labels: ["accessibility"],
             });

@@ -12,32 +12,32 @@ because I use GitHub Pages, which only supports one site per repo.
 - [AHK++](./packages/ahkpp/readme.md): IDE extension for AHK v1 and v2 language support
 - [Aspire](./packages/aspire/readme.md): Orchestration toolkit for distributed applications
 - [Astro](./packages/astro/readme.md): Web framework for content-driven websites
-- [Azure](./packages/azure/readme.md): Cloud computing platform
-- [Bash](./packages/bash/readme.md): Cross-platform shell
+- [Azure](./packages/markwiemer.com/src/azure/readme.md): Cloud computing platform
+- [Bash](./packages/markwiemer.com/src/bash/readme.md): Cross-platform shell
 - [.NET (dotnet)](./packages/dotnet/readme.md): Open-source framework for any software
   - [Roslyn](./packages/dotnet/roslyn/README.md): The .NET compiler platform
-- [Git](./packages/git/readme.md): Version control system, includes notes on Git LFS
+- [Git](./packages/markwiemer.com/src/git/readme.md): Version control system, includes notes on Git LFS
 - [GitHub](./packages/github/readme.md): DevOps platform
   - [Codespaces](./packages/github/codespaces/readme.md)
   - [Pages](./packages/github/pages/readme.md)
   - [REST API](./packages/github/rest/readme.md)
 - [JavaScript](./packages/javascript/readme.md): Programming language for adding interactivity to websites
   - [jq (jqlang)](./packages/javascript/jq/readme.md): CLI tool for editing JSON files
-- [jj (Jujutsu)](./packages/jj/readme.md): Replacement for Git
+- [jj (Jujutsu)](./packages/markwiemer.com/src/jj/readme.md): Replacement for Git
 - [Luanti](./packages/luanti/readme.md): Open-source engine, distribution platform, and client for "boxel" games
 - [markwiemer.com](./packages/markwiemer.com/readme.md): My personal website!
 - [Melvor Idle](./packages/melvor/readme.md): Heavily moddable RuneScape-inspired game
 - [Mocha](./packages/mocha): JavaScript test framework for Node.js and the browser
-- [mod.io](./packages/mod.io/readme.md): Site for hosting UGC
+- [mod.io](./packages/markwiemer.com/src/mod.io/readme.md): Site for hosting UGC
 - [Modrinth](./packages/modrinth/readme.md): App for managing Minecraft versions and UGC
-- [New machine](./packages/new-machine/readme.md): Setup steps for any new machine
-- [Notes](./packages/notes/readme.md): Miscellaneous notes: Blog, Bun, Deno, JDial, security, style, web.
+- [New machine](./packages/markwiemer.com/src/new-machine/readme.md): Setup steps for any new machine
+- [Notes](./packages/markwiemer.com/src/notes/readme.md): Miscellaneous notes: Blog, Bun, Deno, JDial, security, style, web.
 - [pnpm](./packages/pnpm/readme.md): Node package manager, alternative to npm
-- [Podman](./packages/podman/readme.md): Open-source containerization platform, like Docker
-- [POSIX](./packages/posix/readme.md): Set of cross-OS standards by IEEE
-- [Product recommendations](./packages/product/readme.md): Recommendations for products I maintain
+- [Podman](./packages/markwiemer.com/src/podman/readme.md): Open-source containerization platform, like Docker
+- [POSIX](./packages/markwiemer.com/src/posix/readme.md): Set of cross-OS standards by IEEE
+- [Product recommendations](./packages/markwiemer.com/src/product/readme.md): Recommendations for products I maintain
 - [React](./packages/react/readme.md): Library for creating complex interactive websites
-- [Rust](./packages/rust/readme.md): Programming language emphasizing safety and performance
+- [Rust](./packages/markwiemer.com/src/rust/readme.md): Programming language emphasizing safety and performance
 - [TypeScript](./packages/typescript/readme.md): Programming language that adds types to JavaScript
 - [Unified](./packages/unified/readme.md): Software collective for content processing
 - [Visual Studio Code](./packages/vscode/readme.md): Mostly open-source IDE, includes sample extension
