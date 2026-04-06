@@ -1,0 +1,5 @@
+# Astro-built assets use content hashes in filenames and can be cached immutably.
+# Supported by Cloudflare Pages and Netlify. Not supported by GitHub Pages.
+# https://developers.cloudflare.com/pages/configuration/headers/
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable

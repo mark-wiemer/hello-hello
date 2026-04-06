@@ -32,23 +32,51 @@ self.addEventListener("activate", (event) => {
 });
 
 //* Fetch: Intercepts every network request the page makes.
-// Strategy: "network-first with cache fallback"
-//   1. Try to fetch from the network.
-//   2. If the network succeeds, store a copy in the cache, then return the response.
-//   3. If the network fails (e.g. user is offline), serve the cached copy instead.
 // Only GET requests are cached; POST/PUT/DELETE are passed through as-is.
+//
+// Two strategies based on URL path:
+//
+// 1. "cache-first" for /_astro/* assets:
+//    These files have content hashes in their filenames (e.g. image.abc123.webp)
+//    and never change, so we serve from cache when available and skip the network.
+//    This works around GitHub Pages' short Cache-Control: max-age=600 header.
+//
+// 2. "network-first with cache fallback" for everything else:
+//    Try the network first, cache the response, fall back to cache if offline.
 self.addEventListener("fetch", (event) => {
   const { request } = event;
   if (request.method !== "GET") return;
 
-  event.respondWith(
-    caches.open(cacheName).then((cache) =>
-      fetch(request)
-        // Clone the response because a Response body can only be consumed once:
-        // one copy goes into the cache, the original is returned to the browser.
-        .then((response) => cache.put(request, response.clone()).then(() => response))
-        // Network failed — try to serve from cache so the site works offline.
-        .catch(() => cache.match(request)),
-    ),
-  );
+  const url = new URL(request.url);
+
+  if (url.pathname.startsWith("/_astro/")) {
+    // Cache-first: content-hashed assets never change
+    event.respondWith(
+      caches
+        .open(cacheName)
+        .then((cache) =>
+          cache
+            .match(request)
+            .then(
+              (cached) =>
+                cached ||
+                fetch(request).then((response) =>
+                  cache.put(request, response.clone()).then(() => response),
+                ),
+            ),
+        ),
+    );
+  } else {
+    // Network-first: always try fresh content, fall back to cache offline
+    event.respondWith(
+      caches.open(cacheName).then((cache) =>
+        fetch(request)
+          // Clone the response because a Response body can only be consumed once:
+          // one copy goes into the cache, the original is returned to the browser.
+          .then((response) => cache.put(request, response.clone()).then(() => response))
+          // Network failed — try to serve from cache so the site works offline.
+          .catch(() => cache.match(request)),
+      ),
+    );
+  }
 });
