@@ -76,6 +76,8 @@
     "Allman",
     "Alnum",
     "antialiasing",
+    "appguru",
+    "appgurueu",
     "artifacting",
     "asquare",
     "Astroneer",
@@ -86,8 +88,10 @@
     "Backreference",
     "BBBS",
     "behaviour",
+    "Bersin",
     "Biasly",
     "bitmask",
+    "Bloarg",
     "booter",
     "borderless",
     "borns",
@@ -119,6 +123,7 @@
     "Consolas",
     "convo",
     "Coordonné",
+    "corpserot",
     "countertop",
     "Cust",
     "cweijan",
@@ -204,6 +209,7 @@
     "Gitea",
     "Grandell",
     "graycheck",
+    "greenxenith",
     "greycheck",
     "groupbox",
     "hardlink",
@@ -249,6 +255,7 @@
     "Lorax",
     "LPARAM",
     "Luanti",
+    "luatic",
     "Machado",
     "mapo",
     "markw",
@@ -265,6 +272,7 @@
     "msgbox",
     "MSIE",
     "MSNBC",
+    "Müller",
     "Mult",
     "MYDOCU",
     "myprog",
@@ -353,6 +361,7 @@
     "schooler",
     "scminput",
     "Semotiuk",
+    "serot",
     "SETBASE",
     "SETSEL",
     "specialised",
@@ -382,6 +391,7 @@
     "Trackbar",
     "triggerings",
     "Truffula",
+    "Trumpers",
     "uefi",
     "unclickable",
     "undock",
@@ -418,9 +428,11 @@
     "wordlike",
     "workarea",
     "WPARAM",
+    "wsor",
     "Wynonna",
     "xcopy",
     "xdigit",
+    "Xenith",
     "Yick",
     "YYYYMMDDHH",
     "YYYYWW",
@@ -430,6 +442,8 @@
     "zipperless"
   ],
   "chat.tools.urls.autoApprove": {
+    "https://code.visualstudio.com": true,
+    "https://github.com/microsoft/vscode/wiki/*": true,
     "https://github.com/microsoft/vscode/issues": {
       "approveRequest": false,
       "approveResponse": true
@@ -438,7 +452,8 @@
     "https://github.com/actions": true,
     "https://github.com": true,
     "https://github.com/oven-sh/setup-bun": true,
-    "https://github.com/oven-sh": true
+    "https://github.com/oven-sh": true,
+    "https://docs.astro.build": true
   },
   "chat.viewSessions.enabled": false,
   "debug.onTaskErrors": "abort",
@@ -565,7 +580,11 @@
   "chat.tools.terminal.autoApprove": {
     "git tag": true,
     "git rev-parse": true,
-    "npx semver": true
+    "npx semver": true,
+    "git lfs": true,
+    "awk": true,
+    "git rev-list": true,
+    "npm run -s test-node-run": true
   },
   "json.schemaDownload.trustedDomains": {
     "https://developer.microsoft.com/json-schemas/": true,

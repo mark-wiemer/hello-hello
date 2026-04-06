@@ -16,14 +16,25 @@ interface Props {
     <meta name="viewport" content="width=device-width" />
     <meta name="author" content="Mark Wiemer" />
     <link rel="shortcut icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.webp" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.webp" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.webp" />
     <link rel="manifest" href="/site.webmanifest" />
-    <!-- Copied from --body-bg-X in public/styles.css -->
+
+    <!-- Copied from --body-bg-X in src/public/styles.css -->
+    <!-- Styles browser UI around the site -->
     <meta name="theme-color" content="white" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="black" media="(prefers-color-scheme: dark)" />
+
     <link rel="stylesheet" href={style} />
+    <script is:inline data-notes="apply saved theme before paint">
+      (() => {
+        const theme = localStorage.getItem("theme");
+        if (theme === "light" || theme === "dark") {
+          document.documentElement.setAttribute("data-theme", theme);
+        }
+      })();
+    </script>
     <title>{Astro.props.pageTitle} - markwiemer.com</title>
   </head>
   <body>

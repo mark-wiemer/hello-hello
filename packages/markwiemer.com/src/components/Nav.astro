@@ -6,47 +6,89 @@ import NavEntry from "@/components/NavEntry.astro";
 <!-- todo way too many prettier-ignores in Astro -->
 <!-- todo research **details** of making this inert -->
 <!-- can people still easily access this nav? -->
-<button id="openNav" aria-label="Navigation">☰</button>
-<nav aria-expanded="false" inert>
-  <h2>Here</h2>
-  <ul>
-    <!-- Make sure all entries here are also linked in the home page for a11y -->
-    <!-- https://github.com/mark-wiemer/hello-hello/issues/16 -->
-    <NavEntry href="/" text="Home" />
-    <NavEntry href="/about" text="About" />
-    <NavEntry href="/blog" text="Blog" />
-    <NavEntry href="/games" text="Games" />
-    <NavEntry href="/glossary" text="Glossary" />
-    <NavEntry href="/resume" text="Resume" />
-    <NavEntry href="/software" text="Software" />
-  </ul>
-  <h2>Elsewhere</h2>
-  <ul>
-    <NavEntry href="https://ahkpp.com" text="AHK++" />
-    <NavEntry href="https://mochajs.org" text="Mocha" />
-    <!-- invisible char U+00a0 is non-breaking space -->
-    <!-- https://en.wikipedia.org/wiki/Non-breaking_space -->
-    <!-- todo find way to use `nbsp;` in source without IDE replacing it -->
-    <!-- todo secretly make nav full width immediately to avoid using nbsp here? -->
-    <NavEntry
-      href="https://github.com/mark-wiemer/hello-hello/tree/main/packages/markwiemer.com"
-      text="Website source"
-    />
-  </ul>
-  <script is:inline data-notes="handle nav toggle">
-    const toggleButton = document.querySelector("#openNav");
-    const nav = document.querySelector("nav");
-    toggleButton?.addEventListener("click", () => {
-      if (nav.getAttribute("aria-expanded") === "true") {
-        nav.setAttribute("aria-expanded", "false");
-        nav.setAttribute("inert", "");
-        document.body.classList.remove("nav-open");
-        return;
-      } else {
-        nav.setAttribute("aria-expanded", "true");
-        nav.removeAttribute("inert");
-        document.body.classList.add("nav-open");
-      }
-    });
+<button id="toggleMenu" aria-label="Menu">☰</button>
+<div id="siteMenu" aria-expanded="false" inert>
+  <nav>
+    <h2>Here</h2>
+    <ul>
+      <!-- Make sure all entries here are also linked in the home page for a11y -->
+      <!-- https://github.com/mark-wiemer/hello-hello/issues/16 -->
+      <NavEntry href="/" text="Home" />
+      <NavEntry href="/about" text="About" />
+      <NavEntry href="/blog" text="Blog" />
+      <NavEntry href="/games" text="Games" />
+      <NavEntry href="/glossary" text="Glossary" />
+      <NavEntry href="/resume" text="Resume" />
+      <NavEntry href="/software" text="Software" />
+    </ul>
+    <h2>Elsewhere</h2>
+    <ul>
+      <NavEntry href="https://ahkpp.com" text="AHK++" />
+      <NavEntry href="https://mochajs.org" text="Mocha" />
+      <!-- invisible char U+00a0 is non-breaking space -->
+      <!-- https://en.wikipedia.org/wiki/Non-breaking_space -->
+      <!-- todo find way to use `nbsp;` in source without IDE replacing it -->
+      <!-- todo secretly make nav full width immediately to avoid using nbsp here? -->
+      <NavEntry
+        href="https://github.com/mark-wiemer/hello-hello/tree/main/packages/markwiemer.com"
+        text="Website source"
+      />
+    </ul>
+    <script is:inline data-notes="handle nav toggle">
+      const toggleButton = document.querySelector("#toggleMenu");
+      const siteMenu = document.querySelector("#siteMenu");
+      toggleButton?.addEventListener("click", () => {
+        if (siteMenu.getAttribute("aria-expanded") === "true") {
+          siteMenu.setAttribute("aria-expanded", "false");
+          siteMenu.setAttribute("inert", "");
+          document.body.classList.remove("nav-open");
+          return;
+        } else {
+          siteMenu.setAttribute("aria-expanded", "true");
+          siteMenu.removeAttribute("inert");
+          document.body.classList.add("nav-open");
+        }
+      });
+    </script>
+  </nav>
+  <h2>Settings</h2>
+  <button id="themeToggle" aria-live="polite">Theme: System</button>
+  <script is:inline data-notes="handle theme toggle">
+    (() => {
+      const themeToggle = document.querySelector("#themeToggle");
+      const themes = ["system", "light", "dark"];
+      const labels = { system: "Theme: System", light: "Theme: Light", dark: "Theme: Dark" };
+
+      const getStoredTheme = () => localStorage.getItem("theme") || "system";
+
+      const applyTheme = (theme) => {
+        if (theme === "system") {
+          document.documentElement.removeAttribute("data-theme");
+        } else {
+          document.documentElement.setAttribute("data-theme", theme);
+        }
+      };
+
+      const updateButton = (theme) => {
+        if (themeToggle) themeToggle.textContent = labels[theme];
+      };
+
+      // Initialize button text from current state
+      const current = getStoredTheme();
+      updateButton(current);
+
+      themeToggle?.addEventListener("click", () => {
+        const current = getStoredTheme();
+        const nextIndex = (themes.indexOf(current) + 1) % themes.length;
+        const next = themes[nextIndex];
+        if (next === "system") {
+          localStorage.removeItem("theme");
+        } else {
+          localStorage.setItem("theme", next);
+        }
+        applyTheme(next);
+        updateButton(next);
+      });
+    })();
   </script>
-</nav>
+</div>
