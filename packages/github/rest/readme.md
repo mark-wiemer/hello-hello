@@ -7,6 +7,21 @@
   pnpm add @octokit/core
   ```
 
+## Repository settings
+
+- [REST API endpoint to update a repository](https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#update-a-repository)
+
+See `index.js` for a detailed example. Configures:
+
+- Disable wikis
+- Enable discussions
+- Enable projects
+- Block merge commits
+- Set default commit message for squash merges to PR title
+- Block rebase merging
+- Allow auto-merge
+- Automatically delete head branches
+
 ## Branch protection
 
 - [REST API endpoints for protected branches](https://docs.github.com/en/rest/branches/branch-protection?apiVersion=2022-11-28)
