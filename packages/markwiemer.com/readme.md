@@ -53,3 +53,7 @@ Console logs:
     ```
 
     - Edge just does this for every site
+
+## License
+
+This is FOSS I promise, see [docs/license.txt](./docs/license.txt) for details :)
