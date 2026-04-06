@@ -1,4 +1,23 @@
-import { defineConfig, devices } from "@playwright/test";
+import { defineConfig, devices, type PlaywrightTestConfig } from "@playwright/test";
+
+function defineProjects(ci: boolean) {
+  const projects: PlaywrightTestConfig["projects"] = [
+    {
+      name: "chromium",
+      use: { ...devices["Desktop Chrome"] },
+      grepInvert: /@headed/,
+    },
+  ];
+
+  if (!ci) {
+    projects.push({
+      name: "chromium-headed",
+      use: { ...devices["Desktop Chrome"], headless: false },
+      grep: /@headed/,
+    });
+  }
+  return projects;
+}
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -17,16 +36,5 @@ export default defineConfig({
     trace: "on-first-retry",
     baseURL: "http://localhost:8910",
   },
-  projects: [
-    {
-      name: "chromium",
-      use: { ...devices["Desktop Chrome"] },
-      grepInvert: /@headed/,
-    },
-    {
-      name: "chromium-headed",
-      use: { ...devices["Desktop Chrome"], headless: false },
-      grep: /@headed/,
-    },
-  ],
+  projects: defineProjects(!!process.env.CI),
 });
