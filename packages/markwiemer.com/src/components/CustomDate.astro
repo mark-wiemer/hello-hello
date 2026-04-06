@@ -6,19 +6,4 @@ interface Props {
 const { date } = Astro.props;
 ---
 
-<script>
-  function formatCustomDates() {
-    const format = localStorage.getItem("dateFormat") || "system";
-    document.querySelectorAll("time.custom-date").forEach((el) => {
-      const isoDate = el.getAttribute("datetime");
-      if (!isoDate) return;
-      // Parse as local date to avoid timezone offset issues
-      const date = new Date(isoDate + "T00:00:00");
-      el.textContent = format === "iso" ? isoDate : date.toLocaleDateString();
-    });
-  }
-  formatCustomDates();
-  window.addEventListener("dateformat-changed", formatCustomDates);
-</script>
-
 <time datetime={date} class="custom-date">{date}</time>

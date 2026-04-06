@@ -2,6 +2,7 @@
 import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import { resolve, sep } from "node:path";
+import rehypeCustomDates from "../src/plugins/rehype-custom-dates.ts";
 
 const publicDirPath = `${resolve(process.cwd(), `src${sep}public`)}${sep}`;
 
@@ -9,6 +10,9 @@ const publicDirPath = `${resolve(process.cwd(), `src${sep}public`)}${sep}`;
 export default defineConfig({
   integrations: [mdx()],
   publicDir: "./src/public",
+  markdown: {
+    rehypePlugins: [rehypeCustomDates],
+  },
   redirects: {
     "/ahkpp": "https://ahkpp.com",
     "/luanti": "/software/luanti",
