@@ -293,7 +293,7 @@ code {
   background-color: var(--code-bg);
 }
 
-#themeToggle {
+.toggle {
   background: none;
   border: 1px solid var(--text-primary);
   border-radius: var(--border-radius-button);
