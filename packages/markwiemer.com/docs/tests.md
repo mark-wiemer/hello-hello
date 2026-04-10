@@ -57,6 +57,4 @@ Then duplicate for light mode and dark mode!
 
 ## Userspace links
 
-These links should always redirect somewhere useful:
-
-- todo more
+See [#81: Auto-test any new userspace link - GitHub](https://github.com/mark-wiemer/hello-hello/issues/81)
