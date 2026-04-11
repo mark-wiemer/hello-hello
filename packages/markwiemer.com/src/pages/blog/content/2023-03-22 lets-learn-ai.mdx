@@ -1,0 +1,96 @@
+---
+postTitle: "Let’s learn about artificial intelligence"
+postDate: "2023-03-22"
+original: "https://markwiemer.medium.com/lets-learn-about-artificial-intelligence-b74ca3b68eb5"
+---
+
+## A series about AI, machine learning, ChatGPT, and more
+
+import CaptionedImage from "@/components/CaptionedImage.astro";
+import AiMinecraftCastle from "@/assets/2023-03-22-ai-minecraft-castle.webp";
+
+<CaptionedImage
+  src={AiMinecraftCastle}
+  alt="A blocky, detailed castle on a blue sky"
+  caption="I was overwhelmed by the power of an AI that could draw this, let alone by the power of ChatGPT. But I forged on, I explored the castle, and now I’m here to share my map! Made with Bing Image Creator."
+  eager
+/>
+
+Ever since the explosive release of ChatGPT in November 2022, I’ve been feeling imposter syndrome and anxiety around artificial intelligence (AI). What does it do, exactly? How does it work? What’s next? For context, I’m a software engineer, and I’ve been working at Microsoft since I graduated in 2020. But I’ve never had an opportunity to truly “use AI,” and I ignored most news around it as too full of buzzwords, hype, and jargon.
+
+**Let’s learn about AI and the recent developments in the field.** This series is for anyone, tech and non-tech people alike, that has minimal experience with AI. We’ll learn together about what the heck is going on with all these chatbot tools — ChatGPT, the new Bing, Bard, Copilot, the list goes on. Are they overhyped? What are they capable of? Are they sufficiently private, secure, and ethical? These are big questions, and they can’t all be answered in one post. But I hope to break it down without all the jargon that seems to be in every article I’ve read so far.
+
+**In this article**, we’ll cover the definition of AI, machine learning, OpenAI, and recent AI product announcements.
+
+---
+
+This article mentions Microsoft, my employer. I wrote this article in my free time and all opinions are my own.
+
+---
+
+**I didn’t get into AI until early February**, when our team got excited for an org-wide FHL — a fix-hack-learn week where we basically get to do whatever we want. The topic that dominated conversations was ChatGPT and the potential of related tools. I spent that week nervously learning the basics of modern artificial intelligence, the terms around it, and the recent product releases. My team fed data to models and whatnot, but I just read Wikipedia articles and asked ChatGPT to explain to me how it worked. Once my team had a working proof-of-concept, I asked them how they made it and volunteered to create the pitch video. I got so nervous I took a day off. But I kept learning.
+
+And then “the new Bing” was released, and GPT-4 came out, and Microsoft 365 Copilot was announced, and Google made plenty of its own announcements. All of these are incredibly important developments, and they highlight the new potential of AI tools. They also exacerbate my feelings of incompetence and being overwhelmed. But the only way out is through, right? So let’s go.
+
+---
+
+**AI is the ability to do something that “seems smart”**: play a game well, recognize handwriting, convert speech to text, recommend a video to watch, or generate a paragraph in response to a question written in plain English. This definition seems like it covers a lot: and it does! 100 years ago **everything** was done manually, from basic arithmetic to document preparation to scheduling to planning international governments. The tools available could only relay existing information, they couldn’t summarize it or “do” anything with it. AI tools determine the next move in a board game, or the next word in a search query, or whether a word is spelled wrong. Any tool that can produce an output different than what you input is, in the most basic sense, an AI tool.
+
+More commonly, we think about the “higher-level” AI that does “really smart stuff”: when we refer to “the algorithm” present in YouTube, Facebook, TikTok, Amazon, and elsewhere that recommends content, we’re referring to an AI algorithm. Of course, what someone considers “really smart” is going to vary a lot depending on who you ask and when you ask them. 50 years ago, a computer’s ability to play checkers was astonishing, now it’s “just a computation.” This is [the AI effect](https://en.wikipedia.org/wiki/AI_effect), and I tried to counter it with my earlier broad definition of AI. ChatGPT and other new “chatbot tools” are almost unanimously considered “higher-level” AI, but really there’s no fundamental difference between ChatGPT and a simple calculator. Both take input, do some calculations (OK, ChatGPT does **a lot** of calculations) and give some new output based on the input. Both are AI. So what separates them?
+
+---
+
+**Machine learning** is the most talked-about way engineers create these “higher-level” AI algorithms. And, like AI, machine learning is a very broad field. The defining characteristic of a machine learning algorithm (vs some other AI algorithm) is that engineers don’t “directly” tell it exactly what to do. Instead, a machine learning algorithm is given training data (sample input and output) and expected to “learn” the pattern between input and output. For example, the algorithm could be given 10,000 pictures of dogs with the sample output “this is a dog,” and then 10,000 pictures of literally anything else with the sample output “this is not a dog.” From there, someone could give the algorithm a new picture, and the algorithm would use its learning to say either “this is a dog” or “this is not a dog.”
+
+Machine learning is not limited to classifying pictures, though: it’s the same core process that powers ChatGPT, “the algorithm” present on social media and shopping sites, chess algorithms, and more. (As an exercise, consider what the training data might be for these algorithms.)
+
+**Let’s use an example**: checkers. In a traditional algorithm, engineers might say “OK computer, here’s the current board. Run through all the possible next moves, and score each move according to how many pieces the other player has and how many pieces of yours are vulnerable. Choose the move with the highest score.” This scoring system is considered a model: a math function that calculates a score for a given input. This algorithm is AI, but it’s not machine learning. In machine learning, the algorithm would be given training data: “OK computer, here’s a checker board, here’s the best next move. We’ve given you 100 examples like this. Learn how to play checkers.” The algorithm builds its own model by re-adjusting its scoring function as it goes through the training data. It changes its scoring based on what it guessed and what the expected output was. While the algorithm is going through the training data, it’s said to be learning, or training its model. It then uses this trained model to make predictions on new input. We could show a trained algorithm a board that it’s never seen before, and it’d use its model to score the possible next moves and make its choice.
+
+---
+
+**OpenAI is the lab behind ChatGPT**. It was founded in 2015. OpenAI coined the term generative pre-trained transformer (GPT) in 2018. Generative just means the model will generate content, like text. We’ll talk more about “pre-trained” and “transformer” in a future article, but they’re more about how the algorithm was built, not what it can do. But these GPT-n things (GPT-2, GPT-3, etc.) are just models, specifically large language models (LLMs). An LLM takes in text, scores potential output text, then gives back the text with the highest score. They’re not directly interactive like ChatGPT.
+
+There are other LLMs made by other large companies: Google has [LaMDA](https://blog.google/technology/ai/lamda/), for example. These new “chatbot tools” are basically two parts: The part that takes your prompt (your message to the chatbot) and the language model itself. The two parts talk to each other just like your browser talks to Google when you make a web search.
+
+ChatGPT is a website that talks to a GPT model behind the scenes. Other companies are building their own tools that talk to GPT-n or the ChatGPT model. For example, “[the new Bing](https://blogs.microsoft.com/blog/2023/02/07/reinventing-search-with-a-new-ai-powered-microsoft-bing-and-edge-your-copilot-for-the-web/)” [talks to GPT-4](https://blogs.bing.com/search/march_2023/Confirmed-the-new-Bing-runs-on-OpenAI%E2%80%99s-GPT-4), which was just publicly released on March 14, 2023.
+
+(Update April 8: I should clarify that [ChatGPT is also the name of the model](https://openai.com/blog/chatgpt) that the ChatGPT website talks to. It’s [listed as “gpt-3.5-turbo”](https://platform.openai.com/docs/model-index-for-researchers) in multiple [OpenAI docs](https://platform.openai.com/docs/models/gpt-3-5), so you may hear folks say “ChatGPT talks to GPT-3.5” or “ChatGPT talks to a GPT-3.5 model,” both of which are usually close enough.)
+
+Slight tangent: **Microsoft is the main partner of OpenAI**. [GPT-4 was trained on a Microsoft-built supercomputer](https://news.microsoft.com/source/features/ai/openai-azure-supercomputer/). That supercomputer is the fifth-largest in the world. And it was built just for OpenAI. [Microsoft has invested billions of dollars in the lab](https://blogs.microsoft.com/blog/2023/01/23/microsoftandopenaiextendpartnership/) and is [reportedly a 49% shareholder](https://www.semafor.com/article/01/09/2023/microsoft-eyes-10-billion-bet-on-chatgpt) as of January 2023. Oh, and [GPT-3 is exclusively licensed to Microsoft](https://blogs.microsoft.com/blog/2020/09/22/microsoft-teams-up-with-openai-to-exclusively-license-gpt-3-language-model/) — this means Microsoft determines who does and doesn’t get to build future tools like ChatGPT using that model. I’m not sure of the status of GPT-4 yet, but I wouldn’t be too surprised if all future GPT-n models were Microsoft-only.
+
+---
+
+**Why are companies announcing so many chatbot tools?** In short, many companies recognized the potential of LLMs awhile ago, and these tools have been in the works since then. But with the unprecedented popularity of ChatGPT, engineers probably got additional capacity, and it’s been a well-publicized race since then.
+
+**The tools are powerful because they use plain English for both input and output**. Like a traditional search engine, we don’t need to remember a specific way of talking to the computer: we just type what we think and we get results. Even better, the output is plain English as well! Instead of a list of (ads and) maybe useful links, we just get… an answer! Tools built around OpenAI’s models have literally taken the searching out of searching. Can you tell I’m excited? (Side note: experts refer to “plain English” as “natural language.”)
+
+Finally, the breadth and depth of these tools truly feels unlimited. I believe [Microsoft’s announcement of Microsoft 365 Copilot](https://www.linkedin.com/events/thefutureofwork-reinventingprod7038508574142074880/comments/) speaks for itself, but if a 40-minute demo and overview is too much for you, I’ll summarize. Microsoft believes in the power of tools where you input plain English, and it outputs useful information or even a helpful modification to your document. Copilot is basically “ChatGPT that has access to your Microsoft 365 documents.” Ask Copilot for a 3-minute draft speech for your daughter’s graduation, making sure to mention her good grades, how proud you are of her, and how excited you are for her future, and you’ll get it. Instantly. No searching, no copy-pasting, no nothing. The goal of the “copilot” paradigm is to provide drafts and quick fix options without taking over and without the user having to do any busy work at all. Instead of asking your “Excel friend” how to write a specific formula (I’m looking at you, Dad) or trying to sift through the results from Google, just ask Copilot. It won’t just give you a formula, it’ll visualize it for you, provide additional context about it, provide alternative suggestions — anything! OK, this is starting to sound like an ad (it’s not), but I really am excited. I haven’t used Copilot yet but I’m eager to, and I’ll report back when I can. If tech like this works, “just Google it” will be replaced by “just ask Copilot.”
+
+Microsoft isn’t alone: Google has announced similar features for [Google Workspace](https://workspace.google.com/blog/product-announcements/generative-ai), and both companies have announced some form of developer frameworks to empower engineers to create their own LLM-AI-powered experiences: Microsoft has [Semantic Kernel](https://learn.microsoft.com/en-us/semantic-kernel/whatissk) and Google has [MakerSuite](https://developers.googleblog.com/2023/03/announcing-palm-api-and-makersuite.html). As of writing, Google’s [Bard just entered public preview](https://blog.google/technology/ai/try-bard/). I haven’t heard much yet from Amazon, Apple, or other Big Tech companies, but it’s only a matter of time.
+
+Additionally, OpenAI published 6 [customer stories](https://openai.com/customer-stories) for GPT-4: [Duolingo](https://openai.com/customer-stories/duolingo), [Khan Academy](https://openai.com/customer-stories/khan-academy), [Government of Iceland](https://openai.com/customer-stories/government-of-iceland), [Stripe](https://openai.com/customer-stories/stripe), [Morgan Stanley](https://openai.com/customer-stories/morgan-stanley), and [Be My Eyes](https://openai.com/customer-stories/be-my-eyes). These stories highlight the diversity of LLM applications beyond the “chatbot tools” we’re familiar with. Expect this technology to start getting integrated in more and more unique ways!
+
+Clearly, many big players in the industry believe these new chatbot tools will be as revolutionary as the smartphone has been. I’m inclined to believe them.
+
+---
+
+**That’s a wrap on part 1!** I hope this article helped you understand the current AI landscape and what the near future may bring. If you haven’t yet, you can use [ChatGPT](https://chat.openai.com/) for free, [try the new Bing](https://www.bing.com/new), or watch endless demos at any video website near you.
+
+Thank you for reading. What do you want to learn next? How can I help? Let me know in the comments! 🤓
+
+{/* todo link to second article in series (once it's hosted on my site) */}
+Here’s the second article in this series:
+
+[AI is a buzzword. Here are the real words to know - markwiemer.medium.com](https://markwiemer.medium.com/ai-is-a-buzzword-here-are-the-real-words-to-know-47b1e0a324a7?source=post_page-----b74ca3b68eb5---------------------------------------)
+
+---
+
+---
+
+Updated April 8 to clarify that ChatGPT is both a model and a product.
+
+Updated April 16 to add a subtitle.
+
+Updated May 6 for a more engaging featured image (was brain, robot, and exploding head emoji on blue background). Also updated the conclusion and changed “new Bing” to “the new Bing.”
+
+Update May 7 to define “prompt” and add the “Microsoft independent” disclaimer.
