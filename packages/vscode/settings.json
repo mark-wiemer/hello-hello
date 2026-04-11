@@ -70,6 +70,7 @@
   "cSpell.enableFiletypes": ["!ts", "!typescript", "ahk", "ahk2"],
   "cSpell.numSuggestions": 3,
   "cSpell.userWords": [
+    "aaaand",
     "Abdalla",
     "ADDRES",
     "ahkpp",
@@ -86,6 +87,7 @@
     "autohotkey",
     "backcolor",
     "Backreference",
+    "Bada",
     "BBBS",
     "behaviour",
     "Bersin",
@@ -246,6 +248,7 @@
     "Keybd",
     "klass",
     "Kyklish",
+    "latexmk",
     "LCID",
     "Lexikos",
     "libc",
