@@ -6,6 +6,7 @@ describe("getAllBlogPosts", () => {
     const paths = getAllBlogPosts();
     expect(
       paths.find((entry) => entry.params.slug === "testing-accessibility-reflow"),
+      `${paths.map((path) => JSON.stringify(path))}`,
     ).not.toBeUndefined();
   });
 });

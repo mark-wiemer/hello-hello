@@ -21,13 +21,13 @@ interface BlogPost {
  * Returns all blog posts.
  */
 export function getAllBlogPosts(): BlogPost[] {
-  // path: e.g. '/src/pages/blog/content/2024-10-08 months-without-music.mdx'
+  // path: e.g. '/src/pages/blog/content/2024-10-08-months-without-music.mdx'
   // module: object representing the module at that location
   const paths = getRawBlogPostPaths().map(([path, module]) => {
     /** e.g. '2024-10-08 months-without-music' */
     const filename = path.split("/").pop()?.replace(".mdx", "") || "";
     /** e.g. 'months-without-music' */
-    const slug = filename.split(" ").slice(1).join("-");
+    const slug = filename.split("-").slice(3).join("-");
 
     return { params: { slug }, props: { module } };
   });
