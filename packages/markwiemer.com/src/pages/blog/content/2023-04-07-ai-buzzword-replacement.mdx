@@ -1,0 +1,124 @@
+---
+# Medium post uses Title Case, I use sentence case on my site.
+postTitle: "AI is a buzzword. Here are the real words to know"
+postDate: "2023-04-07"
+original: "https://medium.com/the-generator/ai-is-a-buzzword-here-are-the-real-words-to-know-47b1e0a324a7"
+---
+
+import CaptionedImage from "@/components/CaptionedImage.astro";
+import IntimidatingTower from "@/assets/2023-04-07-ai-buzzword-replacement/2023-04-07-01-intimidating-tower.webp";
+import KitchenAnalogy from "@/assets/2023-04-07-ai-buzzword-replacement/2023-04-07-02-kitchen-analogy.webp";
+import BardJwstHallucination from "@/assets/2023-04-07-ai-buzzword-replacement/2023-04-07-03-bard-jwst-hallucination.webp";
+
+<CaptionedImage
+  src={IntimidatingTower}
+  alt="A towering blocky structure rising into the clouds in front of a startled onlooker"
+  caption="Me being intimidated by all this AI stuff. Made with Bing Image Creator."
+  eager
+/>
+
+## Plain English descriptions of terms surrounding “AI” technology
+
+In my [overview of AI and machine learning](/blog/lets-learn-ai), I defined AI as “the ability to do something that ‘seems smart.’ ” Spoiler alert: I know this is a bad definition. Real spoiler alert: I can’t find a good one. [No one has written one that everyone agrees on](https://en.wikipedia.org/wiki/List_of_philosophical_problems#Cognition_and_AI). We’re kinda stuck with “seems smart” for now. But that’s OK, because tech industry folks don’t actually say “let’s build an AI app,” they say “let’s implement this solution with machine learning” or “let’s make sure we ground the user’s prompts to avoid hallucinations.”
+
+AI, as a term, is just a buzzword. Back in the 90s, [Deep Blue](<https://en.wikipedia.org/wiki/Deep_Blue_(chess_computer)>) was the big bad AI that beat Garry Kasparov, then-World Chess Champion, at his own game! Nowadays, though, many would hesitate to call it AI: After all, a lot of it was memorization and the rest was following instructions given by programmers and chess experts. Is it smart if it’s just following instructions? But AI sounds cool! And it certainly seems smart, so it fits! Here we see the true purpose of the term “AI”: to give a cooler name to programs, something better than “chess memorization and instruction-following computer” or “smart-seeming rule-follower.” “AI” wraps everything up neatly, and marketers often hope that the audience never really questions what’s going on behind the scenes.
+
+So let’s go behind the scenes.
+
+---
+
+Disclaimer: This article mentions Microsoft, my employer. I wrote this article in my free time and all opinions are my own.
+
+---
+
+Nowadays, nearly every app that we consider AI is built via a process called **machine learning**. To summarize [my earlier coverage of this term](/blog/lets-learn-ai), a machine learning algorithm creates its own way of acting based on examples. This way of acting is called a **model**, and it’s just like a cooking recipe. A traditional algorithm is provided with a hand-crafted recipe by engineers. However, engineers have been unable to create hand-crafted recipes for image recognition and many other problems, so machine learning has saved the day in those fields.
+
+{/* In Medium, this KitchenAnalogy image is marked decorative because it's explained in the paragraph below. However, I prefer to include alt text and probably should have from the start. */}
+
+<CaptionedImage
+  src={KitchenAnalogy}
+  alt="Data matches ingredients, algorithms match appliances, models match recipes, and predictions match dishes"
+  caption="The four parts to machine learning match those of a kitchen — thanks Cassie! Source: Cassie Kozyrkov"
+  eager
+/>
+
+To use [Cassie Kozyrkov](https://kozyrkov.medium.com/)'s [excellent kitchen analogy](https://hackernoon.com/why-businesses-fail-at-machine-learning-fbff41c4d5db), there are four parts to any machine learning process: Gather data, feed it into an algorithm, validate the model, and use it to serve predictions. Analogously, there are four parts to a kitchen: Ingredients, appliances, recipes, and dishes. But machine learning “appliances” are a lot smarter than the average oven — they don’t just heat food, they learn how to prepare a dish!
+
+For example, to create ChatGPT, OpenAI gathered data from all over the internet and created some sample conversations of their own, fed it all into a generative pre-trained transformer (GPT) algorithm, came out with an updated GPT-3.5 model, and now they use that to predict the next words in a conversation. (Update April 8: There was a bit of extra work: they “checked on the model while it was cooking,” so to speak, to help the appliance along using a process known as [Reinforcement Learning from Human Feedback](<https://openai.com/blog/chatgpt#:~:text=this%20model%20using-,Reinforcement%20Learning%20from%20Human%20Feedback,-(RLHF)%2C%20using%20the>). I’ve also modified the previous paragraph to clarify that ChatGPT is one model built independent of the original GPT-3.5 models.)
+
+In fact, [machine learning is used everywhere](https://en.wikipedia.org/wiki/Machine_learning#Applications): From [Twitter’s recommendation algorithm](https://github.com/twitter/the-algorithm) (see its “heavy ranker” for details) to probably every other website’s recommendation algorithm to [medical diagnosis](https://en.wikipedia.org/wiki/Computer-aided_diagnosis) to [fraud detection](https://en.wikipedia.org/wiki/Credit_card_fraud#Machine_learning) to [astronomy](https://en.wikipedia.org/wiki/Astroinformatics) and beyond!
+
+A **large language model** is just a machine learning model specifically trained to output text based on text input. Some **examples of large language models** include GPT-3, GPT-3.5, and GPT-4 (sometimes these are just referred to as GPT-n). There’s also [LaMDA by Google](https://blog.google/technology/ai/lamda/), [LLaMA by Meta](https://ai.facebook.com/blog/large-language-model-llama-meta-ai/), and [BloombergGPT](https://mediabrief.com/bloomberggpt-language-model-for-finance/) by that company that names everything after that guy. Technically, [the GPT-n models are each a family of models](https://platform.openai.com/docs/models/gpt-4), but most articles use “GPT-4” to refer to its most optimized chat model.
+
+Some **products that use large language models** are ChatGPT, which uses GPT-3.5\* (now GPT-4 for subscribers), the new Bing (GPT-4), and Google Bard (LaMDA). Expect many, many more to come. And just remember: anyone who says the new Bing is “powered by ChatGPT” isn’t quite correct — now you can help them learn!
+
+\*Update April 8: Technically, [ChatGPT is also the name of the model](https://openai.com/blog/chatgpt), but it was fine-tuned from a GPT-3.5 model and is referred to as “GPT-3.5” on the app itself and “[gpt-3.5-turbo](https://platform.openai.com/docs/model-index-for-researchers)” throughout [OpenAI documentation](https://platform.openai.com/docs/models/gpt-3-5).
+
+---
+
+A **product** is a wrapper around a model, a way to make it easier to work with a model and integrate it with other things, like websites and whatnot. Products also provide security, privacy, and policy logic to ensure bad prompts don’t get sent to the model and bad output doesn’t get shown to you. Product owners decide what is “bad” and what isn’t, and they usually avoid the standard hateful, violent, or just plain rude speech, among other things. Prompts accepted by the product are usually forwarded directly to the model, though this is changing.
+
+Newer prompt-based products will **ground** prompts, which just means they’ll adjust prompts to make them more useful before giving them to the model (see [Microsoft’s recent announcement](https://www.linkedin.com/events/thefutureofwork-reinventingprod7038508574142074880/comments/) at 21:04). A grounded prompt is supposed to be less likely to result in a **hallucination**. A model hallucinates whenever it outputs something that might seem true, but isn’t. There are plenty of examples of this online, but [the early days of the new Bing](https://www.theverge.com/2023/2/15/23599072/microsoft-ai-bing-personality-conversations-spy-employees-webcams) take the cake: in one case, [it claimed Avatar 2 hadn’t come out yet and proceeded to insult the user](https://www.reddit.com/r/bing/comments/110eagl/the_customer_service_of_the_new_bing_chat_is/). (Screenshots and stories can be made up, but I recreated the Avatar 2 hallucination myself, though I didn’t get insulted.)
+
+{/* todo link the "VLT did" caption text to "https://exoplanets.nasa.gov/resources/300/2m1207-b-first-image-of-an-exoplanet/", then remove parenthetical paragraph */}
+{/* https://github.com/mark-wiemer/hello-hello/issues/94 */}
+
+<CaptionedImage
+  src={BardJwstHallucination}
+  alt="Google’s Bard announcement tweet showing a false answer from Bard"
+  caption="Bard’s famous $100 billion hallucination—JWST didn’t take the first picture of an exoplanet, VLT did."
+  eager
+/>
+
+Hallucinations are as dangerous as they sound, so it’s important to remember that **models don’t know the truth**. Models only guess words. It’s up to the product, and ultimately the user, to fact-check anything that a model outputs. Another famous hallucination comes from Google: on February 6, [Google showcased Bard’s very first public answer](https://twitter.com/Google/status/1622710355775393793)—and it was a hallucination. They didn’t catch it and didn’t put any disclaimers, and [Google subsequently lost $100 billion in market value](https://www.cnet.com/science/space/googles-chatgpt-rival-bard-called-out-for-nasa-webb-space-telescope-error/). To be fair, the old Bing still makes the same mistake when I search “which telescope took the first image of an exoplanet,” but Google’s failure to fact-check their own model shows just how easy it is to believe a hallucination. Always fact-check!
+
+(Here's [the first image of an exoplanet](https://exoplanets.nasa.gov/resources/300/2m1207-b-first-image-of-an-exoplanet/), taken in 2004.)
+
+---
+
+Finally, let’s cover some basic algorithms that create models. The first one was a **neural network**, and then people started building things like **convolutional neural networks** and **recurrent neural networks** and **generative adversarial neural networks**, but it wasn’t until 2017 that we got the newest algorithm: the **transformer**, which is much simpler and only took me a dozen hours of intense studying to get a basic grasp of.
+
+Do we need to know how any of these algorithms work? Well, do we need to know how an oven works? Not really, we just need to know it cooks our food and it’s dangerous when it’s hot! The technical details can be interesting, but it all boils down to a bunch of the same math over and over again, I promise.
+
+---
+
+Let’s summarize everything in a nice glossary, shall we?
+
+<dl>
+  <dt>Artificial intelligence (AI)</dt>
+  <dd>A poorly-defined term that basically means “seems smart,” mostly used in marketing.</dd>
+  <dt>Machine learning (ML)</dt>
+  <dd>
+    The process through which coders make a program that learns by example, not by instruction.
+  </dd>
+  <dt>ML algorithm</dt>
+  <dd> A bit of software that refines a model every time it takes in an input.</dd>
+  <dt>Model</dt>
+  <dd> A math process that works on data of a given type to predict something.</dd>
+  <dt>Generative large language model (LLM)</dt>
+  <dd> A type of model that predicts what text comes next.</dd>
+  <dt>Product</dt>
+  <dd> Any software application that uses an LLM behind the scenes.</dd>
+  <dt>Prompt</dt>
+  <dd> When you go to ChatGPT and send a message, that message is your prompt.</dd>
+  <dt>Grounding</dt>
+  <dd> Adjusting a prompt in an effort to make it better for an LLM.</dd>
+  <dt>Hallucinating</dt>
+  <dd> When an LLM gets something wrong, it’s hallucinating — always fact-check!</dd>
+</dl>
+
+So there you have it! Engineers feed data to machine learning algorithms, which then create models that power products. Large language models like GPT-4 are primarily used in chatbot tools, but we should expect other ways of interacting with them in the near future! And always remember that these tools may hallucinate, so we need to fact-check them just like anything else.
+
+Thank you for reading. What would you like to learn next? How can I help?
+
+Here’s a suggestion, it’s the first article in this series: [Let's learn about artificial intelligence - markwiemer.com](/blog/lets-learn-ai)
+
+{/* todo link to self-hosted blog post */}
+
+And the next entry: [Unlock the power of ChatGPT with prompt engineering - markwiemer.medium.com](https://markwiemer.medium.com/unlock-the-power-of-chatgpt-with-prompt-engineering-46aa760e929a)
+
+---
+
+---
+
+2026-04-11: First published to markwiemer.com. Changed glossary from unordered list to dictionary list. Added parenthetical paragraph linking to first image of an exoplanet due to [technical limitations](https://github.com/mark-wiemer/hello-hello/issues/94).
