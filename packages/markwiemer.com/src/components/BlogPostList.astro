@@ -1,15 +1,8 @@
 ---
-import { getAllBlogPosts } from "@/utils/blog";
+import { getAllBlogPosts, sortBlogPostsOldestFirst } from "@/utils/blog";
 import CustomDate from "@/components/CustomDate.astro";
 
-type PostListItem = {
-  postDate: string;
-  postTime: string | undefined;
-  postTitle: string;
-  postType: string;
-  lastUpdated: string | undefined;
-  /** Whether to list the post in the index and home page */
-  listed: boolean;
+type PostListItem = ReturnType<typeof getAllBlogPosts>[0]["props"]["module"]["frontmatter"] & {
   slug: string;
 };
 
@@ -26,18 +19,30 @@ let posts: PostListItem[] = getAllBlogPosts()
     return { ...props.module?.frontmatter, slug: params.slug, listed };
   })
   .filter((post) => post.postDate && post.slug && post.listed)
-  .sort((a, b) => b.postDate.localeCompare(a.postDate))
+  // todo enforce sort order
+  .sort(sortBlogPostsOldestFirst)
+  .reverse()
   .filter(filter ?? (() => true))
   .slice(0, limit ?? undefined);
 ---
 
+{/* todo enforce this */}
+{/* we need user-facing `:` on same line of code as `<a href...` to avoid space before colon */}
+
+<!-- prettier-ignore -->
 <ul>
   {
     posts.map((post) => (
       <li>
-        <CustomDate date={post.postDate} />{post.postType === "notes" ? " (notes): " : ": "}
-        <a href={`/blog/${post.slug}`}>{post.postTitle}</a>
-        {post.lastUpdated ? <>{" "}(last updated <CustomDate date={post.lastUpdated} />)</> : ""}
+        <CustomDate date={post.postDate} />{post.postType === "notes" ? " (notes): " : ": "}<a href={`/blog/${post.slug}`}>{post.postTitle}</a>
+        {post.lastUpdated ? (
+          <>
+            {" "}
+            (last updated <CustomDate date={post.lastUpdated} />)
+          </>
+        ) : (
+          ""
+        )}
       </li>
     ))
   }
