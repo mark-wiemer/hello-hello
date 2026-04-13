@@ -27,6 +27,20 @@ POSIX also defines the [Shell Command Language](https://pubs.opengroup.org/onlin
 grep -RIn --exclude-dir=node_modules -- "auth.md" ./path/to/hello-hello || true
 ```
 
+### sed
+
+[sed](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/sed.html) -- stream editor
+
+```sh
+MY_FILE="./src/pages/blog/content/__todo__"
+```
+
+```sh
+sed -i "s/’/'/g" $MY_FILE
+sed -i 's/[“”]/"/g' $MY_FILE
+sed -i 's/…/.../g' $MY_FILE
+```
+
 ## Shell Command Language
 
 Links are to official sources unless otherwise specified. Citations in code use the same numbering and name as in official sources.
