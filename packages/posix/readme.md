@@ -20,12 +20,18 @@ POSIX also defines the [Shell Command Language](https://pubs.opengroup.org/onlin
 
 ### grep
 
-[grep](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/grep.html)
+[grep](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/grep.html) -- search a file for a pattern
 
 ```sh
 # Search this monorepo for "auth.md", succeeding even if nothing is found
 grep -RIn --exclude-dir=node_modules -- "auth.md" ./path/to/hello-hello || true
 ```
+
+### mv
+
+[mv](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/mv.html) -- move files
+
+Doesn't seem to take fancy args on its own, need to learn more about piping and xargs to get good use out of this.
 
 ### sed
 
