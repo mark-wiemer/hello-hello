@@ -1,0 +1,142 @@
+---
+postTitle: "Unlock the power of ChatGPT with prompt engineering"
+postDate: "2023-04-16"
+original: "https://markwiemer.medium.com/unlock-the-power-of-chatgpt-with-prompt-engineering-46aa760e929a"
+---
+
+## Simple tricks make ChatGPT even smarter and more useful
+
+import CaptionedImage from "@/components/CaptionedImage.astro";
+import AiChatgptRobot from "@/assets/2023-04-16-ai-prompt-engineering/2023-04-16-ai-01-chatgpt-robot.webp";
+import DefinePromptEngineering from "@/assets/2023-04-16-ai-prompt-engineering/2023-04-16-ai-02-define-prompt-engineering.webp";
+import LimitResponseLength from "@/assets/2023-04-16-ai-prompt-engineering/2023-04-16-ai-03-limit-response-length.webp";
+import Etymologist from "@/assets/2023-04-16-ai-prompt-engineering/2023-04-16-ai-04-etymologist.webp";
+import Fool from "@/assets/2023-04-16-ai-prompt-engineering/2023-04-16-ai-05-fool.webp";
+import AvoidTechnical from "@/assets/2023-04-16-ai-prompt-engineering/2023-04-16-ai-06-avoid-technical.webp";
+
+<CaptionedImage
+  src={AiChatgptRobot}
+  alt="An AI-generated image of a humanoid robot with no arms and four metal wheels instead of legs"
+  caption="I like to pretend ChatGPT is a little friendly guy just rolling around and answering questions. Made with Lexica Aperture"
+  eager
+/>
+
+All these new chatbots are still a bit intimidating to me. The more I learn, the more I realize how much I don't know. Early in my research, I felt I wasn't even getting what all the hype was about. When I used ChatGPT, its answers were always so long-winded and it often used terms I didn't know. And I'm a tech guy! I should know these terms, right? Am I dumb? Oh boy...
+
+Then one day I asked ChatGPT to be less chatty. And it worked! And I asked it to use simpler words. And it worked! These discoveries helped me see the power of these new chatbot tools: they understand instructions. To use ChatGPT (and its friends, like Bing and Bard) most effectively, guide it through a conversation instead of just crossing your fingers. It takes some effort, but the better your prompt, the better the bot's response.
+
+**That's all prompt engineering is:** Writing specific messages to bots so that they give you better results. The rest of this article will detail some examples of just how powerful this practice can be.
+
+---
+
+Disclaimer: This article mentions products by Microsoft, my employer. I wrote this article in my free time and all opinions are my own.
+
+Side note: [Full text for all conversations pictured](https://github.com/mark-wiemer/new-chatbot-conversations/blob/main/2023-04-15-medium-snippets-prompt-engineering.md) is also linked at the end of the article.
+
+---
+
+<CaptionedImage
+  src={DefinePromptEngineering}
+  alt="A ChatGPT conversation. User: Define prompt engineering in 20 words. Bot: Prompt engineering is designing effective cues for AI models by selecting input format and crafting informative, specific, and flexible prompts."
+  caption="I find ChatGPT a lot more useful when it doesn't chat so much, but even this definition isn't great. Let's learn how to make it even better!"
+/>
+
+Here's the simplest trick: ask ChatGPT to limit the length of its response. You don't have to say "in 20 words," you could also just say "brief," "short," or "concise." Whatever floats your boat. Remember: these chatbots were basically trained on the entire internet, so they understand pretty much any instruction that's ever been given.
+
+We can go further! We can write instructions just once and ChatGPT will follow them for a while. ChatGPT (GPT-3.5) remembers roughly the last 3000 words. You can work around this by simply resending your instructions once it forgets.
+
+Personally, I prefer ChatGPT to be less chatty, as three AI-generated paragraphs at once can be overwhelming when I just want a definition. So I start every ChatGPT conversation the same way:
+
+<CaptionedImage
+  src={LimitResponseLength}
+  alt="A ChatGPT conversation. User: For the rest of this conversation, I want you to limit your responses to 20 words. Bot: Understood, I'll keep my responses concise and within the requested word limit. How can I assist you? User: Define prompt engineering. Bot: Prompt engineering is the process of crafting and optimizing prompts to generate specific language model outputs"
+  caption="ChatGPT remembers instructions for a long time (but not forever!)"
+/>
+
+OK, we're still barely scratching the surface. Some of you are mad at me for using the world's most powerful natural language model to define words, I know. To you, I encourage patience. There is no shame in using a powerful technology for a basic thing if it works and the stakes are low! We will get there, don't worry.
+
+---
+
+ChatGPT is almost as good an actor as I am\* — let's use that to our advantage! We can [ask ChatGPT to pretend to be anyone](https://huggingface.co/datasets/fka/awesome-chatgpt-prompts) — a character from your favorite book or movie, an English language teacher, a famous scientist, a travel guide, the list goes on. Plus, ChatGPT is almost as smart as I am\*\* — it can act like a professional plumber, life coach, web design consultant, florist, anything! You could open up a millinery with all the hats ChatGPT can wear!
+
+<CaptionedImage
+  src={Etymologist}
+  alt={`A ChatGPT conversation excerpt.
+    User: I want you to act as a etymologist.
+        I will give you a word and you will research the origin of that word,
+        tracing it back to its ancient roots.
+        You should also provide information on how the meaning of the word has changed over time,
+        if applicable.
+        My first request is "What's a fancy word for hat store?"
+    Bot: The word you are looking for is "millinery," which refers to
+        the designing, making, and selling of women's hats.
+        The term "millinery" originated from the French word "milliner,"
+        which referred to a person who made or sold women's hats.
+        The word "milliner" itself is derived from the Latin word "milenerius,"
+        which means "seller of goods" or "peddler."`}
+  caption="All the cool kids are using ChatGPT to find fancy words! 👒"
+/>
+
+Seriously, asking ChatGPT to act in a specific persona is one of the most powerful and basic ways to get better results from it. I see a few main uses of ChatGPT roles, but please don't think this is a comprehensive list!
+
+- Brainstorming: ChatGPT can be a professional in any industry to provide you with a personalized brainstorming session for anything you can imagine. It can be a marketer, logistics manager, software engineer — again, the list goes on and on.
+- Troubleshoot specific problems: Got a leaky faucet? Car won't start even with a good battery? ChatGPT can act as a plumber, mechanic, or more to help you understand the situation and what actions you can take.
+- Learn new things: You can ask ChatGPT to be an English teacher, math teacher, research partner, travel guide, dietitian, etc. to help you master a subject or just make studying a bit less overwhelming.
+- Improve your headspace: This is a personal favorite. Honestly, you don't need prompt engineering for this one, but it can be useful to adjust ChatGPT's tone. You can even have it give religious responses, if you're into that. Just ask ChatGPT to be a life coach, caring friend, priest/imam/rabbi/\<your religious guide here\>, or any other role that feels helpful to you. The value really comes from writing, but having an interactive chat can help you see things from a different perspective. Of course, ChatGPT is no substitute for true friendship or a trained professional, but it can be helpful in a high-stress moment to just open up a quick chat session and put your thoughts "on paper."
+- Just have fun! Among my favorites in this category are drunk person, stand-up comedian, and fool. Sometimes when researchers use one of the largest supercomputers in the world to build a state-of-the-art, revolutionary tool, you just have to use it to generate random sentences, you know?
+
+<CaptionedImage
+  src={Fool}
+  alt={`A ChatGPT conversation excerpt.
+    User: I want you to act as a fool. The fool's sentences are meaningless.
+        The words used by fool are completely arbitrary.
+        The fool does not make logical sentences in any way.
+        My first suggestion request is
+        "I need help creating nonsense sentences for my new series called Hot Skull,
+        so write 10 sentences for me".
+    Bot: Oh, Hot Skull! That sounds like a slippery ice cream cone sliding down a rainbow.
+        Here are ten nonsense sentences for you to use in your series:
+        1. Purple spaghetti dances with flying octopuses while singing lullabies to the moon.
+        2. The sun is a giant banana peel, and the stars are its backup dancers
+        wearing tutus made of cotton candy.`}
+  caption="Ask and you shall receive!"
+/>
+
+The examples in this section were adapted from this [nice starting list](https://huggingface.co/datasets/fka/awesome-chatgpt-prompts), and now you're equipped to search "prompt engineering tips" and explore the many results the internet has to offer!
+
+\*I'll have you know I won "Most Promising Newcomer" in high school forensics, thank you very much!
+
+\*\*OK, I'm having a rough day today, so I just need to tell myself that I'm super smart. Is that such a crime? ChatGPT says it can't feel wronged, so I think I'm in the clear.
+
+---
+
+These are just the basics of prompt engineering, but I hope this has clarified the term enough to make the practice approachable! As you can see, being more specific and asking ChatGPT to follow specific roles can greatly improve the quality of its responses.
+
+Unfortunately, not all prompts work in all chatbots. Bard is bad at making nonsense, and Bing has very active safeguards preventing it from pretending to be something other than "a chat mode of Microsoft Bing search." If something doesn't work, try a different chatbot or a different prompt. And it never hurts to look online for more examples!
+
+Let's summarize:
+
+- **Prompt engineering** is adjusting your prompts to get better results from the tool you're using, like ChatGPT.
+- ChatGPT loves to follow instructions — we can use this to our advantage by asking it to limit message length or roleplay a specific persona.
+- There are now tons of prompt engineering resources online! Take your time, try them out as you find them, and don't be afraid to tinker.
+
+<CaptionedImage
+  src={AvoidTechnical}
+  alt={`A ChatGPT conversation.
+    User: Define prompt engineering for someone without a technology background.
+        Limit your definition to 20 words.
+    Bot: Prompt engineering is the process of creating effective and relevant prompts
+        to train AI language models to generate human-like responses.`}
+  caption="Surprise! You always get a better definition by asking ChatGPT to avoid technical terms."
+/>
+
+Thank you for reading. What do you want to learn next? How can I help? Let me know in the comments! 🤓
+
+Here's the [full text for all conversations](https://github.com/mark-wiemer/new-chatbot-conversations/blob/main/2023-04-15-medium-snippets-prompt-engineering.md) used in this article, including ones not pictured.
+
+This article is the third in my Let's Learn AI series, you can check out the first two entries here:
+
+1. [Let's learn about artificial intelligence](/blog/lets-learn-ai)
+1. [AI is a buzzword. Here are the real words to know](/blog/ai-buzzword-replacement)
+
+For a more detailed breakdown of prompt engineering with even more examples, here's a great new article (Medium members only): [2023-03-23 - Best ChatGPT Tips and Tricks - Michael King on Medium](https://medium.com/@neonforge/best-chatgpt-tips-and-tricks-shared-by-chatgpt-experts-turbo-charge-your-ai-experience-prompts-f01d43818ae4)
