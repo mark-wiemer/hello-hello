@@ -1,0 +1,87 @@
+---
+postTitle: "AI Updates: The 10 biggest announcements since ChatGPT"
+postDate: "2023-04-08"
+postTime: "19:01 PDT"
+original: "https://markwiemer.medium.com/ai-updates-the-10-biggest-announcements-since-chatgpt-4c506145a3b9"
+---
+
+import CaptionedImage from "@/components/CaptionedImage.astro";
+import AiLlama from "@/assets/2023-04-08-ai-llama.webp";
+import ChatGptPlusUnavailable from "@/assets/2023-04-08-chatgpt-plus-unavailable.webp";
+
+## Recent announcements and releases explained
+
+<CaptionedImage
+  src={AiLlama}
+  alt="An AI-generated image of a digital llama silhouette"
+  caption="I drew LLaMA using Bing Image Creator. If you blur your eyes, it looks kinda cool. Kinda."
+  eager
+/>
+
+Alright, so we're all [familiar with ChatGPT](/blog/lets-learn-ai), right? But how much do we know about the new Bing, GPT-4, Bard, Microsoft 365 Copilot, LaMDA, LLaMA, PaLM API, Semantic Kernel, Auto-GPT, GPT4All, SudoLang, Riteway, or GPT-4's hidden plaintext compression language?
+
+I thought so!
+
+(And if you're not yet familiar with ChatGPT or AI terms like "model" and "LLM," I've covered them in plain English just for you! [Let's learn about artificial intelligence - markwiemer.com](/blog/lets-learn-ai))
+
+AI Updates is a new article series that will cover recent developments in the now-extremely-popular field. Naturally, most of the updates will focus on developments related to generative large language models and their products, like ChatGPT, since that's all the rage these days.
+
+We'll be starting with products you're likely familiar with, just to ensure everyone's on equal footing before we go into the more niche developments.
+
+Let's dive in!
+
+---
+
+This article mentions Microsoft, my employer. I wrote this article in my free time and all opinions are my own.
+
+---
+
+<CaptionedImage
+  src={ChatGptPlusUnavailable}
+  alt="A screenshot of the ChatGPT plan dialog showing ChatGPT Plus isn't available due to high demand"
+  caption="It's a big deal when a multi-billion dollar lab has such high demand that they can't accept your money. Screenshot source: me, April 4"
+  eager
+/>
+
+- **[ChatGPT](https://chat.openai.com/chat)**: This revolutionary chatbot [released in November 2022](https://openai.com/blog/chatgpt) took the world by storm, sparking the chatbot race we know and love today. After the [March 14 release of GPT-4](https://openai.com/product/gpt-4), there was such high demand for the $20/mo ChatGPT Plus plan that they temporarily paused upgrades!
+
+1. **[Google Bard](https://bard.google.com/)**: After a [disastrous February 6 tweet](https://twitter.com/Google/status/1622710355775393793) announcing their new chatbot ([in which the bot hallucinated](/blog/ai-buzzword-replacement)), [Bard entered open access](https://blog.google/technology/ai/try-bard/) on March 21, [received "meh" reviews](<https://en.wikipedia.org/wiki/Bard_(chatbot)#Reception>) (I like it!), and is now one of only two Big Tech internet-enabled LLM chatbots, the other being...
+
+1. **[The new Bing](https://bing.com/chat):** On [February 7, Microsoft began rolling out "the new Bing,"](https://blogs.microsoft.com/blog/2023/02/07/reinventing-search-with-a-new-ai-powered-microsoft-bing-and-edge-your-copilot-for-the-web/) which promptly began [hallucinating and even insulting some users](https://www.theverge.com/2023/2/15/23599072/microsoft-ai-bing-personality-conversations-spy-employees-webcams) when they tried to correct it. Microsoft has since fixed [this "unhinged" behavior](https://www.npr.org/2023/03/02/1159895892/ai-microsoft-bing-chatbot), but users reported it was then [much dumber](https://www.windowslatest.com/2023/02/21/microsofts-bing-ai-just-got-dumber-with-frequent-lets-move-on-to-a-new-topic-prompts/). Here we are two months later and [now it can draw](https://blogs.microsoft.com/blog/2023/03/21/create-images-with-your-words-bing-image-creator-comes-to-the-new-bing/)! Today, the service is relatively stable and less dumb, but who knows what tomorrow holds?
+
+1. **[LLaMA by Meta](https://ai.facebook.com/blog/large-language-model-llama-meta-ai/):** The Facebook parent released 🦙 "Large Language Model Meta AI" on February 24. Their release announcement emphasizes quality over quantity, with far fewer parameters but more intense training. They've also released their code to researchers.
+
+1. **[Dynamics 365 Copilot](https://cloudblogs.microsoft.com/dynamics365/bdm/2023/03/06/introducing-microsoft-dynamics-365-copilot-bringing-next-generation-ai-to-every-line-of-business):** Microsoft introduced the "first AI copilot in both CRM and ERP" on March 6, the first of its kind to be integrated into a major enterprise product. Copilot serves sellers, service agents, marketers, business owners, and supply chain managers by drafting responses, notes, action items, and more so the people can focus on the interesting part of their work. (Wow, that was a long sentence.)
+
+1. **[GPT-4](https://openai.com/research/gpt-4) and its [customer stories](https://openai.com/customer-stories):** On March 14, OpenAI cut a 🍰 slice of pi and dished out GPT-4 to the world. A major upgrade over GPT-3.5, which powers ChatGPT, they simultaneously shared 6 customer stories of how the model is already being used in developing products across industries. Microsoft also revealed that [the new Bing had been using GPT-4](https://blogs.bing.com/search/march_2023/Confirmed-the-new-Bing-runs-on-OpenAI%E2%80%99s-GPT-4) the whole time, those sneaky beavers! Unlike Meta, OpenAI has [refused to share GPT-4's code](https://www.vice.com/en/article/ak3w5a/openais-gpt-4-is-closed-source-and-shrouded-in-secrecy), citing "[safety implications](https://arxiv.org/pdf/2303.08774.pdf)."
+
+1. **[PaLM API & MakerSuite](https://developers.googleblog.com/2023/03/announcing-palm-api-and-makersuite.html):** Not wanting to miss out on the Pi Day action, Google made developer-focused March 14 announcements. [Pathways Language Model](https://ai.googleblog.com/2022/04/pathways-language-model-palm-scaling-to.html) API allows developers to access one of Google's language models directly, and MakerSuite allows devs to quickly prototype their AI ideas. 🧑‍💻
+
+1. **[Google Workspace generative-AI experiences](https://workspace.google.com/blog/product-announcements/generative-ai):** Still on March 14 (is it Pi Day or Groundhog Day?), Google shared new ChatGPT-like features within its productivity suite, allowing users to draft entire documents, emails, or meeting notes with a single prompt. Although they don't have a catchy name, they do seem pretty powerful — unfortunately the features are still [limited to "trusted testers."](https://workspace.google.com/solutions/ai/)
+
+1. **[Microsoft 365 Copilot](https://blogs.microsoft.com/blog/2023/03/16/introducing-microsoft-365-copilot-your-copilot-for-work/):** Microsoft announced this new suite of features on March 16, though it's [not yet available to the general public](https://answers.microsoft.com/en-us/msoffice/forum/all/how-can-i-access-and-use-microsoft-365-copilot/48a6729c-6d20-4347-bba1-656421013199). Analogous to the Google Workspace features announced two days earlier, Copilot will help across The Suite Formerly Known As Office (also Teams and Outlook), and will have full access to your meeting notes, emails, and other information to create personalized suggestions. The announcement post includes "more on pricing and licensing soon," so we'll see how that develops. There's also a helpful [40-minute announcement video](https://www.linkedin.com/events/thefutureofwork-reinventingprod7038508574142074880/comments/) if you're into that! 🍿
+
+1. **[Semantic Kernel](https://devblogs.microsoft.com/semantic-kernel/hello-world/):** Microsoft published Semantic Kernel (SK) on March 17. SK is a framework for developers to create applications that incorporate LLM AI. This is analogous to Google's PaLM API & MakerSuite from three days earlier. I haven't used either framework yet though, and I'll share my thoughts when I do!
+
+1. **[GitHub Copilot X](https://github.com/features/preview/copilot-x):** On March 22, GitHub announced their new product vision for [GitHub Copilot](https://github.com/features/copilot), which is basically ChatGPT for coding: it only writes code and you use it directly in your code files, not on a website. The new vision brings Copilot beyond coding and into debugging, testing, analyzing, writing documentation, and sharing insights with other engineers. As an avid user of GitHub Copilot (I get it for free from Microsoft, parent of GitHub and employer of me), I look forward to the updates here!
+
+1. **[AWS Generative AI Accelerator](https://aws.amazon.com/blogs/startups/aws-launches-global-generative-ai-accelerator-for-startups/):** Amazon announced their accelerator on April 4, and it's meant to help established startups use AI for anything, anywhere on the globe. With up to $300,000 in AWS credits given to each startup, there are sure to be some major developments before [the program ends on July 27](https://aws-startup-lofts.com/amer/program/accelerators/generative-ai).
+
+---
+
+And there we have it, the 10 — er, 11 — biggest AI announcements since ChatGPT, according to yours truly. And this is only a fraction of the activity in this space! Future articles will cover open-source indie projects, prompt engineering discoveries, and other innovative approaches to working with AI.
+
+What did I miss? What do you want to learn more about? How can I help? Let me know in the comments!
+
+{/* todo link to internal 2023-05-08-ai-updates-autogpt */}
+
+Here's the next AI Update, published May 8: [AI Updates: The Auto-GPT rocket, LLaMA's cheap children, and more](https://medium.com/the-generator/ai-updates-the-auto-gpt-rocket-llamas-cheap-children-and-more-d5cd3a5eddf6)
+
+---
+
+---
+
+Updates:
+
+- 2023-05-07: Move the "Microsoft independent" disclaimer to its own section.
+- 2026-04-13: Moved to markwiemer.com, adjusted text formatting to match site styles, added alt text for leading image.
