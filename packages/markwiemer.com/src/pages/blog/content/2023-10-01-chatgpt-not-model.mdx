@@ -1,0 +1,58 @@
+---
+postTitle: "ChatGPT was never just a language model, despite OpenAI's claims"
+postDate: "2023-10-01"
+original: "https://markwiemer.medium.com/chatgpt-was-never-just-a-language-model-despite-openais-claims-60778d81eb04"
+---
+
+## Understanding the pieces of these new AI experiences
+
+import CaptionedImage from "@/components/CaptionedImage.astro";
+import Gurbo from "@/assets/2023-10-01-ai-01-gurbo.webp";
+import FlaggedChat from "@/assets/2023-10-01-ai-02-flagged-chat.webp";
+
+<CaptionedImage
+  src={Gurbo}
+  alt="A hollow metallic gray cube with rays of blue light going toward the center"
+  caption={`Meet Gurbo, my name for the language model behind ChatGPT. Made with Bing Image Generator.`}
+  eager
+/>
+
+Whether we know it as the silly chatbot someone showed us, a productivity tool we use often, or the foundation of the next generation of human-computer interaction, ChatGPT is easily the biggest software release of the past decade. In [their announcement](https://openai.com/blog/chatgpt#:~:text=a%20model%20called%20ChatGPT), OpenAI branded it as a language model. And 95% of its success is due to the power of the large language model behind it. However, ChatGPT does things that language models simply can't do — anyone familiar with language models knows that chat history simply isn't possible. But ChatGPT provides a handy list of previous chats accessible at any time!
+
+Calling ChatGPT a model was a branding move, a simplification, and it's led to tons of confusion for engineers new to AI. As ChatGPT gets more bells and whistles, OpenAI's branding makes it even harder for us to understand what goes into this powerful new technology, how these products are deployed responsibly, and how engineers will build more complicated AI-powered experiences.
+
+So what does the model in ChatGPT actually do? What extra features did OpenAI add to their website to make it even more powerful? And why does this difference matter?
+
+As always, I work for Microsoft, a company with a close strategic partnership to OpenAI. This article was written in my free time and all opinions are my own.
+
+---
+
+A large language model (LLM), like all statistical models, is a prediction device. Newton's laws of physics provide a model for predicting how an object will travel as long as we know its initial speed and direction. More complex physics models will account for air resistance, different gravity on different planets, atmospheric density, eddies in air currents as the object moves, and more. Models aren't perfect, but they're usually good enough. We model a coin flip with a 50/50 chance, even though in reality [no coin is perfectly fair](https://web.archive.org/web/20110331174847/http://comptop.stanford.edu/u/preprints/heads.pdf). But the 50/50 model is pretty close, so we've kept it. A good model gives results that closely match reality, and if we know a model's limitations we know when we can use it and when to avoid it. If we're flipping 10,000 coins and betting a million dollars on the result, we might want to inspect the coins a bit closer — welcome to software at scale!
+
+Specifically, we can think of models as functions: you put stuff in, you get stuff out. You put in the initial position, speed, and direction of the apple you threw, and Newton's model of physics spits out where it will land. You ask the coin-flip model for heads or tails, and it returns heads 50% of the time. You ask the large language model in ChatGPT when George Washington was born, and it gives you the words it thinks most likely answer that question.
+
+Why is it called a large language model, anyway? It's a language model because it models language, that makes sense. And it's large because there are a lot of variables — in essence, it does a lot of math behind the scenes. You think it's hard to solve Newton's equations for the parabolic path of that apple you threw? Imagine having to multiply billions of numbers every time you say a single word — now you know how ChatGPT feels!
+
+In short, the model really is the core of the ChatGPT experience: when you send your message to ChatGPT, it (almost always) sends that message to its model and gives you the model's response. There wasn't much need to distinguish the website from the model when ChatGPT was first released, but we know now that ChatGPT has so many more features than just regular chat. For example, nowhere in my description of models did I mention memory or history. Newton's equations can't tell us when we last threw an apple. The model of a coin flip can't tell us the result of a coin flip we did last week. So how does ChatGPT know our conversation history?
+
+---
+
+When you go to chat.openai.com, you're not looking at a language model. You're looking at an application. A language model doesn't have colors or buttons or anything fancy — it's just a really big math equation. ChatGPT is an application that does a big fancy math equation when you chat with it. But it also saves a chat history after every response — that's completely outside the model. It allows you to [provide instructions that carry across multiple chats](https://openai.com/blog/custom-instructions-for-chatgpt). [ChatGPT filters your messages](https://openai.com/blog/chatgpt#:~:text=Users%20are%20encouraged%20to%20provide%20feedback%20on%20problematic%20model%20outputs%20through%20the%20UI%2C%20as%20well%20as%20on%20false%20positives/negatives%20from%20the%20external%20content%20filter%20which%20is%20also%20part%20of%20the%20interface.) before doing all that math — if your message isn't appropriate, it gives a canned response instead of actually going to the famous large language model behind the scenes. Oh, and [ChatGPT sends your messages to OpenAI](https://help.openai.com/en/articles/7730893-data-controls-faq) so they can update/train their big math equation behind the scenes. If it were just a large language model — that is, a system that took in text and spit out a prediction of what text might come next — it couldn't do any of these things!
+
+<CaptionedImage
+  src={FlaggedChat}
+  alt={`Screenshot of warning message over a user's ChatGPT message. Warning message says "This content may violate our content policy. If you believe this to be in error, please submit your feedback — your input will aid our research in this area."`}
+  caption={`Flagged messages don't actually go to the fancy large language model`}
+/>
+
+And don't even get me started on the features they've added to ChatGPT: plugins are, by definition, not part of a language model. I'll cover those in my next article. And the [new text-to-speech feature](https://openai.com/blog/chatgpt-can-now-see-hear-and-speak), while cool, is squarely outside the realm of "thing that predicts what words come next," yet it's all bundled as part of ChatGPT, and ChatGPT was announced as a language model. It was never a language model, and OpenAI knew this. Oh well.
+
+---
+
+Why should we distinguish the model from the rest of the website's behavior? As users, it doesn't matter too much to us, does it? But with more and more companies announcing LLM-powered experiences — Duolingo Max, Google Bard, Khan Academy's Khanmigo, Microsoft Copilot — and even more using LLMs behind the scenes for things like security analysis and systems optimization, we can't assume that they'll have the same safeguards as ChatGPT, even if they're using the same model. As these models handle more and more computation done on our behalf (or with our data), we should remain curious and clear-minded to avoid being misled. We've learned from the dot-com bubble and social media that tech is rarely all it's cracked up to be, and we should bring that caution with us as we learn about LLMs, ChatGPT, and everything else in the AI space today.
+
+The same can be said for engineers — we need to understand the capabilities and limitations of ChatGPT's model if we're going to be incorporating it into our own products. At Microsoft, I'm building a copilot much like all the other ones you've seen announced, and our team has done tons of research on exactly what can and can't be done. I'm proud to say we're pushing the envelope — responsibly, of course — and we've spent many hours teaching and working with other teams to help them (and ourselves) learn about things like the fact that the model has no memory, that few-shot learning really means "fill the whole context window with examples," that repetition really works, and that latency is an unpredictable but major concern. We're exploring the world of plugins, just like ChatGPT has, and we need to do that knowing where the model ends and the plugin begins. We need to piece everything together for a seamless user experience — but in order to do that, you bet we have to know what the pieces are!
+
+Stay curious and stay cautious. There's a lot to learn, and even the official branding from OpenAI can be misleading. Ask questions when you can (I'm happy to answer!) and remember that there's much more to these products than meets the eye.
+
+Next time, we'll cover plugins and begin unraveling just how copilots are designed. Until then, have a great week! 🤓
