@@ -11,7 +11,6 @@ export const getStaticPaths = getAllBlogPosts;
 
 const { module } = Astro.props;
 let { default: Content, frontmatter } = module;
-/* todo handle "originally posted on Medium.com" stuff */
 const { postTitle, postDate, postTime, lastUpdated, postType } = frontmatter;
 
 const notesDisclaimer =
@@ -23,7 +22,6 @@ const notesDisclaimer =
 <Layout pageTitle={postTitle}>
   <h1>{postTitle}</h1>
   <p>
-    <!-- todo incorporate postTime into CustomDate -->
     <CustomDate date={postDate} />{postTime ? `, ${postTime}.` : "."}
     {
       lastUpdated ? (

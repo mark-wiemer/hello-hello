@@ -12,6 +12,7 @@ export default defineConfig({
   redirects: {
     "/ahkpp": "https://ahkpp.com",
     "/luanti": "/software/luanti",
+    "/about": "/blog/who-am-i",
   },
   vite: {
     plugins: [
