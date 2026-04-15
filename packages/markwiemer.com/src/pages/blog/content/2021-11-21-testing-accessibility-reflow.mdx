@@ -11,6 +11,7 @@ import MicrosoftA11yHome from "@/assets/2021-11-21-microsoft-a11y-home.webp";
   src={MicrosoftA11yHome}
   alt="Screenshot with three windows open. One window is zoomed in, another logs the visual viewport size as “width: 315.75, height: 251.75”, the third is an accessibility assessment."
   caption="Performing an accessibility assessment on Microsoft's home page. Note the viewport must be at a very specific size."
+  eager
 ></CaptionedImage>
 
 Like all good engineers, we want our products to be accessible. Since we're building a website (or a web app), we're following [Accessibility Insights for Web](https://accessibilityinsights.io/docs/en/web/overview/)'s assessment. We've reached section 17.5: [Reflow](https://www.w3.org/WAI/WCAG21/Understanding/reflow.html). This section ensures our website is accessible with a viewport of 320x256 [CSS pixels](https://www.w3.org/WAI/WCAG21/Understanding/reflow.html#:~:text=Key%20Terms-,css%20pixel,-visual%20angle%20of) (including scroll bars). Let's learn how to test reflow efficiently.
