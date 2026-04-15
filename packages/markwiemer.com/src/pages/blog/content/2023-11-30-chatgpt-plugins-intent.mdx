@@ -1,0 +1,153 @@
+---
+postTitle: "ChatGPT, beyond the model: Plugins and intent recognition"
+postDate: "2023-11-30"
+original: "https://medium.com/the-generator/chatgpt-beyond-the-model-plugins-and-intent-recognition-b5a7649701e9"
+---
+
+import CaptionedImage from "@/components/CaptionedImage.astro";
+import SmartBox from "@/assets/2023-11-30-chatgpt-plugins-intent/2023-11-30-ai-01-smart-box.webp";
+import WeatherSampleDiagram from "@/assets/2023-11-30-chatgpt-plugins-intent/2023-11-30-ai-02-weather-sample-diagram.webp";
+import PickPlugin from "@/assets/2023-11-30-chatgpt-plugins-intent/2023-11-30-ai-03-pick-plugin.webp";
+import SummarizeWeather from "@/assets/2023-11-30-chatgpt-plugins-intent/2023-11-30-ai-04-summarize-weather.webp";
+import PickSports from "@/assets/2023-11-30-chatgpt-plugins-intent/2023-11-30-ai-05-pick-sports.webp";
+import PickInvalid from "@/assets/2023-11-30-chatgpt-plugins-intent/2023-11-30-ai-06-pick-invalid.webp";
+import AiPluggedIn from "@/assets/2023-11-30-chatgpt-plugins-intent/2023-11-30-ai-07-ai-plugged-in.webp";
+
+## How the language model does more for us by connecting to the digital world
+
+<CaptionedImage
+  src={SmartBox}
+  alt="a glowing mechanical box with a few thick wires loosely plugged into it, industrial cyberpunk"
+  caption="What happens when we take the smart box and give it access to the Internet? Made with Microsoft Designer"
+  eager
+></CaptionedImage>
+
+At this point, we know that ChatGPT is basically a magic Plinko board: Put your words (your prompt) at the top, and watch them bounce around the model's pegs until you get a neat answer. But the pegs are fixed: the same prompt gives roughly the same answer, regardless of when it's entered. As a result, we can't get news updates or weather reports directly from a language model: it simply doesn't have access to the outside world.
+
+But when you go to Bing Chat, Microsoft Copilot, Google Bard, or Grok, you can clearly see time-sensitive responses: the current score of the game, houses for sale near you, or breaking news about, well, anything. It's neat, but how does it work? The simple answer is that engineers just give search results to the model and ask it to summarize. But how does that work in detail? What can we learn from copilots that can be applied to any application as we enter what Microsoft calls "the age of copilots"? Let's dive in!
+
+As always, I'm a Microsoft employee speaking unofficially: all opinions are my own.
+
+---
+
+I've already given away the biggest secret: Copilots just gather information outside of the language model, then feed it in like a regular prompt. For our purposes, a copilot is just an application that uses an LLM to determine what actions to take and summarize responses for the user. Let's break down how this works (full diagram text at [weather sample gist](https://gist.github.com/mark-wiemer/19ba25dd393fff82efc3db79d27f7f91)):
+
+<CaptionedImage
+  src={WeatherSampleDiagram}
+  alt=""
+  caption="A simple interaction with a copilot, like Bing Chat, Google Bard, or Grok."
+></CaptionedImage>
+
+That's a single back-and-forth between a user and a copilot. The user asks about the weather, and the copilot uses a language model and a plugin to provide an informative response with a link to more info. I've named the model of this copilot "Gurbo," my personal shorthand for GPT-3.5-Turbo, the original model behind ChatGPT.
+
+There's a lot to break down here, but I want to call out three things:
+
+1. The language model doesn't know where its inputs came from or how its outputs will be used
+1. The weather plugin doesn't know that the language model exists
+1. An app that uses an LLM and a number of plugins can assist in any digital task
+
+Reflecting on callout 1, we see that the language model didn't need to change at all to be able to provide these responses. In fact, these aren't made up: [ChatGPT gives these exact responses](https://chat.openai.com/share/60446728-162e-43d2-a20a-d640a8d04308) for these prompts, you can try it yourself! From the perspective of the language model, these are exactly the same as a user chatting online ([full text for all conversation screenshots](https://chat.openai.com/share/60446728-162e-43d2-a20a-d640a8d04308)):
+
+<CaptionedImage
+  src={PickPlugin}
+  alt={`Conversation with ChatGPT. You: Pick a plugin from the following list for this prompt:  Prompt: "What's the weather like today?"  Plugins:  1. Sports: gets info sporting events  2. Weather: get the current weather for a region  3. News: get recent news on a topic  Just say the plugin name, nothing else. ChatGPT: Weather`}
+  caption="Yes, I know this isn't a perfect template, but ChatGPT doesn't care"
+></CaptionedImage>
+
+<CaptionedImage
+  src={SummarizeWeather}
+  alt={`Conversation with ChatGPT. You: Summarize this weather: ‘{ temp: 70, unit: "F", sky: "sunny" }'  Be professional and friendly.  ChatGPT:  The current weather is a pleasant 70°F with sunny skies. Enjoy the beautiful weather!`}
+  caption="Traditional applications typically deal with structured data — ChatGPT turns that into natural language"
+></CaptionedImage>
+
+Already we're seeing one of the main benefits of using a large language model to interpret user requests: it doesn't need to be reprogrammed to handle different questions! This same prompt template works for many requests:
+
+<CaptionedImage
+  src={PickSports}
+  alt={`Conversation with ChatGPT. ChatGPT picks the correct plugin for sports and news. Full text linked in article.`}
+></CaptionedImage>
+
+"But Mark," you ask, "what happens when the user's prompt doesn't match any of the plugins on the list?"
+
+<CaptionedImage
+  src={PickInvalid}
+  alt={`Conversation with ChatGPT. ChatGPT accurately says it doesn't have a plugin for flights. Full text linked in article.`}
+></CaptionedImage>
+
+Turns out the language model behind ChatGPT is smart! Behind the scenes, a copilot takes ChatGPT's response and checks if it's a valid option. If not, it may simply return "Sorry, something went wrong." (We'll discuss advanced error-handling later.)
+
+With automated requests to these language models, engineers are seeing the full benefit of a general-purpose LLM: It can handle just about any natural language we throw at it, allowing us to build a variety of complex copilots with the same LLM core. Before LLMs like the ones powering ChatGPT, engineers had to write custom code every time they wanted to handle a new type of question. Now we can reuse the same mega-model for everything, allowing us to build awesome stuff much faster. And with the incredible flexibility of LLMs, we can build stuff we never even thought about before, like an everything app — each feature can plug in to the LLM, and the LLM does a great job using its features appropriately based on the user's request, as we've seen above.
+
+---
+
+Breakdown, part 2: The weather plugin doesn't know that the language model exists. In fact, no plugin needs to know about a language model. And you know why that's great? Because weather apps were built to handle ZIP codes and city names, not questions! So how do engineers combine the flexibility of an LLM with the specificity of a "traditional" application like a weather or sports app?
+
+The answer is with a manifest! A manifest is just a file that describes the plugin. Information from the manifest is given directly to the model through a sample prompt, as we've seen earlier in this article. Here's a sample manifest for reference, adapted from [OpenAI's plugin tutorial](https://platform.openai.com/docs/plugins/getting-started):
+
+```json
+{
+    "schema_version": "v1",
+    "name_for_human": "Weather Anywhere",
+    "name_for_model": "weather",
+    "description_for_human":
+      "Get current weather information
+       for any location on Earth!",
+    "description_for_model":
+      "Get the current weather for a region.
+       Provides results based on ZIP code or city name.",
+    "auth": {
+        "type": "none"
+    },
+    "api": {
+        "type": "openapi",
+        "url": "https://example.com/openapi.yaml"
+    },
+    "logo_url": "https://example.com/logo.png",
+    "contact_email": "support@example.com",
+    "legal_info_url": "http://www.example.com/legal"
+}
+```
+
+There's a bit of noise in there, but I think you can see the part that's most relevant: It's the part that we normal people can understand! You may also recognize that "Get the current weather for a region" is the exact text sent to ChatGPT earlier. That's right: relevant info from the manifest just gets added to your prompt through the magic of prompt augmentation! (For simplicity, my examples only include the first part of the description, but in practice the whole description is always included.)
+
+Prompt augmentation is as simple as you can imagine: Take the user's input, then add stuff to it so that the model can take more specific actions! In this article, we've been doing prompt augmentation to recognize the user's intent: what type of information does the user want? What plugin should we use to get that info? This process is simple:
+
+1. Start with some instructions: "Pick a plugin from the following list for this prompt."
+1. Include the user's prompt, of course! Wrap it in quotes and announce it so the model knows when it starts and ends: "Prompt: ‘What's the weather like today?' "
+1. For each manifest file provided, take the name and model description and add it to a nice list: "1. 1. Sports: gets info sporting events, 2. Weather: get the current weather for a region..." (I copied my typo for consistency with the earlier prompts — you can see the LLM handles this just fine.)
+1. When in doubt, provide more instructions! ChatGPT is very chatty, and will often provide more than what we need. This is fine when chatting, but when sending ChatGPT's response to an application, it's much easier to handle a single word than a whole sentence. For this example, I've added "Just say the plugin name, nothing else."
+
+There's plenty more to say on prompt augmentation — it's really just an automated form of [prompt engineering](/blog/ai-prompt-engineering) at the end of the day! Engineers will often provide many examples to leverage what's called few-shot learning, they'll remind the LLM that it's OK to say "I don't know" to prevent [hallucinations](/blog/ai-buzzword-replacement), they'll encourage the LLM to cite its sources or refuse to answer irrelevant questions, the list goes on and on. For now, we can see the value of putting all this work onto the copilot instead of the user. No more need to spell out every little thing in detail — the copilot takes care of that too!
+
+With manifests, we have a very simple way to connect any traditional application to a large language model. Just provide a simple description of it and you're basically good to go! We don't need to reinvent any wheels here, most applications already have descriptions so that new engineers understand how they work — now we just pass that knowledge to an LLM, and it takes care of the rest!
+
+---
+
+<CaptionedImage
+  src={AiPluggedIn}
+  alt="A lamp with a smiling face and many cords plugged in"
+  caption="Copilots don't have faces, but this is how I like to imagine them. Made with Microsoft Designer"
+></CaptionedImage>
+
+That brings us to our final callout: An app that uses an LLM and a number of plugins can assist in any digital task.
+
+Let's reflect on how we've searched online. In a sense we've all silently been mastering the art of keyword searching. Most of us avid computer users don't open our browser and type "Hi Google, please tell me the current weather. Thank you very much." That would work, but we know that traditional search engines only really care about a few words. Most of us search "weather" and get the results we need.
+
+But as we see Bing or Google or whatever search engine we use start a conversation with us about our searches, we're more inclined to give those full sentences to these new copilots. Before, if we were curious about climate trends across the Pacific Northwest and how that's impacted the prevalence of wildfire smoke, we might search "climate history Pacific Northwest wildfires" and get some pretty good results. We'd click through, read a bit, take some notes, then search again. But this process, like most multi-site experiences on the Web, is full of friction. Pages load slowly, cookie notifications are annoying, auto-playing videos are the worst, and overall it's a struggle to get to the relevant information as articles are often full of fluff.
+
+A search copilot, like Google Bard, allows us to cut through the annoying parts of the Web. We can now chat with the Internet without leaving our page. We can ask follow-up questions, get detailed summaries, and go into the sources to ensure we're not being misinformed. It's a smooth, simple process, and I'm sure we'll see more advanced features in this space soon.
+
+But we can go further! Imagine an Amazon plugin that allows you to review, add to, and checkout your Amazon cart from the same page. We already have an AI image generation plugin in Bing Chat — imagine drawing an image based on your perfect imagined shoe, then doing a shopping search based on that image! For more technical use-cases, Microsoft Copilot in Excel can already spin up charts, summarize tables, and create dynamic columns for better data visualization — all because it's plugged in to your current file.
+
+Beyond creating and visualizing, plugged-in LLMs can also assist with navigation. Curious as to why your insurance only covered a certain portion of your medical bill? I'm sure insurance companies will have their own copilots soon. As will every other support agent: bankers, IT, retail — you name it! If things go well, we'll never have to wait through an annoying phone tree or chat with an incompetent bot again.
+
+---
+
+We've covered a lot of ground, and we're still just getting started. Now that ChatGPT and other LLMs can connect directly to any application, we're going to see an explosion of apps using LLMs. Let's recap why, and what the benefits are:
+
+1. Copilots are apps that connect LLMs to traditional features, and they can assist with any digital task as long as the right plugin is enabled.
+1. We can imagine a copilot as an app that uses ChatGPT just as we do.
+1. Connecting an existing app to an LLM is easy, so we can expect many complex apps to do it soon (if they haven't already)!
+1. The same LLM can be reused as the core of any number of copilots — engineers focus more on helping users and less on app infrastructure.
+
+What do you think copilots will do next? As always, I'd love to hear your thoughts! Thank you for reading. 🤓
