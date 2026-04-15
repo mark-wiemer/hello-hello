@@ -35,7 +35,7 @@ const imageProps: ComponentProps<typeof Image> = {
   alt,
   width: src.width,
   height: src.height,
-  loading: eager ? "eager" : "lazy",
+  priority: eager,
   class: klass,
   style: `
     aspect-ratio: ${aspectRatio};
