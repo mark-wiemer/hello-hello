@@ -1,0 +1,113 @@
+---
+postTitle: "AI Updates: The Auto-GPT rocket, LLaMA’s cheap children, and more"
+postDate: "2023-05-08"
+original: "https://markwiemer.medium.com/there-are-so-many-worlds-to-explore-c4f8d5d3cc7"
+---
+
+## This AI wave is nowhere near cresting
+
+import CaptionedImage from "@/components/CaptionedImage.astro";
+import AiLlama from "@/assets/2023-05-08-ai-updates-autogpt/2023-05-08-ai-01-llama.webp";
+import AutogptStarHistory from "@/assets/2023-05-08-ai-updates-autogpt/2023-05-08-ai-02-autogpt-star-history.webp";
+import Astronaut from "@/assets/2023-05-08-ai-updates-autogpt/2023-05-08-ai-03-astronaut.webp";
+
+<CaptionedImage
+  src={AiLlama}
+  alt="AI-generated image of a llama with a human brain floating above it against a space background"
+  caption={`The llamas will not be stopped! Made with DreamStudio.`}
+  eager
+/>
+
+Hello and welcome back to AI Updates, where we cover the latest developments in the hottest space in tech. It’s been over a month since the last installment, and so much has happened. I’ve been reading every day and I still don’t feel caught up! Let’s dive in, hug some llamas, and learn what the AI community has in store for us today.
+
+---
+
+As usual, this article mentions Microsoft, my employer. I wrote this article in my free time, and all opinions are my own.
+
+New to AI? I’ve got you covered! Start here: [Let's learn about artificial intelligence](/blog/lets-learn-ai).
+
+---
+
+## AI agents and Auto-GPT
+
+ChatGPT reads your messages and writes responses without any access to the Internet. The new Bing does the same, but searches online for an answer first. But what if we asked AI to do more? What if we wanted something complex, something that couldn’t be done in a single prompt?
+
+Enter AI agents: AI products that give models like ChatGPT access to tools like Internet search, document storage, and computational engines like [WolframAlpha](https://www.wolframalpha.com/). When prompted, agents set a goal and plan a series of tasks to accomplish that goal. Agents “talk to themselves” as they go, reasoning through a complex process and using their tools to make progress. Artificial agency of this kind has been [imagined for centuries](https://en.wikipedia.org/wiki/Golem), but wasn’t feasible until ChatGPT.
+
+For example, an agent prompted to “[find the square root of the age of the founder of IBM](https://cobusgreyling.medium.com/agents-da2bd17d2db2)” might first use a search to identify the founder of IBM, search again to find his birth date, use a date tool to learn the current date, use a math tool to get a final answer, and then synthesize that info into a ChatGPT-like response. All of this from a single prompt.
+
+On March 30, Toran Bruce Richards published [Auto-GPT](https://news.agpt.co/), an AI agent powered by GPT-4. Anyone can use it without sending any data to Richards — that is, as long as they’re willing to [pay OpenAI](https://openai.com/pricing#language-models) a few pennies per thousand words sent to and from GPT-4. The project has rocketed to become [the 30th most-starred repo on GitHub](https://github.com/EvanLi/Github-Ranking/blob/master/Top100/Top-100-stars.md).
+
+Many other AI agents now exist, including [BabyAGI](https://babyagi.org/), browser-based [AgentGPT](https://agentgpt.reworkd.ai/), and Khan Academy’s [Khanmigo](https://www.youtube.com/watch?v=jUtbi3unD2g) (which blurs the line between agency and [AI grounding](/blog/ai-buzzword-replacement)). Expect more products that (discreetly?) use AI agency to be announced soon.
+
+<CaptionedImage
+  src={AutogptStarHistory}
+  alt="Graph of Auto-GPT star history, data below."
+  caption={`Auto-GPT star history vs the 1st, 10th, and 20th most-starred GitHub repos as of May 6. 🚀`}
+/>
+
+| Repository   | Age in years | Total stars | Stars per year |
+| ------------ | ------------ | ----------- | -------------- |
+| FreeCodeCamp | 8.4          | 365,517     | 43,671         |
+| Vue          | 9.6          | 203,449     | 21,265         |
+| Flutter      | 8.1          | 152,837     | 18,834         |
+| Auto-GPT     | 0.1          | 125,628     | 899,102        |
+
+Auto-GPT is at about 900K stars per year vs FreeCodeCamp’s ~44K. Data sourced from [Auto-GPT star history](https://star-history.com/#freecodecamp/freecodecamp&vuejs/vue&flutter/flutter&Significant-Gravitas/Auto-GPT&Date) above on 2023-05-06.
+
+---
+
+## AI + friendship = HuggingGPT, aka Microsoft JARVIS
+
+For a research-grade case study on the power and diverse applications of AI agents, look no further than [the HuggingGPT paper](https://arxiv.org/abs/2303.17580), published by Microsoft Research Asia and Zhejiang University on March 30. In it, they study an agent powered by ChatGPT with access to specialized machine learning models from the popular Hugging Face registry.
+
+[Hugging Face](https://huggingface.co/) is the leading platform for sharing machine learning models, including image labellers, video generators, text classifiers, audio understanders, and more. Many models, unlike ChatGPT, are highly-specialized and only work on well-structured data (instead of plain English), so they’re cheaper to run and give better results. Since [HuggingGPT](https://huggingface.co/spaces/microsoft/HuggingGPT) (also known as [JARVIS/Jarvis](https://github.com/microsoft/JARVIS)) has access to any model on Hugging Face, it can work seamlessly with images, audio, text, video, and other file formats.
+
+In the below figure from the paper, we see Jarvis’s explanation of how it generated a dubbed video from nothing but a text prompt.
+
+<CaptionedImage
+  src={Astronaut}
+  alt="Query-response pair from HuggingGPT paper. Full text linked below."
+  caption={`Bippity boppity boo, Jarvis has a fake video for you! Adapted from Figure 4 of the HuggingGPT paper.`}
+/>
+
+See also the [image transcript](https://gist.github.com/mark-wiemer/9c3f8b6720a6f1258d2c582768b631ea) for all your copy-paste and usability needs. 🧑‍🚀
+
+---
+
+## HustleGPT
+
+So far, we’ve given AI access to the Internet and friends from Hugging Face. But what if we gave it the most powerful resource of all? 💸
+
+On March 15, designer Jackson Greenhouse Fall [gave GPT-4 a measly $100](https://twitter.com/jacksonfall/status/1636107218859745286) and asked it to build its own business. He claims to have spent the money as his GPT boss instructed him to, and he went viral in the process. The business, a niche eco-living blog called [Green Gadget Guru](https://www.greengadgetguru.com/), hasn’t bloomed, as [Fall has since prioritized Makeshift](https://twitter.com/jacksonfall/status/1646272211429507073), the 3,000-member Discord community he started days after he found Internet fame. A spinoff group using the name [HustleGPT on both Twitter](https://twitter.com/hustlegpt) and Discord recently passed 6,000 Discord members. ([They also banned Fall](https://twitter.com/HustleGPT/status/1641186482676199424).) As [Yogi Berra said](https://www.goodreads.com/quotes/261863-it-s-tough-to-make-predictions-especially-about-the-future), “it’s tough to make predictions, especially about the future,” but the barrier for starting a business has certainly been lowered greatly by the newest AI tools.
+
+---
+
+## LLaMA’s many children
+
+[Last time on AI Updates](/blog/ai-updates-chatgpt), we covered the announcement of Meta’s [LLaMA](https://ai.facebook.com/blog/large-language-model-llama-meta-ai/), a language model released to researchers (and [leaked on March 3](https://www.theverge.com/2023/3/8/23629362/meta-ai-language-model-llama-leak-online-misuse#:~:text=just%20one%20week%20after%20Meta%20started%20fielding%20requests%20to%20access%20LLaMA%2C%20the%20model%20was%20leaked%20online.%20On%20March%203rd%2C%20a%20downloadable%20torrent%20of%20the%20system%20was%20posted%20on%204chan)). Since then, folks have built more specialized models based on LLaMA, reaching near-ChatGPT performance in user-preference studies. LLaMA’s children include [GPT4All](https://github.com/nomic-ai/gpt4all), a free downloadable ChatGPT clone that runs without Internet, and [Stanford’s Alpaca](https://crfm.stanford.edu/2023/03/13/alpaca.html), an instruction-following model whose [demo was shut down](https://github.com/tatsu-lab/stanford_alpaca/commit/d3b79d0e95bf1c637f54b85a371614bd80dd0b3e) four days after its March 13 announcement due to safety concerns. Each model was made for less than $1,500 and maybe a person-month of work (GPT4All was made by 5 authors who worked “[about four days](https://s3.amazonaws.com/static.nomic.ai/gpt4all/2023_GPT4All_Technical_Report.pdf)”). The natural drawback here is lower-quality responses, but we don’t need a Ferrari to get to the grocery store, do we? (Thanks to Patrice Pelland, my triple-skip-level manager, for sharing that analogy.)
+
+There are now countless other LLaMA-based projects out there, including [ChatLLaMA](https://github.com/nebuly-ai/nebuly/tree/main/optimization/chatllama) (for training your own LLaMA-based model), the interactive [Vicuna](https://lmsys.org/blog/2023-03-30-vicuna/) (trained for $300), and [Berkeley’s Koala](https://bair.berkeley.edu/blog/2023/04/03/koala/) (trained for less than $100!). As costs to train models continue to decrease, expect to see more and more little LLaMAs coming to a website near you!
+
+---
+
+## AI anthropomorphism concerns
+
+Pretending all these programs are animals is all fun and games, right? Well, some researchers disagree, and anthropomorphism of AI (that is, attributing human qualities to AI) is a significant concern in some expert circles.
+
+Below is a collection of well-cited conversations started by Ben Shneiderman and published by
+[Chenhao Tan](https://medium.com/u/8477aec256e4). It’s an engaging academic debate about reactions to an AI product that convincingly refers to itself as “I,” our tendency to grow attached to non-human objects, and the potential impact of such technologies becoming ubiquitous. It’s refreshing to see honest discourse about the dangers of these new tools: [On AI Anthropomorphism](https://medium.com/human-centered-ai/on-ai-anthropomorphism-abff4cecc5ae).
+
+---
+
+And that’s a wrap for this edition! The AI community has taken center-stage this month with brillions of new models, tools, and products for us to try out! Big Tech researchers continue to explore the potential of the models that already exist, and the barriers to enter the field have been lowered. Concerns remain, and always will, but we can educate ourselves by listening in on expert conversations and sharing our thoughts.
+
+Thank you for reading. What would you like to learn next? How can I help? Let me know in the comments! 🤓
+
+In case you missed it, here’s the [first AI Updates entry](/blog/ai-updates-chatgpt).
+
+---
+
+---
+
+2026-04-13: Added alt text to all images, adjusted formatting to match this site.
