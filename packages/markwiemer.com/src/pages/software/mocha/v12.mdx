@@ -2,13 +2,19 @@ import Layout from "@/layouts/Layout.astro";
 
 <Layout pageTitle="Mocha 12">
 
-{/* todo make this page respond to datetime format changes */}
-
 # Mocha 12
 
 Mocha 12 (sometimes "v12") is an upcoming release of [Mocha](/software/mocha) which updates internal dependencies while maintaining a stable end-user experience. There are no planned breaking changes between Mocha 11 and Mocha 12.
 
-We released 11 unique betas through early April 2026, and I was personally aiming for a release candidate in early April and a full release in late April. However, I got super sick and am still not healthy as of 2026-04-08. We won't get an RC until a few weeks after I'm healthy, whenever that is.
+We released 11 unique betas through early April 2026, and I was personally aiming for a release candidate in early April and a full release in late April. However, I got super sick.
+
+Now that I'm healthy, the plan is simple:
+
+1. Slowly migrate from CJS to ESM
+1. Review unrelated pending PRs while I wait
+1. Once we're converted to ESM, release the first Mocha 12 release candidate (12.0.0-rc.1)
+1. Iteratively fix bugs, but no new features in any release candidates
+1. Once we're confident in stability, release Mocha 12!
 
 Dates and times are PDT (UTC-7). All links are to GitHub unless otherwise specified.
 
@@ -23,44 +29,6 @@ Items are ordered by ascending creation time.
   - Pelle started working on this one (2026-03-26)
   - Pelle still drafting things offline, will work with him to get a clearer timeline (2026-04-02)
   - I re-opened [#5767: chore: migrate lib/pending and lib/error-constants to ESM](https://github.com/mochajs/mocha/pull/5767) as a first PR to ensure we are on the same page about implementation details after discussion with Pelle (2026-04-04)
-
-## Recently completed work
-
-- [#5763: Bug: beta versions should use semver-style dot numeric separator (instead of dash)](https://github.com/mochajs/mocha/issues/5763)
-  - I proposed a fix in the evening of 2026-03-26
-  - I fixed the fix, got it approved, then merged it on 2026-04-02
-
-{/* todo custom CSS for details to match visual identity */}
-
-<details>
-<summary>Removed from milestone</summary>
-
-## Currently removed from milestone
-
-These issues weren't super important for v12, and turned out to be more complicated than we thought, so I've pushed them to other milestones after a brief discussion. There's a small chance they come back.
-
-- [#5335: Package: Bump supports-color from 8 to 10](https://github.com/mochajs/mocha/issues/5335)
-  - Asked to push out of v12 given weird complexities (2026-03-26)
-  - Best alternative is forking picocolors, which I think is a bit much, so I pushed this to 12.x (2026-04-02)
-- [#5471: feat: remove supports-color dependency](https://github.com/mochajs/mocha/pull/5471)
-  - Would replace #5335, called it out again in that issue on 2026-03-26
-  - Requires dependency PR to merge ([picocolors#96: Don't force-enable color if env.CI is set](https://github.com/alexeyraspopov/picocolors/pull/96))
-  - `picocolors` hasn't been updated in 2+ years, asked maintainers publicly about forking it
-  - Best alternative is forking picocolors, which I think is a bit much, so I pushed this to chores milestone (2026-04-02)
-
-## Definitely removed from milestone
-
-- [#5672: Bug: process.exit(0) ends mocha silently](https://github.com/mochajs/mocha/issues/5672)
-  - Has a fix PR ([#5776: fix!: intercept process.exit during test execution](https://github.com/mochajs/mocha/pull/5776)) that I can review, but... (2026-03-26)
-  - Asked about landing this in v12 vs v13 given major release strategy (2026-03-26)
-  - We chose to move this to v13 on 2026-03-30
-- [#5835: refactor!: remove unused legacy errors.js functions](https://github.com/mochajs/mocha/pull/5835)
-  - Pelle opened this on 2026-03-31
-  - Josh noted that it had a breaking change on 2026-04-01
-  - I asked to move this to v13 on 2026-04-02 evening
-  - We moved this to v13 per discussion (2026-04-04 morning)
-
-</details>
 
 ## References
 
