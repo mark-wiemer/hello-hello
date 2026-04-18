@@ -243,6 +243,11 @@ luanti_trash() {
     eval gio trash "$luanti_games_relative_path/$dest"
 }
 
+# Format No Config
+fnc() {
+    npm run format:fix -- --no-config
+}
+
 new_project() {
     pnpm init
     pnpm add -D sort-package-json
@@ -253,10 +258,12 @@ new_project() {
     pnpm run validate:fix
 }
 
+# Node Index
 ni() {
     node index.js
 }
 
+# Node Start
 ns() {
     pnpm start
 }
@@ -266,6 +273,7 @@ reset_project() {
     new_project
 }
 
+# VaLidate and Fix
 vlf() {
     pnpm run validate:fix
 }
