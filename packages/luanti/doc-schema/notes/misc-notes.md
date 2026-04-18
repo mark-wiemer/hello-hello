@@ -21,7 +21,7 @@ In the tag-based example, we see that the result is very verbose but can more ea
 
 A lightweight syntax would follow traditional Markdown syntax, e.g.
 
-```
+```md
 ## get_modnames([load_order]: boolean)
 
 Returns a list of the mods' names that are loaded or are yet to be loaded during startup.
