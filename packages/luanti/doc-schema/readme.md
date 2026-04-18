@@ -68,4 +68,4 @@ Alternatively, use LuaLS with the "Luanti" or "Luanti Full API" addon:
     - Current doc has 0 h5 elements
 
 <a id="approaches"></a>
-Approaches are now documented in [approaches.md](notes/approaches.md)
+Approaches are now documented in [misc-notes.md](notes/misc-notes.md#approaches), we've decided on Markdown.

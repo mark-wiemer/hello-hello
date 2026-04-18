@@ -65,7 +65,7 @@ A mature, enterprise-grade Lua-centric type system, might not be expressive enou
 
 ### Markdown (proposed)
 
-For full details, see [markdown-approach.md](./markdown-approach.md)
+For full details, see [Markdown approach for Luanti doc schema](#Markdown-approach-for-Luanti-doc-schema)
 
 Markdown is the most common language for documentation, with extensive tooling support for translating it into HTML and other common markup langauges. It's extremely easy to write Markdown, and Markdown previews are built-in to VS Code and other popular IDEs, so documentation writers will be able to pick it up quickly. Additionally, we can leverage the existing Markdown ecosystem (e.g. remark by the unified collective) to efficiently parse, validate, and warn against potential violations of any Markdown schema we define.
 
