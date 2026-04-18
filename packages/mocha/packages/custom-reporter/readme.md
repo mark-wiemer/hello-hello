@@ -631,7 +631,20 @@ heyo
 npm i -D mocha@12.0.0-beta-9.2
 ```
 
+This fails:
+
+```
+npm run test:old
+```
+
+This also fails:
+
+```
+npm run test:new:cjs
+```
+
 ## References
 
 - [#5025 - 🐛 Bug: remove util.inherits / convert to classes](https://github.com/mochajs/mocha/issues/5025)
+- [#5180 - chore: switch reporters from util.inherits to ES2015 classes](https://github.com/mochajs/mocha/pull/5180)
 - [#5357 - 📌 Mocha 12 Release Plan](https://github.com/mochajs/mocha/issues/5357)
