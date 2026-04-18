@@ -2,9 +2,11 @@ var mocha = require("mocha");
 
 console.log("heyo");
 
+// To have this reporter "extend" a built-in reporter, change it to extend:
+// class MyReporter extends mocha.reporters.Spec {
 class MyReporter {
   MyReporter(runner) {
-    console.log("hello");
+    console.log("hello"); // does not get logged
     this.passes = 0;
     this.failures = 0;
     mocha.reporters.Base.call(this, runner);
@@ -25,6 +27,4 @@ class MyReporter {
   }
 }
 
-// To have this reporter "extend" a built-in reporter, change it to extend:
-// class MyReporter extends mocha.reporters.Spec {
 module.exports = MyReporter;

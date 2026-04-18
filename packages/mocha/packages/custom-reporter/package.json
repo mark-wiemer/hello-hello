@@ -4,15 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test:old//": "works with Mocha 11.7.5",
+    "test:old//": "works with Mocha 11.7.5, not with 12.0.0-beta-9.2",
     "test:old": "mocha add.test.js --reporter my-old-reporter.cjs",
-    "test:new:cjs//": "fails with Mocha 11.7.5",
-    "test:new:cjs": "mocha add.test.js --reporter my-new-reporter.cjs"
+    "test:old:debug": "DEBUG=mocha:* mocha add.test.js --reporter my-old-reporter.cjs",
+    "test:new:cjs//": "fails with Mocha 11.7.5 and 12.0.0-beta-9.2",
+    "test:new:cjs": "mocha add.test.js --reporter my-new-reporter.cjs",
+    "test:new:cjs:debug": "DEBUG=mocha:* mocha add.test.js --reporter my-new-reporter.cjs"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "mocha": "11.7.5"
+    "mocha": "^11.7.5"
   },
   "type": "module"
 }
