@@ -1,0 +1,18 @@
+{
+  "name": "custom-reporter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test:old//": "works with Mocha 11.7.5",
+    "test:old": "mocha add.test.js --reporter my-old-reporter.cjs",
+    "test:new:cjs//": "fails with Mocha 11.7.5",
+    "test:new:cjs": "mocha add.test.js --reporter my-new-reporter.cjs"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "11.7.5"
+  },
+  "type": "module"
+}
