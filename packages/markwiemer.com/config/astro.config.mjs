@@ -9,10 +9,16 @@ const publicDirPath = `${resolve(process.cwd(), `src${sep}public`)}${sep}`;
 export default defineConfig({
   integrations: [mdx()],
   publicDir: "./src/public",
+  // never change these; these are user-facing links
+  // don't add more `/___` entries, use `/s/___` from now on
   redirects: {
+    "/about": "/blog/who-am-i",
     "/ahkpp": "https://ahkpp.com",
     "/luanti": "/software/luanti",
-    "/about": "/blog/who-am-i",
+    "/s/about": "/blog/who-am-i",
+    "/s/luanti": "/software/luanti",
+    "/s/mocha": "/software/mocha",
+    "/s/mocha12": "/software/mocha/v12",
   },
   vite: {
     plugins: [

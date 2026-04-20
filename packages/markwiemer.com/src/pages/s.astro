@@ -1,0 +1,46 @@
+---
+import Layout from "@/layouts/Layout.astro";
+
+// todo these are currently manually copied into astro.config.mjs
+// todo add tests
+const links: [string, string][] = [
+  ["about", "/blog/who-am-i"],
+  ["luanti", "/software/luanti"],
+  ["mocha", "/software/mocha"],
+  ["mocha12", "/software/mocha/v12"],
+];
+---
+
+<Layout pageTitle="Short links">
+  <h1>Short links</h1>
+
+  <p>
+    Here are some short links :) These URLs will never change and will always redirect to the same
+    "long link" page. Additionally, they all live on markwiemer.com, so you can trust them as much
+    as any other part of this site. You can bookmark them with confidence 🤓
+  </p>
+
+  <table>
+    <thead>
+      <th>Short link (<code>s/___</code>)</th><th>Full slug</th>
+    </thead>
+    {
+      // todo add copy button
+      links.map((linkRow) => (
+        <tr>
+          <td>
+            <a href={`/s/${linkRow[0]}`}>{linkRow[0]}</a>
+          </td>
+          <td>
+            <code>{linkRow[1]}</code>
+          </td>
+        </tr>
+      ))
+    }
+  </table>
+
+  <hr />
+  <hr />
+
+  <p>See also <a href="/">Home - markwiemer.com</a></p>
+</Layout>
