@@ -113,7 +113,7 @@ function calcInitialState(boardSize, cellSize, ctx, dirs) {
  * @returns {import("../game.js").Vector2D} A position that doesn't overlap with the snake
  */
 function calcApplePos(state) {
-  let foundValidPos = false;
+  let foundValidPos;
   do {
     /** @type {import("../game.js").Vector2D} */
     let applePos = {

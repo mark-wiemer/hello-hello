@@ -13,6 +13,7 @@ Options:
 import sharp from "sharp";
 import { readdir, stat, unlink, readFile, writeFile } from "fs/promises";
 import { join, extname, relative } from "path";
+import process from "node:process";
 
 const assetsDir = new URL("../src/assets/", import.meta.url).pathname;
 const srcDir = new URL("../src/", import.meta.url).pathname;
