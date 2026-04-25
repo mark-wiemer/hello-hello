@@ -17,34 +17,34 @@ async function getColumnCount(
 test.describe("modern app chart", () => {
   const expectColumnTuple = async (page: Page, width: number, expected: [number, number]) => {
     await page.setViewportSize({ width, height: 800 });
-    await page.goto("/software");
+
     const columnsTop = await getColumnCount(page, ".top-grid");
     const columnsBottom = await getColumnCount(page, ".bottom-grid");
-    expect([columnsTop, columnsBottom]).toEqual(expected);
+    expect.soft([columnsTop, columnsBottom], `${width}`).toEqual(expected);
   };
 
-  test.describe("[320-640] px", () => {
-    // todo use property-based testing
-    for (const width of [320, 480, 640]) {
-      test(`at ${width}px`, async ({ page }) => {
-        await expectColumnTuple(page, width, [1, 1]);
-      });
+  const propertyBasedTest = async (
+    page: Page,
+    min: number,
+    max: number,
+    expected: [number, number],
+  ) => {
+    await page.goto("/software");
+    const viewportWidths = [min, Math.floor((max + min) / 2), max];
+    for (let i = 0; i < 15; i++) {
+      viewportWidths.push(Math.floor(Math.random() * (max - min) + min));
     }
-  });
 
-  test.describe("(640-1280] px", () => {
-    for (const width of [641, 960, 1280]) {
-      test(`at ${width}px`, async ({ page }) => {
-        await expectColumnTuple(page, width, [2, 2]);
-      });
+    for (const width of viewportWidths) {
+      await expectColumnTuple(page, width, expected);
     }
-  });
+  };
 
-  test.describe("(1280, inf) px", () => {
-    for (const width of [1281, 1920, 9999]) {
-      test(`at ${width}px`, async ({ page }) => {
-        await expectColumnTuple(page, width, [4, 3]);
-      });
-    }
-  });
+  const propertyBasedTestFactory = (min: number, max: number, expected: [number, number]) =>
+    test(`[${min}-${max}] px`, async ({ page }) =>
+      await propertyBasedTest(page, min, max, expected));
+
+  propertyBasedTestFactory(320, 640, [1, 1]);
+  propertyBasedTestFactory(641, 1280, [2, 2]);
+  propertyBasedTestFactory(1281, 9999, [4, 3]);
 });
