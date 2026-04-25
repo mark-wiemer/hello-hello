@@ -11,6 +11,7 @@ const userspaceLinks = [
   "/games/snake/index.html",
 ];
 
+// todo make these tests more resilient (currently 404 redirect fails)
 for (const link of userspaceLinks) {
   test(`${link} loads successfully`, async ({ page }) => {
     const response = await page.goto(link);
