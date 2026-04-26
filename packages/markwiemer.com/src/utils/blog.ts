@@ -14,8 +14,7 @@ interface BlogPost {
   props: {
     /** Object representing the module at that location */
     module: {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      default: any; // todo why does Astro need this?
+      default: unknown; // todo why does Astro need this?
       frontmatter: PostFrontmatter;
     };
   };
