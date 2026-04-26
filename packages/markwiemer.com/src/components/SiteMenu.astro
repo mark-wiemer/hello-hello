@@ -52,6 +52,7 @@ import NavEntry from "@/components/NavEntry.astro";
   <button id="themeToggle" class="toggle" aria-live="polite">Error</button>
   <script is:inline data-notes="handle theme toggle">
     (() => {
+      // todo dedupe the toggle logic
       const themeToggle = document.querySelector("#themeToggle");
       const themes = ["system", "light", "dark"];
       const labels = { system: "System", light: "Light", dark: "Dark" };
