@@ -3,6 +3,10 @@ function getRawBlogPostPaths() {
   return Object.entries(glob);
 }
 
+/**
+ * Astro-compatible interface for `getStaticPaths`
+ * https://github.com/mark-wiemer/hello-hello/issues/122
+ */
 interface BlogPost {
   // This must be named `params` to work with Astro's dynamic routing
   params: {
@@ -14,7 +18,7 @@ interface BlogPost {
   props: {
     /** Object representing the module at that location */
     module: {
-      default: unknown; // todo why does Astro need this?
+      default: unknown;
       frontmatter: PostFrontmatter;
     };
   };
@@ -46,7 +50,6 @@ export function getAllBlogPosts(): BlogPost[] {
     /** e.g. 'months-without-music' */
     const slug = filename.split("-").slice(3).join("-");
 
-    // todo learn more about types here
     return { params: { slug }, props: { module: module as BlogPost["props"]["module"] } };
   });
 

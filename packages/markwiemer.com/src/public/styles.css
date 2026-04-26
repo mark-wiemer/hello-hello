@@ -124,14 +124,10 @@
 
   &[aria-expanded="true"] {
     width: var(--nav-open-width);
-    /* todo border disappears before transition is done */
     border-right: 1px solid var(--text-primary);
   }
 }
 
-/* button */
-/* todo remove rounded border on right side while expanded */
-/* this would mirror the existing appearance on the left while collapsed */
 #toggleMenu {
   width: var(--width-button-nav);
   border: 1px solid var(--text-primary);
