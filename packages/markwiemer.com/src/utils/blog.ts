@@ -73,10 +73,11 @@ function toTimestamp(f: DateParts): number {
 }
 
 /**
+ * Does not handle edge cases around Daylight Saving Time
  * @returns
- * - Negative if `a` should precede `b` when sorted
+ * - Negative if `a` should precede `b` when sorted (`a` is older)
  * - Zero if `a` and `b` represent the same time
- * - Positive if `a` should come after `b` when sorted
+ * - Positive if `a` should come after `b` when sorted (`b` is older)
  */
 export function sortBlogPostsOldestFirst(a: DateParts, b: DateParts): number {
   return toTimestamp(a) - toTimestamp(b);
