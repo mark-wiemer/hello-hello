@@ -81,9 +81,8 @@
 }
 
 ::selection {
-  /* todo make a:hover border go away when ::selection is applied */
-  color: var(--text-primary);
-  background-color: var(--link-primary);
+  color: var(--body-bg);
+  background-color: var(--text-primary);
 }
 
 #siteMenu {
