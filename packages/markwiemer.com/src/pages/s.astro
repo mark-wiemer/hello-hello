@@ -1,8 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 
-// todo these are currently manually copied into astro.config.mjs
-// todo add tests
 const links: [string, string][] = [
   ["about", "/blog/who-am-i"],
   ["luanti", "/software/luanti"],
@@ -25,7 +23,6 @@ const links: [string, string][] = [
       <th>Short link (<code>s/___</code>)</th><th>Full slug</th>
     </thead>
     {
-      // todo add copy button
       links.map((linkRow) => (
         <tr>
           <td>

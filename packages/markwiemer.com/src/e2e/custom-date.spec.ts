@@ -157,6 +157,3 @@ test.describe("Datetimes toggle", () => {
     }
   });
 });
-
-// todo test for unexpected visual space between date and subsequent element
-// that space reappears if we place the `script` element after the `time` element

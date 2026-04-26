@@ -3,8 +3,6 @@ import NavEntry from "@/components/NavEntry.astro";
 ---
 
 {/* prettier-ignore */}
-<!-- todo research **details** of making this inert -->
-<!-- can people still easily access this nav? -->
 <button id="toggleMenu" aria-label="Menu">☰</button>
 <div id="siteMenu" aria-expanded="false" inert>
   <nav>
@@ -25,7 +23,6 @@ import NavEntry from "@/components/NavEntry.astro";
       <NavEntry href="https://mochajs.org" text="Mocha" />
       <!-- invisible char U+00a0 is non-breaking space -->
       <!-- https://en.wikipedia.org/wiki/Non-breaking_space -->
-      <!-- todo find way to use `&nbsp;` in source without IDE replacing it -->
       <NavEntry
         href="https://github.com/mark-wiemer/hello-hello/tree/main/packages/markwiemer.com"
         text="Website source"
@@ -52,7 +49,6 @@ import NavEntry from "@/components/NavEntry.astro";
   <button id="themeToggle" class="toggle" aria-live="polite">Error</button>
   <script is:inline data-notes="handle theme toggle">
     (() => {
-      // todo dedupe the toggle logic
       const themeToggle = document.querySelector("#themeToggle");
       const themes = ["system", "light", "dark"];
       const labels = { system: "System", light: "Light", dark: "Dark" };

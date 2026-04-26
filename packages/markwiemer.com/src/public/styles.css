@@ -24,7 +24,6 @@
   /* should also be close to 150px of course */
   /* 165px is my favorite candidate */
   /* fails at 1.75, 2, and 4, but passes all others */
-  /* todo improve nav component alignment (border, button) */
   --nav-open-width: 165px;
   --nav-open-time: 0.2s;
   --padding-table: 10px;
@@ -36,7 +35,7 @@
 
   /** reference values */
   /* not currently used directly due to technical issues */
-  /* todo find better CSS system */
+  /* https://github.com/mark-wiemer/hello-hello/issues/118 */
   /* [320, 480] px */
   --breakpoint-very-thin: 480px;
   /* (480, 640] px */
