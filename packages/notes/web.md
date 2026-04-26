@@ -72,6 +72,25 @@ Shorthand rules apply in the order of `top, right, bottom, left` or, `top-bottom
 
 <!-- todo below this line is not necessarily a continuation of the track above -->
 
+## Misc
+
 ### [CSS grid layout](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Grids)
 
 [`fr` is short for fraction](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/flex_value) and is a CSS data type only used in grids.
+
+### [TypeScript template literal types](https://www.typescriptlang.org/docs/handbook/2/template-literal-types.html)
+
+```ts
+type AllLocaleIDs = `${EmailLocaleIDs | FooterLocaleIDs}_id`;
+type Lang = "en" | "ja" | "pt";
+
+type LocaleMessageIDs = `${Lang}_${AllLocaleIDs}`;
+```
+
+Note that `number` can be any number of digits, and `type Digit = '0' | '1' | ... | '9'` often results in unions too complex for TS to evaluate. My approach has been an in-between:
+
+```ts
+// Approximation of an ISO date format
+// Technically also accepts "0-9999-102394" but it's a start!
+type DateStr = `${number}-${number}-${number}`;
+```

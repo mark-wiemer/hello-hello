@@ -21,11 +21,7 @@ interface BlogPost {
   };
 }
 
-interface PostFrontmatter {
-  /** Original posted ISO date (not time), e.g. `2026-04-12` */
-  postDate: string;
-  /** Original posted local time (not date), e.g. `20:02 PDT` or `09:32 PST`. Only PDT or PST are used. */
-  postTime: string | undefined;
+type PostFrontmatter = DateParts & {
   /** Main heading for the article */
   postTitle: string;
   /** ISO date (not time) */
@@ -39,7 +35,7 @@ interface PostFrontmatter {
    * Only valid post types are article and notes.
    */
   postType?: "notes";
-}
+};
 
 /** Returns all blog posts in no particular order */
 export function getAllBlogPosts(): BlogPost[] {
@@ -58,20 +54,30 @@ export function getAllBlogPosts(): BlogPost[] {
   return paths;
 }
 
-// per JS sort standards:
-// negative if first arg should precede second arg when sorted
-// zero if equal
-// positive if first arg should come after second arg when sorted
-export function sortBlogPostsOldestFirst(a: PostFrontmatter, b: PostFrontmatter): number {
-  return toTimestamp(a) - toTimestamp(b);
-}
+//* Date logic
+type DateParts = {
+  // TS cannot easily represent exact types here (union too complex)
+  /** Original posted ISO date (not time), e.g. `2026-04-12` */
+  postDate: `${number}-${number}-${number}`;
+  /** Original posted local time (not date), e.g. `20:02 PDT` or `09:32 PST`. Only PDT or PST are used. */
+  postTime?: `${number}:${number} P${"D" | "S"}T`;
+};
 
-// todo ugh working with dates is not fun
-function toDateString(f: PostFrontmatter): string {
+function toDateString(f: DateParts): string {
   if (!f.postTime) return f.postDate;
   return `${f.postDate} ${f.postTime.slice(0, `00:00`.length)}`;
 }
 
-function toTimestamp(f: PostFrontmatter): number {
+function toTimestamp(f: DateParts): number {
   return Date.parse(toDateString(f));
+}
+
+/**
+ * @returns
+ * - Negative if `a` should precede `b` when sorted
+ * - Zero if `a` and `b` represent the same time
+ * - Positive if `a` should come after `b` when sorted
+ */
+export function sortBlogPostsOldestFirst(a: DateParts, b: DateParts): number {
+  return toTimestamp(a) - toTimestamp(b);
 }
