@@ -19,7 +19,6 @@ let posts: PostListItem[] = getAllBlogPosts()
     return { ...props.module?.frontmatter, slug: params.slug, listed };
   })
   .filter((post) => post.postDate && post.slug && post.listed)
-  // todo enforce sort order
   .sort(sortBlogPostsOldestFirst)
   .reverse()
   .filter(filter ?? (() => true))
