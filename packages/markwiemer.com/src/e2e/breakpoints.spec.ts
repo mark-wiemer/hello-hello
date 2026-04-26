@@ -1,10 +1,7 @@
 import { test, expect, type Page } from "@playwright/test";
 
 /** Returns the number of columns in a CSS grid element */
-async function getColumnCount(
-  page: import("@playwright/test").Page,
-  selector: string,
-): Promise<number> {
+async function getColumnCount(page: Page, selector: string): Promise<number> {
   return await page.evaluate((sel) => {
     const el = document.querySelector(sel);
     if (!el) return 0;
