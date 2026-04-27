@@ -26,7 +26,7 @@ let posts: PostListItem[] = getAllBlogPosts()
 ---
 
 <!-- prettier-ignore -->
-<ul>
+<ul aria-label="Blog posts">
   {
     posts.map((post) => (
       <li>
