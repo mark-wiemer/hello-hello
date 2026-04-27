@@ -7,7 +7,7 @@ import NavEntry from "@/components/NavEntry.astro";
 <div id="siteMenu" aria-expanded="false" inert>
   <nav>
     <h2>Here</h2>
-    <ul>
+    <ul aria-label="Sitemap">
       <NavEntry href="/" text="Home" />
       <NavEntry href="/blog/who-am-i" text="About" />
       <NavEntry href="/blog" text="Blog" />
@@ -18,7 +18,7 @@ import NavEntry from "@/components/NavEntry.astro";
       <NavEntry href="/software" text="Software" />
     </ul>
     <h2>Elsewhere</h2>
-    <ul>
+    <ul aria-label="External links">
       <NavEntry href="https://ahkpp.com" text="AHK++" />
       <NavEntry href="https://mochajs.org" text="Mocha" />
       <!-- invisible char U+00a0 is non-breaking space -->
