@@ -44,12 +44,18 @@ because I use GitHub Pages, which only supports one site per repo.
 
 ## Glossary
 
+Quick reference for terms on this page:
+
 - **boxel**: Cubic voxel. Think of games like Minecraft, but not like Astroneer or A Game About Digging a Hole. (I made up this term for this context and haven't seen it in broad use, so I almost always wrap it in quotes: "boxel")
 - **DevOps**: Developer operations. Includes security. DevSecOps is a mess of a term, let's stick with DevOps.
 - **UGC**: User-generated content. An umbrella term for mods, texture packs, shaders, etc.
-- **voxel**: Volumetric pixel. Generally refers to a type of game where players can permanently modify the terrain.
+- **voxel**: Volume element. Generally refers to a game where players can permanently modify the terrain (Minecraft, Astroneer).
+
+[Full glossary](https://markwiemer.com/glossary)
 
 ## Setting up pnpm
+
+Note: I'm going to [move to Deno or Bun](https://github.com/mark-wiemer/hello-hello/issues/72)!
 
 This repo is organized as a `pnpm` workspace to filter out some of the noise.
 You can treat the root `package.json` as my minimal recommendations for any JS package.
