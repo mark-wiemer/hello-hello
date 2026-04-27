@@ -9,13 +9,13 @@ because I use GitHub Pages, which only supports one site per repo.
 
 ## Index
 
-- [AHK++](./packages/ahkpp/readme.md): IDE extension for AHK v1 and v2 language support
+- [AHK++ (ahkpp)](./packages/ahkpp/readme.md): IDE extension for AHK v1 and v2 language support. Includes [ahkpp.com](https://ahkpp.com)
 - [Aspire](./packages/aspire/readme.md): Orchestration toolkit for distributed applications
 - [Astro](./packages/astro/readme.md): Web framework for content-driven websites
 - [Azure](./packages/azure/readme.md): Cloud computing platform
 - [Bash](./packages/bash/readme.md): Cross-platform shell
 - [.NET (dotnet)](./packages/dotnet/readme.md): Open-source framework for any software
-  - [Roslyn](./packages/dotnet/roslyn/README.md): The .NET compiler platform
+  - [Roslyn](./packages/dotnet/roslyn/README.md): The .NET compiler platform, where [I work full-time](https://github.com/mwiemer-microsoft)
 - [Git](./packages/git/readme.md): Version control system, includes notes on Git LFS
 - [GitHub](./packages/github/readme.md): DevOps platform
   - [Codespaces](./packages/github/codespaces/readme.md)
@@ -31,15 +31,15 @@ because I use GitHub Pages, which only supports one site per repo.
 - [mod.io](./packages/mod.io/readme.md): Site for hosting UGC
 - [Modrinth](./packages/modrinth/readme.md): App for managing Minecraft versions and UGC
 - [New machine](./packages/new-machine/readme.md): Setup steps for any new machine
-- [Notes](./packages/notes/readme.md): Miscellaneous notes: Blog, Bun, Deno, JDial, security, style, web.
-- [pnpm](./packages/pnpm/readme.md): Node package manager, alternative to npm
+- [Notes](./packages/notes/readme.md): Miscellaneous notes: Blog, Bun, Deno, JDial, security, style, web, etc.
+- [pnpm](./packages/pnpm/readme.md): JavaScript package manager, alternative to npm
 - [Podman](./packages/podman/readme.md): Open-source containerization platform, like Docker
-- [POSIX](./packages/posix/readme.md): Set of cross-OS standards by IEEE
+- [POSIX](./packages/posix/readme.md): Set of cross-OS standards by IEEE, includes Shell language and utilities
 - [Product recommendations](./packages/product/readme.md): Recommendations for products I maintain
 - [React](./packages/react/readme.md): Library for creating complex interactive websites
 - [Rust](./packages/rust/readme.md): Programming language emphasizing safety and performance
 - [TypeScript](./packages/typescript/readme.md): Programming language that adds types to JavaScript
-- [Unified](./packages/unified/readme.md): Software collective for content processing
+- [Unified](./packages/unified/readme.md): Software collective for content processing, includes MDX
 - [Visual Studio Code](./packages/vscode/readme.md): Mostly open-source IDE, includes sample extension
 
 ## Glossary
