@@ -1,14 +1,20 @@
 {
   "type": "module",
+  "//": {
+    "": "this is just for notes, not used anywhere",
+    "dependencies": {
+      "mocha-main": "file:../mocha",
+      "mocha-release": "11.7.5"
+    }
+  },
   "scripts": {
-    "test:debug": "npx cross-env DEBUG=* npm test",
+    "test:debug": "npx cross-env DEBUG=mocha:cli:mocha npm test",
     "test": "cross-env NODE_ENV=test mocha"
   },
   "dependencies": {
-    "mocha": "11.7.5"
+    "mocha": "file:../mocha"
   },
   "devDependencies": {
-    "chai": "^6.2.2",
     "cross-env": "^10.1.0"
   }
 }

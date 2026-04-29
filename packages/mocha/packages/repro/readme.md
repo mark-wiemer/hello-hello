@@ -2,276 +2,6 @@
 
 [Bug: .mocharc.js / .mocharc.mjs / ESM export default configs don't seem to work](https://github.com/mochajs/mocha/issues/5812)
 
-My setup: current Mocha main, Node 22.21.1, Linux Mint 22.1 Cinnamon
-
-Two errors reported: `.mocharc.js` and `.mocharc.mjs`. I cannot repro either issue.
-
-## 11.7.5 (partial repro)
-
-`.mocharc.js`: Cannot repro
-
-```log
-$ pnpm run test:debug
-
-> @ test:debug /home/markw/my-stuff/hello-hello/packages/mocha/packages/repro
-> npx cross-env DEBUG=* npm test
-
-
-> test
-> cross-env NODE_ENV=test mocha
-
-  mocha:esm-utils assigning requireOrImport, require_module === true +0ms
-  mocha:cli:config findConfig: found config file /home/markw/my-stuff/hello-hello/packages/mocha/packages/repro/.mocharc.js +0ms
-  mocha:cli:config loadConfig: trying to parse config at /home/markw/my-stuff/hello-hello/packages/mocha/packages/repro/.mocharc.js +0ms
-  mocha:cli:config parsers: load cwd-relative path: "/home/markw/my-stuff/hello-hello/packages/mocha/packages/repro/.mocharc.js" +0ms
-mocha config
-  mocha:cli:options no config found in /home/markw/my-stuff/hello-hello/packages/mocha/packages/repro/package.json +0ms
-  mocha:cli:mocha loaded opts {
-  _: [],
-  config: false,
-  package: false,
-  __esModule: true,
-  default: {
-    extension: [ 'ts', 'tsx' ],
-    'node-option': [ 'import=tsx' ],
-    recursive: true,
-    reporter: 'spec',
-    require: [ './test/setup.ts' ],
-    spec: [ 'src/**/*.test.ts' ],
-    timeout: 5000,
-    'watch-files': [ 'src/**/*.ts', 'test/**/*.ts' ]
-  },
-  diff: true,
-  extension: [ 'js', 'cjs', 'mjs' ],
-  reporter: 'spec',
-  slow: 75,
-  timeout: 2000,
-  ui: 'bdd',
-  'watch-ignore': [ 'node_modules', '.git' ]
-} +0ms
-  mocha:cli:mocha running Mocha in-process +1ms
-  mocha:cli:cli entered main with raw args [] +0ms
-  mocha:plugin-loader registered plugin def "mochaHooks" +0ms
-  mocha:plugin-loader registered plugin def "mochaGlobalSetup" +0ms
-  mocha:plugin-loader registered plugin def "mochaGlobalTeardown" +0ms
-  mocha:plugin-loader registered 3 plugin defs (0 ignored) +0ms
-  mocha:plugin-loader finalized plugins: [Object: null prototype] {} +0ms
-  mocha:cli:run post-yargs config {
-  package: [Getter/Setter],
-  _: [],
-  config: false,
-  __esModule: true,
-  default: {
-    extension: [ 'ts', 'tsx' ],
-    'node-option': [ 'import=tsx' ],
-    recursive: true,
-    reporter: 'spec',
-    require: [ './test/setup.ts' ],
-    spec: [ 'src/**/*.test.ts' ],
-    timeout: 5000,
-    'watch-files': [ 'src/**/*.ts', 'test/**/*.ts' ]
-  },
-  diff: true,
-  extension: [ 'js', 'cjs', 'mjs' ],
-  reporter: 'spec',
-  slow: 75,
-  timeout: 2000,
-  ui: 'bdd',
-  'watch-ignore': [ 'node_modules', '.git' ],
-  watchIgnore: [ 'node_modules', '.git' ],
-  'pass-on-failing-test-suite': false,
-  passOnFailingTestSuite: false,
-  spec: [ 'test' ],
-  '$0': 'mocha'
-} +0ms
-  mocha:suite slow 75 +0ms
-  mocha:suite timeout 2000 +0ms
-  mocha:mocha configured 0 global setup functions +0ms
-  mocha:mocha configured 0 global teardown functions +0ms
-  mocha:cli:lookup-files looking for files using glob pattern: test+(.js|.cjs|.mjs) +0ms
-  mocha:cli:run:helpers test files (in order):  [] +0ms
-Error: No test files found: "test"
- ELIFECYCLE  Command failed with exit code 1.
-```
-
-`.mocharc.mjs`: Does repro
-
-```log
-$ pnpm run test:debug
-
-> @ test:debug /home/markw/my-stuff/hello-hello/packages/mocha/packages/repro
-> npx cross-env DEBUG=* npm test
-
-
-> test
-> cross-env NODE_ENV=test mocha
-
-  mocha:esm-utils assigning requireOrImport, require_module === true +0ms
-  mocha:cli:options no config found in /home/markw/my-stuff/hello-hello/packages/mocha/packages/repro/package.json +0ms
-  mocha:cli:mocha loaded opts {
-  _: [],
-  config: false,
-  package: false,
-  diff: true,
-  extension: [ 'js', 'cjs', 'mjs' ],
-  reporter: 'spec',
-  slow: 75,
-  timeout: 2000,
-  ui: 'bdd',
-  'watch-ignore': [ 'node_modules', '.git' ]
-} +0ms
-  mocha:cli:mocha running Mocha in-process +0ms
-  mocha:cli:cli entered main with raw args [] +0ms
-  mocha:plugin-loader registered plugin def "mochaHooks" +0ms
-  mocha:plugin-loader registered plugin def "mochaGlobalSetup" +0ms
-  mocha:plugin-loader registered plugin def "mochaGlobalTeardown" +0ms
-  mocha:plugin-loader registered 3 plugin defs (0 ignored) +0ms
-  mocha:plugin-loader finalized plugins: [Object: null prototype] {} +0ms
-  mocha:cli:run post-yargs config {
-  package: [Getter/Setter],
-  _: [],
-  config: false,
-  diff: true,
-  extension: [ 'js', 'cjs', 'mjs' ],
-  reporter: 'spec',
-  slow: 75,
-  timeout: 2000,
-  ui: 'bdd',
-  'watch-ignore': [ 'node_modules', '.git' ],
-  watchIgnore: [ 'node_modules', '.git' ],
-  'pass-on-failing-test-suite': false,
-  passOnFailingTestSuite: false,
-  spec: [ 'test' ],
-  '$0': 'mocha'
-} +0ms
-  mocha:suite slow 75 +0ms
-  mocha:suite timeout 2000 +0ms
-  mocha:mocha configured 0 global setup functions +0ms
-  mocha:mocha configured 0 global teardown functions +0ms
-  mocha:cli:lookup-files looking for files using glob pattern: test+(.js|.cjs|.mjs) +0ms
-  mocha:cli:run:helpers test files (in order):  [] +0ms
-Error: No test files found: "test"
- ELIFECYCLE  Command failed with exit code 1.
-```
-
-## Main (b0a89ce5, cannot repro)
-
-`.mocharc.js`:
-
-```log
-$ pnpm run test:debug
-
-> @ test:debug /home/markw/my-stuff/hello-hello/packages/mocha/packages/repro
-> npx cross-env DEBUG=* npm test
-
-
-> test
-> cross-env NODE_ENV=test mocha
-
-  mocha:esm-utils assigning requireOrImport, require_module === true +0ms
-  mocha:cli:config findConfig: found config file /home/markw/my-stuff/hello-hello/packages/mocha/packages/repro/.mocharc.js +0ms
-  mocha:cli:config loadConfig: trying to parse config at /home/markw/my-stuff/hello-hello/packages/mocha/packages/repro/.mocharc.js +0ms
-  mocha:cli:config parsers: load cwd-relative path: "/home/markw/my-stuff/hello-hello/packages/mocha/packages/repro/.mocharc.js" +0ms
-mocha config
-  mocha:cli:options no config found in /home/markw/my-stuff/hello-hello/packages/mocha/packages/repro/package.json +0ms
-  mocha:cli:mocha loaded opts {
-  _: [ 'src/**/*.test.ts' ],
-  config: false,
-  package: false,
-  extension: [ 'ts', 'tsx' ],
-  'node-option': [ 'import=tsx' ],
-  recursive: true,
-  reporter: 'spec',
-  require: [ './test/setup.ts' ],
-  timeout: 5000,
-  'watch-files': [ 'src/**/*.ts', 'test/**/*.ts' ],
-  diff: true,
-  slow: 75,
-  ui: 'bdd',
-  'watch-ignore': [ 'node_modules', '.git' ]
-} +0ms
-  mocha:cli:mocha final node argv [ '--import=tsx' ] +0ms
-  mocha:cli:mocha forking child process via command: /home/markw/.local/share/fnm/node-versions/v22.21.1/installation/bin/node --import=tsx /home/markw/my-stuff/hello-hello/packages/mocha/packages/mocha/lib/cli/cli.js src/**/*.test.ts --no-config --no-package --extension ts --extension tsx --recursive --reporter spec --require ./test/setup.ts --timeout 5000 --watch-files src/**/*.ts --watch-files test/**/*.ts --diff --slow 75 --ui bdd --watch-ignore node_modules --watch-ignore .git +1ms
-node:internal/modules/package_json_reader:314
-  throw new ERR_MODULE_NOT_FOUND(packageName, fileURLToPath(base), null);
-        ^
-
-Error [ERR_MODULE_NOT_FOUND]: Cannot find package 'tsx' imported from /home/markw/my-stuff/hello-hello/packages/mocha/packages/repro/
-    at Object.getPackageJSONURL (node:internal/modules/package_json_reader:314:9)
-    at packageResolve (node:internal/modules/esm/resolve:767:81)
-    at moduleResolve (node:internal/modules/esm/resolve:853:18)
-    at defaultResolve (node:internal/modules/esm/resolve:983:11)
-    at #cachedDefaultResolve (node:internal/modules/esm/loader:731:20)
-    at ModuleLoader.resolve (node:internal/modules/esm/loader:708:38)
-    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:310:38)
-    at onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:664:36)
-    at TracingChannel.tracePromise (node:diagnostics_channel:350:14)
-    at ModuleLoader.import (node:internal/modules/esm/loader:663:21) {
-  code: 'ERR_MODULE_NOT_FOUND'
-}
-
-Node.js v22.21.1
- ELIFECYCLE  Command failed with exit code 1.
-```
-
-`.mocharc.mjs`:
-
-```log
-$ pnpm run test:debug
-
-> @ test:debug /home/markw/my-stuff/hello-hello/packages/mocha/packages/repro
-> npx cross-env DEBUG=* npm test
-
-
-> test
-> cross-env NODE_ENV=test mocha
-
-  mocha:esm-utils assigning requireOrImport, require_module === true +0ms
-  mocha:cli:config findConfig: found config file /home/markw/my-stuff/hello-hello/packages/mocha/packages/repro/.mocharc.mjs +0ms
-  mocha:cli:config loadConfig: trying to parse config at /home/markw/my-stuff/hello-hello/packages/mocha/packages/repro/.mocharc.mjs +0ms
-  mocha:cli:config parsers: load cwd-relative path: "/home/markw/my-stuff/hello-hello/packages/mocha/packages/repro/.mocharc.mjs" +0ms
-mocha config
-  mocha:cli:options no config found in /home/markw/my-stuff/hello-hello/packages/mocha/packages/repro/package.json +0ms
-  mocha:cli:mocha loaded opts {
-  _: [ 'src/**/*.test.ts' ],
-  config: false,
-  package: false,
-  extension: [ 'ts', 'tsx' ],
-  'node-option': [ 'import=tsx' ],
-  recursive: true,
-  reporter: 'spec',
-  require: [ './test/setup.ts' ],
-  timeout: 5000,
-  'watch-files': [ 'src/**/*.ts', 'test/**/*.ts' ],
-  diff: true,
-  slow: 75,
-  ui: 'bdd',
-  'watch-ignore': [ 'node_modules', '.git' ]
-} +0ms
-  mocha:cli:mocha final node argv [ '--import=tsx' ] +1ms
-  mocha:cli:mocha forking child process via command: /home/markw/.local/share/fnm/node-versions/v22.21.1/installation/bin/node --import=tsx /home/markw/my-stuff/hello-hello/packages/mocha/packages/mocha/lib/cli/cli.js src/**/*.test.ts --no-config --no-package --extension ts --extension tsx --recursive --reporter spec --require ./test/setup.ts --timeout 5000 --watch-files src/**/*.ts --watch-files test/**/*.ts --diff --slow 75 --ui bdd --watch-ignore node_modules --watch-ignore .git +0ms
-node:internal/modules/package_json_reader:314
-  throw new ERR_MODULE_NOT_FOUND(packageName, fileURLToPath(base), null);
-        ^
-
-Error [ERR_MODULE_NOT_FOUND]: Cannot find package 'tsx' imported from /home/markw/my-stuff/hello-hello/packages/mocha/packages/repro/
-    at Object.getPackageJSONURL (node:internal/modules/package_json_reader:314:9)
-    at packageResolve (node:internal/modules/esm/resolve:767:81)
-    at moduleResolve (node:internal/modules/esm/resolve:853:18)
-    at defaultResolve (node:internal/modules/esm/resolve:983:11)
-    at #cachedDefaultResolve (node:internal/modules/esm/loader:731:20)
-    at ModuleLoader.resolve (node:internal/modules/esm/loader:708:38)
-    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:310:38)
-    at onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:664:36)
-    at TracingChannel.tracePromise (node:diagnostics_channel:350:14)
-    at ModuleLoader.import (node:internal/modules/esm/loader:663:21) {
-  code: 'ERR_MODULE_NOT_FOUND'
-}
-
-Node.js v22.21.1
- ELIFECYCLE  Command failed with exit code 1.
-```
-
 ## Description
 
 ### Expected
@@ -318,3 +48,174 @@ version 11.7.5
 ### Additional Info
 
 _No response_
+
+## Setup
+
+Node 22.21.1, Linux Mint 22.1 Cinnamon
+
+`package.json` has two variants, Mocha main and Mocha release:
+
+```json
+{
+  "type": "module",
+  "//": {
+    "": "this is just for notes, not used anywhere",
+    "dependencies": {
+      "mocha-main": "file:../mocha",
+      "mocha-release": "11.7.5"
+    }
+  },
+  "scripts": {
+    "test:debug": "npx cross-env DEBUG=mocha:cli:mocha npm test",
+    "test": "cross-env NODE_ENV=test mocha"
+  },
+  "dependencies": {
+    "mocha": "11.7.5"
+  },
+  "devDependencies": {
+    "cross-env": "^10.1.0"
+  }
+}
+```
+
+```js
+// .mocharc.js or .mocharc.mjs
+export default {
+  spec: ["src/**/*.test.ts"],
+};
+```
+
+```ts
+// src/sample.test.ts
+console.log("Hello from sample.test.ts");
+```
+
+## Mocha 11.7.5 (does repro)
+
+`.mocharc.mjs`: New values not logged anywhere
+
+```log
+$ npm run test:debug
+
+> test:debug
+> npx cross-env DEBUG=mocha:cli:mocha npm test
+
+
+> test
+> cross-env NODE_ENV=test mocha
+
+  mocha:cli:mocha loaded opts {
+  _: [],
+  config: false,
+  package: false,
+  diff: true,
+  extension: [ 'js', 'cjs', 'mjs' ],
+  reporter: 'spec',
+  slow: 75,
+  timeout: 2000,
+  ui: 'bdd',
+  'watch-ignore': [ 'node_modules', '.git' ]
+} +0ms
+  mocha:cli:mocha running Mocha in-process +1ms
+Error: No test files found: "test"
+```
+
+`.mocharc.js`: Does repro (values not included at all)
+
+```log
+$ npm run test:debug
+
+> test:debug
+> npx cross-env DEBUG=mocha:cli:mocha npm test
+
+
+> test
+> cross-env NODE_ENV=test mocha
+
+  mocha:cli:mocha loaded opts {
+  _: [],
+  config: false,
+  package: false,
+  __esModule: true,
+  default: { spec: [ 'src/**/*.test.ts' ] },
+  diff: true,
+  extension: [ 'js', 'cjs', 'mjs' ],
+  reporter: 'spec',
+  slow: 75,
+  timeout: 2000,
+  ui: 'bdd',
+  'watch-ignore': [ 'node_modules', '.git' ]
+} +0ms
+  mocha:cli:mocha running Mocha in-process +0ms
+Error: No test files found: "test"
+```
+
+## Mocha main branch (1b3d6042, 2026-04-27, does not repro)
+
+`.mocharc.mjs`: Does not repro
+
+```log
+$ npm run test:debug
+
+> test:debug
+> npx cross-env DEBUG=mocha:cli:mocha npm test
+
+
+> test
+> cross-env NODE_ENV=test mocha
+
+  mocha:cli:mocha loaded opts {
+  _: [ 'src/**/*.test.ts' ],
+  config: false,
+  package: false,
+  diff: true,
+  extension: [ 'js', 'cjs', 'mjs' ],
+  reporter: 'spec',
+  slow: 75,
+  timeout: 2000,
+  ui: 'bdd',
+  'watch-ignore': [ 'node_modules', '.git' ]
+} +0ms
+  mocha:cli:mocha running Mocha in-process +1ms
+Hello from sample.test.ts
+
+
+  0 passing (0ms)
+
+```
+
+`.mocharc.js`: Does not repro
+
+```log
+$ npm run test:debug
+
+> test:debug
+> npx cross-env DEBUG=mocha:cli:mocha npm test
+
+
+> test
+> cross-env NODE_ENV=test mocha
+
+  mocha:cli:mocha loaded opts {
+  _: [ 'src/**/*.test.ts' ],
+  config: false,
+  package: false,
+  diff: true,
+  extension: [ 'js', 'cjs', 'mjs' ],
+  reporter: 'spec',
+  slow: 75,
+  timeout: 2000,
+  ui: 'bdd',
+  'watch-ignore': [ 'node_modules', '.git' ]
+} +0ms
+  mocha:cli:mocha running Mocha in-process +1ms
+Hello from sample.test.ts
+
+
+  0 passing (1ms)
+
+```
+
+## Conclusion
+
+Fixed in an unreleased commit after 11.7.5, will be fixed in 12.0.0 and is already fixed in a beta release.
