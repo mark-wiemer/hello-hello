@@ -648,6 +648,7 @@
     "https://raw.githubusercontent.com/microsoft/vscode/": true,
     "https://schemastore.azurewebsites.net/": true,
     "https://unpkg.com/knip%406/schema-jsonc.json": true,
+    "https://unpkg.com/knip%406/schema.json": true,
     "https://www.schemastore.org/": true
   },
   "chat.editing.confirmEditRequestRemoval": false
