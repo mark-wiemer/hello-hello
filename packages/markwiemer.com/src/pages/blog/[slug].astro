@@ -11,7 +11,7 @@ export const getStaticPaths = getAllBlogPosts;
 
 const { module } = Astro.props;
 let { default: Content, frontmatter } = module;
-const { postTitle, postDate, postTime, lastUpdated, postType } = frontmatter;
+const { title, postDate, postTime, lastUpdated, postType } = frontmatter;
 
 const notesDisclaimer =
   postType === "notes"
@@ -19,8 +19,8 @@ const notesDisclaimer =
     : "";
 ---
 
-<Layout pageTitle={postTitle}>
-  <h1>{postTitle}</h1>
+<Layout pageTitle={title}>
+  <h1>{title}</h1>
   <p>
     <CustomDate date={postDate} />{postTime ? `, ${postTime}.` : "."}
     {

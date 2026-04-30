@@ -26,7 +26,7 @@ interface BlogPost {
 
 type PostFrontmatter = DateParts & {
   /** Main heading for the article */
-  postTitle: string;
+  title: string;
   /** ISO date (not time) */
   lastUpdated?: string;
   /** Whether to list the post in the index and home page */

@@ -30,7 +30,7 @@ let posts: PostListItem[] = getAllBlogPosts()
   {
     posts.map((post) => (
       <li>
-        <CustomDate date={post.postDate} />{post.postType === "notes" ? " (notes): " : ": "}<a href={`/blog/${post.slug}`}>{post.postTitle}</a>
+        <CustomDate date={post.postDate} />{post.postType === "notes" ? " (notes): " : ": "}<a href={`/blog/${post.slug}`}>{post.title}</a>
         {post.lastUpdated ? (
           <>
             {" "}
