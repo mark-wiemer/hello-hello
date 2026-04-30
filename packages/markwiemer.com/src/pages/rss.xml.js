@@ -2,6 +2,8 @@
 
 import rss, { pagesGlobToRssItems } from "@astrojs/rss";
 
+// todo this links to /blog/content/yyyy-mm-dd-post-title.mdx
+// we want /blog/post-title
 export async function GET(context) {
   return rss({
     title: "Mark Wiemer's blog",
