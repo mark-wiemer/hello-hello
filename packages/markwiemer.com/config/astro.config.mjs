@@ -11,7 +11,7 @@ export default defineConfig({
   integrations: [mdx()],
   publicDir: "./src/public",
   // never change these; these are user-facing links
-  // don't add more `/___` entries, use `/s/___` from now on
+  // don't add more `/___` keys, use `/s/___` from now on
   redirects: {
     "/about": "/blog/who-am-i",
     "/ahkpp": "https://ahkpp.com",
@@ -21,6 +21,7 @@ export default defineConfig({
     "/s/mocha": "/software/mocha",
     "/s/mocha12": "/software/mocha/v12",
   },
+  site: "https://markwiemer.com",
   vite: {
     plugins: [
       {
