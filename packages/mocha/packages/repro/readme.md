@@ -57,7 +57,7 @@ Ensure `package.json` has the published version of Mocha referenced as a depende
 + "mocha": "11.7.5"
 ```
 
-Replace `11.7.5` with the version ID you're installing, if needed, e.g. `12.0.0-beta-9.2`.
+Replace `11.7.5` with the version ID you're installing, if needed, e.g. `12.0.0-beta-9.2`. Scoped forks of Mocha, e.g. `@mark-wiemer/mocha`, will fail here (see `5899.2` below)
 
 Then run:
 
@@ -288,18 +288,40 @@ Hello from test
 my-reporter loaded successfully from CWD node_modules
 ```
 
-### issue-5899-12.0.0-beta-9.4-unreleased from registry (6fb0419, not yet tested)
+### @mark-wiemer/mocha 12.0.0-beta-9.4.issue-5899.2 from registry (fails, "cannot find module)
+
+This is using the package named `@mark-wiemer/mocha`, not the official `mocha` package.
 
 Windows:
 
 ```log
-$ npm run cli
+$ git rm ../mocha --ignore-unmatch
+rm -rf ../mocha
+rm package-lock.json
+rm -rf node_modules
+npm install
+npm run cli
+
+error: the following file has local modifications:
+    packages/mocha/packages/mocha
+(use --cached to keep the file, or -f to force removal)
+
+> postinstall
+> node install-custom-reporter.js
+
+
+added 60 packages, and audited 61 packages in 2s
+
+17 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
 
 > cli
 > npx cross-env DEBUG=mocha:cli* mocha --no-package
 
   mocha:cli:config findConfig: found config file C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\repro\.mocharc.json +0ms
-  mocha:cli:config loadConfig: trying to parse config at C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\repro\.mocharc.json +1ms
+  mocha:cli:config loadConfig: trying to parse config at C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\repro\.mocharc.json +0ms
   mocha:cli:mocha loaded opts {
   _: [],
   package: false,
@@ -312,42 +334,15 @@ $ npm run cli
   ui: 'bdd',
   'watch-ignore': [ 'node_modules', '.git' ]
 } +0ms
-  mocha:cli:mocha running Mocha in-process +1ms
+  mocha:cli:mocha running Mocha in-process +0ms
   mocha:cli:cli entered main with raw args [] +0ms
-  mocha:cli:cli module.paths before modification: [
-  'C:\\Users\\markw\\my-stuff\\hello-hello\\packages\\mocha\\packages\\mocha\\lib\\cli\\node_modules',
-  'C:\\Users\\markw\\my-stuff\\hello-hello\\packages\\mocha\\packages\\mocha\\lib\\node_modules',
-  'C:\\Users\\markw\\my-stuff\\hello-hello\\packages\\mocha\\packages\\mocha\\node_modules',
-  'C:\\Users\\markw\\my-stuff\\hello-hello\\packages\\mocha\\packages\\node_modules',
-  'C:\\Users\\markw\\my-stuff\\hello-hello\\packages\\mocha\\node_modules',
-  'C:\\Users\\markw\\my-stuff\\hello-hello\\packages\\node_modules',
-  'C:\\Users\\markw\\my-stuff\\hello-hello\\node_modules',
-  'C:\\Users\\markw\\my-stuff\\node_modules',
-  'C:\\Users\\markw\\node_modules',
-  'C:\\Users\\node_modules',
-  'C:\\node_modules'
-] +1ms
-  mocha:cli:cli module.paths after modification: [
-  'C:\\Users\\markw\\my-stuff\\hello-hello\\packages\\mocha\\packages\\mocha\\lib\\cli\\node_modules',
-  'C:\\Users\\markw\\my-stuff\\hello-hello\\packages\\mocha\\packages\\mocha\\lib\\node_modules',
-  'C:\\Users\\markw\\my-stuff\\hello-hello\\packages\\mocha\\packages\\mocha\\node_modules',
-  'C:\\Users\\markw\\my-stuff\\hello-hello\\packages\\mocha\\packages\\node_modules',
-  'C:\\Users\\markw\\my-stuff\\hello-hello\\packages\\mocha\\node_modules',
-  'C:\\Users\\markw\\my-stuff\\hello-hello\\packages\\node_modules',
-  'C:\\Users\\markw\\my-stuff\\hello-hello\\node_modules',
-  'C:\\Users\\markw\\my-stuff\\node_modules',
-  'C:\\Users\\markw\\node_modules',
-  'C:\\Users\\node_modules',
-  'C:\\node_modules',
-  'C:\\Users\\markw\\my-stuff\\hello-hello\\packages\\mocha\\packages\\repro',
-  'C:\\Users\\markw\\my-stuff\\hello-hello\\packages\\mocha\\packages\\repro\\node_modules'
-] +0ms
 
 ✖ ERROR: TypeError: Could not load reporter "my-reporter":
 
- Error: Cannot find module 'C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\repro\my-reporter'
+ Error: Cannot find module 'mocha'
 Require stack:
-- C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\mocha\lib\cli\run-helpers.js
+- C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\repro\node_modules\my-reporter\index.js
+- C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\repro\node_modules\@mark-wiemer\mocha\lib\cli\run-helpers.js
     at Function._resolveFilename (node:internal/modules/cjs/loader:1383:15)
     at defaultResolveImpl (node:internal/modules/cjs/loader:1025:19)
     at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1030:22)
@@ -356,18 +351,28 @@ Require stack:
     at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
     at Module.require (node:internal/modules/cjs/loader:1463:12)
     at require (node:internal/modules/helpers:147:16)
-    at exports.validateLegacyPlugin (C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\mocha\lib\cli\run-helpers.js:294:25)
-    at C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\mocha\lib\cli\run.js:356:9 {
+    at Object.<anonymous> (C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\repro\node_modules\my-reporter\index.js:4:15)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Module.require (node:internal/modules/cjs/loader:1463:12)
+    at require (node:internal/modules/helpers:147:16)
+    at exports.validateLegacyPlugin (C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\repro\node_modules\@mark-wiemer\mocha\lib\cli\run-helpers.js:288:23)
+    at C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\repro\node_modules\@mark-wiemer\mocha\lib\cli\run.js:356:9 {
   code: 'MODULE_NOT_FOUND',
   requireStack: [
-    'C:\\Users\\markw\\my-stuff\\hello-hello\\packages\\mocha\\packages\\mocha\\lib\\cli\\run-helpers.js'
+    'C:\\Users\\markw\\my-stuff\\hello-hello\\packages\\mocha\\packages\\repro\\node_modules\\my-reporter\\index.js',
+    'C:\\Users\\markw\\my-stuff\\hello-hello\\packages\\mocha\\packages\\repro\\node_modules\\@mark-wiemer\\mocha\\lib\\cli\\run-helpers.js'
   ]
 }
-    at createInvalidReporterError (file:///C:/Users/markw/my-stuff/hello-hello/packages/mocha/packages/mocha/lib/errors.mjs:48:13)
-    at createInvalidLegacyPluginError (file:///C:/Users/markw/my-stuff/hello-hello/packages/mocha/packages/mocha/lib/errors.mjs:182:14)
-    at createUnknownError (C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\mocha\lib\cli\run-helpers.js:277:5)
-    at exports.validateLegacyPlugin (C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\mocha\lib\cli\run-helpers.js:296:15)
-    at C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\mocha\lib\cli\run.js:356:9 {
+    at createInvalidReporterError (file:///C:/Users/markw/my-stuff/hello-hello/packages/mocha/packages/repro/node_modules/@mark-wiemer/mocha/lib/errors.mjs:48:13)
+    at createInvalidLegacyPluginError (file:///C:/Users/markw/my-stuff/hello-hello/packages/mocha/packages/repro/node_modules/@mark-wiemer/mocha/lib/errors.mjs:182:14)
+    at createUnknownError (C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\repro\node_modules\@mark-wiemer\mocha\lib\cli\run-helpers.js:277:5)
+    at exports.validateLegacyPlugin (C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\repro\node_modules\@mark-wiemer\mocha\lib\cli\run-helpers.js:290:26)
+    at C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\repro\node_modules\@mark-wiemer\mocha\lib\cli\run.js:356:9 {
   code: 'ERR_MOCHA_INVALID_REPORTER',
   reporter: 'my-reporter'
 }
