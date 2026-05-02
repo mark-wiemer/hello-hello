@@ -4,7 +4,7 @@
 
 ## Repro
 
-Investigation ongoing due to issues with `package-lock.json` resolution. Repro cases are using a registry installation unless otherwise specified.
+Investigation ongoing due to inability to find a reliable failing case. Repro cases are using a registry installation unless otherwise specified.
 
 If any `log` code blocks have an isolated timestamp near the top or at the end, that's from my custom shell config, not Mocha. I'm trying to manually remove them but may forget!
 
@@ -573,6 +573,88 @@ $ npm run cli
 } +0ms
   mocha:cli:mocha running Mocha in-process +1ms
   mocha:cli:cli entered main with raw args [] +0ms
+  mocha:cli:run post-yargs config {
+  package: [Getter/Setter],
+  _: [],
+  config: false,
+  reporter: 'my-reporter',
+  diff: true,
+  extension: [ 'js', 'cjs', 'mjs' ],
+  slow: 75,
+  timeout: 2000,
+  ui: 'bdd',
+  'watch-ignore': [ 'node_modules', '.git' ],
+  watchIgnore: [ 'node_modules', '.git' ],
+  'pass-on-failing-test-suite': false,
+  passOnFailingTestSuite: false,
+  'forbid-only': false,
+  forbidOnly: false,
+  spec: [ 'test' ],
+  '$0': 'mocha'
+} +0ms
+  mocha:cli:lookup-files looking for files using glob pattern: test+(.js|.cjs|.mjs) +0ms
+  mocha:cli:run:helpers test files (in order):  [
+  'C:\\Users\\markw\\my-stuff\\hello-hello\\packages\\mocha\\packages\\repro\\test.js'
+] +0ms
+  mocha:cli:run:helpers single run with 1 file(s) +0ms
+Hello from test
+my-reporter loaded successfully from CWD node_modules
+```
+
+### 12.0.0-alpha-issue-5899.4 (back to CJS, no module.paths manipulation, works as intended)
+
+Well this is awkward.
+
+```logs
+$ rm package-lock.json
+rm -rf node_modules
+npm install
+npm run cli
+
+> postinstall
+> node install-custom-reporter.js
+
+
+added 61 packages, and audited 62 packages in 2s
+
+17 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+> cli
+> npx cross-env DEBUG=mocha:cli* mocha --no-package
+
+  mocha:cli:config findConfig: found config file C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\repro\.mocharc.json +0ms
+  mocha:cli:config loadConfig: trying to parse config at C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\repro\.mocharc.json +0ms
+  mocha:cli:mocha loaded opts {
+  _: [],
+  package: false,
+  config: false,
+  reporter: 'my-reporter',
+  diff: true,
+  extension: [ 'js', 'cjs', 'mjs' ],
+  slow: 75,
+  timeout: 2000,
+  ui: 'bdd',
+  'watch-ignore': [ 'node_modules', '.git' ]
+} +0ms
+  mocha:cli:mocha running Mocha in-process +1ms
+  mocha:cli:cli entered main with raw args [] +0ms
+  mocha:cli:cli module.paths before modification [
+  'C:\\Users\\markw\\my-stuff\\hello-hello\\packages\\mocha\\packages\\repro\\node_modules\\mocha\\lib\\cli\\node_modules',
+  'C:\\Users\\markw\\my-stuff\\hello-hello\\packages\\mocha\\packages\\repro\\node_modules\\mocha\\lib\\node_modules',
+  'C:\\Users\\markw\\my-stuff\\hello-hello\\packages\\mocha\\packages\\repro\\node_modules\\mocha\\node_modules',
+  'C:\\Users\\markw\\my-stuff\\hello-hello\\packages\\mocha\\packages\\repro\\node_modules',
+  'C:\\Users\\markw\\my-stuff\\hello-hello\\packages\\mocha\\packages\\node_modules',
+  'C:\\Users\\markw\\my-stuff\\hello-hello\\packages\\mocha\\node_modules',
+  'C:\\Users\\markw\\my-stuff\\hello-hello\\packages\\node_modules',
+  'C:\\Users\\markw\\my-stuff\\hello-hello\\node_modules',
+  'C:\\Users\\markw\\my-stuff\\node_modules',
+  'C:\\Users\\markw\\node_modules',
+  'C:\\Users\\node_modules',
+  'C:\\node_modules'
+] +0ms
   mocha:cli:run post-yargs config {
   package: [Getter/Setter],
   _: [],
