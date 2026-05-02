@@ -848,7 +848,96 @@ Require stack:
 
 ### 12.0.0-alpha-issue-5899.2 global (debug logs)
 
-todo
+```log
+$ npm i -g mocha@12.0.0-alpha-issue-5899.2
+2026-05-02 14:11:01
+
+added 5 packages, removed 24 packages, and changed 47 packages in 812ms
+2026-05-02 14:11:02
+[last: 1s]
+~/my-stuff/hello-hello/packages/mocha/packages/repro (main)
+$ npm run cli
+2026-05-02 14:11:07
+
+> cli
+> npx cross-env DEBUG=mocha:cli* mocha --no-package
+
+  mocha:cli:config findConfig: found config file C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\repro\.mocharc.json +0ms
+  mocha:cli:config loadConfig: trying to parse config at C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\repro\.mocharc.json +1ms
+  mocha:cli:mocha loaded opts {
+  _: [],
+  package: false,
+  config: false,
+  reporter: 'my-reporter',
+  diff: true,
+  extension: [ 'js', 'cjs', 'mjs' ],
+  slow: 75,
+  timeout: 2000,
+  ui: 'bdd',
+  'watch-ignore': [ 'node_modules', '.git' ]
+} +0ms
+  mocha:cli:mocha running Mocha in-process +0ms
+  mocha:cli:cli entered main with raw args [] +0ms
+  mocha:cli:cli module.paths before modification [
+  'C:\\Users\\markw\\AppData\\Roaming\\fnm\\node-versions\\v22.21.1\\installation\\node_modules\\mocha\\lib\\cli\\node_modules',
+  'C:\\Users\\markw\\AppData\\Roaming\\fnm\\node-versions\\v22.21.1\\installation\\node_modules\\mocha\\lib\\node_modules',
+  'C:\\Users\\markw\\AppData\\Roaming\\fnm\\node-versions\\v22.21.1\\installation\\node_modules\\mocha\\node_modules',
+  'C:\\Users\\markw\\AppData\\Roaming\\fnm\\node-versions\\v22.21.1\\installation\\node_modules',
+  'C:\\Users\\markw\\AppData\\Roaming\\fnm\\node-versions\\v22.21.1\\node_modules',
+  'C:\\Users\\markw\\AppData\\Roaming\\fnm\\node-versions\\node_modules',
+  'C:\\Users\\markw\\AppData\\Roaming\\fnm\\node_modules',
+  'C:\\Users\\markw\\AppData\\Roaming\\node_modules',
+  'C:\\Users\\markw\\AppData\\node_modules',
+  'C:\\Users\\markw\\node_modules',
+  'C:\\Users\\node_modules',
+  'C:\\node_modules'
+] +0ms
+  mocha:cli:cli module.paths after modification [
+  'C:\\Users\\markw\\AppData\\Roaming\\fnm\\node-versions\\v22.21.1\\installation\\node_modules\\mocha\\lib\\cli\\node_modules',
+  'C:\\Users\\markw\\AppData\\Roaming\\fnm\\node-versions\\v22.21.1\\installation\\node_modules\\mocha\\lib\\node_modules',
+  'C:\\Users\\markw\\AppData\\Roaming\\fnm\\node-versions\\v22.21.1\\installation\\node_modules\\mocha\\node_modules',
+  'C:\\Users\\markw\\AppData\\Roaming\\fnm\\node-versions\\v22.21.1\\installation\\node_modules',
+  'C:\\Users\\markw\\AppData\\Roaming\\fnm\\node-versions\\v22.21.1\\node_modules',
+  'C:\\Users\\markw\\AppData\\Roaming\\fnm\\node-versions\\node_modules',
+  'C:\\Users\\markw\\AppData\\Roaming\\fnm\\node_modules',
+  'C:\\Users\\markw\\AppData\\Roaming\\node_modules',
+  'C:\\Users\\markw\\AppData\\node_modules',
+  'C:\\Users\\markw\\node_modules',
+  'C:\\Users\\node_modules',
+  'C:\\node_modules',
+  'C:\\Users\\markw\\my-stuff\\hello-hello\\packages\\mocha\\packages\\repro',
+  'C:\\Users\\markw\\my-stuff\\hello-hello\\packages\\mocha\\packages\\repro\\node_modules'
+] +0ms
+
+✖ ERROR: TypeError: Could not load reporter "my-reporter":
+
+ Error: Cannot find module 'C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\repro\my-reporter'
+Require stack:
+- C:\Users\markw\AppData\Roaming\fnm\node-versions\v22.21.1\installation\node_modules\mocha\lib\cli\run-helpers.js
+    at Function._resolveFilename (node:internal/modules/cjs/loader:1383:15)
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1025:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1030:22)
+    at Function._load (node:internal/modules/cjs/loader:1192:37)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Module.require (node:internal/modules/cjs/loader:1463:12)
+    at require (node:internal/modules/helpers:147:16)
+    at exports.validateLegacyPlugin (C:\Users\markw\AppData\Roaming\fnm\node-versions\v22.21.1\installation\node_modules\mocha\lib\cli\run-helpers.js:294:25)
+    at C:\Users\markw\AppData\Roaming\fnm\node-versions\v22.21.1\installation\node_modules\mocha\lib\cli\run.js:356:9 {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    'C:\\Users\\markw\\AppData\\Roaming\\fnm\\node-versions\\v22.21.1\\installation\\node_modules\\mocha\\lib\\cli\\run-helpers.js'
+  ]
+}
+    at createInvalidReporterError (file:///C:/Users/markw/AppData/Roaming/fnm/node-versions/v22.21.1/installation/node_modules/mocha/lib/errors.mjs:48:13)
+    at createInvalidLegacyPluginError (file:///C:/Users/markw/AppData/Roaming/fnm/node-versions/v22.21.1/installation/node_modules/mocha/lib/errors.mjs:182:14)
+    at createUnknownError (C:\Users\markw\AppData\Roaming\fnm\node-versions\v22.21.1\installation\node_modules\mocha\lib\cli\run-helpers.js:277:5)
+    at exports.validateLegacyPlugin (C:\Users\markw\AppData\Roaming\fnm\node-versions\v22.21.1\installation\node_modules\mocha\lib\cli\run-helpers.js:296:15)
+    at C:\Users\markw\AppData\Roaming\fnm\node-versions\v22.21.1\installation\node_modules\mocha\lib\cli\run.js:356:9 {
+  code: 'ERR_MOCHA_INVALID_REPORTER',
+  reporter: 'my-reporter'
+}
+```
 
 ## Areas of concern
 
