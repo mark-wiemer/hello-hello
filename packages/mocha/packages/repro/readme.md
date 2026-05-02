@@ -4,7 +4,7 @@
 
 ## Repro
 
-I cannot yet reproduce this issue reliably. The "special require logic" documented in the "Areas of concern" section is not currently working as intended on any branch, but I promise it was working at one point! It seems like even when installing from registry, it's using the local files. I'm going to remove the Mocha submodule entirely for commits that rely on the registry.
+Investigation ongoing, some repro steps or results may be unreliable, likely due to issues with `package-lock.json` resolution.
 
 To reproduce this issue, I'm using my fork, `mark-wiemer/mocha`, and two branches:
 
@@ -14,6 +14,8 @@ To reproduce this issue, I'm using my fork, `mark-wiemer/mocha`, and two branche
 If any `log` code blocks have an isolated timestamp near the top or at the end, that's from my custom shell config, not Mocha. I'm trying to manually remove them but may forget!
 
 ### Repro steps
+
+I've documented this for Windows + Bash, but the steps should be very similar regardless of operating system or shell.
 
 #### Local
 
@@ -40,15 +42,9 @@ npm run cli
 
 #### Registry
 
-First, remove the Mocha submodule if it's installed. This may require closing your IDE and running the command in a separate shell:
+First, remove the Mocha submodule if it's installed. This may require closing your IDE and running the command in a separate shell. We'll also remove our stale `repro/package-lock.json` file and `repro/node_modules` folder at this point.
 
-```sh
-git rm ../mocha
-```
-
-<!-- todo delete submodule -->
-
-Custom repro steps, change `package.json`:
+Ensure `package.json` has the published version of Mocha referenced as a dependency:
 
 ```diff
 - "mocha": "file:../mocha"
@@ -58,16 +54,41 @@ Custom repro steps, change `package.json`:
 Then run:
 
 ```sh
+git rm ../mocha --ignore-unmatch
+rm package-lock.json
+rm -rf node_modules
 npm install
 npm run cli
 ```
 
-### 11.7.5 from registry (fails, "cannot find module")
+### 11.7.5 from registry (works as intended)
 
-Actual result on Windows:
+Actual result on Windows (running all Shell commands at once):
 
 ```log
-$ npm run cli
+$ git rm ../mocha --ignore-unmatch
+rm package-lock.json
+rm -rf node_modules
+npm install
+npm run cli
+
+npm warn deprecated glob@10.5.0: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+
+> postinstall
+> node install-custom-reporter.js
+
+
+added 94 packages, and audited 95 packages in 1s
+
+29 packages are looking for funding
+  run `npm fund` for details
+
+3 vulnerabilities (1 low, 2 high)
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
 
 > cli
 > npx cross-env DEBUG=mocha:cli* mocha --no-package
@@ -87,65 +108,6 @@ $ npm run cli
   'watch-ignore': [ 'node_modules', '.git' ]
 } +0ms
   mocha:cli:mocha running Mocha in-process +0ms
-  mocha:cli:cli entered main with raw args [] +0ms
-
-✖ ERROR: TypeError: Could not load reporter "my-reporter":
-
- Error: Cannot find module 'C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\repro\my-reporter'
-Require stack:
-- C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\mocha\lib\cli\run-helpers.js
-- C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\mocha\lib\cli\options.js
-- C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\mocha\bin\mocha.js
-    at Function._resolveFilename (node:internal/modules/cjs/loader:1383:15)
-    at defaultResolveImpl (node:internal/modules/cjs/loader:1025:19)
-    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1030:22)
-    at Function._load (node:internal/modules/cjs/loader:1192:37)
-    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
-    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
-    at Module.require (node:internal/modules/cjs/loader:1463:12)
-    at require (node:internal/modules/helpers:147:16)
-    at exports.validateLegacyPlugin (C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\mocha\lib\cli\run-helpers.js:292:25)
-    at C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\mocha\lib\cli\run.js:359:9 {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [
-    'C:\\Users\\markw\\my-stuff\\hello-hello\\packages\\mocha\\packages\\mocha\\lib\\cli\\run-helpers.js',
-    'C:\\Users\\markw\\my-stuff\\hello-hello\\packages\\mocha\\packages\\mocha\\lib\\cli\\options.js',
-    'C:\\Users\\markw\\my-stuff\\hello-hello\\packages\\mocha\\packages\\mocha\\bin\\mocha.js'
-  ]
-}
-    at createInvalidReporterError (C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\mocha\lib\errors.js:95:13)
-    at createInvalidLegacyPluginError (C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\mocha\lib\errors.js:229:14)
-    at createUnknownError (C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\mocha\lib\cli\run-helpers.js:275:5)
-    at exports.validateLegacyPlugin (C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\mocha\lib\cli\run-helpers.js:294:15)
-    at C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\mocha\lib\cli\run.js:359:9 {
-  code: 'ERR_MOCHA_INVALID_REPORTER',
-  reporter: 'my-reporter'
-}
-```
-
-Expected result on Windows is below. It's taken from an unsaved worktree, working to recover it!
-
-```log
-$ npm run cli
-
-> cli
-> npx cross-env DEBUG=mocha:cli* mocha --no-package
-
-  mocha:cli:config findConfig: found config file C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\repro\.mocharc.json +0ms
-  mocha:cli:config loadConfig: trying to parse config at C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\repro\.mocharc.json +1ms
-  mocha:cli:mocha loaded opts {
-  _: [],
-  package: false,
-  config: false,
-  reporter: 'my-reporter',
-  diff: true,
-  extension: [ 'js', 'cjs', 'mjs' ],
-  slow: 75,
-  timeout: 2000,
-  ui: 'bdd',
-  'watch-ignore': [ 'node_modules', '.git' ]
-} +0ms
-  mocha:cli:mocha running Mocha in-process +1ms
   mocha:cli:cli entered main with raw args [] +0ms
   mocha:cli:run post-yargs config {
   package: [Getter/Setter],
@@ -173,72 +135,11 @@ Hello from test
 my-reporter loaded successfully from CWD node_modules
 ```
 
-### 11.7.5 from local (v11.7.5, fails, "cannot find module")
+### 11.7.5 from local (v11.7.5, not yet tested)
 
-Windows:
+### issue-5899-11.7.5 from local (74435be5, not yet tested)
 
-```log
-$ npm run cli
-
-> cli
-> npx cross-env DEBUG=mocha:cli* mocha --no-package
-
-  mocha:cli:config findConfig: found config file C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\repro\.mocharc.json +0ms
-  mocha:cli:config loadConfig: trying to parse config at C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\repro\.mocharc.json +1ms
-  mocha:cli:mocha loaded opts {
-  _: [],
-  package: false,
-  config: false,
-  reporter: 'my-reporter',
-  diff: true,
-  extension: [ 'js', 'cjs', 'mjs' ],
-  slow: 75,
-  timeout: 2000,
-  ui: 'bdd',
-  'watch-ignore': [ 'node_modules', '.git' ]
-} +0ms
-  mocha:cli:mocha running Mocha in-process +0ms
-  mocha:cli:cli entered main with raw args [] +0ms
-
-✖ ERROR: TypeError: Could not load reporter "my-reporter":
-
- Error: Cannot find module 'C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\repro\my-reporter'
-Require stack:
-- C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\mocha\lib\cli\run-helpers.js
-- C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\mocha\lib\cli\options.js
-- C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\mocha\bin\mocha.js
-    at Function._resolveFilename (node:internal/modules/cjs/loader:1383:15)
-    at defaultResolveImpl (node:internal/modules/cjs/loader:1025:19)
-    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1030:22)
-    at Function._load (node:internal/modules/cjs/loader:1192:37)
-    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
-    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
-    at Module.require (node:internal/modules/cjs/loader:1463:12)
-    at require (node:internal/modules/helpers:147:16)
-    at exports.validateLegacyPlugin (C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\mocha\lib\cli\run-helpers.js:292:25)
-    at C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\mocha\lib\cli\run.js:359:9 {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [
-    'C:\\Users\\markw\\my-stuff\\hello-hello\\packages\\mocha\\packages\\mocha\\lib\\cli\\run-helpers.js',
-    'C:\\Users\\markw\\my-stuff\\hello-hello\\packages\\mocha\\packages\\mocha\\lib\\cli\\options.js',
-    'C:\\Users\\markw\\my-stuff\\hello-hello\\packages\\mocha\\packages\\mocha\\bin\\mocha.js'
-  ]
-}
-    at createInvalidReporterError (C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\mocha\lib\errors.js:95:13)
-    at createInvalidLegacyPluginError (C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\mocha\lib\errors.js:229:14)
-    at createUnknownError (C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\mocha\lib\cli\run-helpers.js:275:5)
-    at exports.validateLegacyPlugin (C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\mocha\lib\cli\run-helpers.js:294:15)
-    at C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\mocha\lib\cli\run.js:359:9 {
-  code: 'ERR_MOCHA_INVALID_REPORTER',
-  reporter: 'my-reporter'
-}
-```
-
-### issue-5899-11.7.5 from local (74435be5)
-
-asd
-
-### issue-5899-12.0.0-beta-9.4-unreleased from local (6fb0419, fails, "cannot find module")
+### issue-5899-12.0.0-beta-9.4-unreleased from local (6fb0419, not yet tested)
 
 Windows:
 
