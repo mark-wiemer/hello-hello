@@ -40,6 +40,12 @@ npm run cli
 
 #### Registry
 
+First, remove the Mocha submodule if it's installed. This may require closing your IDE and running the command in a separate shell:
+
+```sh
+git rm ../mocha
+```
+
 <!-- todo delete submodule -->
 
 Custom repro steps, change `package.json`:
