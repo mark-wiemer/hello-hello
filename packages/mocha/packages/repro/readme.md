@@ -6,11 +6,6 @@
 
 Investigation ongoing due to issues with `package-lock.json` resolution.
 
-To reproduce this issue, I'm using my fork, `mark-wiemer/mocha`, and two branches:
-
-- [`issue-5899-12.0.0-beta-9.4-unreleased`](https://github.com/mark-wiemer/mocha/tree/issue-5899-12.0.0-beta-9.4-unreleased): based on tip of `main` at the time of writing (2026-05-02)
-- [`issue-5899-11.7.5`](https://github.com/mark-wiemer/mocha/tree/issue-5899-12.0.0-11.7.5): based on 11.7.5 (tag `v11.7.5`), just adding logs
-
 If any `log` code blocks have an isolated timestamp near the top or at the end, that's from my custom shell config, not Mocha. I'm trying to manually remove them but may forget!
 
 ### Repro steps
