@@ -1,221 +1,97 @@
-# Mocha issue 5812
+# Mocha cli.js migration to ESM
 
-[Bug: .mocharc.js / .mocharc.mjs / ESM export default configs don't seem to work](https://github.com/mochajs/mocha/issues/5812)
+[Repo: Convert `cli.js` to ESM · Issue 5899 · mochajs/mocha](https://github.com/mochajs/mocha/issues/5899)
 
-## Description
+There were three areas of concern:
 
-### Expected
+1. Special `require` logic:
 
-Given the explanation in the configuring mocha guide, I would expect a config file named `.mocharc.js` or `.mocharc.mjs` with the following contents to work:
+   ```js
+   // ensure we can require() from current working directory
+   if (typeof module.paths !== "undefined") {
+     module.paths.push(cwd(), path.resolve("node_modules"));
+   }
+   ```
 
-<!-- no language ID here to preserve double-quote usage reported -->
+2. Allow direct execution:
 
-```
-console.log('mocha config');
+   ```js
+   // allow direct execution
+   if (require.main === module) {
+     exports.main();
+   }
+   ```
 
-export default {
-  "extension": ["ts", "tsx"],
-  "node-option": ["import=tsx"],
-  "recursive": true,
-  "reporter": "spec",
-  "require": ["./test/setup.ts"],
-  "spec": ["src/**/*.test.ts"],
-  "timeout": 5000,
-  "watch-files": ["src/**/*.ts", "test/**/*.ts"]
-}
-```
+3. `bin/_mocha` logic:
 
-in package:
+   ```js
+   /**
+    * This file remains for backwards compatibility only.
+    * Don't put stuff in this file.
+    * @see module:lib/cli
+    */
 
-```
-"type": "module",
-...
-"test": "cross-env NODE_ENV=test mocha",
-```
+   require("../lib/cli").main();
+   ```
 
-### Actual
+## Special `require` logic
 
-When I run `pnpm run test`, the .mjs file is completely ignored, and the .js file is read (console output happens), but the export default { ... } seems to be ignored. Converting this config back to .mocharc.json works as expected.
-
-### Minimal, Complete and Verifiable Example
-
-create a .mocharc.js config file with `export default { ... }` as the config interface and run the test suite. Config will be ignored.
-
-### Versions
-
-version 11.7.5
-
-### Additional Info
-
-_No response_
-
-## Setup
-
-Node 22.21.1, Linux Mint 22.1 Cinnamon
-
-`package.json` has two variants, Mocha main and Mocha release:
-
-```json
-{
-  "type": "module",
-  "//": {
-    "": "this is just for notes, not used anywhere",
-    "dependencies": {
-      "mocha-main": "file:../mocha",
-      "mocha-release": "11.7.5"
-    }
-  },
-  "scripts": {
-    "test:debug": "npx cross-env DEBUG=mocha:cli:mocha npm test",
-    "test": "cross-env NODE_ENV=test mocha"
-  },
-  "dependencies": {
-    "mocha": "11.7.5"
-  },
-  "devDependencies": {
-    "cross-env": "^10.1.0"
-  }
-}
-```
+CJS code:
 
 ```js
-// .mocharc.js or .mocharc.mjs
-export default {
-  spec: ["src/**/*.test.ts"],
-};
+// ensure we can require() from current working directory
+if (typeof module.paths !== "undefined") {
+  module.paths.push(cwd(), path.resolve("node_modules"));
+}
 ```
 
-```ts
-// src/sample.test.ts
-console.log("Hello from sample.test.ts");
+[Modules: CommonJS modules | Node.js v25.9.0 Documentation](https://nodejs.org/api/modules.html#modulepaths)
+
+- doesn't have much info! "The search paths for the module."
+
+[2026-05-02 07:20 PDT - AI chat "Module.paths support in ESM migration" (Claude Sonnet 4.6)](https://claude.ai/share/64c8a5eb-91d1-4545-907b-63c5cbeb565e)
+
+- working to verify AI claims...
+
+## Allow direct execution
+
+CJS code:
+
+```js
+// allow direct execution
+if (require.main === module) {
+  exports.main();
+}
 ```
 
-## Mocha 11.7.5 (does repro)
+This has been changed in an open PR ([feat: convert `lib/cli/cli.mjs` to ESM by hainenber · Pull Request 5909 · mochajs/mocha](https://github.com/mochajs/mocha/pull/5909)):
 
-`.mocharc.mjs`: New values not logged anywhere
-
-```log
-$ npm run test:debug
-
-> test:debug
-> npx cross-env DEBUG=mocha:cli:mocha npm test
-
-
-> test
-> cross-env NODE_ENV=test mocha
-
-  mocha:cli:mocha loaded opts {
-  _: [],
-  config: false,
-  package: false,
-  diff: true,
-  extension: [ 'js', 'cjs', 'mjs' ],
-  reporter: 'spec',
-  slow: 75,
-  timeout: 2000,
-  ui: 'bdd',
-  'watch-ignore': [ 'node_modules', '.git' ]
-} +0ms
-  mocha:cli:mocha running Mocha in-process +1ms
-Error: No test files found: "test"
+```js
+if (__filename === process.argv[1]) {
+  main();
+}
 ```
 
-`.mocharc.js`: Does repro (values not included at all)
+This is how I'd do it, my concerns are resolved :)
 
-```log
-$ npm run test:debug
+## `bin/_mocha` logic:
 
-> test:debug
-> npx cross-env DEBUG=mocha:cli:mocha npm test
+CJS code:
 
+```js
+/**
+ * This file remains for backwards compatibility only.
+ * Don't put stuff in this file.
+ * @see module:lib/cli
+ */
 
-> test
-> cross-env NODE_ENV=test mocha
-
-  mocha:cli:mocha loaded opts {
-  _: [],
-  config: false,
-  package: false,
-  __esModule: true,
-  default: { spec: [ 'src/**/*.test.ts' ] },
-  diff: true,
-  extension: [ 'js', 'cjs', 'mjs' ],
-  reporter: 'spec',
-  slow: 75,
-  timeout: 2000,
-  ui: 'bdd',
-  'watch-ignore': [ 'node_modules', '.git' ]
-} +0ms
-  mocha:cli:mocha running Mocha in-process +0ms
-Error: No test files found: "test"
+require("../lib/cli").main();
 ```
 
-## Mocha main branch (1b3d6042, 2026-04-27, does not repro)
+This doesn't need to change, `bin/_mocha` requires `lib/cli/index.js`, not the `lib/cli/cli.js` file. My concerns are resolved :)
 
-`.mocharc.mjs`: Does not repro
+## Followup work
 
-```log
-$ npm run test:debug
+Boxes are checked when work items are created or work is done :)
 
-> test:debug
-> npx cross-env DEBUG=mocha:cli:mocha npm test
-
-
-> test
-> cross-env NODE_ENV=test mocha
-
-  mocha:cli:mocha loaded opts {
-  _: [ 'src/**/*.test.ts' ],
-  config: false,
-  package: false,
-  diff: true,
-  extension: [ 'js', 'cjs', 'mjs' ],
-  reporter: 'spec',
-  slow: 75,
-  timeout: 2000,
-  ui: 'bdd',
-  'watch-ignore': [ 'node_modules', '.git' ]
-} +0ms
-  mocha:cli:mocha running Mocha in-process +1ms
-Hello from sample.test.ts
-
-
-  0 passing (0ms)
-
-```
-
-`.mocharc.js`: Does not repro
-
-```log
-$ npm run test:debug
-
-> test:debug
-> npx cross-env DEBUG=mocha:cli:mocha npm test
-
-
-> test
-> cross-env NODE_ENV=test mocha
-
-  mocha:cli:mocha loaded opts {
-  _: [ 'src/**/*.test.ts' ],
-  config: false,
-  package: false,
-  diff: true,
-  extension: [ 'js', 'cjs', 'mjs' ],
-  reporter: 'spec',
-  slow: 75,
-  timeout: 2000,
-  ui: 'bdd',
-  'watch-ignore': [ 'node_modules', '.git' ]
-} +0ms
-  mocha:cli:mocha running Mocha in-process +1ms
-Hello from sample.test.ts
-
-
-  0 passing (1ms)
-
-```
-
-## Conclusion
-
-Fixed in an unreleased commit after 11.7.5, will be fixed in 12.0.0 and is already fixed in a beta release.
+- [ ] Ensure there is test coverage for invoking via CLI and with custom require path
