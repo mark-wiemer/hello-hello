@@ -14,7 +14,7 @@
     "postinstall": "node install-custom-reporter.js"
   },
   "dependencies": {
-    "mocha": "12.0.0-alpha-issue-5899.1"
+    "mocha": "12.0.0-alpha-issue-5899.3"
   },
   "devDependencies": {
     "cross-env": "10.1.0",
