@@ -7,9 +7,6 @@
 [submodule "packages/github/pages"]
 	path = packages/github/pages
 	url = https://github.com/mark-wiemer/hello-github-pages
-[submodule "packages/mocha/packages/issue-5599"]
-	path = packages/mocha/packages/issue-5599
-	url = https://github.com/mark-wiemer/mocha-issue-5599
 [submodule "packages/modrinth/nml"]
 	path = packages/modrinth/nml
 	url = https://github.com/mark-wiemer/nerds-minecraft-launcher
