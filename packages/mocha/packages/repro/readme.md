@@ -72,6 +72,26 @@ npm run cli
 
 First, this removes the Mocha submodule if it's installed. This may require closing your IDE and running the command in a separate shell. This also removes the stale `repro/package-lock.json` file and `repro/node_modules` folder before re-installing to work around potential issues if `node_modules` still references the now-deleted files in `../mocha`
 
+#### Global
+
+Ensure `package.json` does not have Mocha referenced as a dependency, something like:
+
+```diff
+- "mocha": "11.7.5"
+```
+
+Globally install the version of Mocha to test:
+
+```sh
+npm i -g mocha@12.0.0-beta-9.3
+```
+
+Try to repro:
+
+```sh
+npm run cli
+```
+
 ### 11.7.5 (works as intended)
 
 Actual result on Windows (running all Shell commands at once):
@@ -146,7 +166,7 @@ Hello from test
 my-reporter loaded successfully from CWD node_modules
 ```
 
-### 11.7.5 from local (v11.7.5, fails, "cannot find ...repro\my-reporter")
+### 11.7.5 from local (v11.7.5, fails, "Cannot find ...repro\my-reporter")
 
 Actual result on Windows (running last few Shell commands at once):
 
@@ -683,6 +703,153 @@ Hello from test
 my-reporter loaded successfully from CWD node_modules
 ```
 
+### 11.7.5 global (fails, "Cannot find ...repro/my-reporter")
+
+```log
+$ npm i -g mocha@11.7.5
+2026-05-02 14:06:12
+npm warn deprecated glob@10.5.0: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+
+added 40 packages, and changed 52 packages in 1s
+2026-05-02 14:06:13
+[last: 1s]
+~/my-stuff/hello-hello/packages/mocha/packages/repro (main)
+$ npm run cli
+2026-05-02 14:06:15
+
+> cli
+> npx cross-env DEBUG=mocha:cli* mocha --no-package
+
+  mocha:cli:config findConfig: found config file C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\repro\.mocharc.json +0ms
+  mocha:cli:config loadConfig: trying to parse config at C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\repro\.mocharc.json +0ms
+  mocha:cli:mocha loaded opts {
+  _: [],
+  package: false,
+  config: false,
+  reporter: 'my-reporter',
+  diff: true,
+  extension: [ 'js', 'cjs', 'mjs' ],
+  slow: 75,
+  timeout: 2000,
+  ui: 'bdd',
+  'watch-ignore': [ 'node_modules', '.git' ]
+} +0ms
+  mocha:cli:mocha running Mocha in-process +1ms
+  mocha:cli:cli entered main with raw args [] +0ms
+
+✖ ERROR: TypeError: Could not load reporter "my-reporter":
+
+ Error: Cannot find module 'C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\repro\my-reporter'
+Require stack:
+- C:\Users\markw\AppData\Roaming\fnm\node-versions\v22.21.1\installation\node_modules\mocha\lib\cli\run-helpers.js
+- C:\Users\markw\AppData\Roaming\fnm\node-versions\v22.21.1\installation\node_modules\mocha\lib\cli\options.js
+- C:\Users\markw\AppData\Roaming\fnm\node-versions\v22.21.1\installation\node_modules\mocha\bin\mocha.js
+    at Function._resolveFilename (node:internal/modules/cjs/loader:1383:15)
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1025:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1030:22)
+    at Function._load (node:internal/modules/cjs/loader:1192:37)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Module.require (node:internal/modules/cjs/loader:1463:12)
+    at require (node:internal/modules/helpers:147:16)
+    at exports.validateLegacyPlugin (C:\Users\markw\AppData\Roaming\fnm\node-versions\v22.21.1\installation\node_modules\mocha\lib\cli\run-helpers.js:292:25)
+    at C:\Users\markw\AppData\Roaming\fnm\node-versions\v22.21.1\installation\node_modules\mocha\lib\cli\run.js:359:9 {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    'C:\\Users\\markw\\AppData\\Roaming\\fnm\\node-versions\\v22.21.1\\installation\\node_modules\\mocha\\lib\\cli\\run-helpers.js',
+    'C:\\Users\\markw\\AppData\\Roaming\\fnm\\node-versions\\v22.21.1\\installation\\node_modules\\mocha\\lib\\cli\\options.js',
+    'C:\\Users\\markw\\AppData\\Roaming\\fnm\\node-versions\\v22.21.1\\installation\\node_modules\\mocha\\bin\\mocha.js'
+  ]
+}
+    at createInvalidReporterError (C:\Users\markw\AppData\Roaming\fnm\node-versions\v22.21.1\installation\node_modules\mocha\lib\errors.js:95:13)
+    at createInvalidLegacyPluginError (C:\Users\markw\AppData\Roaming\fnm\node-versions\v22.21.1\installation\node_modules\mocha\lib\errors.js:229:14)
+    at createUnknownError (C:\Users\markw\AppData\Roaming\fnm\node-versions\v22.21.1\installation\node_modules\mocha\lib\cli\run-helpers.js:275:5)
+    at exports.validateLegacyPlugin (C:\Users\markw\AppData\Roaming\fnm\node-versions\v22.21.1\installation\node_modules\mocha\lib\cli\run-helpers.js:294:15)
+    at C:\Users\markw\AppData\Roaming\fnm\node-versions\v22.21.1\installation\node_modules\mocha\lib\cli\run.js:359:9 {
+  code: 'ERR_MOCHA_INVALID_REPORTER',
+  reporter: 'my-reporter'
+}
+```
+
+### 12.0.0-beta-9.3 global (fails, "Cannot find ...repro/my-reporter")
+
+```log
+$ npm i -g mocha@^12.0.0-
+2026-05-02 14:03:35
+
+added 52 packages in 2s
+2026-05-02 14:03:37
+[last: 2s]
+~/my-stuff/hello-hello/packages/mocha/packages/repro (main)
+$ npx mocha --verison
+2026-05-02 14:04:52
+
+2026-05-02 14:04:53
+[last: 1s]
+~/my-stuff/hello-hello/packages/mocha/packages/repro (main)
+$ npx mocha --version
+2026-05-02 14:04:55
+12.0.0-beta-9.3
+2026-05-02 14:04:56
+[last: 1s]
+~/my-stuff/hello-hello/packages/mocha/packages/repro (main)
+$ npm run cli
+2026-05-02 14:06:01
+
+> cli
+> npx cross-env DEBUG=mocha:cli* mocha --no-package
+
+  mocha:cli:config findConfig: found config file C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\repro\.mocharc.json +0ms
+  mocha:cli:config loadConfig: trying to parse config at C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\repro\.mocharc.json +1ms
+  mocha:cli:mocha loaded opts {
+  _: [],
+  package: false,
+  config: false,
+  reporter: 'my-reporter',
+  diff: true,
+  extension: [ 'js', 'cjs', 'mjs' ],
+  slow: 75,
+  timeout: 2000,
+  ui: 'bdd',
+  'watch-ignore': [ 'node_modules', '.git' ]
+} +0ms
+  mocha:cli:mocha running Mocha in-process +1ms
+  mocha:cli:cli entered main with raw args [] +0ms
+
+✖ ERROR: TypeError: Could not load reporter "my-reporter":
+
+ Error: Cannot find module 'C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\repro\my-reporter'
+Require stack:
+- C:\Users\markw\AppData\Roaming\fnm\node-versions\v22.21.1\installation\node_modules\mocha\lib\cli\run-helpers.js
+    at Function._resolveFilename (node:internal/modules/cjs/loader:1383:15)
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1025:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1030:22)
+    at Function._load (node:internal/modules/cjs/loader:1192:37)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Module.require (node:internal/modules/cjs/loader:1463:12)
+    at require (node:internal/modules/helpers:147:16)
+    at exports.validateLegacyPlugin (C:\Users\markw\AppData\Roaming\fnm\node-versions\v22.21.1\installation\node_modules\mocha\lib\cli\run-helpers.js:294:25)
+    at C:\Users\markw\AppData\Roaming\fnm\node-versions\v22.21.1\installation\node_modules\mocha\lib\cli\run.js:356:9 {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    'C:\\Users\\markw\\AppData\\Roaming\\fnm\\node-versions\\v22.21.1\\installation\\node_modules\\mocha\\lib\\cli\\run-helpers.js'
+  ]
+}
+    at createInvalidReporterError (C:\Users\markw\AppData\Roaming\fnm\node-versions\v22.21.1\installation\node_modules\mocha\lib\errors.js:96:13)
+    at createInvalidLegacyPluginError (C:\Users\markw\AppData\Roaming\fnm\node-versions\v22.21.1\installation\node_modules\mocha\lib\errors.js:230:14)
+    at createUnknownError (C:\Users\markw\AppData\Roaming\fnm\node-versions\v22.21.1\installation\node_modules\mocha\lib\cli\run-helpers.js:277:5)
+    at exports.validateLegacyPlugin (C:\Users\markw\AppData\Roaming\fnm\node-versions\v22.21.1\installation\node_modules\mocha\lib\cli\run-helpers.js:296:15)
+    at C:\Users\markw\AppData\Roaming\fnm\node-versions\v22.21.1\installation\node_modules\mocha\lib\cli\run.js:356:9 {
+  code: 'ERR_MOCHA_INVALID_REPORTER',
+  reporter: 'my-reporter'
+}
+```
+
+### 12.0.0-alpha-issue-5899.2 global (debug logs)
+
+todo
+
 ## Areas of concern
 
 There were three areas of concern:
@@ -778,3 +945,7 @@ This doesn't need to change, `bin/_mocha` requires `lib/cli/index.js`, not the `
 Boxes are checked when work items are created or work is done :)
 
 - [ ] Ensure there is test coverage for invoking via CLI and with custom require path
+
+```
+
+```
