@@ -55,12 +55,14 @@ This ensures the Mocha repo is present on the local machine,
 
 #### Registry
 
-Ensure `package.json` has the published version of Mocha referenced as a dependency:
+Ensure `package.json` has the published version of Mocha referenced as a dependency, something like:
 
 ```diff
 - "mocha": "file:../mocha"
 + "mocha": "11.7.5"
 ```
+
+Replace `11.7.5` with the version ID you're installing, if needed, e.g. `12.0.0-beta-9.2`.
 
 Then run:
 
@@ -73,7 +75,7 @@ npm install
 npm run cli
 ```
 
-First, this remove the Mocha submodule if it's installed. This may require closing your IDE and running the command in a separate shell. This also removes the stale `repro/package-lock.json` file and `repro/node_modules` folder before re-installing to work around potential issues if `node_modules` still references the now-deleted files in `../mocha`
+First, this removes the Mocha submodule if it's installed. This may require closing your IDE and running the command in a separate shell. This also removes the stale `repro/package-lock.json` file and `repro/node_modules` folder before re-installing to work around potential issues if `node_modules` still references the now-deleted files in `../mocha`
 
 ### 11.7.5 from registry (works as intended)
 
@@ -221,7 +223,75 @@ Require stack:
 }
 ```
 
-### issue-5899-11.7.5 from registry (74435be5, not yet tested)
+### 12.0.0-beta-9.2 from registry (works as intended)
+
+```log
+$ git rm ../mocha --ignore-unmatch
+rm -rf ../mocha
+rm package-lock.json
+rm -rf node_modules
+npm install
+npm run cli
+
+rm 'packages/mocha/packages/mocha'
+
+> postinstall
+> node install-custom-reporter.js
+
+
+added 61 packages, and audited 62 packages in 2s
+
+18 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+> cli
+> npx cross-env DEBUG=mocha:cli* mocha --no-package
+
+  mocha:cli:config findConfig: found config file C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\repro\.mocharc.json +0ms
+  mocha:cli:config loadConfig: trying to parse config at C:\Users\markw\my-stuff\hello-hello\packages\mocha\packages\repro\.mocharc.json +1ms
+  mocha:cli:mocha loaded opts {
+  _: [],
+  package: false,
+  config: false,
+  reporter: 'my-reporter',
+  diff: true,
+  extension: [ 'js', 'cjs', 'mjs' ],
+  slow: 75,
+  timeout: 2000,
+  ui: 'bdd',
+  'watch-ignore': [ 'node_modules', '.git' ]
+} +0ms
+  mocha:cli:mocha running Mocha in-process +0ms
+  mocha:cli:cli entered main with raw args [] +0ms
+  mocha:cli:run post-yargs config {
+  package: [Getter/Setter],
+  _: [],
+  config: false,
+  reporter: 'my-reporter',
+  diff: true,
+  extension: [ 'js', 'cjs', 'mjs' ],
+  slow: 75,
+  timeout: 2000,
+  ui: 'bdd',
+  'watch-ignore': [ 'node_modules', '.git' ],
+  watchIgnore: [ 'node_modules', '.git' ],
+  'pass-on-failing-test-suite': false,
+  passOnFailingTestSuite: false,
+  'forbid-only': false,
+  forbidOnly: false,
+  spec: [ 'test' ],
+  '$0': 'mocha'
+} +0ms
+  mocha:cli:lookup-files looking for files using glob pattern: test+(.js|.cjs|.mjs) +0ms
+  mocha:cli:run:helpers test files (in order):  [
+  'C:\\Users\\markw\\my-stuff\\hello-hello\\packages\\mocha\\packages\\repro\\test.js'
+] +0ms
+  mocha:cli:run:helpers single run with 1 file(s) +0ms
+Hello from test
+my-reporter loaded successfully from CWD node_modules
+```
 
 ### issue-5899-12.0.0-beta-9.4-unreleased from registry (6fb0419, not yet tested)
 
