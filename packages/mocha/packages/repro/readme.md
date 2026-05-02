@@ -15,6 +15,10 @@ If any `log` code blocks have an isolated timestamp near the top or at the end, 
 
 ### Repro steps
 
+#### Local
+
+<!-- todo add submodule -->
+
 In `package.json`, ensure we're using the local version:
 
 ```diff
@@ -34,7 +38,9 @@ npm install
 npm run cli
 ```
 
-### 11.7.5 from registry (fails, "cannot find module")
+#### Registry
+
+<!-- todo delete submodule -->
 
 Custom repro steps, change `package.json`:
 
@@ -49,6 +55,8 @@ Then run:
 npm install
 npm run cli
 ```
+
+### 11.7.5 from registry (fails, "cannot find module")
 
 Actual result on Windows:
 
