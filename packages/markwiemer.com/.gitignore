@@ -26,3 +26,6 @@ pnpm-debug.log*
 # Playwright test artifacts
 playwright-report/
 test-results/
+
+# Krita (in-progress files end with `~` (tilde))
+*~
