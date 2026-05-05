@@ -17,13 +17,25 @@ The cute dog is Wynonna, my Australian shepherd 🥰
 
 ## What I'm doing
 
-### Mapping software!
+### Resting
 
-Check out [my page on software](/software) for everything I know about digital stuff! I started it in March 2026, so forgive me if my entire cortex isn't laid out in detail yet ;) I also started a [glossary](/glossary) that will grow to include every term I find interesting!
+If you know me, you know I've been going through significant health issues since March 2026. Fortunately, in the grand scheme of things, that wasn't that long ago, so here's hoping I'm back in action soon enough! More details:
 
-### Writing!
+export const healthFilter = (post) => {
+  // Runs at build time, but better than nothing :)
+  const includedPostTitles = [
+    "Pericarditis and spoons",
+    "The Bus Concussion of 2026",
+    "Penultimate health update (on the restful road)",
+  ];
+  return includedPostTitles.includes(post.postTitle);
+};
 
-Recent posts:
+<BlogPostList filter={healthFilter} />
+
+### Writing
+
+Although recent blog posts have been around my personal life, I also write about AI, mental health, and politics.
 
 export const recentFilter = (post) => {
   // Runs at build time, but better than nothing :)
@@ -42,7 +54,7 @@ export const recentFilter = (post) => {
 - Maintaining [Mocha](/software/mocha)
 - Building little browser [games](/games/index.html)
 - Contributing to [Luanti](/software/luanti)
-- [Building AI-powered stuff](/resume) for Microsoft (but that's a secret!)
+- [Building Roslyn](https://github.com/dotnet/roslyn/issues?q=sort%3Aupdated-desc%20involves%3Amwiemer-microsoft) for Microsoft
 - Hanging out with Wynonna and friends (human friends, to be clear)
 
 ## Where I hang out
