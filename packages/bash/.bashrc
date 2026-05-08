@@ -349,3 +349,6 @@ deduplicate_path() {
 # Call at the end of .bashrc
 deduplicate_path
 #endregion
+
+# opencode
+export PATH=/home/markw/.opencode/bin:$PATH

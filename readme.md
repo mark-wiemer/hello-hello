@@ -14,6 +14,7 @@ because I use GitHub Pages, which only supports one site per repo.
 - [Astro](./packages/astro/readme.md): Web framework for content-driven websites
 - [Azure](./packages/azure/readme.md): Cloud computing platform
 - [Bash](./packages/bash/readme.md): Cross-platform shell
+- [Browser](./packages/browser/readme.md): Web browser extensions
 - [.NET (dotnet)](./packages/dotnet/readme.md): Open-source framework for any software
   - [Roslyn](./packages/dotnet/roslyn/README.md): The .NET compiler platform, where [I work full-time](https://github.com/mwiemer-microsoft)
 - [Git](./packages/git/readme.md): Version control system, includes notes on Git LFS
