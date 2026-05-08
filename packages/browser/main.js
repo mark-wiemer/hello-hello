@@ -1,14 +1,20 @@
-const url = globalThis.location.href;
-const title = document.title?.trim() ||
-  document.querySelector("title")?.textContent?.trim() || url;
-const markdown = `[${title || url}](${url})`;
+if (typeof browser === "undefined") {
+  // Chrome does not support the browser namespace yet.
+  globalThis.browser = chrome;
+}
 
-navigator.clipboard
-  .writeText(markdown)
-  .then(() => {
-    console.log("Copied link markdown:", markdown);
-  })
-  .catch((error) => {
-    console.error("Failed to copy markdown:", error);
-    alert(`Failed to copy markdown: ${error}`);
-  });
+browser.action.onClicked.addListener((tab) => {
+  console.log("hello world");
+  if (!tab.id) {
+    return;
+  }
+
+  chrome.scripting
+    .executeScript({
+      target: { tabId: tab.id },
+      files: ["copy.js"],
+    })
+    .catch((error) => {
+      console.error("Failed to inject copy script:", error);
+    });
+});

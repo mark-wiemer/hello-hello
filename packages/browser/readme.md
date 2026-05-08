@@ -13,8 +13,7 @@ clipboard.
 
 You should see e.g. `[Example Domain](https://example.com/)`
 
-This extension has only been tested in Firefox. It does not currently work in
-Edge.
+See [issues](#issues) for important limitations.
 
 ## Setup
 
@@ -27,6 +26,17 @@ This project uses [Deno](../notes/deno.md) instead of Node.js
   deno run dev
   ```
 
+## Issues
+
+- Only works on one of Edge or Firefox at a time
+  - Edge/Chromium doesn't `background.scripts` in `manifest_version` 3
+  - `manifest_version` 2 support is no longer guaranteed
+  - Firefox doesn't support `background.service_worker` in `manifest_version` 3
+  - Not sure how such a terrible system has come into place? Welcome to web dev!
+  - Need a manifest.json generator script at build time
+- Not packaged or published yet
+  - Still learning :)
+
 ## Resources
 
 https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Your_first_WebExtension
@@ -38,3 +48,7 @@ https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Your_firs
 https://developer.mozilla.org/en-US/docs/Web/API/Clipboard_API
 
 https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Interact_with_the_clipboard
+
+edge://extensions/
+
+- Enable developer mode to install unpackaged extensions like this one

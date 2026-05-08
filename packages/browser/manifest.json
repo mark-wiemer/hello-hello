@@ -8,7 +8,7 @@
   },
   "permissions": ["activeTab", "scripting", "clipboardWrite"],
   "background": {
-    "scripts": ["background.js"]
+    "service_worker": "main.js"
   },
   "action": {
     "default_title": "Copy page link as Markdown"
