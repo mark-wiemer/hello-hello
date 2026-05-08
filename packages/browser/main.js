@@ -9,7 +9,7 @@ browser.action.onClicked.addListener((tab) => {
     return;
   }
 
-  chrome.scripting
+  browser.scripting
     .executeScript({
       target: { tabId: tab.id },
       files: ["copy.js"],
