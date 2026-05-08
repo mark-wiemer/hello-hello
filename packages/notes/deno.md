@@ -16,3 +16,7 @@ Validate installation:
 ```
 deno --version
 ```
+
+## Misc
+
+- `deno fmt` formats all files

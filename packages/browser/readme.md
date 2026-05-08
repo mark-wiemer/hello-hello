@@ -1,17 +1,13 @@
 # Browser
 
-Browser extensions made and maintained by me :)
+A sample browser extension with notes
 
 ## Setup
 
-To install dependencies:
+This project uses [Deno](../notes/deno.md) instead of Node.js
 
-```bash
-bun install
-```
-
-To run:
-
-```bash
-bun run index.ts
-```
+- [Install Deno](https://deno.com)
+- ```
+  deno install
+  deno run main.ts
+  ```

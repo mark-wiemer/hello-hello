@@ -328,6 +328,14 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 export CHROME_BIN="/usr/bin/chromium"
 #endregion
 
+#region opencode
+export PATH=/home/markw/.opencode/bin:$PATH
+#endregion
+
+#region Deno
+. "/home/markw/.deno/env"
+#endregion
+
 #region path deduplication (must be last region)
 # Remove duplicate entries from PATH
 deduplicate_path() {
@@ -349,6 +357,3 @@ deduplicate_path() {
 # Call at the end of .bashrc
 deduplicate_path
 #endregion
-
-# opencode
-export PATH=/home/markw/.opencode/bin:$PATH
