@@ -1,8 +1,8 @@
 {
   "tasks": {
-    "dev": "deno run --watch main.ts"
+    "dev": "deno run -A web-ext run -u mozilla.org"
   },
   "imports": {
-    "@std/assert": "jsr:@std/assert@1"
+    "web-ext": "npm:web-ext@^10.1.0"
   }
 }
