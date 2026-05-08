@@ -13,6 +13,9 @@ clipboard.
 
 You should see e.g. `[Example Domain](https://example.com/)`
 
+This extension has only been tested in Firefox. It does not currently work in
+Edge.
+
 ## Setup
 
 This project uses [Deno](../notes/deno.md) instead of Node.js

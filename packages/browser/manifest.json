@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Markdown Link",
-  "version": "1.0",
+  "version": "0.1.0",
   "description": "Copies the current page URL and title as Markdown to the clipboard.",
   "icons": {
     "48": "icons/border-48.png"
