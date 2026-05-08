@@ -1,0 +1,27 @@
+const manifest = {
+  manifest_version: 3,
+  name: "Markdown Link",
+  version: "0.1.0",
+  description: "Copies the current page URL and title as Markdown to the clipboard.",
+  icons: {
+    "48": "icons/border-48.png",
+  },
+  permissions: ["activeTab", "scripting", "clipboardWrite"],
+  background: {
+    service_worker: "main.js",
+  },
+  action: {
+    default_title: "Copy page link as Markdown",
+  },
+  browser_specific_settings: {
+    gecko: {
+      id: "borderify@mozilla.org",
+      data_collection_permissions: {
+        required: ["none"],
+      },
+    },
+  },
+};
+
+Deno.writeTextFileSync("manifest.json", JSON.stringify(manifest, null, 2));
+

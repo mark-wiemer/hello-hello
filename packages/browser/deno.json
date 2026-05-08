@@ -1,6 +1,7 @@
 {
   "tasks": {
-    "dev": "deno run -A web-ext run -u mozilla.org"
+    "dev": "deno run -A web-ext run -u mozilla.org",
+    "generate": "deno run --allow-write generate-manifest-json.js"
   },
   "imports": {
     "web-ext": "npm:web-ext@^10.1.0"
