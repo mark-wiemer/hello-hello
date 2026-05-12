@@ -10,6 +10,10 @@ See `terminal.settings.json`
 
 [MDN docs on prefers-reduced-motion](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion#user_preferences)
 
+## Disable taskbar app flashing
+
+Settings > Personalization > Taskbar behaviors > Show flashing on taskbar apps (unchecked)
+
 ## Invert scroll Windows 11
 
 Windows 11 24H2: Settings > "scroll direction"
@@ -20,10 +24,6 @@ Older:
 2. Registry editor > HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum\HID > Go to path > Device Parameters > FlipFlopWheel = 1
 3. Unplug device and plug it back in
 4. Note that this only works for that device plugged into that port :/
-
-## Upgrade AdBlock Plus
-
-1. https://accounts.adblockplus.org/en/premium
 
 ## Snipaste
 

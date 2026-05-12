@@ -3,3 +3,7 @@
 Setup steps for any new machine that I use
 
 Most of this is already covered in the relevant package folders, like `git` and `vscode`.
+
+## Upgrade AdBlock Plus
+
+1. https://accounts.adblockplus.org/en/premium
