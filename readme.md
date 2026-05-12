@@ -7,6 +7,8 @@ AHK++ will stay its own repo for better issue tracking and stargazing.
 Websites I maintain beyond markwiemer.com will stay as their own repos
 because I use GitHub Pages, which only supports one site per repo.
 
+See also [Mark Wiemer's work](https://github.com/orgs/mark-wiemer-org/projects/1)
+
 ## Index
 
 - [AHK++ (ahkpp)](./packages/ahkpp/readme.md): IDE extension for AHK v1 and v2 language support. Includes [ahkpp.com](https://ahkpp.com)
