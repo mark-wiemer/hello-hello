@@ -47,7 +47,8 @@
       "other": "off",
       "strings": "off"
     },
-    "editor.wordWrap": "bounded"
+    "editor.wordWrap": "bounded",
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[mdx]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
