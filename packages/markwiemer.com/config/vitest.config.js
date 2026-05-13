@@ -12,6 +12,10 @@ const mdxStub = {
   },
 };
 
+// RE build warnings:
+// `optimizeDeps.esbuildOptions` option was specified by "astro:dev-toolbar" plugin.
+// `resolve.alias` contains an alias with `customResolver` option.
+// https://github.com/mark-wiemer/hello-hello/issues/126
 export default getViteConfig({
   plugins: [mdxStub],
   // https://vitest.dev/config/
