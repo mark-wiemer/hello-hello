@@ -1,18 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { getAllBlogPosts, sortBlogPostsOldestFirst } from "./blog";
-
-describe("getAllBlogPosts", () => {
-  it("includes the expected slug and filename", () => {
-    const paths = getAllBlogPosts();
-    expect(
-      paths.find((entry) => entry.params.slug === "testing-accessibility-reflow"),
-      `${paths.map((path) => JSON.stringify(path))}`,
-    ).not.toBeUndefined();
-  });
-});
+import { oldestFirst } from "./date";
 
 describe("sortBlogPostsOldestFirst", () => {
-  type Arg = Parameters<typeof sortBlogPostsOldestFirst>[0];
+  type Arg = Parameters<typeof oldestFirst>[0];
   it.each<[Arg, Arg]>([
     [
       { postDate: "2026-04-12", postTime: "20:02 PST" },
@@ -27,7 +17,7 @@ describe("sortBlogPostsOldestFirst", () => {
       { postDate: "2026-04-10", postTime: "21:03 PST" },
     ],
   ])("a before b", (a, b) => {
-    expect(sortBlogPostsOldestFirst(a, b)).toBeLessThan(0);
+    expect(oldestFirst(a, b)).toBeLessThan(0);
   });
 
   it.each<[Arg, Arg]>([
@@ -44,7 +34,7 @@ describe("sortBlogPostsOldestFirst", () => {
       { postDate: "2026-04-10", postTime: "20:02 PDT" },
     ],
   ])("b before a", (a, b) => {
-    expect(sortBlogPostsOldestFirst(a, b)).toBeGreaterThan(0);
+    expect(oldestFirst(a, b)).toBeGreaterThan(0);
   });
 
   it.each<[Arg, Arg]>([
@@ -53,6 +43,6 @@ describe("sortBlogPostsOldestFirst", () => {
       { postDate: "2026-04-12", postTime: "21:01 PST" },
     ],
   ])("equal", (a, b) => {
-    expect(sortBlogPostsOldestFirst(a, b)).toBe(0);
+    expect(oldestFirst(a, b)).toBe(0);
   });
 });

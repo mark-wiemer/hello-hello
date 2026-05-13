@@ -1,17 +1,24 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import CustomDate from "@/components/CustomDate.astro";
-import { getAllBlogPosts } from "@/utils/blog";
+import { getCollection, render } from 'astro:content';
 
 /**
- * Magic function used by Astro.
+ * `getStaticPaths` is a magic function used by Astro.
  * https://docs.astro.build/en/guides/routing/#dynamic-routes
  */
-export const getStaticPaths = getAllBlogPosts;
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    // `slug` matches the filename, `[slug].astro`
+    params: { slug: post.id},
+    props: { post },
+  }));
+};
 
-const { module } = Astro.props;
-let { default: Content, frontmatter } = module;
-const { postTitle, postDate, postTime, lastUpdated, postType } = frontmatter;
+const { post } = Astro.props;
+const { Content } = await render(post);
+const { postTitle, postDate, postTime, lastUpdated, postType } = post.data;
 
 const notesDisclaimer =
   postType === "notes"

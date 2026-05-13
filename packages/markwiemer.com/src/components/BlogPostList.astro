@@ -1,8 +1,9 @@
 ---
-import { getAllBlogPosts, sortBlogPostsOldestFirst } from "@/utils/blog";
+import { oldestFirst } from "@/utils/date";
 import CustomDate from "@/components/CustomDate.astro";
+import { getCollection, type InferEntrySchema } from 'astro:content';
 
-type PostListItem = ReturnType<typeof getAllBlogPosts>[0]["props"]["module"]["frontmatter"] & {
+type PostListItem = InferEntrySchema<"blog"> & {
   slug: string;
 };
 
@@ -13,13 +14,23 @@ interface Props {
 
 const { filter, limit } = Astro.props;
 
-let posts: PostListItem[] = getAllBlogPosts()
-  .map<PostListItem>(({ params, props }) => {
-    const listed = props.module?.frontmatter.listed ?? true;
-    return { ...props.module?.frontmatter, slug: params.slug, listed };
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    // `slug` matches the filename, `[slug].astro`
+    params: { slug: post.id},
+    props: { post },
+  }));
+};
+
+const posts = (await getCollection('blog'))
+  .map<PostListItem>(entry => {
+    const data = entry.data;
+    const listed = data.listed ?? true;
+    return { ...data, slug: entry.id, listed };
   })
   .filter((post) => post.postDate && post.slug && post.listed)
-  .sort(sortBlogPostsOldestFirst)
+  .sort(oldestFirst)
   .reverse()
   .filter(filter ?? (() => true))
   .slice(0, limit ?? undefined);
