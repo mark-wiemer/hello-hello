@@ -14,7 +14,6 @@ const mdxStub = {
 export default getViteConfig({
   plugins: [mdxStub],
   test: {
-    /* for example, use global to avoid globals imports (describe, test, expect): */
-    // globals: true,
+    exclude: ["./src/e2e/**", "**/node_modules/**", "**/.git/**"],
   },
 });
