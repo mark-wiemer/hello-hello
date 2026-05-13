@@ -43,11 +43,8 @@ const blog = defineCollection({
     postTime: z.string().optional(),
     /** Main heading for the article */
     postTitle: z.string(),
-    /**
-     * If not provided, it's implicitly an article.
-     * todo Only valid post types are `article` and `notes`.
-     */
-    postType: z.string().optional(),
+    /** If not provided, it's implicitly an article. */
+    postType: z.literal(["notes"]).optional(),
   }),
 });
 
