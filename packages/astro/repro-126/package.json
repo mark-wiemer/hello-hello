@@ -13,6 +13,7 @@
     "test": "vitest"
   },
   "dependencies": {
+    "@astrojs/mdx": "^5.0.5",
     "astro": "^6.3.2",
     "vitest": "^4.1.0"
   },

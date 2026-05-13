@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig } from "astro/config";
+import mdx from "@astrojs/mdx";
 import { resolve, sep } from "node:path";
 import process from "node:process";
 
@@ -7,6 +8,7 @@ const publicDirPath = `${resolve(process.cwd(), `src${sep}public`)}${sep}`;
 
 // https://astro.build/config
 export default defineConfig({
+  integrations: [mdx()],
   vite: {
     plugins: [
       {
