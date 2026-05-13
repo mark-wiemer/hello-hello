@@ -66,6 +66,7 @@ test.describe("blog index", () => {
       "got-dream-job",
       "heart-condition-spoons",
       "bus-concussion-2026",
+      "penultimate-health-update",
     ].reverse();
 
     const actualListedBlogIds = await getListedPosts(page);
