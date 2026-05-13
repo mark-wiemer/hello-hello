@@ -79,6 +79,10 @@ jobs:
         uses: actions/checkout@v6
         with:
           lfs: true
+      - name: Setup Node for Astro 6
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24 # must be 22.12 or greater
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
       - name: Install dependencies
