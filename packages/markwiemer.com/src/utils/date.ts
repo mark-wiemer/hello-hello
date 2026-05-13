@@ -1,19 +1,24 @@
+import { getCollection } from "astro:content";
+
+/*
+As of writing, this resolves to:
+
+```ts
 type DateParts = {
-  // TS cannot easily represent exact types here (union too complex)
-  // Learning more about Zod:
-  // https://github.com/mark-wiemer/hello-hello/issues/122
-  /**
-   * Original posted ISO date (not time), e.g. `2026-04-12`
-   * todo `${number}-${number}-${number}`
-   */
-  postDate: string;
-  /**
-   * Original posted local time (not date), e.g. `20:02 PDT` or `09:32 PST`
-   * Only PDT or PST are used.
-   * todo `${number}:${number} P${"D" | "S"}T`
-   */
-  postTime?: string;
-};
+    postDate: string;
+    postTime?: string | undefined;
+}
+```
+
+Ideally this resolves to something closer to the source in
+src/content.config.ts
+
+Ref https://github.com/mark-wiemer/hello-hello/issues/127
+*/
+type DateParts = Pick<
+  Awaited<ReturnType<typeof getCollection<"blog">>>[0]["data"],
+  "postDate" | "postTime"
+>;
 
 function toDateString(f: DateParts): string {
   if (!f.postTime) return f.postDate;
