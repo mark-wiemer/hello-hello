@@ -18,6 +18,7 @@
     "playwright//": "To be used as part of `e2e`",
     "preview": "astro preview --config config/astro.config.mjs",
     "preview:e2e": "bun run preview --port 8910",
+    "sync": "astro sync --config config/astro.config.mjs",
     "test": "vitest --config config/vitest.config.js",
     "test:ci": "bun run test --run",
     "trigger-deploy": "bash ../../scripts/trigger-markwiemer-deploy.sh",
@@ -25,7 +26,7 @@
     "validate:fix": "sort-package-json"
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.3.13",
+    "@astrojs/mdx": "^5.0.4",
     "@types/node": "^25.6.0",
     "astro": "^5.16.10",
     "sharp": "^0.34.5",
