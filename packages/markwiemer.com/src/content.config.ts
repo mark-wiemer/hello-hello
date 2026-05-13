@@ -26,18 +26,16 @@ const blog = defineCollection({
     listed: z.boolean().optional(),
     /** Medium URL where this was originally posted */
     original: z.string().optional(),
-
-    // Learning more about Zod:
-    // https://github.com/mark-wiemer/hello-hello/issues/122
-
     /** Original posted ISO date (not time), e.g. `2026-04-12` */
     postDate: z.iso.date(),
     /**
      * Original posted local time (not date), e.g. `20:02 PDT` or `09:32 PST`.
      * Only PDT or PST are used.
-     * todo `${number}:${number} P${"D" | "S"}T`
      */
-    postTime: z.string().optional(),
+    postTime: z
+      .string()
+      .regex(/^\d\d:\d\d P(D|S)T$/)
+      .optional(),
     /** Main heading for the article */
     postTitle: z.string(),
     /** If not provided, it's implicitly an article. */
