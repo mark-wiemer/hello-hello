@@ -30,11 +30,8 @@ const blog = defineCollection({
     // Learning more about Zod:
     // https://github.com/mark-wiemer/hello-hello/issues/122
 
-    /**
-     * Original posted ISO date (not time), e.g. `2026-04-12`
-     * todo `${number}-${number}-${number}`
-     */
-    postDate: z.string(),
+    /** Original posted ISO date (not time), e.g. `2026-04-12` */
+    postDate: z.iso.date(),
     /**
      * Original posted local time (not date), e.g. `20:02 PDT` or `09:32 PST`.
      * Only PDT or PST are used.
