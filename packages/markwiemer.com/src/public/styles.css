@@ -338,4 +338,8 @@ th {
   border: 1px solid var(--text-primary);
   padding: 4px 8px;
 }
+
+ul {
+  padding-left: 20px;
+}
 /* #endregion Elements */
