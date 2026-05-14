@@ -87,6 +87,7 @@ import NavEntry from "@/components/NavEntry.astro";
   </script>
 
   <button id="datetimeFormatToggle" class="toggle" aria-live="polite">Error</button>
+  <!-- RE de-duping: https://github.com/mark-wiemer/hello-hello/issues/113 -->
   <script is:inline data-notes="handle date format toggle">
     (() => {
       const datetimeFormatToggle = document.querySelector("#datetimeFormatToggle");
