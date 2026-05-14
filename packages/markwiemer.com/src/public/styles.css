@@ -1,3 +1,4 @@
+/* #region Variables and theme */
 /* https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascading_variables/Using_custom_properties */
 /* :root is a common practice for global reference */
 :root {
@@ -79,12 +80,16 @@
   --nav-bg: var(--nav-bg-dark);
   --text-primary: var(--text-primary-dark);
 }
+/* #endregion Variables and theme */
 
+/* #region Pseudoelements */
 ::selection {
   color: var(--body-bg);
   background-color: var(--text-primary);
 }
+/* #endregion Pseudoelements */
 
+/* #region IDs */
 #siteMenu {
   box-sizing: border-box;
   height: 100%;
@@ -140,7 +145,9 @@
   left: 0;
   transition: transform var(--nav-open-time) ease;
 }
+/* #endregion IDs */
 
+/* #region Classes */
 .skip-link {
   position: absolute;
   left: 50%;
@@ -153,6 +160,29 @@
   }
 }
 
+/* buttons to toggle settings */
+.toggle {
+  background: none;
+  border: 1px solid var(--text-primary);
+  border-radius: var(--border-radius-button);
+  color: var(--text-primary);
+  cursor: pointer;
+  font-size: smaller;
+  margin-top: 8px;
+  /* padding is inside button */
+  padding: 2px 6px;
+}
+
+.wide-section {
+  position: relative;
+  left: calc(50% - 50vw + var(--padding-table));
+  width: calc(100vw - var(--padding-table) * 2);
+  overflow-x: auto;
+  box-sizing: border-box;
+}
+/* #endregion Classes */
+
+/* #region Complex */
 body.nav-open #toggleMenu {
   transform: translateX(
     calc(var(--nav-open-width) - var(--width-button-nav) + var(--border-radius-button))
@@ -160,67 +190,31 @@ body.nav-open #toggleMenu {
   z-index: var(--z-index-nav-button);
 }
 
-body,
-button {
-  line-height: var(--line-height-default);
-  /* Order matters for font-family */
-  font-family:
-    "Segoe UI",
-    "Segoe UI Web (West European)",
-    -apple-system,
-    BlinkMacSystemFont,
-    Roboto,
-    "Helvetica Neue",
-    sans-serif;
-  font-size: var(--font-size-default);
-
-  background-color: var(--body-bg);
-  color: var(--text-primary);
-  scrollbar-color: var(--text-primary) var(--body-bg);
+div.headerImages {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 1em;
+  /* Row-gap in case of wraparound */
+  row-gap: 1em;
+  align-self: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 1em;
 }
 
-body {
-  /* Add 1em below to allow user to sanity-check it's the true end-of-page */
-  /* Use margin instead of padding as most user agents have a margin we don't want */
-  margin: 0 0 1em 0;
+img.border {
+  border: 2px solid var(--img-border);
 }
 
-figcaption {
-  font-size: smaller;
-  text-align: center;
-}
-
-h1 {
-  font-size: 3em;
-  font-weight: 600;
-  line-height: 52px;
-  text-align: center;
-  margin-bottom: 12px;
-
-  /* breakpoint-very-thin */
-  @media (max-width: 480px) {
-    font-size: 2em;
-  }
-}
-
-figure {
-  margin: 0;
-}
-
-footer {
+figure.center {
   display: flex;
   flex-direction: column;
   align-items: center;
-  & hr {
-    width: 640px;
-  }
 }
+/* #endregion Complex */
 
-hr {
-  width: 320px;
-  max-width: calc(100% - 64px);
-}
-
+/* #region Elements */
 a {
   text-decoration: underline;
   border-radius: 5px;
@@ -246,20 +240,6 @@ a {
   }
 }
 
-div.headerImages {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  column-gap: 1em;
-  /* Row-gap in case of wraparound */
-  row-gap: 1em;
-  align-self: center;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-bottom: 1em;
-}
-
-/* Apply to article elements to get center margin */
 article {
   margin: 0 auto;
   max-width: 640px;
@@ -282,14 +262,29 @@ blockquote {
   margin-left: 0;
 }
 
-img.border {
-  border: 2px solid var(--img-border);
+body {
+  /* Add 1em below to allow user to sanity-check it's the true end-of-page */
+  /* Use margin instead of padding as most user agents have a margin we don't want */
+  margin: 0 0 1em 0;
 }
 
-figure.center {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+body,
+button {
+  line-height: var(--line-height-default);
+  /* Order matters for font-family */
+  font-family:
+    "Segoe UI",
+    "Segoe UI Web (West European)",
+    -apple-system,
+    BlinkMacSystemFont,
+    Roboto,
+    "Helvetica Neue",
+    sans-serif;
+  font-size: var(--font-size-default);
+
+  background-color: var(--body-bg);
+  color: var(--text-primary);
+  scrollbar-color: var(--text-primary) var(--body-bg);
 }
 
 code {
@@ -297,17 +292,40 @@ code {
   background-color: var(--code-bg);
 }
 
-/* buttons to toggle settings */
-.toggle {
-  background: none;
-  border: 1px solid var(--text-primary);
-  border-radius: var(--border-radius-button);
-  color: var(--text-primary);
-  cursor: pointer;
+figcaption {
   font-size: smaller;
-  margin-top: 8px;
-  /* padding is inside button */
-  padding: 2px 6px;
+  text-align: center;
+}
+
+figure {
+  margin: 0;
+}
+
+footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  & hr {
+    width: 640px;
+  }
+}
+
+h1 {
+  font-size: 3em;
+  font-weight: 600;
+  line-height: 52px;
+  text-align: center;
+  margin-bottom: 12px;
+
+  /* breakpoint-very-thin */
+  @media (max-width: 480px) {
+    font-size: 2em;
+  }
+}
+
+hr {
+  width: 320px;
+  max-width: calc(100% - 64px);
 }
 
 table {
@@ -315,16 +333,9 @@ table {
   margin: 0 auto;
 }
 
-.wide-section {
-  position: relative;
-  left: calc(50% - 50vw + var(--padding-table));
-  width: calc(100vw - var(--padding-table) * 2);
-  overflow-x: auto;
-  box-sizing: border-box;
-}
-
-th,
-td {
+td,
+th {
   border: 1px solid var(--text-primary);
   padding: 4px 8px;
 }
+/* #endregion Elements */
