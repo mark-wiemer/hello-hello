@@ -23,7 +23,7 @@
     "test:ci": "bun run test --run",
     "trigger-deploy": "bash ../../scripts/trigger-markwiemer-deploy.sh",
     "upgrade": "bunx @astrojs/upgrade",
-    "validate:ci": "bun run test:ci && bun run e2e:ci",
+    "validate:ci": "bun run test:ci && bun run e2e:ci && echo All CI validations passed, ready to deploy",
     "validate:fix": "sort-package-json"
   },
   "dependencies": {

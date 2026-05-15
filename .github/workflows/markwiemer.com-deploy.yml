@@ -91,6 +91,8 @@ jobs:
       - name: Build static content
         run: bun run build
         working-directory: ${{ env.SITE_DIR }}
+      - name: Validate build
+        run: bun run validate:ci
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
