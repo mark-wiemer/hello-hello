@@ -1,6 +1,6 @@
-# Checks daily to deploy the site
 # If nothing to deploy, short-circuits
-name: markwiemer.com - Daily deploy
+# Checks daily and can be triggered manually
+name: markwiemer.com - Deploy
 
 on:
   schedule:
