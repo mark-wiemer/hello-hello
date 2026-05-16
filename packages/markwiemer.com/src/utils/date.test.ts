@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { oldestFirst } from "./date";
 
-describe("sortBlogPostsOldestFirst", () => {
+describe("oldestFirst", () => {
   type Arg = Parameters<typeof oldestFirst>[0];
   it.each<[Arg, Arg]>([
     [
