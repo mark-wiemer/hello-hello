@@ -9,9 +9,11 @@
   --code-bg-dark: rgb(33, 38, 44);
   --code-bg-light: rgb(214, 223, 233);
   --font-size-default: 18px;
+  --font-size-small: 16px;
   --img-border-dark: var(--text-primary-dark);
   --img-border-light: var(--text-primary-light);
-  --line-height-default: 1.5em;
+  --line-height-default: 27px;
+  --line-height-small: 24px;
   --link-active-dark: var(--text-primary-dark);
   --link-active-light: var(--text-primary-light);
   --link-primary-dark: rgb(0, 162, 174);
@@ -167,7 +169,8 @@
   border-radius: var(--border-radius-button);
   color: var(--text-primary);
   cursor: pointer;
-  font-size: smaller;
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
   margin-top: 8px;
   /* padding is inside button */
   padding: 2px 6px;
@@ -288,12 +291,14 @@ button {
 }
 
 code {
-  font-size: smaller;
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
   background-color: var(--code-bg);
 }
 
 figcaption {
-  font-size: smaller;
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
   text-align: center;
 }
 
@@ -326,6 +331,11 @@ h1 {
 hr {
   width: 320px;
   max-width: calc(100% - 64px);
+}
+
+small {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
 }
 
 table {
