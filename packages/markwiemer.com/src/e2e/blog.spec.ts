@@ -69,6 +69,7 @@ test.describe("blog index", () => {
       "penultimate-health-update",
       "2026-war-in-iran",
       "dr-james-tweddell",
+      "both-trump-administrations",
     ].reverse();
 
     const actualListedBlogIds = await getListedPosts(page);
