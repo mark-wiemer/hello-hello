@@ -288,8 +288,8 @@ const glossary: TermDef[] = [
     "A form of test coverage that considers real-world scenarios, not just lines of code. For example, a single line of code might call `IsNullOrWhiteSpace` and have full condition coverage with two tests, but would require several tests for scenario coverage: `null`, empty string, string with all spaces, string with all tabs, string with mix of other whitespace, etc. Also useful when automated coverage reporting is unavailable, e.g. in integration or end-to-end tests. Sometimes referred to by others as code coverage. Scenario coverage is a term I made up, but a common concept in the industry.",
   ],
   [
-    "slug",
-    "In software, this refers to the part of the URL after the top-level domain (TLD). For instance, the slug of `https://markwiemer.com/glossary#software?hello=world` is `/glossary#software?hello=world`",
+    "slug (software)",
+    "The part of a URL after the top-level domain (TLD). For instance, the slug of `https://markwiemer.com/glossary#software?hello=world` is `/glossary#software?hello=world`",
   ],
   // software is a category
   [
@@ -429,7 +429,19 @@ const toId = (term: string): string => {
       glossary.map((termDef) => (
         <>
           <dt id={toId(termDef[0])}>{termDef[0]}</dt>
-          <dd>{termDef[1]}</dd>
+          <dd>
+            {/* https://github.com/mark-wiemer/hello-hello/issues/130 */}
+            {/* lookahead to ensure there is not a digit immediately after the slash */}
+            {termDef[1].split(/(?<=\/)(?!\d)/).map((part: string, i: number) => {
+              const shouldAddWbr = i > 0;
+              return (
+                <>
+                  {shouldAddWbr && <wbr />}
+                  {part}
+                </>
+              );
+            })}
+          </dd>
         </>
       ))
     }
