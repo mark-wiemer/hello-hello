@@ -9,7 +9,6 @@
     }
   },
   "scripts": {
-    "cli": "npx cross-env DEBUG=mocha:cli* mocha --no-package",
     "test:debug": "npx cross-env DEBUG=mocha:cli:mocha npm test",
     "test": "cross-env NODE_ENV=test mocha"
   },
