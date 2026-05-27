@@ -11,8 +11,10 @@
   "scripts": {
     "cli": "npx cross-env DEBUG=mocha:cli* mocha --no-package",
     "test:debug": "npx cross-env DEBUG=mocha:cli:mocha npm test",
-    "test": "cross-env NODE_ENV=test mocha",
-    "postinstall": "node install-custom-reporter.js"
+    "test": "cross-env NODE_ENV=test mocha"
+  },
+  "dependencies": {
+    "mocha": "12.0.0-beta-9.4"
   },
   "devDependencies": {
     "cross-env": "10.1.0",
