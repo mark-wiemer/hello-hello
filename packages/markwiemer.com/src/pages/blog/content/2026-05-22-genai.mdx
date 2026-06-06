@@ -7,67 +7,134 @@ postType: "notes"
 
 See also [ChatGPT and generative AI: An evergreen guide](/blog/evergreen-ai-guide), an index of my organized writings. Notes here are very messy and subject to change, but published for transparency 🤓
 
+My work focuses on text-based GenAI, but there may be a few notes here for image-, sound-, and video-based GenAI.
+
+I work for Microsoft, a major player in the GenAI space. I write these notes in my free time and all opinions are my own, unedited by anyone at Microsoft.
+
 ## To-do
 
-- Categories of value of GenAI
 - Clarify definition of AGI
-- True societal cost of data centers
-  - Electricity
-  - Water
-  - Noise
-  - Sanity
-  - Other?
-- True societal value of data centers
-  - Value provided compared to alternatives
-  - Realized value in drug discovery and other fields (not just claims)
 - "The cloud is full" claims
-- Use cases
-  - Use big AI to generate scripts
-  - Use medium AI to parse logs
-  - Use small AI to find scripts
-- Integrations
-  - Still vary widely and changing frequently (2026-05-06)
-- Popular products:
-  - OpenClaw
-  - Claude Code
-  - GitHub Copilot
-  - OpenCode
-  - Microsoft Copilot (does not connect to personal data)
-  - Microsoft 365 Copilot (connects to personal data)
-- Popular orchestrators/model creators
-  - Microsoft (MAI)
-  - OpenAI (ChatGPT, GPT)
-  - Anthropic (Haiku, Sonnet, Opus, Mythos)
-  - Google (Gemini)
-- Run models locally
-  - Ollama
+- Financial cost of AI subscriptions/tokens
 
 ## Compared to non-generative AI
 
 Generative AI is characterized by the novelty of the output that it gives, where other AI is designed to find existing artifacts. It's pretty easy to tell what's generative and what isn't: anything that writes something that's never been published before is generative. Many folks have referred to GenAI as a "very advanced autocomplete" [citation needed] because, like autocomplete, large language models (LLMs) just guess word after word after word in their answer without any direct consideration for reality [citation needed]. An LLM will gladly write "George Washington was born on February 22, 1732" but it is not at all able to verify that claim [citation needed].
 
-Examples of traditional AI are hard to pin down, because there's still no good definition for AI [citation needed], let alone a good definition for intelligence as a whole [citation needed]. In my view, AI is anything that "seems smart" or can provide information, like a calculator, a chess engine, a spell-checker.
+Examples of non-generative AI are hard to pin down, because there's still no good definition for AI [citation needed], let alone a good definition for intelligence as a whole [citation needed]. In my view, AI is anything that "seems smart" or can provide information, like a calculator, a spell-checker, a chess engine, a search engine, or a recommendation algorithm. Pretty much everything digital that you saw before 2023 was non-generative AI.
 
 ## Where GenAI can help
 
 GenAI can help wherever computers can help, pretty much! It's primarily best at high-level reasoning, and procedural computations (like chess engines) are best left to the much-more-efficient traditional programs.
 
+### Medicine
+
 [2026-06-04 - 'World-first' vaccine designed by artificial intelligence - BBC](https://www.bbc.com/news/articles/crrpggegwe0o)
+
+<details open>
+
+<summary>Article summary and notes</summary>
 
 - > Artificial intelligence has been used to develop a "fundamentally new" type of vaccine that could protect against large swathes of viruses and prevent pandemics, say researchers.
   >
   > The team at the University of Cambridge say it is the first time a vaccine's key component has been designed entirely by AI and then trialled in people.
   >
   > The vaccine was engineered to work on all coronaviruses which would include all Covid variants as well as viruses that currently infect animals yet have the potential to start the next pandemic.
-- > The Cambridge researchers took known genetic codes – the instruction manuals of life – from a range of coronaviruses that had been recorded by surveillance programmes hunting for potential viral threats.
+  >
+  > ...
+  >
+  > The Cambridge researchers took known genetic codes – the instruction manuals of life – from a range of coronaviruses that had been recorded by surveillance programmes hunting for potential viral threats.
   >
   > These genetic codes were analysed by an artificial intelligence. It then designed a "super-antigen" that could train the immune system in such a way it gave protection against the whole family of viruses – even if they mutated or a new infection jumped from animals to people.
-- > The findings detailed in the [Journal of Infection](<https://www.journalofinfection.com/article/S0163-4453(26)00084-8/fulltext>) said the impact on the immune system was "modest", but they are still generating excitement.
+  >
+  > ...
+  >
+  > The findings detailed in the [Journal of Infection](<https://www.journalofinfection.com/article/S0163-4453(26)00084-8/fulltext>) said the impact on the immune system was "modest", but they are still generating excitement.
   >
   > Prof Saul Faust, who performed some of the trials at the University of Southampton, said the AI design "definitely has potential" and was "really exciting".
-- Journal of Infection link from BBC: [2026-05-18 - A phase I, needle free, dose escalation clinical trial of pEVAC-PS, a candidate pan-Sarbecovirus Vaccine - A. Munro et. al. in Journal of Infection](<https://www.journalofinfection.com/article/S0163-4453(26)00084-8/fulltext>)
-  - > Background: Coronaviruses such as SARS, SARS-CoV-2 and related Sarbeco-Coronaviruses continue to pose global health threats, underscoring the need for vaccines capable of inducing broad cross-sarbecovirus protection. The pEVAC-PS vaccine was developed using Digitally Immune Optimised Synthetic Vaccine (DIOSynVax) technology and pre-clinically selected for the ability to induce broadly protective immune responses across the Sarbecoviruses including SARS, SARS-CoV-2, and related viruses representing potential zoonotic spillovers. For this first-in-human study, the antigen was delivered as a DNA vaccine to enable thermostability and needle-free intradermal administration to support future deployment in resource-limited settings.
-  - > Interpretation: Needle-free intradermal delivery of this novel computationally designed PanSarbeco vaccine was safe and well tolerated. Although immunogenicity was modest in the context of substantial pre-existing immunity, participants developed measurable responses to conserved, vaccine-encoded sarbecovirus epitopes, supporting the feasibility of this antigen design strategy.
+- [2026-05-18 - A phase I, needle free, dose escalation clinical trial of pEVAC-PS, a candidate pan-Sarbecovirus Vaccine - A. Munro et. al. in Journal of Infection](<https://www.journalofinfection.com/article/S0163-4453(26)00084-8/fulltext>) (same link in BBC article)
+  - > The pEVAC-PS vaccine was developed ... and pre-clinically selected for the ability to induce broadly protective immune responses across the Sarbecoviruses including SARS, SARS-CoV-2, and related viruses representing potential zoonotic spillovers. For this first-in-human study, the antigen was delivered as a DNA vaccine to enable thermostability and needle-free intradermal administration to support future deployment in resource-limited settings.
+    >
+    > ... vaccine was safe and well tolerated. Although immunogenicity was modest in the context of substantial pre-existing immunity, participants developed measurable responses ... supporting the feasibility of this antigen design strategy.
+
+</details>
+
+## Tools
+
+### Models
+
+Language models are the core of any generative AI product. They're also known as large language models (LLMs), small language models (SLMs), or just "models." They're designed to take in text and output text that continues the conversation, usually in a way that provides information. They are usually trained by supercomputers on huge portions of the entire Internet then manually tuned to ensure they output polite responses. The result is a set of roughly one billion (for small models) to one trillion (for large models) simple math equations [citation needed]. Every time a single token (roughly three quarters of a word) is sent to a language model, it runs every single math equation [citation needed]. Yes, that means over a trillion calculations per word input and word output for many large language models [example needed]!
+
+Models are just the core, they are not advanced products with fancy user interfaces. They take in text, they spit out text, that's all. They do not track conversation history, user details, policy enforcement, or anything. The products that wrap models (described later) are what add these features.
+
+Models are usually released in families, e.g. GPT-3.5, GPT-4, GPT-4o, are all in the "GPT-N family." For simplicity, people will sometimes say "Opus is great, but Sonnet is faster" without referring to specific versions of either model (e.g. Opus 4.6, Sonnet 4.6) [citation needed].
+
+Here are some big names, in alphabetical order:
+
+- Claude model families (Haiku, Sonnet, Opus) by Anthropic
+- DeepSeek model families by DeepSeek
+- Gemini model family by Google
+- GPT-N model family OpenAI
+  - GPT stands for generative pre-trained transformer, which is not trademarked, but has become closely associated with OpenAI, which pioneered the technology [citation needed]
+- MAI model families (Image, Transcribe, Thinking, Voice, Code) by Microsoft
+  - MAI stands for Microsoft AI [citation needed]
+
+Frontier models (the newest and fanciest ones) still are not small enough to run on a traditional home computer, though that's changing (June 2026). Nearly all AI use remains done in "the cloud," the network of data centers across the world. However, there are products for running language models locally, which can provide a huge benefit in latency, privacy, security, and cost. A popular product here is [Ollama](https://ollama.com/) by Ollama Inc.
+
+### Products
+
+Developers will sometimes connect to models directly, but unless you've paid for an API key or downloaded Ollama, you're talking to an AI-powered product, not directly to a model. Products have additional features, including:
+
+- Graphical user interface (GUI)
+- Chat history
+- Memory and personalization
+- Acceptable use policies
+- Tool integration
+- Product-creator provided prompt templates
+
+Popular chat products include:
+
+- Claude by Anthropic
+- ChatGPT by OpenAI
+- Google Gemini
+- Microsoft Copilot\*
+  - Free, does not integrate with personal files, is accessible at [copilot.com](https://copilot.com)
+- M365 Copilot (aka Copilot in Microsoft 365)\*
+  - Paid (included with some subscriptions), integrates with personal files, has advanced features, is accessible at [m365.cloud.microsoft/chat](https://m365.cloud.microsoft/chat)
+
+\*: [What's the difference between Microsoft Copilot (free) and Copilot in Microsoft 365 - Microsoft Support](https://support.microsoft.com/en-us/microsoft-365-copilot/what-s-the-difference-between-microsoft-copilot-free-and-copilot-in-microsoft-365)
+
+People have developed other products, like desktop automation software, that uses GenAI, notably OpenClaw developed by individual Peter Steinberger and first released in November 2025. OpenClaw was designed to fully integrate with all files and apps on a computer, including email and other messaging apps. Steinberger's work went viral in January 2026, and he spoke at Microsoft Build in June 2026 to endorse OpenClaw's official integration into Microsoft Windows.
+
+Additionally, there are many developer-focused products that integrate with local files to generate code. These include:
+
+- [Claude Code](https://claude.com/product/claude-code) by [Anthropic](https://www.anthropic.com/)
+- [GitHub Copilot](https://docs.github.com/en/copilot/get-started/what-is-github-copilot)
+- [OpenCode](https://opencode.ai/) by [Anomaly Innovations](https://anoma.ly/)
+
+### Surfaces
+
+A surface is a space where a feature appears. Each website or app is its own surface, and modals or popups are another common surface.
+
+The simplest surface for GenAI is an AI chat like [copilot.com](https://copilot.com) or [gemini.google.com](https://gemini.google.com), where the user goes to a dedicated page to send messages directly to an AI-powered product. GenAI companies have also integrated AI-powered features into many products, including search engines (Google's, Bing's, and others' AI summaries) and productivity app families like Microsoft 365 ("Office") and Google Workspace ("G Suite"), and even traditional texting apps ([Gemini in Google Messages](https://support.google.com/gemini/answer/14599070)). To summarize, surfaces include:
+
+- AI chat
+- Search engines
+- Productivity apps
+- Traditional messaging apps
+- ...and more!
+
+There is value in describing the surface when discussing AI. Knowing the surface can help support agents describe how to customize AI behavior or search for information about features.
+
+## Techniques
+
+- Decision history tracking
+- Generation and use of ad-hoc procedural tools
+- Hill climbing
+- Prompt engineering (including instructions and skills files)
+- Ralph loop
+- Test-driven development
+- Vibe coding
 
 ## Case studies
 
@@ -75,6 +142,10 @@ GenAI can help wherever computers can help, pretty much! It's primarily best at 
 {/* Progressed at [multiple] speed: took [duration] compared to an estimated [duration] due to [reason] */}
 
 ### Personal
+
+[2026-04-03 - Port more tests to run on Linux (dotnet/roslyn PR 83052) - Jared Parsons on GitHub](https://github.com/dotnet/roslyn/pull/83052)
+
+- Ralph loop
 
 [2026-05-25 - Enforce word break after slash (mark-wiemer/hello-hello issue 130) - GitHub](https://github.com/mark-wiemer/hello-hello/issues/130)
 
@@ -85,7 +156,33 @@ GenAI can help wherever computers can help, pretty much! It's primarily best at 
 - I did a few minutes of manual refactoring before settling on the AI-generated approach after providing AI some guidance
 - I plan to do more work on this issue manually
 
-## Water use
+{/* "so fucking wrong" Ollama StarCoder example */}
+
+## Concerns
+
+AI is a huge technology (you probably already know this!)
+
+### Intellectual property theft
+
+GenAI models were (and continue to be) trained on huge portions of the Internet, and many have raised concerns that the data used was not legally licensed for product development [citation needed].
+
+### Critical thinking degradation
+
+There are concerns AI users are handing off critical thinking skills to AI, leading to a less thoughtful or productive or happy life [citation needed].
+
+### AI derangement
+
+AI is often criticized as being sycophantic [citation needed], indulging in the user's baseless claims and encouraging erratic and dangerous behavior [citation needed]. Additionally, AI has claimed to be a person with a physical address, leading to at least one person trying to travel to visit their AI, only to die in transit: [2025-08-14 - Meta's flirty AI chatbot invited a retiree to New York. He never made it home. - Reuters].
+
+### Stock market bubble
+
+There are concerns that the current stock market is too heavily indexed on GenAI companies, and that they're significantly overvalued. Concerned parties argue that this is a bubble, and it will pop with severe economic consequences [citation needed].
+
+### Data center problems (water, power, noise)
+
+Even simple GenAI are extremely computationally expensive compared to traditional methods [citation needed]. As a result, companies are building (or leasing) data centers at a very high rate [citation needed]. Data centers are buildings dedicated to housing tons of computers to process AI requests from users in the region. They are the core of "the cloud." They are huge buildings that can require large of power to run, can require large amounts of water, and can generate noise that could bother nearby residents. GenAI companies claim to be working to mitigate all three of these concerns, as well as others.
+
+#### Water
 
 [2026-01-27 - Microsoft Pledged to Save Water. In the A.I. Era, It Expects Water Use to Soar. - New York Times](https://www.nytimes.com/2026/01/27/technology/microsoft-water-ai-data-centers.html)
 
@@ -105,7 +202,7 @@ GenAI can help wherever computers can help, pretty much! It's primarily best at 
 - Microsoft's estimate is just below Toyota's in 2030
 - 46% of Microsoft's water withdrawals came from water-stressed areas, according to Microsoft
 
-## Power use
+#### Power
 
 [2026-01-27 - Microsoft Pledged to Save Water. In the A.I. Era, It Expects Water Use to Soar. - New York Times](https://www.nytimes.com/2026/01/27/technology/microsoft-water-ai-data-centers.html)
 
@@ -116,6 +213,10 @@ GenAI can help wherever computers can help, pretty much! It's primarily best at 
 [2026-05-12 - You Can't Just Plug in a Data Center - The Dispatch](https://thedispatch.com/newsletter/dispatch-energy/data-center-electricity-use-regulators-utilities/)
 
 - Good intro to power contract negotiations, no big stats
+
+#### Noise
+
+(todo)
 
 ## Misc
 
