@@ -17,25 +17,9 @@ The cute dog is Wynonna, my Australian shepherd 🥰
 
 ## What I'm doing
 
-### Resting
-
-If you know me, you know I've been going through significant health issues since March 2026. Fortunately, in the grand scheme of things, that wasn't that long ago, so here's hoping I'm back in action soon enough! More details:
-
-export const healthFilter = (post) => {
-  // Runs at build time, but better than nothing :)
-  const includedPostTitles = [
-    "Pericarditis and spoons",
-    "The Bus Concussion of 2026",
-    "Penultimate health update (on the restful road)",
-  ];
-  return includedPostTitles.includes(post.postTitle);
-};
-
-<BlogPostList filter={healthFilter} />
-
 ### Writing
 
-Although recent blog posts have been around my personal life, I also write about AI, mental health, and politics.
+I write about AI, mental health, politics, and my personal life.
 
 export const recentFilter = (post) => {
   // Runs at build time, but better than nothing :)
