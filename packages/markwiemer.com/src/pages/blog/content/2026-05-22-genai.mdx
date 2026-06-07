@@ -16,6 +16,8 @@ I work for Microsoft, a major player in the GenAI space. I write these notes in 
 - Clarify definition of AGI
 - "The cloud is full" claims
 - Financial cost of AI subscriptions/tokens
+- Categorize https://antigravity.google/
+- Categorize https://chatgpt.com/codex/
 
 ## Compared to non-generative AI
 
@@ -59,7 +61,13 @@ GenAI can help wherever computers can help, pretty much! It's primarily best at 
 
 </details>
 
-## Tools
+## GenAI concepts
+
+Models are the math machine that does the calculations to get the next word, over and over again, until an entire answer is output. This is the core of GenAI.
+
+Products are the GUI and wrapper features that go around models. Products also provide orchestration for models to use tools, like searching the web or checking the current time or even reading and modifying files on your machine.
+
+Surfaces are where you use GenAI. Sometimes this is a dedicated chat, other times it's integrated into existing products. Additionally, dedicated chats can be based on web browsers, native GUI apps, or CLI apps.
 
 ### Models
 
@@ -89,7 +97,7 @@ Developers will sometimes connect to models directly, but unless you've paid for
 - Chat history
 - Memory and personalization
 - Acceptable use policies
-- Tool integration
+- Tool integration (sometimes including access to local machine files)
 - Product-creator provided prompt templates
 
 Popular chat products include:
@@ -106,11 +114,22 @@ Popular chat products include:
 
 People have developed other products, like desktop automation software, that uses GenAI, notably OpenClaw developed by individual Peter Steinberger and first released in November 2025. OpenClaw was designed to fully integrate with all files and apps on a computer, including email and other messaging apps. Steinberger's work went viral in January 2026, and he spoke at Microsoft Build in June 2026 to endorse OpenClaw's official integration into Microsoft Windows.
 
+Desktop automation software products include:
+
+- [Claude Cowork](https://claude.com/product/cowork) by Anthropic
+- [Microsoft 365 Copilot Cowork](https://learn.microsoft.com/en-us/microsoft-365/copilot/cowork/)
+- [OpenClaw](https://openclaw.ai/)
+
 Additionally, there are many developer-focused products that integrate with local files to generate code. These include:
 
 - [Claude Code](https://claude.com/product/claude-code) by [Anthropic](https://www.anthropic.com/)
 - [GitHub Copilot](https://docs.github.com/en/copilot/get-started/what-is-github-copilot)
 - [OpenCode](https://opencode.ai/) by [Anomaly Innovations](https://anoma.ly/)
+
+New sign-ups for GitHub Copilot Pro, Pro+, and Student plans have been paused since 2026-04-20, and are still paused as of 2026-06-06:
+
+- [2026-04-20 - Changes to GitHub Copilot Individual plans - The GitHub Blog](https://github.blog/news-insights/company-news/changes-to-github-copilot-individual-plans/)
+- I checked on 2026-06-06 and was still unable to sign up.
 
 ### Surfaces
 
@@ -125,6 +144,10 @@ The simplest surface for GenAI is an AI chat like [copilot.com](https://copilot.
 - ...and more!
 
 There is value in describing the surface when discussing AI. Knowing the surface can help support agents describe how to customize AI behavior or search for information about features.
+
+### Tools (skills)
+
+Tools, sometimes called skills, are how the model interacts with the digital world. This includes searching the web, checking the current time, or reading and modifying files on your machine. (More coming soon)
 
 ## Techniques
 
@@ -156,7 +179,13 @@ There is value in describing the surface when discussing AI. Knowing the surface
 - I did a few minutes of manual refactoring before settling on the AI-generated approach after providing AI some guidance
 - I plan to do more work on this issue manually
 
-{/* "so fucking wrong" Ollama StarCoder example */}
+{/* todo "so fucking wrong" Ollama StarCoder example */}
+
+### Other
+
+{/* todo more details */}
+
+- [2026-06-06 - The Promise of Vibe Coding - The Dispatch](https://thedispatch.com/article/vibe-coding-artificial-intelligence-prayer/)
 
 ## Concerns
 
