@@ -60,16 +60,14 @@ A **product** is a wrapper around a model, a way to make it easier to work with 
 
 Newer prompt-based products will **ground** prompts, which just means they'll adjust prompts to make them more useful before giving them to the model (see [Microsoft's recent announcement](https://www.linkedin.com/events/thefutureofwork-reinventingprod7038508574142074880/comments/) at 21:04). A grounded prompt is supposed to be less likely to result in a **hallucination**. A model hallucinates whenever it outputs something that might seem true, but isn't. There are plenty of examples of this online, but [the early days of the new Bing](https://www.theverge.com/2023/2/15/23599072/microsoft-ai-bing-personality-conversations-spy-employees-webcams) take the cake: in one case, [it claimed Avatar 2 hadn't come out yet and proceeded to insult the user](https://www.reddit.com/r/bing/comments/110eagl/the_customer_service_of_the_new_bing_chat_is/). (Screenshots and stories can be made up, but I recreated the Avatar 2 hallucination myself, though I didn't get insulted.)
 
+{/* prettier-ignore */}
 <CaptionedImage
   src={BardJwstHallucination}
   alt="Google's Bard announcement tweet showing a false answer from Bard"
-  caption="Bard's famous $100 billion hallucination—JWST didn't take the first picture of an exoplanet, VLT did."
   border
-/>
+>Bard's famous $100 billion hallucination—JWST didn't take the first picture of an exoplanet, [VLT did](https://exoplanets.nasa.gov/resources/300/2m1207-b-first-image-of-an-exoplanet/).</CaptionedImage>
 
 Hallucinations are as dangerous as they sound, so it's important to remember that **models don't know the truth**. Models only guess words. It's up to the product, and ultimately the user, to fact-check anything that a model outputs. Another famous hallucination comes from Google: on February 6, [Google showcased Bard's very first public answer](https://twitter.com/Google/status/1622710355775393793)—and it was a hallucination. They didn't catch it and didn't put any disclaimers, and [Google subsequently lost $100 billion in market value](https://www.cnet.com/science/space/googles-chatgpt-rival-bard-called-out-for-nasa-webb-space-telescope-error/). To be fair, the old Bing still makes the same mistake when I search "which telescope took the first image of an exoplanet," but Google's failure to fact-check their own model shows just how easy it is to believe a hallucination. Always fact-check!
-
-(Here's [the first image of an exoplanet](https://exoplanets.nasa.gov/resources/300/2m1207-b-first-image-of-an-exoplanet/), taken in 2004.)
 
 ---
 
@@ -81,13 +79,12 @@ Do we need to know how any of these algorithms work? Well, do we need to know ho
 
 Let's summarize everything in a nice glossary, shall we?
 
+{/* prettier-ignore */}
 <dl>
   <dt>Artificial intelligence (AI)</dt>
   <dd>A poorly-defined term that basically means "seems smart," mostly used in marketing.</dd>
   <dt>Machine learning (ML)</dt>
-  <dd>
-    The process through which coders make a program that learns by example, not by instruction.
-  </dd>
+  <dd>The process through which coders make a program that learns by example, not by instruction.</dd>
   <dt>ML algorithm</dt>
   <dd> A bit of software that refines a model every time it takes in an input.</dd>
   <dt>Model</dt>
@@ -116,4 +113,5 @@ And the next entry: [Unlock the power of ChatGPT with prompt engineering](/blog/
 
 ---
 
-2026-04-11: First published to markwiemer.com. Changed glossary from unordered list to dictionary list. Added parenthetical paragraph linking to first image of an exoplanet due to [technical limitations](https://github.com/mark-wiemer/hello-hello/issues/94).
+- 2026-04-11: First published to markwiemer.com. Changed glossary from unordered list to dictionary list. Added parenthetical paragraph linking to first image of an exoplanet due to [technical limitations](https://github.com/mark-wiemer/hello-hello/issues/94).
+- 2026-06-08: Replaced parenthetical paragraph with link in caption (solved technical limitation). Fixed up dictionary list formatting.

@@ -7,7 +7,7 @@ postType: "notes"
 
 See also [ChatGPT and generative AI: An evergreen guide](/blog/evergreen-ai-guide), an index of my organized writings. Notes here are very messy and subject to change, but published for transparency 🤓
 
-My work focuses on text-based GenAI, but there may be a few notes here for image-, sound-, and video-based GenAI.
+My work focuses on text-based GenAI, but there may be a few notes here for image-, sound-, and video-based GenAI. Unless otherwise specified, GenAI and AI can be considered the same thing.
 
 I work for Microsoft, a major player in the GenAI space. I write these notes in my free time and all opinions are my own, unedited by anyone at Microsoft.
 
@@ -164,6 +164,8 @@ Tools, sometimes called skills, are how the model interacts with the digital wor
 {/* [Model] via [app] for each study */}
 {/* Progressed at [multiple] speed: took [duration] compared to an estimated [duration] due to [reason] */}
 
+Situations where people have tried GenAI to accomplish a task, and the results.
+
 ### Personal
 
 [2026-04-03 - Port more tests to run on Linux (dotnet/roslyn PR 83052) - Jared Parsons on GitHub](https://github.com/dotnet/roslyn/pull/83052)
@@ -183,13 +185,13 @@ Tools, sometimes called skills, are how the model interacts with the digital wor
 
 ### Other
 
-{/* todo more details */}
+{/* todo more details on 2026-06-06 article */}
 
-- [2026-06-06 - The Promise of Vibe Coding - The Dispatch](https://thedispatch.com/article/vibe-coding-artificial-intelligence-prayer/)
+[2026-06-06 - The Promise of Vibe Coding - The Dispatch](https://thedispatch.com/article/vibe-coding-artificial-intelligence-prayer/)
 
 ## Concerns
 
-AI is a huge technology (you probably already know this!)
+AI is a huge technology (you probably already know this!). The bigger the tech, the broader the area of concerns.
 
 ### Intellectual property theft
 
@@ -206,6 +208,40 @@ AI is often criticized as being sycophantic [citation needed], indulging in the 
 ### Stock market bubble
 
 There are concerns that the current stock market is too heavily indexed on GenAI companies, and that they're significantly overvalued. Concerned parties argue that this is a bubble, and it will pop with severe economic consequences [citation needed].
+
+### Problematic answers, aka hallucinations
+
+A common term in GenAI is "hallucination," a way to explain a confident-sounding answer that's incorrect. In this sense, AI is always hallucinating, but sometimes the hallucinations align with reality. The only thing that AI sees is the input that it receives: pre-training data from months or years ago and web search results based on your input. There is also a system prompt that usually provides guidance instead of information, and other tool results like the current time, memory information about you and past conversations, and other things. Overall, though, free chatbots rarely connect to very reliable information, they usually just read a few web search results.
+
+AI systems will almost always "believe" and repeat all input they've been given, even if that input is a fraudulent article or a repeated baseless claim. AI becomes more "grounded" when provided with reliable, trustworthy input from reputable news sources or trusted organizational data. AI output is always a hallucination based on the input it's currently seeing. A GenAI app's output is never based directly on reality, only on the text it's given.
+
+GenAI systems are designed to "doubt" input that has been consistently refuted in their pre-training data [citation needed], e.g. "George Washington is still alive." Additionally, during its supervised learning stage, AI is usually built to doubt false claims that likely appeared in pre-training data, e.g. false claims that "Trump won the 2020 election" or "vaccines cause autism." AI companies take care to ensure that these claims are correctly refuted instead of relying on pre-training data, which includes many repetitions of those false claims. AI apps also include a system prompt that the AI reads before responding to any user question, which will include similar instructions to refute strange claims and gather more information. Finally, if AI searches the web and finds conflicting information, it will likely continue searching until it has enough aligned claims one way or the other, or simply say "I don't know."
+
+Hallucinations are a major focus of research; lying bots are a big problem for every good actor. As more of the Internet becomes AI-generated, web-searching AI chatbots need to be able to handle much larger amounts of propaganda in addition to the pre-existing mountain of baseless and/or disproven claims repeated across the Internet by humans. Only an AI system that can reliably produce helpful answers will work in the long-term.
+
+[2023-04-07 - AI is a buzzword. Here are the real words to know - markwiemer.com](/blog/ai-buzzword-replacement/)
+
+- > there are four parts to any machine learning process: Gather data, feed it into an algorithm, validate the model, and use it to serve predictions.
+  >
+  > ...
+  >
+  > Newer prompt-based products will ground prompts, which just means they'll adjust prompts to make them more useful before giving them to the model ... A model hallucinates whenever it outputs something that might seem true, but isn't. There are plenty of examples of this online ...
+  >
+  > ...
+  >
+  > it's important to remember that models don't know the truth. Models only guess words. It's up to the product, and ultimately the user, to fact-check anything that a model outputs.
+
+[2025-12-04 - Do Self-Promotional "Best" Lists Boost ChatGPT Visibility? Study of 26,283 Source URLs - Ahrefs Blog](https://ahrefs.com/blog/best-lists-research/)
+
+- > Our latest research into top-of-the-funnel queries shows that recently updated "best X" lists were the most prominent page type in ChatGPT sources, including those where recommended brands ranked themselves in first place.
+  >
+  > There was also a correlation between a brand positioning highly in third-party lists and being more likely to feature in responses.
+
+[2026-02-18 - I hacked ChatGPT and Google's AI - and it only took 20 minutes - BBC](https://www.bbc.com/future/article/20260218-i-hacked-chatgpt-and-googles-ai-and-it-only-took-20-minutes)
+
+- > It turns out changing the answers AI tools give other people can be as easy as writing a single, well-crafted blog post almost anywhere online.
+
+{/* todo specific to Grok, infamous for ridiculous "positive" claims about owner Elon Musk and other controversies */}
 
 ### Data center problems (water, power, noise)
 
