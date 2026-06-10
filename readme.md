@@ -56,24 +56,13 @@ Quick reference for terms on this page:
 
 [Full glossary](https://markwiemer.com/glossary)
 
-## Setting up pnpm
+## Setting up Bun
 
-Note: I'm going to [move to Deno or Bun](https://github.com/mark-wiemer/hello-hello/issues/72)!
+This repo uses [Bun](https://bun.sh) as the package manager and runtime.
 
-This repo is organized as a `pnpm` workspace to filter out some of the noise.
-You can treat the root `package.json` as my minimal recommendations for any JS package.
-Although this repo isn't limited to JS, that's where I spend most of my time.
+Install Bun from https://bun.sh/docs/installation, then run `bun install` at the repo root.
 
-This is also my first repo with pnpm, I was an npm guy before but it's time for a change!
-
-I followed `https://pnpm.io/installation` on Linux Mint:
-
-```bash
-curl -fsSL https://get.pnpm.io/install.sh | sh -
-```
-
-This gave me `pnpm 10.23.0` bundled with Node 20.11.1, but I don't plan to use the bundled version.
-I use `fnm` to manage Node versions and I generally use an LTS version (22.21.1 as of writing). I don't use pnpm on Windows, see [/packages/pnpm/readme.md](/packages/pnpm/readme.md) for more info.
+The root `package.json` defines the workspace packages and can be treated as my minimal recommendations for any JS package. Although this repo isn't limited to JS, that's where I spend most of my time.
 
 ## Commit messages
 

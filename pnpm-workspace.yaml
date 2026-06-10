@@ -1,9 +1,0 @@
-packages:
-  - packages/astro
-  - packages/github/pages
-  - packages/luanti/doc-schema
-  - packages/unified
-
-onlyBuiltDependencies:
-  - esbuild
-  - sharp

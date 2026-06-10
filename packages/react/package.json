@@ -6,13 +6,13 @@
     "type": "module",
     "scripts": {
         "build": "tsc && vite build",
-        "preci": "npx playwright install",
+        "preci": "bunx playwright install",
         "ci": "start-server-and-test start:ci http-get://localhost:8080 playwright",
-        "format": "npm run format:inner -- --check .",
-        "format:fix": "npm run format:inner -- --write .",
+        "format": "bun run format:inner -- --check .",
+        "format:fix": "bun run format:inner -- --write .",
         "format:inner": "prettier",
-        "lint": "npm run lint:inner && echo No ESLint problems",
-        "lint:fix": "npm run lint:inner -- --fix",
+        "lint": "bun run lint:inner && echo No ESLint problems",
+        "lint:fix": "bun run lint:inner -- --fix",
         "lint:inner": "eslint --max-warnings 0",
         "packagejson": "sort-package-json --check",
         "packagejson:fix": "sort-package-json",
@@ -22,9 +22,9 @@
         "start:ci": "vite",
         "test": "vitest --run",
         "tsc": "tsc && echo No TS problems",
-        "validate": "npm run packagejson && npm run format && npm run lint && npm run validate:unfixable",
-        "validate:fix": "npm run packagejson:fix && npm run format:fix && npm run lint:fix && npm run validate:unfixable",
-        "validate:unfixable": "npm run tsc && npm run test && npm run ci && echo Ready for review!",
+        "validate": "bun run packagejson && bun run format && bun run lint && bun run validate:unfixable",
+        "validate:fix": "bun run packagejson:fix && bun run format:fix && bun run lint:fix && bun run validate:unfixable",
+        "validate:unfixable": "bun run tsc && bun run test && bun run ci && echo Ready for review!",
         "watch": "vitest"
     },
     "dependencies": {
@@ -51,6 +51,6 @@
         "vitest": "^3.2.4"
     },
     "engines": {
-        "node": "^20 || ^22"
+        "bun": "^1"
     }
 }
