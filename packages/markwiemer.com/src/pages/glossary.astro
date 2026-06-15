@@ -4,6 +4,7 @@ import Layout from "@/layouts/Layout.astro";
 type TermDef = [term: string, definition: string];
 
 const glossary: TermDef[] = [
+  //#region numbers and symbols
   [
     "501(c)(6)",
     "A designation for American non-profits focused around business and commerce. See also OpenJS Foundation.",
@@ -12,6 +13,8 @@ const glossary: TermDef[] = [
     ".NET",
     "Pronounced and sometimes written `dotnet`. An open-source software toolkit developed by Microsoft.",
   ],
+  //#endregion
+  //#region A
   ["AI", "artificial intelligence"],
   ["AI effect", `The reclassification of actions from "AI" to "not AI."`],
   ["app", "In software, an app is an application."],
@@ -31,6 +34,8 @@ const glossary: TermDef[] = [
     "Atom (text editor)",
     "A cross-platform, Electron-based, open-source, highly customizable editor maintained by GitHub and discontinued in 2022 in favor of Visual Studio Code.",
   ],
+  //#endregion
+  //#region B
   ["blog", "My blog is a homepage and a set of posts."],
   [
     "boxel",
@@ -49,6 +54,8 @@ const glossary: TermDef[] = [
     "browser",
     "A browser is a tool for listing, viewing, and navigating between records of a certain type: webpages, files, etc. In context, 'browser' may refer specifically to a web browser, file browser, or other particular browser.",
   ],
+  //#endregion
+  //#region C
   [
     "C#",
     "Pronounced and sometimes written `C Sharp`. An open-source programming language developed by Microsoft.",
@@ -103,6 +110,8 @@ const glossary: TermDef[] = [
     "czar",
     `In American politics, this is a mostly unofficial term to refer to officials appointed by the US president to handle specific issues. It follows a tradition of unofficial czar titles for simplification dating back to 1919's "industry czar." Trump made the term part of official titles for the first time in American politics during his second administration, naming a White House AI and Crypto Czar, Border Czar, and Pardon Czar. Despite this, the titles are still usually put in scare quotes by other publications. See also border czar.`,
   ],
+  //#endregion
+  //#region D
   ["deets", "details"],
   [
     "Deno",
@@ -117,6 +126,8 @@ const glossary: TermDef[] = [
     "The number that goes into the other one in division. In `6 / 2`, `2` is the divisor. See also dividend.",
   ],
   ["dotnet", ".NET"],
+  //#endregion
+  //#region E
   [
     "Ecma",
     "Organization that defines ECMAScript. Short for Ecma International, originally short for European Computer Manufacturers Association.",
@@ -138,7 +149,11 @@ const glossary: TermDef[] = [
     "ESM",
     "ECMAScript modules, the modern way of using multiple JS files in a project. See also CJS.",
   ],
+  //#endregion
+  //#region F
   ["FOSS", "free and open-source software. See also libre."],
+  //#endregion
+  //#region G
   ["GenAI", "generative AI"],
   [
     "generative AI",
@@ -165,6 +180,8 @@ const glossary: TermDef[] = [
     "GUI",
     "In software, a graphical user interface. The elements of the UI are presented visually, with graphical buttons. Popular web browsers like Chrome, Edge, and Safari are all GUI-based, as are nearly all consumer-grade software applications.",
   ],
+  //#endregion
+  //#region H
   ["Haiku (GenAI)", "Claude Haiku"],
   [
     "hardware",
@@ -178,11 +195,15 @@ const glossary: TermDef[] = [
     "HTML",
     "Hypertext Markup Language, a markup language designed to specify the content of a website, first released in 1993.",
   ],
+  //#endregion
+  //#region I
   [
     "IDE (software)",
     "Integrated development environment, an app that provides many tools for creating and reviewing software. Common pieces include a debugger, syntax highlighting, diff viewers, and integrated terminals. Modern IDEs are usually extensible with community-created plugins for advanced or niche tools. See also text editor, Visual Studio.",
   ],
   ["IRC", "Internet Relay Chat"],
+  //#endregion
+  //#region J
   // JavaScript is a category
   [
     "JavaScript",
@@ -190,7 +211,11 @@ const glossary: TermDef[] = [
   ],
   ["JavaScriptCore", "A JavaScript engine used by WebKit and Bun."],
   ["JS", "JavaScript"],
+  //#endregion
+  //#region K
   ["knowledge elicitation", "The process of gathering information from people."],
+  //#endregion
+  //#region L
   [
     "liberal hawk",
     "A politically liberal person, in the American sense of the term, who is also a war hawk. See also hawk.",
@@ -208,12 +233,16 @@ const glossary: TermDef[] = [
     "Luanti",
     "An open-source 'boxel' game creation system including a game engine, distribution platform, and application for players.",
   ],
+  //#endregion
+  //#region M
   [
     "magic (software)",
     "A value or file with no other direct reference in app source that's still valuable for the application or its developers. For example, `.gitignore` is a magic file used by Git for developers to mark files that don't need to be tracked. Also refers to file signatures, bytes used at the beginning of a file to denote the type.",
   ],
   ["MCVE", "minimum complete verifiable example"],
   ["Mocha", "A test framework for Node and web browsers owned by the OpenJS Foundation."],
+  //#endregion
+  //#region N
   [
     "natural language",
     "A language used by people to communicate, like English, Arabic, or American Sign Language. See also programming language.",
@@ -231,6 +260,8 @@ const glossary: TermDef[] = [
     "npm",
     "The default package manager for Node.js. Open-source and ultimately owned by Microsoft. See also package manager.",
   ],
+  //#endregion
+  //#region O
   ["Opus (GenAI)", "Claude Opus"],
   ["OpenAI", "A GenAI company and creator of ChatGPT."],
   ["OpenJSF", "OpenJS Foundation"],
@@ -242,6 +273,8 @@ const glossary: TermDef[] = [
     "open-source",
     "Software that is available to inspect, download, copy, and redistribute with minimal limitations. The most common limitation is that any distributed copies must also be open-source. Some open-source projects require monetary payment to access. See also libre.",
   ],
+  //#endregion
+  //#region P
   // package manager is a hub
   [
     "package manager",
@@ -260,6 +293,8 @@ const glossary: TermDef[] = [
     "programming language",
     "A language designed for developers to communicate with computers. Programming languages often include unambiguous syntax to ensure instructions are executed the same way every time.",
   ],
+  //#endregion
+  //#region R
   ["regex", "regular expression"],
   [
     "regular expression",
@@ -279,6 +314,8 @@ const glossary: TermDef[] = [
     "runtime",
     "A system used to both execute code and interact with 'external' software objects. For example, in JavaScript, an engine can run `1 + 1`, but only a runtime can interact with the `document` object on a webpage. Common JavaScript runtimes are Bun, Deno, and Node.js.",
   ],
+  //#endregion
+  //#region S
   [
     "scare quotes",
     `Quotation marks wrapped around a non-standard term, e.g. "Bacteria can 'walk' across the surface of your teeth."`,
@@ -297,6 +334,8 @@ const glossary: TermDef[] = [
     "Non-physical digital technology. This website is software, but your monitor or phone are not software. See also hardware.",
   ],
   ["Sonnet (GenAI)", "Claude Sonnet"],
+  //#endregion
+  //#region T
   [
     "TACO",
     `Trump Always Chickens Out. Coined May 2025 in reference to Trump-announced tariffs, which were often delayed or entirely cancelled. It's since been used to reference many of Trump's subsequent actions.`,
@@ -342,6 +381,8 @@ const glossary: TermDef[] = [
     "TypeScript",
     "An open-source superset of JavaScript that adds and enforces types. Originally, TypeScript had to be transpiled to JavaScript outside of most runtimes. Now, transpilation or direct TypeScript execution is bundled to varying degrees in common runtimes. As such, the terms 'JavaScript' and 'TypeScript' are becoming increasingly interchangeable. Ultimately owned by Microsoft.",
   ],
+  //#endregion
+  //#region U
   [
     "ubiquitous language",
     "A common set of terms used in a cross-disciplinary team to improve communication.",
@@ -369,6 +410,8 @@ const glossary: TermDef[] = [
     "User experience. In software, often refers to GUIs and the user journey through an application.",
   ],
   ["UX/UI", "See UI/UX."],
+  //#endregion
+  //#region V
   ["V8", "In software, V8 is a JavaScript engine used by Node.js, Chromium, and more."],
   ["VB", "Visual Basic"],
   [
@@ -388,12 +431,16 @@ const glossary: TermDef[] = [
     "voxel",
     "Volume element, often in reference to player-editable 3D terrain, like in Minecraft or Astroneer. See also boxel.",
   ],
+  //#endregion
+  //#region W
   ["WebKit", "The browser engine for Apple devices."],
   [
     "web technologies",
     "Usually in reference to HTML (content), CSS (style), and JavaScript (interactivity), the three technologies present in nearly all websites.",
   ],
   ["wrapper", "A piece of software whose core functionality is provided by the software it wraps."],
+  //#endregion
+  //#region Z
   [
     "Zed (text editor)",
     "A cross-platform Rust-based spiritual successor to Atom, open-sourced in 2024. Its name comes from `Z` as the last, or ultimate, and `ed` for editor.",
@@ -403,6 +450,7 @@ const glossary: TermDef[] = [
     "Zod (JavaScript)",
     "A TypeScript-based validation library that also works with vanilla JavaScript.",
   ],
+  //#endregion
 ];
 
 const toId = (term: string): string => {
