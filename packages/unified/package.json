@@ -23,5 +23,5 @@
   },
   "devDependencies": {
     "sort-package-json": "^3.4.0"
-  },
+  }
 }
