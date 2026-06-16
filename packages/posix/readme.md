@@ -79,3 +79,18 @@ echo Hello > out.log 2>&1
 echo "Hello
 world" | grep Hello
 ```
+
+### For loop
+
+[2.9.4.2 The for loop](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/V3_chap02.html#tag_19_09_04_03)
+
+```sh
+for name [ in [word ... ]]
+do
+    compound-list
+done
+```
+
+```sh
+for i in {1..3}; do echo Hello; done
+```

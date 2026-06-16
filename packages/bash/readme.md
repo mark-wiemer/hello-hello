@@ -6,7 +6,7 @@ See [my new-machine repo](https://github.com/mark-wiemer/new-machine) for instal
 This [How-To Geek article on the difference between terminal, shell, and console](https://www.howtogeek.com/terminal-vs-command-line-vs-shell-vs-console/) also covers TTY (teletypewriter).
 
 - [Bash reference manual](https://www.gnu.org/software/bash/manual/bash.html)
-  - "[Bash] is intended to be a conformant implementation of the IEEE POSIX Shell and Tools portion of the IEEE POSIX specification (IEEE Standard 1003.1)."
+  - "[Bash] is intended to be a conformant implementation of the IEEE [POSIX](../posix/readme.md) Shell and Tools portion of the IEEE POSIX specification (IEEE Standard 1003.1)."
   - `--posix` aligns more closely with POSIX. However, I don't use this flag.
   - "For almost every purpose, shell functions are preferable to aliases."
 
