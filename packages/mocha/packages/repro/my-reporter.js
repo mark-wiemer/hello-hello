@@ -2,7 +2,7 @@ import mocha from "mocha";
 
 // You can extend other reporters by changing the class you extend:
 // class MyReporter extends mocha.reporters.Spec {
-class MyReporter extends mocha.reporters.Base {
+export default class MyReporter extends mocha.reporters.Base {
   constructor(runner) {
     super(runner);
 
