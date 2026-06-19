@@ -4,33 +4,36 @@ import Layout from "@/layouts/Layout.astro";
 
 # Mocha 12
 
-Mocha 12 (sometimes "v12") is an upcoming release of [Mocha](/software/mocha) which updates internal dependencies while maintaining a stable end-user experience. There are no planned breaking changes between Mocha 11 and Mocha 12.
+Mocha 12 (sometimes "v12") is an upcoming release of [Mocha](/software/mocha) which updates internal dependencies while maintaining a stable end-user experience. There were originally no planned breaking changes between Mocha 11 and Mocha 12, but we added a few to spice things up (and make everyone's life easier in the long run).
 
-We released 11 unique betas through early April 2026, and I was personally aiming for a release candidate in early April and a full release in late April. However, I got super sick.
-
-Once I'm healthy, the plan is simple:
-
-1. Document breaking changes
-1. Open one last PR to migrate from CJS to ESM
-1. Review unrelated pending PRs while I wait
-1. Once we're converted to ESM, release the first Mocha 12 release candidate (12.0.0-rc.1)
-1. Iteratively fix bugs, but no new features in any release candidates
-1. Once we're confident in stability, release Mocha 12!
+We released 11 unique betas through early April 2026, and I was personally aiming for a release candidate in early April and a full release in late April. However, I got super sick in March and didn't recover until late May. It's now mid-June and we plan to have the first release candidate ready this weekend (by June 20). We haven't yet decided
 
 Dates and times are PDT (UTC-7). All links are to GitHub unless otherwise specified.
 
 ## Remaining work
 
-Items are ordered by ascending creation time.
+Items are ordered by ideal merge order.
 
-- [#5025: Bug: remove util.inherits / convert to classes](https://github.com/mochajs/mocha/issues/5025)
-  - I re-opened this on 2026-04-18 because the PR to update the docs wasn't correct
-    - [#5677: docs: switch util.inherits to class extends](https://github.com/mochajs/mocha/pull/5677)
-- [#5357: Mocha 12 Release Plan](https://github.com/mochajs/mocha/issues/5357)
-  - I asked about necessary docs on 2026-03-26
-  - I started drafting [#5848: chore: add v12 release notes](https://github.com/mochajs/mocha/pull/5848) on 2026-04-02
-- [#5400: Repo: Switch from CJS to ESM internally](https://github.com/mochajs/mocha/issues/5400)
-  - [Mostafa](https://github.com/mochajs/mocha/commits?author=mostafaNazari702) volunteered to do this, and I [gave him the green light](https://discord.com/channels/1169379988978536528/1492154019223834785/1498873979652276264) to open one big PR on 2026-04-28
+1. [#5025: Bug: remove util.inherits / convert to classes](https://github.com/mochajs/mocha/issues/5025)
+   1. Merge
+      [#6082: add back Netlify to v11.x branch](https://github.com/mochajs/mocha/pull/6082)
+   1. Merge
+      [#5677: docs: switch util.inherits to class extends](https://github.com/mochajs/mocha/pull/5677)
+1. [#5400: Repo: Switch from CJS to ESM internally](https://github.com/mochajs/mocha/issues/5400)
+   1. Merge
+      [#6078: feat!: change root package.json type to module](https://github.com/mochajs/mocha/pull/6078)
+1. [#5357: Mocha 12 Release Plan](https://github.com/mochajs/mocha/issues/5357)
+   1. Merge
+      [#6083: configure Release Please for RC](https://github.com/mochajs/mocha/pull/6083)
+   1. Release `12.0.0-rc.1`
+   1. Wait until we're comfortable releasing `12.0.0` (how long?)
+   1. Merge
+      [#6084: setup Release Please for v12 stable](https://github.com/mochajs/mocha/pull/6084)
+   1. Release `12.0.0`!
+   1. Merge
+      [#5848: add v12 release notes](https://github.com/mochajs/mocha/pull/5848)
+   1. Manually deploy `mochajs.org` to celebrate
+   1. Publish announcement on Discord!
 
 ## References
 
