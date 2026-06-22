@@ -8,6 +8,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
+    "cli": "bun src/cli/bin.ts",
     "start": "tsx src/index.ts",
     "test": "vitest",
     "test:ci": "vitest --run",
@@ -26,7 +27,8 @@
     "unist-util-visit": "^5.0.0",
     "vfile": "^6.0.3",
     "vfile-reporter": "^8.1.1",
-    "vitest": "^4.0.18"
+    "vitest": "^4.0.18",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@types/node": "^25.0.10",
