@@ -1,0 +1,83 @@
+# Builds an unsigned `.ipa`
+name: iOS Hello World - Build
+on:
+  push:
+    branches: [main, ios]
+    paths:
+      - packages/ios-hello-world/**
+      - .github/workflows/ios-hello-world-build.yml
+  pull_request:
+    paths:
+      - packages/ios-hello-world/**
+      - .github/workflows/ios-hello-world-build.yml
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build unsigned IPA
+    runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: packages/ios-hello-world
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Select latest stable Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+
+      - name: Show toolchain
+        run: |
+          xcodebuild -version
+          xcodebuild -list -project HelloWorld.xcodeproj
+
+      - name: Compute build name
+        run: |
+          set -euo pipefail
+          VERSION=$(xcodebuild -project HelloWorld.xcodeproj -showBuildSettings 2>/dev/null \
+            | awk '/^\s+MARKETING_VERSION =/ { print $3; exit }')
+          DATE=$(date -u +%Y.%m.%d)
+          BUILD_NAME="HelloWorld-${VERSION}-${DATE}.${{ github.run_number }}"
+          echo "BUILD_NAME=$BUILD_NAME" >> "$GITHUB_ENV"
+          echo "Build name: $BUILD_NAME"
+
+      - name: Build unsigned .app
+        run: |
+          set -euo pipefail
+          xcodebuild \
+            -project HelloWorld.xcodeproj \
+            -scheme HelloWorld \
+            -configuration Release \
+            -sdk iphoneos \
+            -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGN_ENTITLEMENTS="" \
+            clean build
+
+      - name: Package .app into .ipa
+        run: |
+          set -euo pipefail
+          APP_PATH="build/Build/Products/Release-iphoneos/HelloWorld.app"
+          if [ ! -d "$APP_PATH" ]; then
+            echo "::error::App not found at $APP_PATH"
+            ls -R build/Build/Products || true
+            exit 1
+          fi
+          rm -rf Payload "${BUILD_NAME}.ipa"
+          mkdir Payload
+          cp -R "$APP_PATH" Payload/
+          zip -qr "${BUILD_NAME}.ipa" Payload
+          echo "Built IPA:"
+          ls -lh "${BUILD_NAME}.ipa"
+
+      - name: Upload IPA artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.BUILD_NAME }}
+          # Path is relative to the repo root, not the job's working-directory.
+          path: packages/ios-hello-world/${{ env.BUILD_NAME }}.ipa
+          if-no-files-found: error

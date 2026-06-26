@@ -1,0 +1,10 @@
+# Build output
+build/
+DerivedData/
+Payload/
+*.ipa
+
+# macOS / Xcode user cruft
+.DS_Store
+xcuserdata/
+*.xcuserstate
