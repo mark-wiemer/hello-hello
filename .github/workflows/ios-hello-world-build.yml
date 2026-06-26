@@ -18,7 +18,7 @@ jobs:
     runs-on: macos-latest
     defaults:
       run:
-        working-directory: ios-hello-world
+        working-directory: packages/ios-hello-world
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -32,6 +32,16 @@ jobs:
         run: |
           xcodebuild -version
           xcodebuild -list -project HelloWorld.xcodeproj
+
+      - name: Compute build name
+        run: |
+          set -euo pipefail
+          VERSION=$(xcodebuild -project HelloWorld.xcodeproj -showBuildSettings 2>/dev/null \
+            | awk '/^\s+MARKETING_VERSION =/ { print $3; exit }')
+          DATE=$(date -u +%Y.%m.%d)
+          BUILD_NAME="HelloWorld-${VERSION}-${DATE}.${{ github.run_number }}"
+          echo "BUILD_NAME=$BUILD_NAME" >> "$GITHUB_ENV"
+          echo "Build name: $BUILD_NAME"
 
       - name: Build unsigned .app
         run: |
@@ -57,17 +67,17 @@ jobs:
             ls -R build/Build/Products || true
             exit 1
           fi
-          rm -rf Payload HelloWorld.ipa
+          rm -rf Payload "${BUILD_NAME}.ipa"
           mkdir Payload
           cp -R "$APP_PATH" Payload/
-          zip -qr HelloWorld.ipa Payload
+          zip -qr "${BUILD_NAME}.ipa" Payload
           echo "Built IPA:"
-          ls -lh HelloWorld.ipa
+          ls -lh "${BUILD_NAME}.ipa"
 
       - name: Upload IPA artifact
         uses: actions/upload-artifact@v4
         with:
-          name: HelloWorld-ipa
+          name: ${{ env.BUILD_NAME }}
           # Path is relative to the repo root, not the job's working-directory.
-          path: ios-hello-world/HelloWorld.ipa
+          path: packages/ios-hello-world/${{ env.BUILD_NAME }}.ipa
           if-no-files-found: error
