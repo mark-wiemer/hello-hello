@@ -4,11 +4,11 @@ on:
   push:
     branches: [main, ios]
     paths:
-      - ios-hello-world/**
+      - packages/ios-hello-world/**
       - .github/workflows/ios-hello-world-build.yml
   pull_request:
     paths:
-      - ios-hello-world/**
+      - packages/ios-hello-world/**
       - .github/workflows/ios-hello-world-build.yml
   workflow_dispatch:
 
