@@ -1,0 +1,78 @@
+name: iOS Hello World - Build (unsigned IPA)
+
+# Builds an UNSIGNED .ipa on a GitHub-hosted macOS runner.
+# No Apple certificates or secrets are needed here — code signing happens later
+# on your PC via Sideloadly/AltStore using your free Apple ID. See the README in
+# ios-hello-world/ for the install steps.
+
+on:
+  push:
+    branches: [main, ios]
+    paths:
+      - ios-hello-world/**
+      - .github/workflows/ios-hello-world-build.yml
+  pull_request:
+    paths:
+      - ios-hello-world/**
+      - .github/workflows/ios-hello-world-build.yml
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build unsigned IPA
+    runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: ios-hello-world
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Select latest stable Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+
+      - name: Show toolchain
+        run: |
+          xcodebuild -version
+          xcodebuild -list -project HelloWorld.xcodeproj
+
+      - name: Build unsigned .app
+        run: |
+          set -euo pipefail
+          xcodebuild \
+            -project HelloWorld.xcodeproj \
+            -scheme HelloWorld \
+            -configuration Release \
+            -sdk iphoneos \
+            -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGN_ENTITLEMENTS="" \
+            clean build
+
+      - name: Package .app into .ipa
+        run: |
+          set -euo pipefail
+          APP_PATH="build/Build/Products/Release-iphoneos/HelloWorld.app"
+          if [ ! -d "$APP_PATH" ]; then
+            echo "::error::App not found at $APP_PATH"
+            ls -R build/Build/Products || true
+            exit 1
+          fi
+          rm -rf Payload HelloWorld.ipa
+          mkdir Payload
+          cp -R "$APP_PATH" Payload/
+          zip -qr HelloWorld.ipa Payload
+          echo "Built IPA:"
+          ls -lh HelloWorld.ipa
+
+      - name: Upload IPA artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: HelloWorld-ipa
+          # Path is relative to the repo root, not the job's working-directory.
+          path: ios-hello-world/HelloWorld.ipa
+          if-no-files-found: error
