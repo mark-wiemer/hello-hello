@@ -1,10 +1,5 @@
-name: iOS Hello World - Build (unsigned IPA)
-
-# Builds an UNSIGNED .ipa on a GitHub-hosted macOS runner.
-# No Apple certificates or secrets are needed here — code signing happens later
-# on your PC via Sideloadly/AltStore using your free Apple ID. See the README in
-# ios-hello-world/ for the install steps.
-
+# Builds an unsigned `.ipa`
+name: iOS Hello World - Build
 on:
   push:
     branches: [main, ios]
