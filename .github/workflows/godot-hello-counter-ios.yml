@@ -65,7 +65,8 @@ jobs:
           xcodebuild -version
 
       - name: Import project (generate C# glue)
-        run: "$GODOT" --headless --import
+        run: |
+          "$GODOT" --headless --import
 
       - name: Export iOS Xcode project
         run: |
