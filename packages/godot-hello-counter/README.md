@@ -60,41 +60,48 @@ downloads Godot .NET 4.7, runs a headless import to generate the C# glue, then
 builds the project with `dotnet build`. This verifies the code compiles on
 every push.
 
-## iOS export (CI on a Mac runner — no local Mac needed)
+## iOS export (CI on a Mac runner — no local Mac needed) ✅ verified
 
-> **Heads up:** Godot 4.7's **C#/.NET iOS export is experimental and *requires
-> macOS*** — it refuses to run on Windows/Linux for .NET projects (verified
-> locally). So unlike the desktop build, the iOS `.ipa` can only be produced on
-> a Mac. The workflow below uses a GitHub-hosted Mac so you still don't need
-> your own.
+This produces an **unsigned** `HelloCounter.ipa` (~40 MB; arm64, with the C#
+code AOT-compiled into `HelloCounter.framework`) that you sideload with
+AltStore — proven working on a GitHub-hosted Mac, no local Mac required.
 
-The workflow at
+> Godot 4.7's C#/.NET iOS export is experimental and **requires macOS** (it
+> refuses to run on Windows/Linux for .NET projects), which is why this half
+> runs on `macos-latest`. The desktop build above still runs on Windows.
+
+The workflow
 [`.github/workflows/godot-hello-counter-ios.yml`](../../.github/workflows/godot-hello-counter-ios.yml)
 runs on `macos-latest` and:
 
 1. Installs the .NET `ios` workload + Godot 4.7 .NET editor + iOS export templates.
-2. Imports the project and runs
+2. Imports the project, then exports **project-only**:
    `godot --headless --export-debug "iOS" build/ios/HelloCounter.xcodeproj`.
-3. Builds the generated Xcode project with `xcodebuild` (unsigned,
-   `CODE_SIGNING_ALLOWED=NO`).
-4. Packages the `.app` into `HelloCounter.ipa` and uploads it as the
-   `HelloCounter-ios-ipa` artifact.
+3. Builds the generated Xcode project **unsigned** with
+   `xcodebuild -scheme HelloCounter ... CODE_SIGNING_ALLOWED=NO`.
+4. Zips the `.app` into `HelloCounter.ipa`, uploaded as artifact `HelloCounter-ios-ipa`.
 
-The export preset lives in [`export_presets.cfg`](export_presets.cfg)
-(bundle id `com.markwiemer.hellocounter`).
+### Why the project is configured the way it is (non-obvious requirements)
+
+Godot's headless C#/iOS export fails — often *silently* — without these. Each
+was needed to get a green build:
+
+| Setting / file | Why |
+| --- | --- |
+| `rendering/.../import_etc2_astc=true` in [`project.godot`](project.godot) | Mobile export requires VRAM ETC2/ASTC; without it `can_export()` returns false **with no error message**. |
+| `application/export_project_only=true` in [`export_presets.cfg`](export_presets.cfg) | Otherwise Godot runs `xcodebuild archive` + `-exportArchive` itself, which **require code signing**. Project-only stops after generating the (AOT-compiled) Xcode project so we can build it unsigned. |
+| [`HelloCounter.sln`](HelloCounter.sln) | C# export aborts with "no solution file exists"; the editor makes it on first GUI build, headless `--import` does not. |
+| [`icon.svg`](icon.svg) + `config/icon` | iOS export generates the AppIcon set from the project icon; with none it errors `Invalid icon (...): ''`. |
+| `app_store_team_id="AAAAAAAAAA"` (placeholder) | Export refuses an empty Team ID. Build is unsigned so the value is irrelevant; AltStore re-signs with your own identity. |
+| `xcodebuild -scheme` (not `-target`) | `-derivedDataPath` requires `-scheme`; Godot generates a `HelloCounter` scheme. |
 
 ### Get the `.ipa` and install it
 
 ```sh
-# after pushing iOS-affecting changes to main (or use --dispatch to trigger manually)
+# open a PR or push to main to trigger CI (or: bash scripts/fetch-ipa.sh --dispatch)
 bash scripts/fetch-ipa.sh            # waits for CI, downloads build/ipa/HelloCounter.ipa
 bash scripts/fetch-ipa.sh --help     # options
 ```
 
 Then sideload `HelloCounter.ipa` with **AltStore**, exactly as documented in
 [`packages/ios-hello-world`](../ios-hello-world/README.md#altstore).
-
-> Because C#/.NET iOS export is experimental, expect the **first** Mac-runner
-> run to possibly need a small tweak (e.g. the `xcodebuild -target` name — the
-> workflow prints `xcodebuild -list` right before building so you can confirm
-> it). Everything up to the Mac-only steps is verified.

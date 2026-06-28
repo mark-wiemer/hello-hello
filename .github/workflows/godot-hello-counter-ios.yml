@@ -7,10 +7,11 @@
 name: Godot Hello Counter - iOS
 on:
   push:
-    # godot-hello-counter lets this experimental C#/iOS export run on the
-    # feature branch so it can be validated before merge. Drop it once merged
-    # (it's just a stale branch ref at that point).
-    branches: [main, godot-hello-counter]
+    branches: [main]
+    paths:
+      - packages/godot-hello-counter/**
+      - .github/workflows/godot-hello-counter-ios.yml
+  pull_request:
     paths:
       - packages/godot-hello-counter/**
       - .github/workflows/godot-hello-counter-ios.yml
