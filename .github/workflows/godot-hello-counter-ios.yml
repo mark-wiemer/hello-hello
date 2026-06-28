@@ -87,7 +87,7 @@ jobs:
           cd build/ios
           xcodebuild \
             -project HelloCounter.xcodeproj \
-            -target HelloCounter \
+            -scheme HelloCounter \
             -configuration Debug \
             -sdk iphoneos \
             -derivedDataPath dd \
