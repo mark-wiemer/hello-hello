@@ -1,0 +1,55 @@
+# Builds the Godot C# project on Windows to verify it compiles
+name: Godot Hello Counter - Build
+on:
+  push:
+    branches: [main]
+    paths:
+      - packages/godot-hello-counter/**
+      - .github/workflows/godot-hello-counter-build.yml
+  pull_request:
+    paths:
+      - packages/godot-hello-counter/**
+      - .github/workflows/godot-hello-counter-build.yml
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build C# (Windows)
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: packages/godot-hello-counter
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Install Godot .NET (Mono) 4.7
+        shell: bash
+        run: |
+          set -euo pipefail
+          URL="https://github.com/godotengine/godot/releases/download/4.7-stable/Godot_v4.7-stable_mono_win64.zip"
+          curl -L "$URL" -o godot-mono.zip
+          unzip -q godot-mono.zip -d godot-mono
+          echo "GODOT=$(pwd)/godot-mono/Godot_v4.7-stable_mono_win64/Godot_v4.7-stable_mono_win64.exe" >> "$GITHUB_ENV"
+
+      - name: Show versions
+        shell: bash
+        run: |
+          dotnet --version
+          "$GODOT" --version
+
+      - name: Restore NuGet / generate Godot glue
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Headless editor import generates the .godot/ glue needed to build
+          "$GODOT" --headless --import 2>&1 || true
+
+      - name: Build C#
+        shell: bash
+        run: dotnet build HelloCounter.csproj --configuration Release

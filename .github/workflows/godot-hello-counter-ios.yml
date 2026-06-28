@@ -1,0 +1,117 @@
+# Exports the Godot C# game to an iOS Xcode project and builds an unsigned .ipa.
+#
+# Runs on a GitHub-hosted Mac because Godot 4.7's C#/.NET iOS export is
+# experimental and *requires macOS* (verified: the export refuses to run on
+# Windows/Linux for .NET projects). The .ipa is unsigned — sideload it with
+# AltStore, exactly like packages/ios-hello-world.
+name: Godot Hello Counter - iOS
+on:
+  push:
+    branches: [main]
+    paths:
+      - packages/godot-hello-counter/**
+      - .github/workflows/godot-hello-counter-ios.yml
+  workflow_dispatch:
+
+env:
+  GODOT_RELEASE: 4.7-stable
+  GODOT_TEMPLATE_DIR_NAME: 4.7.stable.mono
+
+jobs:
+  ios:
+    name: Export iOS unsigned IPA
+    runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: packages/godot-hello-counter
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Install .NET iOS workload
+        run: dotnet workload install ios
+
+      - name: Install Godot .NET editor + iOS export templates
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE="https://github.com/godotengine/godot/releases/download/${GODOT_RELEASE}"
+
+          curl -L "$BASE/Godot_v${GODOT_RELEASE}_mono_macos.universal.zip" -o godot.zip
+          unzip -q godot.zip
+          xattr -dr com.apple.quarantine Godot_mono.app || true
+          GODOT="$(pwd)/Godot_mono.app/Contents/MacOS/Godot"
+          chmod +x "$GODOT"
+          echo "GODOT=$GODOT" >> "$GITHUB_ENV"
+
+          curl -L "$BASE/Godot_v${GODOT_RELEASE}_mono_export_templates.tpz" -o templates.tpz
+          DEST="$HOME/Library/Application Support/Godot/export_templates/${GODOT_TEMPLATE_DIR_NAME}"
+          mkdir -p "$DEST"
+          unzip -q templates.tpz -d templates_extracted
+          mv templates_extracted/templates/* "$DEST/"
+
+      - name: Show toolchain
+        run: |
+          "$GODOT" --version
+          xcodebuild -version
+
+      - name: Import project (generate C# glue)
+        run: "$GODOT" --headless --import
+
+      - name: Export iOS Xcode project
+        run: |
+          set -euo pipefail
+          mkdir -p build/ios
+          "$GODOT" --headless --export-debug "iOS" build/ios/HelloCounter.xcodeproj
+          echo "--- generated project ---"
+          ls -la build/ios
+
+      - name: List Xcode targets/schemes
+        run: |
+          cd build/ios
+          # Helps debug the -target name below if Godot's naming ever changes.
+          xcodebuild -list -project HelloCounter.xcodeproj
+
+      - name: Build unsigned .app
+        run: |
+          set -euo pipefail
+          cd build/ios
+          xcodebuild \
+            -project HelloCounter.xcodeproj \
+            -target HelloCounter \
+            -configuration Debug \
+            -sdk iphoneos \
+            -derivedDataPath dd \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY="" \
+            clean build
+
+      - name: Package .app into .ipa
+        run: |
+          set -euo pipefail
+          APP_PATH="$(find build/ios/dd/Build/Products -maxdepth 3 -name '*.app' -type d | head -n 1)"
+          if [ -z "$APP_PATH" ]; then
+            echo "::error::No .app produced by xcodebuild"
+            find build/ios/dd/Build/Products || true
+            exit 1
+          fi
+          rm -rf Payload HelloCounter.ipa
+          mkdir Payload
+          cp -R "$APP_PATH" Payload/
+          zip -qr HelloCounter.ipa Payload
+          echo "Built IPA:"
+          ls -lh HelloCounter.ipa
+
+      - name: Upload IPA artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: HelloCounter-ios-ipa
+          # Path is relative to the repo root, not the job's working-directory.
+          path: packages/godot-hello-counter/HelloCounter.ipa
+          if-no-files-found: error

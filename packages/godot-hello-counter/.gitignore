@@ -1,0 +1,16 @@
+# Godot-specific
+.godot/
+# Note: .uid files are intentionally NOT ignored — Godot 4.4+ recommends
+# committing them so resource references survive file renames.
+
+# .NET / C#
+obj/
+.mono/
+data_*/
+mono_crash.*.json
+
+# Export artifacts
+build/
+*.ipa
+*.apk
+*.aab
