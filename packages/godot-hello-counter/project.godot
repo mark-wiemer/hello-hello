@@ -13,3 +13,7 @@ config/features=PackedStringArray("4.7", "C#", "Mobile")
 [dotnet]
 
 project/assembly_name="HelloCounter"
+
+[rendering]
+
+textures/vram_compression/import_etc2_astc=true
