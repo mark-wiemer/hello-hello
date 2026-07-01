@@ -15,6 +15,7 @@ export default defineConfig({
   redirects: {
     "/about": "/blog/who-am-i",
     "/ahkpp": "https://ahkpp.com",
+    "/blog/war-in-iran": "/blog/2026-war-in-iran",
     "/luanti": "/software/luanti",
     "/s/about": "/blog/who-am-i",
     "/s/luanti": "/software/luanti",
