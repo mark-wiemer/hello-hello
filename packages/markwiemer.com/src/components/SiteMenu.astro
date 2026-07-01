@@ -2,8 +2,15 @@
 import NavEntry from "@/components/NavEntry.astro";
 ---
 
-{/* prettier-ignore */}
-<button id="toggleMenu" aria-label="Menu">☰</button>
+<button id="toggleMenu" aria-label="Menu">
+  <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false">
+    <path
+      d="M3 4h18M3 12h18M3 20h18"
+      stroke="currentColor"
+      stroke-width="3.5"
+      stroke-linecap="round"></path>
+  </svg>
+</button>
 <div id="siteMenu" aria-expanded="false" inert>
   <nav>
     <h2>Here</h2>
