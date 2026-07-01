@@ -2,37 +2,38 @@
 /* https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascading_variables/Using_custom_properties */
 /* :root is a common practice for global reference */
 :root {
-  /* --body-bg-X is also used in Layout.astro */
-  --body-bg-dark: black;
-  --body-bg-light: white;
+  /* Variable name: attribute, element, variant */
+  --border-color-img-dark: var(--color-text-primary-dark);
+  --border-color-img-light: var(--color-text-primary-light);
   --border-radius-button: 4px;
-  --code-bg-dark: rgb(33, 38, 44);
-  --code-bg-light: rgb(214, 223, 233);
+  /* --color-body-X values are also used in Layout.astro */
+  --color-body-dark: black;
+  --color-body-light: white;
+  --color-code-dark: rgb(33, 38, 44);
+  --color-code-light: rgb(214, 223, 233);
+  --color-link-active-dark: var(--color-text-primary-dark);
+  --color-link-active-light: var(--color-text-primary-light);
+  --color-link-primary-dark: rgb(0, 162, 174);
+  --color-link-primary-light: rgb(9 115 131);
+  --color-link-visited-dark: rgb(219, 8, 219);
+  --color-link-visited-light: rgb(107, 2, 107);
+  --color-nav-dark: var(--color-body-dark);
+  --color-nav-light: var(--color-body-light);
+  --color-text-primary-dark: gainsboro;
+  --color-text-primary-light: black;
   --font-size-default: 18px;
   --font-size-small: 16px;
-  --img-border-dark: var(--text-primary-dark);
-  --img-border-light: var(--text-primary-light);
   --line-height-default: 27px;
   --line-height-small: 24px;
-  --link-active-dark: var(--text-primary-dark);
-  --link-active-light: var(--text-primary-light);
-  --link-primary-dark: rgb(0, 162, 174);
-  --link-primary-light: rgb(9 115 131);
-  --link-visited-dark: rgb(219, 8, 219);
-  --link-visited-light: rgb(107, 2, 107);
-  --nav-bg-dark: var(--body-bg-dark);
-  --nav-bg-light: var(--body-bg-light);
+  --padding-table: 10px;
+  --size-button-menu: 30px;
+  --transition-duration-nav: 0.2s;
   /* ideally is divisible by 1.1, 1.25, 1.5, 1.75, 2, 2.5, 3, 4, and 5 */
   /* these are the zoom levels of Microsoft Edge and likely other browsers */
   /* should also be close to 150px of course */
   /* 165px is my favorite candidate */
   /* fails at 1.75, 2, and 4, but passes all others */
-  --nav-open-width: 165px;
-  --nav-open-time: 0.2s;
-  --padding-table: 10px;
-  --text-primary-dark: gainsboro;
-  --text-primary-light: black;
-  --size-button-menu: 30px;
+  --width-nav-open: 165px;
   --z-index-nav-main: 1;
   --z-index-nav-button: 2;
 
@@ -47,47 +48,47 @@
   --breakpoint-medium: 1280px;
 
   /* Resolved theme properties (default: light) */
-  --body-bg: var(--body-bg-light);
-  --code-bg: var(--code-bg-light);
-  --img-border: var(--img-border-light);
-  --link-active: var(--link-active-light);
-  --link-primary: var(--link-primary-light);
-  --link-visited: var(--link-visited-light);
-  --nav-bg: var(--nav-bg-light);
-  --text-primary: var(--text-primary-light);
+  --border-color-img: var(--border-color-img-light);
+  --color-body: var(--color-body-light);
+  --color-code: var(--color-code-light);
+  --color-link-active: var(--color-link-active-light);
+  --color-link-primary: var(--color-link-primary-light);
+  --color-link-visited: var(--color-link-visited-light);
+  --color-nav: var(--color-nav-light);
+  --color-text-primary: var(--color-text-primary-light);
 }
 
 /* System dark preference (when user hasn't chosen "light") */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --body-bg: var(--body-bg-dark);
-    --code-bg: var(--code-bg-dark);
-    --img-border: var(--img-border-dark);
-    --link-active: var(--link-active-dark);
-    --link-primary: var(--link-primary-dark);
-    --link-visited: var(--link-visited-dark);
-    --nav-bg: var(--nav-bg-dark);
-    --text-primary: var(--text-primary-dark);
+    --border-color-img: var(--border-color-img-dark);
+    --color-body: var(--color-body-dark);
+    --color-code: var(--color-code-dark);
+    --color-link-active: var(--color-link-active-dark);
+    --color-link-primary: var(--color-link-primary-dark);
+    --color-link-visited: var(--color-link-visited-dark);
+    --color-nav: var(--color-nav-dark);
+    --color-text-primary: var(--color-text-primary-dark);
   }
 }
 
 /* Explicit dark theme override */
 :root[data-theme="dark"] {
-  --body-bg: var(--body-bg-dark);
-  --code-bg: var(--code-bg-dark);
-  --img-border: var(--img-border-dark);
-  --link-active: var(--link-active-dark);
-  --link-primary: var(--link-primary-dark);
-  --link-visited: var(--link-visited-dark);
-  --nav-bg: var(--nav-bg-dark);
-  --text-primary: var(--text-primary-dark);
+  --border-color-img: var(--border-color-img-dark);
+  --color-body: var(--color-body-dark);
+  --color-code: var(--color-code-dark);
+  --color-link-active: var(--color-link-active-dark);
+  --color-link-primary: var(--color-link-primary-dark);
+  --color-link-visited: var(--color-link-visited-dark);
+  --color-nav: var(--color-nav-dark);
+  --color-text-primary: var(--color-text-primary-dark);
 }
 /* #endregion Variables and theme */
 
 /* #region Pseudoelements */
 ::selection {
-  color: var(--body-bg);
-  background-color: var(--text-primary);
+  color: var(--color-body);
+  background-color: var(--color-text-primary);
 }
 /* #endregion Pseudoelements */
 
@@ -101,7 +102,7 @@
   padding-top: 40px;
   position: fixed;
   top: 0;
-  transition: var(--nav-open-time);
+  transition: var(--transition-duration-nav);
   width: 0;
   z-index: var(--z-index-nav-main);
 
@@ -126,12 +127,12 @@
     padding-left: 0;
   }
 
-  background-color: var(--nav-bg);
-  color: var(--text-primary);
+  background-color: var(--color-nav);
+  color: var(--color-text-primary);
 
   &[aria-expanded="true"] {
-    width: var(--nav-open-width);
-    border-right: 1px solid var(--text-primary);
+    width: var(--width-nav-open);
+    border-right: 1px solid var(--color-text-primary);
   }
 }
 
@@ -141,7 +142,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--text-primary);
+  border: 1px solid var(--color-text-primary);
   border-radius: var(--border-radius-button);
   margin-top: 4px;
   margin-left: calc(-1 * var(--border-radius-button));
@@ -149,7 +150,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  transition: transform var(--nav-open-time) ease;
+  transition: transform var(--transition-duration-nav) ease;
 }
 /* #endregion IDs */
 
@@ -169,9 +170,9 @@
 /* buttons to toggle settings */
 .toggle {
   background: none;
-  border: 1px solid var(--text-primary);
+  border: 1px solid var(--color-text-primary);
   border-radius: var(--border-radius-button);
-  color: var(--text-primary);
+  color: var(--color-text-primary);
   cursor: pointer;
   font-size: var(--font-size-small);
   line-height: var(--line-height-small);
@@ -192,7 +193,7 @@
 /* #region Complex */
 body.nav-open #toggleMenu {
   transform: translateX(
-    calc(var(--nav-open-width) - var(--size-button-menu) + var(--border-radius-button))
+    calc(var(--width-nav-open) - var(--size-button-menu) + var(--border-radius-button))
   );
   z-index: var(--z-index-nav-button);
 }
@@ -211,7 +212,7 @@ div.headerImages {
 }
 
 img.border {
-  border: 2px solid var(--img-border);
+  border: 2px solid var(--border-color-img);
 }
 
 figure.center {
@@ -227,23 +228,23 @@ a {
   border-radius: 5px;
 
   /* See docs/tests.md for link state test matrix */
-  color: var(--link-primary);
+  color: var(--color-link-primary);
   &:hover {
-    outline: 2px solid var(--link-primary);
+    outline: 2px solid var(--color-link-primary);
   }
   &:visited {
-    color: var(--link-visited);
+    color: var(--color-link-visited);
   }
   &:visited:hover {
-    outline: 2px solid var(--link-visited);
+    outline: 2px solid var(--color-link-visited);
   }
   &:visited:active {
-    outline: 2px solid var(--link-active);
-    color: var(--link-active);
+    outline: 2px solid var(--color-link-active);
+    color: var(--color-link-active);
   }
   &:active {
-    outline: 2px solid var(--link-active);
-    color: var(--link-active);
+    outline: 2px solid var(--color-link-active);
+    color: var(--color-link-active);
   }
 }
 
@@ -289,15 +290,15 @@ button {
     sans-serif;
   font-size: var(--font-size-default);
 
-  background-color: var(--body-bg);
-  color: var(--text-primary);
-  scrollbar-color: var(--text-primary) var(--body-bg);
+  background-color: var(--color-body);
+  color: var(--color-text-primary);
+  scrollbar-color: var(--color-text-primary) var(--color-body);
 }
 
 code {
   font-size: var(--font-size-small);
   line-height: var(--line-height-small);
-  background-color: var(--code-bg);
+  background-color: var(--color-code);
 }
 
 figcaption {
@@ -349,7 +350,7 @@ table {
 
 td,
 th {
-  border: 1px solid var(--text-primary);
+  border: 1px solid var(--color-text-primary);
   padding: 4px 8px;
 }
 
