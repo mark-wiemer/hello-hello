@@ -25,9 +25,11 @@ Items are in no particular order.
 - **Executive orders of the President of the United States: use federalregister.gov,**
   e.g. https://www.federalregister.gov/documents/2025/01/29/2025-02007/protecting-the-meaning-and-value-of-american-citizenship
   (#137)
+  - with link text of the structure: `date of filing - Executive Order ___: Order title - Federal Register`
 - **Supreme Court of the United States: use supremecourt.gov/search,**
   e.g. https://www.supremecourt.gov/search.aspx?filename=/docket/docketfiles/html/public/24a884.html
   (#136)
+  - with link text of the structure: `date of filing - No. ___: plaintiff v. defendant - Supreme Court`
 - **Wikipedia: do not cite.** Instead, cite primary sources. (#134)
 
 ## Filenames
