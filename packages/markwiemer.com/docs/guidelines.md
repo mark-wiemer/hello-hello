@@ -92,8 +92,12 @@ Items are in no particular order.
   [#147](https://github.com/mark-wiemer/hello-hello/issues/147)
 - **Avoid link text that starts or end with whitespace.**
   [#148](https://github.com/mark-wiemer/hello-hello/issues/148)
+- **For Constitutional amendments, use words, not numerals.** e.g. "Fourteenth Amendment," never "14th Amendment."
+  [#151](https://github.com/mark-wiemer/hello-hello/issues/151)
 
 ## Technical
+
+None of these can be enforced.
 
 - **Avoid a domain-specific language.**
 - **Avoid GitHub Flavored Markdown-specific features.**
