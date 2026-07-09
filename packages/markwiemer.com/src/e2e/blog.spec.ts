@@ -73,6 +73,7 @@ test.describe("blog index", () => {
       "genai",
       "im-finally-healthy",
       "immigration-to-us",
+      "donald-trump",
     ].reverse();
 
     const actualListedBlogIds = await getListedPosts(page);
