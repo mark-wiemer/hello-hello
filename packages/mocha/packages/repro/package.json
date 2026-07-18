@@ -10,10 +10,11 @@
   },
   "scripts": {
     "test:debug": "npx cross-env DEBUG=mocha:cli:mocha npm test",
-    "test": "cross-env NODE_ENV=test mocha"
+    "test": "cross-env NODE_ENV=test mocha",
+    "test:allow-uncaught": "cross-env NODE_ENV=test mocha --allow-uncaught"
   },
   "dependencies": {
-    "mocha": "12.0.0-beta-9.4"
+    "mocha": "12.0.0-rc.1"
   },
   "devDependencies": {
     "cross-env": "10.1.0",
