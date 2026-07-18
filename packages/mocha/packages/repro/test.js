@@ -1,5 +1,13 @@
-import { describe, it } from 'mocha'
+import { describe, after, it } from "mocha";
 
-describe('mocha', () => {
-  it('works', () => {})
-})
+describe("outer suite", () => {
+  after(() => {
+    throw new Error("outer cleanup failed");
+  });
+
+  describe("inner suite", () => {
+    it("fails for the real reason", () => {
+      throw new Error("inner test failed");
+    });
+  });
+});
