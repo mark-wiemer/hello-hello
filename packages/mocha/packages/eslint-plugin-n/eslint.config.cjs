@@ -1,5 +1,7 @@
 const { defineConfig, globalIgnores } = require("eslint/config");
-const { default: n } = require("eslint-plugin-n");
+const n = require("eslint-plugin-n");
+
+// console.log(require("eslint-plugin-n"));
 
 module.exports = defineConfig(
   {

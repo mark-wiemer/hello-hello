@@ -4,6 +4,6 @@
   },
   "dependencies": {
     "eslint": "10.7.0",
-    "eslint-plugin-n": "18.1.0"
+    "eslint-plugin-n": "18.2.0"
   }
 }
