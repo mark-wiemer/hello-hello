@@ -24,6 +24,7 @@ Items are in no particular order.
 
 ### Specific sources
 
+- **Court Listener:** e.g. `2024-08-19 - Bartz v. Anthropic PBC (4:24-cv-05417) - Court Listener`. Use "District Court" and "USCA" if needed.
 - **Executive orders of the President of the United States: use federalregister.gov,**
   e.g. https://www.federalregister.gov/documents/2025/01/29/2025-02007/protecting-the-meaning-and-value-of-american-citizenship
   [#137](https://github.com/mark-wiemer/hello-hello/issues/137)
