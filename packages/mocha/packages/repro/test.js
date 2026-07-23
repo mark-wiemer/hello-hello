@@ -1,13 +1,5 @@
-import { describe, after, it } from "mocha";
+import { it } from "mocha";
 
-describe("outer suite", () => {
-  after(() => {
-    throw new Error("outer cleanup failed");
-  });
+it("works", () => {
 
-  describe("inner suite", () => {
-    it("fails for the real reason", () => {
-      throw new Error("inner test failed");
-    });
-  });
 });

@@ -1,41 +1,22 @@
-# Issue 5925: parent-suite teardown error masks original failure from nested suite
+# Issue 6147: DEP0151
 
-[Issue 5925](https://github.com/mochajs/mocha/issues/5925)
+[Issue 6147](https://github.com/mochajs/mocha/issues/6147)
 
-Repro on Linux Mint 22.1 Cinnamon:
+Fails in RC 2:
 
 ```log
-$ npm run test
+$ npm test
 
 > test
-> cross-env NODE_ENV=test mocha
+> mocha --version; mocha
 
-(node:234721) [DEP0151] DeprecationWarning: No "main" or "exports" field defined in the package.json for /.../repro/node_modules/mocha/ resolving the main entry point "index.js", imported from /.../repro/test.js.
+12.0.0-rc.2
+(node:19839) [DEP0151] DeprecationWarning: No "main" or "exports" field defined in the package.json for /home/markw/my-stuff/hello-hello/packages/mocha/packages/repro/node_modules/mocha/ resolving the main entry point "index.js", imported from /home/markw/my-stuff/hello-hello/packages/mocha/packages/repro/test.js.
 Default "index" lookups for the main are deprecated for ES modules.
 (Use `node --trace-deprecation ...` to show where the warning was created)
 
 
-  outer suite
-    inner suite
-      1) fails for the real reason
-    2) "after all" hook in "outer suite"
+  ✔ works
 
-
-  0 passing (1ms)
-  2 failing
-
-  1) outer suite
-       inner suite
-         fails for the real reason:
-     Error: inner test failed
-      at Context.<anonymous> (file:///.../repro/test.js:10:13)
-      at process.processImmediate (node:internal/timers:534:21)
-
-  2) outer suite
-       "after all" hook in "outer suite":
-     Error: outer cleanup failed
-      at Context.<anonymous> (file:///.../repro/test.js:5:11)
-      at process.processImmediate (node:internal/timers:534:21)
+  1 passing (0ms)
 ```
-
-There should only be the "fails for the real reason" error, not the "after all" error.
