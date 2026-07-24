@@ -21,9 +21,10 @@ See also [Mark Wiemer's work](https://github.com/orgs/mark-wiemer-org/projects/1
   - [Roslyn](./packages/dotnet/roslyn/README.md): The .NET compiler platform, where [I work full-time](https://github.com/mwiemer-microsoft)
 - [Git](./packages/git/readme.md): Version control system, includes notes on Git LFS
 - [GitHub](./packages/github/readme.md): DevOps platform
-  - [Codespaces](./packages/github/codespaces/readme.md)
-  - [Pages](./packages/github/pages/readme.md)
-  - [REST API](./packages/github/rest/readme.md)
+  - [Codespaces](./packages/github/codespaces/readme.md): Cloud-based IDE
+  - [Pages](./packages/github/pages/readme.md): Personal websites
+  - [REST API](./packages/github/rest/readme.md): Bulk interactions
+- [Godot](./packages/godot/readme.md): Open-source game engine
 - [JavaScript](./packages/javascript/readme.md): Programming language for adding interactivity to websites
   - [jq (jqlang)](./packages/javascript/jq/readme.md): CLI tool for editing JSON files
 - [jj (Jujutsu)](./packages/jj/readme.md): Replacement for Git
