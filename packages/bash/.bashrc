@@ -290,6 +290,20 @@ PS1='\[\033[33m\]\w\[\033[36m\]`__git_ps1` \[\033[35m\]Node $(node --version)\[\
 
 #region packages
 
+#region Aspire
+export PATH="$HOME/.aspire/bin:$PATH"
+export ASPIRE_CONTAINER_RUNTIME=podman
+#endregion
+
+#region Bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+#endregion
+
+#region Deno
+. "/home/markw/.deno/env"
+#endregion
+
 #region dotnetup
 export PATH="/home/markw/.dotnetup:$PATH"
 #endregion
@@ -301,6 +315,15 @@ if [ -d "$FNM_PATH" ]; then
   eval "`fnm env`"
 fi
 export PATH=$HOME/.local/bin:$PATH
+#endregion
+
+#region my-stuff/scripts
+# see new-machine/linux
+export PATH="$HOME/my-stuff/scripts:$PATH"
+#endregion
+
+#region opencode
+export PATH=/home/markw/.opencode/bin:$PATH
 #endregion
 
 #region pnpm
@@ -315,28 +338,6 @@ esac
 . "$HOME/.cargo/env"
 #endregion
 
-#region Aspire
-export PATH="$HOME/.aspire/bin:$PATH"
-export ASPIRE_CONTAINER_RUNTIME=podman
-#endregion
-
-#region add my-stuff/scripts to PATH
-# see new-machine/linux
-export PATH="$HOME/my-stuff/scripts:$PATH"
-#endregion
-
-#region Bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-#endregion
-
-#region opencode
-export PATH=/home/markw/.opencode/bin:$PATH
-#endregion
-
-#region Deno
-. "/home/markw/.deno/env"
-#endregion
 
 #endregion packages
 
