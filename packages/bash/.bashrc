@@ -288,6 +288,12 @@ vlf() {
 PS1='\[\033[33m\]\w\[\033[36m\]`__git_ps1` \[\033[35m\]Node $(node --version)\[\033[0m\]\n\$ '
 #endregion
 
+#region packages
+
+#region dotnetup
+export PATH="/home/markw/.dotnetup:$PATH"
+#endregion
+
 #region fnm
 FNM_PATH="/home/markw/.local/share/fnm"
 if [ -d "$FNM_PATH" ]; then
@@ -324,10 +330,6 @@ export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 #endregion
 
-#region Chrome for Karma
-export CHROME_BIN="/usr/bin/chromium"
-#endregion
-
 #region opencode
 export PATH=/home/markw/.opencode/bin:$PATH
 #endregion
@@ -335,6 +337,9 @@ export PATH=/home/markw/.opencode/bin:$PATH
 #region Deno
 . "/home/markw/.deno/env"
 #endregion
+
+#endregion packages
+
 
 #region path deduplication (must be last region)
 # Remove duplicate entries from PATH
