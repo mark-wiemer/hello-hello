@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://bkt0ju0tsacxl"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_04hqx"]
+font_size = 36
+
+[node name="HUD" type="CanvasLayer"]
+
+[node name="Background" type="ColorRect" parent="."]
+offset_right = 1000.0
+offset_bottom = 50.0
+color = Color(0.120958, 0.133708, 0.214953, 1)
+
+[node name="Score" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -500.0
+offset_right = 500.0
+offset_bottom = 50.0
+grow_horizontal = 2
+text = "Score: 0"
+label_settings = SubResource("LabelSettings_04hqx")
+horizontal_alignment = 1
+vertical_alignment = 1
