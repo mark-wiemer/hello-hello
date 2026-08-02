@@ -21,7 +21,7 @@
     "editor.formatOnSave": false
   },
   "[csharp]": {
-    "editor.defaultFormatter": "csharpier.csharpier-vscode"
+    "editor.defaultFormatter": "ms-dotnettools.csharp"
   },
   "[css]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
