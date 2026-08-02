@@ -4,6 +4,12 @@
 It encourages using GDScript, it's Python-like DSL,
 but for a few reasons, I use C# whenever I can.
 
+## Index
+
+- [`hello-godot`](./hello-godot/readme.md): The Dodge the Creeps tutorial, written in GDScript
+- [`hello-godot-sharp`](./hello-godot-sharp/readme.md): A Snake game, written in C#
+- [`new-game-project`](./new-game-project/readme.md): An empty project for C#
+
 ## Why C#?
 
 Three reasons:
