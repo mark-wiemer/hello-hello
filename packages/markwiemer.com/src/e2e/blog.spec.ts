@@ -75,6 +75,7 @@ test.describe("blog index", () => {
       "immigration-to-us",
       "donald-trump",
       "blessing-in-disguise-2026",
+      "model-harness-piracy",
     ].reverse();
 
     const actualListedBlogIds = await getListedPosts(page);
