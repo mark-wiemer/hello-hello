@@ -1,16 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://bvct0by5jyane"]
+[gd_scene format=3 uid="uid://bvct0by5jyane"]
 
-[ext_resource type="Script" path="res://Main.cs" id="1_yqyh0"]
+[ext_resource type="Script" uid="uid://hlv5id56mb5s" path="res://Main.cs" id="1_yqyh0"]
 [ext_resource type="PackedScene" uid="uid://bkt0ju0tsacxl" path="res://hud.tscn" id="2_aerv8"]
 [ext_resource type="Texture2D" uid="uid://dkswm848id4eb" path="res://assets/bg.png" id="3_cd7be"]
 [ext_resource type="PackedScene" uid="uid://b6ikjhf0tif4a" path="res://snake_segment.tscn" id="4_vl7lm"]
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" unique_id=1068724194]
 script = ExtResource("1_yqyh0")
 SegmentScene = ExtResource("4_vl7lm")
 
-[node name="HUD" parent="." instance=ExtResource("2_aerv8")]
+[node name="HUD" parent="." unique_id=809567105 instance=ExtResource("2_aerv8")]
 
-[node name="Background" type="Sprite2D" parent="."]
+[node name="Background" type="Sprite2D" parent="." unique_id=323694071]
 position = Vector2(500, 550)
 texture = ExtResource("3_cd7be")
+
+[node name="Timer" type="Timer" parent="." unique_id=837827396]
+wait_time = 0.1
+
+[connection signal="timeout" from="Timer" to="." method="OnTimerTimeout"]

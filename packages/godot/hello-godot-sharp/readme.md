@@ -6,4 +6,6 @@ This project takes heavy inspiration and code snippets from [Beginner Godot Tuto
 
 This project uses [Git LFS](https://git-lfs.com/).
 
-Right now, this game renders a static 3-cell snake on a blue checkered background. There is no interactivity or animation.
+Right now, this game renders a 3-cell snake on a blue checkered background.
+The game is started by pressing W, A, S, or D to choose direction.
+There are no apples, no collision, no scoring, and no direction queueing.
