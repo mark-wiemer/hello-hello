@@ -19,6 +19,7 @@ See also [Mark Wiemer's work](https://github.com/orgs/mark-wiemer-org/projects/1
 - [Browser](./packages/browser/readme.md): Web browser extensions
 - [.NET (dotnet)](./packages/dotnet/readme.md): Open-source framework for any software
   - [Roslyn](./packages/dotnet/roslyn/README.md): The .NET compiler platform, where [I work full-time](https://github.com/mwiemer-microsoft)
+- [Five Dice](./packages/five-dice/readme.md): A Yahtzee-like poker dice game I created
 - [Git](./packages/git/readme.md): Version control system, includes notes on Git LFS
 - [GitHub](./packages/github/readme.md): DevOps platform
   - [Codespaces](./packages/github/codespaces/readme.md): Cloud-based IDE
