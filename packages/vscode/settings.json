@@ -704,7 +704,8 @@
     "https://schemastore.azurewebsites.net/": true,
     "https://unpkg.com/knip%406/schema-jsonc.json": true,
     "https://unpkg.com/knip%406/schema.json": true,
-    "https://www.schemastore.org/": true
+    "https://www.schemastore.org/": true,
+    "https://xunit.net": true
   },
   "chat.editing.confirmEditRequestRemoval": false,
   "security.promptForLocalFileProtocolHandling": false
