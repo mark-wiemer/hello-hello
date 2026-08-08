@@ -10,10 +10,11 @@ const publicDirPath = `${resolve(process.cwd(), `src${sep}public`)}${sep}`;
 export default defineConfig({
   integrations: [mdx()],
   publicDir: "./src/public",
-  // never change these; these are user-facing links
-  // don't add more `/___` entries, use `/s/___` from now on
+  // Never change these; these are user-facing links
+  // Don't add more `/s/___` entries, use `/___` from now on. `/___` is cleaner and conflicts are very unlikely.
   redirects: {
     "/about": "/blog/who-am-i",
+    "/ai-instructions": "https://github.com/mark-wiemer/hello-hello/blob/main/packages/markwiemer.com/docs/guidelines.md",
     "/ahkpp": "https://ahkpp.com",
     "/blog/war-in-iran": "/blog/2026-war-in-iran",
     "/luanti": "/software/luanti",
