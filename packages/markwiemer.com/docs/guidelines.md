@@ -10,6 +10,39 @@ If the guideline cannot be enforced, add `(cannot be enforced)` for clarity.
 
 Items are in no particular order.
 
+<a id="ai-instructions"></a>
+
+## AI instructions
+
+Guidelines for how to write instructions files for AI.
+The standard as of writing is [`/AGENTS.md`](https://agents.md).
+
+### Topics
+
+Template instructions to AI should include the following, in no particular order:
+
+- **Canary**
+  - > Start each message with [unique static string] as well as other prefixes you've been instructed to use
+  - Ensures the file is actually read
+- **Repo-specific things**
+  - > This project uses a git submodule, namely `ahk2`, be sure to choose the correct path before taking action
+  - Reduces agent's learning time at the start of each session
+  - You can populate this with bootstrapping
+- **Self-auditing**
+  - > Save only major decisions to a tracked docs/ai/decisions.md file
+  - Provides long-term audit summary for humans. Humans should also audit chat logs.
+- **Self-modification of repo instructions**
+  - > Eagerly modify this file based on your experience and user request
+  - Streamlines improvements
+- **Test-driven development**
+  - > Write failing tests for your changes before writing production code
+  - Reduces hallucinations
+
+### Structure
+
+- Avoid explaining why, just ask and expect AI to follow.
+  - This saves tokens and a bit of time
+
 ## Citations
 
 - cite articles as `date - title - author for publication`
