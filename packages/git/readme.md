@@ -52,31 +52,31 @@ git lfs status
 
 ## Submodules
 
-After first clone of repo:
+Set submodules to match remote monorepo:
 
 ```sh
 git submodule update --init --recursive
 ```
 
-Update all to match current remote:
+Update submodules to match each submodule remote:
 
 ```sh
 git submodule update --remote
 ```
 
-To add a new submodule:
+Add a new submodule:
 
 ```sh
 git submodule add url relative_path
 ```
 
-To remove a submodule:
+Remove a submodule:
 
 ```sh
 git rm path_to_submodule
 ```
 
-To rename a submodule, simply delete it and re-add it in a renamed folder.
+Rename a submodule: simply remove it and re-add it in a renamed folder.
 
 ## Tags
 
