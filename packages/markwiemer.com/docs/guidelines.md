@@ -27,7 +27,8 @@ Template instructions to AI should include the following, in no particular order
 - **Repo-specific things**
   - > This project uses a git submodule, namely `ahk2`, be sure to choose the correct path before taking action
   - Reduces agent's learning time at the start of each session
-  - You can populate this with bootstrapping
+  - You can populate this with bootstrapping:
+    ask AI once to "read the project and update its instructions file"
 - **Self-auditing**
   - > Save only major decisions to a tracked docs/ai/decisions.md file
   - Provides long-term audit summary for humans. Humans should also audit chat logs.
