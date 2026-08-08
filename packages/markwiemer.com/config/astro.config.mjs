@@ -14,7 +14,7 @@ export default defineConfig({
   // Don't add more `/s/___` entries, use `/___` from now on. `/___` is cleaner and conflicts are very unlikely.
   redirects: {
     "/about": "/blog/who-am-i",
-    "/ai-instructions": "https://github.com/mark-wiemer/hello-hello/blob/main/packages/markwiemer.com/docs/guidelines.md",
+    "/ai-instructions": "https://github.com/mark-wiemer/hello-hello/blob/main/packages/markwiemer.com/docs/guidelines.md#ai-instructions",
     "/ahkpp": "https://ahkpp.com",
     "/blog/war-in-iran": "/blog/2026-war-in-iran",
     "/luanti": "/software/luanti",
