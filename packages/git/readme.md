@@ -80,15 +80,15 @@ Rename a submodule: simply remove it and re-add it in a renamed folder.
 
 ## Tags
 
-```
+```sh
 git tag tagname
 ```
 
-```
+```sh
 git push --tags
 ```
 
-```
+```sh
 git tag -d tagname
 git push --delete remote tagname
 ```
