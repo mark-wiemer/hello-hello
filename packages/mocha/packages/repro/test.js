@@ -1,3 +1,3 @@
-it("t", async () => {
-  require("node:assert").deepEqual(Object.create(null), { a: 1 });
-});
+const Mocha = require('mocha');
+console.log(typeof Mocha);
+new Mocha();

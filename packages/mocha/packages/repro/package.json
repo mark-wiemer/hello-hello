@@ -1,21 +1,20 @@
 {
   "type": "commonjs",
   "//": {
-    "1": "this is just for notes, not used anywhere",
-    "2": "this project intentionally does not install mocha, see readme",
+    "1": "this prop is just for notes, not used anywhere",
     "dependencies": {
       "mocha-local": "file:../mocha",
-      "mocha-v11-stable": "11.7.6",
+      "mocha-v11-stable": "11.8.0",
       "mocha-v12-beta": "12.0.0-beta-9.6",
-      "mocha-v12-rc": "12.0.0-rc.5"
+      "mocha-v12-rc": "12.0.0-rc.6"
     }
   },
   "scripts": {
-    "test:debug": "npx cross-env DEBUG=mocha:cli:mocha npm test",
-    "test": "mocha --version; node --version; mocha; echo $?"
+    "test:debug": "npx cross-env DEBUG=mocha npm test",
+    "test": "echo Mocha $(mocha --version); echo Node $(node --version); node test.js; echo Exit code $?"
   },
   "dependencies": {
-    "mocha": "12.0.0-rc.5"
+    "mocha": "12.0.0-rc.6"
   },
   "devDependencies": {
     "cross-env": "10.1.0",
