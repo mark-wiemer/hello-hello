@@ -624,8 +624,6 @@
   "githubPullRequests.pullRequestDescription": "none",
   "githubPullRequests.pushBranch": "always",
   "githubPullRequests.terminalLinksHandler": "github",
-  "gitlens.ai.model": "vscode",
-  "gitlens.ai.vscode.model": "copilot:gpt-4.1",
   "godotTools.editorPath.godot4": "/home/markw/myStuff/apps/Godot_v4.3-stable_linux.x86_64",
   "javascript.updateImportsOnFileMove.enabled": "always",
   "markdown.preferredMdPathExtensionStyle": "includeExtension",
