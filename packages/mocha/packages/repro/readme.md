@@ -4,7 +4,7 @@
 
 Reproduction attempts are on Linux Mint 22.1 Cinnamon in Bash.
 
-## Cannot repro
+## Can repro
 
 ### should parse quoted flags from MOCHA_OPTIONS
 
@@ -16,10 +16,10 @@ $ npm run test:debug
 
 
 > test
-> mocha --grep 'foo bar' --color; echo; echo Exit code $?; echo Mocha $(mocha --version); echo Node $(node --version)
+> npx cross-env MOCHA_OPTIONS="--grep 'foo bar' --color" mocha; echo; echo Exit code $?; echo Mocha $(mocha --version); echo Node $(node --version)
 
   mocha:cli:mocha loaded opts {
-  _: [],
+  _: [ "bar'" ],
   diff: true,
   extension: [ 'js', 'cjs', 'mjs' ],
   package: false,
@@ -28,15 +28,12 @@ $ npm run test:debug
   timeout: 2000,
   ui: 'bdd',
   'watch-ignore': [ 'node_modules', '.git' ],
-  grep: 'foo bar',
+  grep: "'foo",
   color: true,
   config: false
 } +0ms
-  mocha:cli:mocha running Mocha in-process +1ms
-
-
-  0 passing (0ms)
-
+  mocha:cli:mocha running Mocha in-process +0ms
+Error: No test files found: "bar'"
 
 Exit code 0
   mocha:cli:mocha loaded opts { _: [], version: true } +0ms
@@ -44,8 +41,6 @@ Exit code 0
 Mocha 12.0.0-rc.6
 Node v22.21.1
 ```
-
-## Can repro
 
 ### should allow negative numeric values in MOCHA_OPTIONS
 
