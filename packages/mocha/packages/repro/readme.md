@@ -209,3 +209,81 @@ Exit code 0
 Mocha 11.8.0
 Node v22.21.1
 ```
+
+### preserves trailing backslashes in unquoted arguments
+
+11.8.0: prints help and exits with 0
+
+```
+$ npm run test
+
+> test
+> npx cross-env MOCHA_OPTIONS='--grep foo\' mocha; echo; echo Exit code $?; echo Mocha$(mocha --version); echo Node $(node --version)
+
+mocha inspect [spec..]
+
+Run tests with Mocha
+
+Commands
+  mocha inspect [spec..]  Run tests with Mocha                         [default]
+...
+    Docs: https://mochajs.org/
+
+✖ ERROR: null
+
+Exit code 0
+Mocha 11.8.0
+Node v22.21.1
+```
+
+12.0.0-rc.6: prints error and exits with 0
+
+```
+$ npm run test
+
+> test
+> npx cross-env MOCHA_OPTIONS='--grep foo\' mocha; echo; echo Exit code $?; echo Mocha$(mocha --version); echo Node $(node --version)
+
+/.../repro/node_modules/mocha/lib/mocha.cjs:562
+    this.options.grep = new RegExp(arg[1] || arg[0], arg[2]);
+                        ^
+
+SyntaxError: Invalid regular expression: /foo\/: \ at end of pattern
+    at new RegExp (<anonymous>)
+    at Mocha.grep (/.../repro/node_modules/mocha/lib/mocha.cjs:562:25)
+    at new Mocha (/.../repro/node_modules/mocha/lib/mocha.cjs:176:8)
+    at exports.handler (/.../repro/node_modules/mocha/lib/cli/run.cjs:140:17)
+    at runCommand (file:///.../repro/node_modules/mocha/lib/cli/cli.js:96:14)
+
+Node.js v22.21.1
+
+Exit code 0
+Mocha 12.0.0-rc.6
+Node v22.21.1
+```
+
+This PR (mark-wiemer-cli-parser-regression-repro): same as RC 6, prints error and exits with 0
+
+```
+$ npm run test
+
+> test
+> npx cross-env MOCHA_OPTIONS='--grep foo\' mocha; echo; echo Exit code $?; echo Mocha $(mocha --version); echo Node $(node --version)
+
+/home/markw/my-stuff/hello-hello/packages/mocha/packages/mocha/lib/mocha.cjs:562
+    this.options.grep = new RegExp(arg[1] || arg[0], arg[2]);
+                        ^
+
+SyntaxError: Invalid regular expression: /foo\/: \ at end of pattern
+    at new RegExp (<anonymous>)
+    at Mocha.grep (/home/markw/my-stuff/hello-hello/packages/mocha/packages/mocha/lib/mocha.cjs:562:25)
+    at new Mocha (/home/markw/my-stuff/hello-hello/packages/mocha/packages/mocha/lib/mocha.cjs:176:8)
+    at exports.handler (/home/markw/my-stuff/hello-hello/packages/mocha/packages/mocha/lib/cli/run.cjs:140:17)
+    at runCommand (file:///home/markw/my-stuff/hello-hello/packages/mocha/packages/mocha/lib/cli/cli.js:96:14)
+
+Node.js v22.21.1
+
+Exit code 0
+Mocha 12.0.0-rc.6.mark-wiemer-cli-parser-regression-repro
+Node v22.21.1
+```
