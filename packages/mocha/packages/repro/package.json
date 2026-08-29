@@ -1,5 +1,5 @@
 {
-  "type": "commonjs",
+  "type": "module",
   "//": {
     "1": "this prop is just for notes, not used anywhere",
     "dependencies": {
@@ -14,7 +14,7 @@
   },
   "scripts": {
     "test:debug": "npx cross-env DEBUG=mocha:* npm test",
-    "test": "node test.js; echo; echo Exit code $?; echo Mocha $(mocha --version); echo Node $(node --version)"
+    "test": "mocha --grep 'foo bar' --color; echo; echo Exit code $?; echo Mocha $(mocha --version); echo Node $(node --version)"
   },
   "dependencies": {
     "mocha": "12.0.0-rc.6"
