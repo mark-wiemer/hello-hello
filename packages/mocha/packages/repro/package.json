@@ -13,8 +13,8 @@
     }
   },
   "scripts": {
-    "test:debug": "npx cross-env DEBUG=mocha:* npm test",
-    "test": "mocha --grep 'foo bar' --color; echo; echo Exit code $?; echo Mocha $(mocha --version); echo Node $(node --version)"
+    "test:debug": "npx cross-env DEBUG=mocha:cli:mocha npm test",
+    "test": "mocha --timeout -1; echo; echo Exit code $?; echo Mocha $(mocha --version); echo Node $(node --version)"
   },
   "dependencies": {
     "mocha": "12.0.0-rc.6"

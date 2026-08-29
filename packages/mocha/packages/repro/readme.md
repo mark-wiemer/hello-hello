@@ -4,7 +4,9 @@
 
 Reproduction attempts are on Linux Mint 22.1 Cinnamon in Bash.
 
-Cannot repro `should parse quoted flags from MOCHA_OPTIONS` failure:
+## Cannot repro
+
+### should parse quoted flags from MOCHA_OPTIONS
 
 ```
 $ npm run test:debug
@@ -35,6 +37,29 @@ $ npm run test:debug
 
   0 passing (0ms)
 
+
+Exit code 0
+  mocha:cli:mocha loaded opts { _: [], version: true } +0ms
+  mocha:cli:mocha running Mocha in-process +1ms
+Mocha 12.0.0-rc.6
+Node v22.21.1
+```
+
+## Can repro
+
+### should allow negative numeric values in MOCHA_OPTIONS
+
+```
+$ npm run test:debug
+
+> test:debug
+> npx cross-env DEBUG=mocha:cli:mocha npm test
+
+
+> test
+> mocha --timeout -1; echo; echo Exit code $?; echo Mocha $(mocha --version); echo Node $(node --version)
+
+Error: Not enough arguments following: timeout
 
 Exit code 0
   mocha:cli:mocha loaded opts { _: [], version: true } +0ms
