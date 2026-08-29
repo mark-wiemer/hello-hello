@@ -14,13 +14,11 @@
   },
   "scripts": {
     "test:debug": "npx cross-env DEBUG=mocha:cli:mocha npm test",
-    "test": "npx cross-env MOCHA_OPTIONS=\"--grep 'foo bar' --color\" mocha; echo; echo Exit code $?; echo Mocha $(mocha --version); echo Node $(node --version)"
-  },
-  "dependencies": {
-    "mocha": "12.0.0-rc.6"
+    "test": "npx cross-env MOCHA_OPTIONS='--grep \"foo' mocha; echo; echo Exit code $?; echo Mocha $(mocha --version); echo Node $(node --version)"
   },
   "devDependencies": {
     "cross-env": "10.1.0",
+    "mocha": "file:../mocha",
     "semver": "7.7.4"
   }
 }
