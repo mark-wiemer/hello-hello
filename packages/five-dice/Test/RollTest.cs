@@ -5,19 +5,20 @@ namespace Test;
 public class RollTest
 {
     [Fact]
-    public void RollDie_3Sides()
+    public void RollDie_FullRange_NotOutside()
     {
-        var sides = 3;
+        var sides = 20;
+        var trials = sides * 50;
         List<int> results = [];
-        for (int i = 0; i < sides * 20; i++)
+        for (int i = 0; i < trials; i++)
         {
-            results = results.Append(Roll.RollDie(sides)).ToList();
+            results = [.. results, Roll.RollDie(sides)];
         }
         for (int i = 1; i <= sides; i++)
         {
             Assert.True(results.IndexOf(i) >= 0, i.ToString());
         }
-        results.RemoveAll(r => 1 <= r && r <= sides);
-        Assert.True(results.Count == 0);
+        results.RemoveAll(r => 1 <= r && r <= sides); // nothing outside the range
+        Assert.Empty(results);
     }
 }
