@@ -10,7 +10,7 @@ A Yahtzee-like dice poker game.
   ```
 - Test: Test project. Executed via:
   ```sh
-  dotnet run --project Test
+  dotnet test
   ```
 
 ## Guidelines
