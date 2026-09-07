@@ -706,6 +706,5 @@
     "https://xunit.net": true
   },
   "chat.editing.confirmEditRequestRemoval": false,
-  "security.promptForLocalFileProtocolHandling": false,
-  "aspire.aspireCliExecutablePath": "/home/markw/.aspire/bin/aspire"
+  "security.promptForLocalFileProtocolHandling": false
 }
