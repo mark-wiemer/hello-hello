@@ -11,4 +11,25 @@ public class Roll
     {
         return new Random().Next(1, sides + 1);
     }
+
+    public static int[] RollDice(int sides, int count)
+    {
+        if (sides <= 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(sides), "The number of sides must be greater than zero.");
+        }
+
+        if (count <= 0)
+        {
+            return [];
+        }
+
+        int[] results = new int[count];
+        for (int i = 0; i < count; i++)
+        {
+            results[i] = RollDie(sides);
+        }
+
+        return results;
+    }
 }
