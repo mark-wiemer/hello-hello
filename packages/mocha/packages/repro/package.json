@@ -13,7 +13,7 @@
   },
   "scripts": {
     "test:debug": "npx cross-env DEBUG=mocha:cli:mocha npm test",
-    "test": "mocha; echo; echo Exit code $?; echo Mocha $(mocha --version); echo Node $(node --version)"
+    "test": "mocha --parallel --jobs 2 --reporter json; echo; echo Exit code $?; echo Mocha $(mocha --version); echo Node $(node --version)"
   },
   "devDependencies": {
     "cross-env": "10.1.0",
