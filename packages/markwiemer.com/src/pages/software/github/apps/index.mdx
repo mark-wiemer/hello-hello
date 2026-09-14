@@ -10,7 +10,38 @@ I'm learning a new thing!
 - [Registering a GitHub App](https://docs.github.com/en/apps/creating-github-apps/registering-a-github-app/registering-a-github-app)
 - [Modifying a GitHub App registration](https://docs.github.com/en/apps/maintaining-github-apps/modifying-a-github-app-registration)
 
-And some private links just for me:
+<a id="auto-add"></a>
+
+## Automatically adding issues and PRs to a project
+
+In some scenarios, connecting a repo to a project can be complex.
+The best workflow I've found has been using a GitHub App attached to an organization.
+
+1. Create a new app with repo read, project write permissions in your org
+   1. Go to your organization's "new app" page, e.g. https://github.com/organizations/mark-wiemer-org/settings/apps/new/
+   1. Choose any name, description, and homepage URL.
+   1. Disable webhook activation.
+   1. For repository permissions, choose "issues: read-only" and "PRs: read-only"
+   1. For organization permissions, choose "projects: read and write"
+   1. "Where can this GitHub App be installed?" Only on this account.
+1. Generate and save the private key for the app
+1. Install the app to your organization account (e.g. https://github.com/organizations/mark-wiemer-org/settings/apps/mark-wiemer-app/installations)
+1. In your repo, add the secrets
+   1. Go to e.g. https://github.com/mark-wiemer/hello-hello/settings/secrets/actions
+   1. `APP_PRIVATE_KEY` is the saved private key, of the form:
+      ```
+      -----BEGIN RSA PRIVATE KEY-----
+      abcabc123123abcabc...
+      -----END RSA PRIVATE KEY-----
+      ```
+      (no trailing newline)
+   1. `APP_CLIENT_ID` comes from e.g. https://github.com/organizations/mark-wiemer-org/settings/apps/mark-wiemer-app
+1. Add the workflow to your repo, ref https://github.com/mark-wiemer/hello-hello/blob/main/.github/workflows/_global-add-to-project.yml
+1.
+
+## Private links
+
+Just for Mark's reference.
 
 - [hello-hello secrets - GitHub](https://github.com/mark-wiemer/hello-hello/settings/secrets/actions)
   - Link the installed app to my main repo
