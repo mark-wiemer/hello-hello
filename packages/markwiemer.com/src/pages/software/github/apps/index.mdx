@@ -35,9 +35,15 @@ The best workflow I've found has been using a GitHub App attached to an organiza
       -----END RSA PRIVATE KEY-----
       ```
       (no trailing newline)
-   1. `APP_CLIENT_ID` comes from e.g. https://github.com/organizations/mark-wiemer-org/settings/apps/mark-wiemer-app
+   1. `APP_CLIENT_ID` comes from e.g. https://github.com/organizations/mark-wiemer-org/settings/apps/mark-wiemer-app. This does not have to be a secret.
 1. Add the workflow to your repo, ref https://github.com/mark-wiemer/hello-hello/blob/main/.github/workflows/_global-add-to-project.yml
-1.
+
+Things should just work!
+
+Note that auto-adding PRs from forks will fail
+as forks don't have access to repo secrets.
+I suggest leaving those out and tracking them via
+backing issues or notifications, if possible.
 
 ## Private links
 
