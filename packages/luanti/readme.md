@@ -40,6 +40,10 @@ A minimal hello world mod to learn about the current tooling for mods written in
 Also consider using Luanti Tools.
 You shouldn't see any yellow or red squiggles.
 
+### sandbox-game
+
+A minimal game written in vanilla Lua to learn the Luanti API.
+
 ### void-game-ts
 
 A very minimal game written in TypeScript alongside my handwritten TypeScript API.
