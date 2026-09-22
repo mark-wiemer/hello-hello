@@ -8,11 +8,13 @@ Instructions are for Linux Mint 22.1 Cinnamon with Bash and Node 26.9.0.
 May not work on other setups.
 Feel free to [open an issue on GitHub](https://github.com/mark-wiemer/hello-hello/issues/new) for help.
 
+This script will move the game into the default Luanti install location:
+
 ```sh
 node scripts/build.js
 ```
 
-Then open or restart Luanti, and it should appear as `mw-sandbox`.
+Then open or restart Luanti, and the game should appear as `mw-sandbox`.
 
 ## Gameplay
 
@@ -21,7 +23,7 @@ All other behavior is default Luanti engine logic, including world gen.
 
 ## Mods
 
-Mods follw the `calm_train_case` naming convention.
+Mods follow the `calm_train_case` naming convention.
 
 ### minimal
 
