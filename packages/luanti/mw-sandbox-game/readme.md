@@ -8,6 +8,13 @@ Instructions are for Linux Mint 22.1 Cinnamon with Bash and Node 26.9.0.
 May not work on other setups.
 Feel free to [open an issue on GitHub](https://github.com/mark-wiemer/hello-hello/issues/new) for help.
 
+### Pre-requisites
+
+- Node.js 26.9.0+ (I recommend using [fnm](https://github.com/schniz/fnm#installation))
+- Luanti 5.17.0+
+
+### Building and running
+
 This script will move the game into the default Luanti install location:
 
 ```sh
@@ -30,3 +37,13 @@ Mods follow the `calm_train_case` naming convention.
 The minimum required features to get a game running.
 
 [minimal/readme.md](./mods/minimal/readme.md)
+
+## Scripts
+
+- `build.sh`: builds and deploys the game
+
+## Other files
+
+- `cspell.json`: enables spell-checking for documentation
+- `game.conf`: metadata necessary for Luanti
+- `package.json`: helps orchestrate Node.js scripts
