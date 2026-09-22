@@ -23,6 +23,13 @@ node scripts/build.js
 
 Then open or restart Luanti, and the game should appear as `mw-sandbox`.
 
+### Developer tools
+
+- Decrease view range: `-`
+- Increase view range: `=`
+- Toggle debug info: F5
+- Toggle profiler: F6
+
 ## Gameplay
 
 Currently minimal: Break and place blocks instantly.
