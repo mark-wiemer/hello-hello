@@ -54,11 +54,8 @@ All other behavior is default Luanti engine logic, including world gen.
 
 Mods follow the `calm_train_case` naming convention.
 
-### minimal
-
-The minimum required features to get a game running.
-
-[minimal/readme.md](./mods/minimal/readme.md)
+- [minimal](./mods/minimal/readme.md): The minimum required features to get a game running.
+- [stair](./mods/mw_stair/readme.md): Upright stairs (WIP)
 
 ## Scripts
 
