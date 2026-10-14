@@ -23,17 +23,32 @@ node scripts/build.js
 
 Then open or restart Luanti, and the game should appear as `mw-sandbox`.
 
-### Developer tools
+## Gameplay
+
+Currently minimal: Break and place blocks instantly.
+All other behavior is default Luanti engine logic, including world gen.
+
+## Developer tools
 
 - Decrease view range: `-`
 - Increase view range: `=`
 - Toggle debug info: F5
 - Toggle profiler: F6
 
-## Gameplay
+### Commands
 
-Currently minimal: Break and place blocks instantly.
-All other behavior is default Luanti engine logic, including world gen.
+- `/help` lists all available commands
+
+### Flying
+
+- `/grantme all` allows you to fly and perform all actions.
+- Enabled the "Double tap jump for fly" in settings for convenience
+- Default keybind for fly is K
+
+### Speed
+
+- Default keybind to enable fast mode is J
+- Default keybind to move fast is E (though I use Left Shift)
 
 ## Mods
 
