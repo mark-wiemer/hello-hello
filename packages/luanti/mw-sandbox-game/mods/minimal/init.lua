@@ -2,7 +2,7 @@ local ____exports = {}
 local prefix = "minimal"
 -- Register blocks
 local node_types = {"stone", "water_source", "river_water_source"}
-for ____, node_type in ipairs(node_types) do
+for _, node_type in ipairs(node_types) do
     local node_name = "minimal" .. ":" .. node_type
     core.register_node(node_name, {description = ("Essential node for mapgen alias \"mapgen_" .. node_type) .. "\"", tiles = {(prefix .. "_" .. node_type) .. ".png"}, groups = {default = 1}})
     core.register_alias("mapgen_" .. node_type, node_name)
