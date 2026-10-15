@@ -37,7 +37,7 @@ Paused in favor of [Make API docs parsable](https://github.com/luanti-org/docs.l
 
 Clone of the official [Minetest Game](https://github.com/luanti-org/minetest_game).
 
-### sandbox-game
+### mw_sandbox
 
 A minimal game written in vanilla Lua to learn the Luanti API.
 
