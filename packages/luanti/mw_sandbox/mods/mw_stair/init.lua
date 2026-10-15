@@ -21,6 +21,7 @@ core.register_node(
 				{-0.5, 0.0, 0.0, 0.5, 0.5, 0.5}, -- Top quarter (north present, south missing)
 			},
 		},
+        paramtype2 = "facedir",
         tiles = {node_tile},
     }
 )
