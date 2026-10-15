@@ -33,6 +33,10 @@ Source code for the game engine and application for players.
 Handwritten TypeScript API for Luanti.
 Paused in favor of [Make API docs parsable](https://github.com/luanti-org/docs.luanti.org/issues/296).
 
+### minetest_game
+
+Clone of the official [Minetest Game](https://github.com/luanti-org/minetest_game).
+
 ### sandbox-game
 
 A minimal game written in vanilla Lua to learn the Luanti API.

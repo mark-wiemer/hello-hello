@@ -28,3 +28,6 @@
 [submodule "packages/mocha/packages/mocha-examples"]
 	path = packages/mocha/packages/mocha-examples
 	url = https://github.com/mochajs/mocha-examples
+[submodule "packages/luanti/minetest_game"]
+	path = packages/luanti/minetest_game
+	url = https://github.com/luanti-org/minetest_game
