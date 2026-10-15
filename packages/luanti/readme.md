@@ -44,12 +44,6 @@ You shouldn't see any yellow or red squiggles.
 
 A minimal game written in vanilla Lua to learn the Luanti API.
 
-### void-game-ts
-
-A very minimal game written in TypeScript alongside my handwritten TypeScript API.
-Development slowed after I realized how annoying it would be to maintain a handwritten TypeScript API.
-Ref [Make API docs parsable](https://github.com/luanti-org/docs.luanti.org/issues/296).
-
 ## People
 
 | Name        | Pronouns  | IRC         | Discord username | Discord ID   | GitHub      | Website                                            |
