@@ -27,10 +27,18 @@ core.register_node(
 
 -- Register stair crafting recipe
 local stair_ingredient = "mw_minimal:stone"
+local craft_output = node_id .. " 4"
 core.register_craft({
-    output = node_id .. " 4",
+    output = craft_output,
     recipe = {
         {stair_ingredient, "",},
+        {stair_ingredient, stair_ingredient},
+    }
+})
+core.register_craft({
+    output = craft_output,
+    recipe = {
+        {"",               stair_ingredient},
         {stair_ingredient, stair_ingredient},
     }
 })
