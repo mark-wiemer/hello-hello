@@ -28,27 +28,9 @@ Then open or restart Luanti, and the game should appear as `mw-sandbox`.
 Currently minimal: Break and place blocks instantly.
 All other behavior is default Luanti engine logic, including world gen.
 
-## Developer tools
+### In-progress
 
-- Decrease view range: `-`
-- Increase view range: `=`
-- Toggle debug info: F5
-- Toggle profiler: F6
-
-### Commands
-
-- `/help` lists all available commands
-
-### Flying
-
-- `/grantme all` allows you to fly and perform all actions.
-- Enabled the "Double tap jump for fly" in settings for convenience
-- Default keybind for fly is K
-
-### Speed
-
-- Default keybind to enable fast mode is J
-- Default keybind to move fast is E (though I use Left Shift)
+[Stairs](./mods/mw_stair/readme.md)!
 
 ## Mods
 
@@ -66,3 +48,33 @@ Mods follow the `calm_train_case` naming convention.
 - `cspell.json`: enables spell-checking for documentation
 - `game.conf`: metadata necessary for Luanti
 - `package.json`: helps orchestrate Node.js scripts
+
+## Developer tools
+
+- Decrease view range: `-`
+- Increase view range: `=`
+- Toggle debug info: F5
+- Toggle profiler: F6
+
+### Luanti in-game commands
+
+Once in a world, you can type `/` to open the command palette / chat.
+
+- `/help` lists all available commands
+
+### Flying
+
+- `/grantme all` allows you to fly and perform all actions.
+- Enabled the "Double tap jump for fly" in settings for convenience
+- Default keybind for fly is K
+
+### Speed
+
+- Default keybind to enable fast mode is J
+- Default keybind to move fast is E (though I use Left Shift)
+
+### VS Code extensions
+
+These extensions aid in Lua development in general.
+
+- sumneko.lua
