@@ -73,6 +73,10 @@ Once in a world, you can type `/` to open the command palette / chat.
 - Default keybind to enable fast mode is J
 - Default keybind to move fast is E (though I use Left Shift)
 
+### Items
+
+- `/giveme mw_stair:stair` for example adds a stair to your inventory
+
 ### VS Code extensions
 
 These extensions aid in Lua development in general.
