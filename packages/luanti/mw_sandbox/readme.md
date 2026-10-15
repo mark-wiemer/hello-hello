@@ -2,6 +2,12 @@
 
 A minimal game written in vanilla Lua to learn the Luanti API and dev loop.
 
+## Gameplay
+
+Nearly all behavior is builtin to Luanti.
+This game adds basic stairs crafted in an L-shape from stone.
+See [gameplay.md](./docs/gameplay.md) for more details.
+
 ## Getting started
 
 Instructions are for Linux Mint 22.1 Cinnamon with Bash and Node 26.9.0.
@@ -36,58 +42,6 @@ node scripts/build.js
 
 Open or restart Luanti and the game should appear as `mw_sandbox`.
 
-## Mods
+## Learn more
 
-Mods follow the `calm_train_case` naming convention.
-
-- [minimal](./mods/minimal/readme.md): The minimum required features to get a game running.
-- [stair](./mods/mw_stair/readme.md): Upright stairs (WIP)
-
-## Scripts
-
-- `build.sh`: builds and deploys the game
-
-## Other files
-
-- `cspell.json`: enables spell-checking for documentation
-- `game.conf`: metadata necessary for Luanti
-- `package.json`: helps orchestrate Node.js scripts
-
-## Developer tools
-
-- Decrease view range: `-`
-- Increase view range: `=`
-- Toggle debug info: F5
-- Toggle profiler: F6
-
-### Luanti in-game commands
-
-Once in a world, you can type `/` to open the command palette / chat.
-
-- `/help` lists all available commands
-
-### Flying
-
-- `/grantme all` allows you to fly and perform all actions.
-- Enabled the "Double tap jump for fly" in settings for convenience
-- Default keybind for fly is K
-
-### Speed
-
-- Default keybind to enable fast mode is J
-- Default keybind to move fast is E (though I use Left Shift)
-
-### Items
-
-- `/giveme mw_stair:stair` for example adds a stair to your inventory
-
-### VS Code extensions
-
-These extensions aid in Lua development in general.
-
-- sumneko.lua
-
-### Glossary
-
-- **node** - equivalent to a Minecraft block
-- **facing (stairs)** - e.g. north-facing stairs have their "gap" (the missing quarter of the node) on the south. As such, upright north-facing stairs are stairs that you go up when facing north and moving forward.
+See [docs](./docs/readme.md) for more info.
