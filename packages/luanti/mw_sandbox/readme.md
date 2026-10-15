@@ -10,10 +10,13 @@ Feel free to [open an issue on GitHub](https://github.com/mark-wiemer/hello-hell
 
 ### Pre-requisites
 
-- Node.js 26.9.0+ (I recommend using [fnm](https://github.com/schniz/fnm#installation))
 - Luanti 5.17.0+
 
-### Building and running
+Highly recommended:
+
+- Node.js 26.9.0+ (I recommend using [fnm](https://github.com/schniz/fnm#installation))
+
+### Building with Node
 
 This script will move the game into the default Luanti install location:
 
@@ -21,16 +24,17 @@ This script will move the game into the default Luanti install location:
 node scripts/build.js
 ```
 
-Then open or restart Luanti, and the game should appear as `mw-sandbox`.
+### Building without Node
 
-## Gameplay
+1. Identify your user data directory
+   1. Open Luanti
+   1. Go to About
+   1. Click "Open User Data Directory"
+1. Copy this folder into your user data directory's `games` folder (e.g. this file would be `path/to/.minetest/games/mw_sandbox/readme.md`)
 
-Currently minimal: Break and place blocks instantly.
-All other behavior is default Luanti engine logic, including world gen.
+### Playing
 
-### In-progress
-
-[Stairs](./mods/mw_stair/readme.md)!
+Open or restart Luanti and the game should appear as `mw_sandbox`.
 
 ## Mods
 

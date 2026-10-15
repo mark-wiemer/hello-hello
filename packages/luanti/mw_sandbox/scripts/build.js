@@ -11,7 +11,7 @@ import { homedir } from "os";
 const root = process.cwd();
 const mods = join(root, "mods");
 const dist = join(root, "dist");
-const gameName = "mw-sandbox"
+const gameName = "mw_sandbox"
 const destination = join(homedir(), ".var", "app", "org.luanti.luanti", ".minetest", "games", gameName);
 
 rmSync(dist, { recursive: true, force: true });
