@@ -9,7 +9,7 @@ for _, node_type in ipairs(node_types) do
     core.register_node(
         node_name,
         {
-            description = "Essential node for mapgen alias \"" .. mapgen_name .. "\"",
+            description = mapgen_name,
             tiles = {(prefix .. "_" .. node_type) .. ".png"},
             groups = {default = 1}
         }
