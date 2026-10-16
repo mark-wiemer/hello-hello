@@ -1,4 +1,3 @@
-local ____exports = {}
 local prefix = "mw_minimal"
 
 -- Register blocks
@@ -20,4 +19,3 @@ end
 -- Register hand
 -- Roughly Minecraft dimensions (x = 0.5, y = 1, z = 4)
 core.register_item(":", {type = "none", wield_image = prefix .. "_hand.png", wield_scale = {x = 0.5, y = 1, z = 4}, tool_capabilities = {groupcaps = {default = {times = {0}}}}})
-return ____exports

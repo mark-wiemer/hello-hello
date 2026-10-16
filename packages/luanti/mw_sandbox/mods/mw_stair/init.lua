@@ -1,4 +1,3 @@
-local ____exports = {}
 local prefix = "mw_stair"
 
 -- Returns a `facedir` in [0, 1, 2, 3] that matches
@@ -72,5 +71,3 @@ core.register_craft({
         {stair_ingredient, stair_ingredient},
     }
 })
-
-return ____exports
