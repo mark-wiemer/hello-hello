@@ -6,6 +6,8 @@ A minimal game written in vanilla Lua to learn the Luanti API and dev loop.
 
 Nearly all behavior is builtin to Luanti.
 This game adds basic stairs crafted in an L-shape from stone.
+There are also lightstone blocks made from one stone.
+One lightstone block can be crafted back into stone.
 See [gameplay.md](./docs/gameplay.md) for more details.
 
 ## Getting started
