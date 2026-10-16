@@ -17,9 +17,9 @@ Mods follow the `calm_train_case` naming convention.
 
 ## Other files
 
-- `cspell.json`: enables spell-checking for documentation
-- `game.conf`: metadata necessary for Luanti
-- `package.json`: helps orchestrate Node.js scripts
+- `/cspell.json`: enables spell-checking for documentation
+- `/game.conf`: metadata necessary for Luanti
+- `/package.json`: helps orchestrate Node.js scripts
 
 ## Developer tools
 
@@ -54,8 +54,3 @@ Once in a world, you can type `/` to open the command palette / chat.
 These extensions aid in Lua development in general.
 
 - sumneko.lua
-
-## Glossary
-
-- **node** - equivalent to a Minecraft block
-- **facing (stairs)** - e.g. north-facing stairs have their "gap" (the missing quarter of the node) on the south. As such, upright north-facing stairs are stairs that you go up when facing north and moving forward.
