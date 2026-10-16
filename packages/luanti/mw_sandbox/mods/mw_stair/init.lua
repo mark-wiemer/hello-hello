@@ -21,13 +21,19 @@ core.register_node(
 				{-0.5, 0.0, 0.0, 0.5, 0.5, 0.5}, -- Top quarter (north present, south missing)
 			},
 		},
+        -- Rotates stair actually based on look yaw, not positions
+        -- Stair is facing toward player (player moving north can climb north-facing stair)
+        -- All stairs are currently upright
         -- https://github.com/mark-wiemer/hello-hello/issues/155
         on_place = function(itemstack, placer, pointed_thing)
+            -- facedir value for Luanti
             local param2 = 0
+            -- [0, 2*pi)
             local look_yaw_rad = placer:get_look_horizontal()
+            -- [0, 360)
             local look_yaw_deg = look_yaw_rad / 3.14159 * 180
-            -- primary cardinal direction
-            -- 0 = north, [315, 45)
+            -- primary cardinal direction [0, 1, 2, 3]
+            -- 0 = north, [315, 360), [0, 45)
             -- 1 = west, [45, 135)
             -- 2 = south, [135, 225)
             -- 3 = east, [225, 315)
