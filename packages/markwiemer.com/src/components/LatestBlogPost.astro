@@ -1,0 +1,27 @@
+---
+import CustomDate from "@/components/CustomDate.astro";
+import { oldestFirst } from "@/utils/date";
+import { getCollection } from "astro:content";
+
+const latestPost = (await getCollection("blog"))
+  .filter((post) => post.data.listed ?? true)
+  .sort((a, b) => oldestFirst(a.data, b.data))
+  .at(-1);
+---
+
+{
+  latestPost && (
+    <>
+      <a href={`/blog/${latestPost.id}`}>{latestPost.data.postTitle}</a>
+      {" ("}
+      <CustomDate date={latestPost.data.postDate} />
+      {latestPost.data.lastUpdated && (
+        <>
+          {", last updated "}
+          <CustomDate date={latestPost.data.lastUpdated} />
+        </>
+      )}
+      {")"}
+    </>
+  )
+}

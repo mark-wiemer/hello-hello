@@ -566,7 +566,6 @@
     "https://github.com/oven-sh": true,
     "https://docs.astro.build": true,
   },
-  "chat.viewSessions.enabled": false,
   "debug.onTaskErrors": "abort",
   "diffEditor.ignoreTrimWhitespace": false,
   "diffEditor.renderSideBySide": true,
@@ -713,4 +712,8 @@
   },
   "chat.editing.confirmEditRequestRemoval": false,
   "security.promptForLocalFileProtocolHandling": false,
+  "chat.defaultConfiguration": {
+    "approvals": "assisted",
+    "mode": "autopilot"
+  },
 }

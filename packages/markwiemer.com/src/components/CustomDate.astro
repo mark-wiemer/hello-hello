@@ -20,6 +20,4 @@ const { date } = Astro.props;
   }
   formatCustomDates();
   window.addEventListener("dateformat-changed", formatCustomDates);
-</script>
-
-<time datetime={date} class="custom-date">{date}</time>
+</script><time datetime={date} class="custom-date">{date}</time>

@@ -2,7 +2,7 @@ import HeaderImage from "@/components/HeaderImage.astro";
 import Mark2026 from "@/assets/2026-02-03-profile-square.webp";
 import Wynonna2024 from "@/assets/2024-04-29 Wynonna raincoat outside.webp";
 import Layout from "@/layouts/Layout.astro";
-import BlogPostList from "@/components/BlogPostList.astro";
+import LatestBlogPost from "@/components/LatestBlogPost.astro";
 
 <Layout pageTitle="Home">
 {/* prettier-ignore */}
@@ -17,28 +17,14 @@ The cute dog is Wynonna, my Australian shepherd 🥰
 
 ## What I'm doing
 
-### Writing
-
-I write about AI, mental health, politics, and my personal life.
-
-export const recentFilter = (post) => {
-  // Runs at build time, but better than nothing :)
-  const cutoff = new Date();
-  cutoff.setDate(cutoff.getDate() - 60);
-  return new Date(post.postDate) >= cutoff;
-};
-
-<BlogPostList filter={recentFilter} limit={5} />
-
-[All posts](/blog)
-
-### Other stuff
-
 - Maintaining [AHK++](https://ahkpp.com)
-- Maintaining [Mocha](/software/mocha)
 - Building little browser [games](/games/index.html)
 - Contributing to [Luanti](/software/luanti)
+- Maintaining [Mocha](/software/mocha)
 - Building [Roslyn](https://github.com/dotnet/roslyn/issues?q=sort%3Aupdated-desc%20involves%3Amwiemer-microsoft) for Microsoft
+- Writing about AI, mental health, politics, and my personal life.
+  - Latest post: <LatestBlogPost />
+  - [All posts](/blog)
 - Hanging out with Wynonna and friends (human friends, to be clear)
 
 ## Where I hang out
@@ -53,7 +39,7 @@ In alphabetical order, I spend time in these places:
 - [Mox Boarding House](https://www.moxboardinghouse.com/)
 - [Outside](https://en.wikipedia.org/wiki/Natural_environment)
 - [Seattle metropolitan area](https://en.wikipedia.org/wiki/Seattle_metropolitan_area)
-- [The Dispatch](https://disqus.com/by/dispatch-staging-ebb702d20be4bf3b930ab9185c241831/comments/) (outdated link since the updated comment platform. No new link is available as of 2026-07-17.)
+- [The Dispatch](https://thedispatch.com) as @mark-wiemer: [first comment](https://thedispatch.com/newsletter/dispatch-faith/social-justice-pope-leo-xiv-catholic-church/#comment-80088eb9-ad01-5067-a103-3f6a55912a5e)
 - [Wikipedia](https://en.wikipedia.org/wiki/User:mark-wiemer)
 
 ### Where I've been
