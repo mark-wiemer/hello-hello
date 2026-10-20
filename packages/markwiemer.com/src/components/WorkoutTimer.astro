@@ -1,0 +1,829 @@
+---
+import DurationInput from "@/components/DurationInput.astro";
+---
+
+<section class="workout-timer" aria-labelledby="workout-timer-heading">
+  <h2 id="workout-timer-heading">Workout timer</h2>
+  <p>Set the number of work reps and the time for each part of your session.</p>
+
+  <form id="workout-timer-form">
+    <fieldset id="workout-timer-settings" class="workout-timer__settings">
+      <legend>Session settings</legend>
+
+      <div class="workout-timer__field">
+        <label for="workout-reps">Reps</label>
+        <div class="workout-timer__rep-control">
+          <input id="workout-reps" name="reps" type="number" min="1" max="100" step="1" value="3" required />
+          <div class="workout-timer__stepper" role="group" aria-label="Adjust reps">
+            <button id="workout-reps-increase" type="button" aria-label="Increase reps">↑</button>
+            <button id="workout-reps-decrease" type="button" aria-label="Decrease reps">↓</button>
+          </div>
+        </div>
+      </div>
+
+      <DurationInput
+        id="workout-work-duration"
+        name="workDuration"
+        label="Time per rep (MM:SS)"
+        value="00:20"
+      />
+      <DurationInput
+        id="workout-prep-duration"
+        name="prepDuration"
+        label="Prep time (MM:SS)"
+        value="00:05"
+      />
+      <DurationInput
+        id="workout-setup-duration"
+        name="setupDuration"
+        label="Rest between reps (MM:SS)"
+        value="00:05"
+      />
+
+      <div class="workout-timer__speech">
+        <label for="workout-speech">
+          <input id="workout-speech" name="speech" type="checkbox" checked />
+          <span>Speak countdown and work/rest cues</span>
+        </label>
+        <small id="workout-speech-help" class="workout-timer__help workout-timer__speech-help">
+          Voice cues use your browser's speech. The timer can replace its own speech cue, but cannot
+          reliably pause music or audio from other apps.
+        </small>
+      </div>
+    </fieldset>
+
+    <div class="workout-timer__actions">
+      <button id="workout-start" type="submit">Start workout</button>
+      <button id="workout-pause" type="button" hidden>Pause</button>
+      <button id="workout-resume" type="button" hidden>Resume</button>
+      <button id="workout-reset" type="button" hidden>Reset</button>
+    </div>
+  </form>
+
+  <div class="workout-timer__share">
+    <label for="workout-settings-url">Saveable session URL</label>
+    <div class="workout-timer__share-row">
+      <input id="workout-settings-url" type="text" readonly />
+      <button id="workout-copy-url" type="button">Copy URL</button>
+    </div>
+    <p id="workout-share-status" role="status">Bookmark this page or copy the URL to save these settings.</p>
+  </div>
+
+  <p class="workout-timer__note">
+    Keep this page open and active for reliable cues; browsers may throttle timers and speech when
+    it is in the background.
+  </p>
+
+  <div class="workout-timer__display">
+    <div class="workout-timer__clock-row">
+      <div
+        id="workout-progress"
+        class="workout-timer__progress-pie"
+        role="progressbar"
+        aria-label="Current phase progress"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        aria-valuenow="0"
+      ></div>
+      <div class="workout-timer__clock-content">
+        <h3 id="workout-phase">Ready</h3>
+        <p id="workout-clock" role="timer" aria-label="Time remaining" aria-live="off">00:00</p>
+        <p id="workout-repetition"></p>
+        <p id="workout-countdown" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+  <p id="workout-announcement" class="workout-timer__visually-hidden" role="status"></p>
+</section>
+
+<script>
+  type PhaseType = "prep" | "work" | "rest";
+
+  interface Phase {
+    type: PhaseType;
+    durationSeconds: number;
+    rep: number;
+  }
+
+  interface TimerSettings {
+    reps: number;
+    workSeconds: number;
+    prepSeconds: number;
+    setupSeconds: number;
+    speech: boolean;
+  }
+
+  type TimerState = "ready" | "running" | "paused" | "complete";
+
+  const form = document.querySelector<HTMLFormElement>("#workout-timer-form");
+  const settings = document.querySelector<HTMLFieldSetElement>("#workout-timer-settings");
+  const repsInput = document.querySelector<HTMLInputElement>("#workout-reps");
+  const increaseRepsButton = document.querySelector<HTMLButtonElement>("#workout-reps-increase");
+  const decreaseRepsButton = document.querySelector<HTMLButtonElement>("#workout-reps-decrease");
+  const workDurationInput = document.querySelector<HTMLInputElement>("#workout-work-duration");
+  const prepDurationInput = document.querySelector<HTMLInputElement>("#workout-prep-duration");
+  const setupDurationInput = document.querySelector<HTMLInputElement>("#workout-setup-duration");
+  const speechCheckbox = document.querySelector<HTMLInputElement>("#workout-speech");
+  const startButton = document.querySelector<HTMLButtonElement>("#workout-start");
+  const pauseButton = document.querySelector<HTMLButtonElement>("#workout-pause");
+  const resumeButton = document.querySelector<HTMLButtonElement>("#workout-resume");
+  const resetButton = document.querySelector<HTMLButtonElement>("#workout-reset");
+  const phaseOutput = document.querySelector<HTMLHeadingElement>("#workout-phase");
+  const clockOutput = document.querySelector<HTMLElement>("#workout-clock");
+  const repetitionOutput = document.querySelector<HTMLParagraphElement>("#workout-repetition");
+  const progressOutput = document.querySelector<HTMLDivElement>("#workout-progress");
+  const countdownOutput = document.querySelector<HTMLParagraphElement>("#workout-countdown");
+  const announcementOutput = document.querySelector<HTMLParagraphElement>("#workout-announcement");
+  const speechHelp = document.querySelector<HTMLElement>("#workout-speech-help");
+  const shareUrlInput = document.querySelector<HTMLInputElement>("#workout-settings-url");
+  const copyUrlButton = document.querySelector<HTMLButtonElement>("#workout-copy-url");
+  const shareStatus = document.querySelector<HTMLParagraphElement>("#workout-share-status");
+
+  if (
+    !form ||
+    !settings ||
+    !repsInput ||
+    !increaseRepsButton ||
+    !decreaseRepsButton ||
+    !workDurationInput ||
+    !prepDurationInput ||
+    !setupDurationInput ||
+    !speechCheckbox ||
+    !startButton ||
+    !pauseButton ||
+    !resumeButton ||
+    !resetButton ||
+    !phaseOutput ||
+    !clockOutput ||
+    !repetitionOutput ||
+    !progressOutput ||
+    !countdownOutput ||
+    !announcementOutput ||
+    !speechHelp ||
+    !shareUrlInput ||
+    !copyUrlButton ||
+    !shareStatus
+  ) {
+    throw new Error("Workout timer markup is incomplete.");
+  }
+
+  const durationPattern = /^([0-5]\d):([0-5]\d)$/;
+  const speechSupported =
+    "speechSynthesis" in window && "SpeechSynthesisUtterance" in window;
+
+  if (!speechSupported) {
+    speechCheckbox.checked = false;
+    speechCheckbox.disabled = true;
+    speechHelp.textContent =
+      "Speech cues are not available in this browser. The visual countdown still works.";
+  }
+
+  let speechPreference = speechCheckbox.checked;
+  let state: TimerState = "ready";
+  let phases: Phase[] = [];
+  let phaseIndex = 0;
+  let phaseEndsAt = 0;
+  let pausedRemainingMilliseconds = 0;
+  let lastCountdown: number | null = null;
+  let animationFrameId: number | null = null;
+
+  function formatTime(totalSeconds: number) {
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+  }
+
+  function secondsFromValue(value: string) {
+    const match = durationPattern.exec(value);
+    if (!match) return null;
+    return Number(match[1]) * 60 + Number(match[2]);
+  }
+
+  function readDuration(input: HTMLInputElement, canSkip: boolean) {
+    input.setCustomValidity("");
+    const durationSeconds = secondsFromValue(input.value);
+    if (durationSeconds === null) return null;
+    if (durationSeconds === 0 && canSkip) return 0;
+    if (durationSeconds === 0) {
+      input.setCustomValidity("Enter a duration greater than zero.");
+      return null;
+    }
+
+    return durationSeconds;
+  }
+
+  function getCurrentSettings(): TimerSettings | null {
+    const reps = repsInput.valueAsNumber;
+    const workSeconds = secondsFromValue(workDurationInput.value);
+    const prepSeconds = secondsFromValue(prepDurationInput.value);
+    const setupSeconds = secondsFromValue(setupDurationInput.value);
+    if (
+      !Number.isInteger(reps) ||
+      reps < Number(repsInput.min) ||
+      reps > Number(repsInput.max) ||
+      workSeconds === null ||
+      workSeconds === 0 ||
+      prepSeconds === null ||
+      setupSeconds === null
+    ) {
+      return null;
+    }
+    return { reps, workSeconds, prepSeconds, setupSeconds, speech: speechPreference };
+  }
+
+  function readIntegerParameter(value: string | null) {
+    if (value === null || !/^\d+$/.test(value)) return null;
+    const parsed = Number(value);
+    return Number.isSafeInteger(parsed) ? parsed : null;
+  }
+
+  function applySettingsFromUrl() {
+    const url = new URL(window.location.href);
+    let invalidSetting = false;
+    const repsParameter = url.searchParams.get("reps");
+    if (repsParameter !== null) {
+      const reps = readIntegerParameter(repsParameter);
+      if (reps !== null && reps >= Number(repsInput.min) && reps <= Number(repsInput.max)) {
+        repsInput.value = String(reps);
+      } else {
+        invalidSetting = true;
+      }
+    }
+
+    const applyDurationParameter = (
+      name: string,
+      input: HTMLInputElement,
+      canSkip: boolean,
+    ) => {
+      const parameter = url.searchParams.get(name);
+      if (parameter === null) return;
+      const durationSeconds = readIntegerParameter(parameter);
+      if (
+        durationSeconds !== null &&
+        durationSeconds <= 3599 &&
+        (canSkip || durationSeconds > 0)
+      ) {
+        input.value = formatTime(durationSeconds);
+      } else {
+        invalidSetting = true;
+      }
+    };
+
+    applyDurationParameter("work", workDurationInput, false);
+    applyDurationParameter("prep", prepDurationInput, true);
+    applyDurationParameter("setup", setupDurationInput, true);
+    const speechParameter = url.searchParams.get("speech");
+    if (speechParameter !== null) {
+      if (speechParameter === "0" || speechParameter === "1") {
+        speechPreference = speechParameter === "1";
+        if (speechSupported) speechCheckbox.checked = speechPreference;
+      } else {
+        invalidSetting = true;
+      }
+    }
+    return invalidSetting;
+  }
+
+  function updateSavedUrl(session: TimerSettings) {
+    const url = new URL(window.location.href);
+    url.searchParams.set("reps", String(session.reps));
+    url.searchParams.set("work", String(session.workSeconds));
+    url.searchParams.set("prep", String(session.prepSeconds));
+    url.searchParams.set("setup", String(session.setupSeconds));
+    url.searchParams.set("speech", session.speech ? "1" : "0");
+    window.history.replaceState(null, "", `${url.pathname}${url.search}${url.hash}`);
+    shareUrlInput.value = url.href;
+    return url;
+  }
+
+  function syncSavedUrl() {
+    const session = getCurrentSettings();
+    if (session) updateSavedUrl(session);
+  }
+
+  function validateSettingsForUrl() {
+    const workSeconds = readDuration(workDurationInput, false);
+    const prepSeconds = readDuration(prepDurationInput, true);
+    const setupSeconds = readDuration(setupDurationInput, true);
+    if (!form.reportValidity() || workSeconds === null || prepSeconds === null || setupSeconds === null) {
+      return null;
+    }
+
+    return {
+      reps: repsInput.valueAsNumber,
+      workSeconds,
+      prepSeconds,
+      setupSeconds,
+      speech: speechPreference,
+    };
+  }
+
+  function updateRepStepper() {
+    const reps = repsInput.valueAsNumber;
+    increaseRepsButton.disabled = !Number.isFinite(reps) || reps >= Number(repsInput.max);
+    decreaseRepsButton.disabled = !Number.isFinite(reps) || reps <= Number(repsInput.min);
+  }
+
+  function adjustReps(amount: number) {
+    const currentReps = repsInput.valueAsNumber;
+    const minimum = Number(repsInput.min);
+    const maximum = Number(repsInput.max);
+    const startingValue = Number.isFinite(currentReps) ? currentReps : minimum;
+    repsInput.value = String(Math.max(minimum, Math.min(maximum, startingValue + amount)));
+    repsInput.dispatchEvent(new Event("input", { bubbles: true }));
+  }
+
+  function speakCue(text: string) {
+    if (!speechSupported || !speechCheckbox.checked) return;
+
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = document.documentElement.lang || "en-US";
+    window.speechSynthesis.speak(utterance);
+  }
+
+  function currentPhaseMessage(phase: Phase, reps: number) {
+    if (phase.type === "prep") return `Get ready for ${reps} reps.`;
+    if (phase.type === "work") return `Work, rep ${phase.rep} of ${reps}.`;
+    return `Rest between reps ${phase.rep} and ${phase.rep + 1}.`;
+  }
+
+  function displayPhase(shouldAnnounce: boolean, reps: number) {
+    const phase = phases[phaseIndex];
+    phaseOutput.textContent =
+      phase.type === "prep" ? "Prep" : phase.type === "work" ? "Work" : "Rest";
+    repetitionOutput.textContent = currentPhaseMessage(phase, reps);
+    announcementOutput.textContent = currentPhaseMessage(phase, reps);
+
+    if (!shouldAnnounce || phase.type === "prep") return;
+
+    if (phase.durationSeconds <= 3 && speechCheckbox.checked) {
+      const countdown = Math.ceil(Math.max(0, phaseEndsAt - Date.now()) / 1000);
+      speakCue(`${phase.type}, ${countdown}`);
+      lastCountdown = countdown;
+    } else {
+      speakCue(phase.type);
+    }
+  }
+
+  function stopAnimation() {
+    if (animationFrameId === null) return;
+    window.cancelAnimationFrame(animationFrameId);
+    animationFrameId = null;
+  }
+
+  function setProgress(ratio: number) {
+    const progress = Math.min(1, Math.max(0, ratio));
+    progressOutput.style.setProperty("--workout-progress-angle", `${progress * 360}deg`);
+    const percent = String(Math.round(progress * 100));
+    if (progressOutput.getAttribute("aria-valuenow") !== percent) {
+      progressOutput.setAttribute("aria-valuenow", percent);
+    }
+  }
+
+  function stopSpeech() {
+    if (speechSupported) window.speechSynthesis.cancel();
+  }
+
+  function completeWorkout(reps: number) {
+    stopAnimation();
+    state = "complete";
+    settings.disabled = false;
+    startButton.hidden = false;
+    pauseButton.hidden = true;
+    resumeButton.hidden = true;
+    resetButton.hidden = true;
+    phaseOutput.textContent = "Workout complete";
+    clockOutput.textContent = "00:00";
+    repetitionOutput.textContent = `Completed ${reps} reps.`;
+    setProgress(1);
+    countdownOutput.textContent = "";
+    announcementOutput.textContent = `Workout complete. ${reps} reps completed.`;
+  }
+
+  function updateTimer(reps: number) {
+    if (state !== "running") return;
+
+    const now = Date.now();
+    while (now >= phaseEndsAt) {
+      const nextPhaseIndex = phaseIndex + 1;
+      if (nextPhaseIndex >= phases.length) {
+        completeWorkout(reps);
+        return;
+      }
+
+      const nextPhaseStart = phaseEndsAt;
+      phaseIndex = nextPhaseIndex;
+      const phase = phases[phaseIndex];
+      phaseEndsAt = nextPhaseStart + phase.durationSeconds * 1000;
+      lastCountdown = null;
+      displayPhase(now < phaseEndsAt, reps);
+    }
+
+    const phase = phases[phaseIndex];
+    const remainingMilliseconds = Math.max(0, phaseEndsAt - now);
+    const remainingSeconds = Math.ceil(remainingMilliseconds / 1000);
+    const formattedTime = formatTime(remainingSeconds);
+    if (clockOutput.textContent !== formattedTime) clockOutput.textContent = formattedTime;
+    setProgress(1 - remainingMilliseconds / (phase.durationSeconds * 1000));
+
+    if (remainingSeconds > 0 && remainingSeconds <= 3) {
+      const countdown = String(remainingSeconds);
+      if (countdownOutput.textContent !== countdown) countdownOutput.textContent = countdown;
+      if (lastCountdown !== remainingSeconds) {
+        lastCountdown = remainingSeconds;
+        speakCue(countdown);
+      }
+    } else if (countdownOutput.textContent !== "") {
+      countdownOutput.textContent = "";
+    }
+  }
+
+  function buildPhases(reps: number, workSeconds: number, prepSeconds: number, setupSeconds: number) {
+    const session: Phase[] = [];
+
+    if (prepSeconds > 0) {
+      session.push({ type: "prep", durationSeconds: prepSeconds, rep: 0 });
+    }
+
+    for (let rep = 1; rep <= reps; rep++) {
+      session.push({ type: "work", durationSeconds: workSeconds, rep });
+      if (rep < reps && setupSeconds > 0) {
+        session.push({ type: "rest", durationSeconds: setupSeconds, rep });
+      }
+    }
+
+    return session;
+  }
+
+  function runAnimationFrame(reps: number) {
+    animationFrameId = null;
+    updateTimer(reps);
+    if (state === "running") {
+      animationFrameId = window.requestAnimationFrame(() => runAnimationFrame(reps));
+    }
+  }
+
+  function resetTimer() {
+    stopAnimation();
+    stopSpeech();
+    state = "ready";
+    phases = [];
+    phaseIndex = 0;
+    phaseEndsAt = 0;
+    pausedRemainingMilliseconds = 0;
+    lastCountdown = null;
+    settings.disabled = false;
+    startButton.hidden = false;
+    pauseButton.hidden = true;
+    resumeButton.hidden = true;
+    resetButton.hidden = true;
+    phaseOutput.textContent = "Ready";
+    clockOutput.textContent = "00:00";
+    repetitionOutput.textContent = "";
+    setProgress(0);
+    countdownOutput.textContent = "";
+    announcementOutput.textContent = "Ready.";
+  }
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const workSeconds = readDuration(workDurationInput, false);
+    const prepSeconds = readDuration(prepDurationInput, true);
+    const setupSeconds = readDuration(setupDurationInput, true);
+    if (!form.reportValidity() || workSeconds === null || prepSeconds === null || setupSeconds === null) {
+      return;
+    }
+
+    const reps = repsInput.valueAsNumber;
+    phases = buildPhases(reps, workSeconds, prepSeconds, setupSeconds);
+    phaseIndex = 0;
+    pausedRemainingMilliseconds = 0;
+    lastCountdown = null;
+    state = "running";
+    settings.disabled = true;
+    startButton.hidden = true;
+    pauseButton.hidden = false;
+    resumeButton.hidden = true;
+    resetButton.hidden = false;
+
+    const phase = phases[phaseIndex];
+    phaseEndsAt = Date.now() + phase.durationSeconds * 1000;
+    displayPhase(true, reps);
+    updateTimer(reps);
+    if (state === "running") {
+      animationFrameId = window.requestAnimationFrame(() => runAnimationFrame(reps));
+    }
+  });
+
+  pauseButton.addEventListener("click", () => {
+    updateTimer(repsInput.valueAsNumber);
+    if (state !== "running") return;
+
+    pausedRemainingMilliseconds = Math.max(0, phaseEndsAt - Date.now());
+    state = "paused";
+    stopAnimation();
+    stopSpeech();
+    pauseButton.hidden = true;
+    resumeButton.hidden = false;
+    announcementOutput.textContent = "Workout paused.";
+  });
+
+  resumeButton.addEventListener("click", () => {
+    state = "running";
+    phaseEndsAt = Date.now() + pausedRemainingMilliseconds;
+    pauseButton.hidden = false;
+    resumeButton.hidden = true;
+    announcementOutput.textContent = "Workout resumed.";
+    updateTimer(repsInput.valueAsNumber);
+    if (state === "running") {
+      animationFrameId = window.requestAnimationFrame(() => runAnimationFrame(repsInput.valueAsNumber));
+    }
+  });
+
+  resetButton.addEventListener("click", resetTimer);
+
+  increaseRepsButton.addEventListener("click", () => adjustReps(1));
+  decreaseRepsButton.addEventListener("click", () => adjustReps(-1));
+  repsInput.addEventListener("input", updateRepStepper);
+  form.addEventListener("input", () => {
+    if (speechSupported) speechPreference = speechCheckbox.checked;
+    syncSavedUrl();
+  });
+
+  copyUrlButton.addEventListener("click", async () => {
+    const session = validateSettingsForUrl();
+    if (!session) {
+      shareStatus.textContent = "Correct the session settings before copying the URL.";
+      return;
+    }
+
+    const url = updateSavedUrl(session);
+    if (!navigator.clipboard?.writeText) {
+      shareUrlInput.focus();
+      shareUrlInput.select();
+      shareStatus.textContent = "Clipboard access is unavailable; copy the selected URL manually.";
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(url.href);
+      shareStatus.textContent = "URL copied. Bookmark it to save these settings.";
+    } catch {
+      shareUrlInput.focus();
+      shareUrlInput.select();
+      shareStatus.textContent = "Clipboard access failed; copy the selected URL manually.";
+    }
+  });
+
+  if (applySettingsFromUrl()) {
+    shareStatus.textContent = "Some saved settings were invalid and ignored.";
+  }
+  updateRepStepper();
+  syncSavedUrl();
+</script>
+
+<style>
+  .workout-timer {
+    border: 1px solid currentColor;
+    border-radius: 8px;
+    margin: 1.5rem 0;
+    padding: 1rem;
+  }
+
+  .workout-timer h2 {
+    margin-top: 0;
+  }
+
+  .workout-timer__settings {
+    border: 1px solid currentColor;
+    display: grid;
+    gap: 0.75rem 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    padding: 1rem;
+  }
+
+  .workout-timer__settings legend {
+    font-weight: 600;
+    padding: 0 0.25rem;
+  }
+
+  .workout-timer__field {
+    display: grid;
+    gap: 0.25rem;
+  }
+
+  .workout-timer__field input {
+    background: var(--color-body);
+    border: 1px solid currentColor;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: var(--color-text-primary);
+    font: inherit;
+    min-height: 2.5rem;
+    padding: 0.25rem 0.5rem;
+    width: 100%;
+  }
+
+  .workout-timer__rep-control {
+    align-items: stretch;
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  #workout-reps {
+    appearance: textfield;
+    font-size: 1.5rem;
+    min-width: 0;
+    text-align: center;
+  }
+
+  #workout-reps::-webkit-inner-spin-button,
+  #workout-reps::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  .workout-timer__stepper {
+    display: grid;
+    grid-template-rows: repeat(2, minmax(2.75rem, 1fr));
+  }
+
+  .workout-timer__stepper button {
+    font-size: 1.5rem;
+    font-weight: 700;
+    min-width: 3rem;
+    padding: 0;
+  }
+
+  .workout-timer__speech {
+    display: grid;
+    gap: 0.5rem;
+    grid-column: 1 / -1;
+  }
+
+  .workout-timer__speech label {
+    align-items: center;
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .workout-timer__speech input {
+    flex: 0 0 auto;
+    height: 1.25rem;
+    width: 1.25rem;
+  }
+
+  .workout-timer__speech-help {
+    grid-column: 1 / -1;
+  }
+
+  .workout-timer__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .workout-timer__note {
+    font-size: var(--font-size-small);
+    line-height: var(--line-height-small);
+  }
+
+  .workout-timer__actions button,
+  .workout-timer__stepper button,
+  .workout-timer__share button {
+    background: var(--color-body);
+    border: 1px solid currentColor;
+    border-radius: 4px;
+    color: var(--color-text-primary);
+    cursor: pointer;
+    font: inherit;
+    padding: 0.25rem 0.75rem;
+  }
+
+  .workout-timer__stepper button {
+    min-height: 2.75rem;
+  }
+
+  .workout-timer__share {
+    display: grid;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .workout-timer__share-row {
+    align-items: stretch;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .workout-timer__share input {
+    background: var(--color-body);
+    border: 1px solid currentColor;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: var(--color-text-primary);
+    flex: 1 1 14rem;
+    font: inherit;
+    min-height: 2.75rem;
+    min-width: 0;
+    padding: 0.25rem 0.5rem;
+  }
+
+  .workout-timer__share button {
+    cursor: pointer;
+    font: inherit;
+  }
+
+  #workout-share-status {
+    font-size: var(--font-size-small);
+    line-height: var(--line-height-small);
+    margin: 0;
+  }
+
+  .workout-timer__actions button:focus-visible,
+  .workout-timer__field input:focus-visible,
+  .workout-timer__speech input:focus-visible,
+  .workout-timer__stepper button:focus-visible,
+  .workout-timer__share input:focus-visible,
+  .workout-timer__share button:focus-visible {
+    outline: 3px solid var(--color-link-primary);
+    outline-offset: 2px;
+  }
+
+  .workout-timer__actions button:disabled,
+  .workout-timer__stepper button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  .workout-timer__display {
+    border-top: 1px solid currentColor;
+    margin-top: 1rem;
+    padding-top: 1rem;
+  }
+
+  .workout-timer__clock-row {
+    align-items: center;
+    display: flex;
+    gap: clamp(0.5rem, 3vw, 1.5rem);
+    justify-content: center;
+  }
+
+  .workout-timer__progress-pie {
+    aspect-ratio: 1;
+    --workout-progress-angle: 0deg;
+    background: conic-gradient(
+      from 0deg,
+      var(--color-link-primary) 0deg var(--workout-progress-angle),
+      var(--color-code) var(--workout-progress-angle) 360deg
+    );
+    border: 2px solid currentColor;
+    border-radius: 50%;
+    flex: 0 0 clamp(4rem, 18vw, 7rem);
+    width: clamp(4rem, 18vw, 7rem);
+  }
+
+  .workout-timer__clock-content {
+    min-width: 0;
+    text-align: left;
+  }
+
+  .workout-timer__display h3 {
+    margin: 0;
+  }
+
+  #workout-clock {
+    font-size: clamp(2.5rem, 13vw, 5rem);
+    font-variant-numeric: tabular-nums;
+    line-height: 1.1;
+    margin: 0.25rem 0;
+    white-space: nowrap;
+  }
+
+  #workout-repetition {
+    margin: 0.25rem 0;
+  }
+
+  #workout-countdown {
+    font-size: 2rem;
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+    line-height: 1;
+    margin: 0.5rem 0 0;
+    min-height: 1em;
+  }
+
+  .workout-timer__visually-hidden {
+    clip: rect(0, 0, 0, 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+  }
+</style>
