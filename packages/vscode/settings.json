@@ -457,6 +457,7 @@
     "Semotiuk",
     "serot",
     "SETBASE",
+    "setlist",
     "SETSEL",
     "Shneiderman",
     "specialised",
@@ -714,6 +715,7 @@
   "security.promptForLocalFileProtocolHandling": false,
   "chat.defaultConfiguration": {
     "approvals": "assisted",
-    "mode": "autopilot"
+    "mode": "autopilot",
   },
+  "aspire.aspireCliExecutablePath": "/home/markw/.aspire/bin/aspire",
 }
