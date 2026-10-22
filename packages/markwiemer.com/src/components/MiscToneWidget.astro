@@ -1,0 +1,372 @@
+<section id="tone-widget" aria-labelledby="tone-widget-title">
+  <h2 id="tone-widget-title">Tone generator</h2>
+  <p>Choose a pitch and press Play.</p>
+  <p id="tone-error" role="alert" hidden></p>
+
+  <div class="controls">
+    <div class="control">
+      <label for="tone-pitch">Pitch</label>
+      <select id="tone-pitch" aria-describedby="tone-pitch-help">
+        <option value="250">Low</option>
+        <option value="850" selected>Medium</option>
+        <option value="4000">High</option>
+        <option value="custom">Custom…</option>
+      </select>
+      <small id="tone-pitch-help">
+        Pick a preset, or open Advanced to enter an exact value.
+      </small>
+    </div>
+
+    <details id="tone-frequency-details">
+      <summary>Advanced: exact frequency</summary>
+      <div class="control">
+        <label for="tone-frequency-exact">
+          Frequency (Hz) <output id="tone-frequency-value" for="tone-frequency-exact">850 Hz</output>
+        </label>
+        <input
+          id="tone-frequency-exact"
+          type="number"
+          min="20"
+          max="20000"
+          step="1"
+          value="850"
+          inputmode="numeric"
+        />
+      </div>
+    </details>
+
+    <div class="control">
+      <label for="tone-volume">Volume <output id="tone-volume-value" for="tone-volume">20%</output></label>
+      <input
+        id="tone-volume"
+        type="range"
+        min="0"
+        max="100"
+        step="1"
+        value="20"
+        aria-describedby="tone-volume-help"
+      />
+      <small id="tone-volume-help">
+        Start with your device volume low, especially when using headphones.
+      </small>
+    </div>
+
+    <button id="tone-play-stop" type="button">Play tone</button>
+  </div>
+</section>
+
+<script>
+  type PlaybackState =
+    | "stopped"
+    | "starting"
+    | "playing";
+
+  const widget = document.querySelector<HTMLElement>("#tone-widget");
+  if (!widget) {
+    throw new Error("Tone widget markup is missing.");
+  }
+
+  const pitchPreset = widget.querySelector<HTMLSelectElement>("#tone-pitch");
+  const frequencyNumberInput = widget.querySelector<HTMLInputElement>("#tone-frequency-exact");
+  const frequencyDetails = widget.querySelector<HTMLDetailsElement>("#tone-frequency-details");
+  const frequencyOutput = widget.querySelector<HTMLOutputElement>("#tone-frequency-value");
+  const volumeInput = widget.querySelector<HTMLInputElement>("#tone-volume");
+  const volumeOutput = widget.querySelector<HTMLOutputElement>("#tone-volume-value");
+  const playStopButton = widget.querySelector<HTMLButtonElement>("#tone-play-stop");
+  const errorMessage = widget.querySelector<HTMLParagraphElement>("#tone-error");
+
+  if (
+    !pitchPreset ||
+    !frequencyNumberInput ||
+    !frequencyDetails ||
+    !frequencyOutput ||
+    !volumeInput ||
+    !volumeOutput ||
+    !playStopButton ||
+    !errorMessage
+  ) {
+    throw new Error("Tone widget controls are incomplete.");
+  }
+
+  const maxOutputGain = 0.1;
+
+  let playbackState: PlaybackState = "stopped";
+  let audioContext: AudioContext | null = null;
+  let volumeGain: GainNode | null = null;
+  let oscillator: OscillatorNode | null = null;
+
+  function setError(message: string): void {
+    errorMessage.textContent = message;
+    errorMessage.hidden = false;
+  }
+
+  function clearError(): void {
+    errorMessage.textContent = "";
+    errorMessage.hidden = true;
+  }
+
+  function getErrorMessage(error: unknown): string {
+    return error instanceof Error ? error.message : String(error);
+  }
+
+  function getOutputGain(): number {
+    return (Number(volumeInput.value) / 100) * maxOutputGain;
+  }
+
+  function readFrequency(): number | undefined {
+    if (frequencyNumberInput.value.trim() === "" || !frequencyNumberInput.validity.valid) {
+      frequencyNumberInput.reportValidity();
+      setError("Enter a frequency from 20 to 20,000 Hz.");
+      return undefined;
+    }
+
+    return frequencyNumberInput.valueAsNumber;
+  }
+
+  function updateFrequency(value: number): void {
+    const frequency = String(value);
+    frequencyNumberInput.value = frequency;
+    frequencyOutput.value = `${value.toLocaleString("en-US")} Hz`;
+    const matchingPreset = Array.from(pitchPreset.options).find(
+      (option) => option.value !== "custom" && Number(option.value) === value,
+    );
+    pitchPreset.value = matchingPreset?.value ?? "custom";
+
+    if (audioContext && oscillator) {
+      try {
+        oscillator.frequency.value = value;
+      } catch (error) {
+        setError(`Unable to update the frequency: ${getErrorMessage(error)}`);
+      }
+    }
+  }
+
+  function updateControls(): void {
+    switch (playbackState) {
+      case "stopped":
+        playStopButton.textContent = "Play tone";
+        break;
+      case "starting":
+        playStopButton.textContent = "Starting…";
+        break;
+      case "playing":
+        playStopButton.textContent = "Stop tone";
+        break;
+    }
+
+    playStopButton.disabled = playbackState === "starting";
+  }
+
+  function closeAudioContext(context: AudioContext | null): void {
+    if (!context || context.state === "closed") {
+      return;
+    }
+
+    void context.close().catch((error: unknown) => {
+      setError(`Audio context cleanup failed: ${getErrorMessage(error)}`);
+    });
+  }
+
+  function finishSession(): void {
+    playbackState = "stopped";
+    oscillator = null;
+    volumeGain = null;
+
+    const contextToClose = audioContext;
+    audioContext = null;
+
+    updateControls();
+    clearError();
+    closeAudioContext(contextToClose);
+  }
+
+  function handleOscillatorEnded(): void {
+    oscillator = null;
+    if (playbackState !== "stopped") {
+      finishSession();
+    }
+  }
+
+  function startOscillator(): void {
+    if (!audioContext || !volumeGain) {
+      throw new Error("Audio is not ready to play.");
+    }
+
+    const nextOscillator = audioContext.createOscillator();
+    nextOscillator.type = "sine";
+    nextOscillator.frequency.value = Number(frequencyNumberInput.value);
+    nextOscillator.connect(volumeGain);
+    nextOscillator.onended = handleOscillatorEnded;
+    oscillator = nextOscillator;
+    nextOscillator.start();
+  }
+
+  async function startTone(): Promise<void> {
+    const frequency = readFrequency();
+    if (frequency === undefined) {
+      return;
+    }
+    updateFrequency(frequency);
+
+    playbackState = "starting";
+    updateControls();
+    clearError();
+
+    let context: AudioContext | null = null;
+
+    try {
+      if (typeof window.AudioContext !== "function") {
+        throw new Error("This browser does not support Web Audio.");
+      }
+
+      context = new window.AudioContext();
+      audioContext = context;
+      volumeGain = context.createGain();
+      volumeGain.gain.value = getOutputGain();
+      volumeGain.connect(context.destination);
+
+      await context.resume();
+      if (context.state !== "running") {
+        throw new Error("The browser did not allow audio playback to start.");
+      }
+
+      startOscillator();
+      playbackState = "playing";
+      updateControls();
+    } catch (error) {
+      finishSession();
+      setError(`Unable to start the tone: ${getErrorMessage(error)}`);
+    }
+  }
+
+  function handlePlayStop(): void {
+    if (playbackState === "stopped") {
+      void startTone();
+    } else if (playbackState === "playing") {
+      finishSession();
+    }
+  }
+
+  pitchPreset.addEventListener("change", () => {
+    if (pitchPreset.value === "custom") {
+      frequencyDetails.open = true;
+      frequencyNumberInput.focus();
+      return;
+    }
+
+    updateFrequency(Number(pitchPreset.value));
+  });
+
+  frequencyNumberInput.addEventListener("input", () => {
+    if (frequencyNumberInput.value !== "" && frequencyNumberInput.validity.valid) {
+      updateFrequency(frequencyNumberInput.valueAsNumber);
+    }
+  });
+
+  volumeInput.addEventListener("input", () => {
+    volumeOutput.value = `${volumeInput.value}%`;
+
+    if (audioContext && volumeGain) {
+      try {
+        volumeGain.gain.value = getOutputGain();
+      } catch (error) {
+        setError(`Unable to change the volume: ${getErrorMessage(error)}`);
+      }
+    }
+  });
+
+  playStopButton.addEventListener("click", handlePlayStop);
+  updateControls();
+</script>
+
+<style>
+  section {
+    border: 1px solid currentColor;
+    border-radius: 8px;
+    margin-block: 1.5em;
+    padding: 1em;
+  }
+
+  h2 {
+    margin-top: 0;
+  }
+
+  .controls {
+    display: grid;
+    gap: 1em;
+  }
+
+  .control {
+    display: grid;
+    gap: 0.25em;
+  }
+
+  label {
+    font-weight: 600;
+  }
+
+  output {
+    font-variant-numeric: tabular-nums;
+    font-weight: 400;
+  }
+
+  input[type="range"] {
+    accent-color: var(--color-link-primary);
+    width: 100%;
+  }
+
+  select,
+  input[type="number"] {
+    background: var(--color-body);
+    border: 1px solid var(--color-text-primary);
+    box-sizing: border-box;
+    color: var(--color-text-primary);
+    font: inherit;
+    max-width: 12em;
+    padding: 0.25em;
+  }
+
+  input[type="number"] {
+    appearance: textfield;
+  }
+
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  details > summary {
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  button {
+    background: var(--color-text-primary);
+    border: 1px solid var(--color-text-primary);
+    border-radius: var(--border-radius-button);
+    color: var(--color-body);
+    cursor: pointer;
+    justify-self: start;
+    padding: 0.35em 0.75em;
+  }
+
+  button:disabled {
+    cursor: wait;
+    opacity: 0.7;
+  }
+
+  button:focus-visible,
+  summary:focus-visible,
+  select:focus-visible,
+  input:focus-visible {
+    outline: 3px solid var(--color-link-primary);
+    outline-offset: 2px;
+  }
+
+  #tone-error:not([hidden]) {
+    border-left: 4px solid currentColor;
+    margin-block: 0.5em;
+    padding-left: 0.75em;
+  }
+</style>
