@@ -13,7 +13,7 @@ import DurationInput from "@/components/DurationInput.astro";
       <div class="workout-timer__field">
         <label for="workout-reps">Reps</label>
         <div class="workout-timer__rep-control">
-          <input id="workout-reps" name="reps" type="number" min="1" max="100" step="1" value="3" required />
+          <input id="workout-reps" name="reps" type="number" min="1" max="100" step="1" value="18" required />
           <div class="workout-timer__stepper" role="group" aria-label="Adjust reps">
             <button id="workout-reps-increase" type="button" aria-label="Increase reps">↑</button>
             <button id="workout-reps-decrease" type="button" aria-label="Decrease reps">↓</button>
@@ -393,12 +393,13 @@ import DurationInput from "@/components/DurationInput.astro";
     pauseButton.hidden = true;
     resumeButton.hidden = true;
     resetButton.hidden = true;
-    phaseOutput.textContent = "Workout complete";
+    phaseOutput.textContent = "Workout done";
     clockOutput.textContent = "00:00";
     repetitionOutput.textContent = `Completed ${reps} reps.`;
     setProgress(1);
     countdownOutput.textContent = "";
-    announcementOutput.textContent = `Workout complete. ${reps} reps completed.`;
+    announcementOutput.textContent = `Workout done. ${reps} reps completed.`;
+    speakCue("workout done");
   }
 
   function updateTimer(reps: number) {
