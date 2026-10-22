@@ -1,0 +1,46 @@
+---
+interface Props {
+  id: string;
+  name: string;
+  label: string;
+  value: string;
+}
+
+const { id, name, label, value } = Astro.props;
+---
+
+<div class="duration-input">
+  <label for={id}>{label}</label>
+  <input
+    id={id}
+    name={name}
+    type="text"
+    pattern="[0-5][0-9]:[0-5][0-9]"
+    value={value}
+    required
+  />
+</div>
+
+<style>
+  .duration-input {
+    display: grid;
+    gap: 0.25rem;
+  }
+
+  .duration-input input {
+    background: var(--color-body);
+    border: 1px solid currentColor;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: var(--color-text-primary);
+    font: inherit;
+    min-height: 2.5rem;
+    padding: 0.25rem 0.5rem;
+    width: 100%;
+  }
+
+  .duration-input input:focus-visible {
+    outline: 3px solid var(--color-link-primary);
+    outline-offset: 2px;
+  }
+</style>

@@ -11,6 +11,7 @@ const pages: { name: string; path: string; disableRules?: string[] }[] = [
   },
   { name: "About page", path: "/blog/who-am-i/" },
   { name: "Glossary", path: "/glossary/" },
+  { name: "Miscellaneous", path: "/misc/" },
   { name: "Resume", path: "/resume/" },
   { name: "Software", path: "/software/" },
 ];
