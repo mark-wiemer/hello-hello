@@ -5,6 +5,8 @@ interface Props {
   pageTitle: string;
   /** Optional CSS class to apply to the main container */
   klass?: string;
+  /** True to replace the default `h1` with the page's own */
+  customHeading?: true;
 }
 ---
 
@@ -42,6 +44,7 @@ interface Props {
     <SiteMenu />
     <article class={Astro.props.klass || undefined}>
       <main id="main-content">
+        {!Astro.props.customHeading ? <h1>{Astro.props.pageTitle}</h1> : <></>}
         <slot />
       </main>
     </article>
