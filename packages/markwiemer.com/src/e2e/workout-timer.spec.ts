@@ -56,7 +56,7 @@ test.describe("workout timer", () => {
     await expect(page.locator("#workout-repetition")).toHaveText("Work, rep 2 of 2.");
 
     await page.clock.runFor(3000);
-    await expect(phase).toHaveText("Workout complete");
+    await expect(phase).toHaveText("Workout done");
     await expect(clock).toHaveText("00:00");
     await expect(page.locator("#workout-repetition")).toHaveText("Completed 2 reps.");
 
@@ -76,6 +76,7 @@ test.describe("workout timer", () => {
       "work, 3",
       "2",
       "1",
+      "workout done",
     ]);
   });
 
@@ -89,12 +90,12 @@ test.describe("workout timer", () => {
     await expect(page.locator("#workout-phase")).toHaveText("Work");
     await expect(page.locator("#workout-clock")).toHaveText("00:04");
     await page.clock.runFor(4000);
-    await expect(page.locator("#workout-phase")).toHaveText("Workout complete");
+    await expect(page.locator("#workout-phase")).toHaveText("Workout done");
 
     const cues = await page.evaluate(() =>
       JSON.parse(localStorage.getItem("__spokenWorkoutCues") ?? "[]") as string[],
     );
-    expect(cues).toEqual(["work", "3", "2", "1"]);
+    expect(cues).toEqual(["work", "3", "2", "1", "workout done"]);
   });
 
   test("pause freezes the clock and resume continues it", async ({ page }) => {
@@ -149,12 +150,20 @@ test.describe("workout timer", () => {
     await expect(page.locator("#workout-phase")).toHaveText("Work");
     await expect(page.locator("#workout-countdown")).toHaveText("1");
     await page.clock.runFor(1000);
-    await expect(page.locator("#workout-phase")).toHaveText("Workout complete");
+    await expect(page.locator("#workout-phase")).toHaveText("Workout done");
 
     const cues = await page.evaluate(() =>
       JSON.parse(localStorage.getItem("__spokenWorkoutCues") ?? "[]") as string[],
     );
-    expect(cues).toEqual(["2", "1", "work, 1", "rest, 2", "1", "work, 1"]);
+    expect(cues).toEqual([
+      "2",
+      "1",
+      "work, 1",
+      "rest, 2",
+      "1",
+      "work, 1",
+      "workout done",
+    ]);
   });
 
   test("the rep stepper has large, bounded controls", async ({ page }) => {
@@ -162,16 +171,16 @@ test.describe("workout timer", () => {
     const increase = page.getByRole("button", { name: "Increase reps" });
     const decrease = page.getByRole("button", { name: "Decrease reps" });
 
-    await expect(reps).toHaveValue("3");
+    await expect(reps).toHaveValue("18");
     await expect(page.getByLabel("Time per rep (MM:SS)", { exact: true })).toHaveValue("00:20");
     await expect(page.getByLabel("Prep time (MM:SS)", { exact: true })).toHaveValue("00:05");
     await expect(page.getByLabel("Rest between reps (MM:SS)", { exact: true })).toHaveValue(
       "00:05",
     );
     await increase.click();
-    await expect(reps).toHaveValue("4");
+    await expect(reps).toHaveValue("19");
     await decrease.click();
-    await expect(reps).toHaveValue("3");
+    await expect(reps).toHaveValue("18");
 
     const size = await increase.evaluate((button) => {
       const bounds = button.getBoundingClientRect();
@@ -184,6 +193,26 @@ test.describe("workout timer", () => {
     await expect(decrease).toBeDisabled();
     await reps.fill("100");
     await expect(increase).toBeDisabled();
+  });
+
+  test("the work duration input stays snug against its label", async ({ page }) => {
+    const getGeometry = (selector: string) =>
+      page.locator(selector).evaluate((input: HTMLInputElement) => {
+        const label = input.labels?.[0];
+        if (!label) throw new Error("Duration input must have a label.");
+        const inputBounds = input.getBoundingClientRect();
+        const labelBounds = label.getBoundingClientRect();
+        return {
+          inputHeight: inputBounds.height,
+          labelGap: inputBounds.top - labelBounds.bottom,
+        };
+      });
+
+    const workGeometry = await getGeometry("#workout-work-duration");
+    const prepGeometry = await getGeometry("#workout-prep-duration");
+    expect(workGeometry.inputHeight).toBe(prepGeometry.inputHeight);
+    expect(workGeometry.labelGap).toBeGreaterThanOrEqual(0);
+    expect(workGeometry.labelGap).toBeLessThanOrEqual(4);
   });
 
   test("a URL restores the customized session settings", async ({ page }) => {
