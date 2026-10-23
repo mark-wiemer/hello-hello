@@ -15,6 +15,14 @@ interface WindowWithToneAudioHarness extends Window {
   __toneAudioHarness: ToneAudioHarness;
 }
 
+interface ToneWakeLockHarness {
+  events: string[];
+}
+
+interface WindowWithToneWakeLockHarness extends Window {
+  __toneWakeLockHarness: ToneWakeLockHarness;
+}
+
 async function installAudioContextMock(page: Page): Promise<void> {
   await page.addInitScript(() => {
     type MockEvent = {
@@ -99,9 +107,48 @@ async function installAudioContextMock(page: Page): Promise<void> {
   });
 }
 
+async function installWakeLockMock(page: Page): Promise<void> {
+  await page.addInitScript(() => {
+    const events: string[] = [];
+
+    class MockWakeLockSentinel extends EventTarget {
+      released = false;
+
+      release(): Promise<void> {
+        this.released = true;
+        events.push("release");
+        this.dispatchEvent(new Event("release"));
+        return Promise.resolve();
+      }
+    }
+
+    Object.defineProperty(navigator, "wakeLock", {
+      configurable: true,
+      value: {
+        request(type: string): Promise<MockWakeLockSentinel> {
+          events.push(`request:${type}`);
+          return Promise.resolve(new MockWakeLockSentinel());
+        },
+      },
+    });
+    Object.defineProperty(window, "__toneWakeLockHarness", {
+      configurable: true,
+      value: {
+        events,
+      },
+    });
+  });
+}
+
 async function getAudioEvents(page: Page): Promise<ToneAudioEvent[]> {
   return page.evaluate(
     () => (window as WindowWithToneAudioHarness).__toneAudioHarness.events,
+  );
+}
+
+async function getWakeLockEvents(page: Page): Promise<string[]> {
+  return page.evaluate(
+    () => (window as WindowWithToneWakeLockHarness).__toneWakeLockHarness.events,
   );
 }
 
@@ -115,6 +162,7 @@ test("plays offline and stops or restarts the selected tone", async ({ page }) =
   const exactFrequency = page.locator("#tone-frequency-exact");
   const playStopButton = page.locator("#tone-play-stop");
 
+  await expect(page.locator("#tone-keep-awake")).toBeChecked();
   await expect(widget).not.toContainText(/network connection|sound-wave cycles per second/);
   await expect(page.locator("#tone-timer")).toHaveCount(0);
   await expect(page.locator("#tone-status")).toHaveCount(0);
@@ -166,4 +214,40 @@ test("plays offline and stops or restarts the selected tone", async ({ page }) =
   await expect(playStopButton).toHaveText("Play tone");
   events = await getAudioEvents(page);
   expect(events.filter((event) => event.type === "close")).toHaveLength(2);
+});
+
+test("keeps the screen awake only while playback is active", async ({ page }) => {
+  await installAudioContextMock(page);
+  await installWakeLockMock(page);
+  await page.goto("/misc");
+
+  const keepAwakeInput = page.locator("#tone-keep-awake");
+  const playStopButton = page.locator("#tone-play-stop");
+
+  await keepAwakeInput.check();
+  await playStopButton.click();
+  await expect(playStopButton).toHaveText("Stop tone");
+  await expect(page.locator("#tone-wake-status")).toHaveText(
+    "The screen will stay awake while the tone plays.",
+  );
+  await expect.poll(() => getWakeLockEvents(page)).toEqual(["request:screen"]);
+
+  await keepAwakeInput.uncheck();
+  await expect(page.locator("#tone-wake-status")).toBeHidden();
+  await expect.poll(() => getWakeLockEvents(page)).toEqual(["request:screen", "release"]);
+
+  await keepAwakeInput.check();
+  await expect.poll(() => getWakeLockEvents(page)).toEqual([
+    "request:screen",
+    "release",
+    "request:screen",
+  ]);
+  await playStopButton.click();
+  await expect(playStopButton).toHaveText("Play tone");
+  await expect.poll(() => getWakeLockEvents(page)).toEqual([
+    "request:screen",
+    "release",
+    "request:screen",
+    "release",
+  ]);
 });
