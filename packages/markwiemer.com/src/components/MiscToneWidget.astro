@@ -51,6 +51,17 @@
       </small>
     </div>
 
+    <div class="control">
+      <label for="tone-keep-awake">
+        <input id="tone-keep-awake" type="checkbox" checked />
+        Keep screen awake while the tone plays
+      </label>
+      <small id="tone-keep-awake-help">
+        Uses your browser's screen wake lock when supported. This works only while the page is visible.
+      </small>
+      <p id="tone-wake-status" role="status" aria-live="polite" hidden></p>
+    </div>
+
     <button id="tone-play-stop" type="button">Play tone</button>
   </div>
 </section>
@@ -72,6 +83,8 @@
   const frequencyOutput = widget.querySelector<HTMLOutputElement>("#tone-frequency-value");
   const volumeInput = widget.querySelector<HTMLInputElement>("#tone-volume");
   const volumeOutput = widget.querySelector<HTMLOutputElement>("#tone-volume-value");
+  const keepAwakeInput = widget.querySelector<HTMLInputElement>("#tone-keep-awake");
+  const wakeLockStatus = widget.querySelector<HTMLParagraphElement>("#tone-wake-status");
   const playStopButton = widget.querySelector<HTMLButtonElement>("#tone-play-stop");
   const errorMessage = widget.querySelector<HTMLParagraphElement>("#tone-error");
 
@@ -82,6 +95,8 @@
     !frequencyOutput ||
     !volumeInput ||
     !volumeOutput ||
+    !keepAwakeInput ||
+    !wakeLockStatus ||
     !playStopButton ||
     !errorMessage
   ) {
@@ -94,6 +109,8 @@
   let audioContext: AudioContext | null = null;
   let volumeGain: GainNode | null = null;
   let oscillator: OscillatorNode | null = null;
+  let screenWakeLock: WakeLockSentinel | null = null;
+  let wakeLockRequestPending = false;
 
   function setError(message: string): void {
     errorMessage.textContent = message;
@@ -107,6 +124,81 @@
 
   function getErrorMessage(error: unknown): string {
     return error instanceof Error ? error.message : String(error);
+  }
+
+  function setWakeLockStatus(message: string): void {
+    wakeLockStatus.textContent = message;
+    wakeLockStatus.hidden = message === "";
+  }
+
+  function shouldKeepScreenAwake(): boolean {
+    return playbackState === "playing" && keepAwakeInput.checked;
+  }
+
+  function releaseScreenWakeLock(): void {
+    const wakeLockToRelease = screenWakeLock;
+    screenWakeLock = null;
+
+    if (wakeLockToRelease) {
+      void wakeLockToRelease.release().catch((error: unknown) => {
+        setWakeLockStatus(`Unable to release the screen wake lock: ${getErrorMessage(error)}`);
+      });
+    }
+  }
+
+  function updateScreenWakeLock(): void {
+    if (!shouldKeepScreenAwake()) {
+      releaseScreenWakeLock();
+      setWakeLockStatus("");
+      return;
+    }
+
+    if (!("wakeLock" in navigator)) {
+      setWakeLockStatus("This browser does not support keeping the screen awake.");
+      return;
+    }
+
+    if (document.visibilityState !== "visible") {
+      setWakeLockStatus("The screen wake lock is available while this page is visible.");
+      return;
+    }
+
+    if (screenWakeLock || wakeLockRequestPending) {
+      return;
+    }
+
+    wakeLockRequestPending = true;
+    void navigator.wakeLock
+      .request("screen")
+      .then((sentinel) => {
+        if (!shouldKeepScreenAwake() || document.visibilityState !== "visible") {
+          void sentinel.release().catch((error: unknown) => {
+            setWakeLockStatus(`Unable to release the screen wake lock: ${getErrorMessage(error)}`);
+          });
+          return;
+        }
+
+        screenWakeLock = sentinel;
+        sentinel.addEventListener(
+          "release",
+          () => {
+            if (screenWakeLock === sentinel) {
+              screenWakeLock = null;
+            }
+            updateScreenWakeLock();
+          },
+          { once: true },
+        );
+        setWakeLockStatus("The screen will stay awake while the tone plays.");
+      })
+      .catch((error: unknown) => {
+        if (shouldKeepScreenAwake()) {
+          setWakeLockStatus(`Unable to keep the screen awake: ${getErrorMessage(error)}`);
+        }
+      })
+      .finally(() => {
+        wakeLockRequestPending = false;
+      });
   }
 
   function getOutputGain(): number {
@@ -171,6 +263,7 @@
     playbackState = "stopped";
     oscillator = null;
     volumeGain = null;
+    updateScreenWakeLock();
 
     const contextToClose = audioContext;
     audioContext = null;
@@ -233,6 +326,7 @@
       startOscillator();
       playbackState = "playing";
       updateControls();
+      updateScreenWakeLock();
     } catch (error) {
       finishSession();
       setError(`Unable to start the tone: ${getErrorMessage(error)}`);
@@ -273,6 +367,14 @@
         setError(`Unable to change the volume: ${getErrorMessage(error)}`);
       }
     }
+  });
+
+  keepAwakeInput.addEventListener("change", () => {
+    updateScreenWakeLock();
+  });
+
+  document.addEventListener("visibilitychange", () => {
+    updateScreenWakeLock();
   });
 
   playStopButton.addEventListener("click", handlePlayStop);
