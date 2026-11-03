@@ -121,7 +121,6 @@ fi
 #region aliases
 alias bashedit='code ~/.bashrc'
 alias bs='npm run build && npm start'
-alias brd='npm run dev'
 # CoPy Recursive Dist to Void
 alias cprdv='cp -r dist ~/.var/app/org.luanti.luanti/.minetest/games/void'
 # Git Commit All with Message
@@ -140,6 +139,7 @@ alias gpm='b=$(__git_ps1 "%s") && git checkout main && git pull && git checkout 
 alias gpumo='b=$(__git_ps1 "%s") && git checkout upstream-main && git pull && git checkout $b && git merge upstream-main -X ours'
 alias gsur='git submodule update --remote'
 alias gurlo='git remote get-url origin'
+alias nrd='npm run dev'
 # Source Bash Run Commands
 alias sbrc='source ~/.bashrc'
 # Validate CI fix

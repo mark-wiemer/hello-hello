@@ -12,7 +12,6 @@ alias ulf='cd ~/myStuff/repos/luanti/lanterns_flame && gpn && update && cd ~/myS
 #* Scripts
 alias bashedit='codium ~/.bashrc'
 alias bs='npm run build && npm start'
-alias brd='npm run dev'
 # Git Commit All with Message
 alias gcam='git add . && git commit -m $!'
 # Git Checkout Main, Pull, New branch
@@ -32,6 +31,7 @@ alias gsur='git submodule update --remote'
 alias npmil='npm i --legacy-peer-deps'
 # npm install with version 6, then revert back to version 8
 alias npmi6='npm install npm@^6 --global && npm i && npm install npm@^8 --global'
+alias nrd='npm run dev'
 # Create a PR branch to review changes locally
 alias pr='git status && git branch -D pr; git checkout -b pr && git reset main'
 # Source Bash Run Commands
