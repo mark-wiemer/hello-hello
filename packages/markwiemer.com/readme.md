@@ -6,7 +6,7 @@ My personal site hosting my articles, pictures of my dog, and other stuff I like
 
 Pre-requisites:
 
-- [Node.js 26](https://nodejs.org/) or newer and npm
+- [Node.js 26](https://nodejs.org/) and npm (comes with Node)
 
 Setup:
 
