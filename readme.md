@@ -59,17 +59,19 @@ Quick reference for terms on this page:
 
 [Full glossary](https://markwiemer.com/glossary)
 
-## Setting up Bun
+## Setting up Node.js and npm
 
-This repo uses [Bun](https://bun.sh) as the package manager and runtime.
+This repo uses [Node.js](https://nodejs.org/) as its runtime and [npm](https://www.npmjs.com/) to manage packages.
 
-Install Bun from https://bun.sh/docs/installation, then run `bun install` at the repo root.
+Use Node.js 26, then run `npm install` at the repo root.
 
-The root `package.json` defines the workspace packages and can be treated as my minimal recommendations for any JS package. Although this repo isn't limited to JS, that's where I spend most of my time.
+The root `package.json` defines the npm workspace packages and can be treated as my minimal recommendations for any JS package. Although this repo isn't limited to JS, that's where I spend a plurality of my time.
 
 ## Commit messages
 
-Right now, I follow a simple "Use imperative, keep it short" approach. Because [Mocha](https://mochajs.org/next/) follows [Angular commit conventions](https://github.com/angular/angular/blob/26fed34e0e340166b70702d6177ad639bbfa94aa/contributing-docs/commit-message-guidelines.md) to auto-generate release logs, I used that for a while. However, it has the same "folder vs tag" problem of not being able to label a commit as, e.g. impacting both "vscode" and "new-machine". There is also the general "false categorization" problem of "is this a chore? is it a docs update? does it matter?" that is fatiguing. Keeping it simple and relying on a system to review the actual code changes and generate reports from that is more reliable. I don't have such a system, but we can all imagine one, right?
+I follow a simple "Use imperative, keep it short" approach.
+
+Because [Mocha](https://mochajs.org/next/) follows [Angular commit conventions](https://github.com/angular/angular/blob/26fed34e0e340166b70702d6177ad639bbfa94aa/contributing-docs/commit-message-guidelines.md) to auto-generate release logs, I used that for a while. However, it has the same "folder vs tag" problem of not being able to label a commit as, e.g. impacting both "vscode" and "new-machine". There is also the general "false categorization" problem of "is this a chore? is it a docs update? does it matter?" that is fatiguing. Keeping it simple and relying on a system to review the actual code changes and generate reports from that is more reliable. I don't have such a system, but we can all imagine one, right?
 
 ## License
 

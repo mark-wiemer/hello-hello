@@ -17,13 +17,13 @@ See [issues](#issues) for important limitations.
 
 ## Setup
 
-This project uses [Deno](../notes/deno.md) instead of Node.js
+This project uses Node.js 26 and npm.
 
-- [Install Deno](https://deno.com)
+- Install Node.js 26 and npm
 - Ensure `firefox` Shell cmd launches Firefox (e.g. `sudo apt install firefox`)
 - ```
-  deno install
-  deno run dev
+  npm install
+  npm run dev
   ```
 
 ## Issues
@@ -43,7 +43,7 @@ https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Your_firs
 
 - Installing via Firefox GUI doesn't work, it only loads the selected file, not
   all files in the folder
-- Use `web-ext` and things work (`deno run dev`)
+- Use `web-ext` and things work (`npm run dev`)
 
 https://developer.mozilla.org/en-US/docs/Web/API/Clipboard_API
 

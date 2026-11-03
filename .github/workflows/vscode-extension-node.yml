@@ -1,7 +1,7 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: vscode/extension CI (Bun)
+name: vscode/extension CI (Node.js)
 
 on:
   push:
@@ -26,10 +26,14 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
-      - run: bun install
+        uses: actions/checkout@v7
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 26
+          cache: npm
+          cache-dependency-path: packages/vscode/extension/package-lock.json
+      - run: npm ci
         working-directory: ${{ env.packageDir }}
-      - run: bun run validate:ci
+      - run: npm run validate:ci
         working-directory: ${{ env.packageDir }}

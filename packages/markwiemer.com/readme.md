@@ -6,13 +6,13 @@ My personal site hosting my articles, pictures of my dog, and other stuff I like
 
 Pre-requisites:
 
-- [Bun](../notes/bun.md)
+- [Node.js 26](https://nodejs.org/) and npm (comes with Node)
 
 Setup:
 
 ```sh
-bun i
-bun dev
+npm install
+npm run dev
 o
 ```
 
@@ -26,7 +26,7 @@ o
 ## Developer tools
 
 - [Astro](../astro/readme.md) to build the site
-- [Bun](../notes/bun.md) to run JavaScript and manage packages
+- [Node.js](https://nodejs.org/) to run JavaScript and npm to manage packages
 - [Git LFS](../git/readme.md) to better track changes to images
 - [GitHub Actions](../github/readme.md) to automatically deploy the site
 - [Prettier](https://prettier.io) to format the repo

@@ -17,7 +17,7 @@ jobs:
 
     steps:
       # https://github.com/actions/stale
-      - uses: actions/stale@v10
+      - uses: actions/stale@v11
         with:
           days-before-stale: 1 # one day for testing
           days-before-close: 1 # one day for testing

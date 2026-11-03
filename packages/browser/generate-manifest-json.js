@@ -1,3 +1,5 @@
+import { writeFileSync } from "node:fs";
+
 //#region Klona
 /**
  * Copied from https://github.com/lukeed/klona, MIT licensed,
@@ -79,13 +81,11 @@ const manifestChromium = klona(manifestCore);
 manifestChromium.background.service_worker = mainScript;
 
 function writeFile(filename, value) {
-  return Deno.writeTextFileSync(
-    filename,
-    JSON.stringify(value, null, 2),
-  );
+  writeFileSync(filename, JSON.stringify(value, null, 2));
 }
 
 const manifestJson = "manifest.json";
 
 writeFile(`${manifestJson}.firefox`, manifestFirefox);
 writeFile(`${manifestJson}.chromium`, manifestChromium);
+writeFile(manifestJson, manifestFirefox);

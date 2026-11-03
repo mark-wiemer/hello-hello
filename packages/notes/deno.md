@@ -1,6 +1,6 @@
 # Hello Deno
 
-[Deno](https://deno.com/) is a JavaScript toolkit, an alternative to [Node.js](../javascript/readme.md) or [Bun](./bun.md)
+[Deno](https://deno.com/) is a JavaScript toolkit, an alternative to [Node.js](../javascript/readme.md) or [Bun](./bun.md). Deno is owned by Cloudflare.
 
 ## Setup
 

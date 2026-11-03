@@ -1,0 +1,15 @@
+{
+  "name": "browser-extension",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npm run generate && web-ext run -u https://mozilla.org",
+    "generate": "node generate-manifest-json.js"
+  },
+  "devDependencies": {
+    "web-ext": "^10.1.0"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}

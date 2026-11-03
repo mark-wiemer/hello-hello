@@ -4,20 +4,26 @@ It's quite a popular language! This folder contains both reference JavaScript fi
 
 ## Setup
 
-To run JavaScript, one must first install a JavaScript runtime. There are three major players: Node, Deno, and [Bun](../notes/bun.md).
+Running JavaScript files is surprisingly complicated.
+
+To run JavaScript, one must first install a JavaScript runtime. There are three major players: Node, Deno, and Bun. Node is independent, Deno is owned by Cloudflare, and Bun is owned by Anthropic. I use Node. If you're running standalone scripts, a runtime is all you need.
+
+To run a script with dependencies, you need a package manager. Node is paired with npm. Deno and Bun have built-in package managers.
+
+To update your runtime, you should install a runtime version manager. I use `fnm` for Node. Deno and Bun, as much newer systems, presumably have simpler upgrade workflows, but I haven't used them enough to know.
 
 ### Node
 
-I use Node because Mocha uses Node. But Node has the world's most annoying [installation configuration](https://nodejs.org/en/download) as of writing (2026-03-08). For most projects, I use [Bash](../bash/readme.md), Node 22, `fnm`, and `pnpm` on both Windows and Linux. I use `npm` for [Mocha](../mocha/readme.md)-related work or any advanced work on Windows, like AHK++. `fnm` on Windows is not recommended by Node but I'm not about to install Docker just for this and Chocolatey isn't sufficient. `fnm` and `pnpm` on Windows don't get along, so I do almost all development on Linux.
+Node has the world's most annoying [installation configuration](https://nodejs.org/en/download) as of writing (2026-11-03). For most projects, I use [Bash](../bash/readme.md), Node 26, `fnm`, and `npm` on both Windows and Linux. The Node team doesn't recommend `fnm` on Windows, but it works for my use cases so far. That said, I do nearly all development on Linux nowadays.
 
-For Linux, see [Hello Linux Mint](../new-machine/linux/linux-mint.md)
+For more on Linux, see [Hello Linux Mint](../new-machine/linux/linux-mint.md)
 
 For Windows, try:
 
 1. ```sh
    sudo choco install fnm
-   fnm install 22.21.1
-   fnm default 22.21.1
+   fnm install 26
+   fnm default 26
    ```
 1. Update `.bashrc` to include this at the end:
    ```sh
@@ -25,25 +31,20 @@ For Windows, try:
    ```
 1. Restart terminal or run `source ~/.bashrc`
 1. ```sh
-   fnm use 22.21.1
+   fnm use 26
    ```
 
-This doesn't seem to quite work: https://github.com/pnpm/pnpm/issues/10531. Likely a corepack issue? I hate corepack.
+Again, I use Linux.
 
-Again, I just use Linux.
+Also, I've experimented with running basic `ts` files directly with Node, e.g. `node index.ts`. For more advanced TS features, see [Hello TypeScript](../typescript/readme.md).
 
-Also, I've started running `ts` files directly with Node, e.g. `node index.ts`. For more advanced TS features, see [Hello TypeScript](../typescript/readme.md).
-
-### Bun
-
-[Bun](../notes/bun.md) also includes its own package manager and test runner, so it's a viable alternative. I had good luck when I used it on my Windows PC in ~2023, but haven't tried it on Windows since. Works great on Linux though!
+Once things are working, you should be able to run `node hello.js` and see `Hello world!` output.
 
 ## Resources
 
 - [Chocolatey (choco)](https://github.com/chocolatey/choco)
 - [fnm](https://github.com/Schniz/fnm)
 - [Hello Bash](../bash/readme.md)
-- [Hello Bun](../notes/bun.md)
 - [Hello TypeScript](../typescript/readme.md)
 - [Hello pnpm](../pnpm/readme.md)
 - [JSDoc](https://jsdoc.app/): integrated into VS Code
