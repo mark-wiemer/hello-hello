@@ -1,8 +1,6 @@
 {
   "author": "Mark Wiemer",
   "workspaces": [
-    "packages/astro",
-    "packages/github/pages",
     "packages/luanti/doc-schema",
     "packages/unified"
   ],
@@ -17,6 +15,6 @@
     "sort-package-json": "^3.4.0"
   },
   "engines": {
-    "bun": "^1"
+    "node": ">=22.12.0"
   }
 }

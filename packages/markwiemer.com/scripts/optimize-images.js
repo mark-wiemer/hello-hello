@@ -2,7 +2,7 @@
 Converts all .jpg/.jpeg/.png images in src/assets/ to .webp format,
 updates all import references in src/, and deletes the originals.
 
-Usage: bun run optimize-images
+Usage: npm run optimize-images
 
 Options:
   --dry-run    Show what would happen without making changes

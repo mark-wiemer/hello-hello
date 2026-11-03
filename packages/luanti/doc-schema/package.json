@@ -11,7 +11,7 @@
     "start": "tsx src/index.ts",
     "test": "vitest",
     "test:ci": "vitest --run",
-    "validate:ci": "sort-package-json --check && bun run test:ci && echo Ready for review!",
+    "validate:ci": "sort-package-json --check && npm run test:ci && echo Ready for review!",
     "validate:fix": "sort-package-json"
   },
   "dependencies": {
@@ -34,7 +34,7 @@
     "sort-package-json": "^3.4.0"
   },
   "//": {
-    "notes": "package.json is a magic file used by bun, npm, pnpm, yarn to manage dependencies and run scripts"
+    "notes": "package.json is a magic file used by npm, pnpm, and yarn to manage dependencies and run scripts"
   },
   "scope": "@mark-wiemer"
 }

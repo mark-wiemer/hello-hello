@@ -83,18 +83,16 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: 24 # must be 22.12 or greater
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
       - name: Install dependencies
-        run: bun install
+        run: npm ci
         working-directory: ${{ env.SITE_DIR }}
       - name: Build static content
-        run: bun run build
+        run: npm run build
         working-directory: ${{ env.SITE_DIR }}
       # error: Script not found "validate:ci"
       # https://github.com/mark-wiemer/hello-hello/issues/129
       # - name: Validate build
-      #   run: bun run validate:ci
+      #   run: npm run validate:ci
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact

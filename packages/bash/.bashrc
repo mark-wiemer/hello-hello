@@ -121,7 +121,7 @@ fi
 #region aliases
 alias bashedit='code ~/.bashrc'
 alias bs='npm run build && npm start'
-alias brd='bun run dev'
+alias brd='npm run dev'
 # CoPy Recursive Dist to Void
 alias cprdv='cp -r dist ~/.var/app/org.luanti.luanti/.minetest/games/void'
 # Git Commit All with Message
@@ -293,15 +293,6 @@ PS1='\[\033[33m\]\w\[\033[36m\]`__git_ps1` \[\033[35m\]Node $(node --version)\[\
 #region Aspire
 export PATH="$HOME/.aspire/bin:$PATH"
 export ASPIRE_CONTAINER_RUNTIME=podman
-#endregion
-
-#region Bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-#endregion
-
-#region Deno
-. "/home/markw/.deno/env"
 #endregion
 
 #region dotnetup

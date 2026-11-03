@@ -4,7 +4,7 @@ It's quite a popular language! This folder contains both reference JavaScript fi
 
 ## Setup
 
-To run JavaScript, one must first install a JavaScript runtime. There are three major players: Node, Deno, and [Bun](../notes/bun.md).
+To run JavaScript in this repository, install Node.js.
 
 ### Node
 
@@ -34,16 +34,11 @@ Again, I just use Linux.
 
 Also, I've started running `ts` files directly with Node, e.g. `node index.ts`. For more advanced TS features, see [Hello TypeScript](../typescript/readme.md).
 
-### Bun
-
-[Bun](../notes/bun.md) also includes its own package manager and test runner, so it's a viable alternative. I had good luck when I used it on my Windows PC in ~2023, but haven't tried it on Windows since. Works great on Linux though!
-
 ## Resources
 
 - [Chocolatey (choco)](https://github.com/chocolatey/choco)
 - [fnm](https://github.com/Schniz/fnm)
 - [Hello Bash](../bash/readme.md)
-- [Hello Bun](../notes/bun.md)
 - [Hello TypeScript](../typescript/readme.md)
 - [Hello pnpm](../pnpm/readme.md)
 - [JSDoc](https://jsdoc.app/): integrated into VS Code

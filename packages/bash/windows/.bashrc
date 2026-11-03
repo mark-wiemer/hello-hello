@@ -12,7 +12,7 @@ alias ulf='cd ~/myStuff/repos/luanti/lanterns_flame && gpn && update && cd ~/myS
 #* Scripts
 alias bashedit='codium ~/.bashrc'
 alias bs='npm run build && npm start'
-alias brd='bun run dev'
+alias brd='npm run dev'
 # Git Commit All with Message
 alias gcam='git add . && git commit -m $!'
 # Git Checkout Main, Pull, New branch

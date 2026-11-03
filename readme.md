@@ -36,7 +36,7 @@ See also [Mark Wiemer's work](https://github.com/orgs/mark-wiemer-org/projects/1
 - [mod.io](./packages/mod.io/readme.md): Site for hosting UGC
 - [Modrinth](./packages/modrinth/readme.md): App for managing Minecraft versions and UGC
 - [New machine](./packages/new-machine/readme.md): Setup steps for any new machine
-- [Notes](./packages/notes/readme.md): Miscellaneous notes: Blog, Bun, Deno, JDial, security, style, web, etc.
+- [Notes](./packages/notes/readme.md): Miscellaneous notes: Blog, Bun, JDial, security, style, web, etc.
 - [ocr](./packages/ocr/readme.md): Optical character recognition for recreating searchable databases
 - [pnpm](./packages/pnpm/readme.md): JavaScript package manager, alternative to npm
 - [Podman](./packages/podman/readme.md): Open-source containerization platform, like Docker
@@ -59,13 +59,14 @@ Quick reference for terms on this page:
 
 [Full glossary](https://markwiemer.com/glossary)
 
-## Setting up Bun
+## Setting up Node.js and npm
 
-This repo uses [Bun](https://bun.sh) as the package manager and runtime.
+This repo uses [npm](https://www.npmjs.com/) to manage JavaScript packages and
+[Node.js](https://nodejs.org/) as its runtime.
 
-Install Bun from https://bun.sh/docs/installation, then run `bun install` at the repo root.
+Install Node.js 22.12 or newer, then run `npm install` at the repo root.
 
-The root `package.json` defines the workspace packages and can be treated as my minimal recommendations for any JS package. Although this repo isn't limited to JS, that's where I spend most of my time.
+The root `package.json` defines the npm workspace packages and can be treated as my minimal recommendations for any JS package. Although this repo isn't limited to JS, that's where I spend most of my time.
 
 ## Commit messages
 
