@@ -8,7 +8,7 @@ To run JavaScript in this repository, install Node.js.
 
 ### Node
 
-I use Node because Mocha uses Node. But Node has the world's most annoying [installation configuration](https://nodejs.org/en/download) as of writing (2026-03-08). For most projects, I use [Bash](../bash/readme.md), Node 22, `fnm`, and `pnpm` on both Windows and Linux. I use `npm` for [Mocha](../mocha/readme.md)-related work or any advanced work on Windows, like AHK++. `fnm` on Windows is not recommended by Node but I'm not about to install Docker just for this and Chocolatey isn't sufficient. `fnm` and `pnpm` on Windows don't get along, so I do almost all development on Linux.
+I use Node because Mocha uses Node. But Node has the world's most annoying [installation configuration](https://nodejs.org/en/download) as of writing (2026-03-08). For most projects, I use [Bash](../bash/readme.md), Node 26, `fnm`, and `pnpm` on both Windows and Linux. I use `npm` for [Mocha](../mocha/readme.md)-related work or any advanced work on Windows, like AHK++. `fnm` on Windows is not recommended by Node but I'm not about to install Docker just for this and Chocolatey isn't sufficient. `fnm` and `pnpm` on Windows don't get along, so I do almost all development on Linux.
 
 For Linux, see [Hello Linux Mint](../new-machine/linux/linux-mint.md)
 
@@ -16,8 +16,8 @@ For Windows, try:
 
 1. ```sh
    sudo choco install fnm
-   fnm install 22.21.1
-   fnm default 22.21.1
+   fnm install 26
+   fnm default 26
    ```
 1. Update `.bashrc` to include this at the end:
    ```sh
@@ -25,7 +25,7 @@ For Windows, try:
    ```
 1. Restart terminal or run `source ~/.bashrc`
 1. ```sh
-   fnm use 22.21.1
+   fnm use 26
    ```
 
 This doesn't seem to quite work: https://github.com/pnpm/pnpm/issues/10531. Likely a corepack issue? I hate corepack.
