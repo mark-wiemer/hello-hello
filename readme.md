@@ -36,7 +36,7 @@ See also [Mark Wiemer's work](https://github.com/orgs/mark-wiemer-org/projects/1
 - [mod.io](./packages/mod.io/readme.md): Site for hosting UGC
 - [Modrinth](./packages/modrinth/readme.md): App for managing Minecraft versions and UGC
 - [New machine](./packages/new-machine/readme.md): Setup steps for any new machine
-- [Notes](./packages/notes/readme.md): Miscellaneous notes: Blog, Bun, JDial, security, style, web, etc.
+- [Notes](./packages/notes/readme.md): Miscellaneous notes: Blog, Bun, Deno, JDial, security, style, web, etc.
 - [ocr](./packages/ocr/readme.md): Optical character recognition for recreating searchable databases
 - [pnpm](./packages/pnpm/readme.md): JavaScript package manager, alternative to npm
 - [Podman](./packages/podman/readme.md): Open-source containerization platform, like Docker
