@@ -17,9 +17,9 @@ See [issues](#issues) for important limitations.
 
 ## Setup
 
-This project uses Node.js 26 or newer and npm.
+This project uses Node.js 26 and npm.
 
-- Install Node.js 26 or newer and npm
+- Install Node.js 26 and npm
 - Ensure `firefox` Shell cmd launches Firefox (e.g. `sudo apt install firefox`)
 - ```
   npm install

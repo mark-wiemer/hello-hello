@@ -64,7 +64,7 @@ Quick reference for terms on this page:
 This repo uses [npm](https://www.npmjs.com/) to manage JavaScript packages and
 [Node.js](https://nodejs.org/) as its runtime.
 
-Use Node.js 26 or newer, then run `npm install` at the repo root.
+Use Node.js 26, then run `npm install` at the repo root.
 
 The root `package.json` defines the npm workspace packages and can be treated as my minimal recommendations for any JS package. Although this repo isn't limited to JS, that's where I spend most of my time.
 
