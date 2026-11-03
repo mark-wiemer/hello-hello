@@ -34,7 +34,7 @@
     "sort-package-json": "^3.4.0"
   },
   "//": {
-    "notes": "package.json is a magic file used by npm, pnpm, and yarn to manage dependencies and run scripts"
+    "notes": "package.json is a magic file used by package managers (npm, pnpm, yarn, etc) to manage dependencies and run scripts"
   },
   "scope": "@mark-wiemer"
 }
