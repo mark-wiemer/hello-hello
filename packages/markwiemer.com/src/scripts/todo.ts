@@ -1,0 +1,431 @@
+import {
+  getCompletionDueDate,
+  getNextLocalDay,
+  getSnoozeDueDate,
+} from "../utils/todo";
+import {
+  loadTasks,
+  readSandboxDate,
+  readSandboxMode,
+  saveTasksToStorage,
+  sandboxStorageKey,
+  storageKey,
+  storeSandboxDate,
+  storeSandboxMode,
+} from "./todo/storage";
+import { createTodoDialogs } from "./todo/dialogs";
+import { createTodoReordering } from "./todo/reordering";
+import { createTodoTableRenderer } from "./todo/tables";
+import type { TodoTask } from "./todo/types";
+
+function getRequiredElement<T extends Element>(selector: string): T {
+  const element = document.querySelector<T>(selector);
+  if (!element) {
+    throw new Error(`Todo page is missing ${selector}.`);
+  }
+  return element;
+}
+
+const activeTable = getRequiredElement<HTMLTableElement>("#todo-active-table");
+const hiddenTable = getRequiredElement<HTMLTableElement>("#todo-hidden-table");
+const newTaskButton = getRequiredElement<HTMLButtonElement>("#todo-new-task");
+const taskDialog = getRequiredElement<HTMLDialogElement>("#todo-task-dialog");
+const taskForm = getRequiredElement<HTMLFormElement>("#todo-task-form");
+const taskDialogHeading = getRequiredElement<HTMLHeadingElement>("#todo-task-dialog-heading");
+const titleInput = getRequiredElement<HTMLInputElement>("#todo-title");
+const intervalInput = getRequiredElement<HTMLInputElement>("#todo-interval");
+const unitInput = getRequiredElement<HTMLSelectElement>("#todo-unit");
+const formError = getRequiredElement<HTMLParagraphElement>("#todo-form-error");
+const cancelTaskButton = getRequiredElement<HTMLButtonElement>("#todo-cancel-task");
+const selectionTools = getRequiredElement<HTMLDivElement>("#todo-selection-tools");
+const selectionCount = getRequiredElement<HTMLSpanElement>("#todo-selection-count");
+const moveUpButton = getRequiredElement<HTMLButtonElement>("#todo-move-up");
+const moveDownButton = getRequiredElement<HTMLButtonElement>("#todo-move-down");
+const toggleHiddenButton = getRequiredElement<HTMLButtonElement>("#todo-toggle-hidden");
+const hiddenContent = getRequiredElement<HTMLDivElement>("#todo-hidden-content");
+const activeEmptyMessage = getRequiredElement<HTMLParagraphElement>("#todo-active-empty");
+const hiddenEmptyMessage = getRequiredElement<HTMLParagraphElement>("#todo-hidden-empty");
+const statusMessage = getRequiredElement<HTMLParagraphElement>("#todo-status");
+const deleteDialog = getRequiredElement<HTMLDialogElement>("#todo-delete-dialog");
+const deleteMessage = getRequiredElement<HTMLParagraphElement>("#todo-delete-message");
+const cancelDeleteButton = getRequiredElement<HTMLButtonElement>("#todo-cancel-delete");
+const confirmDeleteButton = getRequiredElement<HTMLButtonElement>("#todo-confirm-delete");
+const sandboxToggleButton = getRequiredElement<HTMLButtonElement>("#todo-sandbox-toggle");
+const simulateNextDayButton = getRequiredElement<HTMLButtonElement>("#todo-simulate-next-day");
+const sandboxResetButton = getRequiredElement<HTMLButtonElement>("#todo-sandbox-reset");
+const sandboxDateMessage = getRequiredElement<HTMLParagraphElement>("#todo-sandbox-date");
+
+const selectedTaskIds = new Set<string>();
+let hiddenTasksShown = false;
+let visibilityTimer: number | undefined;
+
+const dateTimeFormat = new Intl.DateTimeFormat(undefined, {
+  dateStyle: "medium",
+  timeStyle: "short",
+});
+const initialSandboxMode = readSandboxMode();
+let sandboxModeEnabled = initialSandboxMode.enabled;
+const initialSandboxDate = sandboxModeEnabled ? readSandboxDate() : null;
+let sandboxNow = initialSandboxDate?.date ?? null;
+const initialTaskLoad = loadTasks(getCurrentStorageKey());
+let tasks = initialTaskLoad.tasks;
+const startupErrors = [
+  initialSandboxMode.error,
+  initialSandboxDate?.error ?? null,
+  initialTaskLoad.error,
+].filter((error): error is string => error !== null);
+const dialogs = createTodoDialogs(
+  {
+    taskDialog,
+    taskForm,
+    taskDialogHeading,
+    titleInput,
+    intervalInput,
+    unitInput,
+    formError,
+    cancelTaskButton,
+    deleteDialog,
+    deleteMessage,
+    cancelDeleteButton,
+    confirmDeleteButton,
+    focusAfterDelete: newTaskButton,
+  },
+  {
+    onSaveTask(taskId, title, recurrence) {
+      if (taskId) {
+        tasks = tasks.map((task) =>
+          task.id === taskId ? { ...task, title, recurrence } : task,
+        );
+        saveTasks(`Updated "${title}".`);
+      } else {
+        tasks.push({
+          id: crypto.randomUUID(),
+          title,
+          recurrence,
+          position: tasks.length,
+          hiddenUntil: null,
+          hiddenReason: null,
+        });
+        saveTasks(`Added "${title}".`);
+      }
+    },
+    onDeleteTask(taskId) {
+      const deletedTask = tasks.find((task) => task.id === taskId);
+      tasks = tasks.filter((task) => task.id !== taskId);
+      selectedTaskIds.delete(taskId);
+      saveTasks(deletedTask ? `Deleted "${deletedTask.title}".` : "Task deleted.");
+    },
+  },
+);
+const renderTodoTables = createTodoTableRenderer({
+  activeTable,
+  hiddenTable,
+  isSelected: (taskId) => selectedTaskIds.has(taskId),
+  onSelectionChange(taskId, selected) {
+    if (selected) selectedTaskIds.add(taskId);
+    else selectedTaskIds.delete(taskId);
+    render(taskId);
+  },
+  onComplete: completeTask,
+  onSnooze: snoozeTask,
+  onMarkIncomplete: markTaskIncomplete,
+  onEdit: dialogs.openTask,
+  onDelete: dialogs.openDelete,
+  formatDueDate: (date) => dateTimeFormat.format(new Date(date)),
+});
+
+function getCurrentStorageKey(): string {
+  return sandboxModeEnabled ? sandboxStorageKey : storageKey;
+}
+
+function getCurrentDate(): Date {
+  return sandboxModeEnabled && sandboxNow ? new Date(sandboxNow) : new Date();
+}
+
+function setStatus(message: string, isError = false): void {
+  statusMessage.textContent = message;
+  statusMessage.setAttribute("role", isError ? "alert" : "status");
+}
+
+function updateSandboxControls(): void {
+  sandboxToggleButton.textContent = sandboxModeEnabled
+    ? "Exit sandbox mode"
+    : "Enter sandbox mode";
+  sandboxToggleButton.setAttribute("aria-pressed", String(sandboxModeEnabled));
+  simulateNextDayButton.hidden = !sandboxModeEnabled;
+  sandboxResetButton.hidden = !sandboxModeEnabled;
+  sandboxDateMessage.hidden = !sandboxModeEnabled;
+  sandboxDateMessage.textContent = sandboxModeEnabled
+    ? `Sandbox date: ${dateTimeFormat.format(getCurrentDate())}`
+    : "";
+}
+
+function sortedTasks(): TodoTask[] {
+  return [...tasks].sort((a, b) => a.position - b.position);
+}
+
+function isTaskVisible(task: TodoTask, now = getCurrentDate()): boolean {
+  return task.hiddenUntil === null || Date.parse(task.hiddenUntil) <= now.getTime();
+}
+
+const reordering = createTodoReordering({
+  table: activeTable,
+  getTasks: sortedTasks,
+  getSelectedTaskIds: () => selectedTaskIds,
+  isTaskVisible,
+  onReordered(nextTasks) {
+    tasks = nextTasks;
+    saveTasks("Task order updated.");
+  },
+});
+
+function saveTasks(message: string): void {
+  tasks = tasks.map((task, position) => ({ ...task, position }));
+  const saveError = saveTasksToStorage(getCurrentStorageKey(), tasks);
+
+  render();
+  if (saveError) {
+    setStatus(saveError, true);
+  } else {
+    setStatus(message);
+  }
+}
+
+function render(focusTaskId?: string): void {
+  const orderedTasks = sortedTasks();
+  const activeTasks = orderedTasks.filter((task) => isTaskVisible(task));
+  const hiddenTasks = orderedTasks.filter((task) => !isTaskVisible(task));
+
+  for (const selectedId of selectedTaskIds) {
+    if (!activeTasks.some((task) => task.id === selectedId)) selectedTaskIds.delete(selectedId);
+  }
+
+  renderTodoTables(activeTasks, hiddenTasks);
+  activeEmptyMessage.hidden = activeTasks.length > 0;
+  activeEmptyMessage.classList.remove("todo-loading");
+  activeEmptyMessage.removeAttribute("aria-busy");
+  activeEmptyMessage.textContent =
+    tasks.length > 0
+      ? "No tasks are ready right now."
+      : "No tasks yet. Add one to get started.";
+  hiddenEmptyMessage.hidden = hiddenTasks.length > 0;
+  toggleHiddenButton.textContent = hiddenTasksShown
+    ? `Hide hidden tasks (${hiddenTasks.length})`
+    : `Show hidden tasks (${hiddenTasks.length})`;
+  toggleHiddenButton.setAttribute("aria-expanded", String(hiddenTasksShown));
+  hiddenContent.hidden = !hiddenTasksShown;
+  updateSandboxControls();
+
+  const selectedIdsInOrder = activeTasks
+    .filter((task) => selectedTaskIds.has(task.id))
+    .map((task) => task.id);
+  selectionTools.hidden = selectedIdsInOrder.length === 0;
+  selectionCount.textContent = `${selectedIdsInOrder.length} selected`;
+  moveUpButton.disabled = !reordering.canMoveSelection("up");
+  moveDownButton.disabled = !reordering.canMoveSelection("down");
+
+  if (focusTaskId) {
+    activeTable
+      .querySelector<HTMLInputElement>(`input[data-select-id="${CSS.escape(focusTaskId)}"]`)
+      ?.focus();
+  }
+
+  scheduleVisibilityRefresh();
+}
+
+function completeTask(task: TodoTask): void {
+  const completedAt = getCurrentDate();
+  const hiddenUntil = getCompletionDueDate(completedAt, task.recurrence);
+  tasks = tasks.map((currentTask) =>
+    currentTask.id === task.id
+      ? {
+          ...currentTask,
+          hiddenUntil: hiddenUntil.toISOString(),
+          hiddenReason: "completed",
+        }
+      : currentTask,
+  );
+  selectedTaskIds.delete(task.id);
+  saveTasks(`Completed "${task.title}". It will return ${dateTimeFormat.format(hiddenUntil)}.`);
+}
+
+function snoozeTask(task: TodoTask): void {
+  const hiddenUntil = getSnoozeDueDate(getCurrentDate());
+  tasks = tasks.map((currentTask) =>
+    currentTask.id === task.id
+      ? {
+          ...currentTask,
+          hiddenUntil: hiddenUntil.toISOString(),
+          hiddenReason: "snoozed",
+        }
+      : currentTask,
+  );
+  selectedTaskIds.delete(task.id);
+  saveTasks(`Snoozed "${task.title}" until ${dateTimeFormat.format(hiddenUntil)}.`);
+}
+
+function markTaskIncomplete(task: TodoTask): void {
+  tasks = tasks.map((currentTask) =>
+    currentTask.id === task.id
+      ? { ...currentTask, hiddenUntil: null, hiddenReason: null }
+      : currentTask,
+  );
+  saveTasks(`Marked "${task.title}" incomplete.`);
+}
+
+function expireReadyTasks(announce = true): { count: number; error: string | null } {
+  const now = getCurrentDate();
+  const readyTasks = tasks.filter(
+    (task) => task.hiddenUntil !== null && Date.parse(task.hiddenUntil) <= now.getTime(),
+  );
+  if (readyTasks.length === 0) {
+    scheduleVisibilityRefresh();
+    return { count: 0, error: null };
+  }
+
+  const readyIds = new Set(readyTasks.map((task) => task.id));
+  tasks = tasks.map((task) =>
+    readyIds.has(task.id) ? { ...task, hiddenUntil: null, hiddenReason: null } : task,
+  );
+  const saveError = saveTasksToStorage(getCurrentStorageKey(), tasks);
+  const expiryError = "A task is ready, but its updated state could not be saved.";
+  render();
+  if (saveError) {
+    if (announce) setStatus(expiryError, true);
+  } else if (announce) {
+    setStatus(
+      `${readyTasks.length} task${readyTasks.length === 1 ? "" : "s"} ready to work on.`,
+    );
+  }
+  return {
+    count: readyTasks.length,
+    error: saveError ? expiryError : null,
+  };
+}
+
+function scheduleVisibilityRefresh(): void {
+  if (visibilityTimer !== undefined) window.clearTimeout(visibilityTimer);
+  if (sandboxModeEnabled) {
+    visibilityTimer = undefined;
+    return;
+  }
+  const now = Date.now();
+  const hiddenDates = tasks
+    .map((task) => (task.hiddenUntil ? Date.parse(task.hiddenUntil) : Number.POSITIVE_INFINITY))
+    .filter((dueDate) => dueDate > now);
+  const nextDueDate = Math.min(...hiddenDates);
+  if (!Number.isFinite(nextDueDate)) {
+    visibilityTimer = undefined;
+    return;
+  }
+  const maximumTimeout = 2_147_000_000;
+  const delay = Math.min(maximumTimeout, Math.max(0, nextDueDate - now));
+  visibilityTimer = window.setTimeout(expireReadyTasks, delay);
+}
+
+function toggleSandboxMode(): void {
+  const nextMode = !sandboxModeEnabled;
+  const modeError = storeSandboxMode(nextMode);
+  sandboxModeEnabled = nextMode;
+
+  let dateError: string | null = null;
+  if (sandboxModeEnabled) {
+    const sandboxDateResult = readSandboxDate();
+    sandboxNow = sandboxDateResult.date;
+    dateError = sandboxDateResult.error;
+  } else {
+    sandboxNow = null;
+  }
+
+  const taskLoadResult = loadTasks(getCurrentStorageKey());
+  tasks = taskLoadResult.tasks;
+  selectedTaskIds.clear();
+
+  const expiryResult = expireReadyTasks(false);
+  render();
+  const errors = [modeError, dateError, taskLoadResult.error, expiryResult.error].filter(
+    (error): error is string => error !== null,
+  );
+  if (errors.length > 0) {
+    setStatus(errors.join(" "), true);
+  } else {
+    setStatus(
+      sandboxModeEnabled
+        ? "Sandbox mode enabled. Your regular tasks are unchanged."
+        : "Sandbox mode disabled. Showing your regular tasks.",
+    );
+  }
+}
+
+function simulateNextDay(): void {
+  if (!sandboxModeEnabled || !sandboxNow) return;
+
+  sandboxNow = getNextLocalDay(sandboxNow);
+  const dateError = storeSandboxDate(sandboxNow);
+  const expiryResult = expireReadyTasks(false);
+  render();
+
+  const errors = [dateError, expiryResult.error].filter(
+    (error): error is string => error !== null,
+  );
+  if (errors.length > 0) {
+    setStatus(errors.join(" "), true);
+    return;
+  }
+
+  const readyMessage =
+    expiryResult.count > 0
+      ? ` ${expiryResult.count} task${expiryResult.count === 1 ? "" : "s"} ready.`
+      : "";
+  setStatus(`Sandbox date advanced to ${dateTimeFormat.format(sandboxNow)}.${readyMessage}`);
+}
+
+function resetSandbox(): void {
+  if (!sandboxModeEnabled) return;
+
+  sandboxNow = new Date();
+  const dateError = storeSandboxDate(sandboxNow);
+  tasks = tasks.map((task) => ({
+    ...task,
+    hiddenUntil: null,
+    hiddenReason: null,
+  }));
+  selectedTaskIds.clear();
+
+  const taskError = saveTasksToStorage(getCurrentStorageKey(), tasks);
+  render();
+
+  const errors = [dateError, taskError].filter((error): error is string => error !== null);
+  if (errors.length > 0) {
+    setStatus(errors.join(" "), true);
+  } else {
+    setStatus("Sandbox reset. The date is back to today and all tasks are incomplete.");
+  }
+}
+
+newTaskButton.addEventListener("click", () => dialogs.openTask());
+toggleHiddenButton.addEventListener("click", () => {
+  hiddenTasksShown = !hiddenTasksShown;
+  render();
+});
+sandboxToggleButton.addEventListener("click", toggleSandboxMode);
+simulateNextDayButton.addEventListener("click", simulateNextDay);
+sandboxResetButton.addEventListener("click", resetSandbox);
+moveUpButton.addEventListener("click", () => reordering.moveSelection("up"));
+moveDownButton.addEventListener("click", () => reordering.moveSelection("down"));
+
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "visible") expireReadyTasks();
+});
+
+const initialExpiryResult = expireReadyTasks(false);
+render();
+if (startupErrors.length > 0) {
+  setStatus(startupErrors.join(" "), true);
+} else if (initialExpiryResult.error) {
+  setStatus(initialExpiryResult.error, true);
+} else if (initialExpiryResult.count > 0) {
+  setStatus(
+    `${initialExpiryResult.count} task${initialExpiryResult.count === 1 ? "" : "s"} ready to work on.`,
+  );
+}
