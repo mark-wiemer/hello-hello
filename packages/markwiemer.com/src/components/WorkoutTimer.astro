@@ -1,5 +1,6 @@
 ---
 import DurationInput from "@/components/DurationInput.astro";
+import NumberStepper from "@/components/NumberStepper.astro";
 ---
 
 <section class="workout-timer" aria-labelledby="workout-timer-heading">
@@ -12,13 +13,17 @@ import DurationInput from "@/components/DurationInput.astro";
 
       <div class="workout-timer__field">
         <label for="workout-reps">Reps</label>
-        <div class="workout-timer__rep-control">
-          <input id="workout-reps" name="reps" type="number" min="1" max="100" step="1" value="18" required />
-          <div class="workout-timer__stepper" role="group" aria-label="Adjust reps">
-            <button id="workout-reps-increase" type="button" aria-label="Increase reps">↑</button>
-            <button id="workout-reps-decrease" type="button" aria-label="Decrease reps">↓</button>
-          </div>
-        </div>
+        <NumberStepper
+          id="workout-reps"
+          name="reps"
+          min={1}
+          max={100}
+          value={18}
+          groupLabel="Adjust reps"
+          increaseLabel="Increase reps"
+          decreaseLabel="Decrease reps"
+          required
+        />
       </div>
 
       <DurationInput
@@ -118,8 +123,6 @@ import DurationInput from "@/components/DurationInput.astro";
   const form = document.querySelector<HTMLFormElement>("#workout-timer-form");
   const settings = document.querySelector<HTMLFieldSetElement>("#workout-timer-settings");
   const repsInput = document.querySelector<HTMLInputElement>("#workout-reps");
-  const increaseRepsButton = document.querySelector<HTMLButtonElement>("#workout-reps-increase");
-  const decreaseRepsButton = document.querySelector<HTMLButtonElement>("#workout-reps-decrease");
   const workDurationInput = document.querySelector<HTMLInputElement>("#workout-work-duration");
   const prepDurationInput = document.querySelector<HTMLInputElement>("#workout-prep-duration");
   const setupDurationInput = document.querySelector<HTMLInputElement>("#workout-setup-duration");
@@ -143,8 +146,6 @@ import DurationInput from "@/components/DurationInput.astro";
     !form ||
     !settings ||
     !repsInput ||
-    !increaseRepsButton ||
-    !decreaseRepsButton ||
     !workDurationInput ||
     !prepDurationInput ||
     !setupDurationInput ||
@@ -316,21 +317,6 @@ import DurationInput from "@/components/DurationInput.astro";
       setupSeconds,
       speech: speechPreference,
     };
-  }
-
-  function updateRepStepper() {
-    const reps = repsInput.valueAsNumber;
-    increaseRepsButton.disabled = !Number.isFinite(reps) || reps >= Number(repsInput.max);
-    decreaseRepsButton.disabled = !Number.isFinite(reps) || reps <= Number(repsInput.min);
-  }
-
-  function adjustReps(amount: number) {
-    const currentReps = repsInput.valueAsNumber;
-    const minimum = Number(repsInput.min);
-    const maximum = Number(repsInput.max);
-    const startingValue = Number.isFinite(currentReps) ? currentReps : minimum;
-    repsInput.value = String(Math.max(minimum, Math.min(maximum, startingValue + amount)));
-    repsInput.dispatchEvent(new Event("input", { bubbles: true }));
   }
 
   function speakCue(text: string) {
@@ -545,9 +531,6 @@ import DurationInput from "@/components/DurationInput.astro";
 
   resetButton.addEventListener("click", resetTimer);
 
-  increaseRepsButton.addEventListener("click", () => adjustReps(1));
-  decreaseRepsButton.addEventListener("click", () => adjustReps(-1));
-  repsInput.addEventListener("input", updateRepStepper);
   form.addEventListener("input", () => {
     if (speechSupported) speechPreference = speechCheckbox.checked;
     syncSavedUrl();
@@ -581,7 +564,7 @@ import DurationInput from "@/components/DurationInput.astro";
   if (applySettingsFromUrl()) {
     shareStatus.textContent = "Some saved settings were invalid and ignored.";
   }
-  updateRepStepper();
+  repsInput.dispatchEvent(new Event("input", { bubbles: true }));
   syncSavedUrl();
 </script>
 
@@ -627,37 +610,6 @@ import DurationInput from "@/components/DurationInput.astro";
     width: 100%;
   }
 
-  .workout-timer__rep-control {
-    align-items: stretch;
-    display: flex;
-    gap: 0.5rem;
-  }
-
-  #workout-reps {
-    appearance: textfield;
-    font-size: 1.5rem;
-    min-width: 0;
-    text-align: center;
-  }
-
-  #workout-reps::-webkit-inner-spin-button,
-  #workout-reps::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-
-  .workout-timer__stepper {
-    display: grid;
-    grid-template-rows: repeat(2, minmax(2.75rem, 1fr));
-  }
-
-  .workout-timer__stepper button {
-    font-size: 1.5rem;
-    font-weight: 700;
-    min-width: 3rem;
-    padding: 0;
-  }
-
   .workout-timer__speech {
     display: grid;
     gap: 0.5rem;
@@ -693,7 +645,6 @@ import DurationInput from "@/components/DurationInput.astro";
   }
 
   .workout-timer__actions button,
-  .workout-timer__stepper button,
   .workout-timer__share button {
     background: var(--color-body);
     border: 1px solid currentColor;
@@ -702,10 +653,6 @@ import DurationInput from "@/components/DurationInput.astro";
     cursor: pointer;
     font: inherit;
     padding: 0.25rem 0.75rem;
-  }
-
-  .workout-timer__stepper button {
-    min-height: 2.75rem;
   }
 
   .workout-timer__share {
@@ -745,20 +692,11 @@ import DurationInput from "@/components/DurationInput.astro";
     margin: 0;
   }
 
-  .workout-timer__actions button:focus-visible,
   .workout-timer__field input:focus-visible,
   .workout-timer__speech input:focus-visible,
-  .workout-timer__stepper button:focus-visible,
-  .workout-timer__share input:focus-visible,
-  .workout-timer__share button:focus-visible {
+  .workout-timer__share input:focus-visible {
     outline: 3px solid var(--color-link-primary);
     outline-offset: 2px;
-  }
-
-  .workout-timer__actions button:disabled,
-  .workout-timer__stepper button:disabled {
-    cursor: not-allowed;
-    opacity: 0.6;
   }
 
   .workout-timer__display {

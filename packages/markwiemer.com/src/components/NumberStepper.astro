@@ -1,0 +1,149 @@
+---
+// https://www.w3.org/WAI/ARIA/apg/patterns/spinbutton/
+// Integer input with increase and decrease buttons
+
+interface Props {
+  id: string;
+  name: string;
+  min: number;
+  max: number;
+  value: number;
+  groupLabel: string;
+  increaseLabel: string;
+  decreaseLabel: string;
+  step?: number;
+  required?: boolean;
+}
+
+const {
+  id,
+  name,
+  min,
+  max,
+  value,
+  groupLabel,
+  increaseLabel,
+  decreaseLabel,
+  step = 1,
+  required = false,
+} = Astro.props;
+---
+
+<div class="number-stepper" data-number-stepper>
+  <input
+    id={id}
+    name={name}
+    type="number"
+    min={min}
+    max={max}
+    step={step}
+    value={value}
+    required={required}
+  />
+  <div class="number-stepper__buttons" role="group" aria-label={groupLabel}>
+    <button type="button" data-number-stepper-increase aria-label={increaseLabel}>↑</button>
+    <button type="button" data-number-stepper-decrease aria-label={decreaseLabel}>↓</button>
+  </div>
+</div>
+
+<script>
+  for (const stepper of document.querySelectorAll<HTMLDivElement>("[data-number-stepper]")) {
+    const input = stepper.querySelector<HTMLInputElement>('input[type="number"]');
+    const increaseButton = stepper.querySelector<HTMLButtonElement>(
+      "[data-number-stepper-increase]",
+    );
+    const decreaseButton = stepper.querySelector<HTMLButtonElement>(
+      "[data-number-stepper-decrease]",
+    );
+
+    if (!input || !increaseButton || !decreaseButton) {
+      throw new Error("Number stepper markup is incomplete.");
+    }
+
+    const getLimit = (value: string, fallback: number): number =>
+      value === "" ? fallback : Number(value);
+
+    const updateButtons = () => {
+      const currentValue = input.valueAsNumber;
+      const minimum = getLimit(input.min, Number.NEGATIVE_INFINITY);
+      const maximum = getLimit(input.max, Number.POSITIVE_INFINITY);
+      increaseButton.disabled = !Number.isFinite(currentValue) || currentValue >= maximum;
+      decreaseButton.disabled = !Number.isFinite(currentValue) || currentValue <= minimum;
+    };
+
+    const adjustValue = (amount: number) => {
+      const currentValue = input.valueAsNumber;
+      const minimum = getLimit(input.min, 0);
+      const maximum = getLimit(input.max, Number.POSITIVE_INFINITY);
+      const step = Number(input.step);
+      const increment = Number.isFinite(step) && step > 0 ? step : 1;
+      const startingValue = Number.isFinite(currentValue) ? currentValue : minimum;
+      input.value = String(
+        Math.max(minimum, Math.min(maximum, startingValue + amount * increment)),
+      );
+      input.dispatchEvent(new Event("input", { bubbles: true }));
+      input.dispatchEvent(new Event("change", { bubbles: true }));
+    };
+
+    increaseButton.addEventListener("click", () => adjustValue(1));
+    decreaseButton.addEventListener("click", () => adjustValue(-1));
+    input.addEventListener("input", updateButtons);
+    input.addEventListener("change", updateButtons);
+    updateButtons();
+  }
+</script>
+
+<style>
+  .number-stepper {
+    align-items: stretch;
+    display: flex;
+    gap: 0.5rem;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .number-stepper input {
+    appearance: textfield;
+    background: var(--color-body);
+    border: 1px solid currentColor;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: var(--color-text-primary);
+    flex: 1;
+    font: inherit;
+    font-size: 1.5rem;
+    min-height: 2.5rem;
+    min-width: 0;
+    padding: 0.25rem 0.5rem;
+    text-align: center;
+  }
+
+  .number-stepper input::-webkit-inner-spin-button,
+  .number-stepper input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  .number-stepper__buttons {
+    display: grid;
+    grid-template-rows: repeat(2, minmax(2.75rem, 1fr));
+  }
+
+  .number-stepper__buttons button {
+    background: var(--color-body);
+    border: 1px solid currentColor;
+    border-radius: 4px;
+    color: var(--color-text-primary);
+    font: inherit;
+    font-size: 1.5rem;
+    font-weight: 700;
+    min-height: 2.75rem;
+    min-width: 3rem;
+    padding: 0;
+  }
+
+  .number-stepper input:focus-visible {
+    outline: 3px solid var(--color-link-primary);
+    outline-offset: 2px;
+  }
+</style>

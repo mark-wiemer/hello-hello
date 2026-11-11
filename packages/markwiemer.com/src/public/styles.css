@@ -295,6 +295,16 @@ button {
   scrollbar-color: var(--color-text-primary) var(--color-body);
 }
 
+button:focus-visible {
+  outline: 3px solid var(--color-link-primary);
+  outline-offset: 2px;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
 code {
   font-size: var(--font-size-small);
   line-height: var(--line-height-small);
