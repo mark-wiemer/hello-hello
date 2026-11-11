@@ -5,6 +5,7 @@
   "scripts": {
     "astro": "astro --config config/astro.config.mjs",
     "build": "astro build --config config/astro.config.mjs",
+    "check": "astro check --config config/astro.config.mjs",
     "dev": "astro dev --config config/astro.config.mjs",
     "dev:e2e": "npm run dev -- --port 8910",
     "e2e": "start-server-and-test \"npm run preview:e2e\" http-get://localhost:8910 \"npm run playwright\"",
@@ -23,17 +24,19 @@
     "test:ci": "npm run test -- --run",
     "trigger-deploy": "bash ../../scripts/trigger-markwiemer-deploy.sh",
     "upgrade": "npx @astrojs/upgrade",
-    "validate:ci": "npm run test:ci && npm run e2e:ci && echo All CI validations passed, ready to deploy",
+    "validate:ci": "npm run check && npm run test:ci && npm run e2e:ci && echo All CI validations passed, ready to deploy",
     "validate:fix": "sort-package-json"
   },
   "dependencies": {
     "@astrojs/mdx": "5.0.5",
+    "@tanstack/table-core": "^8.21.3",
     "@types/node": "^25.6.0",
     "astro": "6.3.2",
     "sharp": "^0.34.5",
     "vitest": "^4.0.18"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.12",
     "@axe-core/playwright": "^4.11.1",
     "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.59.1",
@@ -41,6 +44,7 @@
     "eslint-plugin-package-json": "^0.91.1",
     "globals": "^17.5.0",
     "start-server-and-test": "^3.0.0",
+    "typescript": "^6.0.3",
     "typescript-eslint": "^8.59.0"
   },
   "description": "Mark's website"
