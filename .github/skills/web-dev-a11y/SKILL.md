@@ -16,6 +16,10 @@ Before creating or changing a web component:
 - Give every input an associated label. Give icon-only buttons a clear
   accessible name, use native buttons for actions, and preserve keyboard
   operation with a visible focus indicator.
+- Audit each interactive workflow for mouse-only and keyboard-only operation.
+  Dialogs need a visible close or cancel control for mouse users; do not rely
+  on Escape alone. Provide keyboard alternatives to custom gestures such as
+  drag-and-drop.
 - Make increase/decrease buttons at least 24 by 24 CSS pixels. Prefer 44 by 44
   pixel targets to match the site's workout timer.
 - Respect the site's light/dark theme tokens and verify the component at narrow
