@@ -8,9 +8,13 @@ import {
 } from "./todo";
 
 describe("todo recurrence", () => {
-  it("formats singular and plural recurrence labels", () => {
-    expect(formatRecurrence({ interval: 1, unit: "days" })).toBe("Every 1 day");
+  it("uses concise names for one-unit recurrence and preserves plural intervals", () => {
+    expect(formatRecurrence({ interval: 1, unit: "days" })).toBe("Daily");
+    expect(formatRecurrence({ interval: 1, unit: "weeks" })).toBe("Weekly");
+    expect(formatRecurrence({ interval: 1, unit: "months" })).toBe("Monthly");
+    expect(formatRecurrence({ interval: 2, unit: "days" })).toBe("Every 2 days");
     expect(formatRecurrence({ interval: 2, unit: "weeks" })).toBe("Every 2 weeks");
+    expect(formatRecurrence({ interval: 2, unit: "months" })).toBe("Every 2 months");
   });
 
   it("accepts intervals from 1 through 99", () => {
@@ -21,7 +25,7 @@ describe("todo recurrence", () => {
     expect(isValidRecurrence({ interval: 1.5, unit: "days" })).toBe(false);
   });
 
-  it("keeps the completion time when adding day and week recurrences", () => {
+  it("makes day and week recurrence dates ready at local midnight", () => {
     const completedAt = new Date(2026, 0, 5, 14, 30);
     const dueInOneDay = getCompletionDueDate(completedAt, {
       interval: 1,
@@ -32,8 +36,8 @@ describe("todo recurrence", () => {
       unit: "weeks",
     });
 
-    expect(dueInOneDay.getTime()).toBe(new Date(2026, 0, 6, 14, 30).getTime());
-    expect(dueInOneWeek.getTime()).toBe(new Date(2026, 0, 12, 14, 30).getTime());
+    expect(dueInOneDay.getTime()).toBe(new Date(2026, 0, 6).getTime());
+    expect(dueInOneWeek.getTime()).toBe(new Date(2026, 0, 12).getTime());
   });
 
   it("uses the matching date next month for days 1 through 28", () => {
@@ -43,7 +47,7 @@ describe("todo recurrence", () => {
       unit: "months",
     });
 
-    expect(dueDate.getTime()).toBe(new Date(2026, 1, 15, 9).getTime());
+    expect(dueDate.getTime()).toBe(new Date(2026, 1, 15).getTime());
   });
 
   it("uses the 28th of the target month for completion dates 29 through 31", () => {
@@ -54,7 +58,7 @@ describe("todo recurrence", () => {
         unit: "months",
       });
 
-      expect(dueDate.getTime()).toBe(new Date(2026, 1, 28, 9).getTime());
+      expect(dueDate.getTime()).toBe(new Date(2026, 1, 28).getTime());
     }
   });
 
