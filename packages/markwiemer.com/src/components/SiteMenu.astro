@@ -2,7 +2,13 @@
 import NavEntry from "@/components/NavEntry.astro";
 ---
 
-<button id="toggleMenu" aria-label="Menu">
+<button
+  id="toggleMenu"
+  type="button"
+  aria-label="Menu"
+  aria-controls="siteMenu"
+  aria-expanded="false"
+>
   <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false">
     <path
       d="M3 4h18M3 12h18M3 20h18"
@@ -11,8 +17,8 @@ import NavEntry from "@/components/NavEntry.astro";
       stroke-linecap="round"></path>
   </svg>
 </button>
-<div id="siteMenu" aria-expanded="false" inert>
-  <nav>
+<div id="siteMenu" inert>
+  <nav aria-label="Site">
     <h2>Here</h2>
     <ul aria-label="Sitemap">
       <NavEntry href="/" text="Home" />
@@ -39,90 +45,91 @@ import NavEntry from "@/components/NavEntry.astro";
       const toggleButton = document.querySelector("#toggleMenu");
       const siteMenu = document.querySelector("#siteMenu");
       toggleButton?.addEventListener("click", () => {
-        if (siteMenu.getAttribute("aria-expanded") === "true") {
-          siteMenu.setAttribute("aria-expanded", "false");
+        if (toggleButton.getAttribute("aria-expanded") === "true") {
+          toggleButton.setAttribute("aria-expanded", "false");
           siteMenu.setAttribute("inert", "");
           document.body.classList.remove("nav-open");
           return;
         } else {
-          siteMenu.setAttribute("aria-expanded", "true");
+          toggleButton.setAttribute("aria-expanded", "true");
           siteMenu.removeAttribute("inert");
           document.body.classList.add("nav-open");
         }
       });
     </script>
   </nav>
-  <h2>Settings</h2>
-  <button id="themeToggle" class="toggle" aria-live="polite">Error</button>
-  <script is:inline data-notes="handle theme toggle">
-    (() => {
-      const themeToggle = document.querySelector("#themeToggle");
-      const themes = ["system", "light", "dark"];
-      const labels = { system: "System", light: "Light", dark: "Dark" };
+  <section aria-labelledby="site-menu-settings-heading">
+    <h2 id="site-menu-settings-heading">Settings</h2>
+    <button id="themeToggle" class="toggle" aria-live="polite">Error</button>
+    <script is:inline data-notes="handle theme toggle">
+      (() => {
+        const themeToggle = document.querySelector("#themeToggle");
+        const themes = ["system", "light", "dark"];
+        const labels = { system: "System", light: "Light", dark: "Dark" };
 
-      const getStoredTheme = () => localStorage.getItem("theme") || "system";
+        const getStoredTheme = () => localStorage.getItem("theme") || "system";
 
-      const applyTheme = (theme) => {
-        if (theme === "system") {
-          document.documentElement.removeAttribute("data-theme");
-        } else {
-          document.documentElement.setAttribute("data-theme", theme);
-        }
-      };
+        const applyTheme = (theme) => {
+          if (theme === "system") {
+            document.documentElement.removeAttribute("data-theme");
+          } else {
+            document.documentElement.setAttribute("data-theme", theme);
+          }
+        };
 
-      const updateButton = (theme) => {
-        if (themeToggle) themeToggle.textContent = `Theme: ${labels[theme]}`;
-      };
+        const updateButton = (theme) => {
+          if (themeToggle) themeToggle.textContent = `Theme: ${labels[theme]}`;
+        };
 
-      // Initialize button text from current state
-      const current = getStoredTheme();
-      updateButton(current);
-
-      themeToggle?.addEventListener("click", () => {
+        // Initialize button text from current state
         const current = getStoredTheme();
-        const nextIndex = (themes.indexOf(current) + 1) % themes.length;
-        const next = themes[nextIndex];
-        if (next === "system") {
-          localStorage.removeItem("theme");
-        } else {
-          localStorage.setItem("theme", next);
-        }
-        applyTheme(next);
-        updateButton(next);
-      });
-    })();
-  </script>
+        updateButton(current);
 
-  <button id="datetimeFormatToggle" class="toggle" aria-live="polite">Error</button>
-  <!-- RE de-duping: https://github.com/mark-wiemer/hello-hello/issues/113 -->
-  <script is:inline data-notes="handle date format toggle">
-    (() => {
-      const datetimeFormatToggle = document.querySelector("#datetimeFormatToggle");
-      const formats = ["system", "iso"];
-      const labels = { system: "System", iso: "ISO" };
+        themeToggle?.addEventListener("click", () => {
+          const current = getStoredTheme();
+          const nextIndex = (themes.indexOf(current) + 1) % themes.length;
+          const next = themes[nextIndex];
+          if (next === "system") {
+            localStorage.removeItem("theme");
+          } else {
+            localStorage.setItem("theme", next);
+          }
+          applyTheme(next);
+          updateButton(next);
+        });
+      })();
+    </script>
+    <button id="datetimeFormatToggle" class="toggle" aria-live="polite">Error</button>
+    <!-- RE de-duping: https://github.com/mark-wiemer/hello-hello/issues/113 -->
+    <script is:inline data-notes="handle date format toggle">
+      (() => {
+        const datetimeFormatToggle = document.querySelector("#datetimeFormatToggle");
+        const formats = ["system", "iso"];
+        const labels = { system: "System", iso: "ISO" };
 
-      const getStoredFormat = () => localStorage.getItem("dateFormat") || "system";
+        const getStoredFormat = () => localStorage.getItem("dateFormat") || "system";
 
-      const updateButton = (format) => {
-        if (datetimeFormatToggle) datetimeFormatToggle.textContent = `Dates: ${labels[format]}`;
-      };
+        const updateButton = (format) => {
+          if (datetimeFormatToggle) datetimeFormatToggle.textContent = `Dates: ${labels[format]}`;
+        };
 
-      // Initialize button text from current state
-      const current = getStoredFormat();
-      updateButton(current);
-
-      datetimeFormatToggle?.addEventListener("click", () => {
+        // Initialize button text from current state
         const current = getStoredFormat();
-        const nextIndex = (formats.indexOf(current) + 1) % formats.length;
-        const next = formats[nextIndex];
-        if (next === "system") {
-          localStorage.removeItem("dateFormat");
-        } else {
-          localStorage.setItem("dateFormat", next);
-        }
-        updateButton(next);
-        window.dispatchEvent(new Event("dateformat-changed"));
-      });
-    })();
-  </script>
+        updateButton(current);
+
+        datetimeFormatToggle?.addEventListener("click", () => {
+          const current = getStoredFormat();
+          const nextIndex = (formats.indexOf(current) + 1) % formats.length;
+          const next = formats[nextIndex];
+          if (next === "system") {
+            localStorage.removeItem("dateFormat");
+          } else {
+            localStorage.setItem("dateFormat", next);
+          }
+          updateButton(next);
+          window.dispatchEvent(new Event("dateformat-changed"));
+        });
+      })();
+    </script>
+  </section>
 </div>
