@@ -15,9 +15,15 @@ export function isValidRecurrence(recurrence: Recurrence): boolean {
 }
 
 export function formatRecurrence(recurrence: Recurrence): string {
-  const unit =
-    recurrence.interval === 1 ? recurrence.unit.slice(0, -1) : recurrence.unit;
-  return `Every ${recurrence.interval} ${unit}`;
+  if (recurrence.interval === 1) {
+    return {
+      days: "Daily",
+      weeks: "Weekly",
+      months: "Monthly",
+    }[recurrence.unit];
+  }
+
+  return `Every ${recurrence.interval} ${recurrence.unit}`;
 }
 
 export function getCompletionDueDate(completedAt: Date, recurrence: Recurrence): Date {
@@ -43,6 +49,7 @@ export function getCompletionDueDate(completedAt: Date, recurrence: Recurrence):
     dueDate.setDate(completionDay >= 29 ? 28 : Math.min(completionDay, lastDayOfMonth));
   }
 
+  dueDate.setHours(0, 0, 0, 0);
   return dueDate;
 }
 
