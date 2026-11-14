@@ -43,6 +43,10 @@ function isValidTask(value: unknown): value is TodoTask {
   );
 }
 
+function hasUniqueTaskIds(tasks: readonly { id: string }[]): boolean {
+  return new Set(tasks.map((task) => task.id)).size === tasks.length;
+}
+
 export function loadTasks(key: string): { tasks: TodoTask[]; error: string | null } {
   try {
     const storedTasks = localStorage.getItem(key);
@@ -52,7 +56,7 @@ export function loadTasks(key: string): { tasks: TodoTask[]; error: string | nul
     if (
       !Array.isArray(parsed) ||
       !parsed.every(isValidTask) ||
-      new Set(parsed.map((task) => task.id)).size !== parsed.length
+      !hasUniqueTaskIds(parsed)
     ) {
       throw new TypeError("Saved task data does not match the todo app format.");
     }
@@ -105,7 +109,7 @@ export function parseTaskExport(
       candidate.version !== taskExportVersion ||
       !Array.isArray(candidate.tasks) ||
       !candidate.tasks.every(isValidTask) ||
-      new Set(candidate.tasks.map((task) => task.id)).size !== candidate.tasks.length
+      !hasUniqueTaskIds(candidate.tasks)
     ) {
       throw new TypeError("Task backup does not match the supported format.");
     }

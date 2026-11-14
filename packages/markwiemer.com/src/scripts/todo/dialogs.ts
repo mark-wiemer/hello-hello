@@ -11,9 +11,11 @@ interface TodoDialogElements {
   taskDialogHeading: HTMLHeadingElement;
   titleInput: HTMLInputElement;
   intervalInput: HTMLInputElement;
+  intervalError: HTMLParagraphElement;
   unitInput: HTMLSelectElement;
   formError: HTMLParagraphElement;
   cancelTaskButton: HTMLButtonElement;
+  closeTaskButton: HTMLButtonElement;
   deleteDialog: HTMLDialogElement;
   deleteMessage: HTMLParagraphElement;
   cancelDeleteButton: HTMLButtonElement;
@@ -40,9 +42,11 @@ export function createTodoDialogs(
     taskDialogHeading,
     titleInput,
     intervalInput,
+    intervalError,
     unitInput,
     formError,
     cancelTaskButton,
+    closeTaskButton,
     deleteDialog,
     deleteMessage,
     cancelDeleteButton,
@@ -56,6 +60,7 @@ export function createTodoDialogs(
     editingTaskId = task?.id ?? null;
     taskForm.reset();
     formError.hidden = true;
+    clearIntervalError();
     titleInput.setCustomValidity("");
     taskDialogHeading.textContent = task ? "Edit task" : "New task";
     if (task) {
@@ -66,6 +71,18 @@ export function createTodoDialogs(
     intervalInput.dispatchEvent(new Event("input", { bubbles: true }));
     taskDialog.showModal();
     titleInput.focus();
+  }
+
+  function clearIntervalError(): void {
+    intervalInput.removeAttribute("aria-invalid");
+    intervalError.hidden = true;
+    intervalError.textContent = "";
+  }
+
+  function showIntervalError(): void {
+    intervalInput.setAttribute("aria-invalid", "true");
+    intervalError.textContent = "Enter a whole number from 1 to 99.";
+    intervalError.hidden = false;
   }
 
   function openDelete(task: TodoTask): void {
@@ -102,7 +119,19 @@ export function createTodoDialogs(
   }
 
   titleInput.addEventListener("input", () => titleInput.setCustomValidity(""));
+  intervalInput.addEventListener("invalid", (event) => {
+    event.preventDefault();
+    showIntervalError();
+    if (titleInput.validity.valid) intervalInput.focus();
+  });
+  intervalInput.addEventListener("input", () => {
+    if (intervalInput.validity.valid) clearIntervalError();
+  });
   cancelTaskButton.addEventListener("click", () => taskDialog.close());
+  closeTaskButton.addEventListener("click", () => taskDialog.close());
+  taskDialog.addEventListener("close", () => {
+    editingTaskId = null;
+  });
   taskForm.addEventListener("submit", handleTaskSubmit);
   cancelDeleteButton.addEventListener("click", () => {
     deletingTaskId = null;

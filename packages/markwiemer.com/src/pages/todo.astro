@@ -7,6 +7,10 @@ import TextInput from "@/components/TextInput.astro";
 
 <Layout pageTitle="Todo">
   <p id="todo-description">Recurring tasks, stored in this browser on this device. This is an early prototype; tasks may be lost at any time!</p>
+  <p id="todo-sandbox-notice" class="sandbox-notice" hidden>
+    <strong>In sandbox mode</strong>
+    <button id="todo-sandbox-exit" type="button">Exit sandbox mode</button>
+  </p>
 
   <div id="todo-app">
     <p
@@ -18,15 +22,17 @@ import TextInput from "@/components/TextInput.astro";
     ></p>
 
     <p id="todo-reorder-help" class="visually-hidden">
-      Drag a task row to reorder it; a line marks where it will land.
+      Use the Move up and Move down buttons, or drag a task row to reorder it.
     </p>
 
     <section aria-label="Ready tasks">
       <div
+        id="todo-active-region"
         class="table-scroll wide-section"
         role="region"
         aria-label="Ready tasks table"
         tabindex="0"
+        hidden
       >
         <table id="todo-active-table" aria-describedby="todo-reorder-help">
           <caption class="visually-hidden">Tasks ready to work on</caption>
@@ -59,10 +65,14 @@ import TextInput from "@/components/TextInput.astro";
       <button id="todo-new-task" type="button">New task</button>
     </div>
 
-    <section class="hidden-tasks-section" aria-labelledby="todo-hidden-heading">
+    <section
+      id="todo-hidden-section"
+      class="hidden-tasks-section"
+      aria-labelledby="todo-hidden-heading"
+      hidden
+    >
       <button
         id="todo-toggle-hidden"
-        class="text-button"
         type="button"
         aria-expanded="false"
         aria-controls="todo-hidden-content"
@@ -93,7 +103,6 @@ import TextInput from "@/components/TextInput.astro";
             <tbody></tbody>
           </table>
         </div>
-        <p id="todo-hidden-empty" class="empty-message" hidden>No hidden tasks.</p>
       </div>
     </section>
 
@@ -129,7 +138,16 @@ import TextInput from "@/components/TextInput.astro";
 
   <dialog id="todo-task-dialog" aria-labelledby="todo-task-dialog-heading">
     <form id="todo-task-form">
-      <h2 id="todo-task-dialog-heading">New task</h2>
+      <div class="task-dialog-heading">
+        <h2 id="todo-task-dialog-heading">New task</h2>
+        <button
+          id="todo-close-task"
+          type="button"
+          aria-label="Close task dialog"
+        >
+          Close
+        </button>
+      </div>
       <TextInput
         id="todo-title"
         name="title"
@@ -153,6 +171,7 @@ import TextInput from "@/components/TextInput.astro";
             groupLabel="Adjust recurrence interval"
             increaseLabel="Increase recurrence interval"
             decreaseLabel="Decrease recurrence interval"
+            describedBy="todo-interval-error"
             required
           />
           <Dropdown id="todo-unit" name="unit" label="Recurrence unit" labelHidden>
@@ -161,6 +180,7 @@ import TextInput from "@/components/TextInput.astro";
             <option value="months">months</option>
           </Dropdown>
         </div>
+        <p id="todo-interval-error" class="form-error" hidden></p>
       </fieldset>
 
       <p id="todo-form-error" class="form-error" role="alert" hidden></p>
@@ -171,7 +191,11 @@ import TextInput from "@/components/TextInput.astro";
     </form>
   </dialog>
 
-  <dialog id="todo-delete-dialog" aria-labelledby="todo-delete-heading">
+  <dialog
+    id="todo-delete-dialog"
+    aria-labelledby="todo-delete-heading"
+    aria-describedby="todo-delete-message"
+  >
     <h2 id="todo-delete-heading">Delete task?</h2>
     <p id="todo-delete-message"></p>
     <div class="dialog-actions">
@@ -180,10 +204,16 @@ import TextInput from "@/components/TextInput.astro";
     </div>
   </dialog>
 
-  <dialog id="todo-import-dialog" aria-labelledby="todo-import-heading">
+  <dialog
+    id="todo-import-dialog"
+    aria-labelledby="todo-import-heading"
+    aria-describedby="todo-import-message todo-import-warning"
+  >
     <h2 id="todo-import-heading">Import tasks?</h2>
     <p id="todo-import-message"></p>
-    <p>This will replace your current regular tasks. Sandbox tasks will not be changed.</p>
+    <p id="todo-import-warning">
+      This will replace your current regular tasks. Sandbox tasks will not be changed.
+    </p>
     <div class="dialog-actions">
       <button id="todo-cancel-import" type="button">Cancel import</button>
       <button id="todo-confirm-import" type="button">Replace tasks</button>
@@ -220,7 +250,8 @@ import TextInput from "@/components/TextInput.astro";
         an <strong>Unsnooze</strong> action to bring it back right away.
       </p>
       <p>
-        Drag a task row to reorder it; a line marks where it will land.
+        Use the Move up and Move down buttons, or drag a task row to reorder it;
+        a line marks where it will land.
       </p>
     </section>
 
@@ -338,9 +369,22 @@ import TextInput from "@/components/TextInput.astro";
   }
 
   .sandbox-panel {
-    border: 1px dashed var(--color-text-primary);
-    border-radius: 8px;
     padding: 0.75rem;
+  }
+
+  .sandbox-notice {
+    align-items: center;
+    background: var(--todo-completed-background);
+    border-radius: var(--border-radius-button);
+    color: var(--todo-completed-foreground);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .sandbox-notice[hidden] {
+    display: none;
   }
 
   #todo-backup-status {
@@ -352,23 +396,20 @@ import TextInput from "@/components/TextInput.astro";
   }
 
   .todo-toolbar button,
+  .hidden-tasks-section > button,
   .todo-backup-controls button,
   .dialog-actions button,
+  .task-dialog-heading button,
   .task-actions button,
-  .text-button {
+  .reorder-button,
+  .sandbox-controls button,
+  .sandbox-notice button {
     min-height: 44px;
     padding: 0.35rem 0.7rem;
     border: 1px solid var(--color-text-primary);
     border-radius: var(--border-radius-button);
     background: var(--color-body);
     color: var(--color-text-primary);
-  }
-
-  .text-button {
-    border: 0;
-    padding-left: 0;
-    color: var(--color-link-primary);
-    text-decoration: underline;
   }
 
   .table-scroll {
@@ -395,6 +436,20 @@ import TextInput from "@/components/TextInput.astro";
 
   #todo-active-table td:first-child {
     vertical-align: middle;
+  }
+
+  .reorder-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.125rem;
+  }
+
+  .reorder-button {
+    display: inline-grid;
+    min-width: 44px;
+    min-height: 44px;
+    place-items: center;
+    padding: 0;
   }
 
   #todo-active-table td:nth-child(3) {
@@ -428,6 +483,7 @@ import TextInput from "@/components/TextInput.astro";
     font-size: 1.25rem;
     line-height: 1;
     text-align: center;
+    transform: translateY(3px);
     user-select: none;
   }
 
@@ -535,6 +591,13 @@ import TextInput from "@/components/TextInput.astro";
 
   dialog h2 {
     margin: 0;
+  }
+
+  .task-dialog-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
   }
 
   #todo-title {

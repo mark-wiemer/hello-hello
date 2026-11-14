@@ -280,6 +280,51 @@ test.describe("todo app", () => {
     await page.goto("/todo/");
   });
 
+  test("hides the ready tasks table when no tasks are ready", async ({ page }) => {
+    const table = page.locator("#todo-active-table");
+    await expect(table).toBeHidden();
+
+    await createTask(page, "Ready task");
+    await expect(table).toBeVisible();
+
+    await page.getByRole("button", { name: "Snooze until tomorrow: Ready task" }).click();
+    await expect(table).toBeHidden();
+  });
+
+  test("shows the hidden tasks button only while hidden tasks exist", async ({ page }) => {
+    const toggle = page.locator("#todo-toggle-hidden");
+    const section = page.locator("#todo-hidden-section");
+    const hiddenTable = page.locator("#todo-hidden-table");
+    await expect(section).toBeHidden();
+    await expect(toggle).toBeHidden();
+    await expect(hiddenTable).toBeHidden();
+
+    await createTask(page, "Hidden task");
+    await page.getByRole("button", { name: "Snooze until tomorrow: Hidden task" }).click();
+    await expect(section).toBeVisible();
+    await expect(toggle).toBeVisible();
+    await expect(toggle).toHaveText("Show hidden tasks");
+    const stylesMatch = await page.evaluate(() => {
+      const toggleStyles = getComputedStyle(document.querySelector("#todo-toggle-hidden")!);
+      const newTaskStyles = getComputedStyle(document.querySelector("#todo-new-task")!);
+      return (
+        toggleStyles.borderTopWidth === newTaskStyles.borderTopWidth &&
+        toggleStyles.borderTopStyle === newTaskStyles.borderTopStyle &&
+        toggleStyles.paddingLeft === newTaskStyles.paddingLeft &&
+        toggleStyles.textDecorationLine === newTaskStyles.textDecorationLine
+      );
+    });
+    expect(stylesMatch).toBe(true);
+
+    await toggle.click();
+    await expect(hiddenTable).toBeVisible();
+    await page.getByRole("button", { name: "Unsnooze task: Hidden task" }).click();
+    await expect(section).toBeHidden();
+    await expect(toggle).toBeHidden();
+    await expect(page.locator("#todo-hidden-content")).toBeHidden();
+    await expect(hiddenTable).toBeHidden();
+  });
+
   test("creates, edits, persists, and deletes tasks", async ({ page }) => {
     await createTask(page, "Write report", "2", "weeks");
     await expect(page.locator("#todo-active-table tbody tr")).toContainText(
@@ -302,7 +347,24 @@ test.describe("todo app", () => {
       .toBe("[]");
   });
 
-  test("keeps task actions on one row and makes icon columns compact", async ({ page }) => {
+  test("closes the task dialog with mouse and keyboard controls", async ({ page }) => {
+    const newTaskButton = page.getByRole("button", { name: "New task" });
+    const taskDialog = page.getByRole("dialog", { name: "New task" });
+    const closeButton = page.getByRole("button", { name: "Close task dialog" });
+
+    await newTaskButton.click();
+    await closeButton.click();
+    await expect(taskDialog).toBeHidden();
+    await expect(newTaskButton).toBeFocused();
+
+    await newTaskButton.click();
+    await closeButton.focus();
+    await page.keyboard.press("Enter");
+    await expect(taskDialog).toBeHidden();
+    await expect(newTaskButton).toBeFocused();
+  });
+
+  test("keeps task actions on one row and provides keyboard reorder controls", async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 800 });
     await createTask(page, "Task actions");
     await createTask(page, "W".repeat(60), "99", "months");
@@ -335,11 +397,12 @@ test.describe("todo app", () => {
       });
 
     await expect(page.getByRole("columnheader", { name: "Select" })).toHaveCount(0);
-    await expect(page.getByRole("button", { name: "Move up" })).toHaveCount(0);
-    await expect(page.getByRole("button", { name: "Move down" })).toHaveCount(0);
+    await expect(page.getByRole("button", { name: /Move up:/ })).toHaveCount(2);
+    await expect(page.getByRole("button", { name: /Move down:/ })).toHaveCount(2);
     await expect(page.getByRole("columnheader", { name: "Reorder" })).toHaveCount(1);
     await expect(page.getByRole("columnheader", { name: "Complete" })).toHaveCount(1);
-    expect(columnWidths.every((width) => width < 60)).toBe(true);
+    expect(columnWidths[0]).toBeGreaterThanOrEqual(88);
+    expect(columnWidths[1]).toBeLessThan(60);
     expect(new Set(buttonTops.map(Math.round)).size).toBe(1);
     expect(scrollGeometry.left).toBeGreaterThanOrEqual(8);
     expect(scrollGeometry.viewportWidth - scrollGeometry.right).toBeGreaterThanOrEqual(8);
@@ -373,6 +436,7 @@ test.describe("todo app", () => {
         ),
         cellAlignment: getComputedStyle(cell).verticalAlign,
         handleDisplay: getComputedStyle(handle).display,
+        handleTransform: getComputedStyle(handle).transform,
       };
     });
 
@@ -380,8 +444,9 @@ test.describe("todo app", () => {
       centerOffset: expect.any(Number),
       cellAlignment: "middle",
       handleDisplay: "block",
+      handleTransform: "matrix(1, 0, 0, 1, 0, 3)",
     });
-    expect(alignment.centerOffset).toBeLessThan(2);
+    expect(alignment.centerOffset).toBe(3);
   });
 
   test("keeps the page menu clickable above the table after scrolling", async ({ page }) => {
@@ -393,7 +458,86 @@ test.describe("todo app", () => {
     });
 
     await page.locator("#toggleMenu").click();
-    await expect(page.locator("#siteMenu")).toHaveAttribute("aria-expanded", "true");
+    await expect(page.locator("#toggleMenu")).toHaveAttribute("aria-expanded", "true");
+  });
+
+  test("reorders tasks with keyboard-accessible move controls and preserves focus", async ({
+    page,
+  }) => {
+    await createTask(page, "First task");
+    await createTask(page, "Second task");
+    const activeRows = page.locator("#todo-active-table tbody tr");
+    const firstMoveUp = page.getByRole("button", { name: "Move up: First task" });
+    const secondMoveUp = page.getByRole("button", { name: "Move up: Second task" });
+    const secondMoveDown = page.getByRole("button", { name: "Move down: Second task" });
+
+    await expect(firstMoveUp).toBeDisabled();
+    await expect(secondMoveDown).toBeDisabled();
+    for (const button of [firstMoveUp, secondMoveUp, secondMoveDown]) {
+      const size = await button.evaluate((element) => {
+        const bounds = element.getBoundingClientRect();
+        return { width: bounds.width, height: bounds.height };
+      });
+      expect(size.width).toBeGreaterThanOrEqual(44);
+      expect(size.height).toBeGreaterThanOrEqual(44);
+    }
+
+    await secondMoveUp.focus();
+    await page.keyboard.press("Enter");
+
+    await expect(activeRows.first()).toContainText("Second task");
+    await expect(page.getByRole("button", { name: "Move down: Second task" })).toBeFocused();
+    await expect(page.locator("#todo-status")).toContainText("Task order updated");
+    await expect
+      .poll(() =>
+        page.evaluate((key) => {
+          const tasks = JSON.parse(localStorage.getItem(key) ?? "[]") as Array<{
+            title: string;
+            position: number;
+          }>;
+          return tasks.sort((a, b) => a.position - b.position).map((task) => task.title);
+        }, storageKey),
+      )
+      .toEqual(["Second task", "First task"]);
+  });
+
+  test("labels the task form controls and recurrence group", async ({ page }) => {
+    await page.getByRole("button", { name: "New task" }).click();
+    const dialog = page.getByRole("dialog", { name: "New task" });
+
+    await expect(dialog.getByLabel("Title")).toHaveAttribute("required", "");
+    await expect(dialog.getByLabel("Number of intervals")).toHaveAttribute("min", "1");
+    await expect(dialog.getByLabel("Number of intervals")).toHaveAttribute("max", "99");
+    await expect(dialog.getByLabel("Recurrence unit")).toHaveCount(1);
+    await expect(dialog.getByRole("group", { name: "Adjust recurrence interval" })).toHaveCount(1);
+    await expect(dialog.locator("fieldset > legend")).toHaveText("Recurrence");
+    await expect(page.locator("#todo-title")).toHaveAttribute("aria-describedby", "todo-title-help");
+  });
+
+  test("explains invalid recurrence intervals with selectable, announced text", async ({
+    page,
+  }) => {
+    await page.getByRole("button", { name: "New task" }).click();
+    await page.getByLabel("Title").fill("Task");
+    const interval = page.getByLabel("Number of intervals");
+    const error = page.locator("#todo-interval-error");
+
+    await interval.fill("100");
+    await page.getByRole("button", { name: "Save task" }).click();
+
+    await expect(error).toHaveText("Enter a whole number from 1 to 99.");
+    await expect(interval).toBeFocused();
+    await expect(interval).toHaveAttribute("aria-invalid", "true");
+    await expect(interval).toHaveAttribute("aria-describedby", "todo-interval-error");
+    await expect(interval).toHaveAccessibleDescription("Enter a whole number from 1 to 99.");
+    await error.selectText();
+    expect(await page.evaluate(() => window.getSelection()?.toString())).toBe(
+      "Enter a whole number from 1 to 99.",
+    );
+
+    await interval.fill("99");
+    await expect(error).toBeHidden();
+    await expect(interval).not.toHaveAttribute("aria-invalid", "true");
   });
 
   test("styles the title input and dropdown and reveals the counter halfway full", async ({
@@ -539,7 +683,7 @@ test.describe("todo app", () => {
     const completedRow = page.locator("#todo-hidden-table tbody tr");
     await expect(completedRow).toContainText("Completed");
 
-    await page.getByRole("button", { name: "Mark task incomplete: Review notes" }).click();
+    await page.getByRole("button", { name: "Mark incomplete: Review notes" }).click();
     await expect(page.locator("#todo-active-table tbody tr")).toContainText("Review notes");
     await expect(page.locator("#todo-hidden-table tbody tr")).toHaveCount(0);
     await expect
@@ -581,7 +725,14 @@ test.describe("todo app", () => {
     page,
   }) => {
     await createTask(page, "Live daily");
+    const sandboxNotice = page.locator("#todo-sandbox-notice");
+    await expect(sandboxNotice).toBeHidden();
     await page.getByRole("button", { name: "Enter sandbox mode" }).click();
+    await expect(sandboxNotice).toContainText("In sandbox mode");
+    await expect(sandboxNotice).toHaveCSS("background-color", "rgb(220, 238, 255)");
+    await expect(
+      sandboxNotice.getByRole("button", { name: "Exit sandbox mode" }),
+    ).toBeVisible();
     await expect(page.locator("#todo-active-table tbody tr")).toHaveCount(0);
     await createTask(page, "Sandbox daily");
     await page.getByLabel("Complete task: Sandbox daily").click();
@@ -625,6 +776,7 @@ test.describe("todo app", () => {
     });
 
     await page.reload();
+    await expect(sandboxNotice).toBeVisible();
     await expect(page.locator("#todo-sandbox-date")).toContainText("Sandbox date:");
     const restoredDate = await page.evaluate((key) => {
       const date = new Date(sessionStorage.getItem(key) ?? "");
@@ -641,7 +793,8 @@ test.describe("todo app", () => {
     }, sandboxDateSessionKey);
     expect(advancedDate).toEqual({ year: 2026, month: 1, day: 1 });
 
-    await page.getByRole("button", { name: "Exit sandbox mode" }).click();
+    await sandboxNotice.getByRole("button", { name: "Exit sandbox mode" }).click();
+    await expect(sandboxNotice).toBeHidden();
     await expect(page.locator("#todo-active-table tbody tr")).toContainText("Live daily");
     await expect(page.locator("#todo-active-table tbody tr")).not.toContainText("Sandbox daily");
   });
@@ -654,6 +807,29 @@ test.describe("todo app", () => {
     await expect(resetButton).toBeHidden();
     await page.getByRole("button", { name: "Enter sandbox mode" }).click();
     await expect(resetButton).toBeVisible();
+    const sandboxPanelToggle = page.locator("#todo-sandbox-toggle");
+    await expect(sandboxPanelToggle).toBeVisible();
+    await expect(sandboxPanelToggle).toHaveText("Exit sandbox mode");
+    await expect(page.locator("#todo-sandbox-panel")).toHaveCSS("border-top-style", "none");
+    const buttonsMatchStandardStyle = await page.evaluate(() => {
+      const standardButton = getComputedStyle(document.querySelector("#todo-new-task")!);
+      const properties = [
+        "borderTopWidth",
+        "borderTopStyle",
+        "borderRadius",
+        "backgroundColor",
+        "paddingTop",
+        "paddingRight",
+        "minHeight",
+      ] as const;
+      return [...document.querySelectorAll("#todo-sandbox-panel .sandbox-controls button")].every(
+        (button) => {
+          const buttonStyles = getComputedStyle(button);
+          return properties.every((property) => buttonStyles[property] === standardButton[property]);
+        },
+      );
+    });
+    expect(buttonsMatchStandardStyle).toBe(true);
 
     await createTask(page, "Sandbox completed", "1", "weeks");
     await createTask(page, "Sandbox snoozed", "1", "days");
@@ -708,7 +884,7 @@ test.describe("todo app", () => {
     expect(resetState.sandboxDate.getDate()).toBe(31);
     await expect(page.locator("#todo-status")).toContainText("Sandbox reset");
 
-    await page.getByRole("button", { name: "Exit sandbox mode" }).click();
+    await page.locator("#todo-sandbox-toggle").click();
     await expect(resetButton).toBeHidden();
     await expect(page.locator("#todo-active-table tbody tr")).toHaveCount(1);
     await expect(page.getByLabel("Complete task: Live task")).not.toBeChecked();

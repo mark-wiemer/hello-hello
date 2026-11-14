@@ -30,25 +30,30 @@ function getRequiredElement<T extends Element>(selector: string): T {
 
 const activeTable = getRequiredElement<HTMLTableElement>("#todo-active-table");
 const hiddenTable = getRequiredElement<HTMLTableElement>("#todo-hidden-table");
+const activeTableRegion = getRequiredElement<HTMLDivElement>("#todo-active-region");
+const hiddenTasksSection = getRequiredElement<HTMLElement>("#todo-hidden-section");
 const newTaskButton = getRequiredElement<HTMLButtonElement>("#todo-new-task");
 const taskDialog = getRequiredElement<HTMLDialogElement>("#todo-task-dialog");
 const taskForm = getRequiredElement<HTMLFormElement>("#todo-task-form");
 const taskDialogHeading = getRequiredElement<HTMLHeadingElement>("#todo-task-dialog-heading");
 const titleInput = getRequiredElement<HTMLInputElement>("#todo-title");
 const intervalInput = getRequiredElement<HTMLInputElement>("#todo-interval");
+const intervalError = getRequiredElement<HTMLParagraphElement>("#todo-interval-error");
 const unitInput = getRequiredElement<HTMLSelectElement>("#todo-unit");
 const formError = getRequiredElement<HTMLParagraphElement>("#todo-form-error");
 const cancelTaskButton = getRequiredElement<HTMLButtonElement>("#todo-cancel-task");
+const closeTaskButton = getRequiredElement<HTMLButtonElement>("#todo-close-task");
 const toggleHiddenButton = getRequiredElement<HTMLButtonElement>("#todo-toggle-hidden");
 const hiddenContent = getRequiredElement<HTMLDivElement>("#todo-hidden-content");
 const activeEmptyMessage = getRequiredElement<HTMLParagraphElement>("#todo-active-empty");
-const hiddenEmptyMessage = getRequiredElement<HTMLParagraphElement>("#todo-hidden-empty");
 const statusMessage = getRequiredElement<HTMLParagraphElement>("#todo-status");
 const deleteDialog = getRequiredElement<HTMLDialogElement>("#todo-delete-dialog");
 const deleteMessage = getRequiredElement<HTMLParagraphElement>("#todo-delete-message");
 const cancelDeleteButton = getRequiredElement<HTMLButtonElement>("#todo-cancel-delete");
 const confirmDeleteButton = getRequiredElement<HTMLButtonElement>("#todo-confirm-delete");
 const sandboxToggleButton = getRequiredElement<HTMLButtonElement>("#todo-sandbox-toggle");
+const sandboxNotice = getRequiredElement<HTMLParagraphElement>("#todo-sandbox-notice");
+const sandboxExitButton = getRequiredElement<HTMLButtonElement>("#todo-sandbox-exit");
 const simulateNextDayButton = getRequiredElement<HTMLButtonElement>("#todo-simulate-next-day");
 const sandboxResetButton = getRequiredElement<HTMLButtonElement>("#todo-sandbox-reset");
 const sandboxDateMessage = getRequiredElement<HTMLParagraphElement>("#todo-sandbox-date");
@@ -98,9 +103,11 @@ const dialogs = createTodoDialogs(
     taskDialogHeading,
     titleInput,
     intervalInput,
+    intervalError,
     unitInput,
     formError,
     cancelTaskButton,
+    closeTaskButton,
     deleteDialog,
     deleteMessage,
     cancelDeleteButton,
@@ -133,18 +140,6 @@ const dialogs = createTodoDialogs(
     },
   },
 );
-const renderTodoTables = createTodoTableRenderer({
-  activeTable,
-  hiddenTable,
-  onComplete: completeTask,
-  onSnooze: snoozeTask,
-  onUnsnooze: unsnoozeTask,
-  onMarkIncomplete: markTaskIncomplete,
-  onEdit: dialogs.openTask,
-  onDelete: dialogs.openDelete,
-  formatDueDate: (date) => formatLocalDate(new Date(date)),
-});
-
 function getCurrentStorageKey(): string {
   return sandboxModeEnabled ? sandboxStorageKey : storageKey;
 }
@@ -153,16 +148,23 @@ function getCurrentDate(): Date {
   return sandboxModeEnabled && sandboxNow ? new Date(sandboxNow) : new Date();
 }
 
-function setStatus(message: string, isError = false): void {
-  statusMessage.textContent = message;
-  statusMessage.setAttribute("role", isError ? "alert" : "status");
+function updateStatusMessage(
+  element: HTMLParagraphElement,
+  message: string,
+  isError: boolean,
+): void {
+  element.textContent = message;
+  element.setAttribute("role", isError ? "alert" : "status");
+  element.setAttribute("aria-live", isError ? "assertive" : "polite");
   console.debug(`[todo] ${message}`);
 }
 
+function setStatus(message: string, isError = false): void {
+  updateStatusMessage(statusMessage, message, isError);
+}
+
 function setBackupStatus(message: string, isError = false): void {
-  backupStatus.textContent = message;
-  backupStatus.setAttribute("role", isError ? "alert" : "status");
-  console.debug(`[todo] ${message}`);
+  updateStatusMessage(backupStatus, message, isError);
 }
 
 function exportRegularTasks(): void {
@@ -246,6 +248,7 @@ function confirmTaskImport(): void {
 }
 
 function updateSandboxControls(): void {
+  sandboxNotice.hidden = !sandboxModeEnabled;
   sandboxToggleButton.textContent = sandboxModeEnabled
     ? "Exit sandbox mode"
     : "Enter sandbox mode";
@@ -266,7 +269,7 @@ function isTaskVisible(task: TodoTask, now = getCurrentDate()): boolean {
   return task.hiddenUntil === null || Date.parse(task.hiddenUntil) <= now.getTime();
 }
 
-createTodoReordering({
+const todoReordering = createTodoReordering({
   table: activeTable,
   getTasks: sortedTasks,
   isTaskVisible,
@@ -275,6 +278,36 @@ createTodoReordering({
     saveTasks("Task order updated.");
   },
 });
+
+const renderTodoTables = createTodoTableRenderer({
+  activeTable,
+  hiddenTable,
+  onComplete: completeTask,
+  onMoveTask: moveTask,
+  onSnooze: snoozeTask,
+  onUnsnooze: unsnoozeTask,
+  onMarkIncomplete: markTaskIncomplete,
+  onEdit: dialogs.openTask,
+  onDelete: dialogs.openDelete,
+  formatDueDate: (date) => formatLocalDate(new Date(date)),
+});
+
+function moveTask(task: TodoTask, direction: "up" | "down"): void {
+  if (!todoReordering.moveTask(task.id, direction)) return;
+
+  const taskControls = activeTable.querySelectorAll<HTMLButtonElement>(".reorder-button");
+  const preferredControl = [...taskControls].find(
+    (button) =>
+      button.dataset.taskId === task.id && button.dataset.moveDirection === direction,
+  );
+  const alternateControl = [...taskControls].find(
+    (button) =>
+      button.dataset.taskId === task.id &&
+      button.dataset.moveDirection !== direction &&
+      !button.disabled,
+  );
+  (preferredControl && !preferredControl.disabled ? preferredControl : alternateControl)?.focus();
+}
 
 function saveTasks(message: string): void {
   tasks = tasks.map((task, position) => ({ ...task, position }));
@@ -294,6 +327,7 @@ function render(): void {
   const hiddenTasks = orderedTasks.filter((task) => !isTaskVisible(task));
 
   renderTodoTables(activeTasks, hiddenTasks);
+  activeTableRegion.hidden = activeTasks.length === 0;
   activeEmptyMessage.hidden = activeTasks.length > 0;
   activeEmptyMessage.classList.remove("todo-loading");
   activeEmptyMessage.removeAttribute("aria-busy");
@@ -301,10 +335,9 @@ function render(): void {
     tasks.length > 0
       ? "No tasks are ready right now."
       : "No tasks yet. Add one to get started.";
-  hiddenEmptyMessage.hidden = hiddenTasks.length > 0;
-  toggleHiddenButton.textContent = hiddenTasksShown
-    ? `Hide hidden tasks (${hiddenTasks.length})`
-    : `Show hidden tasks (${hiddenTasks.length})`;
+  if (hiddenTasks.length === 0) hiddenTasksShown = false;
+  hiddenTasksSection.hidden = hiddenTasks.length === 0;
+  toggleHiddenButton.textContent = hiddenTasksShown ? "Hide hidden tasks" : "Show hidden tasks";
   toggleHiddenButton.setAttribute("aria-expanded", String(hiddenTasksShown));
   hiddenContent.hidden = !hiddenTasksShown;
   updateSandboxControls();
@@ -315,48 +348,47 @@ function render(): void {
 function completeTask(task: TodoTask): void {
   const completedAt = getCurrentDate();
   const hiddenUntil = getCompletionDueDate(completedAt, task.recurrence);
-  tasks = tasks.map((currentTask) =>
-    currentTask.id === task.id
-      ? {
-          ...currentTask,
-          hiddenUntil: hiddenUntil.toISOString(),
-          hiddenReason: "completed",
-        }
-      : currentTask,
+  updateTaskVisibility(
+    task,
+    { hiddenUntil: hiddenUntil.toISOString(), hiddenReason: "completed" },
+    `Completed "${task.title}". It will return ${dateTimeFormat.format(hiddenUntil)}.`,
   );
-  saveTasks(`Completed "${task.title}". It will return ${dateTimeFormat.format(hiddenUntil)}.`);
 }
 
 function snoozeTask(task: TodoTask): void {
   const hiddenUntil = getSnoozeDueDate(getCurrentDate());
-  tasks = tasks.map((currentTask) =>
-    currentTask.id === task.id
-      ? {
-          ...currentTask,
-          hiddenUntil: hiddenUntil.toISOString(),
-          hiddenReason: "snoozed",
-        }
-      : currentTask,
+  updateTaskVisibility(
+    task,
+    { hiddenUntil: hiddenUntil.toISOString(), hiddenReason: "snoozed" },
+    `Snoozed "${task.title}" until ${dateTimeFormat.format(hiddenUntil)}.`,
   );
-  saveTasks(`Snoozed "${task.title}" until ${dateTimeFormat.format(hiddenUntil)}.`);
 }
 
 function markTaskIncomplete(task: TodoTask): void {
-  tasks = tasks.map((currentTask) =>
-    currentTask.id === task.id
-      ? { ...currentTask, hiddenUntil: null, hiddenReason: null }
-      : currentTask,
+  updateTaskVisibility(
+    task,
+    { hiddenUntil: null, hiddenReason: null },
+    `Marked "${task.title}" incomplete.`,
   );
-  saveTasks(`Marked "${task.title}" incomplete.`);
 }
 
 function unsnoozeTask(task: TodoTask): void {
-  tasks = tasks.map((currentTask) =>
-    currentTask.id === task.id
-      ? { ...currentTask, hiddenUntil: null, hiddenReason: null }
-      : currentTask,
+  updateTaskVisibility(
+    task,
+    { hiddenUntil: null, hiddenReason: null },
+    `Unsnoozed "${task.title}".`,
   );
-  saveTasks(`Unsnoozed "${task.title}".`);
+}
+
+function updateTaskVisibility(
+  task: TodoTask,
+  visibility: Pick<TodoTask, "hiddenUntil" | "hiddenReason">,
+  message: string,
+): void {
+  tasks = tasks.map((currentTask) =>
+    currentTask.id === task.id ? { ...currentTask, ...visibility } : currentTask,
+  );
+  saveTasks(message);
 }
 
 function expireReadyTasks(announce = true): { count: number; error: string | null } {
@@ -493,6 +525,7 @@ toggleHiddenButton.addEventListener("click", () => {
   render();
 });
 sandboxToggleButton.addEventListener("click", toggleSandboxMode);
+sandboxExitButton.addEventListener("click", toggleSandboxMode);
 simulateNextDayButton.addEventListener("click", simulateNextDay);
 sandboxResetButton.addEventListener("click", resetSandbox);
 exportTasksButton.addEventListener("click", exportRegularTasks);

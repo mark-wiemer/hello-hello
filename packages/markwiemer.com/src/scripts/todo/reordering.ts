@@ -53,6 +53,21 @@ export function createTodoReordering({
     replaceActiveOrder(remainingTasks);
   }
 
+  function moveTask(taskId: string, direction: "up" | "down"): boolean {
+    const activeTasks = getActiveTasks();
+    const currentIndex = activeTasks.findIndex((task) => task.id === taskId);
+    if (currentIndex < 0) return false;
+
+    const nextIndex = currentIndex + (direction === "up" ? -1 : 1);
+    if (nextIndex < 0 || nextIndex >= activeTasks.length) return false;
+
+    const [movingTask] = activeTasks.splice(currentIndex, 1);
+    if (!movingTask) return false;
+    activeTasks.splice(nextIndex, 0, movingTask);
+    replaceActiveOrder(activeTasks);
+    return true;
+  }
+
   table.addEventListener("dragstart", (event) => {
     const target = event.target;
     if (!(target instanceof Element)) return;
@@ -113,4 +128,6 @@ export function createTodoReordering({
     clearDropMarker();
     draggedTaskId = null;
   });
+
+  return { moveTask };
 }

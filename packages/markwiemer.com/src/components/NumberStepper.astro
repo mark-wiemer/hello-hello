@@ -11,6 +11,7 @@ interface Props {
   groupLabel: string;
   increaseLabel: string;
   decreaseLabel: string;
+  describedBy?: string;
   step?: number;
   required?: boolean;
 }
@@ -24,6 +25,7 @@ const {
   groupLabel,
   increaseLabel,
   decreaseLabel,
+  describedBy,
   step = 1,
   required = false,
 } = Astro.props;
@@ -39,6 +41,7 @@ const {
     step={step}
     value={value}
     required={required}
+    aria-describedby={describedBy}
   />
   <div class="number-stepper__buttons" role="group" aria-label={groupLabel}>
     <button type="button" data-number-stepper-increase aria-label={increaseLabel}>↑</button>
