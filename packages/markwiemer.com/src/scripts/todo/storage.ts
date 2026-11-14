@@ -3,6 +3,8 @@ import type { TodoTask } from "./types";
 
 export const storageKey = "markwiemer.todo.tasks.v1";
 export const sandboxStorageKey = "markwiemer.todo.sandbox.tasks.v1";
+const taskExportFormat = "markwiemer.todo.tasks";
+const taskExportVersion = 1;
 const sandboxModeSessionKey = "markwiemer.todo.sandbox.enabled.v1";
 const sandboxDateSessionKey = "markwiemer.todo.sandbox.date.v1";
 
@@ -73,6 +75,51 @@ export function saveTasksToStorage(key: string, tasks: TodoTask[]): string | nul
   } catch (error) {
     console.error("[todo] Could not save tasks.", error);
     return "Changes could not be saved to this browser.";
+  }
+}
+
+export function serializeTaskExport(tasks: TodoTask[]): string {
+  return JSON.stringify(
+    {
+      format: taskExportFormat,
+      version: taskExportVersion,
+      tasks,
+    },
+    null,
+    2,
+  );
+}
+
+export function parseTaskExport(
+  contents: string,
+): { tasks: TodoTask[]; error: string | null } {
+  try {
+    const parsed: unknown = JSON.parse(contents);
+    if (!parsed || typeof parsed !== "object") {
+      throw new TypeError("Task backup must be an object.");
+    }
+
+    const candidate = parsed as { format?: unknown; version?: unknown; tasks?: unknown };
+    if (
+      candidate.format !== taskExportFormat ||
+      candidate.version !== taskExportVersion ||
+      !Array.isArray(candidate.tasks) ||
+      !candidate.tasks.every(isValidTask) ||
+      new Set(candidate.tasks.map((task) => task.id)).size !== candidate.tasks.length
+    ) {
+      throw new TypeError("Task backup does not match the supported format.");
+    }
+
+    return {
+      tasks: candidate.tasks.sort((a, b) => a.position - b.position),
+      error: null,
+    };
+  } catch (error) {
+    console.error("[todo] Could not import task backup.", error);
+    return {
+      tasks: [],
+      error: "This file is not a valid or supported todo task backup.",
+    };
   }
 }
 
