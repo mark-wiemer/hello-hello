@@ -3,7 +3,6 @@ import type { TodoTask } from "./types";
 interface TodoReorderingOptions {
   table: HTMLTableElement;
   getTasks: () => TodoTask[];
-  getSelectedTaskIds: () => Set<string>;
   isTaskVisible: (task: TodoTask) => boolean;
   onReordered: (tasks: TodoTask[]) => void;
 }
@@ -11,28 +10,13 @@ interface TodoReorderingOptions {
 export function createTodoReordering({
   table,
   getTasks,
-  getSelectedTaskIds,
   isTaskVisible,
   onReordered,
 }: TodoReorderingOptions) {
-  let draggedTaskIds: string[] = [];
+  let draggedTaskId: string | null = null;
 
   function getActiveTasks(): TodoTask[] {
     return getTasks().filter((task) => isTaskVisible(task));
-  }
-
-  function canMoveSelection(direction: "up" | "down"): boolean {
-    const activeTasks = getActiveTasks();
-    const selectedTaskIds = getSelectedTaskIds();
-    return activeTasks.some((task, index) => {
-      if (!selectedTaskIds.has(task.id)) return false;
-      const neighborIndex = direction === "up" ? index - 1 : index + 1;
-      return (
-        neighborIndex >= 0 &&
-        neighborIndex < activeTasks.length &&
-        !selectedTaskIds.has(activeTasks[neighborIndex].id)
-      );
-    });
   }
 
   function replaceActiveOrder(nextActiveTasks: TodoTask[]): void {
@@ -46,40 +30,6 @@ export function createTodoReordering({
     onReordered(reorderedTasks);
   }
 
-  function moveSelection(direction: "up" | "down"): void {
-    const activeTasks = getActiveTasks();
-    const selectedTaskIds = getSelectedTaskIds();
-    const reorderedTasks = [...activeTasks];
-
-    if (direction === "up") {
-      for (let index = 1; index < reorderedTasks.length; index += 1) {
-        if (
-          selectedTaskIds.has(reorderedTasks[index].id) &&
-          !selectedTaskIds.has(reorderedTasks[index - 1].id)
-        ) {
-          [reorderedTasks[index - 1], reorderedTasks[index]] = [
-            reorderedTasks[index],
-            reorderedTasks[index - 1],
-          ];
-        }
-      }
-    } else {
-      for (let index = reorderedTasks.length - 2; index >= 0; index -= 1) {
-        if (
-          selectedTaskIds.has(reorderedTasks[index].id) &&
-          !selectedTaskIds.has(reorderedTasks[index + 1].id)
-        ) {
-          [reorderedTasks[index], reorderedTasks[index + 1]] = [
-            reorderedTasks[index + 1],
-            reorderedTasks[index],
-          ];
-        }
-      }
-    }
-
-    replaceActiveOrder(reorderedTasks);
-  }
-
   function clearDropMarker(): void {
     for (const row of table.querySelectorAll<HTMLTableRowElement>(
       "tr.todo-row--drop-before, tr.todo-row--drop-after",
@@ -88,16 +38,18 @@ export function createTodoReordering({
     }
   }
 
-  function reorderSelection(targetId: string, insertAfter: boolean): void {
+  function reorderTask(targetId: string, insertAfter: boolean): void {
     const activeTasks = getActiveTasks();
-    const movingTasks = activeTasks.filter((task) => draggedTaskIds.includes(task.id));
-    if (movingTasks.length === 0 || movingTasks.some((task) => task.id === targetId)) return;
+    if (!draggedTaskId || draggedTaskId === targetId) return;
 
-    const remainingTasks = activeTasks.filter((task) => !draggedTaskIds.includes(task.id));
+    const movingTask = activeTasks.find((task) => task.id === draggedTaskId);
+    if (!movingTask) return;
+
+    const remainingTasks = activeTasks.filter((task) => task.id !== draggedTaskId);
     const targetIndex = remainingTasks.findIndex((task) => task.id === targetId);
     if (targetIndex < 0) return;
 
-    remainingTasks.splice(targetIndex + Number(insertAfter), 0, ...movingTasks);
+    remainingTasks.splice(targetIndex + Number(insertAfter), 0, movingTask);
     replaceActiveOrder(remainingTasks);
   }
 
@@ -108,12 +60,7 @@ export function createTodoReordering({
     const taskId = row?.dataset.taskId;
     if (!taskId) return;
 
-    const selectedTaskIds = getSelectedTaskIds();
-    draggedTaskIds = selectedTaskIds.has(taskId)
-      ? getActiveTasks()
-          .filter((task) => selectedTaskIds.has(task.id))
-          .map((task) => task.id)
-      : [taskId];
+    draggedTaskId = taskId;
     if (event.dataTransfer) {
       event.dataTransfer.effectAllowed = "move";
       event.dataTransfer.setData("text/plain", taskId);
@@ -123,13 +70,13 @@ export function createTodoReordering({
 
   table.addEventListener("dragover", (event) => {
     const target = event.target;
-    if (!(target instanceof Element) || draggedTaskIds.length === 0) return;
+    if (!(target instanceof Element) || !draggedTaskId) return;
     const targetRow = target.closest<HTMLTableRowElement>("tr[data-task-id]");
     if (!targetRow) return;
 
     event.preventDefault();
     const targetId = targetRow.dataset.taskId;
-    if (!targetId || draggedTaskIds.includes(targetId)) {
+    if (!targetId || draggedTaskId === targetId) {
       clearDropMarker();
       return;
     }
@@ -149,7 +96,7 @@ export function createTodoReordering({
 
   table.addEventListener("drop", (event) => {
     const target = event.target;
-    if (!(target instanceof Element) || draggedTaskIds.length === 0) return;
+    if (!(target instanceof Element) || !draggedTaskId) return;
     const targetRow = target.closest<HTMLTableRowElement>("tr[data-task-id]");
     const targetId = targetRow?.dataset.taskId;
     if (!targetId || !targetRow) return;
@@ -157,15 +104,13 @@ export function createTodoReordering({
     event.preventDefault();
     const insertAfter =
       event.clientY > targetRow.getBoundingClientRect().top + targetRow.offsetHeight / 2;
-    reorderSelection(targetId, insertAfter);
+    reorderTask(targetId, insertAfter);
     clearDropMarker();
-    draggedTaskIds = [];
+    draggedTaskId = null;
   });
 
   table.addEventListener("dragend", () => {
     clearDropMarker();
-    draggedTaskIds = [];
+    draggedTaskId = null;
   });
-
-  return { canMoveSelection, moveSelection };
 }

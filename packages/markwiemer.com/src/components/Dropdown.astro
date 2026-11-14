@@ -1,0 +1,58 @@
+---
+interface Props {
+  id: string;
+  name: string;
+  label: string;
+  labelHidden?: boolean;
+  required?: boolean;
+}
+
+const { id, name, label, labelHidden = false, required = false } = Astro.props;
+---
+
+<div class="dropdown">
+  <label for={id} class:list={{ "dropdown__visually-hidden": labelHidden }}>{label}</label>
+  <select id={id} name={name} required={required}>
+    <slot />
+  </select>
+</div>
+
+<style>
+  .dropdown {
+    display: grid;
+    gap: 0.25rem;
+    min-width: 0;
+    width: fit-content;
+    max-width: 100%;
+  }
+
+  .dropdown select {
+    background: var(--color-body);
+    border: 1px solid currentColor;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: var(--color-text-primary);
+    font: inherit;
+    min-height: 44px;
+    min-width: 0;
+    padding: 0.25rem 0.5rem;
+    width: 100%;
+  }
+
+  .dropdown select:focus-visible {
+    outline: 3px solid var(--color-link-primary);
+    outline-offset: 2px;
+  }
+
+  .dropdown__visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+</style>

@@ -1,49 +1,39 @@
 ---
 import Layout from "@/layouts/Layout.astro";
+import Dropdown from "@/components/Dropdown.astro";
 import NumberStepper from "@/components/NumberStepper.astro";
+import TextInput from "@/components/TextInput.astro";
 ---
 
 <Layout pageTitle="Todo">
-  <p>Recurring tasks, stored in this browser on this device.</p>
+  <p id="todo-description">Recurring tasks, stored in this browser on this device. This is an early prototype; tasks may be lost at any time!</p>
 
   <div id="todo-app">
-    <section class="sandbox-panel" aria-labelledby="todo-sandbox-heading">
-      <h2 id="todo-sandbox-heading">Sandbox testing</h2>
-      <p>Sandbox tasks and simulated time are separate from your regular task list.</p>
-      <div class="sandbox-controls">
-        <button id="todo-sandbox-toggle" type="button" aria-pressed="false">
-          Enter sandbox mode
-        </button>
-        <button id="todo-simulate-next-day" type="button" hidden>Simulate next day</button>
-        <button id="todo-sandbox-reset" type="button" hidden>Reset sandbox</button>
-      </div>
-      <p id="todo-sandbox-date" aria-live="polite" hidden></p>
-    </section>
+    <p
+      id="todo-status"
+      class="visually-hidden"
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+    ></p>
 
-    <div class="todo-toolbar">
-      <button id="todo-new-task" type="button">New task</button>
-      <div id="todo-selection-tools" class="selection-tools" hidden>
-        <span id="todo-selection-count" aria-live="polite"></span>
-        <button id="todo-move-up" type="button">Move up</button>
-        <button id="todo-move-down" type="button">Move down</button>
-      </div>
-    </div>
-
-    <p id="todo-status" role="status" aria-live="polite" aria-atomic="true"></p>
     <p id="todo-reorder-help" class="visually-hidden">
-      Drag a task row to reorder it, or select one or more tasks and use the move buttons.
+      Drag a task row to reorder it; a line marks where it will land.
     </p>
 
-    <section aria-labelledby="todo-active-heading">
-      <h2 id="todo-active-heading">Tasks</h2>
-      <div class="table-scroll">
+    <section aria-label="Ready tasks">
+      <div
+        class="table-scroll wide-section"
+        role="region"
+        aria-label="Ready tasks table"
+        tabindex="0"
+      >
         <table id="todo-active-table" aria-describedby="todo-reorder-help">
           <caption class="visually-hidden">Tasks ready to work on</caption>
           <thead>
             <tr>
-              <th scope="col">Reorder</th>
-              <th scope="col">Select</th>
-              <th scope="col">Complete</th>
+              <th scope="col"><span class="visually-hidden">Reorder</span></th>
+              <th scope="col"><span class="visually-hidden">Complete</span></th>
               <th scope="col">Task</th>
               <th scope="col">Recurrence</th>
               <th scope="col">Actions</th>
@@ -65,6 +55,10 @@ import NumberStepper from "@/components/NumberStepper.astro";
       </p>
     </section>
 
+    <div class="todo-toolbar">
+      <button id="todo-new-task" type="button">New task</button>
+    </div>
+
     <section class="hidden-tasks-section" aria-labelledby="todo-hidden-heading">
       <button
         id="todo-toggle-hidden"
@@ -77,7 +71,12 @@ import NumberStepper from "@/components/NumberStepper.astro";
       </button>
       <div id="todo-hidden-content" hidden>
         <h2 id="todo-hidden-heading">Hidden tasks</h2>
-        <div class="table-scroll">
+        <div
+          class="table-scroll wide-section"
+          role="region"
+          aria-label="Hidden tasks table"
+          tabindex="0"
+        >
           <table id="todo-hidden-table">
             <caption class="visually-hidden">
               Tasks snoozed or completed until a future date
@@ -97,14 +96,48 @@ import NumberStepper from "@/components/NumberStepper.astro";
         <p id="todo-hidden-empty" class="empty-message" hidden>No hidden tasks.</p>
       </div>
     </section>
+
+    <section id="todo-backup-panel" aria-labelledby="todo-backup-heading">
+      <h2 id="todo-backup-heading">Move tasks between browsers</h2>
+      <p>
+        Export tasks to a JSON file, then import that file on another browser or
+        device. Importing replaces your current tasks. Sandbox tasks are not included.
+      </p>
+      <div class="todo-backup-controls">
+        <button id="todo-export-tasks" type="button">Export tasks</button>
+        <div class="todo-import-control">
+          <label for="todo-import-file">Import tasks from file</label>
+          <input id="todo-import-file" type="file" accept=".json,application/json" />
+        </div>
+      </div>
+      <p id="todo-backup-status" role="status" aria-live="polite" aria-atomic="true"></p>
+    </section>
+
+    <section id="todo-sandbox-panel" class="sandbox-panel" aria-labelledby="todo-sandbox-heading">
+      <h2 id="todo-sandbox-heading">Sandbox mode</h2>
+      <p>Sandbox tasks and simulated time are separate from your regular task list.</p>
+      <div class="sandbox-controls">
+        <button id="todo-sandbox-toggle" type="button" aria-pressed="false">
+          Enter sandbox mode
+        </button>
+        <button id="todo-simulate-next-day" type="button" hidden>Simulate next day</button>
+        <button id="todo-sandbox-reset" type="button" hidden>Reset sandbox</button>
+      </div>
+      <p id="todo-sandbox-date" aria-live="polite" hidden></p>
+    </section>
   </div>
 
   <dialog id="todo-task-dialog" aria-labelledby="todo-task-dialog-heading">
     <form id="todo-task-form">
       <h2 id="todo-task-dialog-heading">New task</h2>
-      <label for="todo-title">Title</label>
-      <input id="todo-title" name="title" type="text" maxlength="60" required />
-      <small class="form-help">Up to 60 characters.</small>
+      <TextInput
+        id="todo-title"
+        name="title"
+        label="Title"
+        maxLength={60}
+        helpText="Up to 60 characters."
+        required
+      />
 
       <fieldset>
         <legend>Recurrence</legend>
@@ -122,12 +155,11 @@ import NumberStepper from "@/components/NumberStepper.astro";
             decreaseLabel="Decrease recurrence interval"
             required
           />
-          <label class="visually-hidden" for="todo-unit">Recurrence unit</label>
-          <select id="todo-unit" name="unit">
+          <Dropdown id="todo-unit" name="unit" label="Recurrence unit" labelHidden>
             <option value="days">days</option>
             <option value="weeks">weeks</option>
             <option value="months">months</option>
-          </select>
+          </Dropdown>
         </div>
       </fieldset>
 
@@ -148,6 +180,16 @@ import NumberStepper from "@/components/NumberStepper.astro";
     </div>
   </dialog>
 
+  <dialog id="todo-import-dialog" aria-labelledby="todo-import-heading">
+    <h2 id="todo-import-heading">Import tasks?</h2>
+    <p id="todo-import-message"></p>
+    <p>This will replace your current regular tasks. Sandbox tasks will not be changed.</p>
+    <div class="dialog-actions">
+      <button id="todo-cancel-import" type="button">Cancel import</button>
+      <button id="todo-confirm-import" type="button">Replace tasks</button>
+    </div>
+  </dialog>
+
   <details id="todo-manual">
     <summary>Todo app manual</summary>
 
@@ -161,10 +203,10 @@ import NumberStepper from "@/components/NumberStepper.astro";
       </p>
       <p>
         Check the box in the Complete column when you finish a task. It moves to
-        Hidden until its recurrence is due again, measured from the time you
-        completed it. Snoozing does not change that schedule. For a monthly
-        recurrence completed on the 29th, 30th, or 31st, the task returns on the
-        28th of the target month.
+        Hidden until its recurrence is due again, calculated from the date you
+        completed it. It returns at midnight on its due date. Snoozing does not
+        change that schedule. For a monthly recurrence completed on the 29th,
+        30th, or 31st, the task returns on the 28th of the target month.
       </p>
     </section>
 
@@ -174,13 +216,11 @@ import NumberStepper from "@/components/NumberStepper.astro";
         The Tasks table shows items that are ready to work on. Use <strong>Snooze</strong>
         to hide a task until midnight at the start of tomorrow. Open <strong>Show hidden tasks</strong>
         to see completed or snoozed items and when they will return. A completed
-        task has a <strong>Mark incomplete</strong> action to bring it back right away.
+        task has a <strong>Mark incomplete</strong> action, and a snoozed task has
+        an <strong>Unsnooze</strong> action to bring it back right away.
       </p>
       <p>
-        Drag a task row to reorder it; a line marks where it will land. You can
-        also select one or more tasks with the round checkboxes, then use <strong>Move up</strong>
-        or <strong>Move down</strong>. These buttons provide a keyboard-friendly
-        alternative to dragging.
+        Drag a task row to reorder it; a line marks where it will land.
       </p>
     </section>
 
@@ -200,7 +240,10 @@ import NumberStepper from "@/components/NumberStepper.astro";
       <h2 id="todo-manual-saving">Saving your tasks</h2>
       <p>
         Tasks are saved in this browser on this device and do not sync to other
-        devices. Clearing this site's browser data may remove your saved tasks.
+        devices. Clearing this site's browser data may remove your saved tasks. Use
+        <strong>Export tasks</strong> to download a JSON backup, then choose that file
+        with <strong>Import tasks from file</strong> on another browser. Importing
+        replaces your regular task list. Sandbox tasks are separate and are not exported.
       </p>
     </section>
 
@@ -262,12 +305,12 @@ import NumberStepper from "@/components/NumberStepper.astro";
 
   #todo-app {
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
     gap: 1rem;
   }
 
   .todo-toolbar,
   .sandbox-controls,
-  .selection-tools,
   .dialog-actions,
   .recurrence-fields {
     display: flex;
@@ -276,12 +319,22 @@ import NumberStepper from "@/components/NumberStepper.astro";
     gap: 0.5rem;
   }
 
-  .recurrence-fields .number-stepper {
-    width: 8rem;
+  .todo-backup-controls {
+    display: grid;
+    justify-items: start;
+    gap: 0.5rem;
+    width: 100%;
   }
 
-  .selection-tools {
-    margin-left: auto;
+  .todo-import-control {
+    display: grid;
+    justify-items: start;
+    gap: 0.25rem;
+    width: min(100%, 32rem);
+  }
+
+  .recurrence-fields .number-stepper {
+    width: 8rem;
   }
 
   .sandbox-panel {
@@ -290,11 +343,16 @@ import NumberStepper from "@/components/NumberStepper.astro";
     padding: 0.75rem;
   }
 
+  #todo-backup-status {
+    margin-bottom: 0;
+  }
+
   .sandbox-panel h2 {
     margin-top: 0;
   }
 
   .todo-toolbar button,
+  .todo-backup-controls button,
   .dialog-actions button,
   .task-actions button,
   .text-button {
@@ -304,7 +362,6 @@ import NumberStepper from "@/components/NumberStepper.astro";
     border-radius: var(--border-radius-button);
     background: var(--color-body);
     color: var(--color-text-primary);
-    cursor: pointer;
   }
 
   .text-button {
@@ -319,18 +376,30 @@ import NumberStepper from "@/components/NumberStepper.astro";
   }
 
   table {
-    width: 100%;
-    min-width: 34rem;
+    width: max-content;
     margin: 0;
+    margin-inline: auto;
   }
 
   th {
     text-align: left;
   }
 
-  #todo-active-table th:nth-child(-n + 3),
-  #todo-active-table td:nth-child(-n + 3) {
+  #todo-active-table th:nth-child(-n + 2),
+  #todo-active-table td:nth-child(-n + 2) {
     text-align: center;
+    padding-inline: 4px;
+    white-space: nowrap;
+    width: 1%;
+  }
+
+  #todo-active-table td:first-child {
+    vertical-align: middle;
+  }
+
+  #todo-active-table td:nth-child(3) {
+    max-width: 60ch;
+    overflow-wrap: anywhere;
   }
 
   tr[draggable="true"] {
@@ -339,11 +408,6 @@ import NumberStepper from "@/components/NumberStepper.astro";
 
   tr[draggable="true"]:active {
     cursor: grabbing;
-  }
-
-  tr.todo-row--selected {
-    outline: 2px solid var(--color-link-primary);
-    outline-offset: -2px;
   }
 
   #todo-active-table tr.todo-row--drop-before > td {
@@ -360,8 +424,10 @@ import NumberStepper from "@/components/NumberStepper.astro";
   }
 
   .drag-handle {
+    display: block;
     font-size: 1.25rem;
     line-height: 1;
+    text-align: center;
     user-select: none;
   }
 
@@ -372,43 +438,17 @@ import NumberStepper from "@/components/NumberStepper.astro";
     accent-color: var(--color-link-primary);
   }
 
-  input[data-select-id] {
-    appearance: none;
-    display: inline-grid;
-    place-content: center;
-    border: 2px solid currentColor;
-    border-radius: 50%;
-    background: var(--color-body);
-    cursor: pointer;
-  }
-
-  input[data-select-id]::before {
-    width: 0.55rem;
-    height: 0.55rem;
-    border-radius: 50%;
-    background: white;
-    content: "";
-    transform: scale(0);
-  }
-
-  input[data-select-id]:checked {
-    border-color: var(--color-link-primary);
-    background: var(--color-link-primary);
-  }
-
-  input[data-select-id]:checked::before {
-    transform: scale(1);
-  }
-
   .task-actions {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: 0.25rem;
   }
 
   .task-actions button {
     min-height: 40px;
     padding: 0.2rem 0.5rem;
+    flex: 0 0 auto;
+    white-space: nowrap;
   }
 
   .task-actions button:last-child,

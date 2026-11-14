@@ -1,0 +1,109 @@
+---
+interface Props {
+  id: string;
+  name: string;
+  label: string;
+  value?: string;
+  helpText?: string;
+  maxLength?: number;
+  pattern?: string;
+  required?: boolean;
+}
+
+const {
+  id,
+  name,
+  label,
+  value,
+  helpText,
+  maxLength,
+  pattern,
+  required = false,
+} = Astro.props;
+---
+
+<div class="text-input" data-text-input>
+  <label for={id}>{label}</label>
+  <input
+    id={id}
+    name={name}
+    type="text"
+    value={value}
+    maxlength={maxLength}
+    pattern={pattern}
+    required={required}
+    aria-describedby={helpText ? `${id}-help` : undefined}
+  />
+  {(helpText || maxLength !== undefined) && (
+    <div class="text-input__details">
+      {helpText && <small id={`${id}-help`}>{helpText}</small>}
+      {maxLength !== undefined && (
+        <span
+          id={`${id}-character-count`}
+          class="text-input__counter"
+          data-character-count
+          hidden
+        ></span>
+      )}
+    </div>
+  )}
+</div>
+
+<script>
+  for (const field of document.querySelectorAll<HTMLElement>("[data-text-input]")) {
+    const input = field.querySelector<HTMLInputElement>('input[type="text"]');
+    const counter = field.querySelector<HTMLSpanElement>("[data-character-count]");
+    if (!input) throw new Error("Text input markup is incomplete.");
+    if (!counter) continue;
+
+    const updateCounter = () => {
+      const maxLength = input.maxLength;
+      counter.textContent = `${input.value.length} / ${maxLength}`;
+      counter.hidden = input.value.length < Math.ceil(maxLength / 2);
+    };
+
+    input.addEventListener("input", updateCounter);
+    input.addEventListener("change", updateCounter);
+    input.addEventListener("focus", updateCounter);
+    updateCounter();
+  }
+</script>
+
+<style>
+  .text-input {
+    display: grid;
+    gap: 0.25rem;
+    min-width: 0;
+  }
+
+  .text-input input {
+    background: var(--color-body);
+    border: 1px solid currentColor;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: var(--color-text-primary);
+    font: inherit;
+    min-height: 44px;
+    min-width: 0;
+    padding: 0.25rem 0.5rem;
+    width: 100%;
+  }
+
+  .text-input input:focus-visible {
+    outline: 3px solid var(--color-link-primary);
+    outline-offset: 2px;
+  }
+
+  .text-input__details {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.25rem 0.75rem;
+    font-size: var(--font-size-small);
+    line-height: var(--line-height-small);
+  }
+
+  .text-input__counter {
+    margin-left: auto;
+  }
+</style>
