@@ -5,10 +5,12 @@ import {
 } from "../utils/todo";
 import {
   loadTasks,
+  parseTaskExport,
   readSandboxDate,
   readSandboxMode,
   saveTasksToStorage,
   sandboxStorageKey,
+  serializeTaskExport,
   storageKey,
   storeSandboxDate,
   storeSandboxMode,
@@ -37,10 +39,6 @@ const intervalInput = getRequiredElement<HTMLInputElement>("#todo-interval");
 const unitInput = getRequiredElement<HTMLSelectElement>("#todo-unit");
 const formError = getRequiredElement<HTMLParagraphElement>("#todo-form-error");
 const cancelTaskButton = getRequiredElement<HTMLButtonElement>("#todo-cancel-task");
-const selectionTools = getRequiredElement<HTMLDivElement>("#todo-selection-tools");
-const selectionCount = getRequiredElement<HTMLSpanElement>("#todo-selection-count");
-const moveUpButton = getRequiredElement<HTMLButtonElement>("#todo-move-up");
-const moveDownButton = getRequiredElement<HTMLButtonElement>("#todo-move-down");
 const toggleHiddenButton = getRequiredElement<HTMLButtonElement>("#todo-toggle-hidden");
 const hiddenContent = getRequiredElement<HTMLDivElement>("#todo-hidden-content");
 const activeEmptyMessage = getRequiredElement<HTMLParagraphElement>("#todo-active-empty");
@@ -54,15 +52,34 @@ const sandboxToggleButton = getRequiredElement<HTMLButtonElement>("#todo-sandbox
 const simulateNextDayButton = getRequiredElement<HTMLButtonElement>("#todo-simulate-next-day");
 const sandboxResetButton = getRequiredElement<HTMLButtonElement>("#todo-sandbox-reset");
 const sandboxDateMessage = getRequiredElement<HTMLParagraphElement>("#todo-sandbox-date");
+const exportTasksButton = getRequiredElement<HTMLButtonElement>("#todo-export-tasks");
+const importFileInput = getRequiredElement<HTMLInputElement>("#todo-import-file");
+const backupStatus = getRequiredElement<HTMLParagraphElement>("#todo-backup-status");
+const importDialog = getRequiredElement<HTMLDialogElement>("#todo-import-dialog");
+const importMessage = getRequiredElement<HTMLParagraphElement>("#todo-import-message");
+const cancelImportButton = getRequiredElement<HTMLButtonElement>("#todo-cancel-import");
+const confirmImportButton = getRequiredElement<HTMLButtonElement>("#todo-confirm-import");
 
-const selectedTaskIds = new Set<string>();
 let hiddenTasksShown = false;
 let visibilityTimer: number | undefined;
+let pendingImportTasks: TodoTask[] | null = null;
 
 const dateTimeFormat = new Intl.DateTimeFormat(undefined, {
   dateStyle: "medium",
   timeStyle: "short",
 });
+
+function formatLocalDate(date: Date): string {
+  if (localStorage.getItem("dateFormat") === "iso") {
+    return [
+      date.getFullYear().toString().padStart(4, "0"),
+      String(date.getMonth() + 1).padStart(2, "0"),
+      String(date.getDate()).padStart(2, "0"),
+    ].join("-");
+  }
+  return date.toLocaleDateString();
+}
+
 const initialSandboxMode = readSandboxMode();
 let sandboxModeEnabled = initialSandboxMode.enabled;
 const initialSandboxDate = sandboxModeEnabled ? readSandboxDate() : null;
@@ -112,7 +129,6 @@ const dialogs = createTodoDialogs(
     onDeleteTask(taskId) {
       const deletedTask = tasks.find((task) => task.id === taskId);
       tasks = tasks.filter((task) => task.id !== taskId);
-      selectedTaskIds.delete(taskId);
       saveTasks(deletedTask ? `Deleted "${deletedTask.title}".` : "Task deleted.");
     },
   },
@@ -120,18 +136,13 @@ const dialogs = createTodoDialogs(
 const renderTodoTables = createTodoTableRenderer({
   activeTable,
   hiddenTable,
-  isSelected: (taskId) => selectedTaskIds.has(taskId),
-  onSelectionChange(taskId, selected) {
-    if (selected) selectedTaskIds.add(taskId);
-    else selectedTaskIds.delete(taskId);
-    render(taskId);
-  },
   onComplete: completeTask,
   onSnooze: snoozeTask,
+  onUnsnooze: unsnoozeTask,
   onMarkIncomplete: markTaskIncomplete,
   onEdit: dialogs.openTask,
   onDelete: dialogs.openDelete,
-  formatDueDate: (date) => dateTimeFormat.format(new Date(date)),
+  formatDueDate: (date) => formatLocalDate(new Date(date)),
 });
 
 function getCurrentStorageKey(): string {
@@ -145,6 +156,93 @@ function getCurrentDate(): Date {
 function setStatus(message: string, isError = false): void {
   statusMessage.textContent = message;
   statusMessage.setAttribute("role", isError ? "alert" : "status");
+  console.debug(`[todo] ${message}`);
+}
+
+function setBackupStatus(message: string, isError = false): void {
+  backupStatus.textContent = message;
+  backupStatus.setAttribute("role", isError ? "alert" : "status");
+  console.debug(`[todo] ${message}`);
+}
+
+function exportRegularTasks(): void {
+  const taskLoadResult = loadTasks(storageKey);
+  if (taskLoadResult.error) {
+    setBackupStatus(taskLoadResult.error, true);
+    return;
+  }
+
+  const backup = new Blob([serializeTaskExport(taskLoadResult.tasks)], {
+    type: "application/json",
+  });
+  const url = URL.createObjectURL(backup);
+  const downloadLink = document.createElement("a");
+  downloadLink.href = url;
+  downloadLink.download = `todo-tasks-${new Date().toISOString().slice(0, 10)}.json`;
+  downloadLink.click();
+  window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+  setBackupStatus(`Exported ${taskLoadResult.tasks.length} regular tasks.`);
+}
+
+async function prepareTaskImport(): Promise<void> {
+  const file = importFileInput.files?.[0];
+  if (!file) return;
+
+  try {
+    const importResult = parseTaskExport(await file.text());
+    if (importResult.error) {
+      setBackupStatus(importResult.error, true);
+      return;
+    }
+
+    pendingImportTasks = importResult.tasks;
+    const taskCount = pendingImportTasks.length;
+    importMessage.textContent = `This file contains ${taskCount} task${taskCount === 1 ? "" : "s"} and will replace your current regular tasks.`;
+    importDialog.showModal();
+  } catch (error) {
+    console.error("[todo] Could not read selected task backup.", error);
+    setBackupStatus("The selected file could not be read.", true);
+  } finally {
+    importFileInput.value = "";
+  }
+}
+
+function confirmTaskImport(): void {
+  if (!pendingImportTasks) {
+    setBackupStatus("Choose a valid task backup before importing.", true);
+    return;
+  }
+
+  const importedTasks = pendingImportTasks.map((task, position) => ({
+    ...task,
+    position,
+  }));
+  const saveError = saveTasksToStorage(storageKey, importedTasks);
+  if (saveError) {
+    setBackupStatus(saveError, true);
+    return;
+  }
+
+  pendingImportTasks = null;
+  importDialog.close();
+  if (sandboxModeEnabled) {
+    setBackupStatus(
+      `Imported ${importedTasks.length} regular tasks. Exit sandbox mode to view them.`,
+    );
+    return;
+  }
+
+  tasks = importedTasks;
+  const expiryResult = expireReadyTasks(false);
+  render();
+  if (expiryResult.error) {
+    setBackupStatus(
+      `Imported ${importedTasks.length} tasks, but a due task could not be updated.`,
+      true,
+    );
+  } else {
+    setBackupStatus(`Imported ${importedTasks.length} regular tasks.`);
+  }
 }
 
 function updateSandboxControls(): void {
@@ -168,10 +266,9 @@ function isTaskVisible(task: TodoTask, now = getCurrentDate()): boolean {
   return task.hiddenUntil === null || Date.parse(task.hiddenUntil) <= now.getTime();
 }
 
-const reordering = createTodoReordering({
+createTodoReordering({
   table: activeTable,
   getTasks: sortedTasks,
-  getSelectedTaskIds: () => selectedTaskIds,
   isTaskVisible,
   onReordered(nextTasks) {
     tasks = nextTasks;
@@ -191,14 +288,10 @@ function saveTasks(message: string): void {
   }
 }
 
-function render(focusTaskId?: string): void {
+function render(): void {
   const orderedTasks = sortedTasks();
   const activeTasks = orderedTasks.filter((task) => isTaskVisible(task));
   const hiddenTasks = orderedTasks.filter((task) => !isTaskVisible(task));
-
-  for (const selectedId of selectedTaskIds) {
-    if (!activeTasks.some((task) => task.id === selectedId)) selectedTaskIds.delete(selectedId);
-  }
 
   renderTodoTables(activeTasks, hiddenTasks);
   activeEmptyMessage.hidden = activeTasks.length > 0;
@@ -216,20 +309,6 @@ function render(focusTaskId?: string): void {
   hiddenContent.hidden = !hiddenTasksShown;
   updateSandboxControls();
 
-  const selectedIdsInOrder = activeTasks
-    .filter((task) => selectedTaskIds.has(task.id))
-    .map((task) => task.id);
-  selectionTools.hidden = selectedIdsInOrder.length === 0;
-  selectionCount.textContent = `${selectedIdsInOrder.length} selected`;
-  moveUpButton.disabled = !reordering.canMoveSelection("up");
-  moveDownButton.disabled = !reordering.canMoveSelection("down");
-
-  if (focusTaskId) {
-    activeTable
-      .querySelector<HTMLInputElement>(`input[data-select-id="${CSS.escape(focusTaskId)}"]`)
-      ?.focus();
-  }
-
   scheduleVisibilityRefresh();
 }
 
@@ -245,7 +324,6 @@ function completeTask(task: TodoTask): void {
         }
       : currentTask,
   );
-  selectedTaskIds.delete(task.id);
   saveTasks(`Completed "${task.title}". It will return ${dateTimeFormat.format(hiddenUntil)}.`);
 }
 
@@ -260,7 +338,6 @@ function snoozeTask(task: TodoTask): void {
         }
       : currentTask,
   );
-  selectedTaskIds.delete(task.id);
   saveTasks(`Snoozed "${task.title}" until ${dateTimeFormat.format(hiddenUntil)}.`);
 }
 
@@ -271,6 +348,15 @@ function markTaskIncomplete(task: TodoTask): void {
       : currentTask,
   );
   saveTasks(`Marked "${task.title}" incomplete.`);
+}
+
+function unsnoozeTask(task: TodoTask): void {
+  tasks = tasks.map((currentTask) =>
+    currentTask.id === task.id
+      ? { ...currentTask, hiddenUntil: null, hiddenReason: null }
+      : currentTask,
+  );
+  saveTasks(`Unsnoozed "${task.title}".`);
 }
 
 function expireReadyTasks(announce = true): { count: number; error: string | null } {
@@ -339,7 +425,6 @@ function toggleSandboxMode(): void {
 
   const taskLoadResult = loadTasks(getCurrentStorageKey());
   tasks = taskLoadResult.tasks;
-  selectedTaskIds.clear();
 
   const expiryResult = expireReadyTasks(false);
   render();
@@ -390,7 +475,6 @@ function resetSandbox(): void {
     hiddenUntil: null,
     hiddenReason: null,
   }));
-  selectedTaskIds.clear();
 
   const taskError = saveTasksToStorage(getCurrentStorageKey(), tasks);
   render();
@@ -411,8 +495,14 @@ toggleHiddenButton.addEventListener("click", () => {
 sandboxToggleButton.addEventListener("click", toggleSandboxMode);
 simulateNextDayButton.addEventListener("click", simulateNextDay);
 sandboxResetButton.addEventListener("click", resetSandbox);
-moveUpButton.addEventListener("click", () => reordering.moveSelection("up"));
-moveDownButton.addEventListener("click", () => reordering.moveSelection("down"));
+exportTasksButton.addEventListener("click", exportRegularTasks);
+importFileInput.addEventListener("change", prepareTaskImport);
+cancelImportButton.addEventListener("click", () => importDialog.close());
+confirmImportButton.addEventListener("click", confirmTaskImport);
+importDialog.addEventListener("close", () => {
+  pendingImportTasks = null;
+});
+window.addEventListener("dateformat-changed", render);
 
 document.addEventListener("visibilitychange", () => {
   if (document.visibilityState === "visible") expireReadyTasks();

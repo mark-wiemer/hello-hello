@@ -151,6 +151,7 @@
   top: 0;
   left: 0;
   transition: transform var(--transition-duration-nav) ease;
+  z-index: var(--z-index-nav-button);
 }
 /* #endregion IDs */
 
@@ -195,7 +196,6 @@ body.nav-open #toggleMenu {
   transform: translateX(
     calc(var(--width-nav-open) - var(--size-button-menu) + var(--border-radius-button))
   );
-  z-index: var(--z-index-nav-button);
 }
 
 div.headerImages {
@@ -295,6 +295,10 @@ button {
   scrollbar-color: var(--color-text-primary) var(--color-body);
 }
 
+button {
+  cursor: pointer;
+}
+
 button:focus-visible {
   outline: 3px solid var(--color-link-primary);
   outline-offset: 2px;
@@ -303,6 +307,38 @@ button:focus-visible {
 button:disabled {
   cursor: not-allowed;
   opacity: 0.6;
+}
+
+input[type="file"] {
+  background: var(--color-body);
+  border: 1px solid var(--color-text-primary);
+  border-radius: var(--border-radius-button);
+  box-sizing: border-box;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  font: inherit;
+  min-height: 44px;
+  max-width: 100%;
+  min-width: 0;
+  padding: 2px;
+  width: 100%;
+}
+
+input[type="file"]::file-selector-button {
+  background: var(--color-body);
+  border: 1px solid var(--color-text-primary);
+  border-radius: var(--border-radius-button);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  font: inherit;
+  min-height: 44px;
+  margin-right: 0.5rem;
+  padding: 0.15rem 0.5rem;
+}
+
+input[type="file"]:focus-visible {
+  outline: 3px solid var(--color-link-primary);
+  outline-offset: 2px;
 }
 
 code {

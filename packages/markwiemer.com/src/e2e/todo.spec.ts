@@ -1,3 +1,4 @@
+import { readFile } from "node:fs/promises";
 import { expect, test, type Page } from "@playwright/test";
 
 const storageKey = "markwiemer.todo.tasks.v1";
@@ -19,6 +20,158 @@ async function createTask(
 
 test.describe("todo app", () => {
   test.describe.configure({ timeout: 10000 });
+
+  test("orders the page from its heading through the sandbox and manual", async ({ page }) => {
+    const orderIsCorrect = await page.evaluate(() => {
+      const selectors = [
+        "#main-content > h1",
+        "#todo-description",
+        "#todo-active-table",
+        "#todo-new-task",
+        "#todo-toggle-hidden",
+        "#todo-hidden-content",
+        "#todo-backup-panel",
+        "#todo-sandbox-panel",
+        "#todo-manual",
+      ];
+      const elements = selectors.map((selector) => document.querySelector(selector));
+      if (elements.some((element) => element === null)) return false;
+
+      for (let index = 1; index < elements.length; index++) {
+        const previous = elements[index - 1];
+        const current = elements[index];
+        if (
+          !previous ||
+          !current ||
+          !(previous.compareDocumentPosition(current) & Node.DOCUMENT_POSITION_FOLLOWING)
+        ) {
+          return false;
+        }
+      }
+
+      return true;
+    });
+
+    expect(orderIsCorrect).toBe(true);
+    await expect(page.getByRole("heading", { name: "Tasks", exact: true })).toHaveCount(0);
+    await expect(page.getByRole("heading", { name: "Activity log" })).toHaveCount(0);
+  });
+
+  test("logs task updates with console.debug", async ({ page }) => {
+    const debugMessages: string[] = [];
+    page.on("console", (message) => {
+      if (message.type() === "debug") debugMessages.push(message.text());
+    });
+
+    await createTask(page, "Activity test");
+    await expect
+      .poll(() => debugMessages)
+      .toContain('[todo] Added "Activity test".');
+  });
+
+  test("exports regular tasks as a portable JSON backup", async ({ page }) => {
+    await createTask(page, "Regular task");
+    await page.getByRole("button", { name: "Enter sandbox mode" }).click();
+    await createTask(page, "Sandbox task");
+
+    const downloadPromise = page.waitForEvent("download");
+    await page.getByRole("button", { name: "Export tasks" }).click();
+    const download = await downloadPromise;
+    expect(download.suggestedFilename()).toMatch(/^todo-tasks-\d{4}-\d{2}-\d{2}\.json$/);
+
+    const path = await download.path();
+    if (!path) throw new Error("Expected the task backup to download to a file.");
+    const backup: unknown = JSON.parse(await readFile(path, "utf8"));
+    expect(backup).toMatchObject({
+      format: "markwiemer.todo.tasks",
+      version: 1,
+      tasks: [{ title: "Regular task" }],
+    });
+    expect((backup as { tasks: Array<{ title: string }> }).tasks).toHaveLength(1);
+  });
+
+  test("imports a backup only after confirming replacement", async ({ page }) => {
+    await createTask(page, "Current task");
+    const backup = {
+      format: "markwiemer.todo.tasks",
+      version: 1,
+      tasks: [
+        {
+          id: "imported-active",
+          title: "Imported active",
+          recurrence: { interval: 2, unit: "weeks" },
+          position: 0,
+          hiddenUntil: null,
+          hiddenReason: null,
+        },
+        {
+          id: "imported-hidden",
+          title: "Imported hidden",
+          recurrence: { interval: 1, unit: "days" },
+          position: 1,
+          hiddenUntil: "2099-01-01T00:00:00.000Z",
+          hiddenReason: "completed",
+        },
+      ],
+    };
+
+    await page.locator("#todo-import-file").setInputFiles({
+      name: "todo-backup.json",
+      mimeType: "application/json",
+      buffer: Buffer.from(JSON.stringify(backup)),
+    });
+    const importDialog = page.getByRole("dialog", { name: "Import tasks?" });
+    await expect(importDialog).toContainText("replace your current regular tasks");
+    await importDialog.getByRole("button", { name: "Replace tasks" }).click();
+
+    await expect(page.locator("#todo-active-table tbody tr")).toContainText("Imported active");
+    await expect(page.locator("#todo-active-table tbody tr")).not.toContainText("Current task");
+    await page.getByRole("button", { name: /Show hidden tasks/ }).click();
+    await expect(page.locator("#todo-hidden-table tbody tr")).toContainText("Imported hidden");
+    await expect(page.locator("#todo-backup-status")).toContainText("Imported 2 regular tasks");
+  });
+
+  test("places backup actions on separate lines and styles the file picker globally", async ({
+    page,
+  }) => {
+    const exportButton = page.getByRole("button", { name: "Export tasks" });
+    const importLabel = page.locator("#todo-backup-panel label");
+    const filePicker = page.locator("#todo-import-file");
+    const geometry = await Promise.all([
+      exportButton.evaluate((element) => element.getBoundingClientRect().top),
+      importLabel.evaluate((element) => element.getBoundingClientRect().top),
+    ]);
+    const filePickerStyle = await filePicker.evaluate((element) => {
+      const style = getComputedStyle(element);
+      return {
+        fontSize: style.fontSize,
+        minHeight: style.minHeight,
+        borderTopStyle: style.borderTopStyle,
+        color: style.color,
+      };
+    });
+    const exportButtonStyle = await exportButton.evaluate((element) => {
+      const style = getComputedStyle(element);
+      return {
+        minHeight: style.minHeight,
+        borderTopStyle: style.borderTopStyle,
+        borderRadius: style.borderRadius,
+      };
+    });
+
+    expect(geometry[0]).toBeLessThan(geometry[1]);
+    expect(filePickerStyle).toMatchObject({
+      fontSize: "18px",
+      minHeight: "44px",
+      borderTopStyle: "solid",
+      color: "rgb(0, 0, 0)",
+    });
+    expect(exportButtonStyle).toEqual({
+      minHeight: "44px",
+      borderTopStyle: "solid",
+      borderRadius: "4px",
+    });
+  });
 
   test("shows a user manual before the parent link with the glossary last", async ({ page }) => {
     const manual = page.locator("#todo-manual");
@@ -149,6 +302,128 @@ test.describe("todo app", () => {
       .toBe("[]");
   });
 
+  test("keeps task actions on one row and makes icon columns compact", async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await createTask(page, "Task actions");
+    await createTask(page, "W".repeat(60), "99", "months");
+
+    const table = page.locator("#todo-active-table");
+    const row = table.locator("tbody tr").first();
+    const buttons = row.locator(".task-actions button");
+    const tableGeometry = await table.evaluate((element) => {
+      const bounds = element.getBoundingClientRect();
+      return { left: bounds.left, right: bounds.right, width: bounds.width };
+    });
+    const columnWidths = await table.locator("tbody tr").first().locator("td").evaluateAll((cells) =>
+      cells.slice(0, 2).map((cell) => cell.getBoundingClientRect().width),
+    );
+    const buttonTops = await buttons.evaluateAll((elements) =>
+      elements.map((element) => element.getBoundingClientRect().top),
+    );
+    const scrollGeometry = await page
+      .locator("section[aria-label='Ready tasks'] > .table-scroll")
+      .evaluate((element) => {
+        const bounds = element.getBoundingClientRect();
+        return {
+          viewportWidth: window.innerWidth,
+          left: bounds.left,
+          right: bounds.right,
+          width: bounds.width,
+          clientWidth: element.clientWidth,
+          scrollWidth: element.scrollWidth,
+        };
+      });
+
+    await expect(page.getByRole("columnheader", { name: "Select" })).toHaveCount(0);
+    await expect(page.getByRole("button", { name: "Move up" })).toHaveCount(0);
+    await expect(page.getByRole("button", { name: "Move down" })).toHaveCount(0);
+    await expect(page.getByRole("columnheader", { name: "Reorder" })).toHaveCount(1);
+    await expect(page.getByRole("columnheader", { name: "Complete" })).toHaveCount(1);
+    expect(columnWidths.every((width) => width < 60)).toBe(true);
+    expect(new Set(buttonTops.map(Math.round)).size).toBe(1);
+    expect(scrollGeometry.left).toBeGreaterThanOrEqual(8);
+    expect(scrollGeometry.viewportWidth - scrollGeometry.right).toBeGreaterThanOrEqual(8);
+    expect(Math.abs(scrollGeometry.left - (scrollGeometry.viewportWidth - scrollGeometry.right)))
+      .toBeLessThan(1);
+    expect(tableGeometry.width).toBeLessThan(scrollGeometry.width);
+    expect(
+      Math.abs(tableGeometry.left - (scrollGeometry.viewportWidth - tableGeometry.right)),
+    ).toBeLessThan(1);
+    expect(scrollGeometry.width).toBeGreaterThan(scrollGeometry.viewportWidth - 30);
+    expect(scrollGeometry.scrollWidth).toBeLessThanOrEqual(scrollGeometry.clientWidth);
+  });
+
+  test("centers the drag handle vertically in its table cell", async ({ page }) => {
+    await createTask(page, "Tall task row");
+    const firstCell = page.locator("#todo-active-table tbody tr").first().locator("td").first();
+    await page.addStyleTag({
+      content: "#todo-active-table tbody tr:first-child > td { height: 7rem; }",
+    });
+
+    const alignment = await firstCell.evaluate((cell) => {
+      const cellBounds = cell.getBoundingClientRect();
+      const handle = cell.querySelector<HTMLElement>(".drag-handle");
+      if (!handle) throw new Error("Expected the task row to have a drag handle.");
+      const handleBounds = handle.getBoundingClientRect();
+      return {
+        centerOffset: Math.abs(
+          cellBounds.top +
+            cellBounds.height / 2 -
+            (handleBounds.top + handleBounds.height / 2),
+        ),
+        cellAlignment: getComputedStyle(cell).verticalAlign,
+        handleDisplay: getComputedStyle(handle).display,
+      };
+    });
+
+    expect(alignment).toEqual({
+      centerOffset: expect.any(Number),
+      cellAlignment: "middle",
+      handleDisplay: "block",
+    });
+    expect(alignment.centerOffset).toBeLessThan(2);
+  });
+
+  test("keeps the page menu clickable above the table after scrolling", async ({ page }) => {
+    await createTask(page, "Task below the menu");
+    await page.evaluate(() => {
+      const table = document.querySelector("#todo-active-table");
+      if (!table) throw new Error("Expected the active tasks table.");
+      window.scrollTo(0, table.getBoundingClientRect().top + window.scrollY + 36);
+    });
+
+    await page.locator("#toggleMenu").click();
+    await expect(page.locator("#siteMenu")).toHaveAttribute("aria-expanded", "true");
+  });
+
+  test("styles the title input and dropdown and reveals the counter halfway full", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 320, height: 800 });
+    await page.getByRole("button", { name: "New task" }).click();
+    const title = page.getByLabel("Title", { exact: true });
+    const counter = page.locator("#todo-title-character-count");
+    const recurrenceUnit = page.getByLabel("Recurrence unit");
+    const longTitle = "a".repeat(30);
+
+    await expect(title).toHaveCSS("min-height", "44px");
+    await expect(title).toHaveCSS("border-radius", "4px");
+    await expect(counter).toBeHidden();
+    await title.fill("a".repeat(29));
+    await expect(counter).toBeHidden();
+    await title.fill(longTitle);
+    await expect(counter).toBeVisible();
+    await expect(counter).toHaveText("30 / 60");
+    await expect(recurrenceUnit).toHaveCSS("min-height", "44px");
+    await expect(recurrenceUnit).toHaveCSS("border-radius", "4px");
+    await expect(page.locator("body")).toHaveJSProperty("scrollWidth", 320);
+
+    await page.getByRole("button", { name: "Save task" }).click();
+    await page.getByRole("button", { name: `Edit task: ${longTitle}` }).click();
+    await expect(counter).toBeVisible();
+    await expect(counter).toHaveText("30 / 60");
+  });
+
   test("recurrence interval controls are accessible and match the workout stepper size", async ({
     page,
   }) => {
@@ -230,14 +505,27 @@ test.describe("todo app", () => {
         hiddenUntil: string;
       }>;
       const date = new Date(savedTasks[0].hiddenUntil);
-      return { year: date.getFullYear(), month: date.getMonth(), day: date.getDate(), hour: date.getHours() };
+      return {
+        year: date.getFullYear(),
+        month: date.getMonth(),
+        day: date.getDate(),
+        hour: date.getHours(),
+        systemDate: date.toLocaleDateString(),
+      };
     }, storageKey);
-    expect(dueDate).toEqual({ year: 2026, month: 1, day: 28, hour: 12 });
+    expect(dueDate).toMatchObject({ year: 2026, month: 1, day: 28, hour: 0 });
 
     await page.getByRole("button", { name: "Show hidden tasks" }).click();
     const completedRow = page.locator("#todo-hidden-table tbody tr");
+    const showsAgain = completedRow.locator("td").nth(2);
     await expect(completedRow).toContainText("Completed");
+    await expect(showsAgain).toHaveText(dueDate.systemDate);
     await expect(completedRow).toHaveCSS("background-color", "rgb(220, 238, 255)");
+    await page.getByRole("button", { name: "Menu" }).click();
+    const dateFormatToggle = page.locator("#datetimeFormatToggle");
+    await dateFormatToggle.click();
+    await expect(dateFormatToggle).toContainText("ISO");
+    await expect(showsAgain).toHaveText("2026-02-28");
     await page.evaluate(() => document.documentElement.setAttribute("data-theme", "dark"));
     await expect(completedRow).toHaveCSS("background-color", "rgb(25, 53, 80)");
   });
@@ -253,6 +541,28 @@ test.describe("todo app", () => {
 
     await page.getByRole("button", { name: "Mark task incomplete: Review notes" }).click();
     await expect(page.locator("#todo-active-table tbody tr")).toContainText("Review notes");
+    await expect(page.locator("#todo-hidden-table tbody tr")).toHaveCount(0);
+    await expect
+      .poll(() =>
+        page.evaluate((key) => {
+          const tasks = JSON.parse(localStorage.getItem(key) ?? "[]") as Array<{
+            hiddenUntil: string | null;
+            hiddenReason: string | null;
+          }>;
+          return tasks[0];
+        }, storageKey),
+      )
+      .toMatchObject({ hiddenUntil: null, hiddenReason: null });
+  });
+
+  test("unsnoozes a hidden task and restores it to the active list", async ({ page }) => {
+    await createTask(page, "Snoozed notes");
+    await page.getByRole("button", { name: "Snooze until tomorrow: Snoozed notes" }).click();
+    await page.getByRole("button", { name: "Show hidden tasks" }).click();
+    await expect(page.locator("#todo-hidden-table tbody tr")).toContainText("Snoozed");
+
+    await page.getByRole("button", { name: "Unsnooze task: Snoozed notes" }).click();
+    await expect(page.locator("#todo-active-table tbody tr")).toContainText("Snoozed notes");
     await expect(page.locator("#todo-hidden-table tbody tr")).toHaveCount(0);
     await expect
       .poll(() =>
@@ -311,7 +621,7 @@ test.describe("todo app", () => {
     expect(storedTasks.live).toMatchObject([{ title: "Live daily", hiddenUntil: null }]);
     expect(storedTasks.sandbox).toEqual({
       title: "Sandbox daily",
-      dueDate: { year: 2026, month: 1, day: 1, hour: 12 },
+      dueDate: { year: 2026, month: 1, day: 1, hour: 0 },
     });
 
     await page.reload();
@@ -404,19 +714,10 @@ test.describe("todo app", () => {
     await expect(page.getByLabel("Complete task: Live task")).not.toBeChecked();
   });
 
-  test("snoozes until tomorrow and exposes accessible multi-select reordering", async ({
-    page,
-  }) => {
+  test("snoozes tasks until tomorrow", async ({ page }) => {
     await createTask(page, "First task");
     await createTask(page, "Second task");
     await createTask(page, "Third task");
-
-    await page.getByLabel("Select task: Second task").check();
-    await page.getByLabel("Select task: Third task").check();
-    await expect(page.getByRole("button", { name: "Move up" })).toBeVisible();
-    await page.getByRole("button", { name: "Move up" }).click();
-    await expect(page.locator("#todo-active-table tbody tr").nth(0)).toContainText("Second task");
-    await expect(page.locator("#todo-active-table tbody tr").nth(1)).toContainText("Third task");
 
     await page.getByRole("button", { name: "Snooze until tomorrow: First task" }).click();
     await expect(page.locator("#todo-active-table tbody tr")).toHaveCount(2);

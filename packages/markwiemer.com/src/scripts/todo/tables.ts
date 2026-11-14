@@ -7,10 +7,9 @@ import { formatRecurrence } from "../../utils/todo";
 import type { TodoTask } from "./types";
 
 interface TodoTableCallbacks {
-  isSelected: (taskId: string) => boolean;
-  onSelectionChange: (taskId: string, selected: boolean) => void;
   onComplete: (task: TodoTask) => void;
   onSnooze: (task: TodoTask) => void;
+  onUnsnooze: (task: TodoTask) => void;
   onMarkIncomplete: (task: TodoTask) => void;
   onEdit: (task: TodoTask) => void;
   onDelete: (task: TodoTask) => void;
@@ -24,7 +23,6 @@ interface TodoTableRendererOptions extends TodoTableCallbacks {
 
 const activeColumns: ColumnDef<TodoTask, unknown>[] = [
   { id: "drag", header: "Reorder" },
-  { id: "select", header: "Select" },
   { id: "complete", header: "Complete" },
   { accessorKey: "title", header: "Task" },
   {
@@ -50,10 +48,9 @@ const hiddenColumns: ColumnDef<TodoTask, unknown>[] = [
 export function createTodoTableRenderer({
   activeTable,
   hiddenTable,
-  isSelected,
-  onSelectionChange,
   onComplete,
   onSnooze,
+  onUnsnooze,
   onMarkIncomplete,
   onEdit,
   onDelete,
@@ -89,20 +86,6 @@ export function createTodoTableRenderer({
     parent.append(button);
   }
 
-  function createSelectionCell(task: TodoTask): HTMLTableCellElement {
-    const cell = document.createElement("td");
-    const checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.checked = isSelected(task.id);
-    checkbox.setAttribute("aria-label", `Select task: ${task.title}`);
-    checkbox.dataset.selectId = task.id;
-    checkbox.addEventListener("change", () => {
-      onSelectionChange(task.id, checkbox.checked);
-    });
-    cell.append(checkbox);
-    return cell;
-  }
-
   function createCompletionCell(task: TodoTask): HTMLTableCellElement {
     const cell = document.createElement("td");
     const checkbox = document.createElement("input");
@@ -133,6 +116,13 @@ export function createTodoTableRenderer({
         () => onMarkIncomplete(task),
         `Mark task incomplete: ${task.title}`,
       );
+    } else if (task.hiddenReason === "snoozed") {
+      appendButton(
+        actions,
+        "Unsnooze",
+        () => onUnsnooze(task),
+        `Unsnooze task: ${task.title}`,
+      );
     }
     appendButton(actions, "Edit", () => onEdit(task), `Edit task: ${task.title}`);
     appendButton(actions, "Delete", () => onDelete(task), `Delete task: ${task.title}`);
@@ -143,7 +133,6 @@ export function createTodoTableRenderer({
     const row = document.createElement("tr");
     row.dataset.taskId = task.id;
     row.draggable = true;
-    if (isSelected(task.id)) row.classList.add("todo-row--selected");
 
     const dragCell = row.insertCell();
     const dragHandle = document.createElement("span");
@@ -151,7 +140,7 @@ export function createTodoTableRenderer({
     dragHandle.setAttribute("aria-hidden", "true");
     dragHandle.textContent = "⠿";
     dragCell.append(dragHandle);
-    row.append(createSelectionCell(task), createCompletionCell(task));
+    row.append(createCompletionCell(task));
 
     const titleCell = row.insertCell();
     titleCell.textContent = task.title;
