@@ -6,15 +6,32 @@ interface Props {
   value: number;
   min: number;
   max: number;
+  groupLabel?: string;
+  increaseLabel?: string;
+  decreaseLabel?: string;
+  describedBy?: string;
+  labelHidden?: boolean;
   step?: number;
 }
 
-const { id, name, label, value, min, max, step = 1 } = Astro.props;
-const accessibleLabel = label.toLowerCase();
+const {
+  id,
+  name,
+  label,
+  min,
+  max,
+  value,
+  groupLabel = `Adjust ${label.toLowerCase()}`,
+  increaseLabel = `Increase ${label.toLowerCase()}`,
+  decreaseLabel = `Decrease ${label.toLowerCase()}`,
+  describedBy,
+  labelHidden = false,
+  step = 1,
+} = Astro.props;
 ---
 
 <div class="number-stepper">
-  <label for={id}>{label}</label>
+  <label class={labelHidden ? "visually-hidden" : undefined} for={id}>{label}</label>
   <div class="number-stepper__control">
     <input
       id={id}
@@ -25,10 +42,11 @@ const accessibleLabel = label.toLowerCase();
       step={step}
       value={value}
       required
+      aria-describedby={describedBy}
     />
-    <div class="number-stepper__buttons" role="group" aria-label={`Adjust ${accessibleLabel}`}>
-      <button type="button" aria-label={`Increase ${accessibleLabel}`}>↑</button>
-      <button type="button" aria-label={`Decrease ${accessibleLabel}`}>↓</button>
+    <div class="number-stepper__buttons" role="group" aria-label={groupLabel}>
+      <button type="button" aria-label={increaseLabel}>↑</button>
+      <button type="button" aria-label={decreaseLabel}>↓</button>
     </div>
   </div>
 </div>

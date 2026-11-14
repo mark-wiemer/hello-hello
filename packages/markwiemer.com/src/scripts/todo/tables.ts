@@ -8,6 +8,7 @@ import type { TodoTask } from "./types";
 
 interface TodoTableCallbacks {
   onComplete: (task: TodoTask) => void;
+  onMoveTask: (task: TodoTask, direction: "up" | "down") => void;
   onSnooze: (task: TodoTask) => void;
   onUnsnooze: (task: TodoTask) => void;
   onMarkIncomplete: (task: TodoTask) => void;
@@ -49,6 +50,7 @@ export function createTodoTableRenderer({
   activeTable,
   hiddenTable,
   onComplete,
+  onMoveTask,
   onSnooze,
   onUnsnooze,
   onMarkIncomplete,
@@ -114,7 +116,7 @@ export function createTodoTableRenderer({
         actions,
         "Mark incomplete",
         () => onMarkIncomplete(task),
-        `Mark task incomplete: ${task.title}`,
+        `Mark incomplete: ${task.title}`,
       );
     } else if (task.hiddenReason === "snoozed") {
       appendButton(
@@ -139,7 +141,10 @@ export function createTodoTableRenderer({
     dragHandle.className = "drag-handle";
     dragHandle.setAttribute("aria-hidden", "true");
     dragHandle.textContent = "⠿";
-    dragCell.append(dragHandle);
+    const reorderControls = document.createElement("div");
+    reorderControls.className = "reorder-controls";
+    reorderControls.append(dragHandle);
+    dragCell.append(reorderControls);
     row.append(createCompletionCell(task));
 
     const titleCell = row.insertCell();
@@ -172,15 +177,40 @@ export function createTodoTableRenderer({
     tableElement: HTMLTableElement,
     data: TodoTask[],
     columns: ColumnDef<TodoTask, unknown>[],
-    createRow: (task: TodoTask) => HTMLTableRowElement,
+    createRow: (task: TodoTask, index: number) => HTMLTableRowElement,
   ): void {
     const table = createTableInstance(data, columns);
     const body = tableElement.tBodies[0] ?? tableElement.createTBody();
-    body.replaceChildren(...table.getRowModel().rows.map((row) => createRow(row.original)));
+    body.replaceChildren(
+      ...table.getRowModel().rows.map((row, index) => createRow(row.original, index)),
+    );
   }
 
   return (activeTasks: TodoTask[], hiddenTasks: TodoTask[]): void => {
-    renderTable(activeTable, activeTasks, activeColumns, createActiveRow);
+    renderTable(activeTable, activeTasks, activeColumns, (task, index) => {
+      const row = createActiveRow(task);
+      const controls = row.querySelector<HTMLDivElement>(".reorder-controls");
+      if (!controls) throw new Error("Active task row is missing reorder controls.");
+
+      for (const direction of ["up", "down"] as const) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "reorder-button";
+        const icon = document.createElement("span");
+        icon.setAttribute("aria-hidden", "true");
+        icon.textContent = direction === "up" ? "↑" : "↓";
+        button.append(icon);
+        button.setAttribute("aria-label", `Move ${direction}: ${task.title}`);
+        button.dataset.taskId = task.id;
+        button.dataset.moveDirection = direction;
+        button.disabled =
+          direction === "up" ? index === 0 : index === activeTasks.length - 1;
+        button.addEventListener("click", () => onMoveTask(task, direction));
+        controls.append(button);
+      }
+
+      return row;
+    });
     renderTable(hiddenTable, hiddenTasks, hiddenColumns, createHiddenRow);
   };
 }
