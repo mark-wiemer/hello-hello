@@ -77,6 +77,7 @@ test.describe("blog index", () => {
       "blessing-in-disguise-2026",
       "saving-a-life",
       "sometimes-i-jaywalk",
+      "closing-up",
     ].reverse();
 
     const actualListedBlogIds = await getListedPosts(page);
