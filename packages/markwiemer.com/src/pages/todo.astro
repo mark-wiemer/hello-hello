@@ -122,9 +122,9 @@ import TextInput from "@/components/TextInput.astro";
       <p id="todo-backup-status" role="status" aria-live="polite" aria-atomic="true"></p>
     </section>
 
-    <section id="todo-sandbox-panel" class="sandbox-panel" aria-labelledby="todo-sandbox-heading">
+    <section id="todo-sandbox-panel" aria-labelledby="todo-sandbox-heading">
       <h2 id="todo-sandbox-heading">Sandbox mode</h2>
-      <p>Sandbox tasks and simulated time are separate from your regular task list.</p>
+      <p>Sandbox tasks and simulated time are separate from your tasks.</p>
       <div class="sandbox-controls">
         <button id="todo-sandbox-toggle" type="button" aria-pressed="false">
           Enter sandbox mode
@@ -134,6 +134,7 @@ import TextInput from "@/components/TextInput.astro";
       </div>
       <p id="todo-sandbox-date" aria-live="polite" hidden></p>
     </section>
+    <hr />
   </div>
 
   <dialog id="todo-task-dialog" aria-labelledby="todo-task-dialog-heading">
@@ -212,7 +213,7 @@ import TextInput from "@/components/TextInput.astro";
     <h2 id="todo-import-heading">Import tasks?</h2>
     <p id="todo-import-message"></p>
     <p id="todo-import-warning">
-      This will replace your current regular tasks. Sandbox tasks will not be changed.
+      This will replace your current tasks. Sandbox tasks will not be changed.
     </p>
     <div class="dialog-actions">
       <button id="todo-cancel-import" type="button">Cancel import</button>
@@ -259,11 +260,11 @@ import TextInput from "@/components/TextInput.astro";
       <h2 id="todo-manual-sandbox">Sandbox testing</h2>
       <p>
         Sandbox mode uses a separate task list, so experiments do not change
-        your regular tasks. <strong>Simulate next day</strong> advances the
+        your tasks. <strong>Simulate next day</strong> advances the
         sandbox date by one day, making tasks due by then ready again. <strong>Reset
         sandbox</strong> returns the date to today and marks every sandbox task
         incomplete. Choose <strong>Exit sandbox mode</strong> to return to your
-        regular list.
+        tasks.
       </p>
     </section>
 
@@ -274,7 +275,7 @@ import TextInput from "@/components/TextInput.astro";
         devices. Clearing this site's browser data may remove your saved tasks. Use
         <strong>Export tasks</strong> to download a JSON backup, then choose that file
         with <strong>Import tasks from file</strong> on another browser. Importing
-        replaces your regular task list. Sandbox tasks are separate and are not exported.
+        replaces your tasks. Sandbox tasks are separate and are not exported.
       </p>
     </section>
 
@@ -368,10 +369,6 @@ import TextInput from "@/components/TextInput.astro";
     width: 8rem;
   }
 
-  .sandbox-panel {
-    padding: 0.75rem;
-  }
-
   .sandbox-notice {
     align-items: center;
     background: var(--todo-completed-background);
@@ -389,10 +386,6 @@ import TextInput from "@/components/TextInput.astro";
 
   #todo-backup-status {
     margin-bottom: 0;
-  }
-
-  .sandbox-panel h2 {
-    margin-top: 0;
   }
 
   .todo-toolbar button,
@@ -567,7 +560,6 @@ import TextInput from "@/components/TextInput.astro";
   }
 
   .hidden-tasks-section {
-    border-top: 1px solid var(--color-text-primary);
     padding-top: 0.5rem;
   }
 

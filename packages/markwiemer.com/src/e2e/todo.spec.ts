@@ -69,8 +69,8 @@ test.describe("todo app", () => {
       .toContain('[todo] Added "Activity test".');
   });
 
-  test("exports regular tasks as a portable JSON backup", async ({ page }) => {
-    await createTask(page, "Regular task");
+  test("exports tasks as a portable JSON backup", async ({ page }) => {
+    await createTask(page, "Task");
     await page.getByRole("button", { name: "Enter sandbox mode" }).click();
     await createTask(page, "Sandbox task");
 
@@ -78,6 +78,7 @@ test.describe("todo app", () => {
     await page.getByRole("button", { name: "Export tasks" }).click();
     const download = await downloadPromise;
     expect(download.suggestedFilename()).toMatch(/^todo-tasks-\d{4}-\d{2}-\d{2}\.json$/);
+    await expect(page.locator("#todo-backup-status")).toHaveText("Exported 1 task.");
 
     const path = await download.path();
     if (!path) throw new Error("Expected the task backup to download to a file.");
@@ -85,7 +86,7 @@ test.describe("todo app", () => {
     expect(backup).toMatchObject({
       format: "markwiemer.todo.tasks",
       version: 1,
-      tasks: [{ title: "Regular task" }],
+      tasks: [{ title: "Task" }],
     });
     expect((backup as { tasks: Array<{ title: string }> }).tasks).toHaveLength(1);
   });
@@ -121,14 +122,14 @@ test.describe("todo app", () => {
       buffer: Buffer.from(JSON.stringify(backup)),
     });
     const importDialog = page.getByRole("dialog", { name: "Import tasks?" });
-    await expect(importDialog).toContainText("replace your current regular tasks");
+    await expect(importDialog).toContainText("replace your current tasks");
     await importDialog.getByRole("button", { name: "Replace tasks" }).click();
 
     await expect(page.locator("#todo-active-table tbody tr")).toContainText("Imported active");
     await expect(page.locator("#todo-active-table tbody tr")).not.toContainText("Current task");
     await page.getByRole("button", { name: /Show hidden tasks/ }).click();
     await expect(page.locator("#todo-hidden-table tbody tr")).toContainText("Imported hidden");
-    await expect(page.locator("#todo-backup-status")).toContainText("Imported 2 regular tasks");
+    await expect(page.locator("#todo-backup-status")).toHaveText("Imported 2 tasks.");
   });
 
   test("places backup actions on separate lines and styles the file picker globally", async ({
@@ -302,6 +303,7 @@ test.describe("todo app", () => {
     await createTask(page, "Hidden task");
     await page.getByRole("button", { name: "Snooze until tomorrow: Hidden task" }).click();
     await expect(section).toBeVisible();
+    await expect(section).toHaveCSS("border-top-style", "none");
     await expect(toggle).toBeVisible();
     await expect(toggle).toHaveText("Show hidden tasks");
     const stylesMatch = await page.evaluate(() => {
@@ -729,8 +731,12 @@ test.describe("todo app", () => {
   }) => {
     await createTask(page, "Live daily");
     const sandboxNotice = page.locator("#todo-sandbox-notice");
+    const sandboxDate = page.locator("#todo-sandbox-date");
+    await expect(sandboxDate).toBeHidden();
+    await expect(page.locator("#todo-sandbox-panel + hr")).toHaveCount(1);
     await expect(sandboxNotice).toBeHidden();
     await page.getByRole("button", { name: "Enter sandbox mode" }).click();
+    await expect(sandboxDate).toBeVisible();
     await expect(sandboxNotice).toContainText("In sandbox mode");
     await expect(sandboxNotice).toHaveCSS("background-color", "rgb(220, 238, 255)");
     await expect(
@@ -780,7 +786,7 @@ test.describe("todo app", () => {
 
     await page.reload();
     await expect(sandboxNotice).toBeVisible();
-    await expect(page.locator("#todo-sandbox-date")).toContainText("Sandbox date:");
+    await expect(sandboxDate).toContainText("Sandbox date:");
     const restoredDate = await page.evaluate((key) => {
       const date = new Date(sessionStorage.getItem(key) ?? "");
       return { year: date.getFullYear(), month: date.getMonth(), day: date.getDate() };
@@ -798,6 +804,7 @@ test.describe("todo app", () => {
 
     await sandboxNotice.getByRole("button", { name: "Exit sandbox mode" }).click();
     await expect(sandboxNotice).toBeHidden();
+    await expect(sandboxDate).toBeHidden();
     await expect(page.locator("#todo-active-table tbody tr")).toContainText("Live daily");
     await expect(page.locator("#todo-active-table tbody tr")).not.toContainText("Sandbox daily");
   });
@@ -814,6 +821,12 @@ test.describe("todo app", () => {
     await expect(sandboxPanelToggle).toBeVisible();
     await expect(sandboxPanelToggle).toHaveText("Exit sandbox mode");
     await expect(page.locator("#todo-sandbox-panel")).toHaveCSS("border-top-style", "none");
+    const [backupHeadingLeft, sandboxHeadingLeft] = await Promise.all(
+      ["#todo-backup-heading", "#todo-sandbox-heading"].map((selector) =>
+        page.locator(selector).evaluate((heading) => heading.getBoundingClientRect().left),
+      ),
+    );
+    expect(sandboxHeadingLeft).toBe(backupHeadingLeft);
     const buttonsMatchStandardStyle = await page.evaluate(() => {
       const standardButton = getComputedStyle(document.querySelector("#todo-new-task")!);
       const properties = [

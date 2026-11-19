@@ -85,6 +85,10 @@ function formatLocalDate(date: Date): string {
   return date.toLocaleDateString();
 }
 
+function formatTaskCount(count: number): string {
+  return `${count} task${count === 1 ? "" : "s"}`;
+}
+
 const initialSandboxMode = readSandboxMode();
 let sandboxModeEnabled = initialSandboxMode.enabled;
 const initialSandboxDate = sandboxModeEnabled ? readSandboxDate() : null;
@@ -183,7 +187,7 @@ function exportRegularTasks(): void {
   downloadLink.download = `todo-tasks-${new Date().toISOString().slice(0, 10)}.json`;
   downloadLink.click();
   window.setTimeout(() => URL.revokeObjectURL(url), 1000);
-  setBackupStatus(`Exported ${taskLoadResult.tasks.length} regular tasks.`);
+  setBackupStatus(`Exported ${formatTaskCount(taskLoadResult.tasks.length)}.`);
 }
 
 async function prepareTaskImport(): Promise<void> {
@@ -199,7 +203,7 @@ async function prepareTaskImport(): Promise<void> {
 
     pendingImportTasks = importResult.tasks;
     const taskCount = pendingImportTasks.length;
-    importMessage.textContent = `This file contains ${taskCount} task${taskCount === 1 ? "" : "s"} and will replace your current regular tasks.`;
+    importMessage.textContent = `This file contains ${formatTaskCount(taskCount)} and will replace your current tasks.`;
     importDialog.showModal();
   } catch (error) {
     console.error("[todo] Could not read selected task backup.", error);
@@ -229,7 +233,7 @@ function confirmTaskImport(): void {
   importDialog.close();
   if (sandboxModeEnabled) {
     setBackupStatus(
-      `Imported ${importedTasks.length} regular tasks. Exit sandbox mode to view them.`,
+      `Imported ${formatTaskCount(importedTasks.length)}. Exit sandbox mode to view them.`,
     );
     return;
   }
@@ -243,7 +247,7 @@ function confirmTaskImport(): void {
       true,
     );
   } else {
-    setBackupStatus(`Imported ${importedTasks.length} regular tasks.`);
+    setBackupStatus(`Imported ${formatTaskCount(importedTasks.length)}.`);
   }
 }
 
@@ -468,8 +472,8 @@ function toggleSandboxMode(): void {
   } else {
     setStatus(
       sandboxModeEnabled
-        ? "Sandbox mode enabled. Your regular tasks are unchanged."
-        : "Sandbox mode disabled. Showing your regular tasks.",
+        ? "Sandbox mode enabled. Your tasks are unchanged."
+        : "Sandbox mode disabled. Showing your tasks.",
     );
   }
 }
