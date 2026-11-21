@@ -4,7 +4,7 @@ import tseslint from "typescript-eslint";
 import { defineConfig, globalIgnores } from "eslint/config";
 import packageJson from "eslint-plugin-package-json";
 
-const globalIgnore = ["**/dodge-the-creeps/**", "**/.astro/**"];
+const globalIgnore = ["**/dodge-the-creeps/**", "**/.astro/**", "**/dist/**"];
 
 export default defineConfig([
   globalIgnores(globalIgnore),

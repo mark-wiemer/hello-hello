@@ -72,36 +72,34 @@
     | "starting"
     | "playing";
 
-  const widget = document.querySelector<HTMLElement>("#tone-widget");
-  if (!widget) {
-    throw new Error("Tone widget markup is missing.");
+  function getRequiredElement<T extends Element>(parent: ParentNode, selector: string): T {
+    const element = parent.querySelector<T>(selector);
+    if (!element) {
+      throw new Error(`Tone widget markup is missing ${selector}.`);
+    }
+    return element;
   }
 
-  const pitchPreset = widget.querySelector<HTMLSelectElement>("#tone-pitch");
-  const frequencyNumberInput = widget.querySelector<HTMLInputElement>("#tone-frequency-exact");
-  const frequencyDetails = widget.querySelector<HTMLDetailsElement>("#tone-frequency-details");
-  const frequencyOutput = widget.querySelector<HTMLOutputElement>("#tone-frequency-value");
-  const volumeInput = widget.querySelector<HTMLInputElement>("#tone-volume");
-  const volumeOutput = widget.querySelector<HTMLOutputElement>("#tone-volume-value");
-  const keepAwakeInput = widget.querySelector<HTMLInputElement>("#tone-keep-awake");
-  const wakeLockStatus = widget.querySelector<HTMLParagraphElement>("#tone-wake-status");
-  const playStopButton = widget.querySelector<HTMLButtonElement>("#tone-play-stop");
-  const errorMessage = widget.querySelector<HTMLParagraphElement>("#tone-error");
-
-  if (
-    !pitchPreset ||
-    !frequencyNumberInput ||
-    !frequencyDetails ||
-    !frequencyOutput ||
-    !volumeInput ||
-    !volumeOutput ||
-    !keepAwakeInput ||
-    !wakeLockStatus ||
-    !playStopButton ||
-    !errorMessage
-  ) {
-    throw new Error("Tone widget controls are incomplete.");
-  }
+  const widget = getRequiredElement<HTMLElement>(document, "#tone-widget");
+  const pitchPreset = getRequiredElement<HTMLSelectElement>(widget, "#tone-pitch");
+  const frequencyNumberInput = getRequiredElement<HTMLInputElement>(
+    widget,
+    "#tone-frequency-exact",
+  );
+  const frequencyDetails = getRequiredElement<HTMLDetailsElement>(
+    widget,
+    "#tone-frequency-details",
+  );
+  const frequencyOutput = getRequiredElement<HTMLOutputElement>(
+    widget,
+    "#tone-frequency-value",
+  );
+  const volumeInput = getRequiredElement<HTMLInputElement>(widget, "#tone-volume");
+  const volumeOutput = getRequiredElement<HTMLOutputElement>(widget, "#tone-volume-value");
+  const keepAwakeInput = getRequiredElement<HTMLInputElement>(widget, "#tone-keep-awake");
+  const wakeLockStatus = getRequiredElement<HTMLParagraphElement>(widget, "#tone-wake-status");
+  const playStopButton = getRequiredElement<HTMLButtonElement>(widget, "#tone-play-stop");
+  const errorMessage = getRequiredElement<HTMLParagraphElement>(widget, "#tone-error");
 
   const maxOutputGain = 0.1;
 
@@ -448,17 +446,10 @@
     border: 1px solid var(--color-text-primary);
     border-radius: var(--border-radius-button);
     color: var(--color-body);
-    cursor: pointer;
     justify-self: start;
     padding: 0.35em 0.75em;
   }
 
-  button:disabled {
-    cursor: wait;
-    opacity: 0.7;
-  }
-
-  button:focus-visible,
   summary:focus-visible,
   select:focus-visible,
   input:focus-visible {

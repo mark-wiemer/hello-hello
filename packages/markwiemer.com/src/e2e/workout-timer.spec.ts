@@ -205,11 +205,16 @@ test.describe("workout timer", () => {
         return {
           inputHeight: inputBounds.height,
           labelGap: inputBounds.top - labelBounds.bottom,
+          labelText: label.textContent?.trim(),
         };
       });
 
     const workGeometry = await getGeometry("#workout-work-duration");
     const prepGeometry = await getGeometry("#workout-prep-duration");
+    const workInput = page.locator("#workout-work-duration");
+    await expect(workInput).toHaveAttribute("required", "");
+    await expect(workInput).toHaveAttribute("pattern", "[0-5][0-9]:[0-5][0-9]");
+    expect(workGeometry.labelText).toBe("Time per rep (MM:SS)");
     expect(workGeometry.inputHeight).toBe(prepGeometry.inputHeight);
     expect(workGeometry.labelGap).toBeGreaterThanOrEqual(0);
     expect(workGeometry.labelGap).toBeLessThanOrEqual(4);

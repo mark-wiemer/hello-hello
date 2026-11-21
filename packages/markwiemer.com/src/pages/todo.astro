@@ -1,0 +1,638 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Dropdown from "@/components/Dropdown.astro";
+import NumberStepper from "@/components/NumberStepper.astro";
+import TextInput from "@/components/TextInput.astro";
+---
+
+<Layout pageTitle="Todo">
+  <p id="todo-description">Recurring tasks, stored in this browser on this device. This is an early prototype; tasks may be lost at any time!</p>
+  <p id="todo-sandbox-notice" class="sandbox-notice" hidden>
+    <strong>In sandbox mode</strong>
+    <button id="todo-sandbox-exit" type="button">Exit sandbox mode</button>
+  </p>
+
+  <div id="todo-app">
+    <p
+      id="todo-status"
+      class="visually-hidden"
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+    ></p>
+
+    <p id="todo-reorder-help" class="visually-hidden">
+      Use the Move up and Move down buttons, or drag a task row to reorder it.
+    </p>
+
+    <section aria-label="Ready tasks">
+      <div
+        id="todo-active-region"
+        class="table-scroll wide-section"
+        role="region"
+        aria-label="Ready tasks table"
+        tabindex="0"
+        hidden
+      >
+        <table id="todo-active-table" aria-describedby="todo-reorder-help">
+          <caption class="visually-hidden">Tasks ready to work on</caption>
+          <thead>
+            <tr>
+              <th scope="col"><span class="visually-hidden">Reorder</span></th>
+              <th scope="col"><span class="visually-hidden">Complete</span></th>
+              <th scope="col">Task</th>
+              <th scope="col">Recurrence</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p
+        id="todo-active-empty"
+        class="empty-message todo-loading"
+        role="status"
+        aria-busy="true"
+      >
+        <span class="todo-loading-indicator" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </span>
+        <span class="visually-hidden">Loading tasks</span>
+      </p>
+    </section>
+
+    <div class="todo-toolbar">
+      <button id="todo-new-task" type="button">New task</button>
+    </div>
+
+    <section
+      id="todo-hidden-section"
+      class="hidden-tasks-section"
+      aria-labelledby="todo-hidden-heading"
+      hidden
+    >
+      <button
+        id="todo-toggle-hidden"
+        type="button"
+        aria-expanded="false"
+        aria-controls="todo-hidden-content"
+      >
+        Show hidden tasks
+      </button>
+      <div id="todo-hidden-content" hidden>
+        <h2 id="todo-hidden-heading">Hidden tasks</h2>
+        <div
+          class="table-scroll wide-section"
+          role="region"
+          aria-label="Hidden tasks table"
+          tabindex="0"
+        >
+          <table id="todo-hidden-table">
+            <caption class="visually-hidden">
+              Tasks snoozed or completed until a future date
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Task</th>
+                <th scope="col">Recurrence</th>
+                <th scope="col">Shows again</th>
+                <th scope="col">Status</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="todo-backup-panel" aria-labelledby="todo-backup-heading">
+      <h2 id="todo-backup-heading">Move tasks between browsers</h2>
+      <p>
+        Export tasks to a JSON file, then import that file on another browser or
+        device. Importing replaces your current tasks. Sandbox tasks are not included.
+      </p>
+      <div class="todo-backup-controls">
+        <button id="todo-export-tasks" type="button">Export tasks</button>
+        <div class="todo-import-control">
+          <label for="todo-import-file">Import tasks from file</label>
+          <input id="todo-import-file" type="file" accept=".json,application/json" />
+        </div>
+      </div>
+      <p id="todo-backup-status" role="status" aria-live="polite" aria-atomic="true"></p>
+    </section>
+
+    <section id="todo-sandbox-panel" aria-labelledby="todo-sandbox-heading">
+      <h2 id="todo-sandbox-heading">Sandbox mode</h2>
+      <p>Sandbox tasks and simulated time are separate from your tasks.</p>
+      <div class="sandbox-controls">
+        <button id="todo-sandbox-toggle" type="button" aria-pressed="false">
+          Enter sandbox mode
+        </button>
+        <button id="todo-simulate-next-day" type="button" hidden>Simulate next day</button>
+        <button id="todo-sandbox-reset" type="button" hidden>Reset sandbox</button>
+      </div>
+      <p id="todo-sandbox-date" aria-live="polite" hidden></p>
+    </section>
+    <hr />
+  </div>
+
+  <dialog id="todo-task-dialog" aria-labelledby="todo-task-dialog-heading">
+    <form id="todo-task-form">
+      <div class="task-dialog-heading">
+        <h2 id="todo-task-dialog-heading">New task</h2>
+        <button
+          id="todo-close-task"
+          type="button"
+          aria-label="Close task dialog"
+        >
+          Close
+        </button>
+      </div>
+      <TextInput
+        id="todo-title"
+        name="title"
+        label="Title"
+        maxLength={60}
+        helpText="Up to 60 characters."
+        required
+      />
+
+      <fieldset>
+        <legend>Recurrence</legend>
+        <div class="recurrence-fields">
+          <span>Every</span>
+          <label class="visually-hidden" for="todo-interval">Number of intervals</label>
+          <NumberStepper
+            id="todo-interval"
+            name="interval"
+            min={1}
+            max={99}
+            value={1}
+            groupLabel="Adjust recurrence interval"
+            increaseLabel="Increase recurrence interval"
+            decreaseLabel="Decrease recurrence interval"
+            describedBy="todo-interval-error"
+            required
+          />
+          <Dropdown id="todo-unit" name="unit" label="Recurrence unit" labelHidden>
+            <option value="days">days</option>
+            <option value="weeks">weeks</option>
+            <option value="months">months</option>
+          </Dropdown>
+        </div>
+        <p id="todo-interval-error" class="form-error" hidden></p>
+      </fieldset>
+
+      <p id="todo-form-error" class="form-error" role="alert" hidden></p>
+      <div class="dialog-actions">
+        <button id="todo-cancel-task" type="button">Cancel</button>
+        <button type="submit">Save task</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog
+    id="todo-delete-dialog"
+    aria-labelledby="todo-delete-heading"
+    aria-describedby="todo-delete-message"
+  >
+    <h2 id="todo-delete-heading">Delete task?</h2>
+    <p id="todo-delete-message"></p>
+    <div class="dialog-actions">
+      <button id="todo-cancel-delete" type="button">Cancel</button>
+      <button id="todo-confirm-delete" type="button">Delete task</button>
+    </div>
+  </dialog>
+
+  <dialog
+    id="todo-import-dialog"
+    aria-labelledby="todo-import-heading"
+    aria-describedby="todo-import-message todo-import-warning"
+  >
+    <h2 id="todo-import-heading">Import tasks?</h2>
+    <p id="todo-import-message"></p>
+    <p id="todo-import-warning">
+      This will replace your current tasks. Sandbox tasks will not be changed.
+    </p>
+    <div class="dialog-actions">
+      <button id="todo-cancel-import" type="button">Cancel import</button>
+      <button id="todo-confirm-import" type="button">Replace tasks</button>
+    </div>
+  </dialog>
+
+  <details id="todo-manual">
+    <summary>Todo app manual</summary>
+
+    <section aria-labelledby="todo-manual-tasks">
+      <h2 id="todo-manual-tasks">Tasks and recurrence</h2>
+      <p>
+        Choose <strong>New task</strong>, enter a title, and set how often the
+        task should return: every 1-99 days, weeks, or months. Use <strong>Edit</strong>
+        to change a task's title or recurrence. <strong>Delete</strong> removes
+        the task permanently after confirmation.
+      </p>
+      <p>
+        Check the box in the Complete column when you finish a task. It moves to
+        Hidden until its recurrence is due again, calculated from the date you
+        completed it. It returns at midnight on its due date. Snoozing does not
+        change that schedule. For a monthly recurrence completed on the 29th,
+        30th, or 31st, the task returns on the 28th of the target month.
+      </p>
+    </section>
+
+    <section aria-labelledby="todo-manual-organizing">
+      <h2 id="todo-manual-organizing">Organizing tasks</h2>
+      <p>
+        The Tasks table shows items that are ready to work on. Use <strong>Snooze</strong>
+        to hide a task until midnight at the start of tomorrow. Open <strong>Show hidden tasks</strong>
+        to see completed or snoozed items and when they will return. A completed
+        task has a <strong>Mark incomplete</strong> action, and a snoozed task has
+        an <strong>Unsnooze</strong> action to bring it back right away.
+      </p>
+      <p>
+        Use the Move up and Move down buttons, or drag a task row to reorder it;
+        a line marks where it will land.
+      </p>
+    </section>
+
+    <section aria-labelledby="todo-manual-sandbox">
+      <h2 id="todo-manual-sandbox">Sandbox testing</h2>
+      <p>
+        Sandbox mode uses a separate task list, so experiments do not change
+        your tasks. <strong>Simulate next day</strong> advances the
+        sandbox date by one day, making tasks due by then ready again. <strong>Reset
+        sandbox</strong> returns the date to today and marks every sandbox task
+        incomplete. Choose <strong>Exit sandbox mode</strong> to return to your
+        tasks.
+      </p>
+    </section>
+
+    <section aria-labelledby="todo-manual-saving">
+      <h2 id="todo-manual-saving">Saving your tasks</h2>
+      <p>
+        Tasks are saved in this browser on this device and do not sync to other
+        devices. Clearing this site's browser data may remove your saved tasks. Use
+        <strong>Export tasks</strong> to download a JSON backup, then choose that file
+        with <strong>Import tasks from file</strong> on another browser. Importing
+        replaces your tasks. Sandbox tasks are separate and are not exported.
+      </p>
+    </section>
+
+    <details id="todo-glossary">
+      <summary>Glossary</summary>
+      <dl>
+        <dt>Complete</dt>
+        <dd>
+          Check the box near a task title to mark it complete. This hides the
+          task until it's ready again, based on its recurrence.
+        </dd>
+        <dt>Hidden</dt>
+        <dd>
+          A hidden task is not shown by default, but can be viewed by opening
+          the hidden tasks section.
+        </dd>
+        <dt>Recurrence</dt>
+        <dd>
+          Once a task is complete, hide it for this long. Can be set between
+          1-99 days, weeks, or months.
+        </dd>
+        <dt>Ready</dt>
+        <dd>A task is ready when it's due today and not yet complete.</dd>
+        <dt>Snooze</dt>
+        <dd>Hide a task until tomorrow morning.</dd>
+        <dt>Task</dt>
+        <dd>Item with a title and recurrence.</dd>
+        <dt>Title</dt>
+        <dd>The name of a task, in plain text.</dd>
+      </dl>
+    </details>
+  </details>
+
+  <hr />
+  <p>See also <a href="/misc">Miscellaneous - markwiemer.com</a></p>
+</Layout>
+
+<script>
+  import "../scripts/todo";
+</script>
+
+<style is:global>
+  :root {
+    --todo-completed-background: #dceeff;
+    --todo-completed-foreground: #17364f;
+  }
+
+  :root[data-theme="dark"] {
+    --todo-completed-background: #193550;
+    --todo-completed-foreground: #e2f1ff;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --todo-completed-background: #193550;
+      --todo-completed-foreground: #e2f1ff;
+    }
+  }
+
+  #todo-app {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+  }
+
+  .todo-toolbar,
+  .sandbox-controls,
+  .dialog-actions,
+  .recurrence-fields {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .todo-backup-controls {
+    display: grid;
+    justify-items: start;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  .todo-import-control {
+    display: grid;
+    justify-items: start;
+    gap: 0.25rem;
+    width: min(100%, 32rem);
+  }
+
+  .recurrence-fields .number-stepper {
+    width: 8rem;
+  }
+
+  .sandbox-notice {
+    align-items: center;
+    background: var(--todo-completed-background);
+    border-radius: var(--border-radius-button);
+    color: var(--todo-completed-foreground);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .sandbox-notice[hidden] {
+    display: none;
+  }
+
+  #todo-backup-status {
+    margin-bottom: 0;
+  }
+
+  .todo-toolbar button,
+  .hidden-tasks-section > button,
+  .todo-backup-controls button,
+  .dialog-actions button,
+  .task-dialog-heading button,
+  .task-actions button,
+  .reorder-button,
+  .sandbox-controls button,
+  .sandbox-notice button {
+    min-height: 44px;
+    padding: 0.35rem 0.7rem;
+    border: 1px solid var(--color-text-primary);
+    border-radius: var(--border-radius-button);
+    background: var(--color-body);
+    color: var(--color-text-primary);
+  }
+
+  .table-scroll {
+    overflow-x: auto;
+  }
+
+  table {
+    width: max-content;
+    margin: 0;
+    margin-inline: auto;
+  }
+
+  th {
+    text-align: left;
+  }
+
+  #todo-active-table th:nth-child(-n + 2),
+  #todo-active-table td:nth-child(-n + 2) {
+    text-align: center;
+    padding-inline: 4px;
+    white-space: nowrap;
+    width: 1%;
+  }
+
+  #todo-active-table td:first-child {
+    vertical-align: middle;
+  }
+
+  .reorder-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.125rem;
+  }
+
+  .reorder-button {
+    display: inline-grid;
+    min-width: 44px;
+    min-height: 44px;
+    place-items: center;
+    padding: 0;
+  }
+
+  #todo-active-table td:nth-child(3) {
+    max-width: 60ch;
+    overflow-wrap: anywhere;
+  }
+
+  tr[draggable="true"] {
+    cursor: grab;
+  }
+
+  tr[draggable="true"]:active {
+    cursor: grabbing;
+  }
+
+  #todo-active-table tr.todo-row--drop-before > td {
+    box-shadow: inset 0 3px 0 var(--color-link-primary);
+  }
+
+  #todo-active-table tr.todo-row--drop-after > td {
+    box-shadow: inset 0 -3px 0 var(--color-link-primary);
+  }
+
+  .todo-row--completed {
+    background: var(--todo-completed-background);
+    color: var(--todo-completed-foreground);
+  }
+
+  .drag-handle {
+    display: block;
+    font-size: 1.25rem;
+    line-height: 1;
+    text-align: center;
+    transform: translateY(3px);
+    user-select: none;
+  }
+
+  input[type="checkbox"] {
+    width: 1.25rem;
+    height: 1.25rem;
+    vertical-align: middle;
+    accent-color: var(--color-link-primary);
+  }
+
+  .task-actions {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0.25rem;
+  }
+
+  .task-actions button {
+    min-height: 40px;
+    padding: 0.2rem 0.5rem;
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+
+  .task-actions button:last-child,
+  #todo-confirm-delete {
+    border-color: currentColor;
+  }
+
+  .empty-message {
+    font-style: italic;
+  }
+
+  #todo-active-empty.todo-loading {
+    display: flex;
+    align-items: center;
+    min-height: var(--line-height-default);
+  }
+
+  .todo-loading-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    height: var(--line-height-default);
+  }
+
+  .todo-loading-indicator span {
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 50%;
+    background: currentColor;
+    animation: todo-loading-pulse 1.2s ease-in-out infinite;
+  }
+
+  .todo-loading-indicator span:nth-child(2) {
+    animation-delay: 0.15s;
+  }
+
+  .todo-loading-indicator span:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+
+  @keyframes todo-loading-pulse {
+    0%,
+    60%,
+    100% {
+      opacity: 0.35;
+      transform: scale(0.75);
+    }
+
+    30% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .todo-loading-indicator span {
+      animation: none;
+      opacity: 0.65;
+    }
+  }
+
+  .hidden-tasks-section {
+    padding-top: 0.5rem;
+  }
+
+  dialog {
+    box-sizing: border-box;
+    width: min(32rem, calc(100vw - 2rem));
+    border: 1px solid var(--color-text-primary);
+    border-radius: 8px;
+    background: var(--color-body);
+    color: var(--color-text-primary);
+  }
+
+  dialog::backdrop {
+    background: rgb(0 0 0 / 60%);
+  }
+
+  dialog form {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  dialog h2 {
+    margin: 0;
+  }
+
+  .task-dialog-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  #todo-title {
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  #todo-interval {
+    width: 5rem;
+  }
+
+  .form-help {
+    margin-top: -0.5rem;
+  }
+
+  .dialog-actions {
+    justify-content: flex-end;
+  }
+
+  .form-error {
+    margin: 0;
+    font-weight: 600;
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  input:focus-visible,
+  select:focus-visible {
+    outline: 3px solid var(--color-link-primary);
+    outline-offset: 2px;
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+</style>

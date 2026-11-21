@@ -11,16 +11,15 @@ interface ToneAudioHarness {
   events: ToneAudioEvent[];
 }
 
-interface WindowWithToneAudioHarness extends Window {
-  __toneAudioHarness: ToneAudioHarness;
-}
-
 interface ToneWakeLockHarness {
   events: string[];
 }
 
-interface WindowWithToneWakeLockHarness extends Window {
-  __toneWakeLockHarness: ToneWakeLockHarness;
+declare global {
+  interface Window {
+    __toneAudioHarness?: ToneAudioHarness;
+    __toneWakeLockHarness?: ToneWakeLockHarness;
+  }
 }
 
 async function installAudioContextMock(page: Page): Promise<void> {
@@ -141,15 +140,19 @@ async function installWakeLockMock(page: Page): Promise<void> {
 }
 
 async function getAudioEvents(page: Page): Promise<ToneAudioEvent[]> {
-  return page.evaluate(
-    () => (window as WindowWithToneAudioHarness).__toneAudioHarness.events,
-  );
+  return page.evaluate(() => {
+    const harness = window.__toneAudioHarness;
+    if (!harness) throw new Error("Tone audio test harness is missing.");
+    return harness.events;
+  });
 }
 
 async function getWakeLockEvents(page: Page): Promise<string[]> {
-  return page.evaluate(
-    () => (window as WindowWithToneWakeLockHarness).__toneWakeLockHarness.events,
-  );
+  return page.evaluate(() => {
+    const harness = window.__toneWakeLockHarness;
+    if (!harness) throw new Error("Tone wake-lock test harness is missing.");
+    return harness.events;
+  });
 }
 
 test("plays offline and stops or restarts the selected tone", async ({ page }) => {

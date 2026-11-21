@@ -1,0 +1,133 @@
+import type { TodoTask } from "./types";
+
+interface TodoReorderingOptions {
+  table: HTMLTableElement;
+  getTasks: () => TodoTask[];
+  isTaskVisible: (task: TodoTask) => boolean;
+  onReordered: (tasks: TodoTask[]) => void;
+}
+
+export function createTodoReordering({
+  table,
+  getTasks,
+  isTaskVisible,
+  onReordered,
+}: TodoReorderingOptions) {
+  let draggedTaskId: string | null = null;
+
+  function getActiveTasks(): TodoTask[] {
+    return getTasks().filter((task) => isTaskVisible(task));
+  }
+
+  function replaceActiveOrder(nextActiveTasks: TodoTask[]): void {
+    const orderedTasks = getTasks();
+    let activeIndex = 0;
+    const reorderedTasks = orderedTasks.map((task) => {
+      if (!isTaskVisible(task)) return task;
+      const nextTask = nextActiveTasks[activeIndex++];
+      return nextTask ?? task;
+    });
+    onReordered(reorderedTasks);
+  }
+
+  function clearDropMarker(): void {
+    for (const row of table.querySelectorAll<HTMLTableRowElement>(
+      "tr.todo-row--drop-before, tr.todo-row--drop-after",
+    )) {
+      row.classList.remove("todo-row--drop-before", "todo-row--drop-after");
+    }
+  }
+
+  function reorderTask(targetId: string, insertAfter: boolean): void {
+    const activeTasks = getActiveTasks();
+    if (!draggedTaskId || draggedTaskId === targetId) return;
+
+    const movingTask = activeTasks.find((task) => task.id === draggedTaskId);
+    if (!movingTask) return;
+
+    const remainingTasks = activeTasks.filter((task) => task.id !== draggedTaskId);
+    const targetIndex = remainingTasks.findIndex((task) => task.id === targetId);
+    if (targetIndex < 0) return;
+
+    remainingTasks.splice(targetIndex + Number(insertAfter), 0, movingTask);
+    replaceActiveOrder(remainingTasks);
+  }
+
+  function moveTask(taskId: string, direction: "up" | "down"): boolean {
+    const activeTasks = getActiveTasks();
+    const currentIndex = activeTasks.findIndex((task) => task.id === taskId);
+    if (currentIndex < 0) return false;
+
+    const nextIndex = currentIndex + (direction === "up" ? -1 : 1);
+    if (nextIndex < 0 || nextIndex >= activeTasks.length) return false;
+
+    const [movingTask] = activeTasks.splice(currentIndex, 1);
+    if (!movingTask) return false;
+    activeTasks.splice(nextIndex, 0, movingTask);
+    replaceActiveOrder(activeTasks);
+    return true;
+  }
+
+  table.addEventListener("dragstart", (event) => {
+    const target = event.target;
+    if (!(target instanceof Element)) return;
+    const row = target.closest<HTMLTableRowElement>("tr[data-task-id]");
+    const taskId = row?.dataset.taskId;
+    if (!taskId) return;
+
+    draggedTaskId = taskId;
+    if (event.dataTransfer) {
+      event.dataTransfer.effectAllowed = "move";
+      event.dataTransfer.setData("text/plain", taskId);
+    }
+    clearDropMarker();
+  });
+
+  table.addEventListener("dragover", (event) => {
+    const target = event.target;
+    if (!(target instanceof Element) || !draggedTaskId) return;
+    const targetRow = target.closest<HTMLTableRowElement>("tr[data-task-id]");
+    if (!targetRow) return;
+
+    event.preventDefault();
+    const targetId = targetRow.dataset.taskId;
+    if (!targetId || draggedTaskId === targetId) {
+      clearDropMarker();
+      return;
+    }
+
+    const insertAfter =
+      event.clientY > targetRow.getBoundingClientRect().top + targetRow.offsetHeight / 2;
+    clearDropMarker();
+    targetRow.classList.add(insertAfter ? "todo-row--drop-after" : "todo-row--drop-before");
+  });
+
+  table.addEventListener("dragleave", (event) => {
+    const relatedTarget = event.relatedTarget;
+    if (!(relatedTarget instanceof Node) || !table.contains(relatedTarget)) {
+      clearDropMarker();
+    }
+  });
+
+  table.addEventListener("drop", (event) => {
+    const target = event.target;
+    if (!(target instanceof Element) || !draggedTaskId) return;
+    const targetRow = target.closest<HTMLTableRowElement>("tr[data-task-id]");
+    const targetId = targetRow?.dataset.taskId;
+    if (!targetId || !targetRow) return;
+
+    event.preventDefault();
+    const insertAfter =
+      event.clientY > targetRow.getBoundingClientRect().top + targetRow.offsetHeight / 2;
+    reorderTask(targetId, insertAfter);
+    clearDropMarker();
+    draggedTaskId = null;
+  });
+
+  table.addEventListener("dragend", () => {
+    clearDropMarker();
+    draggedTaskId = null;
+  });
+
+  return { moveTask };
+}

@@ -24,6 +24,24 @@ test.describe("theme toggle", () => {
     await expect(toggle).toHaveCount(0);
   });
 
+  test("navigation disclosure exposes and updates its expanded state", async ({ page }) => {
+    const menuButton = page.getByRole("button", { name: "Menu" });
+    const navigation = page.getByRole("navigation", { name: "Site" });
+
+    await expect(menuButton).toHaveAttribute("aria-controls", "siteMenu");
+    await expect(menuButton).toHaveAttribute("aria-expanded", "false");
+    await expect(navigation).toBeHidden();
+
+    await menuButton.focus();
+    await page.keyboard.press("Enter");
+    await expect(menuButton).toHaveAttribute("aria-expanded", "true");
+    await expect(navigation).toBeVisible();
+
+    await page.keyboard.press("Enter");
+    await expect(menuButton).toHaveAttribute("aria-expanded", "false");
+    await expect(navigation).toBeHidden();
+  });
+
   test("defaults to system theme", async ({ page }) => {
     const toggle = await openNavAndGetThemeToggle(page);
     await expect(toggle).toHaveText(label(system));
