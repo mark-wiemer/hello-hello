@@ -76,32 +76,26 @@
   if (!widget) {
     throw new Error("Tone widget markup is missing.");
   }
+  const toneWidget = widget;
 
-  const pitchPreset = widget.querySelector<HTMLSelectElement>("#tone-pitch");
-  const frequencyNumberInput = widget.querySelector<HTMLInputElement>("#tone-frequency-exact");
-  const frequencyDetails = widget.querySelector<HTMLDetailsElement>("#tone-frequency-details");
-  const frequencyOutput = widget.querySelector<HTMLOutputElement>("#tone-frequency-value");
-  const volumeInput = widget.querySelector<HTMLInputElement>("#tone-volume");
-  const volumeOutput = widget.querySelector<HTMLOutputElement>("#tone-volume-value");
-  const keepAwakeInput = widget.querySelector<HTMLInputElement>("#tone-keep-awake");
-  const wakeLockStatus = widget.querySelector<HTMLParagraphElement>("#tone-wake-status");
-  const playStopButton = widget.querySelector<HTMLButtonElement>("#tone-play-stop");
-  const errorMessage = widget.querySelector<HTMLParagraphElement>("#tone-error");
-
-  if (
-    !pitchPreset ||
-    !frequencyNumberInput ||
-    !frequencyDetails ||
-    !frequencyOutput ||
-    !volumeInput ||
-    !volumeOutput ||
-    !keepAwakeInput ||
-    !wakeLockStatus ||
-    !playStopButton ||
-    !errorMessage
-  ) {
-    throw new Error("Tone widget controls are incomplete.");
+  function requireElement<T extends Element>(selector: string): T {
+    const element = toneWidget.querySelector<T>(selector);
+    if (!element) {
+      throw new Error(`Tone widget control is missing: ${selector}`);
+    }
+    return element;
   }
+
+  const pitchPreset = requireElement<HTMLSelectElement>("#tone-pitch");
+  const frequencyNumberInput = requireElement<HTMLInputElement>("#tone-frequency-exact");
+  const frequencyDetails = requireElement<HTMLDetailsElement>("#tone-frequency-details");
+  const frequencyOutput = requireElement<HTMLOutputElement>("#tone-frequency-value");
+  const volumeInput = requireElement<HTMLInputElement>("#tone-volume");
+  const volumeOutput = requireElement<HTMLOutputElement>("#tone-volume-value");
+  const keepAwakeInput = requireElement<HTMLInputElement>("#tone-keep-awake");
+  const wakeLockStatus = requireElement<HTMLParagraphElement>("#tone-wake-status");
+  const playStopButton = requireElement<HTMLButtonElement>("#tone-play-stop");
+  const errorMessage = requireElement<HTMLParagraphElement>("#tone-error");
 
   const maxOutputGain = 0.1;
 

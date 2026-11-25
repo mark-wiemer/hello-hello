@@ -115,57 +115,37 @@ import DurationInput from "@/components/DurationInput.astro";
 
   type TimerState = "ready" | "running" | "paused" | "complete";
 
-  const form = document.querySelector<HTMLFormElement>("#workout-timer-form");
-  const settings = document.querySelector<HTMLFieldSetElement>("#workout-timer-settings");
-  const repsInput = document.querySelector<HTMLInputElement>("#workout-reps");
-  const increaseRepsButton = document.querySelector<HTMLButtonElement>("#workout-reps-increase");
-  const decreaseRepsButton = document.querySelector<HTMLButtonElement>("#workout-reps-decrease");
-  const workDurationInput = document.querySelector<HTMLInputElement>("#workout-work-duration");
-  const prepDurationInput = document.querySelector<HTMLInputElement>("#workout-prep-duration");
-  const setupDurationInput = document.querySelector<HTMLInputElement>("#workout-setup-duration");
-  const speechCheckbox = document.querySelector<HTMLInputElement>("#workout-speech");
-  const startButton = document.querySelector<HTMLButtonElement>("#workout-start");
-  const pauseButton = document.querySelector<HTMLButtonElement>("#workout-pause");
-  const resumeButton = document.querySelector<HTMLButtonElement>("#workout-resume");
-  const resetButton = document.querySelector<HTMLButtonElement>("#workout-reset");
-  const phaseOutput = document.querySelector<HTMLHeadingElement>("#workout-phase");
-  const clockOutput = document.querySelector<HTMLElement>("#workout-clock");
-  const repetitionOutput = document.querySelector<HTMLParagraphElement>("#workout-repetition");
-  const progressOutput = document.querySelector<HTMLDivElement>("#workout-progress");
-  const countdownOutput = document.querySelector<HTMLParagraphElement>("#workout-countdown");
-  const announcementOutput = document.querySelector<HTMLParagraphElement>("#workout-announcement");
-  const speechHelp = document.querySelector<HTMLElement>("#workout-speech-help");
-  const shareUrlInput = document.querySelector<HTMLInputElement>("#workout-settings-url");
-  const copyUrlButton = document.querySelector<HTMLButtonElement>("#workout-copy-url");
-  const shareStatus = document.querySelector<HTMLParagraphElement>("#workout-share-status");
-
-  if (
-    !form ||
-    !settings ||
-    !repsInput ||
-    !increaseRepsButton ||
-    !decreaseRepsButton ||
-    !workDurationInput ||
-    !prepDurationInput ||
-    !setupDurationInput ||
-    !speechCheckbox ||
-    !startButton ||
-    !pauseButton ||
-    !resumeButton ||
-    !resetButton ||
-    !phaseOutput ||
-    !clockOutput ||
-    !repetitionOutput ||
-    !progressOutput ||
-    !countdownOutput ||
-    !announcementOutput ||
-    !speechHelp ||
-    !shareUrlInput ||
-    !copyUrlButton ||
-    !shareStatus
-  ) {
-    throw new Error("Workout timer markup is incomplete.");
+  function requireElement<T extends Element>(selector: string): T {
+    const element = document.querySelector<T>(selector);
+    if (!element) {
+      throw new Error(`Workout timer control is missing: ${selector}`);
+    }
+    return element;
   }
+
+  const form = requireElement<HTMLFormElement>("#workout-timer-form");
+  const settings = requireElement<HTMLFieldSetElement>("#workout-timer-settings");
+  const repsInput = requireElement<HTMLInputElement>("#workout-reps");
+  const increaseRepsButton = requireElement<HTMLButtonElement>("#workout-reps-increase");
+  const decreaseRepsButton = requireElement<HTMLButtonElement>("#workout-reps-decrease");
+  const workDurationInput = requireElement<HTMLInputElement>("#workout-work-duration");
+  const prepDurationInput = requireElement<HTMLInputElement>("#workout-prep-duration");
+  const setupDurationInput = requireElement<HTMLInputElement>("#workout-setup-duration");
+  const speechCheckbox = requireElement<HTMLInputElement>("#workout-speech");
+  const startButton = requireElement<HTMLButtonElement>("#workout-start");
+  const pauseButton = requireElement<HTMLButtonElement>("#workout-pause");
+  const resumeButton = requireElement<HTMLButtonElement>("#workout-resume");
+  const resetButton = requireElement<HTMLButtonElement>("#workout-reset");
+  const phaseOutput = requireElement<HTMLHeadingElement>("#workout-phase");
+  const clockOutput = requireElement<HTMLElement>("#workout-clock");
+  const repetitionOutput = requireElement<HTMLParagraphElement>("#workout-repetition");
+  const progressOutput = requireElement<HTMLDivElement>("#workout-progress");
+  const countdownOutput = requireElement<HTMLParagraphElement>("#workout-countdown");
+  const announcementOutput = requireElement<HTMLParagraphElement>("#workout-announcement");
+  const speechHelp = requireElement<HTMLElement>("#workout-speech-help");
+  const shareUrlInput = requireElement<HTMLInputElement>("#workout-settings-url");
+  const copyUrlButton = requireElement<HTMLButtonElement>("#workout-copy-url");
+  const shareStatus = requireElement<HTMLParagraphElement>("#workout-share-status");
 
   const durationPattern = /^([0-5]\d):([0-5]\d)$/;
   const speechSupported =

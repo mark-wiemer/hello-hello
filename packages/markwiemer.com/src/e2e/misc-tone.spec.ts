@@ -142,13 +142,13 @@ async function installWakeLockMock(page: Page): Promise<void> {
 
 async function getAudioEvents(page: Page): Promise<ToneAudioEvent[]> {
   return page.evaluate(
-    () => (window as WindowWithToneAudioHarness).__toneAudioHarness.events,
+    () => (window as unknown as WindowWithToneAudioHarness).__toneAudioHarness.events,
   );
 }
 
 async function getWakeLockEvents(page: Page): Promise<string[]> {
   return page.evaluate(
-    () => (window as WindowWithToneWakeLockHarness).__toneWakeLockHarness.events,
+    () => (window as unknown as WindowWithToneWakeLockHarness).__toneWakeLockHarness.events,
   );
 }
 
