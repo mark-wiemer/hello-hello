@@ -6,6 +6,8 @@ ensure that each of these has an enforcement rule
 or an issue to add enforcement.
 Link the issue to the guideline for tracking.
 If the guideline cannot be enforced, add `(cannot be enforced)` for clarity.
+
+Do not rename this file: it's linked from ai-instructions.
 -->
 
 Items are in no particular order.

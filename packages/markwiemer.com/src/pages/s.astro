@@ -1,8 +1,14 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 
+// Ref ../config/astro.config.mjs
 const links: [string, string][] = [
   ["about", "/blog/who-am-i"],
+  [
+    "ai-instructions",
+    "https://github.com/mark-wiemer/hello-hello/blob/main/packages/markwiemer.com/docs/guidelines.md#ai-instructions",
+  ],
+  ["ahkpp", "https://ahkpp.com"],
   ["luanti", "/software/luanti"],
   ["mocha", "/software/mocha"],
   ["mocha12", "/software/mocha/v12"],
@@ -12,30 +18,37 @@ const links: [string, string][] = [
 <Layout pageTitle="Short links">
   <p>
     Here are some short links :) These URLs will never change and will always redirect to the same
-    "long link" page. Additionally, they all live on markwiemer.com, so you can trust them as much
-    as any other part of this site. You can bookmark them with confidence 🤓
+    "long link" page. You can bookmark them with confidence 🤓
   </p>
 
   <table>
     <thead>
-      <th>Short link (<code>s/___</code>)</th><th>Full slug</th>
+      <th>Short link</th>
+      <th>Full slug</th>
     </thead>
-    {
-      links.map((linkRow) => (
-        <tr>
-          <td>
-            <a href={`/s/${linkRow[0]}`}>{linkRow[0]}</a>
-          </td>
-          <td>
-            <code>{linkRow[1]}</code>
-          </td>
-        </tr>
-      ))
-    }
+    {links.map((linkRow) => (
+      <tr>
+        <td>
+          <a href={`/${linkRow[0]}`}>{linkRow[0]}</a>
+        </td>
+        <td>
+          <code>{linkRow[1]}</code>
+        </td>
+      </tr>
+    ))}
   </table>
 
+  <p>
+    In the past, links used a <code>markwiemer.com/s/short-link</code> pattern. Now it's{" "}
+    <code>markwiemer.com/short-link</code>, no intermediate <code>/s</code>. The <code>/s</code>{" "}
+    links that existed before will work forever, but new links will not support the <code>/s</code>{" "}
+    form.
+  </p>
+
   <hr />
   <hr />
 
-  <p>See also <a href="/">Home - markwiemer.com</a></p>
+  <p>
+    See also <a href="/">Home - markwiemer.com</a>
+  </p>
 </Layout>

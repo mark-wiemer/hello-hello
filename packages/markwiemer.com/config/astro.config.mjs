@@ -12,12 +12,15 @@ export default defineConfig({
   publicDir: "./src/public",
   // Never change these; these are user-facing links
   // Don't add more `/s/___` entries, use `/___` from now on. `/___` is cleaner and conflicts are very unlikely.
+  // Also update ../src/pages/s.astro
   redirects: {
     "/about": "/blog/who-am-i",
     "/ai-instructions": "https://github.com/mark-wiemer/hello-hello/blob/main/packages/markwiemer.com/docs/guidelines.md#ai-instructions",
     "/ahkpp": "https://ahkpp.com",
     "/blog/war-in-iran": "/blog/2026-war-in-iran",
     "/luanti": "/software/luanti",
+    "/mocha": "/software/mocha",
+    "/mocha12": "/software/mocha/v12",
     "/s/about": "/blog/who-am-i",
     "/s/luanti": "/software/luanti",
     "/s/mocha": "/software/mocha",
