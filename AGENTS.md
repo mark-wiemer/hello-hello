@@ -1,0 +1,6 @@
+- Start each message with [hello-hello] as well as other prefixes you've been instructed to use
+- Most work in this repo should be handled within a relevant subfolder of `packages`, see `readme.md` for details
+- Read all `AGENTS.md` files relevant to your work before beginning
+- Save major decisions to an untracked `decisions.md` file for human reference
+- Eagerly modify any `AGENTS.md` file based on your experience and user request
+- Write failing tests for your changes before writing production code
