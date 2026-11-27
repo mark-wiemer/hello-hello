@@ -578,9 +578,16 @@ test.describe("todo app", () => {
     const intervalLabel = page.locator('label[for="todo-interval"]');
     const increase = page.getByRole("button", { name: "Increase recurrence interval" });
     const decrease = page.getByRole("button", { name: "Decrease recurrence interval" });
+    const unit = page.getByLabel("Recurrence unit");
 
     await expect(intervalLabel).toHaveCSS("position", "absolute");
     await expect(intervalLabel).toHaveCSS("clip", "rect(0px, 0px, 0px, 0px)");
+    const controlSpacing = await unit.evaluate((unitElement) => {
+      const decrement = document.querySelector(".number-stepper__buttons button:last-child");
+      if (!decrement) throw new Error("Expected recurrence decrement control.");
+      return unitElement.getBoundingClientRect().left - decrement.getBoundingClientRect().right;
+    });
+    expect(controlSpacing).toBeGreaterThanOrEqual(16);
     await expect(interval).toHaveValue("1");
     await expect(decrease).toBeDisabled();
     await expect(decrease).toHaveCSS("cursor", "not-allowed");
@@ -597,6 +604,10 @@ test.describe("todo app", () => {
       expect(size.width).toBeGreaterThanOrEqual(44);
       expect(size.height).toBeGreaterThanOrEqual(44);
     }
+
+    await page.setViewportSize({ width: 320, height: 800 });
+    await expect(unit).toBeVisible();
+    await expect(page.locator("body")).toHaveJSProperty("scrollWidth", 320);
   });
 
   test("shows a visible drop marker before the row where a task will land", async ({ page }) => {
