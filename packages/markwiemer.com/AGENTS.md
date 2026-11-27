@@ -14,6 +14,9 @@ Before changing this site:
   [global styles](src/public/styles.css), and nearby pages or components before
   introducing visual patterns. Extend the existing theme and responsive
   conventions.
+- For content that depends on client-side initialization, keep dependent
+  controls and lower-page content hidden until the initial render finishes.
+  Preserve a loading state instead of adding a fixed delay.
 
 Write or update a failing test before changing production behavior. Update this
 file when user feedback establishes a recurring site-specific instruction.

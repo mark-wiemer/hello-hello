@@ -31,6 +31,8 @@ function getRequiredElement<T extends Element>(selector: string): T {
 const activeTable = getRequiredElement<HTMLTableElement>("#todo-active-table");
 const hiddenTable = getRequiredElement<HTMLTableElement>("#todo-hidden-table");
 const activeTableRegion = getRequiredElement<HTMLDivElement>("#todo-active-region");
+const belowTableContent = getRequiredElement<HTMLDivElement>("#todo-below-table");
+const belowTableFooter = getRequiredElement<HTMLDivElement>("#todo-below-table-footer");
 const hiddenTasksSection = getRequiredElement<HTMLElement>("#todo-hidden-section");
 const newTaskButton = getRequiredElement<HTMLButtonElement>("#todo-new-task");
 const taskDialog = getRequiredElement<HTMLDialogElement>("#todo-task-dialog");
@@ -346,6 +348,8 @@ function render(): void {
   hiddenContent.hidden = !hiddenTasksShown;
   updateSandboxControls();
 
+  belowTableContent.hidden = false;
+  belowTableFooter.hidden = false;
   scheduleVisibilityRefresh();
 }
 

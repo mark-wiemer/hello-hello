@@ -61,6 +61,7 @@ import TextInput from "@/components/TextInput.astro";
       </p>
     </section>
 
+    <div id="todo-below-table" hidden>
     <div class="todo-toolbar">
       <button id="todo-new-task" type="button">New task</button>
     </div>
@@ -135,6 +136,7 @@ import TextInput from "@/components/TextInput.astro";
       <p id="todo-sandbox-date" aria-live="polite" hidden></p>
     </section>
     <hr />
+    </div>
   </div>
 
   <dialog id="todo-task-dialog" aria-labelledby="todo-task-dialog-heading">
@@ -221,6 +223,7 @@ import TextInput from "@/components/TextInput.astro";
     </div>
   </dialog>
 
+  <div id="todo-below-table-footer" hidden>
   <details id="todo-manual">
     <summary>Todo app manual</summary>
 
@@ -311,6 +314,7 @@ import TextInput from "@/components/TextInput.astro";
 
   <hr />
   <p>See also <a href="/misc">Miscellaneous - markwiemer.com</a></p>
+  </div>
 </Layout>
 
 <script>
@@ -339,6 +343,13 @@ import TextInput from "@/components/TextInput.astro";
     display: grid;
     grid-template-columns: minmax(0, 1fr);
     gap: 1rem;
+  }
+
+  #todo-below-table {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+    min-width: 0;
   }
 
   .todo-toolbar,

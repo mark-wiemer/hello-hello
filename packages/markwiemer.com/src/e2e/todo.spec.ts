@@ -238,6 +238,11 @@ test.describe("todo app", () => {
     const loadingIndicator = loadingPage.locator("#todo-active-empty");
     await expect(loadingIndicator).toBeVisible();
     await expect(loadingIndicator).toHaveAttribute("aria-busy", "true");
+    await expect(loadingPage.locator("#todo-new-task")).toBeHidden();
+    await expect(loadingPage.locator("#todo-manual")).toBeHidden();
+    await expect(
+      loadingPage.getByRole("link", { name: "Miscellaneous - markwiemer.com" }),
+    ).toBeHidden();
     const animationName = await loadingPage
       .locator(".todo-loading-indicator span")
       .first()
@@ -266,6 +271,11 @@ test.describe("todo app", () => {
     }, storageKey);
     const appPage = await appContext.newPage();
     await appPage.goto("/todo/");
+    await expect(appPage.locator("#todo-new-task")).toBeVisible();
+    await expect(appPage.locator("#todo-manual")).toBeVisible();
+    await expect(
+      appPage.getByRole("link", { name: "Miscellaneous - markwiemer.com" }),
+    ).toBeVisible();
     const emptyMessage = appPage.locator("#todo-active-empty");
     await expect(emptyMessage).toHaveText("No tasks are ready right now.");
     const emptyMessageHeight = await emptyMessage.evaluate(
