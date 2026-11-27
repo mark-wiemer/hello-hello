@@ -1,11 +1,13 @@
 {
   "name": "markwiemer.com",
   "private": true,
+  "description": "Mark's website",
   "type": "module",
   "scripts": {
     "astro": "astro --config config/astro.config.mjs",
     "build": "astro build --config config/astro.config.mjs",
     "check": "astro check --config config/astro.config.mjs",
+    "check:conflict-markers": "node scripts/check-conflict-markers.js",
     "dev": "astro dev --config config/astro.config.mjs",
     "dev:e2e": "npm run dev -- --port 8910",
     "e2e": "start-server-and-test \"npm run preview:e2e\" http-get://localhost:8910 \"npm run playwright\"",
@@ -24,7 +26,7 @@
     "test:ci": "npm run test -- --run",
     "trigger-deploy": "bash ../../scripts/trigger-markwiemer-deploy.sh",
     "upgrade": "npx @astrojs/upgrade",
-    "validate:ci": "npm run test:ci && npm run e2e:ci && echo All CI validations passed, ready to deploy",
+    "validate:ci": "npm run check:conflict-markers && npm run test:ci && npm run e2e:ci && echo All CI validations passed, ready to deploy",
     "validate:fix": "sort-package-json"
   },
   "dependencies": {
@@ -45,6 +47,5 @@
     "globals": "^17.5.0",
     "start-server-and-test": "^3.0.0",
     "typescript-eslint": "^8.59.0"
-  },
-  "description": "Mark's website"
+  }
 }
