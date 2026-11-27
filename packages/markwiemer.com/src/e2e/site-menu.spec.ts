@@ -59,6 +59,8 @@ test.describe("site navigation", () => {
 
   test("scales the menu glyph to the larger toggle", async ({ page }) => {
     const glyph = page.getByRole("button", { name: "Toggle site navigation" }).locator("svg");
+    await expect(glyph.locator("path")).toHaveAttribute("stroke-width", "2");
+
     const size = await glyph.evaluate((svg) => {
       const bounds = svg.getBoundingClientRect();
       return { width: bounds.width, height: bounds.height };
