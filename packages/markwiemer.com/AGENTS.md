@@ -16,7 +16,8 @@ Before changing this site:
   conventions.
 - For content that depends on client-side initialization, keep dependent
   controls and lower-page content hidden until the initial render finishes.
-  Preserve a loading state instead of adding a fixed delay.
+  Delay any loading indicator by 100 ms so instant loads do not flash it;
+  reserve the loading area's height.
 
 Write or update a failing test before changing production behavior. Update this
 file when user feedback establishes a recurring site-specific instruction.

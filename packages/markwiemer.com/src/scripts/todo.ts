@@ -48,6 +48,7 @@ const closeTaskButton = getRequiredElement<HTMLButtonElement>("#todo-close-task"
 const toggleHiddenButton = getRequiredElement<HTMLButtonElement>("#todo-toggle-hidden");
 const hiddenContent = getRequiredElement<HTMLDivElement>("#todo-hidden-content");
 const activeEmptyMessage = getRequiredElement<HTMLParagraphElement>("#todo-active-empty");
+const loadingIndicator = getRequiredElement<HTMLSpanElement>(".todo-loading-indicator");
 const statusMessage = getRequiredElement<HTMLParagraphElement>("#todo-status");
 const deleteDialog = getRequiredElement<HTMLDialogElement>("#todo-delete-dialog");
 const deleteMessage = getRequiredElement<HTMLParagraphElement>("#todo-delete-message");
@@ -70,6 +71,8 @@ const confirmImportButton = getRequiredElement<HTMLButtonElement>("#todo-confirm
 let hiddenTasksShown = false;
 let visibilityTimer: number | undefined;
 let pendingImportTasks: TodoTask[] | null = null;
+let initialRenderComplete = false;
+let loadingIndicatorTimer: number | undefined;
 
 const dateTimeFormat = new Intl.DateTimeFormat(undefined, {
   dateStyle: "medium",
@@ -328,6 +331,13 @@ function saveTasks(message: string): void {
 }
 
 function render(): void {
+  initialRenderComplete = true;
+  if (loadingIndicatorTimer !== undefined) {
+    window.clearTimeout(loadingIndicatorTimer);
+    loadingIndicatorTimer = undefined;
+  }
+  loadingIndicator.hidden = true;
+
   const orderedTasks = sortedTasks();
   const activeTasks = orderedTasks.filter((task) => isTaskVisible(task));
   const hiddenTasks = orderedTasks.filter((task) => !isTaskVisible(task));
@@ -548,6 +558,10 @@ window.addEventListener("dateformat-changed", render);
 document.addEventListener("visibilitychange", () => {
   if (document.visibilityState === "visible") expireReadyTasks();
 });
+
+loadingIndicatorTimer = window.setTimeout(() => {
+  if (!initialRenderComplete) loadingIndicator.hidden = false;
+}, 100);
 
 const initialExpiryResult = expireReadyTasks(false);
 render();

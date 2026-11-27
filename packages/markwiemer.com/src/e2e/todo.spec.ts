@@ -229,7 +229,7 @@ test.describe("todo app", () => {
     ).toBe(true);
   });
 
-  test("shows a loading animation that reserves the empty-state height", async ({
+  test("delays the loading animation and reserves the empty-state height", async ({
     browser,
   }) => {
     const loadingContext = await browser.newContext({ javaScriptEnabled: false });
@@ -238,16 +238,14 @@ test.describe("todo app", () => {
     const loadingIndicator = loadingPage.locator("#todo-active-empty");
     await expect(loadingIndicator).toBeVisible();
     await expect(loadingIndicator).toHaveAttribute("aria-busy", "true");
+    await expect(loadingIndicator.locator(".todo-loading-indicator")).toBeHidden();
+    await loadingPage.waitForTimeout(150);
+    await expect(loadingIndicator.locator(".todo-loading-indicator")).toBeHidden();
     await expect(loadingPage.locator("#todo-new-task")).toBeHidden();
     await expect(loadingPage.locator("#todo-manual")).toBeHidden();
     await expect(
       loadingPage.getByRole("link", { name: "Miscellaneous - markwiemer.com" }),
     ).toBeHidden();
-    const animationName = await loadingPage
-      .locator(".todo-loading-indicator span")
-      .first()
-      .evaluate((element) => getComputedStyle(element).animationName);
-    expect(animationName).toBe("todo-loading-pulse");
     const loadingHeight = await loadingIndicator.evaluate(
       (element) => element.getBoundingClientRect().height,
     );
@@ -271,6 +269,8 @@ test.describe("todo app", () => {
     }, storageKey);
     const appPage = await appContext.newPage();
     await appPage.goto("/todo/");
+    await appPage.waitForTimeout(150);
+    await expect(appPage.locator(".todo-loading-indicator")).toBeHidden();
     await expect(appPage.locator("#todo-new-task")).toBeVisible();
     await expect(appPage.locator("#todo-manual")).toBeVisible();
     await expect(
