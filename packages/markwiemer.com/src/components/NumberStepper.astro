@@ -1,0 +1,150 @@
+---
+interface Props {
+  id: string;
+  name: string;
+  label: string;
+  value: number;
+  min: number;
+  max: number;
+  step?: number;
+}
+
+const { id, name, label, value, min, max, step = 1 } = Astro.props;
+const accessibleLabel = label.toLowerCase();
+---
+
+<div class="number-stepper">
+  <label for={id}>{label}</label>
+  <div class="number-stepper__control">
+    <input
+      id={id}
+      name={name}
+      type="number"
+      min={min}
+      max={max}
+      step={step}
+      value={value}
+      required
+    />
+    <div class="number-stepper__buttons" role="group" aria-label={`Adjust ${accessibleLabel}`}>
+      <button type="button" aria-label={`Increase ${accessibleLabel}`}>↑</button>
+      <button type="button" aria-label={`Decrease ${accessibleLabel}`}>↓</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const steppers = document.querySelectorAll<HTMLElement>(".number-stepper");
+
+  function requireControl<T extends Element>(stepper: Element, selector: string): T {
+    const control = stepper.querySelector<T>(selector);
+    if (!control) {
+      throw new Error(`Number stepper is missing a required control: ${selector}`);
+    }
+    return control;
+  }
+
+  for (const stepper of steppers) {
+    const input = requireControl<HTMLInputElement>(stepper, "input[type=number]");
+    const increaseButton = requireControl<HTMLButtonElement>(
+      stepper,
+      'button[aria-label^="Increase "]',
+    );
+    const decreaseButton = requireControl<HTMLButtonElement>(
+      stepper,
+      'button[aria-label^="Decrease "]',
+    );
+
+    function updateButtons() {
+      const currentValue = input.valueAsNumber;
+      increaseButton.disabled = !Number.isFinite(currentValue) || currentValue >= Number(input.max);
+      decreaseButton.disabled = !Number.isFinite(currentValue) || currentValue <= Number(input.min);
+    }
+
+    function adjustValue(amount: number) {
+      const currentValue = input.valueAsNumber;
+      const minimum = Number(input.min);
+      const maximum = Number(input.max);
+      const startingValue = Number.isFinite(currentValue) ? currentValue : minimum;
+      const increment = input.step === "any" ? 1 : Number(input.step);
+      input.value = String(
+        Math.max(
+          minimum,
+          Math.min(maximum, startingValue + amount * (Number.isFinite(increment) ? increment : 1)),
+        ),
+      );
+      input.dispatchEvent(new Event("input", { bubbles: true }));
+    }
+
+    increaseButton.addEventListener("click", () => adjustValue(1));
+    decreaseButton.addEventListener("click", () => adjustValue(-1));
+    input.addEventListener("input", updateButtons);
+    updateButtons();
+  }
+</script>
+
+<style>
+  .number-stepper {
+    align-self: start;
+    display: grid;
+    gap: 0.25rem;
+  }
+
+  .number-stepper__control {
+    align-items: stretch;
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .number-stepper__control input {
+    appearance: textfield;
+    background: var(--color-body);
+    border: 1px solid currentColor;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: var(--color-text-primary);
+    flex: 1 1 auto;
+    font: inherit;
+    font-size: 1.5rem;
+    min-height: 2.5rem;
+    min-width: 0;
+    padding: 0.25rem 0.5rem;
+    text-align: center;
+  }
+
+  .number-stepper__control input::-webkit-inner-spin-button,
+  .number-stepper__control input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  .number-stepper__buttons {
+    display: grid;
+    grid-template-rows: repeat(2, minmax(2.75rem, 1fr));
+  }
+
+  .number-stepper__buttons button {
+    background: var(--color-body);
+    border: 1px solid currentColor;
+    border-radius: 4px;
+    color: var(--color-text-primary);
+    cursor: pointer;
+    font: inherit;
+    font-size: 1.5rem;
+    font-weight: 700;
+    min-height: 2.75rem;
+    min-width: 3rem;
+    padding: 0;
+  }
+
+  .number-stepper__control input:focus-visible,
+  .number-stepper__buttons button:focus-visible {
+    outline: 3px solid var(--color-link-primary);
+    outline-offset: 2px;
+  }
+
+  .number-stepper__buttons button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+</style>
