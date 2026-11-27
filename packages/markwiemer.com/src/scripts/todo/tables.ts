@@ -1,8 +1,3 @@
-import {
-  createTable,
-  getCoreRowModel,
-  type ColumnDef,
-} from "@tanstack/table-core";
 import { formatRecurrence } from "../../utils/todo";
 import type { TodoTask } from "./types";
 
@@ -22,30 +17,6 @@ interface TodoTableRendererOptions extends TodoTableCallbacks {
   hiddenTable: HTMLTableElement;
 }
 
-const activeColumns: ColumnDef<TodoTask, unknown>[] = [
-  { id: "drag", header: "Reorder" },
-  { id: "complete", header: "Complete" },
-  { accessorKey: "title", header: "Task" },
-  {
-    id: "recurrence",
-    accessorFn: (task) => formatRecurrence(task.recurrence),
-    header: "Recurrence",
-  },
-  { id: "actions", header: "Actions" },
-];
-
-const hiddenColumns: ColumnDef<TodoTask, unknown>[] = [
-  { accessorKey: "title", header: "Task" },
-  {
-    id: "recurrence",
-    accessorFn: (task) => formatRecurrence(task.recurrence),
-    header: "Recurrence",
-  },
-  { id: "shows-again", header: "Shows again" },
-  { id: "status", header: "Status" },
-  { id: "actions", header: "Actions" },
-];
-
 export function createTodoTableRenderer({
   activeTable,
   hiddenTable,
@@ -58,22 +29,6 @@ export function createTodoTableRenderer({
   onDelete,
   formatDueDate,
 }: TodoTableRendererOptions) {
-  function createTableInstance(
-    data: TodoTask[],
-    columns: ColumnDef<TodoTask, unknown>[],
-  ) {
-    return createTable<TodoTask>({
-      data,
-      columns,
-      getCoreRowModel: getCoreRowModel(),
-      getRowId: (task) => task.id,
-      state: {},
-      onStateChange: () => {},
-      renderFallbackValue: null,
-      debugTable: import.meta.env.DEV,
-    });
-  }
-
   function appendButton(
     parent: HTMLElement,
     label: string,
@@ -176,18 +131,16 @@ export function createTodoTableRenderer({
   function renderTable(
     tableElement: HTMLTableElement,
     data: TodoTask[],
-    columns: ColumnDef<TodoTask, unknown>[],
     createRow: (task: TodoTask, index: number) => HTMLTableRowElement,
   ): void {
-    const table = createTableInstance(data, columns);
     const body = tableElement.tBodies[0] ?? tableElement.createTBody();
     body.replaceChildren(
-      ...table.getRowModel().rows.map((row, index) => createRow(row.original, index)),
+      ...data.map((task, index) => createRow(task, index)),
     );
   }
 
   return (activeTasks: TodoTask[], hiddenTasks: TodoTask[]): void => {
-    renderTable(activeTable, activeTasks, activeColumns, (task, index) => {
+    renderTable(activeTable, activeTasks, (task, index) => {
       const row = createActiveRow(task);
       const controls = row.querySelector<HTMLDivElement>(".reorder-controls");
       if (!controls) throw new Error("Active task row is missing reorder controls.");
@@ -211,6 +164,6 @@ export function createTodoTableRenderer({
 
       return row;
     });
-    renderTable(hiddenTable, hiddenTasks, hiddenColumns, createHiddenRow);
+    renderTable(hiddenTable, hiddenTasks, createHiddenRow);
   };
 }
