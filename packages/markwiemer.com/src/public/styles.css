@@ -26,7 +26,8 @@
   --line-height-default: 27px;
   --line-height-small: 24px;
   --padding-table: 10px;
-  --size-button-menu: 30px;
+  --size-button-target: 44px;
+  --size-button-menu: var(--size-button-target);
   --transition-duration-nav: 0.2s;
   /* ideally is divisible by 1.1, 1.25, 1.5, 1.75, 2, 2.5, 3, 4, and 5 */
   /* these are the zoom levels of Microsoft Edge and likely other browsers */
@@ -177,8 +178,15 @@
   font-size: var(--font-size-small);
   line-height: var(--line-height-small);
   margin-top: 8px;
+  min-height: var(--size-button-target);
   /* padding is inside button */
   padding: 2px 6px;
+}
+
+#toggleMenu:focus-visible,
+.toggle:focus-visible {
+  outline: 3px solid var(--color-link-primary);
+  outline-offset: 2px;
 }
 
 .wide-section {
