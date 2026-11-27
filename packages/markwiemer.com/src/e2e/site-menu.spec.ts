@@ -56,4 +56,15 @@ test.describe("site navigation", () => {
     expect(size.width).toBeGreaterThanOrEqual(44);
     expect(size.height).toBeGreaterThanOrEqual(44);
   });
+
+  test("scales the menu glyph to the larger toggle", async ({ page }) => {
+    const glyph = page.getByRole("button", { name: "Toggle site navigation" }).locator("svg");
+    const size = await glyph.evaluate((svg) => {
+      const bounds = svg.getBoundingClientRect();
+      return { width: bounds.width, height: bounds.height };
+    });
+
+    expect(size.width).toBeGreaterThanOrEqual(24);
+    expect(size.height).toBeGreaterThanOrEqual(24);
+  });
 });
