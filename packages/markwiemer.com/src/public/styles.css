@@ -130,11 +130,11 @@
 
   background-color: var(--color-nav);
   color: var(--color-text-primary);
+}
 
-  &[aria-expanded="true"] {
-    width: var(--width-nav-open);
-    border-right: 1px solid var(--color-text-primary);
-  }
+body.nav-open #siteMenu {
+  width: var(--width-nav-open);
+  border-right: 1px solid var(--color-text-primary);
 }
 
 #toggleMenu {

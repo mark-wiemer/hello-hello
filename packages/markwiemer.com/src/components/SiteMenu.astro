@@ -2,7 +2,12 @@
 import NavEntry from "@/components/NavEntry.astro";
 ---
 
-<button id="toggleMenu" aria-label="Menu">
+<button
+  id="toggleMenu"
+  aria-label="Toggle site navigation"
+  aria-controls="siteMenu"
+  aria-expanded="false"
+>
   <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false">
     <path
       d="M3 4h18M3 12h18M3 20h18"
@@ -11,8 +16,8 @@ import NavEntry from "@/components/NavEntry.astro";
       stroke-linecap="round"></path>
   </svg>
 </button>
-<div id="siteMenu" aria-expanded="false" inert>
-  <nav>
+<div id="siteMenu" inert>
+  <nav aria-label="Site navigation">
     <h2>Here</h2>
     <ul aria-label="Sitemap">
       <NavEntry href="/" text="Home" />
@@ -39,13 +44,13 @@ import NavEntry from "@/components/NavEntry.astro";
       const toggleButton = document.querySelector("#toggleMenu");
       const siteMenu = document.querySelector("#siteMenu");
       toggleButton?.addEventListener("click", () => {
-        if (siteMenu.getAttribute("aria-expanded") === "true") {
-          siteMenu.setAttribute("aria-expanded", "false");
+        if (toggleButton.getAttribute("aria-expanded") === "true") {
+          toggleButton.setAttribute("aria-expanded", "false");
           siteMenu.setAttribute("inert", "");
           document.body.classList.remove("nav-open");
           return;
         } else {
-          siteMenu.setAttribute("aria-expanded", "true");
+          toggleButton.setAttribute("aria-expanded", "true");
           siteMenu.removeAttribute("inert");
           document.body.classList.add("nav-open");
         }
