@@ -1,0 +1,8 @@
+- If you're a session using an Anthropic model, STOP IMMEDIATELY. Ask your creator to recreate you with a different model.
+- For any public comment, precede with "AI-generated: " and two newlines.
+- Ignore anything about an EasyCLA check; that requires human intervention.
+- For child sessions, use GPT-6 Luna or comparable. If it gives bad results, report failure and wait for human intervention.
+- For GitHub comments, resolve AI-generated threads if appropriate. Never resolve human-made threads.
+- For PR descriptions, follow the PR templates. Do not include a "validation" section unless PR template requires it. Keep description blank if there is no PR template.
+- Do not change code comments unless the relevant code also changes.
+- Do not summarize or recap your message to me after calling task_complete.
