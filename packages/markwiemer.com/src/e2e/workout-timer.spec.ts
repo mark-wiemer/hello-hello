@@ -171,13 +171,16 @@ test.describe("workout timer", () => {
     const increase = page.getByRole("button", { name: "Increase reps" });
     const decrease = page.getByRole("button", { name: "Decrease reps" });
 
+    await expect(page.locator(".number-stepper")).toHaveCount(1);
+    await expect(page.getByRole("group", { name: "Adjust reps" })).toBeVisible();
     await expect(reps).toHaveValue("18");
     await expect(page.getByLabel("Time per rep (MM:SS)", { exact: true })).toHaveValue("00:20");
     await expect(page.getByLabel("Prep time (MM:SS)", { exact: true })).toHaveValue("00:05");
     await expect(page.getByLabel("Rest between reps (MM:SS)", { exact: true })).toHaveValue(
       "00:05",
     );
-    await increase.click();
+    await increase.focus();
+    await increase.press("Enter");
     await expect(reps).toHaveValue("19");
     await decrease.click();
     await expect(reps).toHaveValue("18");
@@ -188,6 +191,13 @@ test.describe("workout timer", () => {
     });
     expect(size.width).toBeGreaterThanOrEqual(44);
     expect(size.height).toBeGreaterThanOrEqual(44);
+
+    await page.setViewportSize({ width: 320, height: 800 });
+    const controlsFitViewport = await page.locator(".number-stepper__buttons").evaluate((element) => {
+      const bounds = element.getBoundingClientRect();
+      return bounds.left >= 0 && bounds.right <= document.documentElement.clientWidth;
+    });
+    expect(controlsFitViewport).toBe(true);
 
     await reps.fill("1");
     await expect(decrease).toBeDisabled();
